@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>String - LambdaORM Wiki</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">LambdaORM Wiki</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../../.." class="nav-link">λORM "We don't reinvent the wheel, we improve it"</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../Features/" class="nav-link">Features</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../Sidebar/" class="nav-link">Sidebar</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../Usage/" class="nav-link">Usage</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../function_functions/" class="nav-link">Function functions</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../operator_operators/" class="nav-link">Operator operators</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Queries <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Expression/" class="dropdown-item">Lambda expressions</a>
+</li>
+                                    
+<li>
+    <a href="../../Metadata/" class="dropdown-item">Metadata</a>
+</li>
+                                    
+<li>
+    <a href="../../Query-Language/" class="dropdown-item">Query Language</a>
+</li>
+                                    
+<li>
+    <a href="../../Repository/" class="dropdown-item">Repositories</a>
+</li>
+                                    
+<li>
+    <a href="../../Transaction/" class="dropdown-item">Transaction</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dml</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../dml/BulkInsert/" class="dropdown-item">BulkInsert</a>
+</li>
+            
+<li>
+    <a href="../../dml/Delete/" class="dropdown-item">Delete</a>
+</li>
+            
+<li>
+    <a href="../../dml/Insert/" class="dropdown-item">Insert</a>
+</li>
+            
+<li>
+    <a href="../../dml/Update/" class="dropdown-item">Update</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dql</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../dql/Grouping/" class="dropdown-item">Grouping</a>
+</li>
+            
+<li>
+    <a href="../../dql/Include/" class="dropdown-item">Include</a>
+</li>
+            
+<li>
+    <a href="../../dql/Join/" class="dropdown-item">Join</a>
+</li>
+            
+<li>
+    <a href="../../dql/Select/" class="dropdown-item">Select</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">operatorsAndFunctions</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../Bitwise/" class="dropdown-item">Bitwise</a>
+</li>
+            
+<li>
+    <a href="../Comparison/" class="dropdown-item">Comparison</a>
+</li>
+            
+<li>
+    <a href="../Datetime/" class="dropdown-item">Datetime</a>
+</li>
+            
+<li>
+    <a href="../Group/" class="dropdown-item">Group</a>
+</li>
+            
+<li>
+    <a href="../Logical/" class="dropdown-item">Logical</a>
+</li>
+            
+<li>
+    <a href="../Nullable/" class="dropdown-item">Nullable</a>
+</li>
+            
+<li>
+    <a href="../Numeric/" class="dropdown-item">Numeric</a>
+</li>
+            
+<li>
+    <a href="../Sort/" class="dropdown-item">Sort</a>
+</li>
+            
+<li>
+    <a href="./" class="dropdown-item active">String</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Schema <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../schema/Schema-Use/" class="dropdown-item">Schema Use</a>
+</li>
+                                    
+<li>
+    <a href="../../../schema/Schema/" class="dropdown-item">Schema</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Definition</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../schema/Definition/SchemaDefinition-Composite/" class="dropdown-item">Composite Entity</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Definition/SchemaDefinition-EnvironmentVariables/" class="dropdown-item">Environment Variables on Schema</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Definition/SchemaDefinition-Expressions/" class="dropdown-item">Expressions on Schema</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Definition/SchemaDefinition/" class="dropdown-item">Definition</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Examples</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../schema/Examples/SchemaExample-Basic/" class="dropdown-item">Basic Schema Example</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Examples/SchemaExample-Composite/" class="dropdown-item">Composite Entity</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Examples/SchemaExample-Extend/" class="dropdown-item">Extend</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Examples/SchemaExample-Listener/" class="dropdown-item">Listener on Schema</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Examples/SchemaExample-MultiplesStages/" class="dropdown-item">Multiples Stages</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Examples/SchemaExample-StageMultiplesSources/" class="dropdown-item">Stage related multiples Sources</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Synchronization</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../schema/Synchronization/SchemaSynchronization-Fetch/" class="dropdown-item">Fetch</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Synchronization/SchemaSynchronization-Incorporate/" class="dropdown-item">Incorporate</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Synchronization/SchemaSynchronization-Introspect/" class="dropdown-item">Introspect</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Synchronization/SchemaSynchronization-Pull/" class="dropdown-item">Pull</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Synchronization/SchemaSynchronization-Push/" class="dropdown-item">Push</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Synchronization/SchemaSynchronization/" class="dropdown-item">Synchronization</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../Sort/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../../schema/Schema-Use/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-light">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#sentences" class="nav-link">Sentences</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#definition" class="nav-link">Definition</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chr</td>
+<td>Get character from ASCII code</td>
+</tr>
+<tr>
+<td>concat</td>
+<td>String concatenation</td>
+</tr>
+<tr>
+<td>lower</td>
+<td>Lowercase string</td>
+</tr>
+<tr>
+<td>lpad</td>
+<td>Pad the left-side of string</td>
+</tr>
+<tr>
+<td>ltrim</td>
+<td>Remove leading chars</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>Searches a string for a specified value and returns a new string where the specified values are replaced</td>
+</tr>
+<tr>
+<td>match</td>
+<td>Returns an array containing all matches, including capturing groups, or null if no matches are found</td>
+</tr>
+<tr>
+<td>mask</td>
+<td>General-purpose function that mask parts of arbitrary strings based on position within the string</td>
+</tr>
+<tr>
+<td>rpad</td>
+<td>Pad the right-side of string</td>
+</tr>
+<tr>
+<td>rtrim</td>
+<td>Remove trailing spaces</td>
+</tr>
+<tr>
+<td>substr substring</td>
+<td>Get a substring of string</td>
+</tr>
+<tr>
+<td>trim</td>
+<td>Remove characters</td>
+</tr>
+<tr>
+<td>upper</td>
+<td>Uppercase string</td>
+</tr>
+<tr>
+<td>strCount</td>
+<td>Count value in source</td>
+</tr>
+<tr>
+<td>isEmpty</td>
+<td>Evaluate if it is empty</td>
+</tr>
+<tr>
+<td>toString</td>
+<td>Convert to string</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: lower(p.subregion) })</td>
+<td>[{"result":"south america"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: upper(p.subregion) })</td>
+<td>[{"result":"SOUTH AMERICA"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: concat(p.region," ",p.subregion) })</td>
+<td>[{"result":"Americas South America"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: lpad(p.region,12,"_") })</td>
+<td>[{"result":"____Americas"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: rpad(p.region,12,"_") })</td>
+<td>[{"result":"Americas____"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: chr(68)})</td>
+<td>[{"result":"D"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: ltrim("  a  ")})</td>
+<td>[{"result":"a  "}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: rtrim("  a  ")})</td>
+<td>[{"result":"  a"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: replace(p.region,"a","*")})</td>
+<td>[{"result":"Americ*s"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: mask(p.subregion)})</td>
+<td>[{"result":"Sou***ica"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: substr(p.subregion,1,3)})</td>
+<td>[{"result":"Sou"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: substring(p.subregion,1,3)})</td>
+<td>[{"result":"Sou"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: strCount(p.subregion,"a")})</td>
+<td>[{"result":1}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: toString(p.latitude)})</td>
+<td>[{"result":"-10.0000"}]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sentences">Sentences</h2>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the subregion in lowercase for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: lower(p.subregion) })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT LOWER(c.subregion) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the subregion in uppercase for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: upper(p.subregion) })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT UPPER(c.subregion) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the region and subregion concatenated for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: concat(p.region,&quot; &quot;,p.subregion) })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CONCAT(CONCAT(c.region,' '),c.subregion) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the region left-padded with "_" for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: lpad(p.region,12,&quot;_&quot;) })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT LPAD(c.region,12,'_') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the region right-padded with "_" for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: rpad(p.region,12,&quot;_&quot;) })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT RPAD(c.region,12,'_') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the character "D" from ASCII code 68 for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: chr(68)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CHAR(68 USING ASCII) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the subregion with leading spaces removed for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: ltrim(&quot;  a  &quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT LTRIM('  a  ') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the subregion with trailing spaces removed for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: rtrim(&quot;  a  &quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT RTRIM('  a  ') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the region with "a" replaced by "*" for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: replace(p.region,&quot;a&quot;,&quot;*&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT REPLACE(c.region,'a','*') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the subregion masked for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: mask(p.subregion)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT Concat(LEFT(c.subregion,3),'***',RIGHT(c.subregion,3)) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the first 3 characters of the subregion for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: substr(p.subregion,1,3)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT SUBSTR(c.subregion,1,3) AS result
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the first 3 characters of the subregion for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: substring(p.subregion,1,3)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT SUBSTR(c.subregion,1,3) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the count of "a" in the subregion for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: strCount(p.subregion,&quot;a&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT (LENGTH(c.subregion)-LENGTH(REPLACE(c.subregion,'a',''))) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the latitude as string for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: toString(p.latitude)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CONVERT(c.latitude, CHAR) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<h2 id="definition">Definition</h2>
+<h3 id="chr">chr</h3>
+<ul>
+<li>description: Get character from ASCII code</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>ascii: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="strcount">strCount</h3>
+<ul>
+<li>description: Count value in source</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>source: string</li>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="lower">lower</h3>
+<ul>
+<li>description: Lowercase string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="lpad">lpad</h3>
+<ul>
+<li>description: Pad the left-side of string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>len: number</li>
+<li>pad: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="ltrim">ltrim</h3>
+<ul>
+<li>description: Remove leading chars</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="replace">replace</h3>
+<ul>
+<li>description: The replace() method searches a string for a specified value and returns a new string where the specified values are replaced.</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>source: string</li>
+<li>target: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="rpad">rpad</h3>
+<ul>
+<li>description: Pad the right-side of string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>len: number</li>
+<li>pad: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="rtrim">rtrim</h3>
+<ul>
+<li>description: Remove trailing spaces</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="substr">substr</h3>
+<ul>
+<li>description: Get a substring of string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>from: number</li>
+<li>count: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="substring">substring</h3>
+<ul>
+<li>description: Get a substring of string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>from: number</li>
+<li>count: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="trim">trim</h3>
+<ul>
+<li>description: Remove characters</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="upper">upper</h3>
+<ul>
+<li>description: Uppercase string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="concat">concat</h3>
+<ul>
+<li>description: String concatenation</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>values: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="mask">mask</h3>
+<ul>
+<li>description: General-purpose function that mask parts of arbitrary strings based on position within the string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isempty">isEmpty</h3>
+<ul>
+<li>description: Evaluate if it is empty</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="tostring">toString</h3>
+<ul>
+<li>description: convert to string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js" defer></script>
+        <script src="../../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

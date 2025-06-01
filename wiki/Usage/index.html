@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Usage - LambdaORM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">LambdaORM Wiki</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">λORM "We don't reinvent the wheel, we improve it"</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../Features/" class="nav-link">Features</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../Sidebar/" class="nav-link">Sidebar</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Usage</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../function_functions/" class="nav-link">Function functions</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../operator_operators/" class="nav-link">Operator operators</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Queries <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../queries/Expression/" class="dropdown-item">Lambda expressions</a>
+</li>
+                                    
+<li>
+    <a href="../queries/Metadata/" class="dropdown-item">Metadata</a>
+</li>
+                                    
+<li>
+    <a href="../queries/Query-Language/" class="dropdown-item">Query Language</a>
+</li>
+                                    
+<li>
+    <a href="../queries/Repository/" class="dropdown-item">Repositories</a>
+</li>
+                                    
+<li>
+    <a href="../queries/Transaction/" class="dropdown-item">Transaction</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dml</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../queries/dml/BulkInsert/" class="dropdown-item">BulkInsert</a>
+</li>
+            
+<li>
+    <a href="../queries/dml/Delete/" class="dropdown-item">Delete</a>
+</li>
+            
+<li>
+    <a href="../queries/dml/Insert/" class="dropdown-item">Insert</a>
+</li>
+            
+<li>
+    <a href="../queries/dml/Update/" class="dropdown-item">Update</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dql</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../queries/dql/Grouping/" class="dropdown-item">Grouping</a>
+</li>
+            
+<li>
+    <a href="../queries/dql/Include/" class="dropdown-item">Include</a>
+</li>
+            
+<li>
+    <a href="../queries/dql/Join/" class="dropdown-item">Join</a>
+</li>
+            
+<li>
+    <a href="../queries/dql/Select/" class="dropdown-item">Select</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">operatorsAndFunctions</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../queries/operatorsAndFunctions/Bitwise/" class="dropdown-item">Bitwise</a>
+</li>
+            
+<li>
+    <a href="../queries/operatorsAndFunctions/Comparison/" class="dropdown-item">Comparison</a>
+</li>
+            
+<li>
+    <a href="../queries/operatorsAndFunctions/Datetime/" class="dropdown-item">Datetime</a>
+</li>
+            
+<li>
+    <a href="../queries/operatorsAndFunctions/Group/" class="dropdown-item">Group</a>
+</li>
+            
+<li>
+    <a href="../queries/operatorsAndFunctions/Logical/" class="dropdown-item">Logical</a>
+</li>
+            
+<li>
+    <a href="../queries/operatorsAndFunctions/Nullable/" class="dropdown-item">Nullable</a>
+</li>
+            
+<li>
+    <a href="../queries/operatorsAndFunctions/Numeric/" class="dropdown-item">Numeric</a>
+</li>
+            
+<li>
+    <a href="../queries/operatorsAndFunctions/Sort/" class="dropdown-item">Sort</a>
+</li>
+            
+<li>
+    <a href="../queries/operatorsAndFunctions/String/" class="dropdown-item">String</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Schema <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../schema/Schema-Use/" class="dropdown-item">Schema Use</a>
+</li>
+                                    
+<li>
+    <a href="../schema/Schema/" class="dropdown-item">Schema</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Definition</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../schema/Definition/SchemaDefinition-Composite/" class="dropdown-item">Composite Entity</a>
+</li>
+            
+<li>
+    <a href="../schema/Definition/SchemaDefinition-EnvironmentVariables/" class="dropdown-item">Environment Variables on Schema</a>
+</li>
+            
+<li>
+    <a href="../schema/Definition/SchemaDefinition-Expressions/" class="dropdown-item">Expressions on Schema</a>
+</li>
+            
+<li>
+    <a href="../schema/Definition/SchemaDefinition/" class="dropdown-item">Definition</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Examples</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../schema/Examples/SchemaExample-Basic/" class="dropdown-item">Basic Schema Example</a>
+</li>
+            
+<li>
+    <a href="../schema/Examples/SchemaExample-Composite/" class="dropdown-item">Composite Entity</a>
+</li>
+            
+<li>
+    <a href="../schema/Examples/SchemaExample-Extend/" class="dropdown-item">Extend</a>
+</li>
+            
+<li>
+    <a href="../schema/Examples/SchemaExample-Listener/" class="dropdown-item">Listener on Schema</a>
+</li>
+            
+<li>
+    <a href="../schema/Examples/SchemaExample-MultiplesStages/" class="dropdown-item">Multiples Stages</a>
+</li>
+            
+<li>
+    <a href="../schema/Examples/SchemaExample-StageMultiplesSources/" class="dropdown-item">Stage related multiples Sources</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Synchronization</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../schema/Synchronization/SchemaSynchronization-Fetch/" class="dropdown-item">Fetch</a>
+</li>
+            
+<li>
+    <a href="../schema/Synchronization/SchemaSynchronization-Incorporate/" class="dropdown-item">Incorporate</a>
+</li>
+            
+<li>
+    <a href="../schema/Synchronization/SchemaSynchronization-Introspect/" class="dropdown-item">Introspect</a>
+</li>
+            
+<li>
+    <a href="../schema/Synchronization/SchemaSynchronization-Pull/" class="dropdown-item">Pull</a>
+</li>
+            
+<li>
+    <a href="../schema/Synchronization/SchemaSynchronization-Push/" class="dropdown-item">Push</a>
+</li>
+            
+<li>
+    <a href="../schema/Synchronization/SchemaSynchronization/" class="dropdown-item">Synchronization</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../Sidebar/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../function_functions/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-light">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#unique-source" class="nav-link">Unique Source</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#multiple-sources" class="nav-link">Multiple Sources</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#cqrs-command-query-responsibility-segregation" class="nav-link">CQRS (Command Query Responsibility Segregation)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#cqrs-command-query-responsibility-segregation-with-kafka" class="nav-link">CQRS (Command Query Responsibility Segregation) with Kafka</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#considerations" class="nav-link">Considerations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>To show different ways of consuming the ORM we will propose different cases with an example domain and we will propose different infrastructures.
+To simplify the schema, we will omit the specification of the properties, keys, indices and relationships of the entities as well as the mapping.
+But you can see the complete schema in the example labs.</p>
+<h2 id="unique-source">Unique Source</h2>
+<p><strong>Schema:</strong></p>
+<p>In the following schema we define 4 entities in the domain: Categories, Customers, Products and Orders, with Orders being an entity composed of Orders and Order Details.
+In infrastructure we define a single scenario that is associated with a single data source called Ordering, which is a MySQL database, which uses the default mapping.</p>
+<pre><code class="language-yaml">domain:  
+  entities:
+  - name: Categories
+  - name: Customers
+  - name: Products
+  - name: Orders
+  - name: Orders.details
+infrastructure:
+  mappings:
+  - name: default
+  sources:
+    - name: Ordering
+      mapping: default
+      dialect: MySQL
+      connection: ${CNN_MYSQL}
+  stages:
+  - name: default
+    sources:
+      - name: Ordering
+</code></pre>
+<p><strong>Query:</strong></p>
+<p>We will write the query to obtain an Order with its details belonging to a client.
+We will write the query using lambda expression.</p>
+<pre><code class="language-typescript">import { orm } from 'lambdaorm'
+import { Orders } from './northwind/domain/model'
+( async () =&gt; {
+ try { 
+  // Initialize the ORM by passing the schema file
+  await orm.init('./lambdaORM.yaml')
+  // Query
+  const query = (customerId:string)=&gt; Orders.filter(p =&gt;p.customerId==customerId)
+                   .include(p=&gt;[p.customer.map(p=&gt;p.name),p.details
+                    .include(p=&gt;p.product
+                     .include(p=&gt;p.category.map(p=&gt;p.name))
+                    .map(p=&gt;p.name))
+                   .map(p=&gt;[p.quantity,p.unitPrice])])
+                   .page(1,1)
+  // Execute the query                 
+  const result = await orm.execute(query, {customerId: 'CENTC' })
+  // Print the result
+  console.log(JSON.stringify(result,null,2))
+ } catch (error: any) {
+  console.error(error)
+ }
+})()
+</code></pre>
+<p><strong>Result:</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 12,
+    &quot;customerId&quot;: &quot;CENTC&quot;,
+    &quot;orderDate&quot;: &quot;1996-07-18T00:00:00.000Z&quot;,
+    &quot;customer&quot;: {
+      &quot;name&quot;: &quot;Centro comercial Moctezuma&quot;
+    },
+    &quot;details&quot;: [
+      {
+        &quot;quantity&quot;: 10,
+        &quot;unitPrice&quot;: 8,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Sir Rodney's Scones&quot;,
+          &quot;category&quot;: {
+            &quot;name&quot;: &quot;Confections&quot;
+          }
+        }
+      },
+      {
+        &quot;quantity&quot;: 1,
+        &quot;unitPrice&quot;: 20.8,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Gravad lax&quot;,
+          &quot;category&quot;: {
+            &quot;name&quot;: &quot;Seafood&quot;
+          }
+        }
+      }
+    ]
+  }
+]
+</code></pre>
+<h2 id="multiple-sources">Multiple Sources</h2>
+<p><strong>Schema:</strong></p>
+<p>In this case we will define a scenario where the domain entities are persisted in different data sources:</p>
+<ul>
+<li>The Categories, Products entities are persisted in the source Catalog, which is a MySQL database that uses the default mapping.</li>
+<li>The Customers entity is persisted in the Crm source, which is a PostgreSQL database that uses the default mapping.</li>
+<li>The Orders entity is persisted in the Ordering source, which is a MongoDB database that uses the mongoDb mapping.</li>
+</ul>
+<pre><code class="language-yaml">domain:  
+  entities:
+  - name: Categories
+  - name: Customers
+  - name: Products
+  - name: Orders
+  - name: Orders.details
+infrastructure:
+  mappings:
+  - name: default
+  - name: mongoDb
+    extends: default
+  sources:
+  - name: Catalog      
+    dialect: MySQL
+    mapping: default
+    connection: ${CNN_MYSQL}      
+  - name: Crm    
+    dialect: PostgreSQL
+    mapping: default
+    connection: ${CNN_POSTGRES}
+  - name: Ordering
+    dialect: MongoDB
+    mapping: mongoDb      
+    connection: ${CNN_MONGODB}    
+  stages:
+  - name: default
+    sources:
+    - name: Catalog
+      condition: entity.in([&quot;Categories&quot;,&quot;Products&quot;])
+    - name: Crm
+      condition: entity.in([&quot;Address&quot;,&quot;Customers&quot;])
+    - name: Ordering
+      condition: entity.in([&quot;Orders&quot;,&quot;Orders.details&quot;])
+</code></pre>
+<p><strong>Query:</strong></p>
+<p>This time we will execute the query from the command line interface (CLI) and we will obtain the same result as in the previous case.</p>
+<pre><code class="language-sh">lambdaorm execute -e &quot;.env&quot; -q &quot;Orders.filter(p =&gt; p.customerId == customerId).include(p =&gt; [p.customer.map(p =&gt; p.name), p.details.include(p =&gt; p.product.include(p =&gt; p.category.map(p =&gt; p.name)).map(p =&gt; p.name)).map(p =&gt; [p.quantity, p.unitPrice])]).page(1,1)&quot; -d &quot;{\&quot;customerId\&quot;: \&quot;HANAR\&quot;}&quot;
+</code></pre>
+<p><strong>Result:</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 12,
+    &quot;customerId&quot;: &quot;CENTC&quot;,
+    &quot;orderDate&quot;: &quot;1996-07-18T00:00:00.000Z&quot;,
+    &quot;customer&quot;: {
+      &quot;name&quot;: &quot;Centro comercial Moctezuma&quot;
+    },
+    &quot;details&quot;: [
+      {
+        &quot;quantity&quot;: 10,
+        &quot;unitPrice&quot;: 8,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Sir Rodney's Scones&quot;,
+          &quot;category&quot;: {
+            &quot;name&quot;: &quot;Confections&quot;
+          }
+        }
+      },
+      {
+        &quot;quantity&quot;: 1,
+        &quot;unitPrice&quot;: 20.8,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Gravad lax&quot;,
+          &quot;category&quot;: {
+            &quot;name&quot;: &quot;Seafood&quot;
+          }
+        }
+      }
+    ]
+  }
+]
+</code></pre>
+<p><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources">view complete laboratory</a></p>
+<h2 id="cqrs-command-query-responsibility-segregation"><a href="https://microservices.io/patterns/data/cqrs.html">CQRS (Command Query Responsibility Segregation)</a></h2>
+<p><strong>Schema:</strong></p>
+<p>In this case we will define 3 scenarios for the same domain.</p>
+<ul>
+<li>default: where data is read and written to the Catalog, Crm and Ordering sources.</li>
+<li>insights: where the data from the Insights source is read and written.</li>
+<li>cqrs: where data is read from the Insights source but persisted in the Catalog, Crm and Ordering sources.</li>
+</ul>
+<p>In order to synchronize the data between the Catalog, Crm and Ordering sources with Insights, we will define a listener that will be executed after each insertion, update or deletion of data in the default and cqrs scenario and will apply the same operation in the insights scenario.</p>
+<pre><code class="language-yaml">domain:  
+  entities:
+  - name: Categories
+  - name: Customers
+  - name: Products
+  - name: Orders
+  - name: Orders.details
+infrastructure:
+  mappings:
+  - name: default
+  - name: mongoDb
+    extends: default
+  sources:
+  - name: Catalog      
+    dialect: MySQL
+    mapping: default
+    connection: ${CNN_MYSQL}      
+  - name: Crm    
+    dialect: PostgreSQL
+    mapping: default
+    connection: ${CNN_POSTGRES}
+  - name: Ordering
+    dialect: MongoDB
+    mapping: mongoDb      
+    connection: ${CNN_MONGODB}
+  - name: Insights    
+    dialect: PostgreSQL
+    mapping: default
+    connection: ${CNN_INSIGHTS}         
+  stages:
+  - name: default
+    sources:
+    - name: Catalog
+      condition: entity.in([&quot;Categories&quot;,&quot;Products&quot;])
+    - name: Crm
+      condition: entity.in([&quot;Address&quot;,&quot;Customers&quot;])
+    - name: Ordering
+      condition: entity.in([&quot;Orders&quot;,&quot;Orders.details&quot;])
+  - name: insights
+    sources:
+    - name: Insights
+  - name: cqrs
+    sources:
+    - name: Insights
+      condition: action == &quot;select&quot;
+    - name: Catalog
+      condition: entity.in([&quot;Categories&quot;,&quot;Products&quot;])
+    - name: Crm
+      condition: entity.in([&quot;Address&quot;,&quot;Customers&quot;])
+    - name: Ordering
+      condition: entity.in([&quot;Orders&quot;,&quot;Orders.details&quot;])
+application:
+  listeners:
+    - name: syncInsights
+      on: [insert, bulkInsert, update, delete ]
+      condition: options.stage.in(&quot;default&quot;,&quot;cqrs&quot;)
+      after: orm.execute(query,data,{stage:&quot;insights&quot;})        
+</code></pre>
+<p><strong>Query:</strong></p>
+<p>In this case we will execute the query from the REST service.</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/execute?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;[p.details.include(p=&gt;p.product.map(p=&gt;p.name)).map(p=&gt;{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=&gt;p.name)]).order(p=&gt;p.orderDate).page(1,1)&quot;,&quot;data&quot;:&quot;{\&quot;customerId\&quot;: \&quot;CENTC\&quot;}&quot;, &quot;options&quot;:&quot;{\&quot;stage\&quot;: \&quot;default\&quot;}&quot;}'
+</code></pre>
+<p><strong>Result:</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 12,
+    &quot;customerId&quot;: &quot;CENTC&quot;,
+    &quot;orderDate&quot;: &quot;1996-07-18T00:00:00.000+02:00&quot;,
+    &quot;details&quot;: [
+      {
+        &quot;subTotal&quot;: 80,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Sir Rodney's Scones&quot;
+        }
+      },
+      {
+        &quot;subTotal&quot;: 20.8,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Gravad lax&quot;
+        }
+      }
+    ],
+    &quot;customer&quot;: {
+      &quot;name&quot;: &quot;Centro comercial Moctezuma&quot;
+    }
+  }
+]
+</code></pre>
+<p><strong>Read Query Plan on Default Stage:</strong></p>
+<p>When a query is executed in the default stage, data will be obtained from different data sources according to the stage configuration.</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/plan?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;[p.details.include(p=&gt;p.product.map(p=&gt;p.name)).map(p=&gt;{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=&gt;p.name)]).order(p=&gt;p.orderDate).page(1,1)&quot;, &quot;options&quot;:&quot;{\&quot;default\&quot;: \&quot;cqrs\&quot;}&quot;}'
+</code></pre>
+<p><strong>Result:</strong></p>
+<pre><code class="language-sh">{
+  &quot;entity&quot;: &quot;Orders&quot;,
+  &quot;dialect&quot;: &quot;MongoDB&quot;,
+  &quot;source&quot;: &quot;Ordering&quot;,
+  &quot;sentence&quot;: &quot;[{ \&quot;$match\&quot; : { \&quot;CustomerID\&quot;:{{customerId}} } }, { \&quot;$project\&quot; :{ \&quot;_id\&quot;: 0 , \&quot;id\&quot;:\&quot;$_id\&quot;, \&quot;customerId\&quot;:\&quot;$CustomerID\&quot;, \&quot;orderDate\&quot;:\&quot;$OrderDate\&quot;, \&quot;__id\&quot;:\&quot;$_id\&quot;, \&quot;__customerId\&quot;:\&quot;$CustomerID\&quot; ,\&quot;details\&quot;: { \&quot;$map\&quot;:{ \&quot;input\&quot;: \&quot;$\\\&quot;Order Details\\\&quot;\&quot;, \&quot;in\&quot;: { \&quot;subTotal\&quot;:{ \&quot;$multiply\&quot; :[\&quot;$$this.Quantity\&quot;,\&quot;$$this.UnitPrice\&quot;] }, \&quot;__productId\&quot;:\&quot;$$this.ProductID\&quot;, \&quot;LambdaOrmParentId\&quot;:\&quot;$$this.OrderID\&quot; } }} }} , { \&quot;$sort\&quot; :{ \&quot;OrderDate\&quot;:1 } } , { \&quot;$skip\&quot; : 0 }, { \&quot;$limit\&quot; : 1 } , { \&quot;$project\&quot;: { \&quot;_id\&quot;: 0 } }]&quot;,
+  &quot;children&quot;: [
+    {
+      &quot;entity&quot;: &quot;Orders.details&quot;,
+      &quot;dialect&quot;: &quot;MongoDB&quot;,
+      &quot;source&quot;: &quot;Ordering&quot;,
+      &quot;children&quot;: [
+        {
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;dialect&quot;: &quot;MySQL&quot;,
+          &quot;source&quot;: &quot;Catalog&quot;,
+          &quot;sentence&quot;: &quot;SELECT p.ProductName AS name, p.ProductID AS LambdaOrmParentId FROM Products p  WHERE  p.ProductID IN (?) &quot;
+        }
+      ]
+    },
+    {
+      &quot;entity&quot;: &quot;Customers&quot;,
+      &quot;dialect&quot;: &quot;PostgreSQL&quot;,
+      &quot;source&quot;: &quot;Crm&quot;,
+      &quot;sentence&quot;: &quot;SELECT c.CompanyName AS \&quot;name\&quot;, c.CustomerID AS \&quot;LambdaOrmParentId\&quot; FROM Customers c  WHERE  c.CustomerID IN ($1) &quot;
+    }
+  ]
+}
+</code></pre>
+<p><strong>Read Query Plan on CQRS Stage:</strong></p>
+<p>When you run a query on the cqrs stage, you will get data from a single data source according to the stage configuration.
+But if the query is for insert, update or delete, it will be executed in the corresponding data source.</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/plan?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;[p.details.include(p=&gt;p.product.map(p=&gt;p.name)).map(p=&gt;{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=&gt;p.name)]).order(p=&gt;p.orderDate).page(1,1)&quot;, &quot;options&quot;:&quot;{\&quot;stage\&quot;: \&quot;cqrs\&quot;}&quot;}'
+</code></pre>
+<p><strong>Result:</strong></p>
+<pre><code class="language-json">{
+  &quot;entity&quot;: &quot;Orders&quot;,
+  &quot;dialect&quot;: &quot;PostgreSQL&quot;,
+  &quot;source&quot;: &quot;Insights&quot;,
+  &quot;sentence&quot;: &quot;SELECT o.OrderID AS \&quot;id\&quot;, o.CustomerID AS \&quot;customerId\&quot;, o.OrderDate AS \&quot;orderDate\&quot;, o.OrderID AS \&quot;__id\&quot;, o.CustomerID AS \&quot;__customerId\&quot; FROM Orders o  WHERE o.CustomerID = $1 ORDER BY o.OrderDate asc  OFFSET 0 LIMIT 1 &quot;,
+  &quot;children&quot;: [
+    {
+      &quot;entity&quot;: &quot;Orders.details&quot;,
+      &quot;dialect&quot;: &quot;PostgreSQL&quot;,
+      &quot;source&quot;: &quot;Insights&quot;,
+      &quot;sentence&quot;: &quot;SELECT (o1.Quantity * o1.UnitPrice) AS \&quot;subTotal\&quot;, o1.ProductID AS \&quot;__productId\&quot;, o1.OrderID AS \&quot;LambdaOrmParentId\&quot; FROM \&quot;Order Details\&quot; o1  WHERE  o1.OrderID IN ($1) &quot;,
+      &quot;children&quot;: [
+        {
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;dialect&quot;: &quot;PostgreSQL&quot;,
+          &quot;source&quot;: &quot;Insights&quot;,
+          &quot;sentence&quot;: &quot;SELECT p.ProductName AS \&quot;name\&quot;, p.ProductID AS \&quot;LambdaOrmParentId\&quot; FROM Products p  WHERE  p.ProductID IN ($1) &quot;
+        }
+      ]
+    },
+    {
+      &quot;entity&quot;: &quot;Customers&quot;,
+      &quot;dialect&quot;: &quot;PostgreSQL&quot;,
+      &quot;source&quot;: &quot;Insights&quot;,
+      &quot;sentence&quot;: &quot;SELECT c.CompanyName AS \&quot;name\&quot;, c.CustomerID AS \&quot;LambdaOrmParentId\&quot; FROM Customers c  WHERE  c.CustomerID IN ($1) &quot;
+    }
+  ]
+}
+</code></pre>
+<p><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/svc/03-northwind-cqrs">view complete laboratory</a></p>
+<h2 id="cqrs-command-query-responsibility-segregation-with-kafka"><a href="https://microservices.io/patterns/data/cqrs.html">CQRS (Command Query Responsibility Segregation)</a> with Kafka</h2>
+<p>If we use the ORM from the REST service, we can use Kafka to publish the insert, update and delete data events in the default and cqrs scenario. And configure Kafka consumers to update the data in the insights scenario.</p>
+<p><strong>Schema:</strong></p>
+<pre><code class="language-yaml">...
+infrastructure:
+  ...
+  queue: 
+    config: $QUEUE_CONFIG
+    consumers:
+      - name: syncInsights
+        config:
+          groupId: group1
+        subscribe:
+          topic: insights-sync
+          fromBeginning: true
+        execute: orm.execute(message.query,message.data, {stage:&quot;insights&quot;})    
+application:
+  listeners:
+    - name: syncInsights
+      on: [insert, bulkInsert, update, delete ]
+      condition: options.stage.in(&quot;default&quot;,&quot;cqrs&quot;)
+      after: queue.send(&quot;insights-sync&quot;,[{query,data}]) 
+</code></pre>
+<p><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/svc/04-northwind-cqrs-kafka">view complete laboratory</a></p>
+<h3 id="node-client">Node Client</h3>
+<p><strong>Schema:</strong></p>
+<p>In the case of using a rest service client, the schema only defines the domain and the paths in the infrastructure.
+Since the infrastructure definition is done in the rest service configuration.</p>
+<pre><code class="language-yaml">domain:  
+  entities:
+  - name: Categories
+  - name: Customers
+  - name: Products
+  - name: Orders
+  - name: Orders.details
+infrastructure:
+  paths:    
+    src: src
+    domain: northwind/domain 
+</code></pre>
+<p><strong>Query:</strong></p>
+<p>In this case we will use a Node client that will connect to the REST service to execute the query.
+And in this case we will write the query in string format.</p>
+<pre><code class="language-typescript">import { orm } from 'lambdaorm-client-node'
+import fs from 'fs'
+import path from'path'
+( async () =&gt; {
+ try { 
+  await orm.init('http://localhost:9291')
+  // test connection
+  console.log(await orm.general.ping())
+  // Gets the content of the data.json file to insert the data
+  const content = fs.readFileSync(path.join(__dirname,'../data.json'), 'utf-8')
+  const data = JSON.parse(content)
+  // Import data
+  await orm.stage.import('default',data)
+  // query as string
+  const query = `Orders.filter(p =&gt;p.customerId==customerId)
+                   .include(p=&gt;[p.customer.map(p=&gt;p.name),p.details
+                    .include(p=&gt;p.product
+                     .include(p=&gt;p.category.map(p=&gt;p.name))
+                    .map(p=&gt;p.name))
+                   .map(p=&gt;[p.quantity,p.unitPrice])])`
+  // get plan 
+  const plan = await orm.plan(query, { stage: 'default'})
+  console.log(JSON.stringify(plan,null,2))
+  // execute query
+  const result = await orm.execute(query, {customerId: 'CENTC' },{ stage: 'default'})
+  console.log(JSON.stringify(result,null,2))
+ } catch (error: any) {
+  console.error(error)
+ } finally {
+  await orm.end()
+ }
+})()
+</code></pre>
+<h2 id="considerations">Considerations</h2>
+<p><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/client-node/02-import-data">view complete laboratory</a></p>
+<p>Keep in mind that whether we use the "lambdaorm" or "lambdaorm-client-node" library we can write the queries in lambda or string format.</p>
+<p>We could start a development by proposing a simple infrastructure and then make modifications to it and this would not affect our code, since the queries are written based on the domain model and are independent of the infrastructure.</p>
+<p>You could also have development, test and production environments with different infrastructure configurations without having to alter the code.</p>
+<p>In addition to the examples presented previously, there are many other use cases that can be solved with λORM by configuring the schema and queries language. Therefore, we invite you to explore the different <a href="https://github.com/lambda-orm/lambdaorm-labs">laboratories</a> and read the <a href="https://github.com/lambda-orm/wiki/wiki">documentation</a>.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

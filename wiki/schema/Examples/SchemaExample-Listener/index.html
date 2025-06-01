@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Listener on Schema - LambdaORM Wiki</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">LambdaORM Wiki</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../../.." class="nav-link">λORM "We don't reinvent the wheel, we improve it"</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../Features/" class="nav-link">Features</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../Sidebar/" class="nav-link">Sidebar</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../Usage/" class="nav-link">Usage</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../function_functions/" class="nav-link">Function functions</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../operator_operators/" class="nav-link">Operator operators</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Queries <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../queries/Expression/" class="dropdown-item">Lambda expressions</a>
+</li>
+                                    
+<li>
+    <a href="../../../queries/Metadata/" class="dropdown-item">Metadata</a>
+</li>
+                                    
+<li>
+    <a href="../../../queries/Query-Language/" class="dropdown-item">Query Language</a>
+</li>
+                                    
+<li>
+    <a href="../../../queries/Repository/" class="dropdown-item">Repositories</a>
+</li>
+                                    
+<li>
+    <a href="../../../queries/Transaction/" class="dropdown-item">Transaction</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dml</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../queries/dml/BulkInsert/" class="dropdown-item">BulkInsert</a>
+</li>
+            
+<li>
+    <a href="../../../queries/dml/Delete/" class="dropdown-item">Delete</a>
+</li>
+            
+<li>
+    <a href="../../../queries/dml/Insert/" class="dropdown-item">Insert</a>
+</li>
+            
+<li>
+    <a href="../../../queries/dml/Update/" class="dropdown-item">Update</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dql</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../queries/dql/Grouping/" class="dropdown-item">Grouping</a>
+</li>
+            
+<li>
+    <a href="../../../queries/dql/Include/" class="dropdown-item">Include</a>
+</li>
+            
+<li>
+    <a href="../../../queries/dql/Join/" class="dropdown-item">Join</a>
+</li>
+            
+<li>
+    <a href="../../../queries/dql/Select/" class="dropdown-item">Select</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">operatorsAndFunctions</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../queries/operatorsAndFunctions/Bitwise/" class="dropdown-item">Bitwise</a>
+</li>
+            
+<li>
+    <a href="../../../queries/operatorsAndFunctions/Comparison/" class="dropdown-item">Comparison</a>
+</li>
+            
+<li>
+    <a href="../../../queries/operatorsAndFunctions/Datetime/" class="dropdown-item">Datetime</a>
+</li>
+            
+<li>
+    <a href="../../../queries/operatorsAndFunctions/Group/" class="dropdown-item">Group</a>
+</li>
+            
+<li>
+    <a href="../../../queries/operatorsAndFunctions/Logical/" class="dropdown-item">Logical</a>
+</li>
+            
+<li>
+    <a href="../../../queries/operatorsAndFunctions/Nullable/" class="dropdown-item">Nullable</a>
+</li>
+            
+<li>
+    <a href="../../../queries/operatorsAndFunctions/Numeric/" class="dropdown-item">Numeric</a>
+</li>
+            
+<li>
+    <a href="../../../queries/operatorsAndFunctions/Sort/" class="dropdown-item">Sort</a>
+</li>
+            
+<li>
+    <a href="../../../queries/operatorsAndFunctions/String/" class="dropdown-item">String</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Schema <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Schema-Use/" class="dropdown-item">Schema Use</a>
+</li>
+                                    
+<li>
+    <a href="../../Schema/" class="dropdown-item">Schema</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Definition</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../Definition/SchemaDefinition-Composite/" class="dropdown-item">Composite Entity</a>
+</li>
+            
+<li>
+    <a href="../../Definition/SchemaDefinition-EnvironmentVariables/" class="dropdown-item">Environment Variables on Schema</a>
+</li>
+            
+<li>
+    <a href="../../Definition/SchemaDefinition-Expressions/" class="dropdown-item">Expressions on Schema</a>
+</li>
+            
+<li>
+    <a href="../../Definition/SchemaDefinition/" class="dropdown-item">Definition</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Examples</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../SchemaExample-Basic/" class="dropdown-item">Basic Schema Example</a>
+</li>
+            
+<li>
+    <a href="../SchemaExample-Composite/" class="dropdown-item">Composite Entity</a>
+</li>
+            
+<li>
+    <a href="../SchemaExample-Extend/" class="dropdown-item">Extend</a>
+</li>
+            
+<li>
+    <a href="./" class="dropdown-item active">Listener on Schema</a>
+</li>
+            
+<li>
+    <a href="../SchemaExample-MultiplesStages/" class="dropdown-item">Multiples Stages</a>
+</li>
+            
+<li>
+    <a href="../SchemaExample-StageMultiplesSources/" class="dropdown-item">Stage related multiples Sources</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Synchronization</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../Synchronization/SchemaSynchronization-Fetch/" class="dropdown-item">Fetch</a>
+</li>
+            
+<li>
+    <a href="../../Synchronization/SchemaSynchronization-Incorporate/" class="dropdown-item">Incorporate</a>
+</li>
+            
+<li>
+    <a href="../../Synchronization/SchemaSynchronization-Introspect/" class="dropdown-item">Introspect</a>
+</li>
+            
+<li>
+    <a href="../../Synchronization/SchemaSynchronization-Pull/" class="dropdown-item">Pull</a>
+</li>
+            
+<li>
+    <a href="../../Synchronization/SchemaSynchronization-Push/" class="dropdown-item">Push</a>
+</li>
+            
+<li>
+    <a href="../../Synchronization/SchemaSynchronization/" class="dropdown-item">Synchronization</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../SchemaExample-Extend/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../SchemaExample-MultiplesStages/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-light">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#listener-on-schema" class="nav-link">Listener on Schema</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#listener-example" class="nav-link">Listener Example</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#laboratories" class="nav-link">Laboratories</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="listener-on-schema">Listener on Schema</h1>
+<p>Listeners allow us to execute actions when an event occurs in the ORM. \
+events are set to the "on" property. \
+And the events that can be listened to are select, insert, bulkInsert, update and delete. \
+The "condition" property allows you to define an expression that is evaluated to determine if the listener is executed. \
+The expressions to be executed can be defined in the "before", "after" and "error" properties. \</p>
+<p>The parameters that we have to use in the expressions are:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>query</td>
+<td>The query expression that was executed</td>
+</tr>
+<tr>
+<td>data</td>
+<td>The data that was sent when the expression was executed</td>
+</tr>
+<tr>
+<td>options</td>
+<td>The options that were sent when the expression was executed</td>
+</tr>
+<tr>
+<td>result</td>
+<td>It is only available in the after event and contains the result of the expression execution</td>
+</tr>
+<tr>
+<td>action</td>
+<td>The action that was executed (select, insert, update, delete, upsert, merge, bulkInsert, bulkUpdate, bulkMerge)</td>
+</tr>
+<tr>
+<td>type</td>
+<td>The type of sentence that was executed (dql, ddl, dml)</td>
+</tr>
+<tr>
+<td>category</td>
+<td>The category of the sentence that was executed (select, insert, update, delete, upsert)</td>
+</tr>
+<tr>
+<td>sentence</td>
+<td>The sentence that was executed</td>
+</tr>
+<tr>
+<td>dialect</td>
+<td>The dialect of the source where the sentence was executed</td>
+</tr>
+<tr>
+<td>source</td>
+<td>The source where the sentence was executed</td>
+</tr>
+<tr>
+<td>entity</td>
+<td>The entity that was affected by the sentence</td>
+</tr>
+<tr>
+<td>error</td>
+<td>It is only available in the error event and contains the error that occurred</td>
+</tr>
+</tbody>
+</table>
+<h2 id="listener-example">Listener Example</h2>
+<p>In this example we see how a Listener is declared to synchronize data in Insights. \
+When a record is inserted, updated or deleted in the default or cqrs stages, the listener is executed. \
+In this case, the expression is defined in the after property, which executes the same expression with the same data but in the stage insights.</p>
+<p><strong>Part of the schema where the listener is defined:</strong></p>
+<pre><code class="language-yaml">...
+application:
+  listeners:
+    - name: syncInsights
+      on: [insert, bulkInsert, update, delete]
+      condition: options.stage.in(&quot;default&quot;,&quot;cqrs&quot;)
+      after: orm.execute(query,data,{stage:&quot;insights&quot;}) 
+</code></pre>
+<p><strong>Schema Complete:</strong></p>
+<pre><code class="language-yaml">domain:  
+  enums:
+  entities:
+  - name: Address
+    abstract: true
+    indexes:
+    - name: postalCode
+      fields: [&quot;postalCode&quot;]
+    - name: region
+      fields: [&quot;region&quot;, &quot;country&quot;]
+    - name: city
+      fields: [&quot;city&quot;]
+    properties:
+    - name: address
+    - name: city
+    - name: region
+    - name: postalCode
+      length: 20
+    - name: country
+  - name: Categories
+    primaryKey: [&quot;id&quot;]
+    uniqueKey: [&quot;name&quot;]
+    properties:
+    - name: id
+      type: integer
+      required: true
+      autoIncrement: true
+    - name: name
+      required: true
+  - name: Customers
+    extends: Address
+    primaryKey: [&quot;id&quot;]
+    indexes:
+    - name: name
+      fields: [&quot;name&quot;]
+    properties:
+    - name: id
+      length: 5
+      required: true
+    - name: name
+      required: true
+  - name: Products
+    primaryKey: [&quot;id&quot;]
+    uniqueKey: [&quot;name&quot;, &quot;supplierId&quot;]
+    properties:
+    - name: id
+      type: integer
+      required: true
+      autoIncrement: true
+    - name: name
+      required: true
+    - name: categoryId
+      type: integer
+    - name: quantity
+    - name: price
+      type: decimal
+      default: 0
+    relations:
+    - name: category
+      from: categoryId
+      entity: Categories
+      to: id
+      target: products
+  - name: Orders
+    primaryKey: [&quot;id&quot;]
+    indexes:
+    - name: orderDate
+      fields: [&quot;orderDate&quot;]
+    properties:
+    - name: id
+      type: integer
+      required: true
+      autoIncrement: true
+    - name: customerId
+      required: true
+      length: 5
+    - name: orderDate
+      type: dateTime 
+    relations:
+    - name: customer
+      from: customerId
+      entity: Customers
+      to: id
+      target: orders
+  - name: Orders.details
+    primaryKey: [&quot;orderId&quot;, &quot;productId&quot;]
+    properties:
+    - name: orderId
+      required: true
+      type: integer
+    - name: productId
+      required: true
+      type: integer
+    - name: unitPrice
+      type: decimal
+    - name: quantity
+      type: decimal
+    relations:
+    - name: order
+      from: orderId
+      entity: Orders
+      to: id
+      target: details
+    - name: product
+      from: productId
+      entity: Products
+      to: id
+      target: orderDetails
+infrastructure:
+  views:
+  - name: default  
+  mappings:
+  - name: default
+    entities:
+    - name: Address
+      abstract: true
+      properties:
+      - name: address
+        mapping: Address
+      - name: city
+        mapping: City
+      - name: region
+        mapping: Region
+      - name: postalCode
+        mapping: PostalCode
+      - name: country
+        mapping: Country
+    - name: Categories
+      mapping: Categories
+      properties:
+      - name: id
+        mapping: CategoryID
+      - name: name
+        mapping: CategoryName
+    - name: Customers
+      extends: Address
+      mapping: Customers
+      properties:
+      - name: id
+        mapping: CustomerID
+      - name: name
+        mapping: CompanyName
+    - name: Products
+      mapping: Products
+      properties:
+      - name: id
+        mapping: ProductID
+      - name: name
+        mapping: ProductName
+      - name: categoryId
+        mapping: CategoryID
+      - name: quantity
+        mapping: QuantityPerUnit
+      - name: price
+        mapping: UnitPrice
+    - name: Orders
+      mapping: Orders
+      properties:
+      - name: id
+        mapping: OrderID
+      - name: customerId
+        mapping: CustomerID
+      - name: orderDate
+        mapping: OrderDate
+    - name: Orders.details
+      mapping: Order Details
+      properties:
+      - name: orderId
+        mapping: OrderID
+      - name: productId
+        mapping: ProductID
+      - name: unitPrice
+        mapping: UnitPrice
+      - name: quantity
+        mapping: Quantity
+  - name: mongoDb
+    extends: default
+    entities:
+      - name: Orders
+        sequence: SQ_ORDERS
+        properties:
+          - name: id
+            mapping: _id
+  sources:
+  - name: Catalog      
+    dialect: MySQL
+    mapping: default
+    connection: ${CNN_MYSQL}      
+  - name: Crm    
+    dialect: PostgreSQL
+    mapping: default
+    connection: ${CNN_POSTGRES}
+  - name: Ordering
+    dialect: MongoDB
+    mapping: mongoDb      
+    connection: ${CNN_MONGODB}
+  - name: Insights    
+    dialect: PostgreSQL
+    mapping: default
+    connection: ${CNN_INSIGHTS}      
+  stages:
+  - name: default
+    sources:
+    - name: Catalog
+      condition: entity.in([&quot;Categories&quot;,&quot;Products&quot;])
+    - name: Crm
+      condition: entity.in([&quot;Address&quot;,&quot;Customers&quot;])
+    - name: Ordering
+      condition: entity.in([&quot;Orders&quot;,&quot;Orders.details&quot;])
+  - name: insights
+    sources:
+    - name: Insights
+  - name: cqrs
+    sources:
+    - name: Insights
+      condition: action == &quot;select&quot;
+    - name: Catalog
+      condition: entity.in([&quot;Categories&quot;,&quot;Products&quot;])
+    - name: Crm
+      condition: entity.in([&quot;Address&quot;,&quot;Customers&quot;])
+    - name: Ordering
+      condition: entity.in([&quot;Orders&quot;,&quot;Orders.details&quot;])    
+application:
+  listeners:
+    - name: syncInsights
+      on: [insert, bulkInsert, update, delete ]
+      condition: options.stage.in(&quot;default&quot;,&quot;cqrs&quot;)
+      after: orm.execute(query,data,{stage:&quot;insights&quot;}) 
+</code></pre>
+<h2 id="laboratories">Laboratories</h2>
+<p><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/08-northwind-cqrs">CLI - northwind cqrs</a></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js" defer></script>
+        <script src="../../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

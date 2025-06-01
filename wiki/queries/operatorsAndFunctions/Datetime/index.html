@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Datetime - LambdaORM Wiki</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">LambdaORM Wiki</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../../.." class="nav-link">λORM "We don't reinvent the wheel, we improve it"</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../Features/" class="nav-link">Features</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../Sidebar/" class="nav-link">Sidebar</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../Usage/" class="nav-link">Usage</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../function_functions/" class="nav-link">Function functions</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../../operator_operators/" class="nav-link">Operator operators</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Queries <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Expression/" class="dropdown-item">Lambda expressions</a>
+</li>
+                                    
+<li>
+    <a href="../../Metadata/" class="dropdown-item">Metadata</a>
+</li>
+                                    
+<li>
+    <a href="../../Query-Language/" class="dropdown-item">Query Language</a>
+</li>
+                                    
+<li>
+    <a href="../../Repository/" class="dropdown-item">Repositories</a>
+</li>
+                                    
+<li>
+    <a href="../../Transaction/" class="dropdown-item">Transaction</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dml</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../dml/BulkInsert/" class="dropdown-item">BulkInsert</a>
+</li>
+            
+<li>
+    <a href="../../dml/Delete/" class="dropdown-item">Delete</a>
+</li>
+            
+<li>
+    <a href="../../dml/Insert/" class="dropdown-item">Insert</a>
+</li>
+            
+<li>
+    <a href="../../dml/Update/" class="dropdown-item">Update</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dql</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../dql/Grouping/" class="dropdown-item">Grouping</a>
+</li>
+            
+<li>
+    <a href="../../dql/Include/" class="dropdown-item">Include</a>
+</li>
+            
+<li>
+    <a href="../../dql/Join/" class="dropdown-item">Join</a>
+</li>
+            
+<li>
+    <a href="../../dql/Select/" class="dropdown-item">Select</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">operatorsAndFunctions</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../Bitwise/" class="dropdown-item">Bitwise</a>
+</li>
+            
+<li>
+    <a href="../Comparison/" class="dropdown-item">Comparison</a>
+</li>
+            
+<li>
+    <a href="./" class="dropdown-item active">Datetime</a>
+</li>
+            
+<li>
+    <a href="../Group/" class="dropdown-item">Group</a>
+</li>
+            
+<li>
+    <a href="../Logical/" class="dropdown-item">Logical</a>
+</li>
+            
+<li>
+    <a href="../Nullable/" class="dropdown-item">Nullable</a>
+</li>
+            
+<li>
+    <a href="../Numeric/" class="dropdown-item">Numeric</a>
+</li>
+            
+<li>
+    <a href="../Sort/" class="dropdown-item">Sort</a>
+</li>
+            
+<li>
+    <a href="../String/" class="dropdown-item">String</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Schema <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../schema/Schema-Use/" class="dropdown-item">Schema Use</a>
+</li>
+                                    
+<li>
+    <a href="../../../schema/Schema/" class="dropdown-item">Schema</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Definition</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../schema/Definition/SchemaDefinition-Composite/" class="dropdown-item">Composite Entity</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Definition/SchemaDefinition-EnvironmentVariables/" class="dropdown-item">Environment Variables on Schema</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Definition/SchemaDefinition-Expressions/" class="dropdown-item">Expressions on Schema</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Definition/SchemaDefinition/" class="dropdown-item">Definition</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Examples</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../schema/Examples/SchemaExample-Basic/" class="dropdown-item">Basic Schema Example</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Examples/SchemaExample-Composite/" class="dropdown-item">Composite Entity</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Examples/SchemaExample-Extend/" class="dropdown-item">Extend</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Examples/SchemaExample-Listener/" class="dropdown-item">Listener on Schema</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Examples/SchemaExample-MultiplesStages/" class="dropdown-item">Multiples Stages</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Examples/SchemaExample-StageMultiplesSources/" class="dropdown-item">Stage related multiples Sources</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Synchronization</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../schema/Synchronization/SchemaSynchronization-Fetch/" class="dropdown-item">Fetch</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Synchronization/SchemaSynchronization-Incorporate/" class="dropdown-item">Incorporate</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Synchronization/SchemaSynchronization-Introspect/" class="dropdown-item">Introspect</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Synchronization/SchemaSynchronization-Pull/" class="dropdown-item">Pull</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Synchronization/SchemaSynchronization-Push/" class="dropdown-item">Push</a>
+</li>
+            
+<li>
+    <a href="../../../schema/Synchronization/SchemaSynchronization/" class="dropdown-item">Synchronization</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../Comparison/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../Group/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-light">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#sentences" class="nav-link">Sentences</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#definition" class="nav-link">Definition</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>curTime</td>
+<td>Get the current time</td>
+</tr>
+<tr>
+<td>today</td>
+<td>Get the current date</td>
+</tr>
+<tr>
+<td>now</td>
+<td>Get the current dateTime</td>
+</tr>
+<tr>
+<td>dateToString</td>
+<td>Convert date to string with ISO 8601 format</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Convert string to time</td>
+</tr>
+<tr>
+<td>date</td>
+<td>Convert string to date</td>
+</tr>
+<tr>
+<td>dateTime</td>
+<td>Convert string to dateTime</td>
+</tr>
+<tr>
+<td>year</td>
+<td>Get year from date</td>
+</tr>
+<tr>
+<td>month</td>
+<td>Get month from date</td>
+</tr>
+<tr>
+<td>day</td>
+<td>Get day of month from date</td>
+</tr>
+<tr>
+<td>weekday</td>
+<td>Get date of week from date</td>
+</tr>
+<tr>
+<td>hour</td>
+<td>Get hour from date</td>
+</tr>
+<tr>
+<td>minute</td>
+<td>Get minute from date</td>
+</tr>
+<tr>
+<td>second</td>
+<td>Get second from date</td>
+</tr>
+<tr>
+<td>millisecond</td>
+<td>Get millisecond from date</td>
+</tr>
+<tr>
+<td>addYear</td>
+<td>Add years to a date</td>
+</tr>
+<tr>
+<td>addMonth</td>
+<td>Add months to a date</td>
+</tr>
+<tr>
+<td>addDay</td>
+<td>Add days to a date</td>
+</tr>
+<tr>
+<td>addHour</td>
+<td>Add hours to a date</td>
+</tr>
+<tr>
+<td>addMinute</td>
+<td>Add minutes to a date</td>
+</tr>
+<tr>
+<td>addSecond</td>
+<td>Add seconds to a date</td>
+</tr>
+<tr>
+<td>addMillisecond</td>
+<td>Add milliseconds to a date</td>
+</tr>
+<tr>
+<td>addTime</td>
+<td>Add time to a date</td>
+</tr>
+<tr>
+<td>subtractTime</td>
+<td>subtract time to a date</td>
+</tr>
+<tr>
+<td>dayDiff</td>
+<td>difference between two dates in days</td>
+</tr>
+<tr>
+<td>hourDiff</td>
+<td>difference between two dates in hours</td>
+</tr>
+<tr>
+<td>secondDiff</td>
+<td>difference between two dates in seconds</td>
+</tr>
+<tr>
+<td>millisecondDiff</td>
+<td>difference between two dates in milliseconds</td>
+</tr>
+<tr>
+<td>dayToDate</td>
+<td>days to  Date</td>
+</tr>
+<tr>
+<td>hourToDate</td>
+<td>hours to  Date</td>
+</tr>
+<tr>
+<td>secondToDate</td>
+<td>seconds to  Date</td>
+</tr>
+<tr>
+<td>millisecondToDate</td>
+<td>milliseconds to Date</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:today()})</td>
+<td>[{"result":"2022-08-14T22:00:00.000Z"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:now()})</td>
+<td>[{"result":"2022-08-15T09:54:22.000Z"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:curTime()})</td>
+<td>[{"result":"11:54:22"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:time("2021-09-06T14:39:11.444Z")})</td>
+<td>[{"result":"00:20:21"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:date("2021-09-06T14:39:11.444Z")})</td>
+<td>[{"result":"2021-09-05T22:00:00.000Z"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:dateTime("2021-09-06T14:39:11.444Z")})</td>
+<td>[{"result":"2021-09-06T12:39:11.000Z"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:dateToString(dateTime("2021-09-06T14:39:11.444Z"))})</td>
+<td>[{"result":"2021-09-06T14:39:11Z"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:year("2021-09-06T14:39:11.444Z")})</td>
+<td>[{"result":2021}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:month("2021-09-06T14:39:11.444Z")})</td>
+<td>[{"result":9}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:day("2021-09-06T14:39:11.444Z")})</td>
+<td>[{"result":6}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:weekday("2021-09-06T14:39:11.444Z")})</td>
+<td>[{"result":2}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:hour("2021-09-06T14:39:11.444Z")})</td>
+<td>[{"result":0}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:minute("2021-09-06T14:39:11.444Z")})</td>
+<td>[{"result":20}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:second("2021-09-06T14:39:11.444Z")})</td>
+<td>[{"result":21}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:millisecond("2021-09-06T14:39:11.444Z")})</td>
+<td>[{"result":0}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:addYear("2021-09-06T14:39:11.444Z",2)})</td>
+<td>[{"result":"2023-09-06 14:39:11.444000"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:addMonth("2021-09-06T14:39:11.444Z",2)})</td>
+<td>[{"result":"2021-11-06 14:39:11.444000"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:addDay("2021-09-06T14:39:11.444Z",2)})</td>
+<td>[{"result":"2021-09-08 14:39:11.444000"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:addHour("2021-09-06T14:39:11.444Z",2)})</td>
+<td>[{"result":"2021-09-06 16:39:11.444000"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:addMinute("2021-09-06T14:39:11.444Z",2)})</td>
+<td>[{"result":"2021-09-06 14:41:11.444000"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:addSecond("2021-09-06T14:39:11.444Z",2)})</td>
+<td>[{"result":"2021-09-06 14:39:13.444000"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:addMillisecond("2021-09-06T14:39:11.444Z",2)})</td>
+<td>[{"result":"2021-09-06 14:39:11.446000"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:addTime("2021-09-06T14:39:11.444Z","08:22:12")})</td>
+<td>[{"result":"08:42:33"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:subtractTime("2021-09-06T14:39:11.444Z","08:22:12")})</td>
+<td>[{"result":"-08:01:51"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:dayDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})</td>
+<td>[{"result":4}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:hourDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})</td>
+<td>[{"result":98}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:secondDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})</td>
+<td>[{"result":353341}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:millisecondDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})</td>
+<td>[{"result":353341000}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:dayToDate(2000)})</td>
+<td>[{"result":"1975-06-24T00:00:00Z"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:hourToDate(2000)})</td>
+<td>[{"result":"1970-03-25T08:00:00Z"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:secondToDate(2000)})</td>
+<td>[{"result":"1970-01-01T00:33:20Z"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result:millisecondToDate(2000)})</td>
+<td>[{"result":"1970-01-01T00:00:02Z"}]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sentences">Sentences</h2>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the current date from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:today()})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CURDATE() AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the current dateTime from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:now()})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT NOW() AS result 
+FROM Countries c 
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the current time from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:curTime()})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CURTIME() AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the time from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:time(&quot;2021-09-06T14:39:11.444Z&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CONVERT('2021-09-06T14:39:11.444Z', TIME) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the date from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:date(&quot;2021-09-06T14:39:11.444Z&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CONVERT('2021-09-06T14:39:11.444Z', DATE) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the dateTime from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:dateTime(&quot;2021-09-06T14:39:11.444Z&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CONVERT('2021-09-06T14:39:11.444Z', DATETIME) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the date as string from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:dateToString(dateTime(&quot;2021-09-06T14:39:11.444Z&quot;))})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT DATE_FORMAT(CONVERT('2021-09-06T14:39:11.444Z', DATETIME), '%Y-%m-%dT%TZ') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the year from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:year(&quot;2021-09-06T14:39:11.444Z&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT EXTRACT(YEAR 
+FROM '2021-09-06T14:39:11.444Z') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the month from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:month(&quot;2021-09-06T14:39:11.444Z&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT EXTRACT(MONTH FROM '2021-09-06T14:39:11.444Z') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the day from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:day(&quot;2021-09-06T14:39:11.444Z&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT DAYOFMONTH('2021-09-06T14:39:11.444Z') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the date of week from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:weekday(&quot;2021-09-06T14:39:11.444Z&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT DAYOFWEEK('2021-09-06T14:39:11.444Z') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the hour from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:hour(&quot;2021-09-06T14:39:11.444Z&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT EXTRACT(HOUR FROM '2021-09-06T14:39:11.444Z') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the minute from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:minute(&quot;2021-09-06T14:39:11.444Z&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT EXTRACT(MINUTE FROM '2021-09-06T14:39:11.444Z') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the second from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:second(&quot;2021-09-06T14:39:11.444Z&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT EXTRACT(SECOND FROM '2021-09-06T14:39:11.444Z') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the millisecond from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:millisecond(&quot;2021-09-06T14:39:11.444Z&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ROUND(EXTRACT(MICROSECOND FROM '2021-09-06T14:39:11.444Z')/1000,0) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to add years to a date from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:addYear(&quot;2021-09-06T14:39:11.444Z&quot;,2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT DATE_ADD('2021-09-06T14:39:11.444Z', INTERVAL 2 YEAR) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to add months to a date from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:addMonth(&quot;2021-09-06T14:39:11.444Z&quot;,2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT DATE_ADD('2021-09-06T14:39:11.444Z', INTERVAL 2 MONTH) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to add days to a date from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:addDay(&quot;2021-09-06T14:39:11.444Z&quot;,2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT DATE_ADD('2021-09-06T14:39:11.444Z', INTERVAL 2 DAY) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to add hours to a date from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:addHour(&quot;2021-09-06T14:39:11.444Z&quot;,2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT '2021-09-06T14:39:11.444Z' + interval '2' HOUR AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to add minutes to a date from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:addMinute(&quot;2021-09-06T14:39:11.444Z&quot;,2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT '2021-09-06T14:39:11.444Z' + interval '2' MINUTE AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to add seconds to a date from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:addSecond(&quot;2021-09-06T14:39:11.444Z&quot;,2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT '2021-09-06T14:39:11.444Z' + interval '2' SECOND AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to add milliseconds to a date from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:addMillisecond(&quot;2021-09-06T14:39:11.444Z&quot;,2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT DATE_ADD('2021-09-06T14:39:11.444Z', INTERVAL (2 * 1000) MICROSECOND) AS result 
+FROM Countries c 
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to add time to a date from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:addTime(&quot;2021-09-06T14:39:11.444Z&quot;,&quot;08:22:12&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ADDTIME('2021-09-06T14:39:11.444Z','08:22:12') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to subtract time to a date from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:subtractTime(&quot;2021-09-06T14:39:11.444Z&quot;,&quot;08:22:12&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT SUBTIME('2021-09-06T14:39:11.444Z','08:22:12') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the difference between two dates in days from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:dayDiff(&quot;2021-09-06T14:39:11&quot;,&quot;2021-09-02T12:30:10&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT DATEDIFF('2021-09-06T14:39:11','2021-09-02T12:30:10') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the difference between two dates in hours from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:hourDiff(&quot;2021-09-06T14:39:11&quot;,&quot;2021-09-02T12:30:10&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT TIMESTAMPDIFF(HOUR, '2021-09-02T12:30:10','2021-09-06T14:39:11') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the difference between two dates in seconds from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:secondDiff(&quot;2021-09-06T14:39:11&quot;,&quot;2021-09-02T12:30:10&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT TIMESTAMPDIFF(SECOND, '2021-09-02T12:30:10','2021-09-06T14:39:11') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:millisecondDiff(&quot;2021-09-06T14:39:11&quot;,&quot;2021-09-02T12:30:10&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ROUND(TIMESTAMPDIFF(MICROSECOND, '2021-09-02T12:30:10','2021-09-06T14:39:11')/1000,0) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the date from days from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:dayToDate(2000)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT DATE_FORMAT(FROM_UNIXTIME(2000*24*3600), '%Y-%m-%dT%TZ') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the date from hours from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:hourToDate(2000)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT DATE_FORMAT(FROM_UNIXTIME(2000*3600), '%Y-%m-%dT%TZ') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the date from seconds from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:secondToDate(2000)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT DATE_FORMAT(FROM_UNIXTIME(2000), '%Y-%m-%dT%TZ') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the date from milliseconds from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result:millisecondToDate(2000)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT DATE_FORMAT(FROM_UNIXTIME(2000/1000), '%Y-%m-%dT%TZ') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<h2 id="definition">Definition</h2>
+<h3 id="curtime">curTime</h3>
+<ul>
+<li>description: Get the current time</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+</ul>
+<h3 id="today">today</h3>
+<ul>
+<li>description: Get the current date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+</ul>
+<h3 id="now">now</h3>
+<ul>
+<li>description: Get the current dateTime</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+</ul>
+<h3 id="datetostring">dateToString</h3>
+<ul>
+<li>description: Convert date to string with ISO 8601 format</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="time">time</h3>
+<ul>
+<li>description: Convert string to time</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="date">date</h3>
+<ul>
+<li>description: Convert string to date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="datetime">dateTime</h3>
+<ul>
+<li>description: Convert string to dateTime</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="year">year</h3>
+<ul>
+<li>description: Get year from date</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="month">month</h3>
+<ul>
+<li>description: Get month from date</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="day">day</h3>
+<ul>
+<li>description: Get day of month from date</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="weekday">weekday</h3>
+<ul>
+<li>description: get date of week from date</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="hour">hour</h3>
+<ul>
+<li>description: get hour from date</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="minute">minute</h3>
+<ul>
+<li>description: Get minute from date</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="second">second</h3>
+<ul>
+<li>description: Get second from date</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="millisecond">millisecond</h3>
+<ul>
+<li>description: Get millisecond from date</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="addyear">addYear</h3>
+<ul>
+<li>description: Add years to a date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>date: Date</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addmonth">addMonth</h3>
+<ul>
+<li>description: Add months to a date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>date: Date</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addday">addDay</h3>
+<ul>
+<li>description: Add days to a date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>date: Date</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addhour">addHour</h3>
+<ul>
+<li>description: Add hours to a date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>date: Date</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addminute">addMinute</h3>
+<ul>
+<li>description: Add minutes to a date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>date: Date</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addsecond">addSecond</h3>
+<ul>
+<li>description: Add seconds to a date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>date: Date</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addmillisecond">addMillisecond</h3>
+<ul>
+<li>description: Add milliseconds to a date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>date: Date</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addtime">addTime</h3>
+<ul>
+<li>description: Add time to a date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>date: Date</li>
+<li>time: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="subtracttime">subtractTime</h3>
+<ul>
+<li>description: subtract time to a date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>date: Date</li>
+<li>time: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="daydiff">dayDiff</h3>
+<ul>
+<li>description: difference between two dates in days</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>date: Date</li>
+<li>date2: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="hourdiff">hourDiff</h3>
+<ul>
+<li>description: difference between two dates in hours</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>time: Date</li>
+<li>time2: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="seconddiff">secondDiff</h3>
+<ul>
+<li>description: difference between two dates in seconds</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>time: Date</li>
+<li>time2: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="milliseconddiff">millisecondDiff</h3>
+<ul>
+<li>description: difference between two dates in milliseconds</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>time: Date</li>
+<li>time2: Date</li>
+</ul>
+</li>
+</ul>
+<h3 id="daytodate">dayToDate</h3>
+<ul>
+<li>description: days to  Date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="hourtodate">hourToDate</h3>
+<ul>
+<li>description: hours to  Date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="secondtodate">secondToDate</h3>
+<ul>
+<li>description: seconds to  Date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="millisecondtodate">millisecondToDate</h3>
+<ul>
+<li>description: milliseconds to Date</li>
+<li>deterministic: true</li>
+<li>return: Date</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js" defer></script>
+        <script src="../../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

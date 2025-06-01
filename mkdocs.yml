@@ -1,0 +1,5 @@
+site_name: LambdaORM Wiki
+docs_dir: docs
+site_dir: wiki
+theme:
+  name: mkdocs

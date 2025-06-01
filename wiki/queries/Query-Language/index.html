@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Query Language - LambdaORM Wiki</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">LambdaORM Wiki</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">λORM "We don't reinvent the wheel, we improve it"</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../Features/" class="nav-link">Features</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../Sidebar/" class="nav-link">Sidebar</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../Usage/" class="nav-link">Usage</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../function_functions/" class="nav-link">Function functions</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../operator_operators/" class="nav-link">Operator operators</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Queries <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../Expression/" class="dropdown-item">Lambda expressions</a>
+</li>
+                                    
+<li>
+    <a href="../Metadata/" class="dropdown-item">Metadata</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Query Language</a>
+</li>
+                                    
+<li>
+    <a href="../Repository/" class="dropdown-item">Repositories</a>
+</li>
+                                    
+<li>
+    <a href="../Transaction/" class="dropdown-item">Transaction</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dml</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../dml/BulkInsert/" class="dropdown-item">BulkInsert</a>
+</li>
+            
+<li>
+    <a href="../dml/Delete/" class="dropdown-item">Delete</a>
+</li>
+            
+<li>
+    <a href="../dml/Insert/" class="dropdown-item">Insert</a>
+</li>
+            
+<li>
+    <a href="../dml/Update/" class="dropdown-item">Update</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dql</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../dql/Grouping/" class="dropdown-item">Grouping</a>
+</li>
+            
+<li>
+    <a href="../dql/Include/" class="dropdown-item">Include</a>
+</li>
+            
+<li>
+    <a href="../dql/Join/" class="dropdown-item">Join</a>
+</li>
+            
+<li>
+    <a href="../dql/Select/" class="dropdown-item">Select</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">operatorsAndFunctions</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../operatorsAndFunctions/Bitwise/" class="dropdown-item">Bitwise</a>
+</li>
+            
+<li>
+    <a href="../operatorsAndFunctions/Comparison/" class="dropdown-item">Comparison</a>
+</li>
+            
+<li>
+    <a href="../operatorsAndFunctions/Datetime/" class="dropdown-item">Datetime</a>
+</li>
+            
+<li>
+    <a href="../operatorsAndFunctions/Group/" class="dropdown-item">Group</a>
+</li>
+            
+<li>
+    <a href="../operatorsAndFunctions/Logical/" class="dropdown-item">Logical</a>
+</li>
+            
+<li>
+    <a href="../operatorsAndFunctions/Nullable/" class="dropdown-item">Nullable</a>
+</li>
+            
+<li>
+    <a href="../operatorsAndFunctions/Numeric/" class="dropdown-item">Numeric</a>
+</li>
+            
+<li>
+    <a href="../operatorsAndFunctions/Sort/" class="dropdown-item">Sort</a>
+</li>
+            
+<li>
+    <a href="../operatorsAndFunctions/String/" class="dropdown-item">String</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Schema <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../schema/Schema-Use/" class="dropdown-item">Schema Use</a>
+</li>
+                                    
+<li>
+    <a href="../../schema/Schema/" class="dropdown-item">Schema</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Definition</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../schema/Definition/SchemaDefinition-Composite/" class="dropdown-item">Composite Entity</a>
+</li>
+            
+<li>
+    <a href="../../schema/Definition/SchemaDefinition-EnvironmentVariables/" class="dropdown-item">Environment Variables on Schema</a>
+</li>
+            
+<li>
+    <a href="../../schema/Definition/SchemaDefinition-Expressions/" class="dropdown-item">Expressions on Schema</a>
+</li>
+            
+<li>
+    <a href="../../schema/Definition/SchemaDefinition/" class="dropdown-item">Definition</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Examples</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../schema/Examples/SchemaExample-Basic/" class="dropdown-item">Basic Schema Example</a>
+</li>
+            
+<li>
+    <a href="../../schema/Examples/SchemaExample-Composite/" class="dropdown-item">Composite Entity</a>
+</li>
+            
+<li>
+    <a href="../../schema/Examples/SchemaExample-Extend/" class="dropdown-item">Extend</a>
+</li>
+            
+<li>
+    <a href="../../schema/Examples/SchemaExample-Listener/" class="dropdown-item">Listener on Schema</a>
+</li>
+            
+<li>
+    <a href="../../schema/Examples/SchemaExample-MultiplesStages/" class="dropdown-item">Multiples Stages</a>
+</li>
+            
+<li>
+    <a href="../../schema/Examples/SchemaExample-StageMultiplesSources/" class="dropdown-item">Stage related multiples Sources</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Synchronization</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../schema/Synchronization/SchemaSynchronization-Fetch/" class="dropdown-item">Fetch</a>
+</li>
+            
+<li>
+    <a href="../../schema/Synchronization/SchemaSynchronization-Incorporate/" class="dropdown-item">Incorporate</a>
+</li>
+            
+<li>
+    <a href="../../schema/Synchronization/SchemaSynchronization-Introspect/" class="dropdown-item">Introspect</a>
+</li>
+            
+<li>
+    <a href="../../schema/Synchronization/SchemaSynchronization-Pull/" class="dropdown-item">Pull</a>
+</li>
+            
+<li>
+    <a href="../../schema/Synchronization/SchemaSynchronization-Push/" class="dropdown-item">Push</a>
+</li>
+            
+<li>
+    <a href="../../schema/Synchronization/SchemaSynchronization/" class="dropdown-item">Synchronization</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../Metadata/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../Repository/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-light">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#query-language" class="nav-link">Query Language</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#queries-type" class="nav-link">Queries type</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#example" class="nav-link">Example:</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#advantage-of-query-language" class="nav-link">Advantage of Query Language</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="query-language">Query Language</h1>
+<p>The query language is based on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">javascript lambda expression</a>.
+These Queries can be written as javascript code by browsing the business model entities.</p>
+<p>Queries can also be sent as a string</p>
+<p>λOrm translates the query into the language corresponding to each database engine.</p>
+<h2 id="queries-type">Queries type</h2>
+<h3 id="dql">DQL</h3>
+<p>Las consultas DQL (Data Query Language) son consultas utilizadas para recuperar datos de una base de datos.</p>
+<p>Las consultas DQL pueden ser bastante simples o pueden incluir cláusulas adicionales para filtrar, ordenar o agrupar datos, así como para realizar cálculos y operaciones en los datos recuperados. Esto permite a los desarrolladores obtener los datos exactos que necesitan de una base de datos según los requisitos de la aplicación.</p>
+<p><strong>View:</strong> <a href="https://lambda-orm.github.io/wiki/Select">Select</a>
+<a href="https://lambda-orm.github.io/wiki/Join">Join</a>
+<a href="https://lambda-orm.github.io/wiki/Grouping">Grouping</a>
+<a href="https://lambda-orm.github.io/wiki/Include">Include</a></p>
+<h3 id="dml">DML</h3>
+<p>DML (Data Manipulation Language) queries are used to manipulate data in a database. Mainly, they include the following operations:</p>
+<ul>
+<li>INSERT: Used to add new records to a table.</li>
+<li>UPDATE: Used to modify existing records in a table.</li>
+<li>DELETE: Used to delete records from a table.</li>
+</ul>
+<p><strong>View:</strong> <a href="https://lambda-orm.github.io/wiki/Insert">Insert</a>
+<a href="https://lambda-orm.github.io/wiki/BulkInsert">BulkInsert</a>
+<a href="https://lambda-orm.github.io/wiki/Update">Update</a>
+<a href="https://lambda-orm.github.io/wiki/Delete">Delete</a></p>
+<h3 id="ddl">DDL</h3>
+<p>DDL (Data Definition Language) are used to define, modify and delete database structures and related objects. Mainly, they include the following operations:</p>
+<ul>
+<li>CREATE: Used to create new objects in the database, such as tables, indexes, views and other objects.</li>
+<li>ALTER: Used to modify the structure of existing objects in the database, such as adding, modifying or deleting columns from a table, changing the data type of a column, renaming an object, among others.</li>
+<li>DROP: Used to delete database objects, such as tables, indexes, views and other objects.</li>
+</ul>
+<p>These queries are created and executed when you use the schema synchronization commands.</p>
+<p><strong>View:</strong> <a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Push">Push</a>
+<a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Pull">Pull</a>
+<a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Fetch">Fetch</a>
+<a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Introspect">Introspect</a>
+<a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Incorporate">Incorporate</a></p>
+<h2 id="example">Example:</h2>
+<pre><code class="language-Typescript">// Selecting countries filtering by region and including related states starting with 'F', with pagination
+Countries
+    .filter(p=&gt; p.region == region) 
+    .map(p=&gt; [p.name,p.subregion,p.latitude,p.longitude]) // Selecting country fields
+    .include(p =&gt; p.states.filter(p=&gt; substr(p.name,1,1)==&quot;F&quot;) // Including states starting with 'F'
+          .map(p=&gt; [p.name,p.latitude,p.longitude])
+    )
+    .page(1,3) // Pagination for countries, 3 records per page
+</code></pre>
+<p>where the SQL equivalent of the query is:</p>
+<pre><code class="language-sql">-- Selecting countries based on region and limiting to 3 records
+SELECT c.name AS `name`, c.subregion AS `subregion`, c.latitude AS `latitude`, c.longitude AS `longitude`, c.iso3 AS `__iso3` 
+FROM Countries c  
+WHERE c.region = ? 
+LIMIT 0,3
+
+-- Selecting states starting with 'F' belonging to the specified countries
+SELECT s.NAME AS &quot;name&quot;, s.LATITUDE AS &quot;latitude&quot;, s.LONGITUDE AS &quot;longitude&quot;, s.COUNTRY_CODE AS &quot;__parentId&quot; 
+FROM TBL_STATES s  
+WHERE SUBSTR(s.NAME,1,1) = 'F'
+  AND s.s.COUNTRY_CODE IN (?) 
+</code></pre>
+<h2 id="advantage-of-query-language">Advantage of Query Language</h2>
+<ul>
+<li>Use of the same programming language.</li>
+<li>No need to learn a new language.</li>
+<li>queries easy to write and understand.</li>
+<li>Use of the intellisense offered by the IDE to write the expressions.</li>
+<li>Avoid syntax errors.</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
