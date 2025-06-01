@@ -15,10 +15,10 @@ Las consultas DQL (Data Query Language) son consultas utilizadas para recuperar 
 
 Las consultas DQL pueden ser bastante simples o pueden incluir cláusulas adicionales para filtrar, ordenar o agrupar datos, así como para realizar cálculos y operaciones en los datos recuperados. Esto permite a los desarrolladores obtener los datos exactos que necesitan de una base de datos según los requisitos de la aplicación.
 
-**View:** [Select](https://github.com/lambda-orm/wiki/wiki/Select)
-[Join](https://github.com/lambda-orm/wiki/wiki/Join)
-[Grouping](https://github.com/lambda-orm/wiki/wiki/Grouping)
-[Include](https://github.com/lambda-orm/wiki/wiki/Include)
+**View:** [Select](https://lambda-orm.github.io/wiki/Select)
+[Join](https://lambda-orm.github.io/wiki/Join)
+[Grouping](https://lambda-orm.github.io/wiki/Grouping)
+[Include](https://lambda-orm.github.io/wiki/Include)
 
 ### DML
 
@@ -28,10 +28,10 @@ DML (Data Manipulation Language) queries are used to manipulate data in a databa
 - UPDATE: Used to modify existing records in a table.
 - DELETE: Used to delete records from a table.
 
-**View:** [Insert](https://github.com/lambda-orm/wiki/wiki/Insert)
-[BulkInsert](https://github.com/lambda-orm/wiki/wiki/BulkInsert)
-[Update](https://github.com/lambda-orm/wiki/wiki/Update)
-[Delete](https://github.com/lambda-orm/wiki/wiki/Delete)
+**View:** [Insert](https://lambda-orm.github.io/wiki/Insert)
+[BulkInsert](https://lambda-orm.github.io/wiki/BulkInsert)
+[Update](https://lambda-orm.github.io/wiki/Update)
+[Delete](https://lambda-orm.github.io/wiki/Delete)
 
 ### DDL
 
@@ -43,11 +43,11 @@ DDL (Data Definition Language) are used to define, modify and delete database st
 
 These queries are created and executed when you use the schema synchronization commands.
 
-**View:** [Push](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Push)
-[Pull](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Pull)
-[Fetch](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Fetch)
-[Introspect](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Introspect)
-[Incorporate](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Incorporate)
+**View:** [Push](https://lambda-orm.github.io/wiki/SchemaSynchronization-Push)
+[Pull](https://lambda-orm.github.io/wiki/SchemaSynchronization-Pull)
+[Fetch](https://lambda-orm.github.io/wiki/SchemaSynchronization-Fetch)
+[Introspect](https://lambda-orm.github.io/wiki/SchemaSynchronization-Introspect)
+[Incorporate](https://lambda-orm.github.io/wiki/SchemaSynchronization-Incorporate)
 
 ## Example:
 

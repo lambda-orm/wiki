@@ -1,8 +1,4 @@
----
-title: λORM "We don't reinvent the wheel, we improve it"
----
-
-# λORM
+# λORM "We don't reinvent the wheel, we improve it"
 
 [![Join the community on GitHub Discussions](https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue.svg)](https://github.com/lambda-orm/wiki/discussions)
 [![Slack](https://img.shields.io/badge/chat-on%20slack-orange)](https://join.slack.com/t/nuevoespaciod-xo58767/shared_invite/zt-29ix7pc2r-Wd_ZBWnWRDv_5DM4NPtVhQ)
@@ -47,18 +43,18 @@ In this example:
 - Map each product to an object with category name and maximum price
 - Sort the products by largest price in descending order
 
-**view:** [queries](https://github.com/lambda-orm/wiki/wiki/Query-Language) |
-[select](https://github.com/lambda-orm/wiki/wiki/Select) |
-[join](https://github.com/lambda-orm/wiki/wiki/Join) |
-[grouping](https://github.com/lambda-orm/wiki/wiki/Grouping) |
-[include](https://github.com/lambda-orm/wiki/wiki/Include) |
-[insert](https://github.com/lambda-orm/wiki/wiki/Insert) |
-[bulkInsert](https://github.com/lambda-orm/wiki/wiki/BulkInsert) |
-[update](https://github.com/lambda-orm/wiki/wiki/Update) |
-[delete](https://github.com/lambda-orm/wiki/wiki/Delete) |
-[repository](https://github.com/lambda-orm/wiki/wiki/Repository) |
-[usage](https://github.com/lambda-orm/wiki/wiki/Usage) |
-[metadata](https://github.com/lambda-orm/wiki/wiki/Metadata)
+**view:** [queries](https://lambda-orm.github.io/wiki/Query-Language) |
+[select](https://lambda-orm.github.io/wiki/Select) |
+[join](https://lambda-orm.github.io/wiki/Join) |
+[grouping](https://lambda-orm.github.io/wiki/Grouping) |
+[include](https://lambda-orm.github.io/wiki/Include) |
+[insert](https://lambda-orm.github.io/wiki/Insert) |
+[bulkInsert](https://lambda-orm.github.io/wiki/BulkInsert) |
+[update](https://lambda-orm.github.io/wiki/Update) |
+[delete](https://lambda-orm.github.io/wiki/Delete) |
+[repository](https://lambda-orm.github.io/wiki/Repository) |
+[usage](https://lambda-orm.github.io/wiki/Usage) |
+[metadata](https://lambda-orm.github.io/wiki/Metadata)
 
 ### Include
 
@@ -131,26 +127,26 @@ import { orm } from '../../lib'
 ]
 ```
 
-**more info:** [include](https://github.com/lambda-orm/wiki/wiki/Include)
+**more info:** [include](https://lambda-orm.github.io/wiki/Include)
 
 ## Schema Configuration
 
 Through the schema, you can define entities, enumerations, indexes, unique keys, default values, constraints, mapping, sources, stages, listeners, etc. The schema can be defined in a JSON or YAML format. Conditions or actions are performed using the same [expression language](https://www.npmjs.com/package/3xpr) that is used to define queries.
 
-**view:**  [schema](https://github.com/lambda-orm/wiki/wiki/Schema) |
-[definition](https://github.com/lambda-orm/wiki/wiki/SchemaDefinition) |
-[use](https://github.com/lambda-orm/wiki/wiki/Schema-Use) |
-[expressions](https://github.com/lambda-orm/wiki/wiki/SchemaDefinition-Expressions) |
-[environment Variables](https://github.com/lambda-orm/wiki/wiki/SchemaDefinition-EnvironmentVariables) |
-[composite](https://github.com/lambda-orm/wiki/wiki/SchemaDefinition-Composite) |
-[listener](https://github.com/lambda-orm/wiki/wiki/SchemaExample-Listener) |
-[multiple stages](https://github.com/lambda-orm/wiki/wiki/SchemaExample-MultiplesStages) |
-[multiple sources](https://github.com/lambda-orm/wiki/wiki/SchemaExample-StageMultiplesSources) |
-[push](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Push) |
-[pull](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Pull) |
-[fetch](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Fetch) |
-[introspect](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Introspect) |
-[incorporate](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Incorporate)
+**view:**  [schema](https://lambda-orm.github.io/wiki/Schema) |
+[definition](https://lambda-orm.github.io/wiki/SchemaDefinition) |
+[use](https://lambda-orm.github.io/wiki/Schema-Use) |
+[expressions](https://lambda-orm.github.io/wiki/SchemaDefinition-Expressions) |
+[environment Variables](https://lambda-orm.github.io/wiki/SchemaDefinition-EnvironmentVariables) |
+[composite](https://lambda-orm.github.io/wiki/SchemaDefinition-Composite) |
+[listener](https://lambda-orm.github.io/wiki/SchemaExample-Listener) |
+[multiple stages](https://lambda-orm.github.io/wiki/SchemaExample-MultiplesStages) |
+[multiple sources](https://lambda-orm.github.io/wiki/SchemaExample-StageMultiplesSources) |
+[push](https://lambda-orm.github.io/wiki/SchemaSynchronization-Push) |
+[pull](https://lambda-orm.github.io/wiki/SchemaSynchronization-Pull) |
+[fetch](https://lambda-orm.github.io/wiki/SchemaSynchronization-Fetch) |
+[introspect](https://lambda-orm.github.io/wiki/SchemaSynchronization-Introspect) |
+[incorporate](https://lambda-orm.github.io/wiki/SchemaSynchronization-Incorporate)
 
 ## Contributing
 
