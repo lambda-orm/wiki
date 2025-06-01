@@ -1,16 +1,16 @@
 # Features
 
 - Supports MySQL, MariaDB, PostgresSQL, Oracle, SqlServer, SqlJs and MongoDB.
-- [Query Language](https://github.com/lambda-orm/lambdaorm/wiki/Query-Language)
+- [Query Language](https://github.com/lambda-orm/wiki/wiki/Query-Language)
 	- Simple query language based on javascript lambda expressions.
 	- Can write the expression as javascript code or as a string
 	- Crud clauses
 	- Implicit joins and group by
-	- [Eager loading using the Include() method.](https://github.com/lambda-orm/lambdaorm/wiki/Include)
-	- [Query expression metadata](https://github.com/lambda-orm/lambdaorm/wiki/Metadata)
-- [Repositories and custom repositories](https://github.com/lambda-orm/lambdaorm/wiki/Repository)
-- [Transactions and distributed transactions](https://github.com/lambda-orm/lambdaorm/wiki/Transaction)
-- [Schema Configuration](https://github.com/lambda-orm/lambdaorm/wiki/Schema)
+	- [Eager loading using the Include() method.](https://github.com/lambda-orm/wiki/wiki/Include)
+	- [Query expression metadata](https://github.com/lambda-orm/wiki/wiki/Metadata)
+- [Repositories and custom repositories](https://github.com/lambda-orm/wiki/wiki/Repository)
+- [Transactions and distributed transactions](https://github.com/lambda-orm/wiki/wiki/Transaction)
+- [Schema Configuration](https://github.com/lambda-orm/wiki/wiki/Schema)
   - Decoupling the domain model from infrastructure
 	- Configuration in json or yml formats
 	- Definition of mappings between domain and infrastructure
@@ -18,12 +18,12 @@
 	- Environment variables
   - define indices, unique keys and constraints
   - Conditions and actions are based on the expression engine [3xpr](https://www.npmjs.com/package/3xpr)
-  - [Synchronization](https://github.com/lambda-orm/lambdaorm/wiki/SchemaSynchronization)
+  - [Synchronization](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization)
 - Performance and Optimization
-  - [BulkInsert](https://github.com/lambda-orm/lambdaorm/wiki/BulkInsert)
+  - [BulkInsert](https://github.com/lambda-orm/wiki/wiki/BulkInsert)
   - High performance queries
   - Connection pooling
-- [Listeners and subscribers](https://github.com/lambda-orm/lambdaorm/wiki/SchemaExample-Listener)
+- [Listeners and subscribers](https://github.com/lambda-orm/wiki/wiki/SchemaExample-Listener)
 - TypeScript and JavaScript support
 - [CLI Support](https://github.com/lambda-orm/lambdaorm-cli) support
 - [REST API Support](https://github.com/lambda-orm/lambdaorm-svc)

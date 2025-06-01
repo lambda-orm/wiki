@@ -51,5 +51,5 @@
   * [Lambda ORM Service](https://github.com/lambda-orm/lambdaorm-svc)
   * [Client Node](https://www.npmjs.com/package/lambdaorm-client-node)
   * [Client Kotlin](https://github.com/lambda-orm/lambdaorm-client-kotlin)
-* [Source Code Documentation](https://github.com/lambda-orm/lambdaorm/blob/main/doc/source/README.md)
-* [Change log](https://github.com/lambda-orm/lambdaorm/blob/main/CHANGELOG.md)
+* [Source Code Documentation](https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md)
+* [Change log](https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md)

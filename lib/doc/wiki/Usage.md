@@ -486,4 +486,4 @@ We could start a development by proposing a simple infrastructure and then make 
 
 You could also have development, test and production environments with different infrastructure configurations without having to alter the code.
 
-In addition to the examples presented previously, there are many other use cases that can be solved with λORM by configuring the schema and queries language. Therefore, we invite you to explore the different [laboratories](https://github.com/lambda-orm/lambdaorm-labs) and read the [documentation](https://github.com/lambda-orm/lambdaorm/wiki).
+In addition to the examples presented previously, there are many other use cases that can be solved with λORM by configuring the schema and queries language. Therefore, we invite you to explore the different [laboratories](https://github.com/lambda-orm/lambdaorm-labs) and read the [documentation](https://github.com/lambda-orm/wiki/wiki).

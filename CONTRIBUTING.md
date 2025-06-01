@@ -27,7 +27,7 @@ There are several ways to ask your question:
 
 - You can create a question on [StackOverflow](https://stackoverflow.com/questions/tagged/lambdaorm) where questions should be tagged with the `lambdaorm` tag.
 - You can ask at [Slack](https://join.slack.com/t/nuevoespaciod-xo58767/shared_invite/zt-29ix7pc2r-Wd_ZBWnWRDv_5DM4NPtVhQ)
-- You can create an issue on [github issues](https://github.com/lambda-orm/lambdaorm/issues)
+- You can create an issue on [github issues](https://github.com/lambda-orm/wiki/issues)
 - If you have Telegram, find me on (@flaviolrita`)
 
 ## Did you find a security vulnerability?
@@ -37,11 +37,11 @@ Please contact me at [lambdaorm@proton.me](mailto:lambdaorm@proton.me) with the 
 
 ## Did you find a bug?
 
-If you find a bug in the source code, you can help us [github issues](https://github.com/lambda-orm/lambdaorm/issues).
+If you find a bug in the source code, you can help us [github issues](https://github.com/lambda-orm/wiki/issues).
 
 ## Is a feature missing?
 
-You can *request* a new feature on [github issues](https://github.com/lambda-orm/lambdaorm/issues).
+You can *request* a new feature on [github issues](https://github.com/lambda-orm/wiki/issues).
 If you want to *implement* a new feature, please submit an issue with
 First a proposal for your work, to be sure we can use it.
 Please consider what type of exchange it is:
@@ -53,8 +53,8 @@ and help you design the change so that it is successfully accepted into the proj
 
 ## Developer documentation
 
-The developer documentation is in the [DEVELOPER.md](https://github.com/lambda-orm/lambdaorm/blob/main/DEVELOPER.md) file.
+The developer documentation is in the [DEVELOPER.md](https://github.com/lambda-orm/wiki/blob/main/DEVELOPER.md) file.
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [MIT License](https://github.com/lambda-orm/lambdaorm/blob/main/LICENSE).
+By contributing, you agree that your contributions will be licensed under the [MIT License](https://github.com/lambda-orm/wiki/blob/main/LICENSE).

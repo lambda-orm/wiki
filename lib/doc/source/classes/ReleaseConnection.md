@@ -6,7 +6,7 @@
 
 # Class: ReleaseConnection
 
-Defined in: [src/lib/connection/application/useCases/release.ts:4](https://github.com/lambda-orm/lambdaorm/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/application/useCases/release.ts#L4)
+Defined in: [src/lib/connection/application/useCases/release.ts:4](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/application/useCases/release.ts#L4)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/lib/connection/application/useCases/release.ts:4](https://githu
 
 > **new ReleaseConnection**(`poolService`): `ReleaseConnection`
 
-Defined in: [src/lib/connection/application/useCases/release.ts:6](https://github.com/lambda-orm/lambdaorm/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/application/useCases/release.ts#L6)
+Defined in: [src/lib/connection/application/useCases/release.ts:6](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/application/useCases/release.ts#L6)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/lib/connection/application/useCases/release.ts:6](https://githu
 
 > **release**(`connection`): `Promise`\<`void`\>
 
-Defined in: [src/lib/connection/application/useCases/release.ts:8](https://github.com/lambda-orm/lambdaorm/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/application/useCases/release.ts#L8)
+Defined in: [src/lib/connection/application/useCases/release.ts:8](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/application/useCases/release.ts#L8)
 
 #### Parameters
 

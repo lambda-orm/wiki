@@ -1,15 +1,15 @@
 # λORM
 
-[![Join the community on GitHub Discussions](https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue.svg)](https://github.com/lambda-orm/lambdaorm/discussions)
+[![Join the community on GitHub Discussions](https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue.svg)](https://github.com/lambda-orm/wiki/discussions)
 [![Slack](https://img.shields.io/badge/chat-on%20slack-orange)](https://join.slack.com/t/nuevoespaciod-xo58767/shared_invite/zt-29ix7pc2r-Wd_ZBWnWRDv_5DM4NPtVhQ)
 [![Gitter](https://badges.gitter.im/lambdaorm/community.svg)](https://app.gitter.im/#/room/#lambdaorm-how-to-contribute:gitter.im)
 [![Discord](https://img.shields.io/badge/chat-on%20discord-orange)](https://discord.com/invite/yXT6XBX2)
-[![Wiki](https://img.shields.io/badge/doc-wiki-yellow)](https://github.com/lambda-orm/lambdaorm/wiki)
+[![Wiki](https://img.shields.io/badge/doc-wiki-yellow)](https://github.com/lambda-orm/wiki/wiki)
 [![language typescript](https://img.shields.io/badge/language-typescript-blue)](https://www.npmjs.com/package/lambdaorm)
 [![npm version](https://img.shields.io/badge/npm-10.2.5-green)](https://www.npmjs.com/package/lambdaorm)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Github CI](https://img.shields.io/badge/Github-CI-red.svg)](https://github.com/lambda-orm/lambdaorm/actions?query=workflow%3A%22publish%22)
+[![Github CI](https://img.shields.io/badge/Github-CI-red.svg)](https://github.com/lambda-orm/wiki/actions?query=workflow%3A%22publish%22)
 [![CLI](https://img.shields.io/badge/Api-CLI-blue.svg)](https://www.npmjs.com/package/lambdaorm-cli)
 [![Api REST](https://img.shields.io/badge/Api-REST-blue.svg)](https://github.com/lambda-orm/lambdaorm-svc)
 
@@ -43,18 +43,18 @@ In this example:
 - Map each product to an object with category name and maximum price
 - Sort the products by largest price in descending order
 
-**view:** [queries](https://github.com/lambda-orm/lambdaorm/wiki/Query-Language) |
-[select](https://github.com/lambda-orm/lambdaorm/wiki/Select) |
-[join](https://github.com/lambda-orm/lambdaorm/wiki/Join) |
-[grouping](https://github.com/lambda-orm/lambdaorm/wiki/Grouping) |
-[include](https://github.com/lambda-orm/lambdaorm/wiki/Include) |
-[insert](https://github.com/lambda-orm/lambdaorm/wiki/Insert) |
-[bulkInsert](https://github.com/lambda-orm/lambdaorm/wiki/BulkInsert) |
-[update](https://github.com/lambda-orm/lambdaorm/wiki/Update) |
-[delete](https://github.com/lambda-orm/lambdaorm/wiki/Delete) |
-[repository](https://github.com/lambda-orm/lambdaorm/wiki/Repository) |
-[usage](https://github.com/lambda-orm/lambdaorm/wiki/Usage) |
-[metadata](https://github.com/lambda-orm/lambdaorm/wiki/Metadata)
+**view:** [queries](https://github.com/lambda-orm/wiki/wiki/Query-Language) |
+[select](https://github.com/lambda-orm/wiki/wiki/Select) |
+[join](https://github.com/lambda-orm/wiki/wiki/Join) |
+[grouping](https://github.com/lambda-orm/wiki/wiki/Grouping) |
+[include](https://github.com/lambda-orm/wiki/wiki/Include) |
+[insert](https://github.com/lambda-orm/wiki/wiki/Insert) |
+[bulkInsert](https://github.com/lambda-orm/wiki/wiki/BulkInsert) |
+[update](https://github.com/lambda-orm/wiki/wiki/Update) |
+[delete](https://github.com/lambda-orm/wiki/wiki/Delete) |
+[repository](https://github.com/lambda-orm/wiki/wiki/Repository) |
+[usage](https://github.com/lambda-orm/wiki/wiki/Usage) |
+[metadata](https://github.com/lambda-orm/wiki/wiki/Metadata)
 
 ### Include
 
@@ -127,34 +127,34 @@ import { orm } from '../../lib'
 ]
 ```
 
-**more info:** [include](https://github.com/lambda-orm/lambdaorm/wiki/Include)
+**more info:** [include](https://github.com/lambda-orm/wiki/wiki/Include)
 
 ## Schema Configuration
 
 Through the schema, you can define entities, enumerations, indexes, unique keys, default values, constraints, mapping, sources, stages, listeners, etc. The schema can be defined in a JSON or YAML format. Conditions or actions are performed using the same [expression language](https://www.npmjs.com/package/3xpr) that is used to define queries.
 
-**view:**  [schema](https://github.com/lambda-orm/lambdaorm/wiki/Schema) |
-[definition](https://github.com/lambda-orm/lambdaorm/wiki/SchemaDefinition) |
-[use](https://github.com/lambda-orm/lambdaorm/wiki/Schema-Use) |
-[expressions](https://github.com/lambda-orm/lambdaorm/wiki/SchemaDefinition-Expressions) |
-[environment Variables](https://github.com/lambda-orm/lambdaorm/wiki/SchemaDefinition-EnvironmentVariables) |
-[composite](https://github.com/lambda-orm/lambdaorm/wiki/SchemaDefinition-Composite) |
-[listener](https://github.com/lambda-orm/lambdaorm/wiki/SchemaExample-Listener) |
-[multiple stages](https://github.com/lambda-orm/lambdaorm/wiki/SchemaExample-MultiplesStages) |
-[multiple sources](https://github.com/lambda-orm/lambdaorm/wiki/SchemaExample-StageMultiplesSources) |
-[push](https://github.com/lambda-orm/lambdaorm/wiki/SchemaSynchronization-Push) |
-[pull](https://github.com/lambda-orm/lambdaorm/wiki/SchemaSynchronization-Pull) |
-[fetch](https://github.com/lambda-orm/lambdaorm/wiki/SchemaSynchronization-Fetch) |
-[introspect](https://github.com/lambda-orm/lambdaorm/wiki/SchemaSynchronization-Introspect) |
-[incorporate](https://github.com/lambda-orm/lambdaorm/wiki/SchemaSynchronization-Incorporate)
+**view:**  [schema](https://github.com/lambda-orm/wiki/wiki/Schema) |
+[definition](https://github.com/lambda-orm/wiki/wiki/SchemaDefinition) |
+[use](https://github.com/lambda-orm/wiki/wiki/Schema-Use) |
+[expressions](https://github.com/lambda-orm/wiki/wiki/SchemaDefinition-Expressions) |
+[environment Variables](https://github.com/lambda-orm/wiki/wiki/SchemaDefinition-EnvironmentVariables) |
+[composite](https://github.com/lambda-orm/wiki/wiki/SchemaDefinition-Composite) |
+[listener](https://github.com/lambda-orm/wiki/wiki/SchemaExample-Listener) |
+[multiple stages](https://github.com/lambda-orm/wiki/wiki/SchemaExample-MultiplesStages) |
+[multiple sources](https://github.com/lambda-orm/wiki/wiki/SchemaExample-StageMultiplesSources) |
+[push](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Push) |
+[pull](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Pull) |
+[fetch](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Fetch) |
+[introspect](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Introspect) |
+[incorporate](https://github.com/lambda-orm/wiki/wiki/SchemaSynchronization-Incorporate)
 
 ## Contributing
 
-Would you like to contribute? Read [our contribution guidelines](https://github.com/lambda-orm/lambdaorm/blob/main/CONTRIBUTING.md) to learn more. There are many ways to help!
+Would you like to contribute? Read [our contribution guidelines](https://github.com/lambda-orm/wiki/blob/main/CONTRIBUTING.md) to learn more. There are many ways to help!
 
 ## Documentation
 
-Full documentation is available in the [Wiki](https://github.com/lambda-orm/lambdaorm/wiki).
+Full documentation is available in the [Wiki](https://github.com/lambda-orm/wiki/wiki).
 
 ## All Labs
 
