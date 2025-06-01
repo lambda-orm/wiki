@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Update - LambdaORM Wiki</title>
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Update";
+    var mkdocs_page_input_path = "Update.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> LambdaORM Wiki</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Usage/">Usage</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Features/">Features</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Queries</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Query-Language/">Query Language</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Expression/">Expression</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DQL</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../Select/">Select</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../Join/">Join</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../Grouping/">Grouping</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../Include/">Include</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">DML</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../Insert/">Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../BulkInsert/">Bulk Insert</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Update</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#update-one-entity-complete">Update one entity complete</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#update-one-field-of-entity-in-all-records">Update one field of entity in all records</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#update-one-field-of-entity-filtered">Update one field of entity filtered</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#update-one-field-of-entity-filtered-and-related-entity">Update one field of entity filtered and related entity</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#update-one-field-of-entity-filtered-and-fields-of-related-entity">Update one field of entity filtered and fields of related entity</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#update-entity-and-multiples-related-entities">Update entity and multiples related entities</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#code-example">Code example</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../Delete/">Delete</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Repository/">Repository</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Transaction/">Transaction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Metadata/">Metadata</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Schema</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../SchemaDefinition.md">Definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaDefinition-Expressions.md">Expressions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaDefinition-EnvironmentVariables.md">Environment Variables</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaDefinition-Composite.md">Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaExample-Listener.md">Listeners</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaExample-Basic.md">Basic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaExample-Extend.md">Extend Entity</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaExample-MultiplesStages.md">Multiples Stages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaExample-StageMultiplesSources.md">Stage with Multiples Sources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaExample-Composite.md">Entity Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Synchronization</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../SchemaSynchronization-Push.md">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../SchemaSynchronization-Pull.md">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../SchemaSynchronization-Fetch.md">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../SchemaSynchronization-Introspect.md">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../SchemaSynchronization-Incorporate.md">Incorporate</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../Schema-Use.md">Use</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md">Source Code Documentation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md">Change log</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">LambdaORM Wiki</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>DML &raquo;</li>
+        
+      
+        
+          <li>Queries &raquo;</li>
+        
+      
+    
+    <li>Update</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="update">Update</h1>
+<p>Since the queries are based on both the expression and the definition in the schema, in the case of wanting to update all the fields it is not necessary to define them since it is assumed if none are defined.</p>
+<p>The mapping to the source(s) is resolved according to the mapping configuration associated with each source in the schema.</p>
+<h2 id="update-one-entity-complete">Update one entity complete</h2>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Updates all fields of the Orders entity
+Orders.update()
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Updates all fields of the Orders entity where OrderID matches the provided parameter
+UPDATE Orders o SET 
+    CustomerID = ?,
+    EmployeeID = ?,
+    OrderDate = ?,
+    RequiredDate = ?,
+    ShippedDate = ?,
+    ShipVia = ?,
+    Freight = ?,
+    ShipName = ?,
+    ShipAddress = ?,
+    ShipCity = ?,
+    ShipRegion = ?,
+    ShipPostalCode = ?,
+    ShipCountry = ? 
+WHERE o.OrderID = ?
+</code></pre>
+<h2 id="update-one-field-of-entity-in-all-records">Update one field of entity in all records</h2>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Updates the ShipPostalCode field in all records of the Orders entity
+Orders.updateAll({ postalCode: postalCode })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Updates the ShipPostalCode field in all records of the Orders entity
+UPDATE Orders o SET ShipPostalCode = ?
+</code></pre>
+<h2 id="update-one-field-of-entity-filtered">Update one field of entity filtered</h2>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Updates the ShipName field of the Orders entity where OrderID matches the provided entity's ID
+Orders.update({ name: entity.name }).filter(p =&gt; p.id === entity.id)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Updates the ShipName field of the Orders entity where OrderID matches the provided entity's ID
+UPDATE Orders o SET ShipName = ? WHERE o.OrderID = ?
+</code></pre>
+<h2 id="update-one-field-of-entity-filtered-and-related-entity">Update one field of entity filtered and related entity</h2>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Updates the ShipName field of the Orders entity and updates related details
+Orders.update({ name: entity.name }).include(p =&gt; p.details(p =&gt; p)).filter(p =&gt; p.id === entity.id)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Updates the ShipName field of the Orders entity where OrderID matches the provided entity's ID
+UPDATE Orders o SET ShipName = ? 
+WHERE o.OrderID = ? 
+
+-- Updates UnitPrice, Quantity, and Discount fields in the Order Details table where OrderID and ProductID 
+-- match the provided parameters
+UPDATE `Order Details` o1 SET UnitPrice = o1.UnitPrice,Quantity = o1.Quantity,Discount = o1.Discount 
+WHERE (o1.OrderID = ? AND o1.ProductID = ?)
+</code></pre>
+<h2 id="update-one-field-of-entity-filtered-and-fields-of-related-entity">Update one field of entity filtered and fields of related entity</h2>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Updates the ShipName field of the Orders entity and updates related details' UnitPrice and ProductID
+Orders.update({ name: entity.name })
+      .include(p =&gt; p.details(p =&gt; ({ unitPrice: p.unitPrice, productId: p.productId })))
+            .filter(p =&gt; p.id === entity.id)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Updates the ShipName field of the Orders entity where OrderID matches the provided entity's ID
+UPDATE Orders o SET ShipName = ?
+WHERE o.OrderID = ?
+
+-- Updates UnitPrice and ProductID fields in the Order Details table where OrderID and ProductID 
+-- match the provided parameters
+UPDATE `Order Details` o1 SET UnitPrice = o1.UnitPrice,ProductID = o1.ProductID 
+WHERE (o1.OrderID = ? AND o1.ProductID = ?)
+</code></pre>
+<h2 id="update-entity-and-multiples-related-entities">Update entity and multiples related entities</h2>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Updates all fields of the Customers entity and includes related orders and details
+Customers.update().include(p =&gt; p.orders.include(p =&gt; p.details))
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Updates all fields of the Customers entity where CustomerID matches the provided parameter
+UPDATE Customers c SET CustomerID = ?,CompanyName = ?,ContactName = ?,ContactTitle = ?,Address = ?,City = ?,Region = ?,PostalCode = ?,Country = ? 
+WHERE c.CustomerID = ? 
+
+-- Updates all fields of the Orders entity where CustomerID matches the provided parameter
+UPDATE Orders o SET CustomerID = ?,EmployeeID = ?,OrderDate = ?,RequiredDate = ?,ShippedDate = ?,ShipVia = ?,Freight = ?,ShipName = ?,ShipAddress = ?,ShipCity = ?,ShipRegion = ?,ShipPostalCode = ?,ShipCountry = ? 
+WHERE o.OrderID = ? 
+
+-- Updates all fields of the Order Details table where OrderID and ProductID match the provided parameters
+UPDATE `Order Details` o1 SET OrderID = ?,ProductID = ?,UnitPrice = ?,Quantity = ?,Discount = ? 
+WHERE (o1.OrderID = ? AND o1.ProductID = ?)
+</code></pre>
+<h2 id="code-example">Code example</h2>
+<pre><code class="language-Typescript">import { orm } from '../../lib'
+import { Customers } from '../northwind/model/__model'
+(async () =&gt; {  
+    try {       
+        await orm.init('./config/northwind.yaml')
+        // entity customer with orders and order details
+        const customer = {
+            id: 'ALFKI',
+            name: 'Alfreds Futterkiste',
+            contact: 'Maria Anders',
+            phone: 'Sales Representative',
+            address: 'Obere Str. 57',
+            city: 'Berlin',
+            region: null,
+            postalCode: '12209',
+            country: 'Germany',
+            orders: [
+                {
+                    id: 1,
+                    customerId: 'ALFKI',
+                    employeeId: 6,
+                    orderDate: '1997-08-24T22:00:00.000Z',
+                    requiredDate: '1997-09-21T22:00:00.000Z',
+                    shippedDate: '1997-09-01T22:00:00.000Z',
+                    shipViaId: 1,
+                    freight: '29.4600',
+                    name: 'Alfreds Futterkiste',
+                    address: 'Obere Str. 57',
+                    city: 'Berlin',
+                    region: null,
+                    postalCode: '12209',
+                    country: 'Germany',
+                    details: [
+                        {
+                            orderId: 1,
+                            productId: 28,
+                            unitPrice: '45.6000',
+                            quantity: '15.0000',
+                            discount: '0.0000'
+                        },
+                        {
+                            orderId: 1,
+                            productId: 39,
+                            unitPrice: '18.0000',
+                            quantity: '21.0000',
+                            discount: '0.0000'
+                        },
+                        {
+                            orderId: 1,
+                            productId: 46,
+                            unitPrice: '12.0000',
+                            quantity: '2.0000',
+                            discount: '0.0000'
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    customerId: 'ALFKI',
+                    employeeId: 4,
+                    orderDate: '1997-10-02T22:00:00.000Z',
+                    requiredDate: '1997-10-30T23:00:00.000Z',
+                    shippedDate: '1997-10-12T22:00:00.000Z',
+                    shipViaId: 2,
+                    freight: '61.0200',
+                    name: 'Alfred-s Futterkiste',
+                    address: 'Obere Str. 57',
+                    city: 'Berlin',
+                    region: null,
+                    postalCode: '12209',
+                    country: 'Germany',
+                    details: [
+                        {
+                            orderId: 2,
+                            productId: 63,
+                            unitPrice: '43.9000',
+                            quantity: '20.0000',
+                            discount: '0.0000'
+                        }
+                    ]
+                }
+            ]
+        }
+        // Defining a query to update Customers and include related orders and details
+        const query = () =&gt; Customers.update().include(p =&gt; p.orders.include(p =&gt; p.details))
+        // Executing the query using the ORM with the specified customer parameter
+        const result = await orm.execute(query, customer)
+        console.log(JSON.stringify(result, null, 2))        
+    } catch (error:any) {
+        console.error(error.stack)
+    } finally {
+        // Ending the ORM connection
+        await orm.end()
+    }
+})()
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Delete/" class="btn btn-neutral float-right" title="Delete">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../BulkInsert/" class="btn btn-neutral" title="Bulk Insert"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../BulkInsert/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Delete/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -1,328 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        
-        <link rel="shortcut icon" href="../../../img/favicon.ico">
-        <title>Definition - LambdaORM Wiki</title>
-        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../../css/font-awesome.min.css" rel="stylesheet">
-        <link href="../../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Definition - LambdaORM Wiki</title>
+  <link rel="stylesheet" href="../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Definition";
+    var mkdocs_page_input_path = "schema/Definition/SchemaDefinition.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
 
-        <script src="../../../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../../../js/bootstrap.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
-    </head>
+<body class="wy-body-for-nav" role="document">
 
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="../../..">LambdaORM Wiki</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="navitem">
-                                <a href="../../.." class="nav-link">λORM "We don't reinvent the wheel, we improve it"</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../../../Features/" class="nav-link">Features</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../../../Sidebar/" class="nav-link">Sidebar</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../../../Usage/" class="nav-link">Usage</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../../../function_functions/" class="nav-link">Function functions</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../../../operator_operators/" class="nav-link">Operator operators</a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Queries <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../../queries/Expression/" class="dropdown-item">Lambda expressions</a>
-</li>
-                                    
-<li>
-    <a href="../../../queries/Metadata/" class="dropdown-item">Metadata</a>
-</li>
-                                    
-<li>
-    <a href="../../../queries/Query-Language/" class="dropdown-item">Query Language</a>
-</li>
-                                    
-<li>
-    <a href="../../../queries/Repository/" class="dropdown-item">Repositories</a>
-</li>
-                                    
-<li>
-    <a href="../../../queries/Transaction/" class="dropdown-item">Transaction</a>
-</li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">Dml</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="../../../queries/dml/BulkInsert/" class="dropdown-item">BulkInsert</a>
-</li>
-            
-<li>
-    <a href="../../../queries/dml/Delete/" class="dropdown-item">Delete</a>
-</li>
-            
-<li>
-    <a href="../../../queries/dml/Insert/" class="dropdown-item">Insert</a>
-</li>
-            
-<li>
-    <a href="../../../queries/dml/Update/" class="dropdown-item">Update</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">Dql</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="../../../queries/dql/Grouping/" class="dropdown-item">Grouping</a>
-</li>
-            
-<li>
-    <a href="../../../queries/dql/Include/" class="dropdown-item">Include</a>
-</li>
-            
-<li>
-    <a href="../../../queries/dql/Join/" class="dropdown-item">Join</a>
-</li>
-            
-<li>
-    <a href="../../../queries/dql/Select/" class="dropdown-item">Select</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">operatorsAndFunctions</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="../../../queries/operatorsAndFunctions/Bitwise/" class="dropdown-item">Bitwise</a>
-</li>
-            
-<li>
-    <a href="../../../queries/operatorsAndFunctions/Comparison/" class="dropdown-item">Comparison</a>
-</li>
-            
-<li>
-    <a href="../../../queries/operatorsAndFunctions/Datetime/" class="dropdown-item">Datetime</a>
-</li>
-            
-<li>
-    <a href="../../../queries/operatorsAndFunctions/Group/" class="dropdown-item">Group</a>
-</li>
-            
-<li>
-    <a href="../../../queries/operatorsAndFunctions/Logical/" class="dropdown-item">Logical</a>
-</li>
-            
-<li>
-    <a href="../../../queries/operatorsAndFunctions/Nullable/" class="dropdown-item">Nullable</a>
-</li>
-            
-<li>
-    <a href="../../../queries/operatorsAndFunctions/Numeric/" class="dropdown-item">Numeric</a>
-</li>
-            
-<li>
-    <a href="../../../queries/operatorsAndFunctions/Sort/" class="dropdown-item">Sort</a>
-</li>
-            
-<li>
-    <a href="../../../queries/operatorsAndFunctions/String/" class="dropdown-item">String</a>
-</li>
-    </ul>
-  </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown active">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Schema <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../Schema-Use/" class="dropdown-item">Schema Use</a>
-</li>
-                                    
-<li>
-    <a href="../../Schema/" class="dropdown-item">Schema</a>
-</li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">Definition</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="../SchemaDefinition-Composite/" class="dropdown-item">Composite Entity</a>
-</li>
-            
-<li>
-    <a href="../SchemaDefinition-EnvironmentVariables/" class="dropdown-item">Environment Variables on Schema</a>
-</li>
-            
-<li>
-    <a href="../SchemaDefinition-Expressions/" class="dropdown-item">Expressions on Schema</a>
-</li>
-            
-<li>
-    <a href="./" class="dropdown-item active">Definition</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">Examples</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="../../Examples/SchemaExample-Basic/" class="dropdown-item">Basic Schema Example</a>
-</li>
-            
-<li>
-    <a href="../../Examples/SchemaExample-Composite/" class="dropdown-item">Composite Entity</a>
-</li>
-            
-<li>
-    <a href="../../Examples/SchemaExample-Extend/" class="dropdown-item">Extend</a>
-</li>
-            
-<li>
-    <a href="../../Examples/SchemaExample-Listener/" class="dropdown-item">Listener on Schema</a>
-</li>
-            
-<li>
-    <a href="../../Examples/SchemaExample-MultiplesStages/" class="dropdown-item">Multiples Stages</a>
-</li>
-            
-<li>
-    <a href="../../Examples/SchemaExample-StageMultiplesSources/" class="dropdown-item">Stage related multiples Sources</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">Synchronization</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="../../Synchronization/SchemaSynchronization-Fetch/" class="dropdown-item">Fetch</a>
-</li>
-            
-<li>
-    <a href="../../Synchronization/SchemaSynchronization-Incorporate/" class="dropdown-item">Incorporate</a>
-</li>
-            
-<li>
-    <a href="../../Synchronization/SchemaSynchronization-Introspect/" class="dropdown-item">Introspect</a>
-</li>
-            
-<li>
-    <a href="../../Synchronization/SchemaSynchronization-Pull/" class="dropdown-item">Pull</a>
-</li>
-            
-<li>
-    <a href="../../Synchronization/SchemaSynchronization-Push/" class="dropdown-item">Push</a>
-</li>
-            
-<li>
-    <a href="../../Synchronization/SchemaSynchronization/" class="dropdown-item">Synchronization</a>
-</li>
-    </ul>
-  </li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                            <li class="nav-item">
-                                <a rel="prev" href="../SchemaDefinition-Expressions/" class="nav-link">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="../../Examples/SchemaExample-Basic/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
-            <span class="fa fa-angle-down"></span>
-        </button>
-    </div>
+  <div class="wy-grid-for-nav">
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-light">
-        <ul class="nav flex-column">
-            
-            <li class="nav-item" data-level="1"><a href="#definition" class="nav-link">Definition</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#structure" class="nav-link">Structure</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#main-definition" class="nav-link">Main Definition</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#domain" class="nav-link">Domain</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#application" class="nav-link">Application</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#infrastructure" class="nav-link">Infrastructure</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-        </ul>
-    </div>
-</div></div>
-                    <div class="col-md-9" role="main">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> LambdaORM Wiki</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
 
-<h1 id="definition">Definition</h1>
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Usage/">Usage</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Features/">Features</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Queries</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Query-Language/">Query Language</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Expression/">Expression</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DQL</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../Select/">Select</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../Join/">Join</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../Grouping/">Grouping</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../Include/">Include</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DML</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../Insert/">Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../BulkInsert/">Bulk Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../Update/">Update</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../Delete/">Delete</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Repository/">Repository</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Transaction/">Transaction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Metadata/">Metadata</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Schema</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition.md">Definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Expressions.md">Expressions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-EnvironmentVariables.md">Environment Variables</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Composite.md">Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Listener.md">Listeners</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Basic.md">Basic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Extend.md">Extend Entity</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-MultiplesStages.md">Multiples Stages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-StageMultiplesSources.md">Stage with Multiples Sources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Composite.md">Entity Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Synchronization</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Push.md">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Pull.md">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Fetch.md">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Introspect.md">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Incorporate.md">Incorporate</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../Schema-Use.md">Use</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md">Source Code Documentation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md">Change log</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">LambdaORM Wiki</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Definition</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="definition">Definition</h1>
 <p>The schema includes all the configuration that the ORM needs.</p>
 <p>The schema separates the definition of the business model (Domain) from the persistence of the data (Infrastructure).</p>
 <p>In the domain, the entities and enumerators that represent the business model are completely clean, without any attributes that couple them to persistence.</p>
@@ -1650,84 +1505,45 @@ infrastructure:
   src: src
   state: orm_state
   domain: domain
-</code></pre></div>
+</code></pre>
+              
             </div>
-        </div>
+          </div>
+          <footer>
+  
 
-        <footer class="col-md-12">
-            <hr>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script>
-            var base_url = "../../..",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="../../../js/base.js" defer></script>
-        <script src="../../../search/main.js" defer></script>
+  <hr/>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form>
-                    <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
         </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
 </div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
-    </body>
+</body>
 </html>

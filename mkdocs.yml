@@ -2,4 +2,46 @@ site_name: LambdaORM Wiki
 docs_dir: docs
 site_dir: wiki
 theme:
-  name: mkdocs
+  name: readthedocs
+
+nav:
+  - Home: index.md
+  - Usage: Usage.md
+  - Features: Features.md
+  - Labs: https://github.com/lambda-orm/lambdaorm-labs
+  - Queries:
+      - Query Language: Query-Language.md
+      - Expression: Expression.md
+      - DQL:
+          - Select: Select.md
+          - Join: Join.md
+          - Grouping: Grouping.md
+          - Include: Include.md
+      - DML:
+          - Insert: Insert.md
+          - Bulk Insert: BulkInsert.md
+          - Update: Update.md
+          - Delete: Delete.md
+      - Repository: Repository.md
+      - Transaction: Transaction.md
+      - Metadata: Metadata.md
+  - Schema:
+      - Definition: SchemaDefinition.md
+      - Expressions: SchemaDefinition-Expressions.md
+      - Environment Variables: SchemaDefinition-EnvironmentVariables.md
+      - Composite: SchemaDefinition-Composite.md
+      - Listeners: SchemaExample-Listener.md
+      - Basic: SchemaExample-Basic.md
+      - Extend Entity: SchemaExample-Extend.md
+      - Multiples Stages: SchemaExample-MultiplesStages.md
+      - Stage with Multiples Sources: SchemaExample-StageMultiplesSources.md
+      - Entity Composite: SchemaExample-Composite.md
+      - Synchronization:
+          - Push: SchemaSynchronization-Push.md
+          - Pull: SchemaSynchronization-Pull.md
+          - Fetch: SchemaSynchronization-Fetch.md
+          - Introspect: SchemaSynchronization-Introspect.md
+          - Incorporate: SchemaSynchronization-Incorporate.md
+      - Use: Schema-Use.md
+  - Source Code Documentation: https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md
+  - Change log: https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md
