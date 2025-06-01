@@ -1,3 +1,7 @@
+---
+title: λORM "We don't reinvent the wheel, we improve it"
+---
+
 # λORM
 
 [![Join the community on GitHub Discussions](https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue.svg)](https://github.com/lambda-orm/wiki/discussions)
