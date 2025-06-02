@@ -10,33 +10,33 @@ The service exposes the following endpoints:
 
 ![query-methods](https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/query-methods.png)
 
-* [Query](https://lambda-orm.github.io/wiki/api/Endpoints/Query)
+* [Query](https://lambda-orm.github.io/wiki/api/Endpoints/Query/index.html)
 
 ### General endpoints
 
 ![general-methods](https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/general-methods.png)
 
-* [General](https://lambda-orm.github.io/wiki/api/Endpoints/General)
+* [General](https://lambda-orm.github.io/wiki/api/Endpoints/Genera/index.html)
 
 ### Schema endpoints
 
 ![schema-methods](https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/schema-methods.png)
 
-* [Schema](https://lambda-orm.github.io/wiki/api/Endpoints/Schema)
+* [Schema](https://lambda-orm.github.io/wiki/api/Endpoints/Schema/index.html)
 
 ### Stage endpoints
 
 ![stage-methods](https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/stage-methods.png)
 
-* [Stages](https://lambda-orm.github.io/wiki/api/Endpoints/Stages)
+* [Stages](https://lambda-orm.github.io/wiki/api/Endpoints/Stages/index.html)
 
 ## Usage
 
-* [Configuration](https://lambda-orm.github.io/wiki/api/Use/Configuration)
-* [Queries](https://lambda-orm.github.io/wiki/api/Use/Queries)
-* [Kafka](https://lambda-orm.github.io/wiki/api/Use/Kafka)
-* [source](https://lambda-orm.github.io/wiki/api/source/README.md)
-* [Change log](https://lambda-orm.github.io/wiki/api/CHANGELOG.md)
+* [Configuration](https://lambda-orm.github.io/wiki/api/Use/Configuration/index.html)
+* [Queries](https://lambda-orm.github.io/wiki/api/Use/Queries/index.html)
+* [Kafka](https://lambda-orm.github.io/wiki/api/Use/Kafka/index.html)
+* [source](https://lambda-orm.github.io/wiki/api/source/index.html)
+* [Change log](https://lambda-orm.github.io/wiki/api/CHANGELOG/index.html)
 
 ### Ping
 

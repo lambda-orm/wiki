@@ -5,45 +5,45 @@ theme:
   name: readthedocs
 
 nav:
-  - Home: index.md
-  - Usage: Usage.md
-  - Features: Features.md
-  - Api: api/index.md
-  - Cli: cli/index.md  
+  - Home: index.html
+  - Usage: Usage/index.html
+  - Features: Features/index.html
+  - Api: api/index.html
+  - Cli: cli/index.html
   - Labs: https://github.com/lambda-orm/lambdaorm-labs
   - Queries:
-      - Query Language: Query-Language.md
-      - Expression: Expression.md
+      - Query Language: Query-Language/index.html
+      - Expression: Expression/index.html
       - DQL:
-          - Select: Select.md
-          - Join: Join.md
-          - Grouping: Grouping.md
-          - Include: Include.md
+          - Select: Select/index.html
+          - Join: Join/index.html
+          - Grouping: Grouping/index.html
+          - Include: Include/index.html
       - DML:
-          - Insert: Insert.md
-          - Bulk Insert: BulkInsert.md
-          - Update: Update.md
-          - Delete: Delete.md
-      - Repository: Repository.md
-      - Transaction: Transaction.md
-      - Metadata: Metadata.md
+          - Insert: Insert/index.html
+          - Bulk Insert: BulkInsert/index.html
+          - Update: Update/index.html
+          - Delete: Delete/index.html
+      - Repository: Repository/index.html
+      - Transaction: Transaction/index.html
+      - Metadata: Metadata/index.html
   - Schema:
-      - Definition: SchemaDefinition.md
-      - Expressions: SchemaDefinition-Expressions.md
-      - Environment Variables: SchemaDefinition-EnvironmentVariables.md
-      - Composite: SchemaDefinition-Composite.md
-      - Listeners: SchemaExample-Listener.md
-      - Basic: SchemaExample-Basic.md
-      - Extend Entity: SchemaExample-Extend.md
-      - Multiples Stages: SchemaExample-MultiplesStages.md
-      - Stage with Multiples Sources: SchemaExample-StageMultiplesSources.md
-      - Entity Composite: SchemaExample-Composite.md
+      - Definition: SchemaDefinition/index.html
+      - Expressions: SchemaDefinition-Expressions/index.html
+      - Environment Variables: SchemaDefinition-EnvironmentVariables/index.html
+      - Composite: SchemaDefinition-Composite/index.html
+      - Listeners: SchemaExample-Listener/index.html
+      - Basic: SchemaExample-Basic/index.html
+      - Extend Entity: SchemaExample-Extend/index.html
+      - Multiples Stages: SchemaExample-MultiplesStages/index.html
+      - Stage with Multiples Sources: SchemaExample-StageMultiplesSources/index.html
+      - Entity Composite: SchemaExample-Composite/index.html
       - Synchronization:
-          - Push: SchemaSynchronization-Push.md
-          - Pull: SchemaSynchronization-Pull.md
-          - Fetch: SchemaSynchronization-Fetch.md
-          - Introspect: SchemaSynchronization-Introspect.md
-          - Incorporate: SchemaSynchronization-Incorporate.md
-      - Use: Schema-Use.md  
-  - Source Code Documentation: https://lambda-orm.github.io/wiki/source/README.md
-  - Change log: https://lambda-orm.github.io/wiki/CHANGELOG.md
+          - Push: SchemaSynchronization-Push/index.html
+          - Pull: SchemaSynchronization-Pull/index.html
+          - Fetch: SchemaSynchronization-Fetch/index.html
+          - Introspect: SchemaSynchronization-Introspect/index.html
+          - Incorporate: SchemaSynchronization-Incorporate/index.html
+      - Use: Schema-Use/index.html  
+  - Source Code Documentation: https://lambda-orm.github.io/wiki/source/README/index.html
+  - Change log: https://lambda-orm.github.io/wiki/CHANGELOG/index.html

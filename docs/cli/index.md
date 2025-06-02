@@ -31,21 +31,21 @@ npm install lambdaorm-cli -g
 
 * Commands
   * Infrastructure Commands
-    * [Version](https://lambda-orm.github.io/wiki/cli/Commands/Version)
-    * [Init](https://lambda-orm.github.io/wiki/cli/Commands/Init)
-    * [Build](https://lambda-orm.github.io/wiki/cli/Commands/Build)
+    * [Version](https://lambda-orm.github.io/wiki/cli/Commands/Version/index.html)
+    * [Init](https://lambda-orm.github.io/wiki/cli/Commands/Init/index.html)
+    * [Build](https://lambda-orm.github.io/wiki/cli/Commands/Build/index.html)
   * DDL Commands
-    * [Sync](https://lambda-orm.github.io/wiki/cli/Commands/Sync)
-    * [Drop](https://lambda-orm.github.io/wiki/cli/Commands/Drop)
+    * [Sync](https://lambda-orm.github.io/wiki/cli/Commands/Sync/index.html)
+    * [Drop](https://lambda-orm.github.io/wiki/cli/Commands/Drop/index.html)
   * Query Commands
-    * [Execute](https://lambda-orm.github.io/wiki/cli/Commands/Execute)
-    * [Plan](https://lambda-orm.github.io/wiki/cli/Commands/Plan)
-    * [Metadata](https://lambda-orm.github.io/wiki/cli/Commands/Metadata)
-    * [Parameters](https://lambda-orm.github.io/wiki/cli/Commands/Parameters)
-    * [Model](https://lambda-orm.github.io/wiki/cli/Commands/Model)
-    * [Constraints](https://lambda-orm.github.io/wiki/cli/Commands/Constraints)
-* [source](https://lambda-orm.github.io/wiki/cli/source/README.md)
-* [Change log](https://lambda-orm.github.io/wiki/cli/CHANGELOG.md)
+    * [Execute](https://lambda-orm.github.io/wiki/cli/Commands/Execute/index.html)
+    * [Plan](https://lambda-orm.github.io/wiki/cli/Commands/Plan/index.html)
+    * [Metadata](https://lambda-orm.github.io/wiki/cli/Commands/Metadata/index.html)
+    * [Parameters](https://lambda-orm.github.io/wiki/cli/Commands/Parameters/index.html)
+    * [Model](https://lambda-orm.github.io/wiki/cli/Commands/Model/index.html)
+    * [Constraints](https://lambda-orm.github.io/wiki/cli/Commands/Constraints/index.html)
+* [source](https://lambda-orm.github.io/wiki/cli/source/README/index.html)
+* [Change log](https://lambda-orm.github.io/wiki/cli/CHANGELOG/index.html)
 
 ## Labs
 
