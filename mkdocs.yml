@@ -8,6 +8,8 @@ nav:
   - Home: index.md
   - Usage: Usage.md
   - Features: Features.md
+  - Api: api/index.md
+  - Cli: cli/index.md  
   - Labs: https://github.com/lambda-orm/lambdaorm-labs
   - Queries:
       - Query Language: Query-Language.md
@@ -42,6 +44,6 @@ nav:
           - Fetch: SchemaSynchronization-Fetch.md
           - Introspect: SchemaSynchronization-Introspect.md
           - Incorporate: SchemaSynchronization-Incorporate.md
-      - Use: Schema-Use.md
-  - Source Code Documentation: https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md
-  - Change log: https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md
+      - Use: Schema-Use.md  
+  - Source Code Documentation: https://lambda-orm.github.io/wiki/source/README.md
+  - Change log: https://lambda-orm.github.io/wiki/CHANGELOG.md

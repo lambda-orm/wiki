@@ -27,37 +27,26 @@ npm install lambdaorm-cli -g
 |	build				| add configuration, model and repositories according to the language.|
 |	drop				|	Removes all database objects but not the database.									|
 
+## Usage
 
+* Commands
   * Infrastructure Commands
-    * [[Version]]
-    * [[Init]]
-    * [[Build]]		
+    * [Version](https://lambda-orm.github.io/wiki/cli/Commands/Version)
+    * [Init](https://lambda-orm.github.io/wiki/cli/Commands/Init)
+    * [Build](https://lambda-orm.github.io/wiki/cli/Commands/Build)
   * DDL Commands
-    * [[Sync]]
-    * [[Drop]]
+    * [Sync](https://lambda-orm.github.io/wiki/cli/Commands/Sync)
+    * [Drop](https://lambda-orm.github.io/wiki/cli/Commands/Drop)
   * Query Commands
-    * [[Execute]]
-    * [[Plan]]
-    * [[Metadata]]
-    * [[Parameters]]
-    * [[Model]]
-    * [[Constraints]]
-
-
-  * [Change log](https://github.com/lambda-orm/lambdaorm-cli/blob/main/CHANGELOG.md)
-
-
-## Documentation
-
-Full documentation is available in the [Wiki](https://github.com/lambda-orm/lambdaorm-cli/wiki).
-
-## Related projects
-
-- [Lambda ORM](https://www.npmjs.com/package/lambdaorm)
-- [Lambda ORM Service](https://github.com/lambda-orm/lambdaorm-svc)
-- [Client Node](https://www.npmjs.com/package/lambdaorm-client-node)
-- [Client Kotlin](https://github.com/lambda-orm/lambdaorm-client-kotlin)
+    * [Execute](https://lambda-orm.github.io/wiki/cli/Commands/Execute)
+    * [Plan](https://lambda-orm.github.io/wiki/cli/Commands/Plan)
+    * [Metadata](https://lambda-orm.github.io/wiki/cli/Commands/Metadata)
+    * [Parameters](https://lambda-orm.github.io/wiki/cli/Commands/Parameters)
+    * [Model](https://lambda-orm.github.io/wiki/cli/Commands/Model)
+    * [Constraints](https://lambda-orm.github.io/wiki/cli/Commands/Constraints)
+* [source](https://lambda-orm.github.io/wiki/cli/source/README.md)
+* [Change log](https://lambda-orm.github.io/wiki/cli/CHANGELOG.md)
 
 ## Labs
 
-You can access various labs at [github.com/lambda-orm/lambdaorm-labs](https://github.com/lambda-orm/lambdaorm-labs)
+You can access various labs at [github.com/lambda-orm/lambdaorm-labs](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli)

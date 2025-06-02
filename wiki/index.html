@@ -58,8 +58,6 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#all-labs">All Labs</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#related-projects">Related projects</a>
@@ -73,6 +71,14 @@
                 </ul>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="Features/">Features</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="api/">Api</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="cli/">Cli</a>
                     </li>
                 </ul>
                 <ul>
@@ -156,11 +162,11 @@
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md">Source Code Documentation</a>
+                    <li class="toctree-l1"><a class="" href="https://lambda-orm.github.io/wiki/source/README.md">Source Code Documentation</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md">Change log</a>
+                    <li class="toctree-l1"><a class="" href="https://lambda-orm.github.io/wiki/CHANGELOG.md">Change log</a>
                     </li>
                 </ul>
       </div>
@@ -207,7 +213,7 @@
 <a href="https://github.com/semantic-release/semantic-release"><img alt="semantic-release" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" /></a>
 <a href="https://github.com/lambda-orm/wiki/actions?query=workflow%3A%22publish%22"><img alt="Github CI" src="https://img.shields.io/badge/Github-CI-red.svg" /></a>
 <a href="https://www.npmjs.com/package/lambdaorm-cli"><img alt="CLI" src="https://img.shields.io/badge/Api-CLI-blue.svg" /></a>
-<a href="https://github.com/lambda-orm/wiki/api"><img alt="Api REST" src="https://img.shields.io/badge/Api-REST-blue.svg" /></a></p>
+<a href="https://lambda-orm.github.io/wiki/api/index.md"><img alt="Api REST" src="https://img.shields.io/badge/Api-REST-blue.svg" /></a></p>
 <p>λORM is an ORM that allows us to perform distributed queries on different database engines.</p>
 <p>In λORM, queries are defined using lambda expressions based on a domain model which abstracts us from the infrastructure. For example, in a query you can obtain or modify records from different entities, where some persist in MySQL, others in Postgres, and others in Mongo.</p>
 <p>λORM allows you to define different scenarios for the same domain. For example, in one scenario, the infrastructure may consist of distributed instances across SQL Server, MongoDB, and Oracle, while in another scenario it may be a single Postgres instance. This allows the <a href="https://microservices.io/patterns/data/cqrs.html">CQRS</a> pattern to be implemented through configuration, without needing to write a single line of code. <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/svc/04-northwind-cqrs-with-kafka">view example</a></p>
@@ -230,18 +236,18 @@ const result = await orm.execute(query, { country: 'ARG' });
 <li>Map each product to an object with category name and maximum price</li>
 <li>Sort the products by largest price in descending order</li>
 </ul>
-<p><strong>view:</strong> <a href="https://lambda-orm.github.io/wiki/Query-Language">queries</a> |
-<a href="https://lambda-orm.github.io/wiki/Select">select</a> |
-<a href="https://lambda-orm.github.io/wiki/Join">join</a> |
-<a href="https://lambda-orm.github.io/wiki/Grouping">grouping</a> |
-<a href="https://lambda-orm.github.io/wiki/Include">include</a> |
-<a href="https://lambda-orm.github.io/wiki/Insert">insert</a> |
-<a href="https://lambda-orm.github.io/wiki/BulkInsert">bulkInsert</a> |
-<a href="https://lambda-orm.github.io/wiki/Update">update</a> |
-<a href="https://lambda-orm.github.io/wiki/Delete">delete</a> |
+<p><strong>view:</strong> <a href="https://lambda-orm.github.io/wiki/queries/Query-Language">queries</a> |
+<a href="https://lambda-orm.github.io/wiki/queries/dql/Select">select</a> |
+<a href="https://lambda-orm.github.io/wiki/queries/dql/Join">join</a> |
+<a href="https://lambda-orm.github.io/wiki/queries/dql/Grouping">grouping</a> |
+<a href="https://lambda-orm.github.io/wiki/queries/dql/Include">include</a> |
+<a href="https://lambda-orm.github.io/wiki/queries/dml/Insert">insert</a> |
+<a href="https://lambda-orm.github.io/wiki/queries/dmlBulkInsert">bulkInsert</a> |
+<a href="https://lambda-orm.github.io/wiki/queries/dml/Update">update</a> |
+<a href="https://lambda-orm.github.io/wiki/queries/dml/Delete">delete</a> |
 <a href="https://lambda-orm.github.io/wiki/Repository">repository</a> |
 <a href="https://lambda-orm.github.io/wiki/Usage">usage</a> |
-<a href="https://lambda-orm.github.io/wiki/Metadata">metadata</a></p>
+<a href="https://lambda-orm.github.io/wiki/queries/Metadata">metadata</a></p>
 <h3 id="include">Include</h3>
 <p>The include allows us to obtain the entity data and its relationships in the same query. These data may be in different databases. \
 In this example the query is expressed as a text string. (Which is another alternative to the lambda expression)</p>
@@ -309,32 +315,29 @@ In this example the query is expressed as a text string. (Which is another alter
 <p><strong>more info:</strong> <a href="https://lambda-orm.github.io/wiki/Include">include</a></p>
 <h2 id="schema-configuration">Schema Configuration</h2>
 <p>Through the schema, you can define entities, enumerations, indexes, unique keys, default values, constraints, mapping, sources, stages, listeners, etc. The schema can be defined in a JSON or YAML format. Conditions or actions are performed using the same <a href="https://www.npmjs.com/package/3xpr">expression language</a> that is used to define queries.</p>
-<p><strong>view:</strong>  <a href="https://lambda-orm.github.io/wiki/Schema">schema</a> |
-<a href="https://lambda-orm.github.io/wiki/SchemaDefinition">definition</a> |
-<a href="https://lambda-orm.github.io/wiki/Schema-Use">use</a> |
-<a href="https://lambda-orm.github.io/wiki/SchemaDefinition-Expressions">expressions</a> |
-<a href="https://lambda-orm.github.io/wiki/SchemaDefinition-EnvironmentVariables">environment Variables</a> |
-<a href="https://lambda-orm.github.io/wiki/SchemaDefinition-Composite">composite</a> |
-<a href="https://lambda-orm.github.io/wiki/SchemaExample-Listener">listener</a> |
-<a href="https://lambda-orm.github.io/wiki/SchemaExample-MultiplesStages">multiple stages</a> |
-<a href="https://lambda-orm.github.io/wiki/SchemaExample-StageMultiplesSources">multiple sources</a> |
-<a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Push">push</a> |
-<a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Pull">pull</a> |
-<a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Fetch">fetch</a> |
-<a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Introspect">introspect</a> |
-<a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Incorporate">incorporate</a></p>
+<p><strong>view:</strong>  <a href="https://lambda-orm.github.io/wiki/schema/Schema">schema</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Definition/SchemaDefinition">definition</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Schema-Use">use</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Definition/SchemaDefinition-Expressions">expressions</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Definition/SchemaDefinition-EnvironmentVariables">environment Variables</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Definition/SchemaDefinition-Composite">composite</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Examples/SchemaExample-Listener">listener</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Examples/SchemaExample-MultiplesStages">multiple stages</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Examples/SchemaExample-StageMultiplesSources">multiple sources</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Push">push</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Pull">pull</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Fetch">fetch</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Introspect">introspect</a> |
+<a href="https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Incorporate">incorporate</a></p>
 <h2 id="contributing">Contributing</h2>
 <p>Would you like to contribute? Read <a href="https://github.com/lambda-orm/wiki/blob/main/CONTRIBUTING.md">our contribution guidelines</a> to learn more. There are many ways to help!</p>
-<h2 id="documentation">Documentation</h2>
-<p>Full documentation is available in the <a href="https://github.com/lambda-orm/wiki/wiki">Wiki</a>.</p>
 <h2 id="all-labs">All Labs</h2>
 <p>You can access various labs at <a href="https://github.com/lambda-orm/lambdaorm-labs">lambdaorm labs</a></p>
 <h2 id="related-projects">Related projects</h2>
 <ul>
 <li><a href="https://www.npmjs.com/package/lambdaorm-cli">Lambda ORM CLI</a>: Command line interface for λORM</li>
-<li><a href="https://github.com/lambda-orm/lambdaorm-svc">Lambda ORM Service</a>: REST service for λORM</li>
+<li><a href="https://lambda-orm.github.io/wiki/api/index">Lambda ORM Service</a>: REST service for λORM</li>
 <li><a href="https://www.npmjs.com/package/lambdaorm-client-node">Client Node</a>: HTTP client for λORM</li>
-<li><a href="https://github.com/lambda-orm/lambdaorm-client-kotlin">Client Kotlin</a> : HTTP client for λORM for Kotlin</li>
 <li><a href="https://www.npmjs.com/package/3xpr">3xpr</a>: Extensible expression engine, which allows evaluating mathematical and logical expressions.</li>
 </ul>
               
@@ -390,5 +393,5 @@ In this example the query is expressed as a text string. (Which is another alter
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2025-06-02 00:48:49.719131+00:00
+Build Date UTC : 2025-06-02 01:16:42.816882+00:00
 -->
