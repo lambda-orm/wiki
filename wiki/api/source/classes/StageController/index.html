@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>StageController - LambdaORM Wiki</title>
+  <link rel="stylesheet" href="../../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "StageController";
+    var mkdocs_page_input_path = "api/source/classes/StageController.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> LambdaORM Wiki</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../../Usage/">Usage</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../../Features/">Features</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Queries</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../../Query-Language.md">Query Language</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../../Expression/">Expression</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DQL</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../../Select.md">Select</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../Join.md">Join</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../Grouping.md">Grouping</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../Include.md">Include</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DML</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../../Insert.md">Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../BulkInsert.md">Bulk Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../Update.md">Update</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../Delete.md">Delete</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../../Repository/">Repository</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../../Transaction/">Transaction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../Metadata.md">Metadata</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Schema</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaDefinition.md">Definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaDefinition-Expressions.md">Expressions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaDefinition-EnvironmentVariables.md">Environment Variables</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaDefinition-Composite.md">Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaExample-Listener.md">Listeners</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaExample-Basic.md">Basic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaExample-Extend.md">Extend Entity</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaExample-MultiplesStages.md">Multiples Stages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaExample-StageMultiplesSources.md">Stage with Multiples Sources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaExample-Composite.md">Entity Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Synchronization</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../../SchemaSynchronization-Push.md">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../SchemaSynchronization-Pull.md">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../SchemaSynchronization-Fetch.md">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../SchemaSynchronization-Introspect.md">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../SchemaSynchronization-Incorporate.md">Incorporate</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../Schema-Use.md">Use</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md">Source Code Documentation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md">Change log</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">LambdaORM Wiki</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>StageController</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p><a href="../../"><strong>orm-service</strong></a></p>
+<hr />
+<p><a href="../globals.md">orm-service</a> / StageController</p>
+<h1 id="class-stagecontroller">Class: StageController</h1>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/stageController.ts#L5">src/infrastructure/controllers/stageController.ts:5</a></p>
+<h2 id="extends">Extends</h2>
+<ul>
+<li><code>Controller</code></li>
+</ul>
+<h2 id="constructors">Constructors</h2>
+<h3 id="constructor">Constructor</h3>
+<blockquote>
+<p><strong>new StageController</strong>(<code>service</code>): <code>StageController</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/stageController.ts#L6">src/infrastructure/controllers/stageController.ts:6</a></p>
+<h4 id="parameters">Parameters</h4>
+<h5 id="service">service</h5>
+<p><a href="../StageService/"><code>StageService</code></a></p>
+<h4 id="returns">Returns</h4>
+<p><code>StageController</code></p>
+<h4 id="overrides">Overrides</h4>
+<p><code>Controller.constructor</code></p>
+<h2 id="methods">Methods</h2>
+<h3 id="collectrequestparams">collectRequestParams()</h3>
+<blockquote>
+<p><code>protected</code> <strong>collectRequestParams</strong>(<code>request</code>): <code>any</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L27">src/infrastructure/controllers/Controller.ts:27</a></p>
+<h4 id="parameters_1">Parameters</h4>
+<h5 id="request">request</h5>
+<p><code>Request</code></p>
+<h4 id="returns_1">Returns</h4>
+<p><code>any</code></p>
+<h4 id="inherited-from">Inherited from</h4>
+<p><code>Controller.collectRequestParams</code></p>
+<hr />
+<h3 id="exists">exists()</h3>
+<blockquote>
+<p><strong>exists</strong>(<code>request</code>, <code>response</code>): <code>Promise</code>\&lt;<code>void</code>></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/stageController.ts#L14">src/infrastructure/controllers/stageController.ts:14</a></p>
+<h4 id="parameters_2">Parameters</h4>
+<h5 id="request_1">request</h5>
+<p><code>Request</code></p>
+<h5 id="response">response</h5>
+<p><code>Response</code></p>
+<h4 id="returns_2">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>></p>
+<hr />
+<h3 id="export">export()</h3>
+<blockquote>
+<p><strong>export</strong>(<code>request</code>, <code>response</code>): <code>Promise</code>\&lt;<code>void</code>></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/stageController.ts#L18">src/infrastructure/controllers/stageController.ts:18</a></p>
+<h4 id="parameters_3">Parameters</h4>
+<h5 id="request_2">request</h5>
+<p><code>Request</code></p>
+<h5 id="response_1">response</h5>
+<p><code>Response</code></p>
+<h4 id="returns_3">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>></p>
+<hr />
+<h3 id="handlerequest">handleRequest()</h3>
+<blockquote>
+<p><code>protected</code> <strong>handleRequest</strong>(<code>request</code>, <code>response</code>, <code>serviceOperation</code>): <code>Promise</code>\&lt;<code>void</code>></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L50">src/infrastructure/controllers/Controller.ts:50</a></p>
+<h4 id="parameters_4">Parameters</h4>
+<h5 id="request_3">request</h5>
+<p><code>any</code></p>
+<h5 id="response_2">response</h5>
+<p><code>any</code></p>
+<h5 id="serviceoperation">serviceOperation</h5>
+<p><code>any</code></p>
+<h4 id="returns_4">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>></p>
+<h4 id="inherited-from_1">Inherited from</h4>
+<p><code>Controller.handleRequest</code></p>
+<hr />
+<h3 id="import">import()</h3>
+<blockquote>
+<p><strong>import</strong>(<code>request</code>, <code>response</code>): <code>Promise</code>\&lt;<code>void</code>></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/stageController.ts#L22">src/infrastructure/controllers/stageController.ts:22</a></p>
+<h4 id="parameters_5">Parameters</h4>
+<h5 id="request_4">request</h5>
+<p><code>Request</code></p>
+<h5 id="response_3">response</h5>
+<p><code>Response</code></p>
+<h4 id="returns_5">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>></p>
+<hr />
+<h3 id="list">list()</h3>
+<blockquote>
+<p><strong>list</strong>(<code>request</code>, <code>response</code>): <code>Promise</code>\&lt;<code>void</code>></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/stageController.ts#L10">src/infrastructure/controllers/stageController.ts:10</a></p>
+<h4 id="parameters_6">Parameters</h4>
+<h5 id="request_5">request</h5>
+<p><code>Request</code></p>
+<h5 id="response_4">response</h5>
+<p><code>Response</code></p>
+<h4 id="returns_6">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>></p>
+<hr />
+<h3 id="senderror">sendError()</h3>
+<blockquote>
+<p><code>protected</code> <strong>sendError</strong>(<code>response</code>, <code>error</code>): <code>void</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L18">src/infrastructure/controllers/Controller.ts:18</a></p>
+<h4 id="parameters_7">Parameters</h4>
+<h5 id="response_5">response</h5>
+<p><code>any</code></p>
+<h5 id="error">error</h5>
+<p><code>any</code></p>
+<h4 id="returns_7">Returns</h4>
+<p><code>void</code></p>
+<h4 id="inherited-from_2">Inherited from</h4>
+<p><code>Controller.sendError</code></p>
+<hr />
+<h3 id="sendresponse">sendResponse()</h3>
+<blockquote>
+<p><code>protected</code> <strong>sendResponse</strong>(<code>response</code>, <code>payload?</code>): <code>void</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L3">src/infrastructure/controllers/Controller.ts:3</a></p>
+<h4 id="parameters_8">Parameters</h4>
+<h5 id="response_6">response</h5>
+<p><code>any</code></p>
+<h5 id="payload">payload?</h5>
+<p><code>any</code></p>
+<h4 id="returns_8">Returns</h4>
+<p><code>void</code></p>
+<h4 id="inherited-from_3">Inherited from</h4>
+<p><code>Controller.sendResponse</code></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

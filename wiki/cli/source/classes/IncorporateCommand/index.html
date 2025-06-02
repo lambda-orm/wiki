@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>IncorporateCommand - LambdaORM Wiki</title>
+  <link rel="stylesheet" href="../../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "IncorporateCommand";
+    var mkdocs_page_input_path = "cli/source/classes/IncorporateCommand.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> LambdaORM Wiki</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../../Usage/">Usage</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../../Features/">Features</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Queries</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../../Query-Language.md">Query Language</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../../Expression/">Expression</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DQL</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../../Select.md">Select</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../Join.md">Join</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../Grouping.md">Grouping</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../Include.md">Include</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DML</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../../Insert.md">Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../BulkInsert.md">Bulk Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../Update.md">Update</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../Delete.md">Delete</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../../Repository/">Repository</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../../Transaction/">Transaction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../Metadata.md">Metadata</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Schema</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaDefinition.md">Definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaDefinition-Expressions.md">Expressions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaDefinition-EnvironmentVariables.md">Environment Variables</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaDefinition-Composite.md">Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaExample-Listener.md">Listeners</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaExample-Basic.md">Basic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaExample-Extend.md">Extend Entity</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaExample-MultiplesStages.md">Multiples Stages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaExample-StageMultiplesSources.md">Stage with Multiples Sources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../SchemaExample-Composite.md">Entity Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Synchronization</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../../SchemaSynchronization-Push.md">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../SchemaSynchronization-Pull.md">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../SchemaSynchronization-Fetch.md">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../SchemaSynchronization-Introspect.md">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../../SchemaSynchronization-Incorporate.md">Incorporate</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../../Schema-Use.md">Use</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md">Source Code Documentation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md">Change log</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">LambdaORM Wiki</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>IncorporateCommand</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p><a href="../../"><strong>Lambda ORM</strong></a></p>
+<hr />
+<p><a href="../../">Lambda ORM</a> / IncorporateCommand</p>
+<h1 id="class-incorporatecommand">Class: IncorporateCommand</h1>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/incorporate.ts#L6">src/lib/infrastructure/command/incorporate.ts:6</a></p>
+<h2 id="implements">Implements</h2>
+<ul>
+<li><code>CommandModule</code></li>
+</ul>
+<h2 id="constructors">Constructors</h2>
+<h3 id="constructor">Constructor</h3>
+<blockquote>
+<p><strong>new IncorporateCommand</strong>(): <code>IncorporateCommand</code></p>
+</blockquote>
+<h4 id="returns">Returns</h4>
+<p><code>IncorporateCommand</code></p>
+<h2 id="properties">Properties</h2>
+<h3 id="command">command</h3>
+<blockquote>
+<p><strong>command</strong>: <code>string</code> = <code>'incorporate'</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/incorporate.ts#L7">src/lib/infrastructure/command/incorporate.ts:7</a></p>
+<p>string (or array of strings) that executes this command when given on the command line, first string may contain positional args</p>
+<h4 id="implementation-of">Implementation of</h4>
+<p><code>CommandModule.command</code></p>
+<hr />
+<h3 id="describe">describe</h3>
+<blockquote>
+<p><strong>describe</strong>: <code>string</code> = <code>'Update schema and push source and import data.'</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/incorporate.ts#L8">src/lib/infrastructure/command/incorporate.ts:8</a></p>
+<p>string used as the description for the command in help text, use <code>false</code> for a hidden command</p>
+<h4 id="implementation-of_1">Implementation of</h4>
+<p><code>CommandModule.describe</code></p>
+<h2 id="methods">Methods</h2>
+<h3 id="builder">builder()</h3>
+<blockquote>
+<p><strong>builder</strong>(<code>args</code>): <code>Argv</code>\&lt;<code>object</code> &amp; <code>object</code> &amp; <code>object</code> &amp; <code>object</code> &amp; <code>object</code> &amp; <code>object</code>></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/incorporate.ts#L10">src/lib/infrastructure/command/incorporate.ts:10</a></p>
+<p>object declaring the options the command accepts, or a function accepting and returning a yargs instance</p>
+<h4 id="parameters">Parameters</h4>
+<h5 id="args">args</h5>
+<p><code>Argv</code></p>
+<h4 id="returns_1">Returns</h4>
+<p><code>Argv</code>\&lt;<code>object</code> &amp; <code>object</code> &amp; <code>object</code> &amp; <code>object</code> &amp; <code>object</code> &amp; <code>object</code>></p>
+<h4 id="implementation-of_2">Implementation of</h4>
+<p><code>CommandModule.builder</code></p>
+<hr />
+<h3 id="handler">handler()</h3>
+<blockquote>
+<p><strong>handler</strong>(<code>args</code>): <code>Promise</code>\&lt;<code>void</code>></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/incorporate.ts#L38">src/lib/infrastructure/command/incorporate.ts:38</a></p>
+<p>a function which will be passed the parsed argv.</p>
+<h4 id="parameters_1">Parameters</h4>
+<h5 id="args_1">args</h5>
+<h6 id="_">_</h6>
+<p>(<code>string</code> | <code>number</code>)[]</p>
+<p>Non-option arguments</p>
+<h6 id="0">$0</h6>
+<p><code>string</code></p>
+<p>The script name or node command</p>
+<h4 id="returns_2">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>></p>
+<h4 id="implementation-of_3">Implementation of</h4>
+<p><code>CommandModule.handler</code></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

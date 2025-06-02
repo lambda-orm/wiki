@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>IOrm - LambdaORM Wiki</title>
+  <link rel="stylesheet" href="../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "IOrm";
+    var mkdocs_page_input_path = "source/interfaces/IOrm.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> LambdaORM Wiki</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Usage/">Usage</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Features/">Features</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Queries</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../Query-Language.md">Query Language</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Expression/">Expression</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DQL</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../Select.md">Select</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Join.md">Join</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Grouping.md">Grouping</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Include.md">Include</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DML</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../Insert.md">Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../BulkInsert.md">Bulk Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Update.md">Update</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Delete.md">Delete</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Repository/">Repository</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Transaction/">Transaction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../Metadata.md">Metadata</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Schema</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition.md">Definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Expressions.md">Expressions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-EnvironmentVariables.md">Environment Variables</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Composite.md">Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Listener.md">Listeners</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Basic.md">Basic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Extend.md">Extend Entity</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-MultiplesStages.md">Multiples Stages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-StageMultiplesSources.md">Stage with Multiples Sources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Composite.md">Entity Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Synchronization</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Push.md">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Pull.md">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Fetch.md">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Introspect.md">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Incorporate.md">Incorporate</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../Schema-Use.md">Use</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md">Source Code Documentation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md">Change log</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">LambdaORM Wiki</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>IOrm</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p><a href="../../"><strong>Lambda ORM</strong></a></p>
+<hr />
+<p><a href="../../">Lambda ORM</a> / IOrm</p>
+<h1 id="interface-iorm">Interface: IOrm</h1>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L6">src/lib/orm/application/orm.ts:6</a></p>
+<h2 id="properties">Properties</h2>
+<h3 id="exp">exp</h3>
+<blockquote>
+<p><strong>exp</strong>: <code>Expressions</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L11">src/lib/orm/application/orm.ts:11</a></p>
+<hr />
+<h3 id="schema">schema</h3>
+<blockquote>
+<p><strong>schema</strong>: <a href="../../classes/SchemaFacade/"><code>SchemaFacade</code></a></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L9">src/lib/orm/application/orm.ts:9</a></p>
+<hr />
+<h3 id="stage">stage</h3>
+<blockquote>
+<p><strong>stage</strong>: <a href="../../classes/StageFacade/"><code>StageFacade</code></a></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L8">src/lib/orm/application/orm.ts:8</a></p>
+<hr />
+<h3 id="state">state</h3>
+<blockquote>
+<p><strong>state</strong>: <a href="../../classes/SchemaState/"><code>SchemaState</code></a></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L10">src/lib/orm/application/orm.ts:10</a></p>
+<h2 id="methods">Methods</h2>
+<h3 id="constraints">constraints()</h3>
+<h4 id="call-signature">Call Signature</h4>
+<blockquote>
+<p><strong>constraints</strong>(<code>query</code>): <a href="../MetadataConstraint/"><code>MetadataConstraint</code></a></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L43">src/lib/orm/application/orm.ts:43</a></p>
+<p>Get constraints of query</p>
+<h5 id="parameters">Parameters</h5>
+<h6 id="query">query</h6>
+<p><code>Function</code></p>
+<h5 id="returns">Returns</h5>
+<p><a href="../MetadataConstraint/"><code>MetadataConstraint</code></a></p>
+<p>Constraints of query</p>
+<h4 id="call-signature_1">Call Signature</h4>
+<blockquote>
+<p><strong>constraints</strong>(<code>query</code>): <a href="../MetadataConstraint/"><code>MetadataConstraint</code></a></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L44">src/lib/orm/application/orm.ts:44</a></p>
+<h5 id="parameters_1">Parameters</h5>
+<h6 id="query_1">query</h6>
+<p><code>string</code></p>
+<h5 id="returns_1">Returns</h5>
+<p><a href="../MetadataConstraint/"><code>MetadataConstraint</code></a></p>
+<hr />
+<h3 id="dialect">dialect()</h3>
+<blockquote>
+<p><strong>dialect</strong>(<code>source</code>): <a href="../../enumerations/Dialect/"><code>Dialect</code></a></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L13">src/lib/orm/application/orm.ts:13</a></p>
+<h4 id="parameters_2">Parameters</h4>
+<h5 id="source">source</h5>
+<p><code>string</code></p>
+<h4 id="returns_2">Returns</h4>
+<p><a href="../../enumerations/Dialect/"><code>Dialect</code></a></p>
+<hr />
+<h3 id="end">end()</h3>
+<blockquote>
+<p><strong>end</strong>(): <code>Promise</code>\&lt;<code>void</code>></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L17">src/lib/orm/application/orm.ts:17</a></p>
+<h4 id="returns_3">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>></p>
+<hr />
+<h3 id="execute">execute()</h3>
+<h4 id="call-signature_2">Call Signature</h4>
+<blockquote>
+<p><strong>execute</strong>(<code>query</code>, <code>data?</code>, <code>options?</code>): <code>Promise</code>\&lt;<code>any</code>></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L68">src/lib/orm/application/orm.ts:68</a></p>
+<p>Execute query</p>
+<h5 id="parameters_3">Parameters</h5>
+<h6 id="query_2">query</h6>
+<p><code>Function</code></p>
+<p>Query to execute</p>
+<h6 id="data">data?</h6>
+<p><code>any</code></p>
+<p>Data with variables</p>
+<h6 id="options">options?</h6>
+<p><a href="../QueryOptions/"><code>QueryOptions</code></a></p>
+<p>query options</p>
+<h5 id="returns_4">Returns</h5>
+<p><code>Promise</code>\&lt;<code>any</code>></p>
+<p>Result of execution</p>
+<h4 id="call-signature_3">Call Signature</h4>
+<blockquote>
+<p><strong>execute</strong>(<code>query</code>, <code>data?</code>, <code>options?</code>): <code>Promise</code>\&lt;<code>any</code>></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L69">src/lib/orm/application/orm.ts:69</a></p>
+<h5 id="parameters_4">Parameters</h5>
+<h6 id="query_3">query</h6>
+<p><code>string</code></p>
+<h6 id="data_1">data?</h6>
+<p><code>any</code></p>
+<h6 id="options_1">options?</h6>
+<p><a href="../QueryOptions/"><code>QueryOptions</code></a></p>
+<h5 id="returns_5">Returns</h5>
+<p><code>Promise</code>\&lt;<code>any</code>></p>
+<hr />
+<h3 id="init">init()</h3>
+<blockquote>
+<p><strong>init</strong>(<code>configPath?</code>, <code>connect?</code>): <code>Promise</code>\&lt;<a href="../Schema/"><code>Schema</code></a>></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L16">src/lib/orm/application/orm.ts:16</a></p>
+<h4 id="parameters_5">Parameters</h4>
+<h5 id="configpath">configPath?</h5>
+<p><code>string</code></p>
+<h5 id="connect">connect?</h5>
+<p><code>boolean</code></p>
+<h4 id="returns_6">Returns</h4>
+<p><code>Promise</code>\&lt;<a href="../Schema/"><code>Schema</code></a>></p>
+<hr />
+<h3 id="metadata">metadata()</h3>
+<h4 id="call-signature_4">Call Signature</h4>
+<blockquote>
+<p><strong>metadata</strong>(<code>query</code>): <a href="../Metadata/"><code>Metadata</code></a></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L50">src/lib/orm/application/orm.ts:50</a></p>
+<p>Get metadata of query</p>
+<h5 id="parameters_6">Parameters</h5>
+<h6 id="query_4">query</h6>
+<p><code>Function</code></p>
+<h5 id="returns_7">Returns</h5>
+<p><a href="../Metadata/"><code>Metadata</code></a></p>
+<p>metadata of query</p>
+<h4 id="call-signature_5">Call Signature</h4>
+<blockquote>
+<p><strong>metadata</strong>(<code>query</code>): <a href="../Metadata/"><code>Metadata</code></a></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L51">src/lib/orm/application/orm.ts:51</a></p>
+<h5 id="parameters_7">Parameters</h5>
+<h6 id="query_5">query</h6>
+<p><code>string</code></p>
+<h5 id="returns_8">Returns</h5>
+<p><a href="../Metadata/"><code>Metadata</code></a></p>
+<hr />
+<h3 id="model">model()</h3>
+<h4 id="call-signature_6">Call Signature</h4>
+<blockquote>
+<p><strong>model</strong>(<code>query</code>): <a href="../MetadataModel/"><code>MetadataModel</code></a>[]</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L29">src/lib/orm/application/orm.ts:29</a></p>
+<p>Get model of query</p>
+<h5 id="parameters_8">Parameters</h5>
+<h6 id="query_6">query</h6>
+<p><code>Function</code></p>
+<h5 id="returns_9">Returns</h5>
+<p><a href="../MetadataModel/"><code>MetadataModel</code></a>[]</p>
+<p>Model of query</p>
+<h4 id="call-signature_7">Call Signature</h4>
+<blockquote>
+<p><strong>model</strong>(<code>query</code>): <a href="../MetadataModel/"><code>MetadataModel</code></a>[]</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L30">src/lib/orm/application/orm.ts:30</a></p>
+<h5 id="parameters_9">Parameters</h5>
+<h6 id="query_7">query</h6>
+<p><code>string</code></p>
+<h5 id="returns_10">Returns</h5>
+<p><a href="../MetadataModel/"><code>MetadataModel</code></a>[]</p>
+<hr />
+<h3 id="normalize">normalize()</h3>
+<h4 id="call-signature_8">Call Signature</h4>
+<blockquote>
+<p><strong>normalize</strong>(<code>query</code>): <code>string</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L22">src/lib/orm/application/orm.ts:22</a></p>
+<p>Normalize query</p>
+<h5 id="parameters_10">Parameters</h5>
+<h6 id="query_8">query</h6>
+<p><code>Function</code></p>
+<h5 id="returns_11">Returns</h5>
+<p><code>string</code></p>
+<p>Expression normalized</p>
+<h4 id="call-signature_9">Call Signature</h4>
+<blockquote>
+<p><strong>normalize</strong>(<code>query</code>): <code>string</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L23">src/lib/orm/application/orm.ts:23</a></p>
+<h5 id="parameters_11">Parameters</h5>
+<h6 id="query_9">query</h6>
+<p><code>string</code></p>
+<h5 id="returns_12">Returns</h5>
+<p><code>string</code></p>
+<hr />
+<h3 id="parameters_12">parameters()</h3>
+<h4 id="call-signature_10">Call Signature</h4>
+<blockquote>
+<p><strong>parameters</strong>(<code>query</code>): <a href="../MetadataParameter/"><code>MetadataParameter</code></a>[]</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L36">src/lib/orm/application/orm.ts:36</a></p>
+<p>Get parameters of query</p>
+<h5 id="parameters_13">Parameters</h5>
+<h6 id="query_10">query</h6>
+<p><code>Function</code></p>
+<h5 id="returns_13">Returns</h5>
+<p><a href="../MetadataParameter/"><code>MetadataParameter</code></a>[]</p>
+<p>Parameters of query</p>
+<h4 id="call-signature_11">Call Signature</h4>
+<blockquote>
+<p><strong>parameters</strong>(<code>query</code>): <a href="../MetadataParameter/"><code>MetadataParameter</code></a>[]</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L37">src/lib/orm/application/orm.ts:37</a></p>
+<h5 id="parameters_14">Parameters</h5>
+<h6 id="query_11">query</h6>
+<p><code>string</code></p>
+<h5 id="returns_14">Returns</h5>
+<p><a href="../MetadataParameter/"><code>MetadataParameter</code></a>[]</p>
+<hr />
+<h3 id="plan">plan()</h3>
+<h4 id="call-signature_12">Call Signature</h4>
+<blockquote>
+<p><strong>plan</strong>(<code>query</code>, <code>options?</code>): <a href="../QueryPlan/"><code>QueryPlan</code></a></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L58">src/lib/orm/application/orm.ts:58</a></p>
+<h5 id="parameters_15">Parameters</h5>
+<h6 id="query_12">query</h6>
+<p><code>Function</code></p>
+<h6 id="options_2">options?</h6>
+<p><a href="../QueryOptions/"><code>QueryOptions</code></a></p>
+<h5 id="returns_15">Returns</h5>
+<p><a href="../QueryPlan/"><code>QueryPlan</code></a></p>
+<h4 id="call-signature_13">Call Signature</h4>
+<blockquote>
+<p><strong>plan</strong>(<code>query</code>, <code>options?</code>): <a href="../QueryPlan/"><code>QueryPlan</code></a></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L59">src/lib/orm/application/orm.ts:59</a></p>
+<h5 id="parameters_16">Parameters</h5>
+<h6 id="query_13">query</h6>
+<p><code>string</code></p>
+<h6 id="options_3">options?</h6>
+<p><a href="../QueryOptions/"><code>QueryOptions</code></a></p>
+<h5 id="returns_16">Returns</h5>
+<p><a href="../QueryPlan/"><code>QueryPlan</code></a></p>
+<hr />
+<h3 id="transaction">transaction()</h3>
+<blockquote>
+<p><strong>transaction</strong>(<code>options</code>, <code>callback</code>): <code>Promise</code>\&lt;<code>void</code>></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/application/orm.ts#L75">src/lib/orm/application/orm.ts:75</a></p>
+<p>transaction</p>
+<h4 id="parameters_17">Parameters</h4>
+<h5 id="options_4">options</h5>
+<p>query options</p>
+<p><code>undefined</code> | <a href="../QueryOptions/"><code>QueryOptions</code></a></p>
+<h5 id="callback">callback</h5>
+<p>(<code>tr</code>) =&gt; <code>Promise</code>\&lt;<code>void</code>></p>
+<h4 id="returns_17">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

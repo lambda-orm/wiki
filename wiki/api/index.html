@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lambda ORM service - LambdaORM Wiki</title>
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lambda ORM service";
+    var mkdocs_page_input_path = "api/index.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> LambdaORM Wiki</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Usage/">Usage</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Features/">Features</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Queries</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../Query-Language.md">Query Language</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Expression/">Expression</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DQL</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../Select.md">Select</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../Join.md">Join</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../Grouping.md">Grouping</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../Include.md">Include</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DML</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../Insert.md">Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../BulkInsert.md">Bulk Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../Update.md">Update</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../Delete.md">Delete</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Repository/">Repository</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Transaction/">Transaction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../Metadata.md">Metadata</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Schema</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../SchemaDefinition.md">Definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaDefinition-Expressions.md">Expressions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaDefinition-EnvironmentVariables.md">Environment Variables</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaDefinition-Composite.md">Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaExample-Listener.md">Listeners</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaExample-Basic.md">Basic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaExample-Extend.md">Extend Entity</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaExample-MultiplesStages.md">Multiples Stages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaExample-StageMultiplesSources.md">Stage with Multiples Sources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../SchemaExample-Composite.md">Entity Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Synchronization</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../SchemaSynchronization-Push.md">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../SchemaSynchronization-Pull.md">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../SchemaSynchronization-Fetch.md">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../SchemaSynchronization-Introspect.md">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../SchemaSynchronization-Incorporate.md">Incorporate</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../Schema-Use.md">Use</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md">Source Code Documentation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md">Change log</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">LambdaORM Wiki</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Lambda ORM service</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="lambda-orm-service">Lambda ORM service</h1>
+<p>Service that exposes the functionality of the <a href="https://www.npmjs.com/package/lambdaorm">LambdaOrm</a> library</p>
+<h2 id="service">Service</h2>
+<p>The service exposes the following endpoints:</p>
+<h3 id="queries-endpoints">Queries endpoints</h3>
+<p><img alt="query-methods" src="https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/query-methods.png" /></p>
+<ul>
+<li><a href="https://lambda-orm.github.io/wiki/api/Endpoints/Query">Query</a></li>
+</ul>
+<h3 id="general-endpoints">General endpoints</h3>
+<p><img alt="general-methods" src="https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/general-methods.png" /></p>
+<ul>
+<li><a href="https://lambda-orm.github.io/wiki/api/Endpoints/General">General</a></li>
+</ul>
+<h3 id="schema-endpoints">Schema endpoints</h3>
+<p><img alt="schema-methods" src="https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/schema-methods.png" /></p>
+<ul>
+<li><a href="https://lambda-orm.github.io/wiki/api/Endpoints/Schema">Schema</a></li>
+</ul>
+<h3 id="stage-endpoints">Stage endpoints</h3>
+<p><img alt="stage-methods" src="https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/stage-methods.png" /></p>
+<ul>
+<li><a href="https://lambda-orm.github.io/wiki/api/Endpoints/Stages">Stages</a></li>
+</ul>
+<h2 id="usage">Usage</h2>
+<ul>
+<li><a href="https://lambda-orm.github.io/wiki/api/Use/Configuration">Configuration</a></li>
+<li><a href="https://lambda-orm.github.io/wiki/api/Use/Queries">Queries</a></li>
+<li><a href="https://lambda-orm.github.io/wiki/api/Use/Kafka">Kafka</a></li>
+<li><a href="https://lambda-orm.github.io/wiki/api/source/README.md">source</a></li>
+<li><a href="https://lambda-orm.github.io/wiki/api/CHANGELOG.md">Change log</a></li>
+</ul>
+<h3 id="ping">Ping</h3>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/ping?format=beautiful&quot;
+</code></pre>
+<p>Result:</p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;pong&quot;,
+  &quot;time&quot;: &quot;2023-12-08T19:41:00.543Z&quot;
+}
+</code></pre>
+<h3 id="model">Model</h3>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/model?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;p.details)&quot;}'
+</code></pre>
+<p>Result:</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;id&quot;,
+    &quot;type&quot;: &quot;integer&quot;
+  },
+  {
+    &quot;name&quot;: &quot;customerId&quot;,
+    &quot;type&quot;: &quot;string&quot;
+  },
+  {
+    &quot;name&quot;: &quot;orderDate&quot;,
+    &quot;type&quot;: &quot;dateTime&quot;
+  },
+  {
+    &quot;name&quot;: &quot;details&quot;,
+    &quot;type&quot;: &quot;Orders.details[]&quot;,
+    &quot;children&quot;: [
+      {
+        &quot;name&quot;: &quot;orderId&quot;,
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      {
+        &quot;name&quot;: &quot;productId&quot;,
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      {
+        &quot;name&quot;: &quot;unitPrice&quot;,
+        &quot;type&quot;: &quot;decimal&quot;
+      },
+      {
+        &quot;name&quot;: &quot;quantity&quot;,
+        &quot;type&quot;: &quot;decimal&quot;
+      },
+      {
+        &quot;name&quot;: &quot;LambdaOrmParentId&quot;,
+        &quot;type&quot;: &quot;integer&quot;
+      }
+    ]
+  }
+]
+</code></pre>
+<h3 id="parameters">Parameters</h3>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/parameters?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;p.details)&quot;}'
+</code></pre>
+<p>Result:</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;customerId&quot;,
+    &quot;type&quot;: &quot;string&quot;
+  },
+  {
+    &quot;name&quot;: &quot;details&quot;,
+    &quot;type&quot;: &quot;Orders.details&quot;,
+    &quot;children&quot;: [
+      {
+        &quot;name&quot;: &quot;LambdaOrmParentId&quot;,
+        &quot;type&quot;: &quot;any&quot;
+      }
+    ]
+  }
+]
+</code></pre>
+<h3 id="constraints">Constraints</h3>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/constraints?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;p.details)&quot;}'
+</code></pre>
+<p>Result:</p>
+<pre><code class="language-json">{
+  &quot;entity&quot;: &quot;Orders&quot;,
+  &quot;constraints&quot;: [],
+  &quot;children&quot;: [
+    {
+      &quot;entity&quot;: &quot;Orders.details&quot;,
+      &quot;constraints&quot;: []
+    }
+  ]
+}
+</code></pre>
+<h3 id="plan">Plan</h3>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/plan?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;p.details)&quot;}'
+</code></pre>
+<p>Result:</p>
+<pre><code class="language-json">{
+  &quot;entity&quot;: &quot;Orders&quot;,
+  &quot;dialect&quot;: &quot;PostgreSQL&quot;,
+  &quot;source&quot;: &quot;default&quot;,
+  &quot;sentence&quot;: &quot;SELECT o.OrderID AS \&quot;id\&quot;, o.CustomerID AS \&quot;customerId\&quot;, o.OrderDate AS \&quot;orderDate\&quot;, o.OrderID AS \&quot;__id\&quot; FROM Orders o  WHERE o.CustomerID = $1 &quot;,
+  &quot;children&quot;: [
+    {
+      &quot;entity&quot;: &quot;Orders.details&quot;,
+      &quot;dialect&quot;: &quot;PostgreSQL&quot;,
+      &quot;source&quot;: &quot;default&quot;,
+      &quot;sentence&quot;: &quot;SELECT o1.OrderID AS \&quot;orderId\&quot;, o1.ProductID AS \&quot;productId\&quot;, o1.UnitPrice AS \&quot;unitPrice\&quot;, o1.Quantity AS \&quot;quantity\&quot;, o1.OrderID AS \&quot;LambdaOrmParentId\&quot; FROM \&quot;Order Details\&quot; o1  WHERE  o1.OrderID IN ($1) &quot;
+    }
+  ]
+}
+</code></pre>
+<h3 id="import">Import</h3>
+<pre><code class="language-sh">curl -X POST -H &quot;Content-Type: application/json&quot; -d @data.json http://localhost:9291/stages/default/import
+</code></pre>
+<h3 id="execute">Execute</h3>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/execute?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;p.details)&quot;, &quot;data&quot;: &quot;{\&quot;customerId\&quot;: \&quot;CENTC\&quot;}&quot; }'
+</code></pre>
+<p>Result:</p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 12,
+    &quot;customerId&quot;: &quot;CENTC&quot;,
+    &quot;orderDate&quot;: &quot;1996-07-18T00:00:00.000Z&quot;,
+    &quot;details&quot;: [
+      {
+        &quot;orderId&quot;: 12,
+        &quot;productId&quot;: 21,
+        &quot;unitPrice&quot;: 8,
+        &quot;quantity&quot;: 10
+      },
+      {
+        &quot;orderId&quot;: 12,
+        &quot;productId&quot;: 37,
+        &quot;unitPrice&quot;: 20.8,
+        &quot;quantity&quot;: 1
+      }
+    ]
+  }
+]
+</code></pre>
+<h2 id="docker-image">Docker Image</h2>
+<p>You can access to image at <a href="https://hub.docker.com/repository/docker/flaviorita/lambdaorm-svc/general">flaviorita/lambdaorm-svc</a></p>
+<h2 id="clients">Clients</h2>
+<p>The following clients allow consuming this service</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/lambdaorm-client-node">Node Client</a></li>
+</ul>
+<p>Soon:</p>
+<ul>
+<li>Kotlin Client</li>
+<li>Python Client</li>
+<li>CSharp Client</li>
+<li>Go Client</li>
+</ul>
+<h2 id="labs">Labs</h2>
+<p>You can access various labs at <a href="https://github.com/lambda-orm/lambdaorm-labs">github.com/lambda-orm/lambdaorm-labs</a></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

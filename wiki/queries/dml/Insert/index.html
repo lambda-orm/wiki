@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Insert - LambdaORM Wiki</title>
+  <link rel="stylesheet" href="../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Insert";
+    var mkdocs_page_input_path = "queries/dml/Insert.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> LambdaORM Wiki</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Usage/">Usage</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Features/">Features</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Queries</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../Query-Language.md">Query Language</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Expression/">Expression</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DQL</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../Select.md">Select</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Join.md">Join</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Grouping.md">Grouping</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Include.md">Include</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DML</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../Insert.md">Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../BulkInsert.md">Bulk Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Update.md">Update</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Delete.md">Delete</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Repository/">Repository</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Transaction/">Transaction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../Metadata.md">Metadata</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Schema</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition.md">Definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Expressions.md">Expressions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-EnvironmentVariables.md">Environment Variables</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Composite.md">Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Listener.md">Listeners</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Basic.md">Basic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Extend.md">Extend Entity</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-MultiplesStages.md">Multiples Stages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-StageMultiplesSources.md">Stage with Multiples Sources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Composite.md">Entity Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Synchronization</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Push.md">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Pull.md">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Fetch.md">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Introspect.md">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Incorporate.md">Incorporate</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../Schema-Use.md">Use</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md">Source Code Documentation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md">Change log</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">LambdaORM Wiki</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Insert</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="insert">Insert</h1>
+<p>Since the queries are based on both the expression and the definition in the schema, in the case of wanting to insert all the fields it is not necessary to define them since it is assumed if none are defined.</p>
+<p>The mapping to the source(s) is resolved according to the mapping configuration associated with each source in the schema.</p>
+<h2 id="insert-simple">Insert Simple</h2>
+<p>In the case that the fields to be inserted are not specified, it is assumed that an object with all fields will be passed.</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Inserting into Categories table without specifying fields
+Categories.insert()
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Inserting into Categories table with CategoryName and Description fields
+INSERT INTO Categories(CategoryName,Description) VALUES(?,?)
+</code></pre>
+<h2 id="insert-specific">Insert specific</h2>
+<p>In this case, only the fields that are specified will be inserted</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Inserting into Categories table with only the name field specified
+Categories.insert({ name: name })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Inserting into Categories table with CategoryName field specified
+INSERT INTO Categories(CategoryName) VALUES(?)
+</code></pre>
+<h2 id="insert-with-include">Insert with include</h2>
+<p>In the case that we need to insert an object which in turn has a relation, we can insert the set using include.</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Inserting into Orders table and including details
+Orders.insert().include(p =&gt; p.details)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Inserting into Orders table with all required fields
+INSERT INTO Orders(CustomerID,EmployeeID,OrderDate,RequiredDate,ShippedDate,ShipVia,Freight,ShipName,ShipAddress,ShipCity,ShipRegion,ShipPostalCode,ShipCountry) 
+VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)
+
+-- Inserting into Order Details table with all required fields
+INSERT INTO `Order Details`(OrderID,ProductID,UnitPrice,Quantity,Discount) 
+VALUES(?,?,?,?,?)
+</code></pre>
+<h2 id="code-example">Code example</h2>
+<pre><code class="language-Typescript">import { orm } from '../../lib'
+import { Orders } from '../northwind/model/__model'
+(async () =&gt; {  
+    try {       
+        await orm.init('./config/northwind.yaml')
+        const order = {
+            customerId: 'VINET',
+            employeeId: 5,
+            orderDate: '1996-07-03T22:00:00.000Z',
+            requiredDate: '1996-07-31T22:00:00.000Z',
+            shippedDate: '1996-07-15T22:00:00.000Z',
+            shipViaId: 3,
+            freight: 32.38,
+            name: 'Vins et alcools Chevalier',
+            address: '59 rue de l-Abbaye',
+            city: 'Reims',
+            postalCode: '51100',
+            country: 'France',
+            details: [
+                {
+                    productId: 11,
+                    unitPrice: 14,
+                    quantity: 12,
+                    discount: 10,
+                    orderId: 833
+                },
+                {
+                    productId: 42,
+                    unitPrice: 9.8,
+                    quantity: 10,
+                    discount: 10,
+                    orderId: 833
+                }
+            ]
+        }
+        // Defining a query to insert into Orders and include details
+        const query = () =&gt; Orders.insert().include(p =&gt; p.details)
+        // Executing the query using the ORM with the specified order parameter
+        const result = await orm.execute(query, order)
+        // return ID of order created
+        console.log(JSON.stringify(result))     
+    } catch (error:any) {
+        console.error(error.stack)
+    } finally {
+        // Ending the ORM connection
+        await orm.end()
+    }
+})()
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

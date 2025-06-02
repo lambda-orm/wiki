@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Grouping - LambdaORM Wiki</title>
+  <link rel="stylesheet" href="../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Grouping";
+    var mkdocs_page_input_path = "queries/dql/Grouping.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> LambdaORM Wiki</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Usage/">Usage</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Features/">Features</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Queries</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../Query-Language.md">Query Language</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Expression/">Expression</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DQL</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../Select.md">Select</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Join.md">Join</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Grouping.md">Grouping</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Include.md">Include</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DML</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../Insert.md">Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../BulkInsert.md">Bulk Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Update.md">Update</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Delete.md">Delete</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Repository/">Repository</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Transaction/">Transaction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../Metadata.md">Metadata</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Schema</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition.md">Definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Expressions.md">Expressions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-EnvironmentVariables.md">Environment Variables</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Composite.md">Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Listener.md">Listeners</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Basic.md">Basic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Extend.md">Extend Entity</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-MultiplesStages.md">Multiples Stages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-StageMultiplesSources.md">Stage with Multiples Sources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Composite.md">Entity Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Synchronization</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Push.md">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Pull.md">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Fetch.md">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Introspect.md">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Incorporate.md">Incorporate</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../Schema-Use.md">Use</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md">Source Code Documentation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md">Change log</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">LambdaORM Wiki</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Grouping</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="grouping">Grouping</h1>
+<p>In the case of grouping, it is not necessary to define it explicitly, since it is deduced when one of the grouping functions is used. \
+The fields by which they are grouped are deduced by which they are contained with some of the grouping functions.</p>
+<h2 id="grouping-functions">Grouping Functions</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>avg</td>
+<td>Calculates the average of the specified columns in a set of rows</td>
+</tr>
+<tr>
+<td>count</td>
+<td>Calculating the number of rows in a set.</td>
+</tr>
+<tr>
+<td>first</td>
+<td>Returns the first value of the selected column</td>
+</tr>
+<tr>
+<td>last</td>
+<td>Returns the last value of the selected column.</td>
+</tr>
+<tr>
+<td>max</td>
+<td>Calculating the maximum.</td>
+</tr>
+<tr>
+<td>min</td>
+<td>Calculating the minimum.</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>Calculating the sum.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="grouping-by-sum-with-order-and-filter">Grouping by sum with order and filter</h2>
+<p>Filters order details based on customer name
+Maps the results to get the order date and the total calculated as the sum of (quantity * unit price)
+Orders the results in descending order by total</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">OrderDetails
+    .filter(p =&gt; p.order.customer.name == customerName)
+    .map(p =&gt; ({ order: p.order.orderDate, total: sum(p.quantity * p.unitPrice) }))
+    .sort(p =&gt; desc(p.total))
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Selects order date and calculates the sum of (quantity * unit price) as 'total'
+-- Performs inner join with Orders and Customers table to get additional customer information
+-- Filters the results based on customer company name
+-- Groups the results by order date
+-- Orders the results in descending order by total
+SELECT o1.OrderDate AS `order`, SUM(o.Quantity * o.UnitPrice) AS `total` 
+FROM `Order Details` o 
+INNER JOIN Orders o1 ON o1.OrderID = o.OrderID 
+INNER JOIN Customers c ON c.CustomerID = o1.CustomerID 
+WHERE c.CompanyName = ? 
+GROUP BY o1.OrderDate 
+ORDER BY `total` desc 
+</code></pre>
+<h2 id="grouping-and-having">Grouping and Having</h2>
+<p>Filters products based on price and supplier country, or stock quantity
+Filters the results based on maximum price
+Maps the results to get the product category and maximum price
+Sorts the results in descending order by maximum price</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">Products
+    .filter(p =&gt; (p.price &gt; 5 &amp;&amp; p.supplier.country == country) || (p.inStock &lt; 3))
+    .having(p =&gt; max(p.price) &gt; 50)
+    .map(p =&gt; ({ category: p.category.name, largestPrice: max(p.price) }))
+    .sort(p =&gt; desc(p.largestPrice))
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Selects product category and calculates the maximum price as 'largestPrice'
+-- Performs inner join with Suppliers and Categories tables to get additional product information
+-- Filters the results based on price and supplier country, or stock quantity
+-- Groups the results by product category
+-- Filters the results based on maximum price
+-- Orders the results in descending order by maximum price
+SELECT c.CategoryName AS `category`, MAX(p.UnitPrice) AS `largestPrice` 
+FROM Products p 
+INNER JOIN Suppliers s ON s.SupplierID = p.SupplierID 
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID 
+WHERE ((p.UnitPrice &gt; 5 AND s.Country = ?) OR p.UnitsInStock &lt; 3) 
+GROUP BY c.CategoryName 
+HAVING MAX(p.UnitPrice) &gt; 50 
+ORDER BY `largestPrice` desc 
+</code></pre>
+<h2 id="code-example">Code example</h2>
+<pre><code class="language-Typescript">import { orm } from '../../lib'
+import { Products } from '../northwind/model/__model'
+(async () =&gt; {
+    try {       
+        await orm.init('./config/northwind.yaml')
+        // Defining a query function that accepts a country parameter
+        // Filtering products based on price and supplier country, or stock quantity
+        // Filtering the results based on maximum price
+        // Mapping the results to get the product category and maximum price
+        // Sorting the results in descending order by maximum price     
+        const query = (country:string) =&gt; Products                      
+                        .filter(p =&gt; (p.price &gt; 5 &amp;&amp; p.supplier.country == country) || (p.inStock &lt; 3))                     
+                        .having(p =&gt; max(p.price) &gt; 50)                     
+                        .map(p =&gt; ({ category: p.category.name, largestPrice: max(p.price) }))                      
+                        .sort(p =&gt; desc(p.largestPrice))
+        const result = await orm.execute(query, {country:'ARG'})
+        console.log(JSON.stringify(result, null, 2))
+    } catch (error:any) {
+        console.error(error.stack)
+    } finally {
+        // Ending the ORM connection
+        await orm.end()
+    }
+})()
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

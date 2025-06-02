@@ -4,14 +4,14 @@
 [![Slack](https://img.shields.io/badge/chat-on%20slack-orange)](https://join.slack.com/t/nuevoespaciod-xo58767/shared_invite/zt-29ix7pc2r-Wd_ZBWnWRDv_5DM4NPtVhQ)
 [![Gitter](https://badges.gitter.im/lambdaorm/community.svg)](https://app.gitter.im/#/room/#lambdaorm-how-to-contribute:gitter.im)
 [![Discord](https://img.shields.io/badge/chat-on%20discord-orange)](https://discord.com/invite/yXT6XBX2)
-[![Wiki](https://img.shields.io/badge/doc-wiki-yellow)](https://github.com/lambda-orm/wiki/wiki)
+[![Wiki](https://img.shields.io/badge/doc-wiki-yellow)](https://github.com/lambda-orm/wiki)
 [![language typescript](https://img.shields.io/badge/language-typescript-blue)](https://www.npmjs.com/package/lambdaorm)
 [![npm version](https://img.shields.io/badge/npm-10.2.5-green)](https://www.npmjs.com/package/lambdaorm)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Github CI](https://img.shields.io/badge/Github-CI-red.svg)](https://github.com/lambda-orm/wiki/actions?query=workflow%3A%22publish%22)
 [![CLI](https://img.shields.io/badge/Api-CLI-blue.svg)](https://www.npmjs.com/package/lambdaorm-cli)
-[![Api REST](https://img.shields.io/badge/Api-REST-blue.svg)](https://github.com/lambda-orm/lambdaorm-svc)
+[![Api REST](https://img.shields.io/badge/Api-REST-blue.svg)](https://github.com/lambda-orm/wiki/api)
 
 λORM is an ORM that allows us to perform distributed queries on different database engines.
 

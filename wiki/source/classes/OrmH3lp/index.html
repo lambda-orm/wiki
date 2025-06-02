@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>OrmH3lp - LambdaORM Wiki</title>
+  <link rel="stylesheet" href="../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "OrmH3lp";
+    var mkdocs_page_input_path = "source/classes/OrmH3lp.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> LambdaORM Wiki</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Usage/">Usage</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Features/">Features</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Queries</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../Query-Language.md">Query Language</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Expression/">Expression</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DQL</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../Select.md">Select</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Join.md">Join</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Grouping.md">Grouping</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Include.md">Include</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DML</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../Insert.md">Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../BulkInsert.md">Bulk Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Update.md">Update</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Delete.md">Delete</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Repository/">Repository</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Transaction/">Transaction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../Metadata.md">Metadata</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Schema</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition.md">Definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Expressions.md">Expressions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-EnvironmentVariables.md">Environment Variables</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Composite.md">Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Listener.md">Listeners</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Basic.md">Basic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Extend.md">Extend Entity</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-MultiplesStages.md">Multiples Stages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-StageMultiplesSources.md">Stage with Multiples Sources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Composite.md">Entity Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Synchronization</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Push.md">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Pull.md">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Fetch.md">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Introspect.md">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Incorporate.md">Incorporate</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../Schema-Use.md">Use</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md">Source Code Documentation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md">Change log</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">LambdaORM Wiki</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>OrmH3lp</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p><a href="../../"><strong>Lambda ORM</strong></a></p>
+<hr />
+<p><a href="../../">Lambda ORM</a> / OrmH3lp</p>
+<h1 id="class-ormh3lp">Class: OrmH3lp</h1>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/shared/infrastructure/helper.ts#L23">src/lib/shared/infrastructure/helper.ts:23</a></p>
+<h2 id="extends">Extends</h2>
+<ul>
+<li><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a></li>
+</ul>
+<h2 id="constructors">Constructors</h2>
+<h3 id="constructor">Constructor</h3>
+<blockquote>
+<p><strong>new OrmH3lp</strong>(<code>h3lp</code>, <code>logger</code>): <code>OrmH3lp</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/shared/infrastructure/helper.ts#L25">src/lib/shared/infrastructure/helper.ts:25</a></p>
+<h4 id="parameters">Parameters</h4>
+<h5 id="h3lp">h3lp</h5>
+<p><code>H3lp</code></p>
+<h5 id="logger">logger</h5>
+<p><a href="../Logger/"><code>Logger</code></a></p>
+<h4 id="returns">Returns</h4>
+<p><code>OrmH3lp</code></p>
+<h4 id="overrides">Overrides</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#constructor"><code>constructor</code></a></p>
+<h2 id="properties">Properties</h2>
+<h3 id="array">array</h3>
+<blockquote>
+<p><code>readonly</code> <strong>array</strong>: <code>IArrayHelper</code></p>
+</blockquote>
+<p>Defined in: node_modules/h3lp/application/h3lp.d.ts:10</p>
+<h4 id="inherited-from">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#array"><code>array</code></a></p>
+<hr />
+<h3 id="crypto">crypto</h3>
+<blockquote>
+<p><strong>crypto</strong>: <a href="../CryptoHelper/"><code>CryptoHelper</code></a></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/shared/infrastructure/helper.ts#L24">src/lib/shared/infrastructure/helper.ts:24</a></p>
+<hr />
+<h3 id="expression">expression</h3>
+<blockquote>
+<p><strong>expression</strong>: <code>ExpressionHelper</code></p>
+</blockquote>
+<p>Defined in: node_modules/3xpr/shared/infrastructure/helper.d.ts:5</p>
+<h4 id="inherited-from_1">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#expression"><code>expression</code></a></p>
+<hr />
+<h3 id="fs">fs</h3>
+<blockquote>
+<p><code>readonly</code> <strong>fs</strong>: <code>IFsHelper</code></p>
+</blockquote>
+<p>Defined in: node_modules/h3lp/application/h3lp.d.ts:5</p>
+<h4 id="inherited-from_2">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#fs"><code>fs</code></a></p>
+<hr />
+<h3 id="http">http</h3>
+<blockquote>
+<p><code>readonly</code> <strong>http</strong>: <code>IHttpHelper</code></p>
+</blockquote>
+<p>Defined in: node_modules/h3lp/application/h3lp.d.ts:6</p>
+<h4 id="inherited-from_3">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#http"><code>http</code></a></p>
+<hr />
+<h3 id="logger_1">logger</h3>
+<blockquote>
+<p><code>readonly</code> <strong>logger</strong>: <a href="../Logger/"><code>Logger</code></a></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:34</p>
+<h4 id="inherited-from_4">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#logger"><code>logger</code></a></p>
+<hr />
+<h3 id="obj">obj</h3>
+<blockquote>
+<p><code>readonly</code> <strong>obj</strong>: <code>IObjectHelper</code></p>
+</blockquote>
+<p>Defined in: node_modules/h3lp/application/h3lp.d.ts:7</p>
+<h4 id="inherited-from_5">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#obj"><code>obj</code></a></p>
+<hr />
+<h3 id="operand">operand</h3>
+<blockquote>
+<p><strong>operand</strong>: <code>OperandHelper</code></p>
+</blockquote>
+<p>Defined in: node_modules/3xpr/shared/infrastructure/helper.d.ts:6</p>
+<h4 id="inherited-from_6">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#operand"><code>operand</code></a></p>
+<hr />
+<h3 id="query">query</h3>
+<blockquote>
+<p><strong>query</strong>: <a href="../QueryHelper/"><code>QueryHelper</code></a></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:37</p>
+<h4 id="inherited-from_7">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#query"><code>query</code></a></p>
+<hr />
+<h3 id="schema">schema</h3>
+<blockquote>
+<p><strong>schema</strong>: <a href="../SchemaHelper/"><code>SchemaHelper</code></a></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:35</p>
+<h4 id="inherited-from_8">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#schema"><code>schema</code></a></p>
+<hr />
+<h3 id="str">str</h3>
+<blockquote>
+<p><code>readonly</code> <strong>str</strong>: <code>IStringHelper</code></p>
+</blockquote>
+<p>Defined in: node_modules/h3lp/application/h3lp.d.ts:8</p>
+<h4 id="inherited-from_9">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#str"><code>str</code></a></p>
+<hr />
+<h3 id="test">test</h3>
+<blockquote>
+<p><code>readonly</code> <strong>test</strong>: <code>ITestHelper</code></p>
+</blockquote>
+<p>Defined in: node_modules/h3lp/application/h3lp.d.ts:9</p>
+<h4 id="inherited-from_10">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#test"><code>test</code></a></p>
+<hr />
+<h3 id="utils">utils</h3>
+<blockquote>
+<p><code>readonly</code> <strong>utils</strong>: <code>IUtils</code></p>
+</blockquote>
+<p>Defined in: node_modules/h3lp/application/h3lp.d.ts:3</p>
+<h4 id="inherited-from_11">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#utils"><code>utils</code></a></p>
+<hr />
+<h3 id="uuid">uuid</h3>
+<blockquote>
+<p><strong>uuid</strong>: <a href="../UUIDWrapper/"><code>UUIDWrapper</code></a></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:38</p>
+<h4 id="inherited-from_12">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#uuid"><code>uuid</code></a></p>
+<hr />
+<h3 id="val">val</h3>
+<blockquote>
+<p><code>readonly</code> <strong>val</strong>: <code>IValidator</code></p>
+</blockquote>
+<p>Defined in: node_modules/h3lp/application/h3lp.d.ts:4</p>
+<h4 id="inherited-from_13">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#val"><code>val</code></a></p>
+<hr />
+<h3 id="yaml">yaml</h3>
+<blockquote>
+<p><strong>yaml</strong>: <a href="../YamlWrapper/"><code>YamlWrapper</code></a></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:36</p>
+<h4 id="inherited-from_14">Inherited from</h4>
+<p><a href="../OrmBaseH3lp/"><code>OrmBaseH3lp</code></a>.<a href="../OrmBaseH3lp/#yaml"><code>yaml</code></a></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

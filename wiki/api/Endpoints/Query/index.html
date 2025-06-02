@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Queries Endpoints - LambdaORM Wiki</title>
+  <link rel="stylesheet" href="../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Queries Endpoints";
+    var mkdocs_page_input_path = "api/Endpoints/Query.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> LambdaORM Wiki</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Usage/">Usage</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Features/">Features</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Queries</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../Query-Language.md">Query Language</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Expression/">Expression</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DQL</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../Select.md">Select</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Join.md">Join</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Grouping.md">Grouping</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Include.md">Include</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">DML</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../Insert.md">Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../BulkInsert.md">Bulk Insert</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Update.md">Update</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../Delete.md">Delete</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Repository/">Repository</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../Transaction/">Transaction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../Metadata.md">Metadata</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Schema</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition.md">Definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Expressions.md">Expressions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-EnvironmentVariables.md">Environment Variables</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Composite.md">Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Listener.md">Listeners</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Basic.md">Basic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Extend.md">Extend Entity</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-MultiplesStages.md">Multiples Stages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-StageMultiplesSources.md">Stage with Multiples Sources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Composite.md">Entity Composite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Synchronization</a>
+    <ul>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Push.md">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Pull.md">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Fetch.md">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Introspect.md">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Incorporate.md">Incorporate</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../../../Schema-Use.md">Use</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/doc/source/README.md">Source Code Documentation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/wiki/blob/main/CHANGELOG.md">Change log</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">LambdaORM Wiki</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Queries Endpoints</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="queries-endpoints">Queries Endpoints</h1>
+<p><img alt="query-methods" src="https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/query-methods.png" /></p>
+<h2 id="metadata">Metadata</h2>
+<p>Return the metadata of the query.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/metadata?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.id==id).include(p=&gt;p.details)&quot;}'
+</code></pre>
+<p>Response:</p>
+<pre><code class="language-json">{
+  &quot;classtype&quot;: &quot;Sentence&quot;,
+  &quot;pos&quot;: {
+    &quot;ln&quot;: 0,
+    &quot;col&quot;: 35
+  },
+  &quot;name&quot;: &quot;select&quot;,
+  &quot;children&quot;: [
+    {
+      &quot;classtype&quot;: &quot;Sentence&quot;,
+      &quot;pos&quot;: {
+        &quot;ln&quot;: 0,
+        &quot;col&quot;: 38
+      },
+      &quot;name&quot;: &quot;select&quot;,
+      &quot;children&quot;: [],
+      &quot;type&quot;: &quot;any&quot;,
+      &quot;entity&quot;: &quot;Orders.details&quot;,
+      &quot;columns&quot;: [
+        {
+          &quot;name&quot;: &quot;orderId&quot;,
+          &quot;type&quot;: &quot;integer&quot;
+        },
+        {
+          &quot;name&quot;: &quot;productId&quot;,
+          &quot;type&quot;: &quot;integer&quot;
+        },
+        {
+          &quot;name&quot;: &quot;unitPrice&quot;,
+          &quot;type&quot;: &quot;decimal&quot;
+        },
+        {
+          &quot;name&quot;: &quot;quantity&quot;,
+          &quot;type&quot;: &quot;decimal&quot;
+        },
+        {
+          &quot;name&quot;: &quot;discount&quot;,
+          &quot;type&quot;: &quot;decimal&quot;
+        },
+        {
+          &quot;name&quot;: &quot;LambdaOrmParentId&quot;,
+          &quot;type&quot;: &quot;integer&quot;
+        }
+      ],
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;LambdaOrmParentId&quot;,
+          &quot;type&quot;: &quot;[integer]&quot;
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;values&quot;: [],
+      &quot;defaults&quot;: [],
+      &quot;clause&quot;: &quot;select&quot;,
+      &quot;alias&quot;: &quot;o1&quot;
+    }
+  ],
+  &quot;type&quot;: &quot;any&quot;,
+  &quot;entity&quot;: &quot;Orders&quot;,
+  &quot;columns&quot;: [
+    {
+      &quot;name&quot;: &quot;id&quot;,
+      &quot;type&quot;: &quot;integer&quot;
+    },
+    {
+      &quot;name&quot;: &quot;customerId&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    },
+    {
+      &quot;name&quot;: &quot;employeeId&quot;,
+      &quot;type&quot;: &quot;integer&quot;
+    },
+    {
+      &quot;name&quot;: &quot;orderDate&quot;,
+      &quot;type&quot;: &quot;dateTime&quot;
+    },
+    {
+      &quot;name&quot;: &quot;requiredDate&quot;,
+      &quot;type&quot;: &quot;date&quot;
+    },
+    {
+      &quot;name&quot;: &quot;shippedDate&quot;,
+      &quot;type&quot;: &quot;date&quot;
+    },
+    {
+      &quot;name&quot;: &quot;shipViaId&quot;,
+      &quot;type&quot;: &quot;integer&quot;
+    },
+    {
+      &quot;name&quot;: &quot;freight&quot;,
+      &quot;type&quot;: &quot;decimal&quot;
+    },
+    {
+      &quot;name&quot;: &quot;name&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    },
+    {
+      &quot;name&quot;: &quot;address&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    },
+    {
+      &quot;name&quot;: &quot;city&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    },
+    {
+      &quot;name&quot;: &quot;region&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    },
+    {
+      &quot;name&quot;: &quot;postalCode&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    },
+    {
+      &quot;name&quot;: &quot;country&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    },
+    {
+      &quot;name&quot;: &quot;__id&quot;,
+      &quot;type&quot;: &quot;integer&quot;
+    }
+  ],
+  &quot;parameters&quot;: [
+    {
+      &quot;name&quot;: &quot;id&quot;,
+      &quot;type&quot;: &quot;integer&quot;
+    }
+  ],
+  &quot;constraints&quot;: [],
+  &quot;values&quot;: [],
+  &quot;defaults&quot;: [],
+  &quot;clause&quot;: &quot;select&quot;,
+  &quot;alias&quot;: &quot;o&quot;
+}
+</code></pre>
+<h2 id="model">Model</h2>
+<p>Return the model of the query.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/model?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.id==id).include(p=&gt;p.details)&quot;}'
+</code></pre>
+<p>Response:</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;id&quot;,
+    &quot;type&quot;: &quot;integer&quot;
+  },
+  {
+    &quot;name&quot;: &quot;customerId&quot;,
+    &quot;type&quot;: &quot;string&quot;
+  },
+  {
+    &quot;name&quot;: &quot;employeeId&quot;,
+    &quot;type&quot;: &quot;integer&quot;
+  },
+  {
+    &quot;name&quot;: &quot;orderDate&quot;,
+    &quot;type&quot;: &quot;dateTime&quot;
+  },
+  {
+    &quot;name&quot;: &quot;requiredDate&quot;,
+    &quot;type&quot;: &quot;date&quot;
+  },
+  {
+    &quot;name&quot;: &quot;shippedDate&quot;,
+    &quot;type&quot;: &quot;date&quot;
+  },
+  {
+    &quot;name&quot;: &quot;shipViaId&quot;,
+    &quot;type&quot;: &quot;integer&quot;
+  },
+  {
+    &quot;name&quot;: &quot;freight&quot;,
+    &quot;type&quot;: &quot;decimal&quot;
+  },
+  {
+    &quot;name&quot;: &quot;name&quot;,
+    &quot;type&quot;: &quot;string&quot;
+  },
+  {
+    &quot;name&quot;: &quot;address&quot;,
+    &quot;type&quot;: &quot;string&quot;
+  },
+  {
+    &quot;name&quot;: &quot;city&quot;,
+    &quot;type&quot;: &quot;string&quot;
+  },
+  {
+    &quot;name&quot;: &quot;region&quot;,
+    &quot;type&quot;: &quot;string&quot;
+  },
+  {
+    &quot;name&quot;: &quot;postalCode&quot;,
+    &quot;type&quot;: &quot;string&quot;
+  },
+  {
+    &quot;name&quot;: &quot;country&quot;,
+    &quot;type&quot;: &quot;string&quot;
+  },
+  {
+    &quot;name&quot;: &quot;details&quot;,
+    &quot;type&quot;: &quot;Orders.details[]&quot;,
+    &quot;children&quot;: [
+      {
+        &quot;name&quot;: &quot;orderId&quot;,
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      {
+        &quot;name&quot;: &quot;productId&quot;,
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      {
+        &quot;name&quot;: &quot;unitPrice&quot;,
+        &quot;type&quot;: &quot;decimal&quot;
+      },
+      {
+        &quot;name&quot;: &quot;quantity&quot;,
+        &quot;type&quot;: &quot;decimal&quot;
+      },
+      {
+        &quot;name&quot;: &quot;discount&quot;,
+        &quot;type&quot;: &quot;decimal&quot;
+      },
+      {
+        &quot;name&quot;: &quot;LambdaOrmParentId&quot;,
+        &quot;type&quot;: &quot;integer&quot;
+      }
+    ]
+  }
+]
+</code></pre>
+<h2 id="parameters">Parameters</h2>
+<p>Return the parameters of the query.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/parameters?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.id==id).include(p=&gt;p.details)&quot;}'
+</code></pre>
+<p>Response:</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;id&quot;,
+    &quot;type&quot;: &quot;integer&quot;
+  },
+  {
+    &quot;name&quot;: &quot;details&quot;,
+    &quot;type&quot;: &quot;Orders.details&quot;,
+    &quot;children&quot;: [
+      {
+        &quot;name&quot;: &quot;LambdaOrmParentId&quot;,
+        &quot;type&quot;: &quot;any&quot;
+      }
+    ]
+  }
+]
+</code></pre>
+<h2 id="constraints">Constraints</h2>
+<p>Return the constraints of the query.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/constraints?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.id==id).include(p=&gt;p.details)&quot;}'
+</code></pre>
+<p>Response:</p>
+<pre><code class="language-json">{
+  &quot;entity&quot;: &quot;Orders&quot;,
+  &quot;constraints&quot;: [],
+  &quot;children&quot;: [
+    {
+      &quot;entity&quot;: &quot;Orders.details&quot;,
+      &quot;constraints&quot;: []
+    }
+  ]
+}
+</code></pre>
+<h2 id="plan">Plan</h2>
+<p>Return the plan of the query, with the sentences to be executed.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/plan?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.id==id).include(p=&gt;p.details)&quot;}'
+</code></pre>
+<p>Response:</p>
+<pre><code class="language-json">{
+  &quot;entity&quot;: &quot;Orders&quot;,
+  &quot;dialect&quot;: &quot;MySQL&quot;,
+  &quot;source&quot;: &quot;default&quot;,
+  &quot;sentence&quot;: &quot;SELECT o.OrderID AS id, o.CustomerID AS customerId, o.EmployeeID AS employeeId, o.OrderDate AS orderDate, o.RequiredDate AS requiredDate, o.ShippedDate AS shippedDate, o.ShipVia AS shipViaId, o.Freight AS freight, o.ShipName AS name, o.ShipAddress AS address, o.ShipCity AS city, o.ShipRegion AS region, o.ShipPostalCode AS postalCode, o.ShipCountry AS country, o.OrderID AS `__id` FROM Orders o  WHERE o.OrderID = ? &quot;,
+  &quot;children&quot;: [
+    {
+      &quot;entity&quot;: &quot;Orders.details&quot;,
+      &quot;dialect&quot;: &quot;MySQL&quot;,
+      &quot;source&quot;: &quot;default&quot;,
+      &quot;sentence&quot;: &quot;SELECT o1.OrderID AS orderId, o1.ProductID AS productId, o1.UnitPrice AS unitPrice, o1.Quantity AS quantity, o1.Discount AS discount, o1.OrderID AS LambdaOrmParentId FROM `Order Details` o1  WHERE  o1.OrderID IN (?) &quot;
+    }
+  ]
+}
+</code></pre>
+<h2 id="execute">Execute</h2>
+<p>Execute the query.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/execute?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.id==id).include(p=&gt;p.details)&quot;, &quot;data&quot;: &quot;{\&quot;id\&quot;: 10248}&quot; }'
+</code></pre>
+<p>Response:</p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 10248,
+    &quot;customerId&quot;: &quot;VINET&quot;,
+    &quot;employeeId&quot;: 5,
+    &quot;orderDate&quot;: &quot;1996-07-03T22:00:00.000Z&quot;,
+    &quot;requiredDate&quot;: &quot;1996-07-31T22:00:00.000Z&quot;,
+    &quot;shippedDate&quot;: &quot;1996-07-15T22:00:00.000Z&quot;,
+    &quot;shipViaId&quot;: 3,
+    &quot;freight&quot;: 32.38,
+    &quot;name&quot;: &quot;Vins et alcools Chevalier&quot;,
+    &quot;address&quot;: &quot;59 rue de l-Abbaye&quot;,
+    &quot;city&quot;: &quot;Reims&quot;,
+    &quot;region&quot;: null,
+    &quot;postalCode&quot;: &quot;51100&quot;,
+    &quot;country&quot;: &quot;France&quot;,
+    &quot;details&quot;: [
+      {
+        &quot;orderId&quot;: 10248,
+        &quot;productId&quot;: 11,
+        &quot;unitPrice&quot;: 14,
+        &quot;quantity&quot;: 12,
+        &quot;discount&quot;: 0
+      },
+      {
+        &quot;orderId&quot;: 10248,
+        &quot;productId&quot;: 42,
+        &quot;unitPrice&quot;: 9.8,
+        &quot;quantity&quot;: 10,
+        &quot;discount&quot;: 0
+      },
+      {
+        &quot;orderId&quot;: 10248,
+        &quot;productId&quot;: 72,
+        &quot;unitPrice&quot;: 34.8,
+        &quot;quantity&quot;: 5,
+        &quot;discount&quot;: 0
+      }
+    ]
+  }
+]
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
