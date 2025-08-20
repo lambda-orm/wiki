@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>String - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "String";
+        var mkdocs_page_input_path = "queries/operatorsAndFunctions/String.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">String</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chr</td>
+<td>Get character from ASCII code</td>
+</tr>
+<tr>
+<td>concat</td>
+<td>String concatenation</td>
+</tr>
+<tr>
+<td>lower</td>
+<td>Lowercase string</td>
+</tr>
+<tr>
+<td>lpad</td>
+<td>Pad the left-side of string</td>
+</tr>
+<tr>
+<td>ltrim</td>
+<td>Remove leading chars</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>Searches a string for a specified value and returns a new string where the specified values are replaced</td>
+</tr>
+<tr>
+<td>match</td>
+<td>Returns an array containing all matches, including capturing groups, or null if no matches are found</td>
+</tr>
+<tr>
+<td>mask</td>
+<td>General-purpose function that mask parts of arbitrary strings based on position within the string</td>
+</tr>
+<tr>
+<td>rpad</td>
+<td>Pad the right-side of string</td>
+</tr>
+<tr>
+<td>rtrim</td>
+<td>Remove trailing spaces</td>
+</tr>
+<tr>
+<td>substr substring</td>
+<td>Get a substring of string</td>
+</tr>
+<tr>
+<td>trim</td>
+<td>Remove characters</td>
+</tr>
+<tr>
+<td>upper</td>
+<td>Uppercase string</td>
+</tr>
+<tr>
+<td>strCount</td>
+<td>Count value in source</td>
+</tr>
+<tr>
+<td>isEmpty</td>
+<td>Evaluate if it is empty</td>
+</tr>
+<tr>
+<td>toString</td>
+<td>Convert to string</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: lower(p.subregion) })</td>
+<td>[{"result":"south america"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: upper(p.subregion) })</td>
+<td>[{"result":"SOUTH AMERICA"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: concat(p.region," ",p.subregion) })</td>
+<td>[{"result":"Americas South America"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: lpad(p.region,12,"_") })</td>
+<td>[{"result":"____Americas"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: rpad(p.region,12,"_") })</td>
+<td>[{"result":"Americas____"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: chr(68)})</td>
+<td>[{"result":"D"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: ltrim("  a  ")})</td>
+<td>[{"result":"a  "}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: rtrim("  a  ")})</td>
+<td>[{"result":"  a"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: replace(p.region,"a","*")})</td>
+<td>[{"result":"Americ*s"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: mask(p.subregion)})</td>
+<td>[{"result":"Sou***ica"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: substr(p.subregion,1,3)})</td>
+<td>[{"result":"Sou"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: substring(p.subregion,1,3)})</td>
+<td>[{"result":"Sou"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: strCount(p.subregion,"a")})</td>
+<td>[{"result":1}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: toString(p.latitude)})</td>
+<td>[{"result":"-10.0000"}]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sentences">Sentences</h2>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the subregion in lowercase for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: lower(p.subregion) })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT LOWER(c.subregion) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the subregion in uppercase for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: upper(p.subregion) })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT UPPER(c.subregion) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the region and subregion concatenated for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: concat(p.region,&quot; &quot;,p.subregion) })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CONCAT(CONCAT(c.region,' '),c.subregion) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the region left-padded with "_" for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: lpad(p.region,12,&quot;_&quot;) })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT LPAD(c.region,12,'_') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the region right-padded with "_" for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: rpad(p.region,12,&quot;_&quot;) })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT RPAD(c.region,12,'_') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the character "D" from ASCII code 68 for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: chr(68)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CHAR(68 USING ASCII) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the subregion with leading spaces removed for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: ltrim(&quot;  a  &quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT LTRIM('  a  ') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the subregion with trailing spaces removed for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: rtrim(&quot;  a  &quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT RTRIM('  a  ') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the region with "a" replaced by "*" for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: replace(p.region,&quot;a&quot;,&quot;*&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT REPLACE(c.region,'a','*') AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the subregion masked for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: mask(p.subregion)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT Concat(LEFT(c.subregion,3),'***',RIGHT(c.subregion,3)) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the first 3 characters of the subregion for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: substr(p.subregion,1,3)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT SUBSTR(c.subregion,1,3) AS result
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the first 3 characters of the subregion for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: substring(p.subregion,1,3)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT SUBSTR(c.subregion,1,3) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the count of "a" in the subregion for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: strCount(p.subregion,&quot;a&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT (LENGTH(c.subregion)-LENGTH(REPLACE(c.subregion,'a',''))) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the latitude as string for the country with the iso3 code "BRA"</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: toString(p.latitude)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CONVERT(c.latitude, CHAR) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<h2 id="definition">Definition</h2>
+<h3 id="chr">chr</h3>
+<ul>
+<li>description: Get character from ASCII code</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>ascii: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="strcount">strCount</h3>
+<ul>
+<li>description: Count value in source</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>source: string</li>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="lower">lower</h3>
+<ul>
+<li>description: Lowercase string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="lpad">lpad</h3>
+<ul>
+<li>description: Pad the left-side of string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>len: number</li>
+<li>pad: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="ltrim">ltrim</h3>
+<ul>
+<li>description: Remove leading chars</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="replace">replace</h3>
+<ul>
+<li>description: The replace() method searches a string for a specified value and returns a new string where the specified values are replaced.</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>source: string</li>
+<li>target: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="rpad">rpad</h3>
+<ul>
+<li>description: Pad the right-side of string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>len: number</li>
+<li>pad: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="rtrim">rtrim</h3>
+<ul>
+<li>description: Remove trailing spaces</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="substr">substr</h3>
+<ul>
+<li>description: Get a substring of string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>from: number</li>
+<li>count: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="substring">substring</h3>
+<ul>
+<li>description: Get a substring of string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>from: number</li>
+<li>count: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="trim">trim</h3>
+<ul>
+<li>description: Remove characters</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="upper">upper</h3>
+<ul>
+<li>description: Uppercase string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="concat">concat</h3>
+<ul>
+<li>description: String concatenation</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>values: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="mask">mask</h3>
+<ul>
+<li>description: General-purpose function that mask parts of arbitrary strings based on position within the string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isempty">isEmpty</h3>
+<ul>
+<li>description: Evaluate if it is empty</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="tostring">toString</h3>
+<ul>
+<li>description: convert to string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

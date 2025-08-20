@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Group - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Group";
+        var mkdocs_page_input_path = "queries/operatorsAndFunctions/Group.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Group</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>avg</td>
+<td>Calculates the average of the specified columns in a set of rows</td>
+</tr>
+<tr>
+<td>count</td>
+<td>Calculating the number of rows in a set.</td>
+</tr>
+<tr>
+<td>first</td>
+<td>Returns the first value of the selected column</td>
+</tr>
+<tr>
+<td>last</td>
+<td>Returns the last value of the selected column.</td>
+</tr>
+<tr>
+<td>max</td>
+<td>Calculating the maximum.</td>
+</tr>
+<tr>
+<td>min</td>
+<td>Calculating the minimum.</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>Calculating the sum.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-js">Countries.filter(p=&gt; p.region == &quot;Americas&quot;).map(p=&gt; {result:count(1)})
+</code></pre>
+<pre><code class="language-json">[{&quot;result&quot;:57}]
+</code></pre>
+<pre><code class="language-js">Countries.map(p=&gt; {region:p.region,countries:count(1)})|
+</code></pre>
+<pre><code class="language-json">[{&quot;region&quot;:&quot;&quot;,&quot;countries&quot;:2}
+,{&quot;region&quot;:&quot;Africa&quot;,&quot;countries&quot;:60}
+,{&quot;region&quot;:&quot;Americas&quot;,&quot;countries&quot;:57}
+,{&quot;region&quot;:&quot;Asia&quot;,&quot;countries&quot;:50}
+,{&quot;region&quot;:&quot;Europe&quot;,&quot;countries&quot;:53}
+,{&quot;region&quot;:&quot;Oceania&quot;,&quot;countries&quot;:27}
+,{&quot;region&quot;:&quot;Polar&quot;,&quot;countries&quot;:1}
+]
+</code></pre>
+<pre><code class="language-js">Countries.map(p=&gt; {region:p.region,max:max(p.latitude)})
+</code></pre>
+<pre><code class="language-json">[{&quot;region&quot;:&quot;&quot;,&quot;max&quot;:-53.1}
+,{&quot;region&quot;:&quot;Africa&quot;,&quot;max&quot;:34}
+,{&quot;region&quot;:&quot;Americas&quot;,&quot;max&quot;:72}
+,{&quot;region&quot;:&quot;Asia&quot;,&quot;max&quot;:48}
+,{&quot;region&quot;:&quot;Europe&quot;,&quot;max&quot;:78}
+,{&quot;region&quot;:&quot;Oceania&quot;,&quot;max&quot;:15.2}
+,{&quot;region&quot;:&quot;Polar&quot;,&quot;max&quot;:-74.65}
+]
+
+</code></pre>
+<pre><code class="language-js">Countries.map(p=&gt; {region:p.region,min:min(p.latitude)})
+</code></pre>
+<pre><code class="language-json">[{&quot;region&quot;:&quot;&quot;,&quot;min&quot;:-54.4333}
+,{&quot;region&quot;:&quot;Africa&quot;,&quot;min&quot;:-49.25}
+,{&quot;region&quot;:&quot;Americas&quot;,&quot;min&quot;:-54.5}
+,{&quot;region&quot;:&quot;Asia&quot;,&quot;min&quot;:-8.8333}
+,{&quot;region&quot;:&quot;Europe&quot;,&quot;min&quot;:35}
+,{&quot;region&quot;:&quot;Oceania&quot;,&quot;min&quot;:-41}
+,{&quot;region&quot;:&quot;Polar&quot;,&quot;min&quot;:-74.65}
+]
+</code></pre>
+<pre><code class="language-js">Countries.map(p=&gt; {region:p.region,avg:avg(p.latitude)})
+</code></pre>
+<pre><code class="language-json">[{&quot;region&quot;:&quot;&quot;,&quot;avg&quot;:-53.76665}
+,{&quot;region&quot;:&quot;Africa&quot;,&quot;avg&quot;:1.283335}
+,{&quot;region&quot;:&quot;Americas&quot;,&quot;avg&quot;:10.42610526}
+,{&quot;region&quot;:&quot;Asia&quot;,&quot;avg&quot;:25.822002}
+,{&quot;region&quot;:&quot;Europe&quot;,&quot;avg&quot;:49.35021321}
+,{&quot;region&quot;:&quot;Oceania&quot;,&quot;avg&quot;:-10.93023704}
+,{&quot;region&quot;:&quot;Polar&quot;,&quot;avg&quot;:-74.65}
+]
+</code></pre>
+<h2 id="sentences">Sentences</h2>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the count of countries in the Americas region</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.region == &quot;Americas&quot;).map(p=&gt; {result:count(1)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT COUNT(1) AS result 
+FROM Countries c  
+WHERE c.region = 'Americas' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the count of countries in each region</p>
+<pre><code class="language-js">Countries.map(p=&gt; {region:p.region,countries:count(1)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT c.region AS region, COUNT(1) AS countries 
+FROM Countries c  
+GROUP BY c.region 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the maximum latitude of countries in each region</p>
+<pre><code class="language-js">Countries.map(p=&gt; {region:p.region,max:max(p.latitude)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT c.region AS region, MAX(c.latitude) AS max 
+FROM Countries c  
+GROUP BY c.region 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the minimum latitude of countries in each region</p>
+<pre><code class="language-js">Countries.map(p=&gt; {region:p.region,min:min(p.latitude)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT c.region AS region, MIN(c.latitude) AS min 
+FROM Countries c  
+GROUP BY c.region 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the average latitude of countries in each region</p>
+<pre><code class="language-js">Countries.map(p=&gt; {region:p.region,avg:avg(p.latitude)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT c.region AS region, AVG(c.latitude) AS avg 
+FROM Countries c  
+GROUP BY c.region 
+</code></pre>
+<h2 id="definition">Definition</h2>
+<h3 id="avg">avg</h3>
+<ul>
+<li>description: Calculates the average of the specified columns in a set of rows</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="count">count</h3>
+<ul>
+<li>description: Calculating the number of rows in a set.</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="first">first</h3>
+<ul>
+<li>description: Returns the first value of the selected column</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>value: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="last">last</h3>
+<ul>
+<li>description: Returns the last value of the selected column.</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>value: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="max">max</h3>
+<ul>
+<li>description: Calculating the maximum.</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>value: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="min">min</h3>
+<ul>
+<li>description: Calculating the minimum.</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>value: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="sum">sum</h3>
+<ul>
+<li>description: Calculating the sum.</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

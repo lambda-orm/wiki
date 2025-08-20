@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Include - λORM Wiki</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Include";
+        var mkdocs_page_input_path = "queries/Include.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Include</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="include">Include</h1>
+<p>λORM includes the include method to load related entities, both for OneToMany, manyToOne, and oneToOne relationships.</p>
+<p>We can also apply filters or bring us some fields from related entities.</p>
+<p>For each include, a statement is executed that fetches all the necessary records, then the objects with relationships are assembled in memory. In this way, multiple executions are avoided, considerably improving performance.</p>
+<p>Includes can be used in selects, inserts, updates, deletes, and bulkInserts.</p>
+<h2 id="include-relation-onetomany">Include relation OneToMany</h2>
+<p>In this example the data of an Order and the customer is obtained</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Filters orders based on ID matching the provided parameter and includes customer details
+Orders.filter(p =&gt; p.id == id).include(p =&gt; p.customer)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Selects order details from the Orders table where the OrderID matches the provided parameter
+SELECT o.OrderID AS `id`, o.CustomerID AS `customerId`, o.EmployeeID
+AS `employeeId`, o.OrderDate AS `orderDate`, o.RequiredDate AS
+`requiredDate`, o.ShippedDate AS `shippedDate`, o.ShipVia AS
+`shipViaId`, o.Freight AS `freight`, o.ShipName AS `name`,
+o.ShipAddress AS `address`, o.ShipCity AS `city`, o.ShipRegion AS
+`region`, o.ShipPostalCode AS `postalCode`, o.ShipCountry AS `country`
+FROM Orders o  WHERE o.OrderID = ? 
+
+-- Selects customer details from the Customers table where the CustomerID matches the provided parameter
+-- The CustomerID is expected to be in the result set of the previous query
+SELECT c.CustomerID AS `id`, c.CompanyName AS `name`, c.ContactName AS
+`contact`, c.ContactTitle AS `phone`, c.Address AS `address`, c.City
+AS `city`, c.Region AS `region`, c.PostalCode AS `postalCode`,
+c.Country AS `country` FROM Customers c  WHERE  c.CustomerID IN (?)
+</code></pre>
+<p><strong>Data Result:</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 10248,
+    &quot;customerId&quot;: &quot;VINET&quot;,
+    &quot;employeeId&quot;: 5,
+    &quot;orderDate&quot;: &quot;1996-07-03T22:00:00.000Z&quot;,
+    &quot;requiredDate&quot;: &quot;1996-07-31T22:00:00.000Z&quot;,
+    &quot;shippedDate&quot;: &quot;1996-07-15T22:00:00.000Z&quot;,
+    &quot;shipViaId&quot;: 3,
+    &quot;freight&quot;: 32.38,
+    &quot;name&quot;: &quot;Vins et alcools Chevalier&quot;,
+    &quot;address&quot;: &quot;59 rue de l-Abbaye&quot;,
+    &quot;city&quot;: &quot;Reims&quot;,
+    &quot;region&quot;: null,
+    &quot;postalCode&quot;: &quot;51100&quot;,
+    &quot;country&quot;: &quot;France&quot;,
+    &quot;customer&quot;: {
+      &quot;id&quot;: &quot;VINET&quot;,
+      &quot;name&quot;: &quot;Vins et alcools Chevalier&quot;,
+      &quot;contact&quot;: &quot;Paul Henriot&quot;,
+      &quot;phone&quot;: &quot;Accounting Manager&quot;,
+      &quot;address&quot;: &quot;59 rue de l'Abbaye&quot;,
+      &quot;city&quot;: &quot;Reims&quot;,
+      &quot;region&quot;: null,
+      &quot;postalCode&quot;: &quot;51100&quot;,
+      &quot;country&quot;: &quot;France&quot;
+    }
+  }
+]
+</code></pre>
+<h2 id="include-relation-onetomany-and-manytoone">Include relation OneToMany and manyToOne</h2>
+<p>In this example, the data of an Order, the customer and the details of the related Order are obtained.</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Filters orders based on the provided ID and includes details and customers
+Orders.filter(p =&gt; p.id == id).include(p =&gt; [p.details,p.customer])
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Selects order details from the Orders table where OrderID matches the provided parameter
+SELECT o.OrderID AS `id`, o.CustomerID AS `customerId`, o.EmployeeID
+AS `employeeId`, o.OrderDate AS `orderDate`, o.RequiredDate AS
+`requiredDate`, o.ShippedDate AS `shippedDate`, o.ShipVia AS
+`shipViaId`, o.Freight AS `freight`, o.ShipName AS `name`,
+o.ShipAddress AS `address`, o.ShipCity AS `city`, o.ShipRegion AS
+`region`, o.ShipPostalCode AS `postalCode`, o.ShipCountry AS `country`
+FROM Orders o  WHERE o.OrderID = ? 
+
+-- Selects order details from the Order Details table where OrderID is in the result set of the previous query
+SELECT o1.OrderID AS `orderId`, o1.ProductID AS `productId`,
+o1.UnitPrice AS `unitPrice`, o1.Quantity AS `quantity`, o1.Discount AS
+`discount` FROM `Order Details` o1  WHERE  o1.OrderID IN (?) 
+
+-- Selects customer details from the Customers table where CustomerID is in the result set of the previous query
+-- CustomerID is expected to be in the result set of the previous query
+SELECT c.CustomerID AS `id`, c.CompanyName AS `name`, c.ContactName AS
+`contact`, c.ContactTitle AS `phone`, c.Address AS `address`, c.City
+AS `city`, c.Region AS `region`, c.PostalCode AS `postalCode`,
+c.Country AS `country` FROM Customers c  WHERE  c.CustomerID IN (?)
+</code></pre>
+<p><strong>Data Result:</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 10248,
+    &quot;customerId&quot;: &quot;VINET&quot;,
+    &quot;employeeId&quot;: 5,
+    &quot;orderDate&quot;: &quot;1996-07-03T22:00:00.000Z&quot;,
+    &quot;requiredDate&quot;: &quot;1996-07-31T22:00:00.000Z&quot;,
+    &quot;shippedDate&quot;: &quot;1996-07-15T22:00:00.000Z&quot;,
+    &quot;shipViaId&quot;: 3,
+    &quot;freight&quot;: 32.38,
+    &quot;name&quot;: &quot;Vins et alcools Chevalier&quot;,
+    &quot;address&quot;: &quot;59 rue de l-Abbaye&quot;,
+    &quot;city&quot;: &quot;Reims&quot;,
+    &quot;region&quot;: null,
+    &quot;postalCode&quot;: &quot;51100&quot;,
+    &quot;country&quot;: &quot;France&quot;,
+    &quot;details&quot;: [
+      {
+        &quot;orderId&quot;: 10248,
+        &quot;productId&quot;: 11,
+        &quot;unitPrice&quot;: 14,
+        &quot;quantity&quot;: 12,
+        &quot;discount&quot;: 0
+      },
+      {
+        &quot;orderId&quot;: 10248,
+        &quot;productId&quot;: 42,
+        &quot;unitPrice&quot;: 9.8,
+        &quot;quantity&quot;: 10,
+        &quot;discount&quot;: 0
+      },
+      {
+        &quot;orderId&quot;: 10248,
+        &quot;productId&quot;: 72,
+        &quot;unitPrice&quot;: 34.8,
+        &quot;quantity&quot;: 5,
+        &quot;discount&quot;: 0
+      }
+    ],
+    &quot;customer&quot;: {
+      &quot;id&quot;: &quot;VINET&quot;,
+      &quot;name&quot;: &quot;Vins et alcools Chevalier&quot;,
+      &quot;contact&quot;: &quot;Paul Henriot&quot;,
+      &quot;phone&quot;: &quot;Accounting Manager&quot;,
+      &quot;address&quot;: &quot;59 rue de l'Abbaye&quot;,
+      &quot;city&quot;: &quot;Reims&quot;,
+      &quot;region&quot;: null,
+      &quot;postalCode&quot;: &quot;51100&quot;,
+      &quot;country&quot;: &quot;France&quot;
+    }
+  }
+]
+</code></pre>
+<h2 id="nested-includes">Nested includes</h2>
+<p>In this example, in the relationship with Orders detail, its relationship with Product is brought and in turn for each product its relationship with Category is brought.</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Filters orders based on the provided ID and includes details (with product and category) and customers
+Orders
+    .filter(p =&gt; p.id == id)
+    .include(p =&gt; [p.details.include(q =&gt; q.product.include(r =&gt; r.category)), p.customer])
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Selects order details from the Orders table where OrderID matches the provided parameter
+SELECT o.OrderID AS `id`, o.CustomerID AS `customerId`, o.EmployeeID
+AS `employeeId`, o.OrderDate AS `orderDate`, o.RequiredDate AS
+`requiredDate`, o.ShippedDate AS `shippedDate`, o.ShipVia AS
+`shipViaId`, o.Freight AS `freight`, o.ShipName AS `name`,
+o.ShipAddress AS `address`, o.ShipCity AS `city`, o.ShipRegion AS
+`region`, o.ShipPostalCode AS `postalCode`, o.ShipCountry AS `country`
+FROM Orders o  WHERE o.OrderID = ? 
+
+-- Selects order details from the Order Details table where OrderID is in the result set of the previous query
+SELECT o1.OrderID AS `orderId`, o1.ProductID AS `productId`,
+o1.UnitPrice AS `unitPrice`, o1.Quantity AS `quantity`, o1.Discount AS
+`discount` FROM `Order Details` o1  WHERE  o1.OrderID IN (?) 
+
+-- Selects product details from the Products table where ProductID is in the result set of the previous query
+-- ProductID is expected to be in the result set of the previous query
+SELECT p.ProductID AS `id`, p.ProductName AS `name`, p.SupplierID AS
+`supplierId`, p.CategoryID AS `categoryId`, p.QuantityPerUnit AS
+`quantity`, p.UnitPrice AS `price`, p.UnitsInStock AS `inStock`,
+p.UnitsOnOrder AS `onOrder`, p.ReorderLevel AS `reorderLevel`,
+p.Discontinued AS `discontinued` FROM Products p  WHERE  p.ProductID
+IN (?) 
+
+-- Selects category details from the Categories table where CategoryID is in the result set of the previous query
+-- CategoryID is expected to be in the result set of the previous query
+SELECT c.CategoryID AS `id`, c.CategoryName AS `name`, c.Description
+AS `description` FROM Categories c  WHERE  c.CategoryID IN (?) 
+
+-- Selects customer details from the Customers table where CustomerID is in the result set of the previous query
+-- CustomerID is expected to be in the result set of the previous query
+SELECT c1.CustomerID AS `id`, c1.CompanyName AS `name`, c1.ContactName
+AS `contact`, c1.ContactTitle AS `phone`, c1.Address AS `address`,
+c1.City AS `city`, c1.Region AS `region`, c1.PostalCode AS
+`postalCode`, c1.Country AS `country` FROM Customers c1  WHERE 
+c1.CustomerID IN (?) 
+</code></pre>
+<p><strong>Data Result:</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 10248,
+    &quot;customerId&quot;: &quot;VINET&quot;,
+    &quot;employeeId&quot;: 5,
+    &quot;orderDate&quot;: &quot;1996-07-03T22:00:00.000Z&quot;,
+    &quot;requiredDate&quot;: &quot;1996-07-31T22:00:00.000Z&quot;,
+    &quot;shippedDate&quot;: &quot;1996-07-15T22:00:00.000Z&quot;,
+    &quot;shipViaId&quot;: 3,
+    &quot;freight&quot;: 32.38,
+    &quot;name&quot;: &quot;Vins et alcools Chevalier&quot;,
+    &quot;address&quot;: &quot;59 rue de l-Abbaye&quot;,
+    &quot;city&quot;: &quot;Reims&quot;,
+    &quot;region&quot;: null,
+    &quot;postalCode&quot;: &quot;51100&quot;,
+    &quot;country&quot;: &quot;France&quot;,
+    &quot;details&quot;: [
+      {
+        &quot;orderId&quot;: 10248,
+        &quot;productId&quot;: 11,
+        &quot;unitPrice&quot;: 14,
+        &quot;quantity&quot;: 12,
+        &quot;discount&quot;: 0,
+        &quot;product&quot;: {
+          &quot;id&quot;: 11,
+          &quot;name&quot;: &quot;Queso Cabrales&quot;,
+          &quot;supplierId&quot;: 5,
+          &quot;categoryId&quot;: 4,
+          &quot;quantity&quot;: &quot;1 kg pkg.&quot;,
+          &quot;price&quot;: 21,
+          &quot;inStock&quot;: 22,
+          &quot;onOrder&quot;: 30,
+          &quot;reorderLevel&quot;: 30,
+          &quot;discontinued&quot;: false,
+          &quot;category&quot;: {
+            &quot;id&quot;: 4,
+            &quot;name&quot;: &quot;Dairy Products&quot;,
+            &quot;description&quot;: &quot;Cheeses&quot;
+          }
+        }
+      },
+      {
+        &quot;orderId&quot;: 10248,
+        &quot;productId&quot;: 42,
+        &quot;unitPrice&quot;: 9.8,
+        &quot;quantity&quot;: 10,
+        &quot;discount&quot;: 0,
+        &quot;product&quot;: {
+          &quot;id&quot;: 42,
+          &quot;name&quot;: &quot;Singaporean Hokkien Fried Mee&quot;,
+          &quot;supplierId&quot;: 20,
+          &quot;categoryId&quot;: 5,
+          &quot;quantity&quot;: &quot;32 - 1 kg pkgs.&quot;,
+          &quot;price&quot;: 14,
+          &quot;inStock&quot;: 26,
+          &quot;onOrder&quot;: 0,
+          &quot;reorderLevel&quot;: 0,
+          &quot;discontinued&quot;: true,
+          &quot;category&quot;: {
+            &quot;id&quot;: 5,
+            &quot;name&quot;: &quot;Grains/Cereals&quot;,
+            &quot;description&quot;: &quot;Breads, crackers, pasta, and cereal&quot;
+          }
+        }
+      },
+      {
+        &quot;orderId&quot;: 10248,
+        &quot;productId&quot;: 72,
+        &quot;unitPrice&quot;: 34.8,
+        &quot;quantity&quot;: 5,
+        &quot;discount&quot;: 0,
+        &quot;product&quot;: {
+          &quot;id&quot;: 72,
+          &quot;name&quot;: &quot;Mozzarella di Giovanni&quot;,
+          &quot;supplierId&quot;: 14,
+          &quot;categoryId&quot;: 4,
+          &quot;quantity&quot;: &quot;24 - 200 g pkgs.&quot;,
+          &quot;price&quot;: 34.8,
+          &quot;inStock&quot;: 14,
+          &quot;onOrder&quot;: 0,
+          &quot;reorderLevel&quot;: 0,
+          &quot;discontinued&quot;: false,
+          &quot;category&quot;: {
+            &quot;id&quot;: 4,
+            &quot;name&quot;: &quot;Dairy Products&quot;,
+            &quot;description&quot;: &quot;Cheeses&quot;
+          }
+        }
+      }
+    ],
+    &quot;customer&quot;: {
+      &quot;id&quot;: &quot;VINET&quot;,
+      &quot;name&quot;: &quot;Vins et alcools Chevalier&quot;,
+      &quot;contact&quot;: &quot;Paul Henriot&quot;,
+      &quot;phone&quot;: &quot;Accounting Manager&quot;,
+      &quot;address&quot;: &quot;59 rue de l'Abbaye&quot;,
+      &quot;city&quot;: &quot;Reims&quot;,
+      &quot;region&quot;: null,
+      &quot;postalCode&quot;: &quot;51100&quot;,
+      &quot;country&quot;: &quot;France&quot;
+    }
+  }
+]
+</code></pre>
+<h3 id="includes-with-some-fields">includes with some fields</h3>
+<p>In this example some fields are brought from the main entity as well as from the included entities.
+This allows us to create queries that return only the data we need.</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Filters orders based on the provided ID and includes customer details, order details (with product category), and order date
+Orders.filter(p =&gt; p.id === id)
+      .include(p =&gt; [
+          // Includes customer name and concatenated address
+          p.customer.map(p =&gt; (
+              { name:p.name, 
+                address:concat(p.address,', ',p.city,' (', p.postalCode,')  ', 
+                p.country) 
+              })),
+          // Includes order details with product names and quantities    
+          p.details.include(p =&gt; p.product
+                                    .include(p =&gt; p.category.map(p =&gt; p.name))
+                                    .map(p =&gt; p.name))
+                    .map(p =&gt; [p.quantity, p.unitPrice])])
+      // Maps to retrieve order dates
+      .map(p =&gt; p.orderDate)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Selects order dates from the Orders table where OrderID matches the provided parameter
+ -- Parameterized query: OrderID is replaced with the provided parameter
+SELECT o.OrderDate AS `orderDate`
+FROM Orders o  
+WHERE o.OrderID = ? 
+
+-- Selects customer company name and concatenated address from the Customers table where CustomerID is in the result set of the previous query
+-- Parameterized query: CustomerID is replaced with the result set of the previous query
+SELECT c.CompanyName AS `name`, CONCAT(c.Address,', ',c.City,' (',c.PostalCode,')  ',c.Country) AS `address`
+FROM Customers c  
+WHERE  c.CustomerID IN (?) 
+
+-- Selects order details (quantity and unit price) from the Order Details table where OrderID is in the result set of the previous query
+ -- Parameterized query: OrderID is replaced with the result set of the previous query
+SELECT o1.Quantity AS `quantity`, o1.UnitPrice AS `unitPrice`
+FROM `Order Details` o1  WHERE  o1.OrderID IN (?) 
+
+-- Selects product names from the Products table where ProductID is in the result set of the previous query
+-- Parameterized query: ProductID is replaced with the result set of the previous query
+SELECT p.ProductName AS `name` 
+FROM Products p  
+WHERE  p.ProductID IN (?) 
+
+-- Parameterized query: ProductID is replaced with the result set of the previous query
+-- Parameterized query: CategoryID is replaced with the result set of the previous query
+SELECT c1.CategoryName AS `name`
+FROM Categories c1  
+WHERE  c1.CategoryID IN (?) 
+</code></pre>
+<p><strong>Data Result:</strong></p>
+<pre><code class="language-json">[
+  [
+        {
+            &quot;orderDate&quot;: &quot;1996-07-03T22:00:00.000Z&quot;,
+            &quot;customer&quot;: {
+                &quot;name&quot;: &quot;Vins et alcools Chevalier&quot;,
+                &quot;address&quot;: &quot;59 rue de l'Abbaye, Reims (51100)  France&quot;
+            },
+            &quot;details&quot;: [
+                {
+                    &quot;quantity&quot;: 12,
+                    &quot;unitPrice&quot;: 14,
+                    &quot;product&quot;: {
+                        &quot;name&quot;: &quot;Queso Cabrales&quot;,
+                        &quot;category&quot;: {
+                            &quot;name&quot;: &quot;Dairy Products&quot;
+                        }
+                    }
+                },
+                {
+                    &quot;quantity&quot;: 10,
+                    &quot;unitPrice&quot;: 9.8,
+                    &quot;product&quot;: {
+                        &quot;name&quot;: &quot;Singaporean Hokkien Fried Mee&quot;,
+                        &quot;category&quot;: {
+                            &quot;name&quot;: &quot;Grains/Cereals&quot;
+                        }
+                    }
+                },
+                {
+                    &quot;quantity&quot;: 5,
+                    &quot;unitPrice&quot;: 34.8,
+                    &quot;product&quot;: {
+                        &quot;name&quot;: &quot;Mozzarella di Giovanni&quot;,
+                        &quot;category&quot;: {
+                            &quot;name&quot;: &quot;Dairy Products&quot;
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+]
+</code></pre>
+<h2 id="code-example">Code example</h2>
+<pre><code class="language-Typescript">import { orm } from '../../lib'
+import { Orders } from '../northwind/model/__model'
+(async () =&gt; {  
+    try {       
+        await orm.init('./config/northwind.yaml')
+    // Defining a query function that accepts an order ID parameter
+    // Filtering orders based on ID matching the provided parameter
+    // Including related entities such as customer details and order details
+    // Including customer details
+    // Including order details with product information
+        const query = (id:number) =&gt; Orders
+                          .filter(p =&gt; p.id === id)
+                          .include(p =&gt; [
+                          p.customer.map(p =&gt; (
+                              { name:p.name, 
+                                address:concat(p.address,', ',p.city,' (', p.postalCode,')  ', 
+                                p.country) 
+                              })),
+                                p.details.include(p =&gt; p.product
+                                                    .include(p =&gt; p.category.map(p =&gt; p.name))
+                                                    .map(p =&gt; p.name))
+                                            .map(p =&gt; [p.quantity, p.unitPrice])])
+                          .map(p =&gt; p.orderDate)
+        // Executing the query with an order ID parameter of 830
+    const result = await orm.execute(query, {id: 830})
+        console.log(JSON.stringify(result, null, 2))        
+    } catch (error:any) {
+        console.error(error.stack)
+    } finally {
+        // Ending the ORM connection
+        await orm.end()
+    }
+})()
+</code></pre>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

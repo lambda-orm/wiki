@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Numeric - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Numeric";
+        var mkdocs_page_input_path = "queries/operatorsAndFunctions/Numeric.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Numeric</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>negative /subtraction</td>
+</tr>
+<tr>
+<td>+</td>
+<td>addition</td>
+</tr>
+<tr>
+<td>*</td>
+<td>multiplication</td>
+</tr>
+<tr>
+<td>/</td>
+<td>division</td>
+</tr>
+<tr>
+<td>**</td>
+<td>exponentiation</td>
+</tr>
+<tr>
+<td>//</td>
+<td>floorDivision</td>
+</tr>
+<tr>
+<td>%</td>
+<td>mod</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>abs</td>
+<td>Get the absolute value</td>
+</tr>
+<tr>
+<td>acos</td>
+<td>Get the arc cosine</td>
+</tr>
+<tr>
+<td>asin</td>
+<td>Get the arc sine</td>
+</tr>
+<tr>
+<td>atan</td>
+<td>Get the arc tangent</td>
+</tr>
+<tr>
+<td>atan2</td>
+<td>Get the arc tangent of x and y</td>
+</tr>
+<tr>
+<td>ceil</td>
+<td>Get the smallest following integer</td>
+</tr>
+<tr>
+<td>cos</td>
+<td>Get the cosine</td>
+</tr>
+<tr>
+<td>cosh</td>
+<td>Get hyperbolic cosine</td>
+</tr>
+<tr>
+<td>exp</td>
+<td>Raise e to the nth power</td>
+</tr>
+<tr>
+<td>floor</td>
+<td>Get the largest preceding integer</td>
+</tr>
+<tr>
+<td>ln</td>
+<td>Get natural logarithm of num</td>
+</tr>
+<tr>
+<td>log</td>
+<td>Get logarithm, base num1, of num2</td>
+</tr>
+<tr>
+<td>log10</td>
+<td>Return the base 10 logarithm of x</td>
+</tr>
+<tr>
+<td>remainder</td>
+<td>Get remainder</td>
+</tr>
+<tr>
+<td>round</td>
+<td>Get rounded value</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>Get sign of exp</td>
+</tr>
+<tr>
+<td>sin</td>
+<td>Get sine</td>
+</tr>
+<tr>
+<td>sinh</td>
+<td>Get hyperbolic sine</td>
+</tr>
+<tr>
+<td>tan</td>
+<td>Get tangent</td>
+</tr>
+<tr>
+<td>tanh</td>
+<td>Get hyperbolic tangent</td>
+</tr>
+<tr>
+<td>trunc</td>
+<td>Truncate num</td>
+</tr>
+<tr>
+<td>toNumber</td>
+<td>convert to number</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: 3+2-1 })</td>
+<td>[{"result":4}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: 3*4-1})</td>
+<td>[{"result":11}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: 1-2-5})</td>
+<td>[{"result":-6}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: (2+3)*2})</td>
+<td>[{"result":10}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: 2*(3+2)})</td>
+<td>[{"result":10}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: 1+2<em>3</em>4})</td>
+<td>[{"result":25}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: (1+(2*<em>3)</em>4)})</td>
+<td>[{"result":33}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: 1+2*<em>(3</em>4)})</td>
+<td>[{"result":4097}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: abs(-9)})</td>
+<td>[{"result":9}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: acos(0.434)})</td>
+<td>[{"result":1.121868332427735}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: asin(0.434)})</td>
+<td>[{"result":0.44892799436716174}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: atan(2)})</td>
+<td>[{"result":1.1071487177940904}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: atan2(90, 15)})</td>
+<td>[{"result":1.4056476493802699}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: ceil(2)})</td>
+<td>[{"result":2}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: cos(2)})</td>
+<td>[{"result":-0.4161468365471424}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: cosh(2)})</td>
+<td>[{"result":3.7621956910836314}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: exp(7)})</td>
+<td>[{"result":1096.6331584284585}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: floor(7)})</td>
+<td>[{"result":7}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: ln(7)})</td>
+<td>[{"result":1.9459101490553132}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: log(7,10)})</td>
+<td>[{"result":1.1832946624549385}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: log10(7)})</td>
+<td>[{"result":0.8450980400142568}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: remainder(7,2)})</td>
+<td>[{"result":-1}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: round(7.984938,2)})</td>
+<td>[{"result":7.98}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: sign(-7)})</td>
+<td>[{"result":-1}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: sin(7)})</td>
+<td>[{"result":0.6569865987187891}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: sinh(7)})</td>
+<td>[{"result":548.3161232732465}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: tan(7)})</td>
+<td>[{"result":0.8714479827243188}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: tanh(7)})</td>
+<td>[{"result":0.9999983369439447}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: trunc(7.984938,2)})</td>
+<td>[{"result":7.98}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: toNumber("3.141516")})</td>
+<td>[{"result":3}]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sentences">Sentences</h2>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the result of 3+2-1</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: 3+2-1 })
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ((3 + 2) - 1) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the result of 3*4-1</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: 3*4-1})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ((3 * 4) - 1) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the result of 1-2-5</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: 1-2-5})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ((1 - 2) - 5) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the result of (2+3)*2</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: (2+3)*2})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ((2 + 3) * 2) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the result of 2*(3+2)</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: 2*(3+2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT (2 * (3 + 2)) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the result of 1+2<em>3</em>4</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: 1+2*3*4})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT (1 + ((2 * 3) * 4)) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the result of (1+(2*<em>3)</em>4)</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: (1+(2**3)*4)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT (1 + (POWER(2,3) * 4)) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the result of 1+2*<em>(3</em>4)</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: 1+2**(3*4)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT (1 + POWER(2,(3 * 4))) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the absolute value of -9</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: abs(-9)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ABS(-9) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the arc cosine of 0.434</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: acos(0.434)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ACOS(0.434) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the arc sine of 0.434</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: asin(0.434)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ASIN(0.434) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the arc tangent of 2</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: atan(2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ATAN(2) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the arc tangent of 90 and 15</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: atan2(90, 15)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ATAN(90,15) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the smallest following integer of 2</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: ceil(2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CEIL(2) AS result
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the cosine of 2</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: cos(2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT COS(2) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the hyperbolic cosine of 2</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: cosh(2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ((EXP(2) + EXP(-2)) / 2) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get e to the nth power of 7</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: exp(7)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT EXP(7) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the largest preceding integer of 7</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: floor(7)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT FLOOR(7) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the natural logarithm of 7</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: ln(7)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT LN(7) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the logarithm, base 7, of 10</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: log(7,10)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT LOG(7,10) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the base 10 logarithm of 7</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: log10(7)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT LOG10(7) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the remainder of 7 and 2</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: remainder(7,2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT (7 - 2*ROUND(7/2)) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the rounded value of 7.984938 with 2 decimals</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: round(7.984938,2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ROUND(7.984938,2) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the sign of -7</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: sign(-7)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT SIGN(-7) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the sine of 7</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: sin(7)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT SIN(7) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the hyperbolic sine of 7</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: sinh(7)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT ((EXP(7) - EXP(-7)) / 2) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the tangent of 7</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: tan(7)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT TAN(7) AS result 
+FROM Countries c 
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the hyperbolic tangent of 7</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: tanh(7)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT (EXP(2*7) - 1)/(EXP(2*7) + 1) AS result 
+FROM Countries c 
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the truncated value of 7.984938</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: trunc(7.984938,2)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT TRUNCATE(7.984938,2) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to convert the string "3.141516" to number</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: toNumber(&quot;3.141516&quot;)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT CONVERT('3.141516', DECIMAL) AS result 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<h2 id="definition">Definition</h2>
+<h3 id="operator-">Operator -</h3>
+<p>Negative:</p>
+<ul>
+<li>description: negative</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<p>Subtraction:</p>
+<ul>
+<li>description: subtraction</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>a: number</li>
+<li>b: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator">Operator +</h3>
+<ul>
+<li>description: addition</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>a: number</li>
+<li>b: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_1">Operator *</h3>
+<ul>
+<li>description: multiplication</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>a: number</li>
+<li>b: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_2">Operator /</h3>
+<ul>
+<li>description: division</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>a: number</li>
+<li>b: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_3">Operator **</h3>
+<ul>
+<li>description: exponentiation</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>a: number</li>
+<li>b: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_4">Operator //</h3>
+<ul>
+<li>description: floorDivision</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>a: number</li>
+<li>b: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_5">Operator %</h3>
+<ul>
+<li>description: mod</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>a: number</li>
+<li>b: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="abs">abs</h3>
+<ul>
+<li>description: Get the absolute value</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="acos">acos</h3>
+<ul>
+<li>description: Get the arc cosine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="asin">asin</h3>
+<ul>
+<li>description: Get the arc sine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="atan">atan</h3>
+<ul>
+<li>description: Get the arc tangent</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="atan2">atan2</h3>
+<ul>
+<li>description: Get the arc tangent of x and y</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+<li>y: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="ceil">ceil</h3>
+<ul>
+<li>description: Get the smallest following integer</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="cos">cos</h3>
+<ul>
+<li>description: Get the cosine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="cosh">cosh</h3>
+<ul>
+<li>description: Get hyperbolic cosine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="exp">exp</h3>
+<ul>
+<li>description: Raise e to the nth power</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="floor">floor</h3>
+<ul>
+<li>description: Get the largest preceding integer</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="ln">ln</h3>
+<ul>
+<li>description: Get natural logarithm of num</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="log">log</h3>
+<ul>
+<li>description: Get logarithm, base num1, of num2</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>n1: number</li>
+<li>n2: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="log10">log10</h3>
+<ul>
+<li>description: Return the base 10 logarithm of x</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="remainder">remainder</h3>
+<ul>
+<li>description: Get remainder</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>n1: number</li>
+<li>n2: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="round">round</h3>
+<ul>
+<li>description: Get rounded value</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+<li>decimals: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="sign">sign</h3>
+<ul>
+<li>description: Get sign of exp</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="sin">sin</h3>
+<ul>
+<li>description: Get sine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="sinh">sinh</h3>
+<ul>
+<li>description: Get hyperbolic sine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="tan">tan</h3>
+<ul>
+<li>description: Get tangent</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="tanh">tanh</h3>
+<ul>
+<li>description: Get hyperbolic tangent</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="trunc">trunc</h3>
+<ul>
+<li>description: Truncate num</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="tonumber">toNumber</h3>
+<ul>
+<li>description: convert to number</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

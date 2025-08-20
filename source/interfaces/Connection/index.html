@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Connection - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Connection";
+        var mkdocs_page_input_path = "source/interfaces/Connection.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Connection</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../"><strong>Lambda ORM</strong></a></p>
+<hr />
+<p><a href="../../">Lambda ORM</a> / Connection</p>
+<h1 id="interface-connection">Interface: Connection</h1>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L5">src/lib/connection/domain/ports/connection.ts:5</a></p>
+<h2 id="properties">Properties</h2>
+<h3 id="cnx">cnx</h3>
+<blockquote>
+<p><strong>cnx</strong>: <code>any</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L7">src/lib/connection/domain/ports/connection.ts:7</a></p>
+<hr />
+<h3 id="id">id</h3>
+<blockquote>
+<p><strong>id</strong>: <code>string</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L6">src/lib/connection/domain/ports/connection.ts:6</a></p>
+<hr />
+<h3 id="intransaction">inTransaction</h3>
+<blockquote>
+<p><strong>inTransaction</strong>: <code>boolean</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L9">src/lib/connection/domain/ports/connection.ts:9</a></p>
+<hr />
+<h3 id="maxchunksizeidsonselect">maxChunkSizeIdsOnSelect</h3>
+<blockquote>
+<p><strong>maxChunkSizeIdsOnSelect</strong>: <code>number</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L11">src/lib/connection/domain/ports/connection.ts:11</a></p>
+<hr />
+<h3 id="maxchunksizeonbulkinsert">maxChunkSizeOnBulkInsert</h3>
+<blockquote>
+<p><strong>maxChunkSizeOnBulkInsert</strong>: <code>number</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L12">src/lib/connection/domain/ports/connection.ts:12</a></p>
+<hr />
+<h3 id="maxchunksizeonselect">maxChunkSizeOnSelect</h3>
+<blockquote>
+<p><strong>maxChunkSizeOnSelect</strong>: <code>number</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L10">src/lib/connection/domain/ports/connection.ts:10</a></p>
+<hr />
+<h3 id="pool">pool</h3>
+<blockquote>
+<p><strong>pool</strong>: <code>any</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L8">src/lib/connection/domain/ports/connection.ts:8</a></p>
+<h2 id="accessors">Accessors</h2>
+<h3 id="config">config</h3>
+<h4 id="get-signature">Get Signature</h4>
+<blockquote>
+<p><strong>get</strong> <strong>config</strong>(): <a href="../ConnectionConfig/"><code>ConnectionConfig</code></a></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L13">src/lib/connection/domain/ports/connection.ts:13</a></p>
+<h5 id="returns">Returns</h5>
+<p><a href="../ConnectionConfig/"><code>ConnectionConfig</code></a></p>
+<h2 id="methods">Methods</h2>
+<h3 id="addfk">addFk()</h3>
+<blockquote>
+<p><strong>addFk</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L45">src/lib/connection/domain/ports/connection.ts:45</a></p>
+<h4 id="parameters">Parameters</h4>
+<h5 id="_mapping">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_1">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="addpk">addPk()</h3>
+<blockquote>
+<p><strong>addPk</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L43">src/lib/connection/domain/ports/connection.ts:43</a></p>
+<h4 id="parameters_1">Parameters</h4>
+<h5 id="_mapping_1">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_1">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_2">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="addproperty">addProperty()</h3>
+<blockquote>
+<p><strong>addProperty</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L42">src/lib/connection/domain/ports/connection.ts:42</a></p>
+<h4 id="parameters_2">Parameters</h4>
+<h5 id="_mapping_2">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_2">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_3">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="adduk">addUk()</h3>
+<blockquote>
+<p><strong>addUk</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L44">src/lib/connection/domain/ports/connection.ts:44</a></p>
+<h4 id="parameters_3">Parameters</h4>
+<h5 id="_mapping_3">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_3">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_4">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="alterproperty">alterProperty()</h3>
+<blockquote>
+<p><strong>alterProperty</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L41">src/lib/connection/domain/ports/connection.ts:41</a></p>
+<h4 id="parameters_4">Parameters</h4>
+<h5 id="_mapping_4">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_4">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_5">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="begintransaction">beginTransaction()</h3>
+<blockquote>
+<p><strong>beginTransaction</strong>(): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L32">src/lib/connection/domain/ports/connection.ts:32</a></p>
+<h4 id="returns_6">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>&gt;</p>
+<hr />
+<h3 id="bulkdelete">bulkDelete()</h3>
+<blockquote>
+<p><strong>bulkDelete</strong>(<code>_mapping</code>, <code>_dialect</code>, <code>_query</code>, <code>_array</code>): <code>Promise</code>\&lt;<code>number</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L26">src/lib/connection/domain/ports/connection.ts:26</a></p>
+<h4 id="parameters_5">Parameters</h4>
+<h5 id="_mapping_5">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="_dialect">_dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="_query">_query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="_array">_array</h5>
+<p><code>any</code>[]</p>
+<h4 id="returns_7">Returns</h4>
+<p><code>Promise</code>\&lt;<code>number</code>&gt;</p>
+<hr />
+<h3 id="bulkinsert">bulkInsert()</h3>
+<blockquote>
+<p><strong>bulkInsert</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>array</code>): <code>Promise</code>\&lt;<code>any</code>[]&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L21">src/lib/connection/domain/ports/connection.ts:21</a></p>
+<h4 id="parameters_6">Parameters</h4>
+<h5 id="mapping">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_5">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="array">array</h5>
+<p><code>any</code>[]</p>
+<h4 id="returns_8">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>[]&gt;</p>
+<hr />
+<h3 id="bulkmerge">bulkMerge()</h3>
+<blockquote>
+<p><strong>bulkMerge</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>array</code>): <code>Promise</code>\&lt;<code>any</code>[]&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L28">src/lib/connection/domain/ports/connection.ts:28</a></p>
+<h4 id="parameters_7">Parameters</h4>
+<h5 id="mapping_1">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_1">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_6">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="array_1">array</h5>
+<p><code>any</code>[]</p>
+<h4 id="returns_9">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>[]&gt;</p>
+<hr />
+<h3 id="bulkupdate">bulkUpdate()</h3>
+<blockquote>
+<p><strong>bulkUpdate</strong>(<code>_mapping</code>, <code>_dialect</code>, <code>_query</code>, <code>_array</code>): <code>Promise</code>\&lt;<code>number</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L24">src/lib/connection/domain/ports/connection.ts:24</a></p>
+<h4 id="parameters_8">Parameters</h4>
+<h5 id="_mapping_6">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="_dialect_1">_dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="_query_1">_query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="_array_1">_array</h5>
+<p><code>any</code>[]</p>
+<h4 id="returns_10">Returns</h4>
+<p><code>Promise</code>\&lt;<code>number</code>&gt;</p>
+<hr />
+<h3 id="commit">commit()</h3>
+<blockquote>
+<p><strong>commit</strong>(): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L33">src/lib/connection/domain/ports/connection.ts:33</a></p>
+<h4 id="returns_11">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>&gt;</p>
+<hr />
+<h3 id="createentity">createEntity()</h3>
+<blockquote>
+<p><strong>createEntity</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L37">src/lib/connection/domain/ports/connection.ts:37</a></p>
+<h4 id="parameters_9">Parameters</h4>
+<h5 id="_mapping_7">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_7">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_12">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="createfk">createFk()</h3>
+<blockquote>
+<p><strong>createFk</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L39">src/lib/connection/domain/ports/connection.ts:39</a></p>
+<h4 id="parameters_10">Parameters</h4>
+<h5 id="_mapping_8">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_8">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_13">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="createindex">createIndex()</h3>
+<blockquote>
+<p><strong>createIndex</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L40">src/lib/connection/domain/ports/connection.ts:40</a></p>
+<h4 id="parameters_11">Parameters</h4>
+<h5 id="_mapping_9">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_9">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_14">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="createsequence">createSequence()</h3>
+<blockquote>
+<p><strong>createSequence</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L38">src/lib/connection/domain/ports/connection.ts:38</a></p>
+<h4 id="parameters_12">Parameters</h4>
+<h5 id="_mapping_10">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_10">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_15">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="delete">delete()</h3>
+<blockquote>
+<p><strong>delete</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>number</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L25">src/lib/connection/domain/ports/connection.ts:25</a></p>
+<h4 id="parameters_13">Parameters</h4>
+<h5 id="mapping_2">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_2">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_11">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_16">Returns</h4>
+<p><code>Promise</code>\&lt;<code>number</code>&gt;</p>
+<hr />
+<h3 id="dropentity">dropEntity()</h3>
+<blockquote>
+<p><strong>dropEntity</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L47">src/lib/connection/domain/ports/connection.ts:47</a></p>
+<h4 id="parameters_14">Parameters</h4>
+<h5 id="_mapping_11">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_12">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_17">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="dropfk">dropFk()</h3>
+<blockquote>
+<p><strong>dropFk</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L51">src/lib/connection/domain/ports/connection.ts:51</a></p>
+<h4 id="parameters_15">Parameters</h4>
+<h5 id="_mapping_12">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_13">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_18">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="dropindex">dropIndex()</h3>
+<blockquote>
+<p><strong>dropIndex</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L52">src/lib/connection/domain/ports/connection.ts:52</a></p>
+<h4 id="parameters_16">Parameters</h4>
+<h5 id="_mapping_13">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_14">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_19">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="droppk">dropPk()</h3>
+<blockquote>
+<p><strong>dropPk</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L49">src/lib/connection/domain/ports/connection.ts:49</a></p>
+<h4 id="parameters_17">Parameters</h4>
+<h5 id="_mapping_14">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_15">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_20">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="dropproperty">dropProperty()</h3>
+<blockquote>
+<p><strong>dropProperty</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L48">src/lib/connection/domain/ports/connection.ts:48</a></p>
+<h4 id="parameters_18">Parameters</h4>
+<h5 id="_mapping_15">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_16">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_21">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="dropsequence">dropSequence()</h3>
+<blockquote>
+<p><strong>dropSequence</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L46">src/lib/connection/domain/ports/connection.ts:46</a></p>
+<h4 id="parameters_19">Parameters</h4>
+<h5 id="_mapping_16">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_17">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_22">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="dropuk">dropUk()</h3>
+<blockquote>
+<p><strong>dropUk</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L50">src/lib/connection/domain/ports/connection.ts:50</a></p>
+<h4 id="parameters_20">Parameters</h4>
+<h5 id="_mapping_17">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_18">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_23">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="end">end()</h3>
+<blockquote>
+<p><strong>end</strong>(): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L14">src/lib/connection/domain/ports/connection.ts:14</a></p>
+<h4 id="returns_24">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>&gt;</p>
+<hr />
+<h3 id="execute">execute()</h3>
+<blockquote>
+<p><strong>execute</strong>(<code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L29">src/lib/connection/domain/ports/connection.ts:29</a></p>
+<h4 id="parameters_21">Parameters</h4>
+<h5 id="query_19">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_25">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="executeddl">executeDDL()</h3>
+<blockquote>
+<p><strong>executeDDL</strong>(<code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L30">src/lib/connection/domain/ports/connection.ts:30</a></p>
+<h4 id="parameters_22">Parameters</h4>
+<h5 id="query_20">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_26">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="executesentence">executeSentence()</h3>
+<blockquote>
+<p><strong>executeSentence</strong>(<code>sentence</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L31">src/lib/connection/domain/ports/connection.ts:31</a></p>
+<h4 id="parameters_23">Parameters</h4>
+<h5 id="sentence">sentence</h5>
+<p><code>any</code></p>
+<h4 id="returns_27">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="foreignkeys">foreignKeys()</h3>
+<blockquote>
+<p><strong>foreignKeys</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L58">src/lib/connection/domain/ports/connection.ts:58</a></p>
+<h4 id="parameters_24">Parameters</h4>
+<h5 id="mapping_3">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_3">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_21">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_1">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_28">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="indexes">indexes()</h3>
+<blockquote>
+<p><strong>indexes</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L61">src/lib/connection/domain/ports/connection.ts:61</a></p>
+<h4 id="parameters_25">Parameters</h4>
+<h5 id="mapping_4">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_4">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_22">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_2">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_29">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="insert">insert()</h3>
+<blockquote>
+<p><strong>insert</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L19">src/lib/connection/domain/ports/connection.ts:19</a></p>
+<h4 id="parameters_26">Parameters</h4>
+<h5 id="mapping_5">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_5">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_23">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_3">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_30">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="insertconditional">insertConditional()</h3>
+<blockquote>
+<p><strong>insertConditional</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L20">src/lib/connection/domain/ports/connection.ts:20</a></p>
+<h4 id="parameters_27">Parameters</h4>
+<h5 id="mapping_6">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_6">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_24">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_4">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_31">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="merge">merge()</h3>
+<blockquote>
+<p><strong>merge</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L27">src/lib/connection/domain/ports/connection.ts:27</a></p>
+<h4 id="parameters_28">Parameters</h4>
+<h5 id="mapping_7">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_7">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_25">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_5">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_32">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="objects">objects()</h3>
+<blockquote>
+<p><strong>objects</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L53">src/lib/connection/domain/ports/connection.ts:53</a></p>
+<h4 id="parameters_29">Parameters</h4>
+<h5 id="mapping_8">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_8">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_26">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_6">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_33">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="partitions">partitions()</h3>
+<blockquote>
+<p><strong>partitions</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L56">src/lib/connection/domain/ports/connection.ts:56</a></p>
+<h4 id="parameters_30">Parameters</h4>
+<h5 id="mapping_9">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_9">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_27">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_7">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_34">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="primarykeys">primaryKeys()</h3>
+<blockquote>
+<p><strong>primaryKeys</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L59">src/lib/connection/domain/ports/connection.ts:59</a></p>
+<h4 id="parameters_31">Parameters</h4>
+<h5 id="mapping_10">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_10">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_28">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_8">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_35">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="rollback">rollback()</h3>
+<blockquote>
+<p><strong>rollback</strong>(): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L34">src/lib/connection/domain/ports/connection.ts:34</a></p>
+<h4 id="returns_36">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>&gt;</p>
+<hr />
+<h3 id="select">select()</h3>
+<blockquote>
+<p><strong>select</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L18">src/lib/connection/domain/ports/connection.ts:18</a></p>
+<h4 id="parameters_32">Parameters</h4>
+<h5 id="mapping_11">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_11">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_29">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_9">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_37">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="sequences">sequences()</h3>
+<blockquote>
+<p><strong>sequences</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L57">src/lib/connection/domain/ports/connection.ts:57</a></p>
+<h4 id="parameters_33">Parameters</h4>
+<h5 id="mapping_12">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_12">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_30">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_10">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_38">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="tables">tables()</h3>
+<blockquote>
+<p><strong>tables</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L54">src/lib/connection/domain/ports/connection.ts:54</a></p>
+<h4 id="parameters_34">Parameters</h4>
+<h5 id="mapping_13">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_13">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_31">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_11">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_39">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="truncateentity">truncateEntity()</h3>
+<blockquote>
+<p><strong>truncateEntity</strong>(<code>_mapping</code>, <code>query</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L36">src/lib/connection/domain/ports/connection.ts:36</a></p>
+<h4 id="parameters_35">Parameters</h4>
+<h5 id="_mapping_18">_mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="query_32">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h4 id="returns_40">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="uniquekeys">uniqueKeys()</h3>
+<blockquote>
+<p><strong>uniqueKeys</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L60">src/lib/connection/domain/ports/connection.ts:60</a></p>
+<h4 id="parameters_36">Parameters</h4>
+<h5 id="mapping_14">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_14">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_33">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_12">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_41">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="update">update()</h3>
+<blockquote>
+<p><strong>update</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>number</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L22">src/lib/connection/domain/ports/connection.ts:22</a></p>
+<h4 id="parameters_37">Parameters</h4>
+<h5 id="mapping_15">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_15">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_34">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_13">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_42">Returns</h4>
+<p><code>Promise</code>\&lt;<code>number</code>&gt;</p>
+<hr />
+<h3 id="upsert">upsert()</h3>
+<blockquote>
+<p><strong>upsert</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L23">src/lib/connection/domain/ports/connection.ts:23</a></p>
+<h4 id="parameters_38">Parameters</h4>
+<h5 id="mapping_16">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_16">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_35">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_14">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_43">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="views">views()</h3>
+<blockquote>
+<p><strong>views</strong>(<code>mapping</code>, <code>dialect</code>, <code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L55">src/lib/connection/domain/ports/connection.ts:55</a></p>
+<h4 id="parameters_39">Parameters</h4>
+<h5 id="mapping_17">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_17">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h5 id="query_36">query</h5>
+<p><a href="../../classes/Query/"><code>Query</code></a></p>
+<h5 id="data_15">data</h5>
+<p><a href="../../classes/Data/"><code>Data</code></a></p>
+<h4 id="returns_44">Returns</h4>
+<p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<hr />
+<h3 id="writedate">writeDate()</h3>
+<blockquote>
+<p><strong>writeDate</strong>(<code>value</code>, <code>mapping</code>, <code>dialect</code>): <code>any</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L15">src/lib/connection/domain/ports/connection.ts:15</a></p>
+<h4 id="parameters_40">Parameters</h4>
+<h5 id="value">value</h5>
+<p><code>any</code></p>
+<h5 id="mapping_18">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_18">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h4 id="returns_45">Returns</h4>
+<p><code>any</code></p>
+<hr />
+<h3 id="writetime">writeTime()</h3>
+<blockquote>
+<p><strong>writeTime</strong>(<code>value</code>, <code>mapping</code>, <code>dialect</code>): <code>any</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/connection/domain/ports/connection.ts#L16">src/lib/connection/domain/ports/connection.ts:16</a></p>
+<h4 id="parameters_41">Parameters</h4>
+<h5 id="value_1">value</h5>
+<p><code>any</code></p>
+<h5 id="mapping_19">mapping</h5>
+<p><a href="../../classes/MappingConfigService/"><code>MappingConfigService</code></a></p>
+<h5 id="dialect_19">dialect</h5>
+<p><a href="../DialectService/"><code>DialectService</code></a></p>
+<h4 id="returns_46">Returns</h4>
+<p><code>any</code></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

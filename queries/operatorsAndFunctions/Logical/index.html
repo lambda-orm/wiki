@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Logical - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Logical";
+        var mkdocs_page_input_path = "queries/operatorsAndFunctions/Logical.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Logical</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>!</td>
+<td>not</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>and</td>
+</tr>
+<tr>
+<td>||</td>
+<td>or</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Countries.filter(p=&gt; p.subregion == "South America" &amp;&amp;  p.longitude &lt; -30 ).map(p=&gt; {result:count(1)})</td>
+<td>[{"result":15}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.subregion == "South America"</td>
+<td></td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.region == "Americas" &amp;&amp;  p.subregion != "Northern America" ).map(p=&gt; {result:count(1)})</td>
+<td>[{"result":51}]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sentences">Sentences</h2>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the count of countries in the Americas region</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.subregion == &quot;South America&quot; &amp;&amp;  p.longitude &lt; -30 ).map(p=&gt; {result:count(1)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT COUNT(1) AS result 
+FROM Countries c  
+WHERE (c.subregion = 'South America' AND c.longitude &lt; -30) 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the count of countries in each region</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.subregion == &quot;South America&quot; || p.subregion == &quot;Central America&quot; ).map(p=&gt; {result:count(1)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT COUNT(1) AS result 
+FROM Countries c  
+WHERE (c.subregion = 'South America' OR c.subregion = 'Central America') 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to get the maximum latitude of countries in each region</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.region == &quot;Americas&quot; &amp;&amp;  p.subregion != &quot;Northern America&quot; ).map(p=&gt; {result:count(1)})
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT COUNT(1) AS result 
+FROM Countries c  
+WHERE (c.region = 'Americas' AND c.subregion &lt;&gt; 'Northern America') 
+</code></pre>
+<h2 id="definition">Definition</h2>
+<h3 id="operator">Operator !</h3>
+<ul>
+<li>description: not</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_1">Operator &amp;&amp;</h3>
+<ul>
+<li>description: and</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>a: boolean</li>
+<li>b: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_2">Operator ||</h3>
+<ul>
+<li>description: or</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>a: boolean</li>
+<li>b: boolean</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

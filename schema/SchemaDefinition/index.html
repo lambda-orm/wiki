@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Definition - λORM Wiki</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Definition";
+        var mkdocs_page_input_path = "schema/SchemaDefinition.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../queries/Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Definition</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="definition">Definition</h1>
+<p>The schema includes all the configuration that the ORM needs.</p>
+<p>The schema separates the definition of the business model (Domain) from the persistence of the data (Infrastructure).</p>
+<p>In the domain, the entities and enumerators that represent the business model are completely clean, without any attributes that couple them to persistence.</p>
+<p>All queries are made according to the business model, so all queries are decoupled from the physical model of the data.</p>
+<p>In the infrastructure, all the necessary configuration is defined to be able to persist and obtain the data from the different sources.</p>
+<p>The schema configuration can be done in a yaml, json file or passed as a parameter when initializing the ORM.</p>
+<p>All the queries that are used for the definition of conditions and for the execution of actions are based on the expression engine <a href="https://www.npmjs.com/package/3xpr">3xpr</a></p>
+<h2 id="structure">Structure</h2>
+<pre><code class="language-yaml">domain:
+  enums:
+  - name: string
+    values:
+      - name: string
+        value: any
+  entities: 
+  - name: string
+    abstract: boolean
+    extends: string[]
+    view: boolean
+    mapping: string
+    primaryKey: string[]
+    uniqueKey: string[]
+    properties:
+      - name: string        
+        mapping: string
+        type: string | integer | decimal | boolean | dateTime | date | time
+        length: number 
+        required: boolean
+        autoIncrement: boolean
+        view: boolean
+        key: string
+        default: expression
+        readExp: expression
+        readValue: expression
+        writeValue: expression      
+    indexes:
+      - name: string
+        fields: string[]
+    relations:    
+      - name: string
+        type: oneToMany | manyToOne | oneToOne  
+        from: string
+        entity: string
+        to: string
+        composite: boolean
+    constraints:
+      - message: string
+        condition: expression
+application:  
+  start:
+    - name: string
+      condition: expression
+      expression: expression
+  end:
+    - name: string
+      condition: expression
+      expression: expression
+  errors:
+    - name: string
+      condition: expression
+      expression: expression    
+  listeners:
+    - name: string
+      on: [select|insert|bulkInsert|update|delete]
+      condition: expression
+      before:  expression
+      after:  expression
+      error:  expression                    
+infrastructure:
+  mappings:
+    - name: string
+      entities:
+        - name: string
+          mapping: string
+          abstract: boolean
+          filter: expression
+          properties:
+            - name: string
+              mapping: string
+              readMappingExp: expression
+  sources:
+    - name: string
+      dialect: [MySQL|MariaDB|PostgreSQL|Oracle|SqlServer|MongoDB|SQLjs] 
+      mapping: string
+      connection: object | EnvironmentVariable
+  stages:
+    - name: string
+      sources:
+        - name: string
+          condition: expression
+  views:
+    - name: string
+      entities:
+        - name: string
+          exclude: boolean
+          properties:
+            - name: string
+              exclude: boolean
+              readExp: expression        
+  paths:
+    src: string
+    state: string
+    domain: string                                                       
+</code></pre>
+<h2 id="main-definition">Main Definition</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Property</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">domain</td>
+<td style="text-align: left;">definition of the business model</td>
+</tr>
+<tr>
+<td style="text-align: left;">application</td>
+<td style="text-align: left;">implementation of events and listeners</td>
+</tr>
+<tr>
+<td style="text-align: left;">infrastructure</td>
+<td style="text-align: left;">concrete implementation of the data model</td>
+</tr>
+</tbody>
+</table>
+<h2 id="domain">Domain</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enums</td>
+<td>definitions of enum  of model</td>
+</tr>
+<tr>
+<td>entities</td>
+<td>definitions of entity of model</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>In the enums section, enumerations are defined that can then be used as the data type of a property.</li>
+<li>In the entities section, the entities are defined with their properties, relationships and constraints</li>
+</ul>
+<h3 id="enum">Enum</h3>
+<p>They define an enumeration which can then be used as the data type of a property.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name of enum</td>
+<td style="text-align: center;">yes</td>
+</tr>
+<tr>
+<td>values</td>
+<td>values of enum</td>
+<td style="text-align: center;">yes</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enum-example">Enum Example</h4>
+<p>In this example, the <strong>DeviceType</strong> enum is defined, which is used in the <strong>type</strong> property of the <strong>Devices</strong> entity.</p>
+<p>Example:</p>
+<pre><code class="language-yaml">domain:
+  enums:
+    - name: DeviceType
+      values:
+        - name: phone
+          value: phone
+        - name: computer
+          value: computer
+        - name: robot
+          value: robot
+  entities:
+    ...
+    - name: Devices
+      extends: Products
+      primaryKey: [&quot;id&quot;]
+      uniqueKey: [&quot;name&quot;]
+      properties:
+        - name: id
+          length: 32
+          required: true
+          default: 'concat(type,&quot;-&quot;,switch(type){case&quot;phone&quot;:imei;default:mac;})'
+        - name: type
+          length: 16
+          required: true
+          enum: DeviceType
+        - name: name
+          length: 32
+          required: true  
+    ...       
+</code></pre>
+<h3 id="entity">Entity</h3>
+<p>The entity is defined with its properties, relationships and constraints</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name of entity</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>abstract</td>
+<td>if the entity is abstract</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>extends</td>
+<td>extension</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>view</td>
+<td>if the entity is a view</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>primaryKey</td>
+<td>primary key</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>uniqueKey</td>
+<td>unique key</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>properties</td>
+<td>entity properties</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>indexes</td>
+<td>indexes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>relations</td>
+<td>relations</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>constraints</td>
+<td>constraints</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="abstract-and-extends-in-entity">Abstract and extends in Entity</h4>
+<p>In this example the abstract entity <strong>positions</strong> is defined which extends the entity <strong>Countries</strong></p>
+<p>Example:</p>
+<pre><code class="language-yaml">domain:
+  entities:
+    - name: Positions
+      abstract: true
+      properties:
+        - name: latitude
+          length: 16
+        - name: longitude
+          length: 16
+    - name: Countries
+      extends: Positions
+      primaryKey: [&quot;iso3&quot;]
+      uniqueKey: [&quot;name&quot;]
+      properties:
+        - name: name
+          required: true
+        - name: iso3
+          length: 3
+          required: true
+</code></pre>
+<h4 id="set-entity-as-view">Set Entity as view</h4>
+<p>This example defines the <strong>Users</strong> entity as a view. \</p>
+<p>Since this entity is managed by an external system and only select queries are allowed.</p>
+<p>Example:</p>
+<pre><code class="language-yaml">domain:
+  entities:
+    ...
+    - name: Users
+      view: true
+      extends: Basics
+      primaryKey: [&quot;username&quot;]
+      uniqueKey: [&quot;email&quot;]
+      properties:
+        - name: username
+          length: 32
+          required: true
+        - name: firstname
+          required: true
+        - name: lastname
+    ...
+</code></pre>
+<h4 id="property">Property</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name of property</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>type</td>
+<td>type of property</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">string</td>
+</tr>
+<tr>
+<td>length</td>
+<td>length of property type</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">80</td>
+</tr>
+<tr>
+<td>required</td>
+<td>if the field is required</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">false</td>
+</tr>
+<tr>
+<td>autoIncrement</td>
+<td>if the field is self-incrementing</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">false</td>
+</tr>
+<tr>
+<td>view</td>
+<td>if the field is a view</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>default</td>
+<td>expression default resolved on server</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>readExp</td>
+<td>read expression resolved in source</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>readValue</td>
+<td>read expression resolved on server</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>writeValue</td>
+<td>write expression resolved in server</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>key</td>
+<td>key to filter or insert</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h5 id="set-property-as-view-and-readexp">Set Property as view and readExp</h5>
+<p>A property set to view is a property that will be returned in read queries. \
+The value of this property is defined in <strong>readExp</strong> using the expression language.</p>
+<p>Example:</p>
+<pre><code class="language-yaml">domain:
+  entities:
+    ...
+    - name: Users
+      view: true
+      extends: Basics
+      primaryKey: [&quot;username&quot;]
+      uniqueKey: [&quot;email&quot;]
+      properties:
+        - name: username
+          length: 32
+          required: true
+        - name: firstname
+          required: true
+        - name: lastname
+          required: true
+        - name: fullmane
+          view: true
+          readExp: concat(lastname,&quot;, &quot;,firstname)
+    ...    
+</code></pre>
+<p><strong>ReadExp</strong> can be used as a view, in this case the read expression will be applied at the time of reading. \
+But no modification will be applied at the time of writing.</p>
+<h5 id="default-value-in-property">Default value in Property</h5>
+<p>When a record is inserted, the expression defined in <strong>default</strong> will be evaluated on the server. \
+This expression will be executed by the expression engine <a href="https://www.npmjs.com/package/3xpr">3xpr</a></p>
+<p>Example:</p>
+<pre><code class="language-yaml">domain:
+  entities:
+    - name: Groups
+      extends: Basics
+      primaryKey: [&quot;id&quot;]
+      uniqueKey: [&quot;name&quot;]
+      properties:
+        - name: id
+          length: 32
+          default: lower(substring(replace(name,&quot; &quot;,&quot;-&quot;),0,32))
+          required: true
+        - name: name
+          length: 32
+          required: true
+</code></pre>
+<h5 id="read-and-write-value-in-property">Read and write value in Property</h5>
+<p>Both <strong>readValue</strong> and <strong>writeValue</strong> are executed on the server.
+When reading, <strong>readValue</strong> will be applied and in the writing actions, <strong>writeValue</strong> will be executed.
+These expressions will be executed by the expression engine <a href="https://www.npmjs.com/package/3xpr">3xpr</a></p>
+<p>Example:</p>
+<pre><code class="language-yaml">domain:
+  entities:
+    ...
+    - name: Users
+      view: true
+      extends: Basics
+      primaryKey: [&quot;username&quot;]
+      uniqueKey: [&quot;email&quot;]
+      properties:
+        - name: username
+          length: 32
+          required: true
+        - name: firstname
+          required: true
+        - name: lastname
+          required: true
+        - name: fullmane
+          view: true
+          readExp: concat(lastname,&quot;, &quot;,firstname)
+        - name: email
+          required: true
+          length: 255
+          writeValue: encrypt(lower(email),&quot;${USERS_SECRET_KEY}&quot;)
+          readValue: decrypt(email,&quot;${USERS_SECRET_KEY}&quot;)
+    ...      
+</code></pre>
+<h5 id="key-value-in-property">Key value in Property</h5>
+<p>The key defined in <strong>keyValue</strong> will be used as a filter in the read and update queries. \
+When a record is inserted this key is assigned to the field. \</p>
+<p>This behavior is useful when we want to define different entities on the same table or collection. \
+Let's imagine we have a <strong>Locations</strong> table where Countries, States and Cities are stored. \
+but we want to work with the entities separately.</p>
+<p>Example:</p>
+<pre><code class="language-yaml">domain:
+  entities:
+    - name: Locations
+      abstract: true
+      primaryKey: [&quot;type&quot;,&quot;code&quot;]
+      uniqueKey: [&quot;type&quot;,&quot;name&quot;]    
+      properties:
+        - name: code
+          required: true
+          length: 16
+        - name: type
+          required: true
+          length: 16 
+        - name: name
+          required: true
+    - name: Country
+      extends: Locations
+      properties:
+        - name: type
+          key: 'country'  
+    - name: States
+      extends: Locations
+      properties:
+        - name: type
+          key: 'state'
+    - name: Cities
+      extends: Locations
+      properties:
+        - name: type
+          key: 'city'
+infrastructure:        
+  mappings:
+    - name: default
+      entities:
+        - name: Locations
+          abstract: true
+          mapping: TBL_LOCATIONS
+          properties:
+            - name: code
+              mapping: CODE
+            - name: type
+              mapping: TYPE
+            - name: name
+              mapping: NAME
+        - name: Country
+          extends: Locations
+        - name: States
+          extends: Locations
+        - name: Cities
+          extends: Locations
+</code></pre>
+<h4 id="relation">Relation</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name of property</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>type</td>
+<td>type of relationship</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">oneToMany</td>
+</tr>
+<tr>
+<td>from</td>
+<td>relationship field</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>entity</td>
+<td>entity with which it relates</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>to</td>
+<td>field of the entity to which it relates</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>composite</td>
+<td>if the relationship is composite</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">false</td>
+</tr>
+<tr>
+<td>target</td>
+<td>Name of the relation in the related entity</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h5 id="target-relation">Target relation</h5>
+<p>When defining <strong>target</strong> the corresponding relationship will be created in the target entity.
+For example, if in the entity <strong>DeviceStatuses</strong> a relationship with <strong>Devices</strong> is created and in this relationship target = "statuses" is set. \
+A relationship called <strong>statuses</strong> will be created in the entity <strong>Devices</strong> which will be manyToOne. \
+Types of target relation according to the source relation:</p>
+<table>
+<thead>
+<tr>
+<th>source</th>
+<th>target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>oneToMany</td>
+<td>manyToOne</td>
+</tr>
+<tr>
+<td>manyToOne</td>
+<td>oneToMany</td>
+</tr>
+<tr>
+<td>oneToOne</td>
+<td>oneToOne</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">domain:
+  entities:
+    - name: DeviceStatuses
+        extends: Basics
+        primaryKey: [&quot;id&quot;]
+        indexes:
+          - name: time
+            fields: [&quot;time&quot;]
+        properties:
+          - name: id
+            type: integer
+            required: true
+            autoIncrement: true
+          - name: deviceId
+            length: 32
+            required: true
+          - name: time
+            type: dateTime
+        relations:
+          - name: device
+            from: deviceId
+            entity: Devices
+            to: id
+            target: statuses
+</code></pre>
+<h4 id="constraint">Constraint</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>message</td>
+<td>message to display</td>
+<td style="text-align: center;">yes</td>
+</tr>
+<tr>
+<td>condition</td>
+<td>boolean expression to evaluate</td>
+<td style="text-align: center;">yes</td>
+</tr>
+</tbody>
+</table>
+<p>Constraints are validated on the server using expressions.
+These expressions will be executed by the expression engine <a href="https://www.npmjs.com/package/3xpr">3xpr</a></p>
+<p>All constraints are validated when inserting or updating a record. \
+The ORM will create various constraints based on other definitions, for example:</p>
+<ul>
+<li>When you define a property as required, a constraint will be created that will validate that this property is not null.</li>
+<li>When defining that a property is of an <strong>Enum</strong> type, a constraint is created that validates that the value is within this enum.</li>
+</ul>
+<p>It is also possible to add a constraint for which the <strong>message</strong> and the <strong>condition</strong> must be defined. \
+The defined message will be sent if the condition is not met.</p>
+<p>Example:</p>
+<pre><code class="language-yaml">domain:
+  entities:
+    - name: Users
+      properties:
+        ...
+        - name: email
+          required: true
+          length: 255
+          readExp: mask(email)
+          writeValue: encrypt(lower(email),&quot;${USERS_SECRET_KEY}&quot;)
+          readValue: decrypt(email,&quot;${USERS_SECRET_KEY}&quot;)
+      constraints:
+        - message: invalid email
+          condition: test(email,&quot;^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$&quot;)
+    - name: Files
+      properties:
+        - name: id
+          length: 255
+          required: true
+        - name: type
+          length: 16
+          required: true
+          enum: FileType
+        - name: deviceId
+          length: 32
+          required: true
+        - name: startDate
+          type: dateTime
+          required: true
+        - name: endDate
+          type: dateTime
+          required: true
+      constraints:
+        - message: endDate cannot be less than startDate
+          condition: startDate&lt;=endDate
+</code></pre>
+<h2 id="application">Application</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Property</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">start</td>
+<td style="text-align: left;">commands to execute when starting the application</td>
+</tr>
+<tr>
+<td style="text-align: left;">end</td>
+<td style="text-align: left;">commands to execute when the application is terminated</td>
+</tr>
+<tr>
+<td style="text-align: left;">errors</td>
+<td style="text-align: left;">commands to execute when an error occurs</td>
+</tr>
+<tr>
+<td style="text-align: left;">listeners</td>
+<td style="text-align: left;">definition of the listeners and the action to be executed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="infrastructure">Infrastructure</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mappings</td>
+<td>definitions of mappings</td>
+</tr>
+<tr>
+<td>sources</td>
+<td>definitions of source</td>
+</tr>
+<tr>
+<td>stages</td>
+<td>definitions of stages</td>
+</tr>
+<tr>
+<td>views</td>
+<td>definitions of views</td>
+</tr>
+<tr>
+<td>paths</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>In the mappings section, the mapping between the entities in the tables or collections in the databases is defined.</li>
+<li>In the sources section the databases are defined</li>
+<li>In the stages section different scenarios are defined in which the rules that associate an entity with a source are determined</li>
+<li>In the views section, different views are defined that can restrict or modify the results of the queries.</li>
+<li>In the paths section, the configuration of the routes where configuration files or execution results will be generated is established.</li>
+</ul>
+<h3 id="mapping">Mapping</h3>
+<p>The mapping between entities in tables or collections in databases is defined.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name of mapping</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>entities</td>
+<td>list of entity mapping</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="entity-mapping">Entity Mapping</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name of entity</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>abstract</td>
+<td>if the entity is abstract</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>extends</td>
+<td>extension</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>mapping</td>
+<td>table name in the database</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">equal name</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>filter expression</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>properties</td>
+<td>list of property mapping</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h5 id="abstract-and-extends-in-entity-mapping">Abstract and extends in Entity Mapping</h5>
+<p>Abstract mapping entities are useful for use in extensions. \
+This example defines the abstract mapping entity <strong>Locations</strong> which extends concrete entities.</p>
+<pre><code class="language-yaml">...
+infrastructure:
+  mappings:
+    - name: default
+      entities:
+        - name: Locations
+          abstract: true
+          mapping: TBL_LOCATIONS
+          properties:
+            - name: code
+              mapping: CODE
+            - name: type
+              mapping: TYPE
+            - name: name
+              mapping: NAME
+        - name: Country
+          extends: Locations
+        - name: States
+          extends: Locations
+        - name: Cities
+          extends: Locations
+...        
+</code></pre>
+<h5 id="filter-in-entity-mapping">Filter in Entity Mapping</h5>
+<p>The filter defined in a Mapping entity is used to filter the records.
+This example filters records from the <strong>user_entity</strong> table where users are from a certain <strong>realmId</strong>.</p>
+<pre><code class="language-yaml">...
+infrastructure:
+  mappings:
+    - name: default
+    - name: keycloak
+      entities:
+        - name: Users
+          mapping: user_entity
+          filter: realmId == &quot;${REALM_ID}&quot;
+          properties:
+            - name: username
+              mapping: username
+            - name: firstname
+              mapping: first_name
+            - name: lastname
+              mapping: last_name
+            - name: email
+              mapping: email
+            - name: created
+              mapping: created_timestamp
+              readMappingExp: millisecondToDate(created/1000)
+            - name: realmId
+              length: 255
+              mapping: realm_id
+...
+</code></pre>
+<h4 id="property-mapping">Property Mapping</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name of property</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>mapping</td>
+<td>table name in the database</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">equal name</td>
+</tr>
+<tr>
+<td>readMappingExp</td>
+<td>read expression resolved in source</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h5 id="read-expression-in-property-mapping">Read expression in Property Mapping</h5>
+<p>The result of the expression defined in <strong>readMappingExp</strong> using the expression language, will be returned in the read queries.</p>
+<pre><code class="language-yaml">infrastructure:
+  mappings:
+    - name: default
+    - name: keycloak
+      entities:
+        - name: Users
+          mapping: user_entity
+          filter: realmId == &quot;${REALM_ID}&quot;
+          properties:
+            ...
+            - name: created
+              mapping: created_timestamp
+              readMappingExp: millisecondToDate(created/1000)
+            - name: realmId
+              length: 255
+              mapping: realm_id
+...
+</code></pre>
+<h3 id="source">Source</h3>
+<p>Databases are defined with their connection</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name of source</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>mapping</td>
+<td>name of reference to mapping</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">first</td>
+</tr>
+<tr>
+<td>dialect</td>
+<td>dialect of data source</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>connection</td>
+<td>string connection</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="set-connection-in-source">Set connection in Source</h4>
+<p>Although it is possible to define the connection both using environment variables and directly in the configuration. \
+This second option is not recommended due to security and different configurations that may exist by environment. \
+The ability to define the connection by configuration should only be used for a temporary local test.</p>
+<p>Using environment variable:</p>
+<pre><code class="language-yaml">...
+infrastructure:
+  sources:
+    - name: test
+      dialect: MySQL
+      mapping: test
+      connection: ${CNN_MYSQL}
+...    
+</code></pre>
+<p>In configuration:</p>
+<pre><code class="language-yaml">...
+infrastructure:
+  sources:
+    - name: test
+      dialect: MySQL
+      mapping: test
+      connection:
+        host: localhost
+        port: 3306
+        user: test
+        password: test
+        database: test
+...      
+</code></pre>
+<h3 id="stage">Stage</h3>
+<p>The stage is defined in which the rules that relate an entity to a source are determined</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name of stage</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>sources</td>
+<td>list of sources rules</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="source-rule">Source Rule</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name of source</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>condition</td>
+<td>boolean expression to evaluate</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">true</td>
+</tr>
+</tbody>
+</table>
+<h4 id="condition-on-source-rule">Condition on Source Rule</h4>
+<p>En <strong>condition</strong> se define la regla para determinar en que source se aplicaran las consultas.
+Las variables de contexto son las siguientes:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>entity</td>
+<td>query entity</td>
+<td>name of entity</td>
+</tr>
+<tr>
+<td>action</td>
+<td>query action</td>
+<td>select, insert, bulkInsert, update, delete, ddl</td>
+</tr>
+<tr>
+<td>read</td>
+<td>it is a read action</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>write</td>
+<td>it is a write action</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>dml</td>
+<td>it is a dml action</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>ddl</td>
+<td>it is a ddl action</td>
+<td>boolean</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>conditions</strong> are validated on the server using expressions. \
+These expressions will be executed by the expression engine <a href="https://www.npmjs.com/package/3xpr">3xpr</a> \
+In the event that more than one condition is met, the source will be determined according to the order in which it was defined.</p>
+<p>In the following example, all entities except <strong>Users</strong> will use the source <strong>main</strong>. \
+And in the case of the entity <strong>Users</strong> it will use the source <strong>keycloak</strong>.</p>
+<p>Example:</p>
+<pre><code class="language-yaml">...
+infrastructure:
+  stages:
+    - name: default
+      sources:
+        - name: main
+          condition: entity != &quot;Users&quot;
+        - name: keycloak
+          condition: entity == &quot;Users&quot;
+</code></pre>
+<h3 id="view">View</h3>
+<p>The view that can restrict or modify the results of the queries is defined.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name that identifies a view</td>
+<td style="text-align: center;">yes</td>
+</tr>
+<tr>
+<td>entities</td>
+<td>entity view list</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entities</strong> not included in the view will not be subject to any restrictions.</p>
+<p>In the following example, the <strong>admin</strong> view can access all entities.</p>
+<p>Example:</p>
+<pre><code class="language-yaml">infrastructure:
+  views:
+    - name: default
+      entities:
+        - name: Devices
+          properties:
+            - name: apiKey
+              readExp: '&quot;***&quot;'
+        - name: Users
+          properties:
+            - name: created
+              readExp: date(created)
+            - name: email
+              exclude: true
+    - name: collector
+      entities:
+        - name: Users
+          exclude: true
+        - name: Groups
+          exclude: true
+        - name: GroupUsers
+          exclude: true
+    - name: admin
+      entities: []
+</code></pre>
+<h4 id="entity-view">Entity View</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>entity name</td>
+<td style="text-align: center;">yes</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td>determines whether the entity is excluded</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>properties</td>
+<td>property view list</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="exclude-in-entity-view">Exclude in Entity View</h4>
+<p><strong>Entities</strong> set to <strong>exclude</strong> will not be accessible when using this view.</p>
+<pre><code class="language-yaml">infrastructure:
+  views:
+    ...
+    - name: collector
+      entities:
+        - name: Users
+          exclude: true
+        - name: Groups
+          exclude: true
+        - name: GroupUsers
+          exclude: true
+    ...
+</code></pre>
+<h4 id="property-view">Property View</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>property name</td>
+<td style="text-align: center;">yes</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td>determines whether the property is excluded</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>readExp</td>
+<td>read expression resolved in source</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h5 id="exclude-in-property-view">Exclude in Property View</h5>
+<p><strong>Properties</strong> set to <strong>exclude</strong> will not be accessible when using this view.</p>
+<pre><code class="language-yaml">infrastructure:
+  views:
+    - name: default
+      entities:
+        ...
+        - name: Users
+          properties:
+            - name: created
+              readExp: date(created)
+            - name: email
+              exclude: true
+      ...        
+</code></pre>
+<h5 id="read-expression-in-property-view">Read expression in Property View</h5>
+<p>The result of the expression defined in <strong>readExp</strong> using the expression language, will be returned in the read queries.</p>
+<p>Example:</p>
+<pre><code class="language-yaml">infrastructure:
+  views:
+    - name: default
+      entities:
+        ...
+        - name: Users
+          properties:
+            - name: created
+              readExp: date(created)
+            - name: email
+              exclude: true
+      ...        
+</code></pre>
+<h3 id="paths">Paths</h3>
+<p>In this app section, the configuration of the routes where the configuration files or execution results will be generated is established.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>src</td>
+<td>set path of source code</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">src</td>
+</tr>
+<tr>
+<td>state</td>
+<td>define path of orm state</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">orm_state</td>
+</tr>
+<tr>
+<td>model</td>
+<td>define path of   model to generate</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">model</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">app:
+  src: src
+  state: orm_state
+  domain: domain
+</code></pre>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

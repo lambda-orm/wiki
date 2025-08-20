@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Function functions - λORM Wiki</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Function functions";
+        var mkdocs_page_input_path = "function_functions.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../queries/Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../queries/Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../queries/Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../queries/Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../queries/Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../queries/Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../queries/Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../queries/BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../queries/Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../queries/Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Function functions</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sleep</td>
+<td>Sleeps for the specified number of milliseconds</td>
+</tr>
+<tr>
+<td>console</td>
+<td>Prints to console</td>
+</tr>
+<tr>
+<td>between</td>
+<td>Between</td>
+</tr>
+<tr>
+<td>includes</td>
+<td>Includes</td>
+</tr>
+<tr>
+<td>in</td>
+<td>In</td>
+</tr>
+<tr>
+<td>like</td>
+<td>String contains pattern</td>
+</tr>
+<tr>
+<td>isNull</td>
+<td>Check if value is null</td>
+</tr>
+<tr>
+<td>isNotNull</td>
+<td>Check if value is not null</td>
+</tr>
+<tr>
+<td>isEmpty</td>
+<td>Check if value is empty</td>
+</tr>
+<tr>
+<td>isNotEmpty</td>
+<td>Check if value is not empty</td>
+</tr>
+<tr>
+<td>isBoolean</td>
+<td>Check if value is boolean</td>
+</tr>
+<tr>
+<td>isNumber</td>
+<td>Check if value is number</td>
+</tr>
+<tr>
+<td>isInteger</td>
+<td>Check if value is integer</td>
+</tr>
+<tr>
+<td>isDecimal</td>
+<td>Check if value is decimal</td>
+</tr>
+<tr>
+<td>isString</td>
+<td>Check if value is string</td>
+</tr>
+<tr>
+<td>isDate</td>
+<td>Check if value is date</td>
+</tr>
+<tr>
+<td>isDateTime</td>
+<td>Check if value is date time</td>
+</tr>
+<tr>
+<td>isTime</td>
+<td>Check if value is time</td>
+</tr>
+<tr>
+<td>isObject</td>
+<td>Check if value is object</td>
+</tr>
+<tr>
+<td>isArray</td>
+<td>Check if value is array</td>
+</tr>
+<tr>
+<td>isBooleanFormat</td>
+<td>Check if value is boolean format</td>
+</tr>
+<tr>
+<td>isNumberFormat</td>
+<td>Check if value is number format</td>
+</tr>
+<tr>
+<td>isIntegerFormat</td>
+<td>Check if value is integer format</td>
+</tr>
+<tr>
+<td>isDecimalFormat</td>
+<td>Check if value is decimal format</td>
+</tr>
+<tr>
+<td>isDateFormat</td>
+<td>Check if value is date format</td>
+</tr>
+<tr>
+<td>isDateTimeFormat</td>
+<td>Check if value is date time format</td>
+</tr>
+<tr>
+<td>isTimeFormat</td>
+<td>Check if value is time format</td>
+</tr>
+<tr>
+<td>nvl</td>
+<td>Null value</td>
+</tr>
+<tr>
+<td>nvl2</td>
+<td>Null value</td>
+</tr>
+<tr>
+<td>abs</td>
+<td>Absolute value</td>
+</tr>
+<tr>
+<td>acos</td>
+<td>Arc cosine</td>
+</tr>
+<tr>
+<td>asin</td>
+<td>Arc sine</td>
+</tr>
+<tr>
+<td>atan</td>
+<td>Arc tangent</td>
+</tr>
+<tr>
+<td>atan2</td>
+<td>Arc tangent of two variables</td>
+</tr>
+<tr>
+<td>ceil</td>
+<td>Ceiling</td>
+</tr>
+<tr>
+<td>cos</td>
+<td>Cosine</td>
+</tr>
+<tr>
+<td>cosh</td>
+<td>Hyperbolic cosine</td>
+</tr>
+<tr>
+<td>exp</td>
+<td>Exponential</td>
+</tr>
+<tr>
+<td>floor</td>
+<td>Floor</td>
+</tr>
+<tr>
+<td>ln</td>
+<td>Natural logarithm</td>
+</tr>
+<tr>
+<td>log10</td>
+<td>Base 10 logarithm</td>
+</tr>
+<tr>
+<td>log</td>
+<td>Natural logarithm</td>
+</tr>
+<tr>
+<td>remainder</td>
+<td>Remainder</td>
+</tr>
+<tr>
+<td>round</td>
+<td>Round</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>Sign</td>
+</tr>
+<tr>
+<td>sin</td>
+<td>Sine</td>
+</tr>
+<tr>
+<td>sinh</td>
+<td>Hyperbolic sine</td>
+</tr>
+<tr>
+<td>tan</td>
+<td>Tangent</td>
+</tr>
+<tr>
+<td>tanh</td>
+<td>Hyperbolic tangent</td>
+</tr>
+<tr>
+<td>trunc</td>
+<td>Truncate</td>
+</tr>
+<tr>
+<td>chr</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>capitalize</td>
+<td>Capitalize</td>
+</tr>
+<tr>
+<td>endsWith</td>
+<td>Ends with</td>
+</tr>
+<tr>
+<td>strCount</td>
+<td>Count</td>
+</tr>
+<tr>
+<td>lower</td>
+<td>Lower case</td>
+</tr>
+<tr>
+<td>lpad</td>
+<td>Left pad</td>
+</tr>
+<tr>
+<td>ltrim</td>
+<td>Left trim</td>
+</tr>
+<tr>
+<td>indexOf</td>
+<td>Index of</td>
+</tr>
+<tr>
+<td>join</td>
+<td>Join</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>Replace</td>
+</tr>
+<tr>
+<td>rpad</td>
+<td>Right pad</td>
+</tr>
+<tr>
+<td>rtrim</td>
+<td>Right trim</td>
+</tr>
+<tr>
+<td>substring</td>
+<td>Substring</td>
+</tr>
+<tr>
+<td>trim</td>
+<td>Trim</td>
+</tr>
+<tr>
+<td>upper</td>
+<td>Upper case</td>
+</tr>
+<tr>
+<td>concat</td>
+<td>Concatenate</td>
+</tr>
+<tr>
+<td>test</td>
+<td>Test</td>
+</tr>
+<tr>
+<td>title</td>
+<td>Title case</td>
+</tr>
+<tr>
+<td>match</td>
+<td>Match</td>
+</tr>
+<tr>
+<td>mask</td>
+<td>Mask sensitive data</td>
+</tr>
+<tr>
+<td>split</td>
+<td>Split string</td>
+</tr>
+<tr>
+<td>startWith</td>
+<td>Starts with</td>
+</tr>
+<tr>
+<td>map</td>
+<td>Map</td>
+</tr>
+<tr>
+<td>foreach</td>
+<td>Foreach</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>Filter</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>Reverse</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>Sort</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>Remove</td>
+</tr>
+<tr>
+<td>push</td>
+<td>Push</td>
+</tr>
+<tr>
+<td>bulkInsert</td>
+<td>Bulk Insert</td>
+</tr>
+<tr>
+<td>pop</td>
+<td>Pop</td>
+</tr>
+<tr>
+<td>length</td>
+<td>Length</td>
+</tr>
+<tr>
+<td>slice</td>
+<td>Slice</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Paging</td>
+</tr>
+<tr>
+<td>distinct</td>
+<td>Distinct</td>
+</tr>
+<tr>
+<td>first</td>
+<td>First</td>
+</tr>
+<tr>
+<td>last</td>
+<td>Last</td>
+</tr>
+<tr>
+<td>count</td>
+<td>Count</td>
+</tr>
+<tr>
+<td>max</td>
+<td>Max</td>
+</tr>
+<tr>
+<td>min</td>
+<td>Min</td>
+</tr>
+<tr>
+<td>avg</td>
+<td>Average</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>Sum</td>
+</tr>
+<tr>
+<td>curTime</td>
+<td>Current time</td>
+</tr>
+<tr>
+<td>today</td>
+<td>Current date</td>
+</tr>
+<tr>
+<td>now</td>
+<td>Current date time</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Get time</td>
+</tr>
+<tr>
+<td>date</td>
+<td>Get date</td>
+</tr>
+<tr>
+<td>dateTime</td>
+<td>Get date time</td>
+</tr>
+<tr>
+<td>year</td>
+<td>Get year</td>
+</tr>
+<tr>
+<td>month</td>
+<td>Get month</td>
+</tr>
+<tr>
+<td>day</td>
+<td>Get day</td>
+</tr>
+<tr>
+<td>weekday</td>
+<td>Get day of week</td>
+</tr>
+<tr>
+<td>hour</td>
+<td>Get hours</td>
+</tr>
+<tr>
+<td>minute</td>
+<td>Get minutes</td>
+</tr>
+<tr>
+<td>second</td>
+<td>Get seconds</td>
+</tr>
+<tr>
+<td>millisecond</td>
+<td>Get milliseconds</td>
+</tr>
+<tr>
+<td>addYear</td>
+<td>Add years</td>
+</tr>
+<tr>
+<td>addMonth</td>
+<td>Add months</td>
+</tr>
+<tr>
+<td>addDay</td>
+<td>Add days</td>
+</tr>
+<tr>
+<td>addHour</td>
+<td>Add hours</td>
+</tr>
+<tr>
+<td>addMinute</td>
+<td>Add minutes</td>
+</tr>
+<tr>
+<td>addSecond</td>
+<td>Add seconds</td>
+</tr>
+<tr>
+<td>addMillisecond</td>
+<td>Add milliseconds</td>
+</tr>
+<tr>
+<td>addTime</td>
+<td>Add time</td>
+</tr>
+<tr>
+<td>subtractTime</td>
+<td>Subtract time</td>
+</tr>
+<tr>
+<td>yearDiff</td>
+<td>Year difference</td>
+</tr>
+<tr>
+<td>dayDiff</td>
+<td>Day difference</td>
+</tr>
+<tr>
+<td>hourDiff</td>
+<td>Hour difference</td>
+</tr>
+<tr>
+<td>secondDiff</td>
+<td>Second difference</td>
+</tr>
+<tr>
+<td>millisecondDiff</td>
+<td>Millisecond difference</td>
+</tr>
+<tr>
+<td>dayToDate</td>
+<td>Convert days to date time</td>
+</tr>
+<tr>
+<td>hourToDate</td>
+<td>Convert hours to date time</td>
+</tr>
+<tr>
+<td>secondToDate</td>
+<td>Convert seconds to date time</td>
+</tr>
+<tr>
+<td>millisecondToDate</td>
+<td>Convert milliseconds to date time</td>
+</tr>
+<tr>
+<td>toString</td>
+<td>Convert to string</td>
+</tr>
+<tr>
+<td>toNumber</td>
+<td>Convert to number</td>
+</tr>
+<tr>
+<td>dateToString</td>
+<td>Convert date to string</td>
+</tr>
+<tr>
+<td>stringify</td>
+<td>Convert to JSON string</td>
+</tr>
+<tr>
+<td>parse</td>
+<td>Parse JSON string</td>
+</tr>
+<tr>
+<td>keys</td>
+<td>Object keys</td>
+</tr>
+<tr>
+<td>values</td>
+<td>Object values</td>
+</tr>
+<tr>
+<td>entries</td>
+<td>Object entries</td>
+</tr>
+<tr>
+<td>fromEntries</td>
+<td>Object from entries</td>
+</tr>
+<tr>
+<td>union</td>
+<td>Union</td>
+</tr>
+<tr>
+<td>intersection</td>
+<td>Intersection</td>
+</tr>
+<tr>
+<td>difference</td>
+<td>Difference</td>
+</tr>
+<tr>
+<td>symmetricDifference</td>
+<td>Symmetric Difference</td>
+</tr>
+<tr>
+<td>toBase64</td>
+<td>Convert a string to base64</td>
+</tr>
+<tr>
+<td>getBase64</td>
+<td>Get a string from base64</td>
+</tr>
+<tr>
+<td>encrypt</td>
+<td>Encrypt a string</td>
+</tr>
+<tr>
+<td>decrypt</td>
+<td>Decrypt a string</td>
+</tr>
+<tr>
+<td>update</td>
+<td>Update a list</td>
+</tr>
+<tr>
+<td>updateAll</td>
+<td>Update all items in a list</td>
+</tr>
+<tr>
+<td>deleteAll</td>
+<td>Delete all items in a list</td>
+</tr>
+<tr>
+<td>merge</td>
+<td>Merge a list</td>
+</tr>
+<tr>
+<td>bulkMerge</td>
+<td>Bulk merge a list</td>
+</tr>
+<tr>
+<td>having</td>
+<td>Having a list</td>
+</tr>
+<tr>
+<td>include</td>
+<td>Include a list</td>
+</tr>
+<tr>
+<td>desc</td>
+<td>Descending</td>
+</tr>
+<tr>
+<td>asc</td>
+<td>Ascending</td>
+</tr>
+<tr>
+<td>orm.execute</td>
+<td>Execute query</td>
+</tr>
+<tr>
+<td>orm.plan</td>
+<td>Plan of query</td>
+</tr>
+<tr>
+<td>orm.metadata</td>
+<td>Get metadata from query</td>
+</tr>
+<tr>
+<td>orm.model</td>
+<td>Get model from query</td>
+</tr>
+<tr>
+<td>orm.parameters</td>
+<td>Get parameters from query</td>
+</tr>
+<tr>
+<td>orm.constraints</td>
+<td>Get constraints from query</td>
+</tr>
+<tr>
+<td>contains</td>
+<td>Includes</td>
+</tr>
+<tr>
+<td>substr</td>
+<td>Substring</td>
+</tr>
+<tr>
+<td>concatenate</td>
+<td>Concatenate</td>
+</tr>
+<tr>
+<td>startsWith</td>
+<td>Starts with</td>
+</tr>
+<tr>
+<td>select</td>
+<td>Map</td>
+</tr>
+<tr>
+<td>each</td>
+<td>Foreach</td>
+</tr>
+<tr>
+<td>where</td>
+<td>Filter</td>
+</tr>
+<tr>
+<td>order</td>
+<td>Sort</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>Remove</td>
+</tr>
+<tr>
+<td>insert</td>
+<td>Push</td>
+</tr>
+<tr>
+<td>len</td>
+<td>Length</td>
+</tr>
+</tbody>
+</table>
+<h2 id="definition">Definition</h2>
+<h3 id="sleep">sleep</h3>
+<ul>
+<li>description: Sleeps for the specified number of milliseconds</li>
+<li>deterministic: true</li>
+<li>return: void</li>
+<li>params:<ul>
+<li>ms?: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="console">console</h3>
+<ul>
+<li>description: Prints to console</li>
+<li>deterministic: true</li>
+<li>return: void</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="between">between</h3>
+<ul>
+<li>description: Between</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: T</li>
+<li>from: T</li>
+<li>to: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="includes">includes</h3>
+<ul>
+<li>description: Includes</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>source: string|T[]</li>
+<li>value: string|T</li>
+</ul>
+</li>
+</ul>
+<h3 id="in">in</h3>
+<ul>
+<li>description: In</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>source: T</li>
+<li>values: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="like">like</h3>
+<ul>
+<li>description: String contains pattern</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>pattern: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isnull">isNull</h3>
+<ul>
+<li>description: Check if value is null</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isnotnull">isNotNull</h3>
+<ul>
+<li>description: Check if value is not null</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isempty">isEmpty</h3>
+<ul>
+<li>description: Check if value is empty</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isnotempty">isNotEmpty</h3>
+<ul>
+<li>description: Check if value is not empty</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isboolean">isBoolean</h3>
+<ul>
+<li>description: Check if value is boolean</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isnumber">isNumber</h3>
+<ul>
+<li>description: Check if value is number</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isinteger">isInteger</h3>
+<ul>
+<li>description: Check if value is integer</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isdecimal">isDecimal</h3>
+<ul>
+<li>description: Check if value is decimal</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isstring">isString</h3>
+<ul>
+<li>description: Check if value is string</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isdate">isDate</h3>
+<ul>
+<li>description: Check if value is date</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isdatetime">isDateTime</h3>
+<ul>
+<li>description: Check if value is date time</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="istime">isTime</h3>
+<ul>
+<li>description: Check if value is time</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isobject">isObject</h3>
+<ul>
+<li>description: Check if value is object</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isarray">isArray</h3>
+<ul>
+<li>description: Check if value is array</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isbooleanformat">isBooleanFormat</h3>
+<ul>
+<li>description: Check if value is boolean format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isnumberformat">isNumberFormat</h3>
+<ul>
+<li>description: Check if value is number format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isintegerformat">isIntegerFormat</h3>
+<ul>
+<li>description: Check if value is integer format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isdecimalformat">isDecimalFormat</h3>
+<ul>
+<li>description: Check if value is decimal format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isdateformat">isDateFormat</h3>
+<ul>
+<li>description: Check if value is date format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isdatetimeformat">isDateTimeFormat</h3>
+<ul>
+<li>description: Check if value is date time format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="istimeformat">isTimeFormat</h3>
+<ul>
+<li>description: Check if value is time format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="nvl">nvl</h3>
+<ul>
+<li>description: Null value</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>value: T</li>
+<li>default: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="nvl2">nvl2</h3>
+<ul>
+<li>description: Null value</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>value: any</li>
+<li>a: T</li>
+<li>b: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="abs">abs</h3>
+<ul>
+<li>description: Absolute value</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="acos">acos</h3>
+<ul>
+<li>description: Arc cosine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="asin">asin</h3>
+<ul>
+<li>description: Arc sine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="atan">atan</h3>
+<ul>
+<li>description: Arc tangent</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="atan2">atan2</h3>
+<ul>
+<li>description: Arc tangent of two variables</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="ceil">ceil</h3>
+<ul>
+<li>description: Ceiling</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="cos">cos</h3>
+<ul>
+<li>description: Cosine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="cosh">cosh</h3>
+<ul>
+<li>description: Hyperbolic cosine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="exp">exp</h3>
+<ul>
+<li>description: Exponential</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="floor">floor</h3>
+<ul>
+<li>description: Floor</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="ln">ln</h3>
+<ul>
+<li>description: Natural logarithm</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="log10">log10</h3>
+<ul>
+<li>description: Base 10 logarithm</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="log">log</h3>
+<ul>
+<li>description: Natural logarithm</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="remainder">remainder</h3>
+<ul>
+<li>description: Remainder</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>n1: number</li>
+<li>n2: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="round">round</h3>
+<ul>
+<li>description: Round</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>num: number</li>
+<li>decimals: 0</li>
+</ul>
+</li>
+</ul>
+<h3 id="sign">sign</h3>
+<ul>
+<li>description: Sign</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="sin">sin</h3>
+<ul>
+<li>description: Sine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="sinh">sinh</h3>
+<ul>
+<li>description: Hyperbolic sine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="tan">tan</h3>
+<ul>
+<li>description: Tangent</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="tanh">tanh</h3>
+<ul>
+<li>description: Hyperbolic tangent</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="trunc">trunc</h3>
+<ul>
+<li>description: Truncate</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="chr">chr</h3>
+<ul>
+<li>description: Character</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>ascii: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="capitalize">capitalize</h3>
+<ul>
+<li>description: Capitalize</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="endswith">endsWith</h3>
+<ul>
+<li>description: Ends with</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>sub: string</li>
+<li>start: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="strcount">strCount</h3>
+<ul>
+<li>description: Count</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>source: string</li>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="lower">lower</h3>
+<ul>
+<li>description: Lower case</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="lpad">lpad</h3>
+<ul>
+<li>description: Left pad</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>len: number</li>
+<li>pad: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="ltrim">ltrim</h3>
+<ul>
+<li>description: Left trim</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="indexof">indexOf</h3>
+<ul>
+<li>description: Index of</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>sub: string</li>
+<li>start: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="join">join</h3>
+<ul>
+<li>description: Join</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>values: string[]</li>
+<li>separator: string</li>
+<li>: "</li>
+</ul>
+</li>
+</ul>
+<h3 id="replace">replace</h3>
+<ul>
+<li>description: Replace</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>source: string</li>
+<li>target: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="rpad">rpad</h3>
+<ul>
+<li>description: Right pad</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>len: number</li>
+<li>pad: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="rtrim">rtrim</h3>
+<ul>
+<li>description: Right trim</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="substring">substring</h3>
+<ul>
+<li>description: Substring</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>from: number</li>
+<li>count: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="trim">trim</h3>
+<ul>
+<li>description: Trim</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="upper">upper</h3>
+<ul>
+<li>description: Upper case</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="concat">concat</h3>
+<ul>
+<li>description: Concatenate</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>values: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="test">test</h3>
+<ul>
+<li>description: Test</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>regexp: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="title">title</h3>
+<ul>
+<li>description: Title case</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="match">match</h3>
+<ul>
+<li>description: Match</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>regexp: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="mask">mask</h3>
+<ul>
+<li>description: Mask sensitive data</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="split">split</h3>
+<ul>
+<li>description: Split string</li>
+<li>deterministic: true</li>
+<li>return: string[]</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>separator: string</li>
+<li>: "</li>
+</ul>
+</li>
+</ul>
+<h3 id="startwith">startWith</h3>
+<ul>
+<li>description: Starts with</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>sub: string</li>
+<li>start: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="map">map</h3>
+<ul>
+<li>description: Map</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="foreach">foreach</h3>
+<ul>
+<li>description: Foreach</li>
+<li>deterministic: true</li>
+<li>return: void</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="filter">filter</h3>
+<ul>
+<li>description: Filter</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="reverse">reverse</h3>
+<ul>
+<li>description: Reverse</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="sort">sort</h3>
+<ul>
+<li>description: Sort</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="remove">remove</h3>
+<ul>
+<li>description: Remove</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="push">push</h3>
+<ul>
+<li>description: Push</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>value: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="bulkinsert">bulkInsert</h3>
+<ul>
+<li>description: Bulk Insert</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>value: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="pop">pop</h3>
+<ul>
+<li>description: Pop</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>list: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="length">length</h3>
+<ul>
+<li>description: Length</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>source: any[]|string</li>
+</ul>
+</li>
+</ul>
+<h3 id="slice">slice</h3>
+<ul>
+<li>description: Slice</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>from: integer</li>
+<li>to: integer</li>
+</ul>
+</li>
+</ul>
+<h3 id="page">page</h3>
+<ul>
+<li>description: Paging</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>page: integer</li>
+<li>records: integer</li>
+</ul>
+</li>
+</ul>
+<h3 id="distinct">distinct</h3>
+<ul>
+<li>description: Distinct</li>
+<li>deterministic: true</li>
+<li>return: any[]</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="first">first</h3>
+<ul>
+<li>description: First</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="last">last</h3>
+<ul>
+<li>description: Last</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="count">count</h3>
+<ul>
+<li>description: Count</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="max">max</h3>
+<ul>
+<li>description: Max</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="min">min</h3>
+<ul>
+<li>description: Min</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="avg">avg</h3>
+<ul>
+<li>description: Average</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="sum">sum</h3>
+<ul>
+<li>description: Sum</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="curtime">curTime</h3>
+<ul>
+<li>description: Current time</li>
+<li>deterministic: true</li>
+<li>return: time</li>
+<li>params:<ul>
+<li>: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="today">today</h3>
+<ul>
+<li>description: Current date</li>
+<li>deterministic: true</li>
+<li>return: date</li>
+<li>params:<ul>
+<li>: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="now">now</h3>
+<ul>
+<li>description: Current date time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="time">time</h3>
+<ul>
+<li>description: Get time</li>
+<li>deterministic: true</li>
+<li>return: time</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="date">date</h3>
+<ul>
+<li>description: Get date</li>
+<li>deterministic: true</li>
+<li>return: date</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="datetime">dateTime</h3>
+<ul>
+<li>description: Get date time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="year">year</h3>
+<ul>
+<li>description: Get year</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="month">month</h3>
+<ul>
+<li>description: Get month</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="day">day</h3>
+<ul>
+<li>description: Get day</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="weekday">weekday</h3>
+<ul>
+<li>description: Get day of week</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="hour">hour</h3>
+<ul>
+<li>description: Get hours</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="minute">minute</h3>
+<ul>
+<li>description: Get minutes</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="second">second</h3>
+<ul>
+<li>description: Get seconds</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="millisecond">millisecond</h3>
+<ul>
+<li>description: Get milliseconds</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="addyear">addYear</h3>
+<ul>
+<li>description: Add years</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addmonth">addMonth</h3>
+<ul>
+<li>description: Add months</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addday">addDay</h3>
+<ul>
+<li>description: Add days</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addhour">addHour</h3>
+<ul>
+<li>description: Add hours</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addminute">addMinute</h3>
+<ul>
+<li>description: Add minutes</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addsecond">addSecond</h3>
+<ul>
+<li>description: Add seconds</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addmillisecond">addMillisecond</h3>
+<ul>
+<li>description: Add milliseconds</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addtime">addTime</h3>
+<ul>
+<li>description: Add time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>time: time</li>
+</ul>
+</li>
+</ul>
+<h3 id="subtracttime">subtractTime</h3>
+<ul>
+<li>description: Subtract time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>time: time</li>
+</ul>
+</li>
+</ul>
+<h3 id="yeardiff">yearDiff</h3>
+<ul>
+<li>description: Year difference</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>date1: dateTime</li>
+<li>date2: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="daydiff">dayDiff</h3>
+<ul>
+<li>description: Day difference</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>date1: dateTime</li>
+<li>date2: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="hourdiff">hourDiff</h3>
+<ul>
+<li>description: Hour difference</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>date1: dateTime</li>
+<li>date2: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="seconddiff">secondDiff</h3>
+<ul>
+<li>description: Second difference</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>date1: dateTime</li>
+<li>date2: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="milliseconddiff">millisecondDiff</h3>
+<ul>
+<li>description: Millisecond difference</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>date1: dateTime</li>
+<li>date2: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="daytodate">dayToDate</h3>
+<ul>
+<li>description: Convert days to date time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="hourtodate">hourToDate</h3>
+<ul>
+<li>description: Convert hours to date time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="secondtodate">secondToDate</h3>
+<ul>
+<li>description: Convert seconds to date time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="millisecondtodate">millisecondToDate</h3>
+<ul>
+<li>description: Convert milliseconds to date time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="tostring">toString</h3>
+<ul>
+<li>description: Convert to string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="tonumber">toNumber</h3>
+<ul>
+<li>description: Convert to number</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="datetostring">dateToString</h3>
+<ul>
+<li>description: Convert date to string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>date: date</li>
+</ul>
+</li>
+</ul>
+<h3 id="stringify">stringify</h3>
+<ul>
+<li>description: Convert to JSON string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="parse">parse</h3>
+<ul>
+<li>description: Parse JSON string</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="keys">keys</h3>
+<ul>
+<li>description: Object keys</li>
+<li>deterministic: true</li>
+<li>return: string[]</li>
+<li>params:<ul>
+<li>obj: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="values">values</h3>
+<ul>
+<li>description: Object values</li>
+<li>deterministic: true</li>
+<li>return: any[]</li>
+<li>params:<ul>
+<li>obj: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="entries">entries</h3>
+<ul>
+<li>description: Object entries</li>
+<li>deterministic: true</li>
+<li>return: [string,any][]</li>
+<li>params:<ul>
+<li>obj: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="fromentries">fromEntries</h3>
+<ul>
+<li>description: Object from entries</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>entries: [string</li>
+<li>: any][]</li>
+</ul>
+</li>
+</ul>
+<h3 id="union">union</h3>
+<ul>
+<li>description: Union</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>a: T[]</li>
+<li>b: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="intersection">intersection</h3>
+<ul>
+<li>description: Intersection</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>a: T[]</li>
+<li>b: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="difference">difference</h3>
+<ul>
+<li>description: Difference</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>a: T[]</li>
+<li>b: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="symmetricdifference">symmetricDifference</h3>
+<ul>
+<li>description: Symmetric Difference</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>a: T[]</li>
+<li>b: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="tobase64">toBase64</h3>
+<ul>
+<li>description: Convert a string to base64</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="getbase64">getBase64</h3>
+<ul>
+<li>description: Get a string from base64</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="encrypt">encrypt</h3>
+<ul>
+<li>description: Encrypt a string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="decrypt">decrypt</h3>
+<ul>
+<li>description: Decrypt a string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="update">update</h3>
+<ul>
+<li>description: Update a list</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="updateall">updateAll</h3>
+<ul>
+<li>description: Update all items in a list</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="deleteall">deleteAll</h3>
+<ul>
+<li>description: Delete all items in a list</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>list: any[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="merge">merge</h3>
+<ul>
+<li>description: Merge a list</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="bulkmerge">bulkMerge</h3>
+<ul>
+<li>description: Bulk merge a list</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="having">having</h3>
+<ul>
+<li>description: Having a list</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="include">include</h3>
+<ul>
+<li>description: Include a list</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="desc">desc</h3>
+<ul>
+<li>description: Descending</li>
+<li>deterministic: true</li>
+<li>return: void</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="asc">asc</h3>
+<ul>
+<li>description: Ascending</li>
+<li>deterministic: true</li>
+<li>return: void</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="ormexecute">orm.execute</h3>
+<ul>
+<li>description: Execute query</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>query: string</li>
+<li>data: any</li>
+<li>options: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="ormplan">orm.plan</h3>
+<ul>
+<li>description: Plan of query</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>query: string</li>
+<li>options: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="ormmetadata">orm.metadata</h3>
+<ul>
+<li>description: Get metadata from query</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>query: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="ormmodel">orm.model</h3>
+<ul>
+<li>description: Get model from query</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>query: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="ormparameters">orm.parameters</h3>
+<ul>
+<li>description: Get parameters from query</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>query: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="ormconstraints">orm.constraints</h3>
+<ul>
+<li>description: Get constraints from query</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>query: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="contains">contains</h3>
+<ul>
+<li>description: Includes</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>source: string|T[]</li>
+<li>value: string|T</li>
+</ul>
+</li>
+</ul>
+<h3 id="substr">substr</h3>
+<ul>
+<li>description: Substring</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>from: number</li>
+<li>count: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="concatenate">concatenate</h3>
+<ul>
+<li>description: Concatenate</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>values: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="startswith">startsWith</h3>
+<ul>
+<li>description: Starts with</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>sub: string</li>
+<li>start: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="select">select</h3>
+<ul>
+<li>description: Map</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="each">each</h3>
+<ul>
+<li>description: Foreach</li>
+<li>deterministic: true</li>
+<li>return: void</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="where">where</h3>
+<ul>
+<li>description: Filter</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="order">order</h3>
+<ul>
+<li>description: Sort</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="delete">delete</h3>
+<ul>
+<li>description: Remove</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="insert">insert</h3>
+<ul>
+<li>description: Push</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>value: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="len">len</h3>
+<ul>
+<li>description: Length</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>source: any[]|string</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

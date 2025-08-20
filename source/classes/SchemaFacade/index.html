@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>SchemaFacade - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "SchemaFacade";
+        var mkdocs_page_input_path = "source/classes/SchemaFacade.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">SchemaFacade</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../"><strong>Lambda ORM</strong></a></p>
+<hr />
+<p><a href="../../">Lambda ORM</a> / SchemaFacade</p>
+<h1 id="class-schemafacade">Class: SchemaFacade</h1>
+<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:10</p>
+<h2 id="constructors">Constructors</h2>
+<h3 id="constructor">Constructor</h3>
+<blockquote>
+<p><strong>new SchemaFacade</strong>(<code>schemaService</code>, <code>getSchemaData</code>, <code>extender</code>, <code>createSchema</code>, <code>initializeSchema</code>, <code>updateSchema</code>, <code>matchSchema</code>, <code>fileService</code>): <code>SchemaFacade</code></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:19</p>
+<h4 id="parameters">Parameters</h4>
+<h5 id="schemaservice">schemaService</h5>
+<p><a href="../SchemaService/"><code>SchemaService</code></a></p>
+<h5 id="getschemadata">getSchemaData</h5>
+<p><a href="../GetSchemaSchema/"><code>GetSchemaSchema</code></a></p>
+<h5 id="extender">extender</h5>
+<p><a href="../SchemaExtender/"><code>SchemaExtender</code></a></p>
+<h5 id="createschema">createSchema</h5>
+<p><a href="../CreateSchema/"><code>CreateSchema</code></a></p>
+<h5 id="initializeschema">initializeSchema</h5>
+<p><a href="../InitializeSchema/"><code>InitializeSchema</code></a></p>
+<h5 id="updateschema">updateSchema</h5>
+<p><a href="../UpdateSchema/"><code>UpdateSchema</code></a></p>
+<h5 id="matchschema">matchSchema</h5>
+<p><a href="../MatchSchema/"><code>MatchSchema</code></a></p>
+<h5 id="fileservice">fileService</h5>
+<p><a href="../../interfaces/IFileSchemaService/"><code>IFileSchemaService</code></a></p>
+<h4 id="returns">Returns</h4>
+<p><code>SchemaFacade</code></p>
+<h2 id="properties">Properties</h2>
+<h3 id="schemaservice_1">schemaService</h3>
+<blockquote>
+<p><code>readonly</code> <strong>schemaService</strong>: <a href="../SchemaService/"><code>SchemaService</code></a></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:11</p>
+<h2 id="methods">Methods</h2>
+<h3 id="complete">complete()</h3>
+<blockquote>
+<p><strong>complete</strong>(<code>schema</code>): <code>void</code></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:25</p>
+<h4 id="parameters_1">Parameters</h4>
+<h5 id="schema">schema</h5>
+<p><a href="../../interfaces/Schema/"><code>Schema</code></a></p>
+<h4 id="returns_1">Returns</h4>
+<p><code>void</code></p>
+<hr />
+<h3 id="create">create()</h3>
+<blockquote>
+<p><strong>create</strong>(<code>dialect?</code>, <code>connection?</code>): <a href="../../interfaces/Schema/"><code>Schema</code></a></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:20</p>
+<h4 id="parameters_2">Parameters</h4>
+<h5 id="dialect">dialect?</h5>
+<p><a href="../../enumerations/Dialect/"><code>Dialect</code></a></p>
+<h5 id="connection">connection?</h5>
+<p><code>any</code></p>
+<h4 id="returns_2">Returns</h4>
+<p><a href="../../interfaces/Schema/"><code>Schema</code></a></p>
+<hr />
+<h3 id="initialize">initialize()</h3>
+<blockquote>
+<p><strong>initialize</strong>(<code>schema</code>, <code>args</code>): <a href="../../interfaces/Schema/"><code>Schema</code></a></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:21</p>
+<h4 id="parameters_3">Parameters</h4>
+<h5 id="schema_1">schema</h5>
+<p><a href="../../interfaces/Schema/"><code>Schema</code></a></p>
+<h5 id="args">args</h5>
+<p><a href="../../interfaces/InitializeSchemaArgs/"><code>InitializeSchemaArgs</code></a></p>
+<h4 id="returns_3">Returns</h4>
+<p><a href="../../interfaces/Schema/"><code>Schema</code></a></p>
+<hr />
+<h3 id="introspect">introspect()</h3>
+<blockquote>
+<p><strong>introspect</strong>(<code>schema</code>, <code>data</code>, <code>name</code>): <a href="../../interfaces/SchemaData/"><code>SchemaData</code></a></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:22</p>
+<h4 id="parameters_4">Parameters</h4>
+<h5 id="schema_2">schema</h5>
+<p><a href="../../interfaces/Schema/"><code>Schema</code></a></p>
+<h5 id="data">data</h5>
+<p><code>any</code></p>
+<h5 id="name">name</h5>
+<p><code>string</code></p>
+<h4 id="returns_4">Returns</h4>
+<p><a href="../../interfaces/SchemaData/"><code>SchemaData</code></a></p>
+<hr />
+<h3 id="match">match()</h3>
+<blockquote>
+<p><strong>match</strong>(<code>schema</code>, <code>mappings</code>, <code>options?</code>): <code>void</code></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:23</p>
+<h4 id="parameters_5">Parameters</h4>
+<h5 id="schema_3">schema</h5>
+<p><a href="../../interfaces/Schema/"><code>Schema</code></a></p>
+<h5 id="mappings">mappings</h5>
+<p><a href="../../interfaces/Mapping/"><code>Mapping</code></a>[]</p>
+<h5 id="options">options?</h5>
+<p><a href="../../interfaces/MatchOptions/"><code>MatchOptions</code></a></p>
+<h4 id="returns_5">Returns</h4>
+<p><code>void</code></p>
+<hr />
+<h3 id="read">read()</h3>
+<blockquote>
+<p><strong>read</strong>(<code>workspace</code>): <code>Promise</code>\&lt;<code>null</code> | <a href="../../interfaces/SchemaInfo/"><code>SchemaInfo</code></a>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:26</p>
+<h4 id="parameters_6">Parameters</h4>
+<h5 id="workspace">workspace</h5>
+<p><code>string</code></p>
+<h4 id="returns_6">Returns</h4>
+<p><code>Promise</code>\&lt;<code>null</code> | <a href="../../interfaces/SchemaInfo/"><code>SchemaInfo</code></a>&gt;</p>
+<hr />
+<h3 id="schemadata">schemaData()</h3>
+<blockquote>
+<p><strong>schemaData</strong>(<code>source</code>, <code>name</code>, <code>type</code>): <a href="../../interfaces/SchemaData/"><code>SchemaData</code></a></p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:24</p>
+<h4 id="parameters_7">Parameters</h4>
+<h5 id="source">source</h5>
+<p><code>any</code></p>
+<h5 id="name_1">name</h5>
+<p><code>string</code></p>
+<h5 id="type">type</h5>
+<p><code>Type</code></p>
+<h4 id="returns_7">Returns</h4>
+<p><a href="../../interfaces/SchemaData/"><code>SchemaData</code></a></p>
+<hr />
+<h3 id="write">write()</h3>
+<blockquote>
+<p><strong>write</strong>(<code>schema</code>, <code>path</code>): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:27</p>
+<h4 id="parameters_8">Parameters</h4>
+<h5 id="schema_4">schema</h5>
+<p><a href="../../interfaces/Schema/"><code>Schema</code></a></p>
+<h5 id="path">path</h5>
+<p><code>string</code></p>
+<h4 id="returns_8">Returns</h4>
+<p><code>Promise</code>\&lt;<code>void</code>&gt;</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

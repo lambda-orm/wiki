@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>BulkInsert - λORM Wiki</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "BulkInsert";
+        var mkdocs_page_input_path = "queries/BulkInsert.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">BulkInsert</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="bulkinsert">BulkInsert</h1>
+<p><strong>BulkInsert</strong> is a database operation that allows inserting multiple records into a table at once, rather than inserting them one by one. This operation is particularly useful when dealing with large datasets or when performance optimization is needed.</p>
+<h2 id="advantages-of-bulkinsert">Advantages of BulkInsert:</h2>
+<ol>
+<li>
+<p><strong>Improved Performance</strong>: BulkInsert significantly reduces the number of round trips between the application and the database, resulting in improved performance. Instead of executing multiple individual insert statements, a single bulk insert statement is executed, which reduces overhead and latency.</p>
+</li>
+<li>
+<p><strong>Reduced Database Load</strong>: By minimizing the number of database transactions, BulkInsert helps in reducing the load on the database server, which can improve overall system performance, especially in high-traffic environments.</p>
+</li>
+<li>
+<p><strong>Atomicity</strong>: BulkInsert operations are typically atomic, meaning that either all records are inserted successfully, or none are. This ensures data integrity and consistency in the database.</p>
+</li>
+<li>
+<p><strong>Simplicity</strong>: Using BulkInsert simplifies the application code by reducing the number of database interactions required. This leads to cleaner and more maintainable code.</p>
+</li>
+<li>
+<p><strong>Scalability</strong>: BulkInsert is well-suited for handling large datasets, making it scalable for applications that need to process and insert a significant amount of data efficiently.</p>
+</li>
+</ol>
+<p>Overall, BulkInsert is a powerful database operation that can significantly improve the performance and efficiency of data insertion tasks in applications dealing with large volumes of data.</p>
+<h2 id="bulkinsert-in-one-entity">BulkInsert in one entity</h2>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Bulk insert operation for Categories entity
+Categories.bulkInsert()
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Bulk insertion into Categories table with provided values
+INSERT INTO Categories(CategoryName,Description) VALUES ?
+</code></pre>
+<h2 id="bulkinsert-with-include-related-entity">BulkInsert with include related entity</h2>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// Bulk insert operation for Orders entity and including details
+Orders.bulkInsert().include(p =&gt; p.details)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Bulk insertion into Orders table with provided values
+INSERT INTO Orders(CustomerID,EmployeeID,OrderDate,RequiredDate,ShippedDate,ShipVia,Freight,ShipName,ShipAddress,ShipCity,ShipRegion,ShipPostalCode,ShipCountry) VALUES ?
+
+-- Bulk insertion into Order Details table with provided values
+INSERT INTO `Order Details`(OrderID,ProductID,UnitPrice,Quantity,Discount) VALUES ?
+</code></pre>
+<h2 id="code-example">Code example</h2>
+<pre><code class="language-Typescript">import { orm } from '../../lib'
+import { Categories } from '../northwind/model/__model'
+(async () =&gt; {  
+    try {       
+        await orm.init('./config/northwind.yaml')
+        const categories = [
+            {
+                name: 'Beverages4',
+                description: 'Soft drinks, coffees, teas, beers, and ales',
+                id: 12
+            },
+            {
+                name: 'Condiments4',
+                description: 'Sweet and savory sauces, relishes, spreads, and seasonings',
+                id: 13
+            }
+        ]
+        // Define a query for bulk insert operation for categories
+        const query = () =&gt; Categories.bulkInsert()
+        // Execute the query using the ORM, passing the query function and the categories data
+        const result = await orm.execute(query, categories)
+        // return ids of records inserted
+        console.log(JSON.stringify(result, null, 2))        
+    } catch (error:any) {
+        console.error(error.stack)
+    } finally {
+        // Ending the ORM connection
+        await orm.end()
+    }
+})()
+</code></pre>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

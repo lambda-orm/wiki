@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>DDLBuilderService - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "DDLBuilderService";
+        var mkdocs_page_input_path = "source/classes/DDLBuilderService.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">DDLBuilderService</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../"><strong>Lambda ORM</strong></a></p>
+<hr />
+<p><a href="../../">Lambda ORM</a> / DDLBuilderService</p>
+<h1 id="class-ddlbuilderservice">Class: DDLBuilderService</h1>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/application/services/ddlBuilder.ts#L11">src/lib/language/application/services/ddlBuilder.ts:11</a></p>
+<h2 id="constructors">Constructors</h2>
+<h3 id="constructor">Constructor</h3>
+<blockquote>
+<p><strong>new DDLBuilderService</strong>(<code>schemaState</code>, <code>languages</code>, <code>stage</code>, <code>helper</code>): <code>DDLBuilderService</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/application/services/ddlBuilder.ts#L13">src/lib/language/application/services/ddlBuilder.ts:13</a></p>
+<h4 id="parameters">Parameters</h4>
+<h5 id="schemastate">schemaState</h5>
+<p><a href="../SchemaState/"><code>SchemaState</code></a></p>
+<h5 id="languages">languages</h5>
+<p><a href="../LanguagesService/"><code>LanguagesService</code></a></p>
+<h5 id="stage">stage</h5>
+<p><code>string</code></p>
+<h5 id="helper">helper</h5>
+<p><a href="../OrmH3lp/"><code>OrmH3lp</code></a></p>
+<h4 id="returns">Returns</h4>
+<p><code>DDLBuilderService</code></p>
+<h2 id="properties">Properties</h2>
+<h3 id="stage_1">stage</h3>
+<blockquote>
+<p><code>readonly</code> <strong>stage</strong>: <code>string</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/application/services/ddlBuilder.ts#L15">src/lib/language/application/services/ddlBuilder.ts:15</a></p>
+<h2 id="methods">Methods</h2>
+<h3 id="drop">drop()</h3>
+<blockquote>
+<p><strong>drop</strong>(<code>mappings</code>): <a href="../Query/"><code>Query</code></a>[]</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/application/services/ddlBuilder.ts#L21">src/lib/language/application/services/ddlBuilder.ts:21</a></p>
+<h4 id="parameters_1">Parameters</h4>
+<h5 id="mappings">mappings</h5>
+<p><a href="../../interfaces/Mapping/"><code>Mapping</code></a>[]</p>
+<h4 id="returns_1">Returns</h4>
+<p><a href="../Query/"><code>Query</code></a>[]</p>
+<hr />
+<h3 id="sync">sync()</h3>
+<blockquote>
+<p><strong>sync</strong>(<code>mappings</code>): <a href="../Query/"><code>Query</code></a>[]</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/application/services/ddlBuilder.ts#L47">src/lib/language/application/services/ddlBuilder.ts:47</a></p>
+<h4 id="parameters_2">Parameters</h4>
+<h5 id="mappings_1">mappings</h5>
+<p><a href="../../interfaces/Mapping/"><code>Mapping</code></a>[]</p>
+<h4 id="returns_2">Returns</h4>
+<p><a href="../Query/"><code>Query</code></a>[]</p>
+<hr />
+<h3 id="truncate">truncate()</h3>
+<blockquote>
+<p><strong>truncate</strong>(<code>mappings</code>): <a href="../Query/"><code>Query</code></a>[]</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/application/services/ddlBuilder.ts#L34">src/lib/language/application/services/ddlBuilder.ts:34</a></p>
+<h4 id="parameters_3">Parameters</h4>
+<h5 id="mappings_2">mappings</h5>
+<p><a href="../../interfaces/Mapping/"><code>Mapping</code></a>[]</p>
+<h4 id="returns_3">Returns</h4>
+<p><a href="../Query/"><code>Query</code></a>[]</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Comparison - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Comparison";
+        var mkdocs_page_input_path = "queries/operatorsAndFunctions/Comparison.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Comparison</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>==  ===</td>
+<td>equal</td>
+</tr>
+<tr>
+<td>!=  !== &lt;&gt;</td>
+<td>notEqual</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>greaterThan</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>lessThan</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>greaterThanOrEqual</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>lessThanOrEqual</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>between</td>
+<td>Specifies how to retrieve values from an expression within a specific range</td>
+</tr>
+<tr>
+<td>in/includes</td>
+<td>Is used to reduce the use of multiple OR conditions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; p.name)</td>
+<td>[{"name":"Brazil"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.iso3 === "BRA").map(p=&gt; p.name)</td>
+<td>[{"name":"Brazil"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; p.latitude &lt; -9 &amp;&amp; p.latitude &gt; -11 &amp;&amp; p.longitude == -55 ).first(p=&gt; p.name)</td>
+<td>[{"name":"Brazil"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; between(p.latitude,-11,-9) &amp;&amp; p.longitude == -55 ).first(p=&gt; p.name)</td>
+<td>[{"name":"Brazil"}]</td>
+</tr>
+<tr>
+<td>Countries.filter(p=&gt; in(p.iso3,["BRA","ARG"])).map(p=&gt; p.name)</td>
+<td>[{"name":"Argentina"},{"name":"Brazil"}]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sentences">Sentences</h2>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the name from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; p.name)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT c.name AS name 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the name from the Countries entity where the iso3 is equal to "BRA".</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.iso3 === &quot;BRA&quot;).map(p=&gt; p.name)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT c.name AS name 
+FROM Countries c  
+WHERE c.iso3 = 'BRA' 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the name from the Countries entity where the latitude is less than -9 and greater than -11 and the longitude is equal to -55.</p>
+<pre><code class="language-js">Countries.filter(p=&gt; p.latitude &lt; -9 &amp;&amp; p.latitude &gt; -11 &amp;&amp; p.longitude == -55 ).first(p=&gt; p.name)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT c.name AS name 
+FROM Countries c  
+WHERE (c.latitude &lt; -9 AND (c.latitude &gt; -11 AND c.longitude = -55))
+ORDER BY c.name asc  
+LIMIT 0,1 
+</code></pre>
+<p><strong>Lambda:</strong></p>
+<p>Query to select the name from the Countries entity where the latitude is between -11 and -9 and the longitude is equal to -55.</p>
+<pre><code class="language-js">Countries.filter(p=&gt; between(p.latitude,-11,-9) &amp;&amp; p.longitude == -55 ).first(p=&gt; p.name)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT c.name AS name 
+FROM Countries c  
+WHERE (c.latitude BETWEEN -11 AND -9 AND c.longitude = -55) 
+ORDER BY c.name asc 
+LIMIT 0,1 
+```s
+
+**Lambda:**
+
+Query to select the name from the Countries entity where the iso3 is equal to &quot;BRA&quot; or &quot;ARG&quot;.
+
+```js
+Countries.filter(p=&gt; in(p.iso3,[&quot;BRA&quot;,&quot;ARG&quot;])).map(p=&gt; p.name)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">SELECT c.name AS name 
+FROM Countries c 
+WHERE  c.iso3 IN ('BRA', 'ARG') 
+</code></pre>
+<h2 id="definition">Definition</h2>
+<h3 id="operator">Operator ==</h3>
+<ul>
+<li>description: equal</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>a: T</li>
+<li>b: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_1">Operator ===</h3>
+<ul>
+<li>description: equal</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>a: T</li>
+<li>b: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_2">Operator !=</h3>
+<ul>
+<li>description: notEqual</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>a: T</li>
+<li>b: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_3">Operator !==</h3>
+<ul>
+<li>description: notEqual</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>a: T</li>
+<li>b: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_4">Operator &lt;&gt;</h3>
+<ul>
+<li>description: notEqual</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>a: T</li>
+<li>b: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_5">Operator &gt;</h3>
+<ul>
+<li>description: greaterThan</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>a: T</li>
+<li>b: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_6">Operator &lt;</h3>
+<ul>
+<li>description: lessThan</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>a: T</li>
+<li>b: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_7">Operator &gt;=</h3>
+<ul>
+<li>description: greaterThanOrEqual</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>a: T</li>
+<li>b: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="operator_8">Operator &lt;=</h3>
+<ul>
+<li>description: lessThanOrEqual</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>a: T</li>
+<li>b: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="between">between</h3>
+<ul>
+<li>description: Specifies how to retrieve values from an expression within a specific range.</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: T</li>
+<li>from: T</li>
+<li>to: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="includes">includes</h3>
+<ul>
+<li>description: Determines if an array includes a certain element</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: T</li>
+<li>list: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="in">in</h3>
+<ul>
+<li>description: Determines if an array includes a certain element</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: T</li>
+<li>list: T[]</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

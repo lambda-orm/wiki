@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Changelog - λORM Wiki</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Changelog";
+        var mkdocs_page_input_path = "api/CHANGELOG.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../queries/Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Changelog</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="changelog">Changelog</h1>
+<p>All notable changes to this project will be documented in this file.</p>
+<h2 id="versions">Versions</h2>
+<h3 id="221-2025-06-01"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v2.2.0...v2.2.1">2.2.1</a> (2025-06-01)</h3>
+<h2 id="220-2025-05-30"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.35...v2.2.0">2.2.0</a> (2025-05-30)</h2>
+<p><strong>Features:</strong></p>
+<ul>
+<li>add beatiful format on endpoints (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/6a99932ba30592584ec77df266fc5913634898fa">6a99932</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/189">#189</a></li>
+<li>complete readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/9f17af2383d21745b907155b0e4ab6b035e4d974">9f17af2</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/189">#189</a></li>
+<li>complete readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/6b7083fe6673a5ef3c87568b67fe53ac864e5ce8">6b7083f</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/189">#189</a></li>
+<li><strong>depens:</strong> update lambdaorm dependence (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/cea5225d689130b92465228656714e2e4c273fd3">cea5225</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li><strong>docs:</strong> add usage on readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/401fbe71dc26d970be791f3b67ea97017ec37754">401fbe7</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li><strong>docs:</strong> update readme and wiki (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/85fc4ec6f8e96a10ecc50c92134e2a3ee5c4e80c">85fc4ec</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li>fix: request without response data (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/c9bd63902a9ac57ec5f96330e1d943d5675faefb">c9bd639</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li><strong>queue:</strong> refactorize consumer (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/e49120ebff480d27f306a412d14b27f4127d8f11">e49120e</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li><strong>queue:</strong> test cqrs with kafka (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/b4a3d053f13942ee7f32088464cd8f15b1332b18">b4a3d05</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li>remove /api prefix on endpoints, refactorize folders and complete readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/bc575cce24063411a59f7d1db30f7fa0c7eb15e4">bc575cc</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/189">#189</a></li>
+<li>remove orb library for apply on lambdaorm (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/15da9436c749b960719ac29fc84a3ad854b7cd03">15da943</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li>rename datasource for souce (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/3fd0a8b795dd8a57a95d3a8fdc8959bd218bd25f">3fd0a8b</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/224">#224</a></li>
+<li><strong>schema:</strong> add schema endpoint (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/24d7055ea3a01070954c8d00eb2e3006f5069ba7">24d7055</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/202">#202</a></li>
+<li><strong>schema:</strong> add version and views (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/439b45bad5f687a6ff7774a95d6f5d5ed82ad443">439b45b</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/202">#202</a></li>
+<li>test cqrs (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/279339d554c5f3981659b54553b64eaeca100fe3">279339d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li>update lambdaorm dependencie (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/285fb496aba3169172bb3ef3ca19b92b7cc5be50">285fb49</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/224">#224</a></li>
+<li>update methods and dependences (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/c6a8fe9507aaf461cdd51965bf4fd0b7faab4ce1">c6a8fe9</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/0">#0</a></li>
+<li>update readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/ba346c865f20b6a39443dac5ce7fb12e16707e86">ba346c8</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/189">#189</a></li>
+<li><strong>wiki:</strong> update Sidebar (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/5eac40d00c447818316842222da4005a60a6b9c1">5eac40d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li><strong>wiki:</strong> update wiki (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/1cbd2c0c0c6ab64a2d8b04a46bc1b22f6d8c18de">1cbd2c0</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+</ul>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve bug on body parameters (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/647df0d11112e47861fd859125b572f47a8f5da9">647df0d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/189">#189</a></li>
+<li>solve import request data (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/413fc7892c60d2374e2f310fd71cadc9dda92a0a">413fc78</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+</ul>
+<h2 id="210-2024-05-13"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v1.2.3...v2.1.0">2.1.0</a> (2024-05-13)</h2>
+<p><strong>Features:</strong></p>
+<ul>
+<li>update methods and dependences (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/c6a8fe9507aaf461cdd51965bf4fd0b7faab4ce1">c6a8fe9</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/0">#0</a></li>
+</ul>
+<h3 id="123-2024-05-04"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v1.2.2...v1.2.3">1.2.3</a> (2024-05-04)</h3>
+<h3 id="122-2024-05-03"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v1.2.1...v1.2.2">1.2.2</a> (2024-05-03)</h3>
+<h3 id="121-2024-04-18"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v1.2.0...v1.2.1">1.2.1</a> (2024-04-18)</h3>
+<h2 id="120-2023-12-28"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.35...v1.2.0">1.2.0</a> (2023-12-28)</h2>
+<p><strong>Features:</strong></p>
+<ul>
+<li>add beatiful format on endpoints (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/6a99932ba30592584ec77df266fc5913634898fa">6a99932</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/189">#189</a></li>
+<li>complete readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/9f17af2383d21745b907155b0e4ab6b035e4d974">9f17af2</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/189">#189</a></li>
+<li>complete readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/6b7083fe6673a5ef3c87568b67fe53ac864e5ce8">6b7083f</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/189">#189</a></li>
+<li><strong>depens:</strong> update lambdaorm dependence (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/cea5225d689130b92465228656714e2e4c273fd3">cea5225</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li><strong>docs:</strong> add usage on readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/401fbe71dc26d970be791f3b67ea97017ec37754">401fbe7</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li><strong>docs:</strong> update readme and wiki (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/85fc4ec6f8e96a10ecc50c92134e2a3ee5c4e80c">85fc4ec</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li>fix: request without response data (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/c9bd63902a9ac57ec5f96330e1d943d5675faefb">c9bd639</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li><strong>queue:</strong> refactorize consumer (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/e49120ebff480d27f306a412d14b27f4127d8f11">e49120e</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li><strong>queue:</strong> test cqrs with kafka (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/b4a3d053f13942ee7f32088464cd8f15b1332b18">b4a3d05</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li>remove /api prefix on endpoints, refactorize folders and complete readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/bc575cce24063411a59f7d1db30f7fa0c7eb15e4">bc575cc</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/189">#189</a></li>
+<li>remove orb library for apply on lambdaorm (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/15da9436c749b960719ac29fc84a3ad854b7cd03">15da943</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li>rename datasource for souce (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/3fd0a8b795dd8a57a95d3a8fdc8959bd218bd25f">3fd0a8b</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/224">#224</a></li>
+<li><strong>schema:</strong> add schema endpoint (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/24d7055ea3a01070954c8d00eb2e3006f5069ba7">24d7055</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/202">#202</a></li>
+<li><strong>schema:</strong> add version and views (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/439b45bad5f687a6ff7774a95d6f5d5ed82ad443">439b45b</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/202">#202</a></li>
+<li>test cqrs (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/279339d554c5f3981659b54553b64eaeca100fe3">279339d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li>update lambdaorm dependencie (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/285fb496aba3169172bb3ef3ca19b92b7cc5be50">285fb49</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/224">#224</a></li>
+<li>update readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/ba346c865f20b6a39443dac5ce7fb12e16707e86">ba346c8</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/189">#189</a></li>
+<li><strong>wiki:</strong> update Sidebar (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/5eac40d00c447818316842222da4005a60a6b9c1">5eac40d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+<li><strong>wiki:</strong> update wiki (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/1cbd2c0c0c6ab64a2d8b04a46bc1b22f6d8c18de">1cbd2c0</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+</ul>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve bug on body parameters (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/647df0d11112e47861fd859125b572f47a8f5da9">647df0d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/189">#189</a></li>
+<li>solve import request data (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/413fc7892c60d2374e2f310fd71cadc9dda92a0a">413fc78</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-svc/issues/201">#201</a></li>
+</ul>
+<h3 id="111-2023-12-27"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v1.1.0...v1.1.1">1.1.1</a> (2023-12-27)</h3>
+<h2 id="110-2023-12-23"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.60...v1.1.0">1.1.0</a> (2023-12-23)</h2>
+<p><strong>Features:</strong></p>
+<ul>
+<li>update lambdaorm dependencie (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/285fb496aba3169172bb3ef3ca19b92b7cc5be50">285fb49</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/224">#224</a></li>
+</ul>
+<h3 id="0860-2023-12-22"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.59...v0.8.60">0.8.60</a> (2023-12-22)</h3>
+<h3 id="0859-2023-12-22"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.58...v0.8.59">0.8.59</a> (2023-12-22)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>rename datasource for source (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/3fd0a8b795dd8a57a95d3a8fdc8959bd218bd25f">3fd0a8b</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/224">#224</a></li>
+</ul>
+<h3 id="0858-2023-12-17"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.57...v0.8.58">0.8.58</a> (2023-12-17)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>docs:</strong> add usage on readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/401fbe71dc26d970be791f3b67ea97017ec37754">401fbe7</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0857-2023-12-16"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.56...v0.8.57">0.8.57</a> (2023-12-16)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>test cqrs (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/279339d554c5f3981659b54553b64eaeca100fe3">279339d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0856-2023-12-16"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.55...v0.8.56">0.8.56</a> (2023-12-16)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>queue:</strong> test cqrs with kafka (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/b4a3d053f13942ee7f32088464cd8f15b1332b18">b4a3d05</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0855-2023-12-16"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.54...v0.8.55">0.8.55</a> (2023-12-16)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>queue:</strong> refactorize consumer (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/e49120ebff480d27f306a412d14b27f4127d8f11">e49120e</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0854-2023-12-13"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.53...v0.8.54">0.8.54</a> (2023-12-13)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>fix: request without response data (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/c9bd63902a9ac57ec5f96330e1d943d5675faefb">c9bd639</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0853-2023-12-13"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.52...v0.8.53">0.8.53</a> (2023-12-13)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>wiki:</strong> update Sidebar (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/5eac40d00c447818316842222da4005a60a6b9c1">5eac40d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve import request data (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/413fc7892c60d2374e2f310fd71cadc9dda92a0a">413fc78</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0852-2023-12-02"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.51...v0.8.52">0.8.52</a> (2023-12-02)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>remove orb library for apply on lambdaorm (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/15da9436c749b960719ac29fc84a3ad854b7cd03">15da943</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+<li><strong>wiki:</strong> update wiki (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/1cbd2c0c0c6ab64a2d8b04a46bc1b22f6d8c18de">1cbd2c0</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0851-2023-11-29"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.50...v0.8.51">0.8.51</a> (2023-11-29)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>docs:</strong> update readme and wiki (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/85fc4ec6f8e96a10ecc50c92134e2a3ee5c4e80c">85fc4ec</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0850-2023-11-28"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.49...v0.8.50">0.8.50</a> (2023-11-28)</h3>
+<h3 id="0849-2023-11-28"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.48...v0.8.49">0.8.49</a> (2023-11-28)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>depens:</strong> update lambdaorm dependence (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/cea5225d689130b92465228656714e2e4c273fd3">cea5225</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0848-2023-11-28"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.47...v0.8.48">0.8.48</a> (2023-11-28)</h3>
+<h3 id="0847-2023-11-26"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.46...v0.8.47">0.8.47</a> (2023-11-26)</h3>
+<h3 id="0846-2023-11-26"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.45...v0.8.46">0.8.46</a> (2023-11-26)</h3>
+<h3 id="0845-2023-11-21"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.44...v0.8.45">0.8.45</a> (2023-11-21)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>schema:</strong> add schema endpoint (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/24d7055ea3a01070954c8d00eb2e3006f5069ba7">24d7055</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/202">#202</a></li>
+</ul>
+<h3 id="0844-2023-11-21"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.43...v0.8.44">0.8.44</a> (2023-11-21)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>schema:</strong> add version and views (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/439b45bad5f687a6ff7774a95d6f5d5ed82ad443">439b45b</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/202">#202</a></li>
+</ul>
+<h3 id="0843-2023-11-17"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.42...v0.8.43">0.8.43</a> (2023-11-17)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>remove /api prefix on endpoints, refactorize folders and complete readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/bc575cce24063411a59f7d1db30f7fa0c7eb15e4">bc575cc</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/189">#189</a></li>
+</ul>
+<h3 id="0842-2023-11-17"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.41...v0.8.42">0.8.42</a> (2023-11-17)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>update readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/ba346c865f20b6a39443dac5ce7fb12e16707e86">ba346c8</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/189">#189</a></li>
+</ul>
+<h3 id="0841-2023-11-17"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.40...v0.8.41">0.8.41</a> (2023-11-17)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>complete readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/9f17af2383d21745b907155b0e4ab6b035e4d974">9f17af2</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/189">#189</a></li>
+</ul>
+<h3 id="0840-2023-11-17"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.39...v0.8.40">0.8.40</a> (2023-11-17)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>complete readme (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/6b7083fe6673a5ef3c87568b67fe53ac864e5ce8">6b7083f</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/189">#189</a></li>
+</ul>
+<h3 id="0839-2023-11-17"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.38...v0.8.39">0.8.39</a> (2023-11-17)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>add beatiful format on endpoints (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/6a99932ba30592584ec77df266fc5913634898fa">6a99932</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/189">#189</a></li>
+</ul>
+<h3 id="0838-2023-11-17"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.37...v0.8.38">0.8.38</a> (2023-11-17)</h3>
+<h3 id="0837-2023-11-16"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.36...v0.8.37">0.8.37</a> (2023-11-16)</h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve bug on body parameters (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/647df0d11112e47861fd859125b572f47a8f5da9">647df0d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/189">#189</a></li>
+</ul>
+<h3 id="0836-2023-11-15"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.35...v0.8.36">0.8.36</a> (2023-11-15)</h3>
+<h3 id="0835-2023-11-15"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.34...v0.8.35">0.8.35</a> (2023-11-15)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>licence:</strong> change licence to MIT and update email (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/8b4298f1da7e262e9059302f8183a55ae6023f0e">8b4298f</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/189">#189</a></li>
+</ul>
+<h3 id="0834-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.33...v0.8.34">0.8.34</a> (2023-11-09)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>dependenpies:</strong> add dependabot (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/76094ff62964f0483a7f7d7f7ce1c643796df1bc">76094ff</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="0833-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.32...v0.8.33">0.8.33</a> (2023-11-09)</h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li><strong>publish:</strong> bugfix build on github workflow (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/0f8c8d9956d9fe5cbe518e06de71e1c0565265d4">0f8c8d9</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="0832-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.31...v0.8.32">0.8.32</a> (2023-11-09)</h3>
+<h3 id="0831-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.30...v0.8.31">0.8.31</a> (2023-11-09)</h3>
+<h3 id="0830-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.29...v0.8.30">0.8.30</a> (2023-11-09)</h3>
+<h3 id="0829-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.28...v0.8.29">0.8.29</a> (2023-11-09)</h3>
+<h3 id="0828-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.27...v0.8.28">0.8.28</a> (2023-11-09)</h3>
+<h3 id="0827-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.26...v0.8.27">0.8.27</a> (2023-11-09)</h3>
+<h3 id="0826-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.25...v0.8.26">0.8.26</a> (2023-11-09)</h3>
+<h3 id="0825-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.24...v0.8.25">0.8.25</a> (2023-11-09)</h3>
+<h3 id="0824-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.23...v0.8.24">0.8.24</a> (2023-11-09)</h3>
+<h3 id="0823-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.22...v0.8.23">0.8.23</a> (2023-11-09)</h3>
+<h3 id="0822-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.21...v0.8.22">0.8.22</a> (2023-11-09)</h3>
+<h3 id="0821-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.10...v0.8.21">0.8.21</a> (2023-11-09)</h3>
+<h3 id="0810-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.9...v0.8.10">0.8.10</a> (2023-11-09)</h3>
+<h3 id="089-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.8...v0.8.9">0.8.9</a> (2023-11-09)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>release:</strong> update github actions (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/51d4215987ddeb2e1a2fa66c688c215fb72d7527">51d4215</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="088-2023-11-07"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.7...v0.8.8">0.8.8</a> (2023-11-07)</h3>
+<h3 id="087-2023-11-07"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.6...v0.8.7">0.8.7</a> (2023-11-07)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>release:</strong> add dist task on release workflow (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/99e7d068833942a981b4d7dd9d387204e4c40dd3">99e7d06</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="086-2023-11-07"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.5...v0.8.6">0.8.6</a> (2023-11-07)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>release:</strong> update workflow (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/c5b2d991eee5bd0c80744f870de2edf559b8b71d">c5b2d99</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="085-2023-11-07"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.4...v0.8.5">0.8.5</a> (2023-11-07)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>release:</strong> update workflow (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/63954b7c1b340a3f5a8cc05abe9c45d80ecf22e1">63954b7</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="084-2023-11-06"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.3...v0.8.4">0.8.4</a> (2023-11-06)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>update release workflow (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/bae06784ebfc34e57c2c1cdb6abce5f9b034f0cc">bae0678</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="083-2023-11-06"><a href="https://github.com/lambda-orm/lambdaorm-svc/compare/v0.8.2...v0.8.3">0.8.3</a> (2023-11-06)</h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>adjust release workflow (<a href="https://github.com/lambda-orm/lambdaorm-svc/commit/4add60fba31b9508c70049e41792f652b6fd0c69">4add60f</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="082-2023-11-05"><a href="https://github.com/lambda-orm/lambdaorm/compare/v0.8.1...v0.8.2">0.8.2</a> (2023-11-05)</h3>
+<h3 id="081-2023-11-05"><a href="https://github.com/lambda-orm/lambdaorm/compare/v0.7.21...v0.8.1">0.8.1</a> (2023-11-05)</h3>
+<h3 id="0721-2023-11-05"><a href="https://github.com/lambda-orm/lambdaorm/compare/v0.6.5...v0.7.21">0.7.21</a> (2023-11-05)</h3>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

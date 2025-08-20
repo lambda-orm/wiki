@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Schema Use - λORM Wiki</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Schema Use";
+        var mkdocs_page_input_path = "schema/Schema-Use.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../queries/Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Schema Use</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="schema-use">Schema Use</h1>
+<h2 id="simple-configuration-example">Simple configuration example</h2>
+<p><strong>Configuration using yaml:</strong></p>
+<pre><code class="language-yaml">domain:
+  entities:
+    - name: Countries
+      primaryKey: [&quot;iso3&quot;]
+      uniqueKey: [&quot;name&quot;]
+      properties:
+        - name: name
+          required: true
+        - name: iso3
+          length: 3
+          required: true
+infrastructure:        
+  mappings:
+    - name: mapping1
+      entities:
+        - name: Countries
+          mapping: TBL_COUNTRIES
+          properties:
+            - name: iso3
+              mapping: ISO3
+            - name: name
+              mapping: NAME
+  sources:
+    - name: source1
+      dialect: MySQL
+      mapping: mapping2
+      connection: ${CNN_MYSQL}
+</code></pre>
+<p><strong>Configuration using json:</strong></p>
+<pre><code class="language-json">{ 
+  &quot;domain&quot;: {
+    &quot;entities&quot;: [
+      {
+        &quot;name&quot;: &quot;Countries&quot;,
+        &quot;primaryKey&quot;: [ &quot;iso3&quot;  ],
+        &quot;uniqueKey&quot;: [ &quot;name&quot; ],
+        &quot;properties&quot;: [
+          { &quot;name&quot;: &quot;iso3&quot;, &quot;required&quot;: true, &quot;type&quot;: &quot;string&quot;, &quot;length&quot;: 3 },
+          { &quot;name&quot;: &quot;name&quot;, &quot;required&quot;: true, &quot;type&quot;: &quot;string&quot; }                
+        ]
+      }
+    ],
+  },
+  &quot;infrastructure&quot;: {
+    &quot;mappings&quot;:[
+      {
+        &quot;name&quot;:&quot;mapping1&quot;,
+        &quot;entities&quot;:[
+          {
+            &quot;name&quot;: &quot;Countries&quot;,
+            &quot;mapping&quot;: &quot;TBL_COUNTRIES&quot;,
+            &quot;properties&quot;: [
+              { &quot;name&quot;: &quot;iso3&quot;, &quot;mapping&quot;: &quot;ISO_3&quot; },
+              { &quot;name&quot;: &quot;name&quot;,&quot;mapping&quot;: &quot;NAME&quot; },
+            ]
+          }
+        ]
+      }
+    ],
+    &quot;sources&quot;: [
+      {
+        &quot;name&quot;: &quot;source1&quot;,
+        &quot;mapping&quot;: &quot;mapping1&quot;,
+        &quot;dialect&quot;: &quot;MySQL&quot;,
+        &quot;connection&quot;: &quot;${CNN_MYSQL}&quot;
+      }
+    ]
+  }  
+}
+</code></pre>
+<h2 id="build-source-code">Build source code</h2>
+<p>Once the schema is configured or modified, the model can be created or modified by executing the "build" command of <a href="https://www.npmjs.com/package/lambdaorm-cli">CLI</a></p>
+<pre><code class="language-sh">lambdaorm build -l node 
+</code></pre>
+<p>This command generates the model file with all the entities as a repository file for each entity</p>
+<p>model.ts:</p>
+<pre><code class="language-ts">export class Country {
+        iso3?: string
+        name?: string       
+}
+export interface QryCountry {
+    iso3: string
+    name: number
+
+}
+export let Countries : Queryable&lt;QryCountry&gt;        
+</code></pre>
+<p>repositoryCountry.ts:</p>
+<pre><code class="language-ts">import { Repository, IOrm } from 'lambdaorm'
+import { Country, QryCountry } from './model'
+export class CountryRepository extends Repository&lt;Country, QryCountry&gt; {
+    constructor (stage?: string, Orm?:IOrm) {
+        super('Countries', stage, Orm)
+    }
+    // Add your code here
+}
+</code></pre>
+<h2 id="set-schema">Set schema</h2>
+<p>When the orm.init() method is invoked it will execute the ORM initialization according to the schema.</p>
+<p>The following options are available to define the settings.</p>
+<ul>
+<li>
+<p>Invoke the orm.init() method without the first argument and write this configuration to a file called lambdaorm.json or lambdaorm.yaml in the root of the project.
+according to the lambdaorm extension you will know how to read it.</p>
+</li>
+<li>
+<p>Invoke the orm.init() method passing as an argument the path where the configuration file is located.
+This route must include the .yaml or .json extension since that way we will know how to read it.</p>
+</li>
+<li>
+<p>Invoke the orm.init() method passing the configuration as a json object as argument</p>
+</li>
+</ul>
+<p>Example passing the configuration file path:</p>
+<pre><code class="language-ts">import { orm } from 'lambdaorm'
+(async () =&gt; {
+    await orm.init('/home/my/app1/lambaORM.yaml')
+    try {       
+        const countries = await orm.execute(`Countries.map(p=&gt;{name:p.name,code:p.alpha3})
+                                                  .sort(p=&gt; desc(p.name))
+                                                  .page(1,10)`)
+        console.log(countries)  
+    } catch (error) {
+        console.log(error)
+    } finally {
+        await orm.end()
+    }
+})()
+</code></pre>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

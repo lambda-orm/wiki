@@ -1,0 +1,4726 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Schema endpoints - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Schema endpoints";
+        var mkdocs_page_input_path = "api/Endpoints/Schema.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../use/Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../use/CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Schema endpoints</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="schema-endpoints">Schema endpoints</h1>
+<p><img alt="schema-methods" src="https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/schema-methods.png" /></p>
+<h2 id="version">Version</h2>
+<p>Returns the version of the schema.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/schema/version?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: &quot;1.0.0&quot;
+}
+</code></pre>
+<h2 id="schema">Schema</h2>
+<p>Returns the schema complete.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/schema?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;domain&quot;: {
+    &quot;version&quot;: &quot;1.0.0&quot;,
+    &quot;entities&quot;: [
+      {
+        &quot;name&quot;: &quot;Categories&quot;,
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;uniqueKey&quot;: [
+          &quot;name&quot;
+        ],
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false,
+            &quot;autoIncrement&quot;: true
+          },
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;description&quot;,
+            &quot;length&quot;: 1000,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;required&quot;: [],
+        &quot;indexes&quot;: [],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;products&quot;,
+            &quot;type&quot;: &quot;manyToOne&quot;,
+            &quot;composite&quot;: false,
+            &quot;from&quot;: &quot;id&quot;,
+            &quot;entity&quot;: &quot;Products&quot;,
+            &quot;weak&quot;: true,
+            &quot;to&quot;: &quot;categoryId&quot;,
+            &quot;target&quot;: &quot;category&quot;
+          }
+        ],
+        &quot;dependents&quot;: [
+          {
+            &quot;entity&quot;: &quot;Products&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;category&quot;,
+              &quot;from&quot;: &quot;categoryId&quot;,
+              &quot;entity&quot;: &quot;Categories&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;target&quot;: &quot;products&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          }
+        ],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Customers&quot;,
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;indexes&quot;: [
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;fields&quot;: [
+              &quot;name&quot;
+            ]
+          }
+        ],
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;length&quot;: 5,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;contact&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;phone&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;address&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;city&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;region&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;postalCode&quot;,
+            &quot;length&quot;: 20,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;country&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          }
+        ],
+        &quot;uniqueKey&quot;: [],
+        &quot;required&quot;: [],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;orders&quot;,
+            &quot;type&quot;: &quot;manyToOne&quot;,
+            &quot;composite&quot;: false,
+            &quot;from&quot;: &quot;id&quot;,
+            &quot;entity&quot;: &quot;Orders&quot;,
+            &quot;weak&quot;: true,
+            &quot;to&quot;: &quot;customerId&quot;,
+            &quot;target&quot;: &quot;customer&quot;
+          }
+        ],
+        &quot;dependents&quot;: [
+          {
+            &quot;entity&quot;: &quot;Orders&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;customer&quot;,
+              &quot;from&quot;: &quot;customerId&quot;,
+              &quot;entity&quot;: &quot;Customers&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;target&quot;: &quot;orders&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          }
+        ],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Employees&quot;,
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;uniqueKey&quot;: [
+          &quot;lastName&quot;,
+          &quot;firstName&quot;
+        ],
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false,
+            &quot;autoIncrement&quot;: true
+          },
+          {
+            &quot;name&quot;: &quot;lastName&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;firstName&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;title&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;titleOfCourtesy&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;birthDate&quot;,
+            &quot;type&quot;: &quot;dateTime&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;hireDate&quot;,
+            &quot;type&quot;: &quot;dateTime&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;phone&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;reportsToId&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;address&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;city&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;region&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;postalCode&quot;,
+            &quot;length&quot;: 20,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;country&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          }
+        ],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;reportsTo&quot;,
+            &quot;from&quot;: &quot;reportsToId&quot;,
+            &quot;entity&quot;: &quot;Employees&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;orders&quot;,
+            &quot;type&quot;: &quot;manyToOne&quot;,
+            &quot;composite&quot;: false,
+            &quot;from&quot;: &quot;id&quot;,
+            &quot;entity&quot;: &quot;Orders&quot;,
+            &quot;weak&quot;: true,
+            &quot;to&quot;: &quot;employeeId&quot;,
+            &quot;target&quot;: &quot;employee&quot;
+          }
+        ],
+        &quot;required&quot;: [],
+        &quot;indexes&quot;: [],
+        &quot;dependents&quot;: [
+          {
+            &quot;entity&quot;: &quot;Employees&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;reportsTo&quot;,
+              &quot;from&quot;: &quot;reportsToId&quot;,
+              &quot;entity&quot;: &quot;Employees&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          },
+          {
+            &quot;entity&quot;: &quot;Orders&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;employee&quot;,
+              &quot;from&quot;: &quot;employeeId&quot;,
+              &quot;entity&quot;: &quot;Employees&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;target&quot;: &quot;orders&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          }
+        ],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Shippers&quot;,
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;uniqueKey&quot;: [
+          &quot;name&quot;
+        ],
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false,
+            &quot;autoIncrement&quot;: true
+          },
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;phone&quot;,
+            &quot;length&quot;: 20,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;required&quot;: [],
+        &quot;indexes&quot;: [],
+        &quot;relations&quot;: [],
+        &quot;dependents&quot;: [],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Suppliers&quot;,
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;uniqueKey&quot;: [
+          &quot;name&quot;
+        ],
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false,
+            &quot;autoIncrement&quot;: true
+          },
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;contact&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;phone&quot;,
+            &quot;length&quot;: 20,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;homepage&quot;,
+            &quot;length&quot;: 200,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;address&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;city&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;region&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;postalCode&quot;,
+            &quot;length&quot;: 20,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;country&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          }
+        ],
+        &quot;required&quot;: [],
+        &quot;indexes&quot;: [],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;products&quot;,
+            &quot;type&quot;: &quot;manyToOne&quot;,
+            &quot;composite&quot;: false,
+            &quot;from&quot;: &quot;id&quot;,
+            &quot;entity&quot;: &quot;Products&quot;,
+            &quot;weak&quot;: true,
+            &quot;to&quot;: &quot;supplierId&quot;,
+            &quot;target&quot;: &quot;supplier&quot;
+          }
+        ],
+        &quot;dependents&quot;: [
+          {
+            &quot;entity&quot;: &quot;Products&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;supplier&quot;,
+              &quot;from&quot;: &quot;supplierId&quot;,
+              &quot;entity&quot;: &quot;Suppliers&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;target&quot;: &quot;products&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          }
+        ],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Products&quot;,
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;uniqueKey&quot;: [
+          &quot;name&quot;,
+          &quot;supplierId&quot;
+        ],
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false,
+            &quot;autoIncrement&quot;: true
+          },
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;supplierId&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;categoryId&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;quantity&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;price&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;default&quot;: 0,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;inStock&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;default&quot;: 0,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;onOrder&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;default&quot;: 0,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;reorderLevel&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;default&quot;: 0,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;discontinued&quot;,
+            &quot;type&quot;: &quot;boolean&quot;,
+            &quot;default&quot;: false,
+            &quot;required&quot;: false
+          }
+        ],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;supplier&quot;,
+            &quot;from&quot;: &quot;supplierId&quot;,
+            &quot;entity&quot;: &quot;Suppliers&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;products&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;category&quot;,
+            &quot;from&quot;: &quot;categoryId&quot;,
+            &quot;entity&quot;: &quot;Categories&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;products&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;orderDetails&quot;,
+            &quot;type&quot;: &quot;manyToOne&quot;,
+            &quot;composite&quot;: false,
+            &quot;from&quot;: &quot;id&quot;,
+            &quot;entity&quot;: &quot;Orders.details&quot;,
+            &quot;weak&quot;: true,
+            &quot;to&quot;: &quot;productId&quot;,
+            &quot;target&quot;: &quot;product&quot;
+          }
+        ],
+        &quot;required&quot;: [],
+        &quot;indexes&quot;: [],
+        &quot;dependents&quot;: [
+          {
+            &quot;entity&quot;: &quot;Orders.details&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;product&quot;,
+              &quot;from&quot;: &quot;productId&quot;,
+              &quot;entity&quot;: &quot;Products&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;target&quot;: &quot;orderDetails&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          }
+        ],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: true,
+        &quot;hadViewReadExp&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Orders&quot;,
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;indexes&quot;: [
+          {
+            &quot;name&quot;: &quot;orderDate&quot;,
+            &quot;fields&quot;: [
+              &quot;orderDate&quot;
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;shippedDate&quot;,
+            &quot;fields&quot;: [
+              &quot;shippedDate&quot;
+            ]
+          }
+        ],
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false,
+            &quot;autoIncrement&quot;: true
+          },
+          {
+            &quot;name&quot;: &quot;customerId&quot;,
+            &quot;required&quot;: true,
+            &quot;length&quot;: 5,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;employeeId&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;orderDate&quot;,
+            &quot;type&quot;: &quot;dateTime&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;requiredDate&quot;,
+            &quot;type&quot;: &quot;date&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;shippedDate&quot;,
+            &quot;type&quot;: &quot;date&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;shipViaId&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;freight&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;address&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;city&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;region&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;postalCode&quot;,
+            &quot;length&quot;: 20,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;country&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          }
+        ],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;customer&quot;,
+            &quot;from&quot;: &quot;customerId&quot;,
+            &quot;entity&quot;: &quot;Customers&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;orders&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;employee&quot;,
+            &quot;from&quot;: &quot;employeeId&quot;,
+            &quot;entity&quot;: &quot;Employees&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;orders&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;details&quot;,
+            &quot;type&quot;: &quot;manyToOne&quot;,
+            &quot;composite&quot;: true,
+            &quot;from&quot;: &quot;id&quot;,
+            &quot;entity&quot;: &quot;Orders.details&quot;,
+            &quot;weak&quot;: true,
+            &quot;to&quot;: &quot;orderId&quot;,
+            &quot;target&quot;: &quot;order&quot;
+          }
+        ],
+        &quot;uniqueKey&quot;: [],
+        &quot;required&quot;: [],
+        &quot;dependents&quot;: [
+          {
+            &quot;entity&quot;: &quot;Orders.details&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;order&quot;,
+              &quot;from&quot;: &quot;orderId&quot;,
+              &quot;entity&quot;: &quot;Orders&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;target&quot;: &quot;details&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          }
+        ],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Orders.details&quot;,
+        &quot;primaryKey&quot;: [
+          &quot;orderId&quot;,
+          &quot;productId&quot;
+        ],
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;orderId&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;productId&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;unitPrice&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;quantity&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;discount&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;required&quot;: false
+          }
+        ],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;order&quot;,
+            &quot;from&quot;: &quot;orderId&quot;,
+            &quot;entity&quot;: &quot;Orders&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;details&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;product&quot;,
+            &quot;from&quot;: &quot;productId&quot;,
+            &quot;entity&quot;: &quot;Products&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;orderDetails&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        ],
+        &quot;uniqueKey&quot;: [],
+        &quot;required&quot;: [],
+        &quot;indexes&quot;: [],
+        &quot;dependents&quot;: [],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: true,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false
+      }
+    ],
+    &quot;enums&quot;: []
+  }
+}
+</code></pre>
+<h2 id="domain">Domain</h2>
+<p>Returns the domain of schema.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/domain?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;entities&quot;: [
+    {
+      &quot;name&quot;: &quot;Categories&quot;,
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;uniqueKey&quot;: [
+        &quot;name&quot;
+      ],
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false,
+          &quot;autoIncrement&quot;: true
+        },
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;description&quot;,
+          &quot;length&quot;: 1000,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        }
+      ],
+      &quot;required&quot;: [],
+      &quot;indexes&quot;: [],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;products&quot;,
+          &quot;type&quot;: &quot;manyToOne&quot;,
+          &quot;composite&quot;: false,
+          &quot;from&quot;: &quot;id&quot;,
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;weak&quot;: true,
+          &quot;to&quot;: &quot;categoryId&quot;,
+          &quot;target&quot;: &quot;category&quot;
+        }
+      ],
+      &quot;dependents&quot;: [
+        {
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;category&quot;,
+            &quot;from&quot;: &quot;categoryId&quot;,
+            &quot;entity&quot;: &quot;Categories&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;products&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Customers&quot;,
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;indexes&quot;: [
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;fields&quot;: [
+            &quot;name&quot;
+          ]
+        }
+      ],
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;length&quot;: 5,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;contact&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;phone&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;address&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;city&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;region&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;postalCode&quot;,
+          &quot;length&quot;: 20,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;country&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        }
+      ],
+      &quot;uniqueKey&quot;: [],
+      &quot;required&quot;: [],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;orders&quot;,
+          &quot;type&quot;: &quot;manyToOne&quot;,
+          &quot;composite&quot;: false,
+          &quot;from&quot;: &quot;id&quot;,
+          &quot;entity&quot;: &quot;Orders&quot;,
+          &quot;weak&quot;: true,
+          &quot;to&quot;: &quot;customerId&quot;,
+          &quot;target&quot;: &quot;customer&quot;
+        }
+      ],
+      &quot;dependents&quot;: [
+        {
+          &quot;entity&quot;: &quot;Orders&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;customer&quot;,
+            &quot;from&quot;: &quot;customerId&quot;,
+            &quot;entity&quot;: &quot;Customers&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;orders&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Employees&quot;,
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;uniqueKey&quot;: [
+        &quot;lastName&quot;,
+        &quot;firstName&quot;
+      ],
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false,
+          &quot;autoIncrement&quot;: true
+        },
+        {
+          &quot;name&quot;: &quot;lastName&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;firstName&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;title&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;titleOfCourtesy&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;birthDate&quot;,
+          &quot;type&quot;: &quot;dateTime&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;hireDate&quot;,
+          &quot;type&quot;: &quot;dateTime&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;phone&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;reportsToId&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;address&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;city&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;region&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;postalCode&quot;,
+          &quot;length&quot;: 20,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;country&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        }
+      ],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;reportsTo&quot;,
+          &quot;from&quot;: &quot;reportsToId&quot;,
+          &quot;entity&quot;: &quot;Employees&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;orders&quot;,
+          &quot;type&quot;: &quot;manyToOne&quot;,
+          &quot;composite&quot;: false,
+          &quot;from&quot;: &quot;id&quot;,
+          &quot;entity&quot;: &quot;Orders&quot;,
+          &quot;weak&quot;: true,
+          &quot;to&quot;: &quot;employeeId&quot;,
+          &quot;target&quot;: &quot;employee&quot;
+        }
+      ],
+      &quot;required&quot;: [],
+      &quot;indexes&quot;: [],
+      &quot;dependents&quot;: [
+        {
+          &quot;entity&quot;: &quot;Employees&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;reportsTo&quot;,
+            &quot;from&quot;: &quot;reportsToId&quot;,
+            &quot;entity&quot;: &quot;Employees&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        },
+        {
+          &quot;entity&quot;: &quot;Orders&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;employee&quot;,
+            &quot;from&quot;: &quot;employeeId&quot;,
+            &quot;entity&quot;: &quot;Employees&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;orders&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Shippers&quot;,
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;uniqueKey&quot;: [
+        &quot;name&quot;
+      ],
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false,
+          &quot;autoIncrement&quot;: true
+        },
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;phone&quot;,
+          &quot;length&quot;: 20,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        }
+      ],
+      &quot;required&quot;: [],
+      &quot;indexes&quot;: [],
+      &quot;relations&quot;: [],
+      &quot;dependents&quot;: [],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Suppliers&quot;,
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;uniqueKey&quot;: [
+        &quot;name&quot;
+      ],
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false,
+          &quot;autoIncrement&quot;: true
+        },
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;contact&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;phone&quot;,
+          &quot;length&quot;: 20,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;homepage&quot;,
+          &quot;length&quot;: 200,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;address&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;city&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;region&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;postalCode&quot;,
+          &quot;length&quot;: 20,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;country&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        }
+      ],
+      &quot;required&quot;: [],
+      &quot;indexes&quot;: [],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;products&quot;,
+          &quot;type&quot;: &quot;manyToOne&quot;,
+          &quot;composite&quot;: false,
+          &quot;from&quot;: &quot;id&quot;,
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;weak&quot;: true,
+          &quot;to&quot;: &quot;supplierId&quot;,
+          &quot;target&quot;: &quot;supplier&quot;
+        }
+      ],
+      &quot;dependents&quot;: [
+        {
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;supplier&quot;,
+            &quot;from&quot;: &quot;supplierId&quot;,
+            &quot;entity&quot;: &quot;Suppliers&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;products&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Products&quot;,
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;uniqueKey&quot;: [
+        &quot;name&quot;,
+        &quot;supplierId&quot;
+      ],
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false,
+          &quot;autoIncrement&quot;: true
+        },
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;supplierId&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;integer&quot;
+        },
+        {
+          &quot;name&quot;: &quot;categoryId&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;quantity&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;price&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;default&quot;: 0,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;inStock&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;default&quot;: 0,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;onOrder&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;default&quot;: 0,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;reorderLevel&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;default&quot;: 0,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;discontinued&quot;,
+          &quot;type&quot;: &quot;boolean&quot;,
+          &quot;default&quot;: false,
+          &quot;required&quot;: false
+        }
+      ],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;supplier&quot;,
+          &quot;from&quot;: &quot;supplierId&quot;,
+          &quot;entity&quot;: &quot;Suppliers&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;products&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;category&quot;,
+          &quot;from&quot;: &quot;categoryId&quot;,
+          &quot;entity&quot;: &quot;Categories&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;products&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;orderDetails&quot;,
+          &quot;type&quot;: &quot;manyToOne&quot;,
+          &quot;composite&quot;: false,
+          &quot;from&quot;: &quot;id&quot;,
+          &quot;entity&quot;: &quot;Orders.details&quot;,
+          &quot;weak&quot;: true,
+          &quot;to&quot;: &quot;productId&quot;,
+          &quot;target&quot;: &quot;product&quot;
+        }
+      ],
+      &quot;required&quot;: [],
+      &quot;indexes&quot;: [],
+      &quot;dependents&quot;: [
+        {
+          &quot;entity&quot;: &quot;Orders.details&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;product&quot;,
+            &quot;from&quot;: &quot;productId&quot;,
+            &quot;entity&quot;: &quot;Products&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;orderDetails&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: true,
+      &quot;hadViewReadExp&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Orders&quot;,
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;indexes&quot;: [
+        {
+          &quot;name&quot;: &quot;orderDate&quot;,
+          &quot;fields&quot;: [
+            &quot;orderDate&quot;
+          ]
+        },
+        {
+          &quot;name&quot;: &quot;shippedDate&quot;,
+          &quot;fields&quot;: [
+            &quot;shippedDate&quot;
+          ]
+        }
+      ],
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false,
+          &quot;autoIncrement&quot;: true
+        },
+        {
+          &quot;name&quot;: &quot;customerId&quot;,
+          &quot;required&quot;: true,
+          &quot;length&quot;: 5,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;employeeId&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;integer&quot;
+        },
+        {
+          &quot;name&quot;: &quot;orderDate&quot;,
+          &quot;type&quot;: &quot;dateTime&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;requiredDate&quot;,
+          &quot;type&quot;: &quot;date&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;shippedDate&quot;,
+          &quot;type&quot;: &quot;date&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;shipViaId&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;freight&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;address&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;city&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;region&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;postalCode&quot;,
+          &quot;length&quot;: 20,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;country&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        }
+      ],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;customer&quot;,
+          &quot;from&quot;: &quot;customerId&quot;,
+          &quot;entity&quot;: &quot;Customers&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;orders&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;employee&quot;,
+          &quot;from&quot;: &quot;employeeId&quot;,
+          &quot;entity&quot;: &quot;Employees&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;orders&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;details&quot;,
+          &quot;type&quot;: &quot;manyToOne&quot;,
+          &quot;composite&quot;: true,
+          &quot;from&quot;: &quot;id&quot;,
+          &quot;entity&quot;: &quot;Orders.details&quot;,
+          &quot;weak&quot;: true,
+          &quot;to&quot;: &quot;orderId&quot;,
+          &quot;target&quot;: &quot;order&quot;
+        }
+      ],
+      &quot;uniqueKey&quot;: [],
+      &quot;required&quot;: [],
+      &quot;dependents&quot;: [
+        {
+          &quot;entity&quot;: &quot;Orders.details&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;order&quot;,
+            &quot;from&quot;: &quot;orderId&quot;,
+            &quot;entity&quot;: &quot;Orders&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;details&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Orders.details&quot;,
+      &quot;primaryKey&quot;: [
+        &quot;orderId&quot;,
+        &quot;productId&quot;
+      ],
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;orderId&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;integer&quot;
+        },
+        {
+          &quot;name&quot;: &quot;productId&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;integer&quot;
+        },
+        {
+          &quot;name&quot;: &quot;unitPrice&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;quantity&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;discount&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;required&quot;: false
+        }
+      ],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;order&quot;,
+          &quot;from&quot;: &quot;orderId&quot;,
+          &quot;entity&quot;: &quot;Orders&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;details&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;product&quot;,
+          &quot;from&quot;: &quot;productId&quot;,
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;orderDetails&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        }
+      ],
+      &quot;uniqueKey&quot;: [],
+      &quot;required&quot;: [],
+      &quot;indexes&quot;: [],
+      &quot;dependents&quot;: [],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: true,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false
+    }
+  ],
+  &quot;enums&quot;: []
+}
+</code></pre>
+<h2 id="entities">Entities</h2>
+<p>Returns the entities of domain.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/entities?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;Categories&quot;,
+    &quot;primaryKey&quot;: [
+      &quot;id&quot;
+    ],
+    &quot;uniqueKey&quot;: [
+      &quot;name&quot;
+    ],
+    &quot;properties&quot;: [
+      {
+        &quot;name&quot;: &quot;id&quot;,
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;required&quot;: false,
+        &quot;autoIncrement&quot;: true
+      },
+      {
+        &quot;name&quot;: &quot;name&quot;,
+        &quot;required&quot;: true,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;description&quot;,
+        &quot;length&quot;: 1000,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;
+      }
+    ],
+    &quot;required&quot;: [],
+    &quot;indexes&quot;: [],
+    &quot;relations&quot;: [
+      {
+        &quot;name&quot;: &quot;products&quot;,
+        &quot;type&quot;: &quot;manyToOne&quot;,
+        &quot;composite&quot;: false,
+        &quot;from&quot;: &quot;id&quot;,
+        &quot;entity&quot;: &quot;Products&quot;,
+        &quot;weak&quot;: true,
+        &quot;to&quot;: &quot;categoryId&quot;,
+        &quot;target&quot;: &quot;category&quot;
+      }
+    ],
+    &quot;dependents&quot;: [
+      {
+        &quot;entity&quot;: &quot;Products&quot;,
+        &quot;relation&quot;: {
+          &quot;name&quot;: &quot;category&quot;,
+          &quot;from&quot;: &quot;categoryId&quot;,
+          &quot;entity&quot;: &quot;Categories&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;products&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        }
+      }
+    ],
+    &quot;constraints&quot;: [],
+    &quot;composite&quot;: false,
+    &quot;hadReadExps&quot;: false,
+    &quot;hadWriteExps&quot;: false,
+    &quot;hadReadValues&quot;: false,
+    &quot;hadWriteValues&quot;: false,
+    &quot;hadDefaults&quot;: false,
+    &quot;hadViewReadExp&quot;: false
+  },
+  {
+    &quot;name&quot;: &quot;Customers&quot;,
+    &quot;primaryKey&quot;: [
+      &quot;id&quot;
+    ],
+    &quot;indexes&quot;: [
+      {
+        &quot;name&quot;: &quot;name&quot;,
+        &quot;fields&quot;: [
+          &quot;name&quot;
+        ]
+      }
+    ],
+    &quot;properties&quot;: [
+      {
+        &quot;name&quot;: &quot;id&quot;,
+        &quot;length&quot;: 5,
+        &quot;required&quot;: true,
+        &quot;type&quot;: &quot;string&quot;
+      },
+      {
+        &quot;name&quot;: &quot;name&quot;,
+        &quot;required&quot;: true,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;contact&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;phone&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;address&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;city&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;region&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;postalCode&quot;,
+        &quot;length&quot;: 20,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;
+      },
+      {
+        &quot;name&quot;: &quot;country&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      }
+    ],
+    &quot;uniqueKey&quot;: [],
+    &quot;required&quot;: [],
+    &quot;relations&quot;: [
+      {
+        &quot;name&quot;: &quot;orders&quot;,
+        &quot;type&quot;: &quot;manyToOne&quot;,
+        &quot;composite&quot;: false,
+        &quot;from&quot;: &quot;id&quot;,
+        &quot;entity&quot;: &quot;Orders&quot;,
+        &quot;weak&quot;: true,
+        &quot;to&quot;: &quot;customerId&quot;,
+        &quot;target&quot;: &quot;customer&quot;
+      }
+    ],
+    &quot;dependents&quot;: [
+      {
+        &quot;entity&quot;: &quot;Orders&quot;,
+        &quot;relation&quot;: {
+          &quot;name&quot;: &quot;customer&quot;,
+          &quot;from&quot;: &quot;customerId&quot;,
+          &quot;entity&quot;: &quot;Customers&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;orders&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        }
+      }
+    ],
+    &quot;constraints&quot;: [],
+    &quot;composite&quot;: false,
+    &quot;hadReadExps&quot;: false,
+    &quot;hadWriteExps&quot;: false,
+    &quot;hadReadValues&quot;: false,
+    &quot;hadWriteValues&quot;: false,
+    &quot;hadDefaults&quot;: false,
+    &quot;hadViewReadExp&quot;: false
+  },
+  {
+    &quot;name&quot;: &quot;Employees&quot;,
+    &quot;primaryKey&quot;: [
+      &quot;id&quot;
+    ],
+    &quot;uniqueKey&quot;: [
+      &quot;lastName&quot;,
+      &quot;firstName&quot;
+    ],
+    &quot;properties&quot;: [
+      {
+        &quot;name&quot;: &quot;id&quot;,
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;required&quot;: false,
+        &quot;autoIncrement&quot;: true
+      },
+      {
+        &quot;name&quot;: &quot;lastName&quot;,
+        &quot;required&quot;: true,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;firstName&quot;,
+        &quot;required&quot;: true,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;title&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;titleOfCourtesy&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;birthDate&quot;,
+        &quot;type&quot;: &quot;dateTime&quot;,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;hireDate&quot;,
+        &quot;type&quot;: &quot;dateTime&quot;,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;phone&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;reportsToId&quot;,
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;address&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;city&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;region&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;postalCode&quot;,
+        &quot;length&quot;: 20,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;
+      },
+      {
+        &quot;name&quot;: &quot;country&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      }
+    ],
+    &quot;relations&quot;: [
+      {
+        &quot;name&quot;: &quot;reportsTo&quot;,
+        &quot;from&quot;: &quot;reportsToId&quot;,
+        &quot;entity&quot;: &quot;Employees&quot;,
+        &quot;to&quot;: &quot;id&quot;,
+        &quot;type&quot;: &quot;oneToMany&quot;,
+        &quot;weak&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;orders&quot;,
+        &quot;type&quot;: &quot;manyToOne&quot;,
+        &quot;composite&quot;: false,
+        &quot;from&quot;: &quot;id&quot;,
+        &quot;entity&quot;: &quot;Orders&quot;,
+        &quot;weak&quot;: true,
+        &quot;to&quot;: &quot;employeeId&quot;,
+        &quot;target&quot;: &quot;employee&quot;
+      }
+    ],
+    &quot;required&quot;: [],
+    &quot;indexes&quot;: [],
+    &quot;dependents&quot;: [
+      {
+        &quot;entity&quot;: &quot;Employees&quot;,
+        &quot;relation&quot;: {
+          &quot;name&quot;: &quot;reportsTo&quot;,
+          &quot;from&quot;: &quot;reportsToId&quot;,
+          &quot;entity&quot;: &quot;Employees&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        }
+      },
+      {
+        &quot;entity&quot;: &quot;Orders&quot;,
+        &quot;relation&quot;: {
+          &quot;name&quot;: &quot;employee&quot;,
+          &quot;from&quot;: &quot;employeeId&quot;,
+          &quot;entity&quot;: &quot;Employees&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;orders&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        }
+      }
+    ],
+    &quot;constraints&quot;: [],
+    &quot;composite&quot;: false,
+    &quot;hadReadExps&quot;: false,
+    &quot;hadWriteExps&quot;: false,
+    &quot;hadReadValues&quot;: false,
+    &quot;hadWriteValues&quot;: false,
+    &quot;hadDefaults&quot;: false,
+    &quot;hadViewReadExp&quot;: false
+  },
+  {
+    &quot;name&quot;: &quot;Shippers&quot;,
+    &quot;primaryKey&quot;: [
+      &quot;id&quot;
+    ],
+    &quot;uniqueKey&quot;: [
+      &quot;name&quot;
+    ],
+    &quot;properties&quot;: [
+      {
+        &quot;name&quot;: &quot;id&quot;,
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;required&quot;: false,
+        &quot;autoIncrement&quot;: true
+      },
+      {
+        &quot;name&quot;: &quot;name&quot;,
+        &quot;required&quot;: true,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;phone&quot;,
+        &quot;length&quot;: 20,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;
+      }
+    ],
+    &quot;required&quot;: [],
+    &quot;indexes&quot;: [],
+    &quot;relations&quot;: [],
+    &quot;dependents&quot;: [],
+    &quot;constraints&quot;: [],
+    &quot;composite&quot;: false,
+    &quot;hadReadExps&quot;: false,
+    &quot;hadWriteExps&quot;: false,
+    &quot;hadReadValues&quot;: false,
+    &quot;hadWriteValues&quot;: false,
+    &quot;hadDefaults&quot;: false,
+    &quot;hadViewReadExp&quot;: false
+  },
+  {
+    &quot;name&quot;: &quot;Suppliers&quot;,
+    &quot;primaryKey&quot;: [
+      &quot;id&quot;
+    ],
+    &quot;uniqueKey&quot;: [
+      &quot;name&quot;
+    ],
+    &quot;properties&quot;: [
+      {
+        &quot;name&quot;: &quot;id&quot;,
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;required&quot;: false,
+        &quot;autoIncrement&quot;: true
+      },
+      {
+        &quot;name&quot;: &quot;name&quot;,
+        &quot;required&quot;: true,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;contact&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;phone&quot;,
+        &quot;length&quot;: 20,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;
+      },
+      {
+        &quot;name&quot;: &quot;homepage&quot;,
+        &quot;length&quot;: 200,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;
+      },
+      {
+        &quot;name&quot;: &quot;address&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;city&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;region&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;postalCode&quot;,
+        &quot;length&quot;: 20,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;
+      },
+      {
+        &quot;name&quot;: &quot;country&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      }
+    ],
+    &quot;required&quot;: [],
+    &quot;indexes&quot;: [],
+    &quot;relations&quot;: [
+      {
+        &quot;name&quot;: &quot;products&quot;,
+        &quot;type&quot;: &quot;manyToOne&quot;,
+        &quot;composite&quot;: false,
+        &quot;from&quot;: &quot;id&quot;,
+        &quot;entity&quot;: &quot;Products&quot;,
+        &quot;weak&quot;: true,
+        &quot;to&quot;: &quot;supplierId&quot;,
+        &quot;target&quot;: &quot;supplier&quot;
+      }
+    ],
+    &quot;dependents&quot;: [
+      {
+        &quot;entity&quot;: &quot;Products&quot;,
+        &quot;relation&quot;: {
+          &quot;name&quot;: &quot;supplier&quot;,
+          &quot;from&quot;: &quot;supplierId&quot;,
+          &quot;entity&quot;: &quot;Suppliers&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;products&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        }
+      }
+    ],
+    &quot;constraints&quot;: [],
+    &quot;composite&quot;: false,
+    &quot;hadReadExps&quot;: false,
+    &quot;hadWriteExps&quot;: false,
+    &quot;hadReadValues&quot;: false,
+    &quot;hadWriteValues&quot;: false,
+    &quot;hadDefaults&quot;: false,
+    &quot;hadViewReadExp&quot;: false
+  },
+  {
+    &quot;name&quot;: &quot;Products&quot;,
+    &quot;primaryKey&quot;: [
+      &quot;id&quot;
+    ],
+    &quot;uniqueKey&quot;: [
+      &quot;name&quot;,
+      &quot;supplierId&quot;
+    ],
+    &quot;properties&quot;: [
+      {
+        &quot;name&quot;: &quot;id&quot;,
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;required&quot;: false,
+        &quot;autoIncrement&quot;: true
+      },
+      {
+        &quot;name&quot;: &quot;name&quot;,
+        &quot;required&quot;: true,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;supplierId&quot;,
+        &quot;required&quot;: true,
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      {
+        &quot;name&quot;: &quot;categoryId&quot;,
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;quantity&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;price&quot;,
+        &quot;type&quot;: &quot;decimal&quot;,
+        &quot;default&quot;: 0,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;inStock&quot;,
+        &quot;type&quot;: &quot;decimal&quot;,
+        &quot;default&quot;: 0,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;onOrder&quot;,
+        &quot;type&quot;: &quot;decimal&quot;,
+        &quot;default&quot;: 0,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;reorderLevel&quot;,
+        &quot;type&quot;: &quot;decimal&quot;,
+        &quot;default&quot;: 0,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;discontinued&quot;,
+        &quot;type&quot;: &quot;boolean&quot;,
+        &quot;default&quot;: false,
+        &quot;required&quot;: false
+      }
+    ],
+    &quot;relations&quot;: [
+      {
+        &quot;name&quot;: &quot;supplier&quot;,
+        &quot;from&quot;: &quot;supplierId&quot;,
+        &quot;entity&quot;: &quot;Suppliers&quot;,
+        &quot;to&quot;: &quot;id&quot;,
+        &quot;target&quot;: &quot;products&quot;,
+        &quot;type&quot;: &quot;oneToMany&quot;,
+        &quot;weak&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;category&quot;,
+        &quot;from&quot;: &quot;categoryId&quot;,
+        &quot;entity&quot;: &quot;Categories&quot;,
+        &quot;to&quot;: &quot;id&quot;,
+        &quot;target&quot;: &quot;products&quot;,
+        &quot;type&quot;: &quot;oneToMany&quot;,
+        &quot;weak&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;orderDetails&quot;,
+        &quot;type&quot;: &quot;manyToOne&quot;,
+        &quot;composite&quot;: false,
+        &quot;from&quot;: &quot;id&quot;,
+        &quot;entity&quot;: &quot;Orders.details&quot;,
+        &quot;weak&quot;: true,
+        &quot;to&quot;: &quot;productId&quot;,
+        &quot;target&quot;: &quot;product&quot;
+      }
+    ],
+    &quot;required&quot;: [],
+    &quot;indexes&quot;: [],
+    &quot;dependents&quot;: [
+      {
+        &quot;entity&quot;: &quot;Orders.details&quot;,
+        &quot;relation&quot;: {
+          &quot;name&quot;: &quot;product&quot;,
+          &quot;from&quot;: &quot;productId&quot;,
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;orderDetails&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        }
+      }
+    ],
+    &quot;constraints&quot;: [],
+    &quot;composite&quot;: false,
+    &quot;hadReadExps&quot;: false,
+    &quot;hadWriteExps&quot;: false,
+    &quot;hadReadValues&quot;: false,
+    &quot;hadWriteValues&quot;: false,
+    &quot;hadDefaults&quot;: true,
+    &quot;hadViewReadExp&quot;: false
+  },
+  {
+    &quot;name&quot;: &quot;Orders&quot;,
+    &quot;primaryKey&quot;: [
+      &quot;id&quot;
+    ],
+    &quot;indexes&quot;: [
+      {
+        &quot;name&quot;: &quot;orderDate&quot;,
+        &quot;fields&quot;: [
+          &quot;orderDate&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;shippedDate&quot;,
+        &quot;fields&quot;: [
+          &quot;shippedDate&quot;
+        ]
+      }
+    ],
+    &quot;properties&quot;: [
+      {
+        &quot;name&quot;: &quot;id&quot;,
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;required&quot;: false,
+        &quot;autoIncrement&quot;: true
+      },
+      {
+        &quot;name&quot;: &quot;customerId&quot;,
+        &quot;required&quot;: true,
+        &quot;length&quot;: 5,
+        &quot;type&quot;: &quot;string&quot;
+      },
+      {
+        &quot;name&quot;: &quot;employeeId&quot;,
+        &quot;required&quot;: true,
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      {
+        &quot;name&quot;: &quot;orderDate&quot;,
+        &quot;type&quot;: &quot;dateTime&quot;,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;requiredDate&quot;,
+        &quot;type&quot;: &quot;date&quot;,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;shippedDate&quot;,
+        &quot;type&quot;: &quot;date&quot;,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;shipViaId&quot;,
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;freight&quot;,
+        &quot;type&quot;: &quot;decimal&quot;,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;name&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;address&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;city&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;region&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      },
+      {
+        &quot;name&quot;: &quot;postalCode&quot;,
+        &quot;length&quot;: 20,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;
+      },
+      {
+        &quot;name&quot;: &quot;country&quot;,
+        &quot;required&quot;: false,
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;length&quot;: 80
+      }
+    ],
+    &quot;relations&quot;: [
+      {
+        &quot;name&quot;: &quot;customer&quot;,
+        &quot;from&quot;: &quot;customerId&quot;,
+        &quot;entity&quot;: &quot;Customers&quot;,
+        &quot;to&quot;: &quot;id&quot;,
+        &quot;target&quot;: &quot;orders&quot;,
+        &quot;type&quot;: &quot;oneToMany&quot;,
+        &quot;weak&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;employee&quot;,
+        &quot;from&quot;: &quot;employeeId&quot;,
+        &quot;entity&quot;: &quot;Employees&quot;,
+        &quot;to&quot;: &quot;id&quot;,
+        &quot;target&quot;: &quot;orders&quot;,
+        &quot;type&quot;: &quot;oneToMany&quot;,
+        &quot;weak&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;details&quot;,
+        &quot;type&quot;: &quot;manyToOne&quot;,
+        &quot;composite&quot;: true,
+        &quot;from&quot;: &quot;id&quot;,
+        &quot;entity&quot;: &quot;Orders.details&quot;,
+        &quot;weak&quot;: true,
+        &quot;to&quot;: &quot;orderId&quot;,
+        &quot;target&quot;: &quot;order&quot;
+      }
+    ],
+    &quot;uniqueKey&quot;: [],
+    &quot;required&quot;: [],
+    &quot;dependents&quot;: [
+      {
+        &quot;entity&quot;: &quot;Orders.details&quot;,
+        &quot;relation&quot;: {
+          &quot;name&quot;: &quot;order&quot;,
+          &quot;from&quot;: &quot;orderId&quot;,
+          &quot;entity&quot;: &quot;Orders&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;details&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        }
+      }
+    ],
+    &quot;constraints&quot;: [],
+    &quot;composite&quot;: false,
+    &quot;hadReadExps&quot;: false,
+    &quot;hadWriteExps&quot;: false,
+    &quot;hadReadValues&quot;: false,
+    &quot;hadWriteValues&quot;: false,
+    &quot;hadDefaults&quot;: false,
+    &quot;hadViewReadExp&quot;: false
+  },
+  {
+    &quot;name&quot;: &quot;Orders.details&quot;,
+    &quot;primaryKey&quot;: [
+      &quot;orderId&quot;,
+      &quot;productId&quot;
+    ],
+    &quot;properties&quot;: [
+      {
+        &quot;name&quot;: &quot;orderId&quot;,
+        &quot;required&quot;: true,
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      {
+        &quot;name&quot;: &quot;productId&quot;,
+        &quot;required&quot;: true,
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      {
+        &quot;name&quot;: &quot;unitPrice&quot;,
+        &quot;type&quot;: &quot;decimal&quot;,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;quantity&quot;,
+        &quot;type&quot;: &quot;decimal&quot;,
+        &quot;required&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;discount&quot;,
+        &quot;type&quot;: &quot;decimal&quot;,
+        &quot;required&quot;: false
+      }
+    ],
+    &quot;relations&quot;: [
+      {
+        &quot;name&quot;: &quot;order&quot;,
+        &quot;from&quot;: &quot;orderId&quot;,
+        &quot;entity&quot;: &quot;Orders&quot;,
+        &quot;to&quot;: &quot;id&quot;,
+        &quot;target&quot;: &quot;details&quot;,
+        &quot;type&quot;: &quot;oneToMany&quot;,
+        &quot;weak&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;product&quot;,
+        &quot;from&quot;: &quot;productId&quot;,
+        &quot;entity&quot;: &quot;Products&quot;,
+        &quot;to&quot;: &quot;id&quot;,
+        &quot;target&quot;: &quot;orderDetails&quot;,
+        &quot;type&quot;: &quot;oneToMany&quot;,
+        &quot;weak&quot;: false
+      }
+    ],
+    &quot;uniqueKey&quot;: [],
+    &quot;required&quot;: [],
+    &quot;indexes&quot;: [],
+    &quot;dependents&quot;: [],
+    &quot;constraints&quot;: [],
+    &quot;composite&quot;: true,
+    &quot;hadReadExps&quot;: false,
+    &quot;hadWriteExps&quot;: false,
+    &quot;hadReadValues&quot;: false,
+    &quot;hadWriteValues&quot;: false,
+    &quot;hadDefaults&quot;: false,
+    &quot;hadViewReadExp&quot;: false
+  }
+]
+</code></pre>
+<h2 id="entity">Entity</h2>
+<p>Returns one entity.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/entities/Categories?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Categories&quot;,
+  &quot;primaryKey&quot;: [
+    &quot;id&quot;
+  ],
+  &quot;uniqueKey&quot;: [
+    &quot;name&quot;
+  ],
+  &quot;properties&quot;: [
+    {
+      &quot;name&quot;: &quot;id&quot;,
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;required&quot;: false,
+      &quot;autoIncrement&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;name&quot;,
+      &quot;required&quot;: true,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;length&quot;: 80
+    },
+    {
+      &quot;name&quot;: &quot;description&quot;,
+      &quot;length&quot;: 1000,
+      &quot;required&quot;: false,
+      &quot;type&quot;: &quot;string&quot;
+    }
+  ],
+  &quot;required&quot;: [],
+  &quot;indexes&quot;: [],
+  &quot;relations&quot;: [
+    {
+      &quot;name&quot;: &quot;products&quot;,
+      &quot;type&quot;: &quot;manyToOne&quot;,
+      &quot;composite&quot;: false,
+      &quot;from&quot;: &quot;id&quot;,
+      &quot;entity&quot;: &quot;Products&quot;,
+      &quot;weak&quot;: true,
+      &quot;to&quot;: &quot;categoryId&quot;,
+      &quot;target&quot;: &quot;category&quot;
+    }
+  ],
+  &quot;dependents&quot;: [
+    {
+      &quot;entity&quot;: &quot;Products&quot;,
+      &quot;relation&quot;: {
+        &quot;name&quot;: &quot;category&quot;,
+        &quot;from&quot;: &quot;categoryId&quot;,
+        &quot;entity&quot;: &quot;Categories&quot;,
+        &quot;to&quot;: &quot;id&quot;,
+        &quot;target&quot;: &quot;products&quot;,
+        &quot;type&quot;: &quot;oneToMany&quot;,
+        &quot;weak&quot;: false
+      }
+    }
+  ],
+  &quot;constraints&quot;: [],
+  &quot;composite&quot;: false,
+  &quot;hadReadExps&quot;: false,
+  &quot;hadWriteExps&quot;: false,
+  &quot;hadReadValues&quot;: false,
+  &quot;hadWriteValues&quot;: false,
+  &quot;hadDefaults&quot;: false,
+  &quot;hadViewReadExp&quot;: false
+}
+</code></pre>
+<h2 id="enums">Enums</h2>
+<p>Return the enums of domain.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/enums?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">[]
+</code></pre>
+<h2 id="enum">Enum</h2>
+<p>Return one enum.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/enums/Color?format=beautiful&quot;
+</code></pre>
+<h2 id="sources">Sources</h2>
+<p>Return the sources.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/sources?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;default&quot;,
+    &quot;dialect&quot;: &quot;MySQL&quot;
+  }
+]
+</code></pre>
+<h2 id="source">Source</h2>
+<p>Return one source.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/sources/default?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;default&quot;,
+    &quot;dialect&quot;: &quot;MySQL&quot;
+  }
+]
+</code></pre>
+<h2 id="mappings">Mappings</h2>
+<p>Return the mappings of schema.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/mappings?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;default&quot;,
+    &quot;entities&quot;: [
+      {
+        &quot;name&quot;: &quot;Categories&quot;,
+        &quot;mapping&quot;: &quot;Categories&quot;,
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;mapping&quot;: &quot;CategoryID&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false,
+            &quot;autoIncrement&quot;: true
+          },
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;mapping&quot;: &quot;CategoryName&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;description&quot;,
+            &quot;mapping&quot;: &quot;Description&quot;,
+            &quot;length&quot;: 1000,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;uniqueKey&quot;: [
+          &quot;name&quot;
+        ],
+        &quot;required&quot;: [],
+        &quot;indexes&quot;: [],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;products&quot;,
+            &quot;type&quot;: &quot;manyToOne&quot;,
+            &quot;composite&quot;: false,
+            &quot;from&quot;: &quot;id&quot;,
+            &quot;entity&quot;: &quot;Products&quot;,
+            &quot;weak&quot;: true,
+            &quot;to&quot;: &quot;categoryId&quot;,
+            &quot;target&quot;: &quot;category&quot;
+          }
+        ],
+        &quot;dependents&quot;: [
+          {
+            &quot;entity&quot;: &quot;Products&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;category&quot;,
+              &quot;from&quot;: &quot;categoryId&quot;,
+              &quot;entity&quot;: &quot;Categories&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;target&quot;: &quot;products&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          }
+        ],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false,
+        &quot;hadKeys&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Customers&quot;,
+        &quot;mapping&quot;: &quot;Customers&quot;,
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;mapping&quot;: &quot;CustomerID&quot;,
+            &quot;length&quot;: 5,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;mapping&quot;: &quot;CompanyName&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;contact&quot;,
+            &quot;mapping&quot;: &quot;ContactName&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;phone&quot;,
+            &quot;mapping&quot;: &quot;ContactTitle&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;address&quot;,
+            &quot;mapping&quot;: &quot;Address&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;city&quot;,
+            &quot;mapping&quot;: &quot;City&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;region&quot;,
+            &quot;mapping&quot;: &quot;Region&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;postalCode&quot;,
+            &quot;mapping&quot;: &quot;PostalCode&quot;,
+            &quot;length&quot;: 20,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;country&quot;,
+            &quot;mapping&quot;: &quot;Country&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          }
+        ],
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;indexes&quot;: [
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;fields&quot;: [
+              &quot;name&quot;
+            ]
+          }
+        ],
+        &quot;uniqueKey&quot;: [],
+        &quot;required&quot;: [],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;orders&quot;,
+            &quot;type&quot;: &quot;manyToOne&quot;,
+            &quot;composite&quot;: false,
+            &quot;from&quot;: &quot;id&quot;,
+            &quot;entity&quot;: &quot;Orders&quot;,
+            &quot;weak&quot;: true,
+            &quot;to&quot;: &quot;customerId&quot;,
+            &quot;target&quot;: &quot;customer&quot;
+          }
+        ],
+        &quot;dependents&quot;: [
+          {
+            &quot;entity&quot;: &quot;Orders&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;customer&quot;,
+              &quot;from&quot;: &quot;customerId&quot;,
+              &quot;entity&quot;: &quot;Customers&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;target&quot;: &quot;orders&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          }
+        ],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false,
+        &quot;hadKeys&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Employees&quot;,
+        &quot;mapping&quot;: &quot;Employees&quot;,
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;mapping&quot;: &quot;EmployeeID&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false,
+            &quot;autoIncrement&quot;: true
+          },
+          {
+            &quot;name&quot;: &quot;lastName&quot;,
+            &quot;mapping&quot;: &quot;LastName&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;firstName&quot;,
+            &quot;mapping&quot;: &quot;FirstName&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;title&quot;,
+            &quot;mapping&quot;: &quot;Title&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;titleOfCourtesy&quot;,
+            &quot;mapping&quot;: &quot;TitleOfCourtesy&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;birthDate&quot;,
+            &quot;mapping&quot;: &quot;BirthDate&quot;,
+            &quot;type&quot;: &quot;dateTime&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;hireDate&quot;,
+            &quot;mapping&quot;: &quot;HireDate&quot;,
+            &quot;type&quot;: &quot;dateTime&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;phone&quot;,
+            &quot;mapping&quot;: &quot;HomePhone&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;reportsToId&quot;,
+            &quot;mapping&quot;: &quot;ReportsTo&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;address&quot;,
+            &quot;mapping&quot;: &quot;Address&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;city&quot;,
+            &quot;mapping&quot;: &quot;City&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;region&quot;,
+            &quot;mapping&quot;: &quot;Region&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;postalCode&quot;,
+            &quot;mapping&quot;: &quot;PostalCode&quot;,
+            &quot;length&quot;: 20,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;country&quot;,
+            &quot;mapping&quot;: &quot;Country&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          }
+        ],
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;uniqueKey&quot;: [
+          &quot;lastName&quot;,
+          &quot;firstName&quot;
+        ],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;reportsTo&quot;,
+            &quot;from&quot;: &quot;reportsToId&quot;,
+            &quot;entity&quot;: &quot;Employees&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;orders&quot;,
+            &quot;type&quot;: &quot;manyToOne&quot;,
+            &quot;composite&quot;: false,
+            &quot;from&quot;: &quot;id&quot;,
+            &quot;entity&quot;: &quot;Orders&quot;,
+            &quot;weak&quot;: true,
+            &quot;to&quot;: &quot;employeeId&quot;,
+            &quot;target&quot;: &quot;employee&quot;
+          }
+        ],
+        &quot;required&quot;: [],
+        &quot;indexes&quot;: [],
+        &quot;dependents&quot;: [
+          {
+            &quot;entity&quot;: &quot;Employees&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;reportsTo&quot;,
+              &quot;from&quot;: &quot;reportsToId&quot;,
+              &quot;entity&quot;: &quot;Employees&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          },
+          {
+            &quot;entity&quot;: &quot;Orders&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;employee&quot;,
+              &quot;from&quot;: &quot;employeeId&quot;,
+              &quot;entity&quot;: &quot;Employees&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;target&quot;: &quot;orders&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          }
+        ],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false,
+        &quot;hadKeys&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Shippers&quot;,
+        &quot;mapping&quot;: &quot;Shippers&quot;,
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;mapping&quot;: &quot;ShipperID&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false,
+            &quot;autoIncrement&quot;: true
+          },
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;mapping&quot;: &quot;CompanyName&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;phone&quot;,
+            &quot;mapping&quot;: &quot;Phone&quot;,
+            &quot;length&quot;: 20,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;uniqueKey&quot;: [
+          &quot;name&quot;
+        ],
+        &quot;required&quot;: [],
+        &quot;indexes&quot;: [],
+        &quot;relations&quot;: [],
+        &quot;dependents&quot;: [],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false,
+        &quot;hadKeys&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Suppliers&quot;,
+        &quot;mapping&quot;: &quot;Suppliers&quot;,
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;mapping&quot;: &quot;SupplierID&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false,
+            &quot;autoIncrement&quot;: true
+          },
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;mapping&quot;: &quot;CompanyName&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;contact&quot;,
+            &quot;mapping&quot;: &quot;ContactName&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;phone&quot;,
+            &quot;mapping&quot;: &quot;Phone&quot;,
+            &quot;length&quot;: 20,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;homepage&quot;,
+            &quot;mapping&quot;: &quot;HomePage&quot;,
+            &quot;length&quot;: 200,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;address&quot;,
+            &quot;mapping&quot;: &quot;Address&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;city&quot;,
+            &quot;mapping&quot;: &quot;City&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;region&quot;,
+            &quot;mapping&quot;: &quot;Region&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;postalCode&quot;,
+            &quot;mapping&quot;: &quot;PostalCode&quot;,
+            &quot;length&quot;: 20,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;country&quot;,
+            &quot;mapping&quot;: &quot;Country&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          }
+        ],
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;uniqueKey&quot;: [
+          &quot;name&quot;
+        ],
+        &quot;required&quot;: [],
+        &quot;indexes&quot;: [],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;products&quot;,
+            &quot;type&quot;: &quot;manyToOne&quot;,
+            &quot;composite&quot;: false,
+            &quot;from&quot;: &quot;id&quot;,
+            &quot;entity&quot;: &quot;Products&quot;,
+            &quot;weak&quot;: true,
+            &quot;to&quot;: &quot;supplierId&quot;,
+            &quot;target&quot;: &quot;supplier&quot;
+          }
+        ],
+        &quot;dependents&quot;: [
+          {
+            &quot;entity&quot;: &quot;Products&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;supplier&quot;,
+              &quot;from&quot;: &quot;supplierId&quot;,
+              &quot;entity&quot;: &quot;Suppliers&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;target&quot;: &quot;products&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          }
+        ],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false,
+        &quot;hadKeys&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Products&quot;,
+        &quot;mapping&quot;: &quot;Products&quot;,
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;mapping&quot;: &quot;ProductID&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false,
+            &quot;autoIncrement&quot;: true
+          },
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;mapping&quot;: &quot;ProductName&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;supplierId&quot;,
+            &quot;mapping&quot;: &quot;SupplierID&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;categoryId&quot;,
+            &quot;mapping&quot;: &quot;CategoryID&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;quantity&quot;,
+            &quot;mapping&quot;: &quot;QuantityPerUnit&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;price&quot;,
+            &quot;mapping&quot;: &quot;UnitPrice&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;default&quot;: 0,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;inStock&quot;,
+            &quot;mapping&quot;: &quot;UnitsInStock&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;default&quot;: 0,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;onOrder&quot;,
+            &quot;mapping&quot;: &quot;UnitsOnOrder&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;default&quot;: 0,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;reorderLevel&quot;,
+            &quot;mapping&quot;: &quot;ReorderLevel&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;default&quot;: 0,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;discontinued&quot;,
+            &quot;mapping&quot;: &quot;Discontinued&quot;,
+            &quot;type&quot;: &quot;boolean&quot;,
+            &quot;default&quot;: false,
+            &quot;required&quot;: false
+          }
+        ],
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;uniqueKey&quot;: [
+          &quot;name&quot;,
+          &quot;supplierId&quot;
+        ],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;supplier&quot;,
+            &quot;from&quot;: &quot;supplierId&quot;,
+            &quot;entity&quot;: &quot;Suppliers&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;products&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;category&quot;,
+            &quot;from&quot;: &quot;categoryId&quot;,
+            &quot;entity&quot;: &quot;Categories&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;products&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;orderDetails&quot;,
+            &quot;type&quot;: &quot;manyToOne&quot;,
+            &quot;composite&quot;: false,
+            &quot;from&quot;: &quot;id&quot;,
+            &quot;entity&quot;: &quot;Orders.details&quot;,
+            &quot;weak&quot;: true,
+            &quot;to&quot;: &quot;productId&quot;,
+            &quot;target&quot;: &quot;product&quot;
+          }
+        ],
+        &quot;required&quot;: [],
+        &quot;indexes&quot;: [],
+        &quot;dependents&quot;: [
+          {
+            &quot;entity&quot;: &quot;Orders.details&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;product&quot;,
+              &quot;from&quot;: &quot;productId&quot;,
+              &quot;entity&quot;: &quot;Products&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;target&quot;: &quot;orderDetails&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          }
+        ],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: true,
+        &quot;hadViewReadExp&quot;: false,
+        &quot;hadKeys&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Orders&quot;,
+        &quot;mapping&quot;: &quot;Orders&quot;,
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;mapping&quot;: &quot;OrderID&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false,
+            &quot;autoIncrement&quot;: true
+          },
+          {
+            &quot;name&quot;: &quot;customerId&quot;,
+            &quot;mapping&quot;: &quot;CustomerID&quot;,
+            &quot;required&quot;: true,
+            &quot;length&quot;: 5,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;employeeId&quot;,
+            &quot;mapping&quot;: &quot;EmployeeID&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;orderDate&quot;,
+            &quot;mapping&quot;: &quot;OrderDate&quot;,
+            &quot;type&quot;: &quot;dateTime&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;requiredDate&quot;,
+            &quot;mapping&quot;: &quot;RequiredDate&quot;,
+            &quot;type&quot;: &quot;date&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;shippedDate&quot;,
+            &quot;mapping&quot;: &quot;ShippedDate&quot;,
+            &quot;type&quot;: &quot;date&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;shipViaId&quot;,
+            &quot;mapping&quot;: &quot;ShipVia&quot;,
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;freight&quot;,
+            &quot;mapping&quot;: &quot;Freight&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;mapping&quot;: &quot;ShipName&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;address&quot;,
+            &quot;mapping&quot;: &quot;ShipAddress&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;city&quot;,
+            &quot;mapping&quot;: &quot;ShipCity&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;region&quot;,
+            &quot;mapping&quot;: &quot;ShipRegion&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          },
+          {
+            &quot;name&quot;: &quot;postalCode&quot;,
+            &quot;mapping&quot;: &quot;ShipPostalCode&quot;,
+            &quot;length&quot;: 20,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;country&quot;,
+            &quot;mapping&quot;: &quot;ShipCountry&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;length&quot;: 80
+          }
+        ],
+        &quot;primaryKey&quot;: [
+          &quot;id&quot;
+        ],
+        &quot;indexes&quot;: [
+          {
+            &quot;name&quot;: &quot;orderDate&quot;,
+            &quot;fields&quot;: [
+              &quot;orderDate&quot;
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;shippedDate&quot;,
+            &quot;fields&quot;: [
+              &quot;shippedDate&quot;
+            ]
+          }
+        ],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;customer&quot;,
+            &quot;from&quot;: &quot;customerId&quot;,
+            &quot;entity&quot;: &quot;Customers&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;orders&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;employee&quot;,
+            &quot;from&quot;: &quot;employeeId&quot;,
+            &quot;entity&quot;: &quot;Employees&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;orders&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;details&quot;,
+            &quot;type&quot;: &quot;manyToOne&quot;,
+            &quot;composite&quot;: true,
+            &quot;from&quot;: &quot;id&quot;,
+            &quot;entity&quot;: &quot;Orders.details&quot;,
+            &quot;weak&quot;: true,
+            &quot;to&quot;: &quot;orderId&quot;,
+            &quot;target&quot;: &quot;order&quot;
+          }
+        ],
+        &quot;uniqueKey&quot;: [],
+        &quot;required&quot;: [],
+        &quot;dependents&quot;: [
+          {
+            &quot;entity&quot;: &quot;Orders.details&quot;,
+            &quot;relation&quot;: {
+              &quot;name&quot;: &quot;order&quot;,
+              &quot;from&quot;: &quot;orderId&quot;,
+              &quot;entity&quot;: &quot;Orders&quot;,
+              &quot;to&quot;: &quot;id&quot;,
+              &quot;target&quot;: &quot;details&quot;,
+              &quot;type&quot;: &quot;oneToMany&quot;,
+              &quot;weak&quot;: false
+            }
+          }
+        ],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: false,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false,
+        &quot;hadKeys&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Orders.details&quot;,
+        &quot;mapping&quot;: &quot;Order Details&quot;,
+        &quot;properties&quot;: [
+          {
+            &quot;name&quot;: &quot;orderId&quot;,
+            &quot;mapping&quot;: &quot;OrderID&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;productId&quot;,
+            &quot;mapping&quot;: &quot;ProductID&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;unitPrice&quot;,
+            &quot;mapping&quot;: &quot;UnitPrice&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;quantity&quot;,
+            &quot;mapping&quot;: &quot;Quantity&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;required&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;discount&quot;,
+            &quot;mapping&quot;: &quot;Discount&quot;,
+            &quot;type&quot;: &quot;decimal&quot;,
+            &quot;required&quot;: false
+          }
+        ],
+        &quot;primaryKey&quot;: [
+          &quot;orderId&quot;,
+          &quot;productId&quot;
+        ],
+        &quot;relations&quot;: [
+          {
+            &quot;name&quot;: &quot;order&quot;,
+            &quot;from&quot;: &quot;orderId&quot;,
+            &quot;entity&quot;: &quot;Orders&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;details&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          },
+          {
+            &quot;name&quot;: &quot;product&quot;,
+            &quot;from&quot;: &quot;productId&quot;,
+            &quot;entity&quot;: &quot;Products&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;orderDetails&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        ],
+        &quot;uniqueKey&quot;: [],
+        &quot;required&quot;: [],
+        &quot;indexes&quot;: [],
+        &quot;dependents&quot;: [],
+        &quot;constraints&quot;: [],
+        &quot;composite&quot;: true,
+        &quot;hadReadExps&quot;: false,
+        &quot;hadWriteExps&quot;: false,
+        &quot;hadReadValues&quot;: false,
+        &quot;hadWriteValues&quot;: false,
+        &quot;hadDefaults&quot;: false,
+        &quot;hadViewReadExp&quot;: false,
+        &quot;hadKeys&quot;: false
+      }
+    ]
+  }
+]
+</code></pre>
+<h2 id="mapping">Mapping</h2>
+<p>Return one mapping.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/mappings/default?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;default&quot;,
+  &quot;entities&quot;: [
+    {
+      &quot;name&quot;: &quot;Categories&quot;,
+      &quot;mapping&quot;: &quot;Categories&quot;,
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;mapping&quot;: &quot;CategoryID&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false,
+          &quot;autoIncrement&quot;: true
+        },
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;mapping&quot;: &quot;CategoryName&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;description&quot;,
+          &quot;mapping&quot;: &quot;Description&quot;,
+          &quot;length&quot;: 1000,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        }
+      ],
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;uniqueKey&quot;: [
+        &quot;name&quot;
+      ],
+      &quot;required&quot;: [],
+      &quot;indexes&quot;: [],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;products&quot;,
+          &quot;type&quot;: &quot;manyToOne&quot;,
+          &quot;composite&quot;: false,
+          &quot;from&quot;: &quot;id&quot;,
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;weak&quot;: true,
+          &quot;to&quot;: &quot;categoryId&quot;,
+          &quot;target&quot;: &quot;category&quot;
+        }
+      ],
+      &quot;dependents&quot;: [
+        {
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;category&quot;,
+            &quot;from&quot;: &quot;categoryId&quot;,
+            &quot;entity&quot;: &quot;Categories&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;products&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false,
+      &quot;hadKeys&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Customers&quot;,
+      &quot;mapping&quot;: &quot;Customers&quot;,
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;mapping&quot;: &quot;CustomerID&quot;,
+          &quot;length&quot;: 5,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;mapping&quot;: &quot;CompanyName&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;contact&quot;,
+          &quot;mapping&quot;: &quot;ContactName&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;phone&quot;,
+          &quot;mapping&quot;: &quot;ContactTitle&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;address&quot;,
+          &quot;mapping&quot;: &quot;Address&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;city&quot;,
+          &quot;mapping&quot;: &quot;City&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;region&quot;,
+          &quot;mapping&quot;: &quot;Region&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;postalCode&quot;,
+          &quot;mapping&quot;: &quot;PostalCode&quot;,
+          &quot;length&quot;: 20,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;country&quot;,
+          &quot;mapping&quot;: &quot;Country&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        }
+      ],
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;indexes&quot;: [
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;fields&quot;: [
+            &quot;name&quot;
+          ]
+        }
+      ],
+      &quot;uniqueKey&quot;: [],
+      &quot;required&quot;: [],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;orders&quot;,
+          &quot;type&quot;: &quot;manyToOne&quot;,
+          &quot;composite&quot;: false,
+          &quot;from&quot;: &quot;id&quot;,
+          &quot;entity&quot;: &quot;Orders&quot;,
+          &quot;weak&quot;: true,
+          &quot;to&quot;: &quot;customerId&quot;,
+          &quot;target&quot;: &quot;customer&quot;
+        }
+      ],
+      &quot;dependents&quot;: [
+        {
+          &quot;entity&quot;: &quot;Orders&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;customer&quot;,
+            &quot;from&quot;: &quot;customerId&quot;,
+            &quot;entity&quot;: &quot;Customers&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;orders&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false,
+      &quot;hadKeys&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Employees&quot;,
+      &quot;mapping&quot;: &quot;Employees&quot;,
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;mapping&quot;: &quot;EmployeeID&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false,
+          &quot;autoIncrement&quot;: true
+        },
+        {
+          &quot;name&quot;: &quot;lastName&quot;,
+          &quot;mapping&quot;: &quot;LastName&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;firstName&quot;,
+          &quot;mapping&quot;: &quot;FirstName&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;title&quot;,
+          &quot;mapping&quot;: &quot;Title&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;titleOfCourtesy&quot;,
+          &quot;mapping&quot;: &quot;TitleOfCourtesy&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;birthDate&quot;,
+          &quot;mapping&quot;: &quot;BirthDate&quot;,
+          &quot;type&quot;: &quot;dateTime&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;hireDate&quot;,
+          &quot;mapping&quot;: &quot;HireDate&quot;,
+          &quot;type&quot;: &quot;dateTime&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;phone&quot;,
+          &quot;mapping&quot;: &quot;HomePhone&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;reportsToId&quot;,
+          &quot;mapping&quot;: &quot;ReportsTo&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;address&quot;,
+          &quot;mapping&quot;: &quot;Address&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;city&quot;,
+          &quot;mapping&quot;: &quot;City&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;region&quot;,
+          &quot;mapping&quot;: &quot;Region&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;postalCode&quot;,
+          &quot;mapping&quot;: &quot;PostalCode&quot;,
+          &quot;length&quot;: 20,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;country&quot;,
+          &quot;mapping&quot;: &quot;Country&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        }
+      ],
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;uniqueKey&quot;: [
+        &quot;lastName&quot;,
+        &quot;firstName&quot;
+      ],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;reportsTo&quot;,
+          &quot;from&quot;: &quot;reportsToId&quot;,
+          &quot;entity&quot;: &quot;Employees&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;orders&quot;,
+          &quot;type&quot;: &quot;manyToOne&quot;,
+          &quot;composite&quot;: false,
+          &quot;from&quot;: &quot;id&quot;,
+          &quot;entity&quot;: &quot;Orders&quot;,
+          &quot;weak&quot;: true,
+          &quot;to&quot;: &quot;employeeId&quot;,
+          &quot;target&quot;: &quot;employee&quot;
+        }
+      ],
+      &quot;required&quot;: [],
+      &quot;indexes&quot;: [],
+      &quot;dependents&quot;: [
+        {
+          &quot;entity&quot;: &quot;Employees&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;reportsTo&quot;,
+            &quot;from&quot;: &quot;reportsToId&quot;,
+            &quot;entity&quot;: &quot;Employees&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        },
+        {
+          &quot;entity&quot;: &quot;Orders&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;employee&quot;,
+            &quot;from&quot;: &quot;employeeId&quot;,
+            &quot;entity&quot;: &quot;Employees&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;orders&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false,
+      &quot;hadKeys&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Shippers&quot;,
+      &quot;mapping&quot;: &quot;Shippers&quot;,
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;mapping&quot;: &quot;ShipperID&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false,
+          &quot;autoIncrement&quot;: true
+        },
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;mapping&quot;: &quot;CompanyName&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;phone&quot;,
+          &quot;mapping&quot;: &quot;Phone&quot;,
+          &quot;length&quot;: 20,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        }
+      ],
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;uniqueKey&quot;: [
+        &quot;name&quot;
+      ],
+      &quot;required&quot;: [],
+      &quot;indexes&quot;: [],
+      &quot;relations&quot;: [],
+      &quot;dependents&quot;: [],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false,
+      &quot;hadKeys&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Suppliers&quot;,
+      &quot;mapping&quot;: &quot;Suppliers&quot;,
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;mapping&quot;: &quot;SupplierID&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false,
+          &quot;autoIncrement&quot;: true
+        },
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;mapping&quot;: &quot;CompanyName&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;contact&quot;,
+          &quot;mapping&quot;: &quot;ContactName&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;phone&quot;,
+          &quot;mapping&quot;: &quot;Phone&quot;,
+          &quot;length&quot;: 20,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;homepage&quot;,
+          &quot;mapping&quot;: &quot;HomePage&quot;,
+          &quot;length&quot;: 200,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;address&quot;,
+          &quot;mapping&quot;: &quot;Address&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;city&quot;,
+          &quot;mapping&quot;: &quot;City&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;region&quot;,
+          &quot;mapping&quot;: &quot;Region&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;postalCode&quot;,
+          &quot;mapping&quot;: &quot;PostalCode&quot;,
+          &quot;length&quot;: 20,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;country&quot;,
+          &quot;mapping&quot;: &quot;Country&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        }
+      ],
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;uniqueKey&quot;: [
+        &quot;name&quot;
+      ],
+      &quot;required&quot;: [],
+      &quot;indexes&quot;: [],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;products&quot;,
+          &quot;type&quot;: &quot;manyToOne&quot;,
+          &quot;composite&quot;: false,
+          &quot;from&quot;: &quot;id&quot;,
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;weak&quot;: true,
+          &quot;to&quot;: &quot;supplierId&quot;,
+          &quot;target&quot;: &quot;supplier&quot;
+        }
+      ],
+      &quot;dependents&quot;: [
+        {
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;supplier&quot;,
+            &quot;from&quot;: &quot;supplierId&quot;,
+            &quot;entity&quot;: &quot;Suppliers&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;products&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false,
+      &quot;hadKeys&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Products&quot;,
+      &quot;mapping&quot;: &quot;Products&quot;,
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;mapping&quot;: &quot;ProductID&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false,
+          &quot;autoIncrement&quot;: true
+        },
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;mapping&quot;: &quot;ProductName&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;supplierId&quot;,
+          &quot;mapping&quot;: &quot;SupplierID&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;integer&quot;
+        },
+        {
+          &quot;name&quot;: &quot;categoryId&quot;,
+          &quot;mapping&quot;: &quot;CategoryID&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;quantity&quot;,
+          &quot;mapping&quot;: &quot;QuantityPerUnit&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;price&quot;,
+          &quot;mapping&quot;: &quot;UnitPrice&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;default&quot;: 0,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;inStock&quot;,
+          &quot;mapping&quot;: &quot;UnitsInStock&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;default&quot;: 0,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;onOrder&quot;,
+          &quot;mapping&quot;: &quot;UnitsOnOrder&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;default&quot;: 0,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;reorderLevel&quot;,
+          &quot;mapping&quot;: &quot;ReorderLevel&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;default&quot;: 0,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;discontinued&quot;,
+          &quot;mapping&quot;: &quot;Discontinued&quot;,
+          &quot;type&quot;: &quot;boolean&quot;,
+          &quot;default&quot;: false,
+          &quot;required&quot;: false
+        }
+      ],
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;uniqueKey&quot;: [
+        &quot;name&quot;,
+        &quot;supplierId&quot;
+      ],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;supplier&quot;,
+          &quot;from&quot;: &quot;supplierId&quot;,
+          &quot;entity&quot;: &quot;Suppliers&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;products&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;category&quot;,
+          &quot;from&quot;: &quot;categoryId&quot;,
+          &quot;entity&quot;: &quot;Categories&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;products&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;orderDetails&quot;,
+          &quot;type&quot;: &quot;manyToOne&quot;,
+          &quot;composite&quot;: false,
+          &quot;from&quot;: &quot;id&quot;,
+          &quot;entity&quot;: &quot;Orders.details&quot;,
+          &quot;weak&quot;: true,
+          &quot;to&quot;: &quot;productId&quot;,
+          &quot;target&quot;: &quot;product&quot;
+        }
+      ],
+      &quot;required&quot;: [],
+      &quot;indexes&quot;: [],
+      &quot;dependents&quot;: [
+        {
+          &quot;entity&quot;: &quot;Orders.details&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;product&quot;,
+            &quot;from&quot;: &quot;productId&quot;,
+            &quot;entity&quot;: &quot;Products&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;orderDetails&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: true,
+      &quot;hadViewReadExp&quot;: false,
+      &quot;hadKeys&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Orders&quot;,
+      &quot;mapping&quot;: &quot;Orders&quot;,
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;id&quot;,
+          &quot;mapping&quot;: &quot;OrderID&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false,
+          &quot;autoIncrement&quot;: true
+        },
+        {
+          &quot;name&quot;: &quot;customerId&quot;,
+          &quot;mapping&quot;: &quot;CustomerID&quot;,
+          &quot;required&quot;: true,
+          &quot;length&quot;: 5,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;employeeId&quot;,
+          &quot;mapping&quot;: &quot;EmployeeID&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;integer&quot;
+        },
+        {
+          &quot;name&quot;: &quot;orderDate&quot;,
+          &quot;mapping&quot;: &quot;OrderDate&quot;,
+          &quot;type&quot;: &quot;dateTime&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;requiredDate&quot;,
+          &quot;mapping&quot;: &quot;RequiredDate&quot;,
+          &quot;type&quot;: &quot;date&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;shippedDate&quot;,
+          &quot;mapping&quot;: &quot;ShippedDate&quot;,
+          &quot;type&quot;: &quot;date&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;shipViaId&quot;,
+          &quot;mapping&quot;: &quot;ShipVia&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;freight&quot;,
+          &quot;mapping&quot;: &quot;Freight&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;mapping&quot;: &quot;ShipName&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;address&quot;,
+          &quot;mapping&quot;: &quot;ShipAddress&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;city&quot;,
+          &quot;mapping&quot;: &quot;ShipCity&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;region&quot;,
+          &quot;mapping&quot;: &quot;ShipRegion&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        },
+        {
+          &quot;name&quot;: &quot;postalCode&quot;,
+          &quot;mapping&quot;: &quot;ShipPostalCode&quot;,
+          &quot;length&quot;: 20,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;name&quot;: &quot;country&quot;,
+          &quot;mapping&quot;: &quot;ShipCountry&quot;,
+          &quot;required&quot;: false,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;length&quot;: 80
+        }
+      ],
+      &quot;primaryKey&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;indexes&quot;: [
+        {
+          &quot;name&quot;: &quot;orderDate&quot;,
+          &quot;fields&quot;: [
+            &quot;orderDate&quot;
+          ]
+        },
+        {
+          &quot;name&quot;: &quot;shippedDate&quot;,
+          &quot;fields&quot;: [
+            &quot;shippedDate&quot;
+          ]
+        }
+      ],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;customer&quot;,
+          &quot;from&quot;: &quot;customerId&quot;,
+          &quot;entity&quot;: &quot;Customers&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;orders&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;employee&quot;,
+          &quot;from&quot;: &quot;employeeId&quot;,
+          &quot;entity&quot;: &quot;Employees&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;orders&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;details&quot;,
+          &quot;type&quot;: &quot;manyToOne&quot;,
+          &quot;composite&quot;: true,
+          &quot;from&quot;: &quot;id&quot;,
+          &quot;entity&quot;: &quot;Orders.details&quot;,
+          &quot;weak&quot;: true,
+          &quot;to&quot;: &quot;orderId&quot;,
+          &quot;target&quot;: &quot;order&quot;
+        }
+      ],
+      &quot;uniqueKey&quot;: [],
+      &quot;required&quot;: [],
+      &quot;dependents&quot;: [
+        {
+          &quot;entity&quot;: &quot;Orders.details&quot;,
+          &quot;relation&quot;: {
+            &quot;name&quot;: &quot;order&quot;,
+            &quot;from&quot;: &quot;orderId&quot;,
+            &quot;entity&quot;: &quot;Orders&quot;,
+            &quot;to&quot;: &quot;id&quot;,
+            &quot;target&quot;: &quot;details&quot;,
+            &quot;type&quot;: &quot;oneToMany&quot;,
+            &quot;weak&quot;: false
+          }
+        }
+      ],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: false,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false,
+      &quot;hadKeys&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;Orders.details&quot;,
+      &quot;mapping&quot;: &quot;Order Details&quot;,
+      &quot;properties&quot;: [
+        {
+          &quot;name&quot;: &quot;orderId&quot;,
+          &quot;mapping&quot;: &quot;OrderID&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;integer&quot;
+        },
+        {
+          &quot;name&quot;: &quot;productId&quot;,
+          &quot;mapping&quot;: &quot;ProductID&quot;,
+          &quot;required&quot;: true,
+          &quot;type&quot;: &quot;integer&quot;
+        },
+        {
+          &quot;name&quot;: &quot;unitPrice&quot;,
+          &quot;mapping&quot;: &quot;UnitPrice&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;quantity&quot;,
+          &quot;mapping&quot;: &quot;Quantity&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;required&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;discount&quot;,
+          &quot;mapping&quot;: &quot;Discount&quot;,
+          &quot;type&quot;: &quot;decimal&quot;,
+          &quot;required&quot;: false
+        }
+      ],
+      &quot;primaryKey&quot;: [
+        &quot;orderId&quot;,
+        &quot;productId&quot;
+      ],
+      &quot;relations&quot;: [
+        {
+          &quot;name&quot;: &quot;order&quot;,
+          &quot;from&quot;: &quot;orderId&quot;,
+          &quot;entity&quot;: &quot;Orders&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;details&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        },
+        {
+          &quot;name&quot;: &quot;product&quot;,
+          &quot;from&quot;: &quot;productId&quot;,
+          &quot;entity&quot;: &quot;Products&quot;,
+          &quot;to&quot;: &quot;id&quot;,
+          &quot;target&quot;: &quot;orderDetails&quot;,
+          &quot;type&quot;: &quot;oneToMany&quot;,
+          &quot;weak&quot;: false
+        }
+      ],
+      &quot;uniqueKey&quot;: [],
+      &quot;required&quot;: [],
+      &quot;indexes&quot;: [],
+      &quot;dependents&quot;: [],
+      &quot;constraints&quot;: [],
+      &quot;composite&quot;: true,
+      &quot;hadReadExps&quot;: false,
+      &quot;hadWriteExps&quot;: false,
+      &quot;hadReadValues&quot;: false,
+      &quot;hadWriteValues&quot;: false,
+      &quot;hadDefaults&quot;: false,
+      &quot;hadViewReadExp&quot;: false,
+      &quot;hadKeys&quot;: false
+    }
+  ]
+}
+</code></pre>
+<h2 id="entity-mapping">Entity Mapping</h2>
+<p>Return one entity mapping.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/mappings/default/Categories?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Categories&quot;,
+  &quot;mapping&quot;: &quot;Categories&quot;,
+  &quot;properties&quot;: [
+    {
+      &quot;name&quot;: &quot;id&quot;,
+      &quot;mapping&quot;: &quot;CategoryID&quot;,
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;required&quot;: false,
+      &quot;autoIncrement&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;name&quot;,
+      &quot;mapping&quot;: &quot;CategoryName&quot;,
+      &quot;required&quot;: true,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;length&quot;: 80
+    },
+    {
+      &quot;name&quot;: &quot;description&quot;,
+      &quot;mapping&quot;: &quot;Description&quot;,
+      &quot;length&quot;: 1000,
+      &quot;required&quot;: false,
+      &quot;type&quot;: &quot;string&quot;
+    }
+  ],
+  &quot;primaryKey&quot;: [
+    &quot;id&quot;
+  ],
+  &quot;uniqueKey&quot;: [
+    &quot;name&quot;
+  ],
+  &quot;required&quot;: [],
+  &quot;indexes&quot;: [],
+  &quot;relations&quot;: [
+    {
+      &quot;name&quot;: &quot;products&quot;,
+      &quot;type&quot;: &quot;manyToOne&quot;,
+      &quot;composite&quot;: false,
+      &quot;from&quot;: &quot;id&quot;,
+      &quot;entity&quot;: &quot;Products&quot;,
+      &quot;weak&quot;: true,
+      &quot;to&quot;: &quot;categoryId&quot;,
+      &quot;target&quot;: &quot;category&quot;
+    }
+  ],
+  &quot;dependents&quot;: [
+    {
+      &quot;entity&quot;: &quot;Products&quot;,
+      &quot;relation&quot;: {
+        &quot;name&quot;: &quot;category&quot;,
+        &quot;from&quot;: &quot;categoryId&quot;,
+        &quot;entity&quot;: &quot;Categories&quot;,
+        &quot;to&quot;: &quot;id&quot;,
+        &quot;target&quot;: &quot;products&quot;,
+        &quot;type&quot;: &quot;oneToMany&quot;,
+        &quot;weak&quot;: false
+      }
+    }
+  ],
+  &quot;constraints&quot;: [],
+  &quot;composite&quot;: false,
+  &quot;hadReadExps&quot;: false,
+  &quot;hadWriteExps&quot;: false,
+  &quot;hadReadValues&quot;: false,
+  &quot;hadWriteValues&quot;: false,
+  &quot;hadDefaults&quot;: false,
+  &quot;hadViewReadExp&quot;: false,
+  &quot;hadKeys&quot;: false
+}
+</code></pre>
+<h2 id="views">Views</h2>
+<p>Return all views.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/views?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">[
+  &quot;default&quot;
+]
+</code></pre>
+<h2 id="stages">Stages</h2>
+<p>Return all stages.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/stages?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;default&quot;,
+    &quot;sources&quot;: [
+      {
+        &quot;name&quot;: &quot;default&quot;
+      }
+    ]
+  }
+]
+</code></pre>
+<h2 id="stage">Stage</h2>
+<p>Return one stage.</p>
+<p>Request:</p>
+<pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/stages/default?format=beautiful&quot;
+</code></pre>
+<p>Response</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;default&quot;,
+  &quot;sources&quot;: [
+    {
+      &quot;name&quot;: &quot;default&quot;
+    }
+  ]
+}
+</code></pre>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
