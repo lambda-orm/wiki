@@ -4,14 +4,15 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="shortcut icon" href="/img/favicon.ico" />
+      <link rel="shortcut icon" href="/wiki/img/favicon.ico" />
     <title>λORM Wiki</title>
-    <link rel="stylesheet" href="/css/theme.css" />
-    <link rel="stylesheet" href="/css/theme_extra.css" />
+    <link rel="stylesheet" href="/wiki/css/theme.css" />
+    <link rel="stylesheet" href="/wiki/css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="/wiki/extra.css" rel="stylesheet" />
     
     <!--[if lt IE 9]>
-      <script src="/js/html5shiv.min.js"></script>
+      <script src="/wiki/js/html5shiv.min.js"></script>
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
       <script>hljs.highlightAll();</script> 
@@ -23,9 +24,9 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="/." class="icon icon-home"> λORM Wiki
+          <a href="/wiki/." class="icon icon-home"> λORM Wiki
         </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="//search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="/wiki//search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
   </form>
 </div>
@@ -33,23 +34,19 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="" href="/index.html">Home</a>
+                <li class="toctree-l1"><a class="" href="/wiki/index.html">Home</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="/Usage/index.html">Usage</a>
+                <li class="toctree-l1"><a class="" href="/wiki/Features">Features</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="/Features/index.html">Features</a>
+                <li class="toctree-l1"><a class="" href="/wiki/api">Api</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="/api/index.html">Api</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="" href="/cli/index.html">Cli</a>
+                <li class="toctree-l1"><a class="" href="/wiki/cli">Cli</a>
                 </li>
               </ul>
               <ul>
@@ -58,71 +55,73 @@
               </ul>
               <p class="caption"><span class="caption-text">Queries</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="" href="/queries/Query-Language/index.html">Query Language</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/queries/Query-Language">Query Language</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/queries/Expression/index.html">Expression</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/queries/Expression">Expression</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/queries/Select/index.html">Select</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/queries/Select">Select</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/queries/Join/index.html">Join</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/queries/Join">Join</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/queries/Grouping/index.html">Grouping</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/queries/Grouping">Grouping</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/queries/Include/index.html">Include</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/queries/Include">Include</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/queries/Insert/index.html">Insert</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/queries/Insert">Insert</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/queries/BulkInsert/index.html">Bulk Insert</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/queries/BulkInsert">Bulk Insert</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/queries/Update/index.html">Update</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/queries/Update">Update</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/queries/Delete/index.html">Delete</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/queries/Delete">Delete</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/wiki/queries/operatorsAndFunctions/OperatorsAndFunctions">Operators & Functions</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Schema</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaDefinition/index.html">Definition</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaDefinition">Definition</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaDefinition-Expressions">Expressions</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaDefinition-EnvironmentVariables">Environment Variables</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaDefinition-Composite">Composite</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaExample-Listener/index.html">Listeners</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaExample-Listener">Listeners</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaExample-Basic/index.html">Basic</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaExample-Basic">Basic</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaExample-Extend">Extend Entity</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaExample-MultiplesStages">Multiples Stages</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaExample-StageMultiplesSources">Stage with Multiples Sources</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaExample-Composite">Entity Composite</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaSynchronization-Push/index.html">Push</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaSynchronization-Push">Push</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaSynchronization-Pull">Pull</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaSynchronization-Fetch">Fetch</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaSynchronization-Introspect">Introspect</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/SchemaSynchronization-Incorporate">Incorporate</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/schema/Schema-Use/index.html">Use</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/schema/Schema-Use">Use</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Use</span></p>
+              <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="" href="/use/Repository/index.html">Repository</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/usage/Repository">Repository</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/use/Transaction/index.html">Transaction</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/usage/Transaction">Transaction</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/use/Usage/index.html">Usage</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/usage/Usage">Usage</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="/use/CHANGELOG/index.html">Change log</a>
+                  <li class="toctree-l1"><a class="" href="/wiki/usage/CHANGELOG">Change log</a>
                   </li>
               </ul>
       </div>
@@ -132,13 +131,13 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="/.">λORM Wiki</a>
+          <a href="/wiki/.">λORM Wiki</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="/." class="icon icon-home" aria-label="Docs"></a></li>
+    <li><a href="/wiki/." class="icon icon-home" aria-label="Docs"></a></li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -179,11 +178,12 @@
     
   </span>
 </div>
-    <script src="/js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "/";</script>
-    <script src="/js/theme_extra.js"></script>
-    <script src="/js/theme.js"></script>
-      <script src="/search/main.js"></script>
+    <script src="/wiki/js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "/wiki/";</script>
+    <script src="/wiki/js/theme_extra.js"></script>
+    <script src="/wiki/js/theme.js"></script>
+      <script src="/wiki/extra.js"></script>
+      <script src="/wiki/search/main.js"></script>
     <script>
         jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
