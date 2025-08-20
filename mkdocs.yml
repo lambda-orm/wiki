@@ -3,44 +3,52 @@ docs_dir: docs
 site_dir: wiki
 theme:
   name: readthedocs
+extra_css:
+  - extra.css
+extra_javascript:
+  - extra.js
+markdown_extensions:
+  - toc:
+      permalink: false
+      toc_depth: 2
 
 nav:
-  - Home: index.html
-  - Usage: Usage/index.html
-  - Features: Features/index.html
-  - Api: api/index.html
-  - Cli: cli/index.html
+  - Home: /
+  - Features: Features
+  - Api: api
+  - Cli: cli
   - Labs: https://github.com/lambda-orm/lambdaorm-labs
   - Queries:
-      - Query Language: queries/Query-Language/index.html
-      - Expression: queries/Expression/index.html
-      - Select: queries/Select/index.html
-      - Join: queries/Join/index.html
-      - Grouping: queries/Grouping/index.html
-      - Include: queries/Include/index.html
-      - Insert: queries/Insert/index.html
-      - Bulk Insert: queries/BulkInsert/index.html
-      - Update: queries/Update/index.html
-      - Delete: queries/Delete/index.html      
+      - Query Language: queries/Query-Language
+      - Expression: queries/Expression
+      - Select: queries/Select
+      - Join: queries/Join
+      - Grouping: queries/Grouping
+      - Include: queries/Include
+      - Insert: queries/Insert
+      - Bulk Insert: queries/BulkInsert
+      - Update: queries/Update
+      - Delete: queries/Delete
+      - Operators & Functions: queries/operatorsAndFunctions/OperatorsAndFunctions   
   - Schema:
-      - Definition: schema/SchemaDefinition/index.html
-      - Expressions: schema/SchemaDefinition-Expressions/index.html
-      - Environment Variables: schema/SchemaDefinition-EnvironmentVariables/index.html
-      - Composite: schema/SchemaDefinition-Composite/index.html
-      - Listeners: schema/SchemaExample-Listener/index.html
-      - Basic:  schema/SchemaExample-Basic/index.html
-      - Extend Entity:  schema/SchemaExample-Extend/index.html
-      - Multiples Stages:  schema/SchemaExample-MultiplesStages/index.html
-      - Stage with Multiples Sources:  schema/SchemaExample-StageMultiplesSources/index.html
-      - Entity Composite:  schema/SchemaExample-Composite/index.html
-      - Push: schema/SchemaSynchronization-Push/index.html
-      - Pull: schema/SchemaSynchronization-Pull/index.html
-      - Fetch: schema/SchemaSynchronization-Fetch/index.html
-      - Introspect: schema/SchemaSynchronization-Introspect/index.html
-      - Incorporate: schema/SchemaSynchronization-Incorporate/index.html
-      - Use: schema/Schema-Use/index.html
-  - Use:      
-    - Repository: use/Repository/index.html
-    - Transaction: use/Transaction/index.html
-    - Usage: use/Usage/index.html
-    - Change log: use/CHANGELOG/index.html
+      - Definition: schema/SchemaDefinition
+      - Expressions: schema/SchemaDefinition-Expressions
+      - Environment Variables: schema/SchemaDefinition-EnvironmentVariables
+      - Composite: schema/SchemaDefinition-Composite
+      - Listeners: schema/SchemaExample-Listener
+      - Basic:  schema/SchemaExample-Basic
+      - Extend Entity:  schema/SchemaExample-Extend
+      - Multiples Stages:  schema/SchemaExample-MultiplesStages
+      - Stage with Multiples Sources:  schema/SchemaExample-StageMultiplesSources
+      - Entity Composite:  schema/SchemaExample-Composite
+      - Push: schema/SchemaSynchronization-Push
+      - Pull: schema/SchemaSynchronization-Pull
+      - Fetch: schema/SchemaSynchronization-Fetch
+      - Introspect: schema/SchemaSynchronization-Introspect
+      - Incorporate: schema/SchemaSynchronization-Incorporate
+      - Use: schema/Schema-Use
+  - Usage:     
+    - Repository: usage/Repository
+    - Transaction: usage/Transaction
+    - Usage: usage/Usage
+    - Change log: usage/CHANGELOG

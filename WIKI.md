@@ -11,6 +11,8 @@ Install MkDocs with pipx:
 
 ```bash
 pipx install mkdocs
+pipx install mkdocs-material
+pipx inject mkdocs mkdocs-material
 ```
 
 Make sure that `~/.local/bin` is in your PATH:
