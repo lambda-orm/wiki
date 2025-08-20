@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Join - λORM Wiki</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Join";
+        var mkdocs_page_input_path = "queries/Join.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Join</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="join">Join</h1>
+<p>Join statements are implicit when they add fields through their relationships.</p>
+<h2 id="join-simple">Join simple</h2>
+<p>Retrieves the product name and its category through a relationship.</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-ts">Products.map(p =&gt; ({ name: p.name, category: p.category.name }))
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Selects the product name as `name` and the category name as `category`.
+-- Performs an inner join between the Products table and the Categories table using CategoryID.
+SELECT p.ProductName AS `name`, c.CategoryName AS `category` 
+FROM Products p 
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID 
+</code></pre>
+<h2 id="join-with-distinct-and-sort">Join with distinct and sort</h2>
+<p>Retrieves distinct values of quantity per unit and category, sorted by category.</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-ts">Products
+    .distinct(p =&gt; ({ quantity: p.quantity, category: p.category.name }))
+    .sort(p =&gt; p.category)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Selects distinct values of quantity per unit as `quantity` and the category name as `category`.
+-- Performs an inner join between the Products table and the Categories table using CategoryID.
+-- Orders the results by `category`.
+SELECT DISTINCT p.QuantityPerUnit AS `quantity`, c.CategoryName AS `category` 
+FROM Products p 
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID 
+ORDER BY `category` 
+</code></pre>
+<h2 id="join-with-filter">Join with filter</h2>
+<p>Retrieves the product name and its category, but only for products with a price greater than 10.</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-ts">Products
+    .filter(p =&gt; p.price &gt; 10)
+    .map(p =&gt; ({ name: p.name, category: p.category.name }))
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Selects the product name as `name` and the category name as `category`.
+-- Performs an inner join between the Products table and the Categories table using CategoryID.
+-- Filters products with a price greater than 10.
+SELECT p.ProductName AS `name`, c.CategoryName AS `category` 
+FROM Products p 
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID 
+WHERE p.UnitPrice &gt; 10 
+</code></pre>
+<h2 id="join-and-pagination">Join and pagination</h2>
+<p>Retrieves the product name and its category for products with a price greater than 10, ordered by category and paginated.</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-ts">Products
+    .filter(p =&gt; p.price &gt; 10)
+    .map(p =&gt; ({ name: p.name, category: p.category.name}))
+    .sort(p =&gt; p.category)
+    .page(1, 10)
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Selects the product name as `name` and the category name as `category`.
+-- Performs an inner join between the Products table and the Categories table using CategoryID.
+-- Filters products with a price greater than 10.
+-- Orders the results by `category` and limits them to 10 results per page, starting from page 1.
+SELECT p.ProductName AS `name`, c.CategoryName AS `category` 
+FROM Products p 
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID 
+WHERE p.UnitPrice &gt; 10 
+ORDER BY `category` LIMIT 0,10 
+</code></pre>
+<h2 id="multiple-join-and-grouping">Multiple Join and grouping</h2>
+<p>Retrieves the order date and the total for each order for a specific customer, ordered by total in descending order.</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-ts">OrderDetails
+    .filter(p =&gt; p.order.customer.name == customerName)
+    .map(p =&gt; ({ order: p.order.orderDate, total: sum(p.quantity * p.unitPrice) }))
+    .sort(p =&gt; desc(p.total))
+</code></pre>
+<p><strong>SQL Result:</strong></p>
+<pre><code class="language-sql">-- Selects the order date as `order` and the sum of quantity times unit price as `total`.
+-- Performs inner joins between the Order Details table and the Orders and Customers tables using OrderID and CustomerID respectively.
+-- Filters orders associated with the provided customer name.
+-- Groups the results by order date.
+-- Orders the results by `total` in descending order.
+SELECT o1.OrderDate AS `order`, SUM(o.Quantity * o.UnitPrice) AS `total` 
+FROM `Order Details` o 
+INNER JOIN Orders o1 ON o1.OrderID = o.OrderID 
+INNER JOIN Customers c ON c.CustomerID = o1.CustomerID 
+WHERE c.CompanyName = ? 
+GROUP BY o1.OrderDate 
+ORDER BY `total` desc 
+</code></pre>
+<h2 id="code-example">Code example</h2>
+<pre><code class="language-Typescript">import { orm } from '../../lib'
+import { OrderDetails } from '../northwind/model/__model'
+(async () =&gt; {  
+    try {       
+        await orm.init('./config/northwind.yaml')
+        const query = OrderDetails
+                    .filter(p =&gt; p.order.customer.name == customerName)
+                    .map(p =&gt; ({ order: p.order.orderDate, total: sum(p.quantity * p.unitPrice) }))
+                    .sort(p =&gt; desc(p.total))
+        const result = await orm.execute(query, {maxPrice:10}, {stage:'MySQL'})
+        console.log(JSON.stringify(result, null, 2))        
+    } catch (error:any) {
+        console.error(error.stack)
+    } finally {
+        await orm.end()
+    }
+})()
+</code></pre>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

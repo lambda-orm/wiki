@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Composite Entity - λORM Wiki</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Composite Entity";
+        var mkdocs_page_input_path = "schema/SchemaExample-Composite.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../queries/Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Select/index.html">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Join/index.html">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Grouping/index.html">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Include/index.html">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Insert/index.html">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/BulkInsert/index.html">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Update/index.html">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Delete/index.html">Delete</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition/index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Push/index.html">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Pull/index.html">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Fetch/index.html">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Introspect/index.html">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../Repository/index.html">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Transaction/index.html">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Usage/index.html">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../CHANGELOG/index.html">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Composite Entity</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="composite-entity">Composite Entity</h1>
+<p>Using the period in the name of an entity we can define a composite entity. \
+For example, if we have an entity Orders and another Orders.details \
+The Orders.details entity is a composite entity of the Orders entity. \</p>
+<p>If the datasource is NoSQL, the data will be stored in a single collection but if the datasource is Relational, the data will be stored in separate tables. \</p>
+<p>But on the domain side it will be treated the same regardless of the type of datasource. \
+abstracting from persistence technology.</p>
+<h2 id="composite-example">Composite Example</h2>
+<p>In this example we can see that we have an entity Orders and another Orders.details \
+The Orders.details entity is a composite entity of the Orders entity. \</p>
+<p><strong>Part of the schema where the composite entity is defined:</strong></p>
+<pre><code class="language-yaml">domain:  
+  entities:
+...  
+  - name: Orders
+    primaryKey: [id]
+    indexes:
+    - name: orderDate
+      fields: [orderDate]
+    properties:
+    - name: id
+      type: integer
+      required: true
+      autoIncrement: true
+    - name: customerId
+      required: true
+      length: 5
+    - name: orderDate
+      type: dateTime 
+  - name: Orders.details
+    primaryKey: [orderId, productId]
+    properties:
+    - name: orderId
+      required: true
+      type: integer
+    - name: productId
+      required: true
+      type: integer
+    - name: unitPrice
+      type: decimal
+    - name: quantity
+      type: decimal
+    relations:
+    - name: order
+      from: orderId
+      entity: Orders
+      to: id
+      target: details
+...
+</code></pre>
+<p><strong>Schema Complete:</strong></p>
+<pre><code class="language-yaml">domain:  
+  entities:
+  - name: Address
+    abstract: true
+    indexes:
+    - name: postalCode
+      fields: [&quot;postalCode&quot;]
+    - name: region
+      fields: [&quot;region&quot;, &quot;country&quot;]
+    - name: city
+      fields: [&quot;city&quot;]
+    properties:
+    - name: address
+    - name: city
+    - name: region
+    - name: postalCode
+      length: 20
+    - name: country
+  - name: Categories
+    primaryKey: [&quot;id&quot;]
+    uniqueKey: [&quot;name&quot;]
+    properties:
+    - name: id
+      type: integer
+      required: true
+      autoIncrement: true
+    - name: name
+      required: true
+  - name: Customers
+    extends: Address
+    primaryKey: [&quot;id&quot;]
+    indexes:
+    - name: name
+      fields: [&quot;name&quot;]
+    properties:
+    - name: id
+      length: 5
+      required: true
+    - name: name
+      required: true
+  - name: Products
+    primaryKey: [&quot;id&quot;]
+    uniqueKey: [&quot;name&quot;, &quot;supplierId&quot;]
+    properties:
+    - name: id
+      type: integer
+      required: true
+      autoIncrement: true
+    - name: name
+      required: true
+    - name: categoryId
+      type: integer
+    - name: quantity
+    - name: price
+      type: decimal
+      default: 0
+    relations:
+    - name: category
+      from: categoryId
+      entity: Categories
+      to: id
+      target: products
+  - name: Orders
+    primaryKey: [&quot;id&quot;]
+    indexes:
+    - name: orderDate
+      fields: [&quot;orderDate&quot;]
+    properties:
+    - name: id
+      type: integer
+      required: true
+      autoIncrement: true
+    - name: customerId
+      required: true
+      length: 5
+    - name: orderDate
+      type: dateTime 
+    relations:
+    - name: customer
+      from: customerId
+      entity: Customers
+      to: id
+      target: orders
+  - name: Orders.details
+    primaryKey: [&quot;orderId&quot;, &quot;productId&quot;]
+    properties:
+    - name: orderId
+      required: true
+      type: integer
+    - name: productId
+      required: true
+      type: integer
+    - name: unitPrice
+      type: decimal
+    - name: quantity
+      type: decimal
+    relations:
+    - name: order
+      from: orderId
+      entity: Orders
+      to: id
+      target: details
+    - name: product
+      from: productId
+      entity: Products
+      to: id
+      target: orderDetails
+infrastructure:
+  views:
+  - name: default  
+  mappings:
+  - name: default
+    entities:
+    - name: Address
+      abstract: true
+      properties:
+      - name: address
+        mapping: Address
+      - name: city
+        mapping: City
+      - name: region
+        mapping: Region
+      - name: postalCode
+        mapping: PostalCode
+      - name: country
+        mapping: Country
+    - name: Categories
+      mapping: Categories
+      properties:
+      - name: id
+        mapping: CategoryID
+      - name: name
+        mapping: CategoryName
+    - name: Customers
+      extends: Address
+      mapping: Customers
+      properties:
+      - name: id
+        mapping: CustomerID
+      - name: name
+        mapping: CompanyName
+    - name: Products
+      mapping: Products
+      properties:
+      - name: id
+        mapping: ProductID
+      - name: name
+        mapping: ProductName
+      - name: categoryId
+        mapping: CategoryID
+      - name: quantity
+        mapping: QuantityPerUnit
+      - name: price
+        mapping: UnitPrice
+    - name: Orders
+      mapping: Orders
+      properties:
+      - name: id
+        mapping: OrderID
+      - name: customerId
+        mapping: CustomerID
+      - name: orderDate
+        mapping: OrderDate
+    - name: Orders.details
+      mapping: Order Details
+      properties:
+      - name: orderId
+        mapping: OrderID
+      - name: productId
+        mapping: ProductID
+      - name: unitPrice
+        mapping: UnitPrice
+      - name: quantity
+        mapping: Quantity
+  - name: mongoDb
+    extends: default
+    entities:
+      - name: Orders
+        sequence: SQ_ORDERS
+        properties:
+          - name: id
+            mapping: _id
+  sources:
+  - name: Catalog      
+    dialect: MySQL
+    mapping: default
+    connection: ${CNN_MYSQL}      
+  - name: Crm    
+    dialect: PostgreSQL
+    mapping: default
+    connection: ${CNN_POSTGRES}
+  - name: Ordering
+    dialect: MongoDB
+    mapping: mongoDb      
+    connection: ${CNN_MONGODB}    
+  stages:
+  - name: default
+    sources:
+    - name: Catalog
+      condition: entity.in([&quot;Categories&quot;,&quot;Products&quot;])
+    - name: Crm
+      condition: entity.in([&quot;Address&quot;,&quot;Customers&quot;])
+    - name: Ordering
+      condition: entity.in([&quot;Orders&quot;,&quot;Orders.details&quot;])   
+</code></pre>
+<p><strong>Environment Variables:</strong></p>
+<pre><code class="language-sh">CNN_MYSQL={&quot;host&quot;:&quot;localhost&quot;,&quot;port&quot;:3306,&quot;user&quot;:&quot;test&quot;,&quot;password&quot;:&quot;test&quot;,&quot;database&quot;:&quot;test&quot;}
+CNN_POSTGRES={&quot;host&quot;:&quot;localhost&quot;,&quot;port&quot;:5433,&quot;user&quot;:&quot;test&quot;,&quot;password&quot;:&quot;test&quot;,&quot;database&quot;:&quot;test&quot;}
+CNN_MONGODB={&quot;url&quot;:&quot;mongodb://test:test@localhost:27017&quot;,&quot;database&quot;:&quot;test&quot;}
+</code></pre>
+<p><strong>Laboratory:</strong></p>
+<p><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources">CLI - northwind multiples datasources</a></p>
+<h2 id="composite-example-in-different-datasources">Composite example in different datasources</h2>
+<p>En este ejemple podemos ver como se trata una entidad compuesta en diferentes datasources. \
+En el stage default se utiliza Mongo para almacenar las Orders y Orders.details \
+En el stage insights se utiliza Postgres para almacenar las Orders y Orders.details  </p>
+<p><strong>Part of the schema where the stages are configured:</strong></p>
+<pre><code class="language-yaml">...
+  stages:
+  - name: default
+    sources:
+    - name: Catalog
+      condition: entity.in([&quot;Categories&quot;,&quot;Products&quot;])
+    - name: Crm
+      condition: entity.in([&quot;Address&quot;,&quot;Customers&quot;])
+    - name: Ordering
+      condition: entity.in([&quot;Orders&quot;,&quot;Orders.details&quot;])
+  - name: insights
+    sources:
+    - name: Insights
+...
+</code></pre>
+<p><strong>Schema Complete:</strong></p>
+<pre><code class="language-yaml">domain:  
+  enums:
+  entities:
+  - name: Address
+    abstract: true
+    indexes:
+    - name: postalCode
+      fields: [&quot;postalCode&quot;]
+    - name: region
+      fields: [&quot;region&quot;, &quot;country&quot;]
+    - name: city
+      fields: [&quot;city&quot;]
+    properties:
+    - name: address
+    - name: city
+    - name: region
+    - name: postalCode
+      length: 20
+    - name: country
+  - name: Categories
+    primaryKey: [&quot;id&quot;]
+    uniqueKey: [&quot;name&quot;]
+    properties:
+    - name: id
+      type: integer
+      required: true
+      autoIncrement: true
+    - name: name
+      required: true
+  - name: Customers
+    extends: Address
+    primaryKey: [&quot;id&quot;]
+    indexes:
+    - name: name
+      fields: [&quot;name&quot;]
+    properties:
+    - name: id
+      length: 5
+      required: true
+    - name: name
+      required: true
+  - name: Products
+    primaryKey: [&quot;id&quot;]
+    uniqueKey: [&quot;name&quot;, &quot;supplierId&quot;]
+    properties:
+    - name: id
+      type: integer
+      required: true
+      autoIncrement: true
+    - name: name
+      required: true
+    - name: categoryId
+      type: integer
+    - name: quantity
+    - name: price
+      type: decimal
+      default: 0
+    relations:
+    - name: category
+      from: categoryId
+      entity: Categories
+      to: id
+      target: products
+  - name: Orders
+    primaryKey: [&quot;id&quot;]
+    indexes:
+    - name: orderDate
+      fields: [&quot;orderDate&quot;]
+    properties:
+    - name: id
+      type: integer
+      required: true
+      autoIncrement: true
+    - name: customerId
+      required: true
+      length: 5
+    - name: orderDate
+      type: dateTime 
+    relations:
+    - name: customer
+      from: customerId
+      entity: Customers
+      to: id
+      target: orders
+  - name: Orders.details
+    primaryKey: [&quot;orderId&quot;, &quot;productId&quot;]
+    properties:
+    - name: orderId
+      required: true
+      type: integer
+    - name: productId
+      required: true
+      type: integer
+    - name: unitPrice
+      type: decimal
+    - name: quantity
+      type: decimal
+    relations:
+    - name: order
+      from: orderId
+      entity: Orders
+      to: id
+      target: details
+    - name: product
+      from: productId
+      entity: Products
+      to: id
+      target: orderDetails
+infrastructure:
+  views:
+  - name: default  
+  mappings:
+  - name: default
+    entities:
+    - name: Address
+      abstract: true
+      properties:
+      - name: address
+        mapping: Address
+      - name: city
+        mapping: City
+      - name: region
+        mapping: Region
+      - name: postalCode
+        mapping: PostalCode
+      - name: country
+        mapping: Country
+    - name: Categories
+      mapping: Categories
+      properties:
+      - name: id
+        mapping: CategoryID
+      - name: name
+        mapping: CategoryName
+    - name: Customers
+      extends: Address
+      mapping: Customers
+      properties:
+      - name: id
+        mapping: CustomerID
+      - name: name
+        mapping: CompanyName
+    - name: Products
+      mapping: Products
+      properties:
+      - name: id
+        mapping: ProductID
+      - name: name
+        mapping: ProductName
+      - name: categoryId
+        mapping: CategoryID
+      - name: quantity
+        mapping: QuantityPerUnit
+      - name: price
+        mapping: UnitPrice
+    - name: Orders
+      mapping: Orders
+      properties:
+      - name: id
+        mapping: OrderID
+      - name: customerId
+        mapping: CustomerID
+      - name: orderDate
+        mapping: OrderDate
+    - name: Orders.details
+      mapping: Order Details
+      properties:
+      - name: orderId
+        mapping: OrderID
+      - name: productId
+        mapping: ProductID
+      - name: unitPrice
+        mapping: UnitPrice
+      - name: quantity
+        mapping: Quantity
+  - name: mongoDb
+    extends: default
+    entities:
+      - name: Orders
+        sequence: SQ_ORDERS
+        properties:
+          - name: id
+            mapping: _id
+  sources:
+  - name: Catalog      
+    dialect: MySQL
+    mapping: default
+    connection: ${CNN_MYSQL}      
+  - name: Crm    
+    dialect: PostgreSQL
+    mapping: default
+    connection: ${CNN_POSTGRES}
+  - name: Ordering
+    dialect: MongoDB
+    mapping: mongoDb      
+    connection: ${CNN_MONGODB}
+  - name: Insights    
+    dialect: PostgreSQL
+    mapping: default
+    connection: ${CNN_INSIGHTS}      
+  stages:
+  - name: default
+    sources:
+    - name: Catalog
+      condition: entity.in([&quot;Categories&quot;,&quot;Products&quot;])
+    - name: Crm
+      condition: entity.in([&quot;Address&quot;,&quot;Customers&quot;])
+    - name: Ordering
+      condition: entity.in([&quot;Orders&quot;,&quot;Orders.details&quot;])
+  - name: insights
+    sources:
+    - name: Insights
+</code></pre>
+<h3 id="orders-composite-in-mongodb">Orders Composite in MongoDb</h3>
+<p>Orders collection:</p>
+<p><img alt="OrderCompositeInMongo" src="https://raw.githubusercontent.com/lambda-orm/lambdaorm/HEAD/images/OrderCompositeInMongo.png" /></p>
+<h3 id="orders-composite-in-postgres">Orders Composite in Postgres</h3>
+<p>Orders table:</p>
+<p><img alt="OrderCompositeInPostgres" src="https://raw.githubusercontent.com/lambda-orm/lambdaorm/HEAD/images/OrderCompositeInPostgres.png" /></p>
+<p>Orders details table:</p>
+<p><img alt="OrderDetailsCompositeInPostgres" src="https://raw.githubusercontent.com/lambda-orm/lambdaorm/HEAD/images/OrderDetailCompositeInPostgres.png" /></p>
+<h2 id="queries">Queries</h2>
+<p>But if we execute the same query in the different stages we can see that the result is the same</p>
+<h3 id="query-on-default-stage">Query on default stage</h3>
+<pre><code class="language-sh">lambdaorm execute -e &quot;.env&quot; -s default -q &quot;Orders.filter(p =&gt; p.customerId == customerId).include(p =&gt; [p.customer.map(p =&gt; p.name), p.details.include(p =&gt; p.product.include(p =&gt; p.category.map(p =&gt; p.name)).map(p =&gt; p.name)).map(p =&gt; [p.quantity, p.unitPrice])]).order(p=&gt; p.id).page(1,1)&quot; -d &quot;{\&quot;customerId\&quot;: \&quot;HANAR\&quot;}&quot;
+</code></pre>
+<p>Result:</p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 3,
+    &quot;customerId&quot;: &quot;HANAR&quot;,
+    &quot;employeeId&quot;: 4,
+    &quot;orderDate&quot;: &quot;1996-07-08T00:00:00.000+02:00&quot;,
+    &quot;requiredDate&quot;: &quot;1996-08-05&quot;,
+    &quot;shippedDate&quot;: &quot;1996-07-12&quot;,
+    &quot;shipViaId&quot;: 2,
+    &quot;freight&quot;: 65.83,
+    &quot;name&quot;: &quot;Hanari Carnes&quot;,
+    &quot;address&quot;: &quot;Rua do Pao, 67&quot;,
+    &quot;city&quot;: &quot;Rio de Janeiro&quot;,
+    &quot;region&quot;: &quot;RJ&quot;,
+    &quot;postalCode&quot;: &quot;05454-876&quot;,
+    &quot;country&quot;: &quot;Brazil&quot;,
+    &quot;details&quot;: [
+      {
+        &quot;quantity&quot;: 10,
+        &quot;unitPrice&quot;: 7.7,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Jack's New England Clam Chowder&quot;,
+          &quot;category&quot;: {
+            &quot;name&quot;: &quot;Seafood&quot;
+          }
+        }
+      },
+      {
+        &quot;quantity&quot;: 35,
+        &quot;unitPrice&quot;: 42.4,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Manjimup Dried Apples&quot;,
+          &quot;category&quot;: {
+            &quot;name&quot;: &quot;Produce&quot;
+          }
+        }
+      },
+      {
+        &quot;quantity&quot;: 15,
+        &quot;unitPrice&quot;: 16.8,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Louisiana Fiery Hot Pepper Sauce&quot;,
+          &quot;category&quot;: {
+            &quot;name&quot;: &quot;Condiments&quot;
+          }
+        }
+      }
+    ],
+    &quot;customer&quot;: {
+      &quot;name&quot;: &quot;Hanari Carnes&quot;
+    }
+  }
+]
+</code></pre>
+<h3 id="same-query-on-insights-stage">Same query on insights stage</h3>
+<pre><code class="language-sh">lambdaorm execute -e &quot;.env&quot; -s insights -q &quot;Orders.filter(p =&gt; p.customerId == customerId).include(p =&gt; [p.customer.map(p =&gt; p.name), p.details.include(p =&gt; p.product.include(p =&gt; p.category.map(p =&gt; p.name)).map(p =&gt; p.name)).map(p =&gt; [p.quantity, p.unitPrice])]).order(p=&gt; p.id).page(1,1)&quot; -d &quot;{\&quot;customerId\&quot;: \&quot;HANAR\&quot;}&quot;
+</code></pre>
+<p>Result:</p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 3,
+    &quot;customerId&quot;: &quot;HANAR&quot;,
+    &quot;employeeId&quot;: 4,
+    &quot;orderDate&quot;: &quot;1996-07-07T22:00:00.000Z&quot;,
+    &quot;requiredDate&quot;: &quot;1996-08-04T22:00:00.000Z&quot;,
+    &quot;shippedDate&quot;: &quot;1996-07-11T22:00:00.000Z&quot;,
+    &quot;shipViaId&quot;: 2,
+    &quot;freight&quot;: 65.83,
+    &quot;name&quot;: &quot;Hanari Carnes&quot;,
+    &quot;address&quot;: &quot;Rua do Pao, 67&quot;,
+    &quot;city&quot;: &quot;Rio de Janeiro&quot;,
+    &quot;region&quot;: &quot;RJ&quot;,
+    &quot;postalCode&quot;: &quot;05454-876&quot;,
+    &quot;country&quot;: &quot;Brazil&quot;,
+    &quot;customer&quot;: {
+      &quot;name&quot;: &quot;Hanari Carnes&quot;
+    },
+    &quot;details&quot;: [
+      {
+        &quot;quantity&quot;: 10,
+        &quot;unitPrice&quot;: 7.7,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Jack's New England Clam Chowder&quot;,
+          &quot;category&quot;: {
+            &quot;name&quot;: &quot;Seafood&quot;
+          }
+        }
+      },
+      {
+        &quot;quantity&quot;: 35,
+        &quot;unitPrice&quot;: 42.4,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Manjimup Dried Apples&quot;,
+          &quot;category&quot;: {
+            &quot;name&quot;: &quot;Produce&quot;
+          }
+        }
+      },
+      {
+        &quot;quantity&quot;: 15,
+        &quot;unitPrice&quot;: 16.8,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Louisiana Fiery Hot Pepper Sauce&quot;,
+          &quot;category&quot;: {
+            &quot;name&quot;: &quot;Condiments&quot;
+          }
+        }
+      }
+    ]
+  }
+]
+</code></pre>
+<h2 id="laboratories">Laboratories</h2>
+<ul>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/05-northwind">CLI - northwind</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources">CLI - northwind multiples datasources</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/07-northwind-multiples-stages">CLI - northwind multiples stages</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

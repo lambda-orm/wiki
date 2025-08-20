@@ -14,30 +14,30 @@ nav:
   - Queries:
       - Query Language: queries/Query-Language/index.html
       - Expression: queries/Expression/index.html
-      - Select: queries/dql/Select/index.html
-      - Join: queries/dql/Join/index.html
-      - Grouping: queries/dql/Grouping/index.html
-      - Include: queries/dql/Include/index.html
-      - Insert: queries/dml/Insert/index.html
-      - Bulk Insert: queries/dml/BulkInsert/index.html
-      - Update: queries/dml/Update/index.html
-      - Delete: queries/dml/Delete/index.html      
+      - Select: queries/Select/index.html
+      - Join: queries/Join/index.html
+      - Grouping: queries/Grouping/index.html
+      - Include: queries/Include/index.html
+      - Insert: queries/Insert/index.html
+      - Bulk Insert: queries/BulkInsert/index.html
+      - Update: queries/Update/index.html
+      - Delete: queries/Delete/index.html      
   - Schema:
-      - Definition: schema/Definition/SchemaDefinition/index.html
-      - Expressions: schema/Definition/SchemaDefinition-Expressions/index.html
-      - Environment Variables: schema/Definition/SchemaDefinition-EnvironmentVariables/index.html
-      - Composite: schema/Definition/SchemaDefinition-Composite/index.html
-      - Listeners: schema/Examples/SchemaExample-Listener/index.html
-      - Basic:  schema/Examples/SchemaExample-Basic/index.html
-      - Extend Entity:  schema/Examples/SchemaExample-Extend/index.html
-      - Multiples Stages:  schema/Examples/SchemaExample-MultiplesStages/index.html
-      - Stage with Multiples Sources:  schema/Examples/SchemaExample-StageMultiplesSources/index.html
-      - Entity Composite:  schema/Examples/SchemaExample-Composite/index.html
-      - Push: schema/Synchronization/SchemaSynchronization-Push/index.html
-      - Pull: schema/Synchronization/SchemaSynchronization-Pull/index.html
-      - Fetch: schema/Synchronization/SchemaSynchronization-Fetch/index.html
-      - Introspect: schema/Synchronization/SchemaSynchronization-Introspect/index.html
-      - Incorporate: schema/Synchronization/SchemaSynchronization-Incorporate/index.html
+      - Definition: schema/SchemaDefinition/index.html
+      - Expressions: schema/SchemaDefinition-Expressions/index.html
+      - Environment Variables: schema/SchemaDefinition-EnvironmentVariables/index.html
+      - Composite: schema/SchemaDefinition-Composite/index.html
+      - Listeners: schema/SchemaExample-Listener/index.html
+      - Basic:  schema/SchemaExample-Basic/index.html
+      - Extend Entity:  schema/SchemaExample-Extend/index.html
+      - Multiples Stages:  schema/SchemaExample-MultiplesStages/index.html
+      - Stage with Multiples Sources:  schema/SchemaExample-StageMultiplesSources/index.html
+      - Entity Composite:  schema/SchemaExample-Composite/index.html
+      - Push: schema/SchemaSynchronization-Push/index.html
+      - Pull: schema/SchemaSynchronization-Pull/index.html
+      - Fetch: schema/SchemaSynchronization-Fetch/index.html
+      - Introspect: schema/SchemaSynchronization-Introspect/index.html
+      - Incorporate: schema/SchemaSynchronization-Incorporate/index.html
       - Use: schema/Schema-Use/index.html
   - Usage:      
     - Repository: Repository/index.html
