@@ -40,7 +40,7 @@ nav:
       - Incorporate: schema/SchemaSynchronization-Incorporate/index.html
       - Use: schema/Schema-Use/index.html
   - Usage:      
-    - Repository: Repository/index.html
-    - Transaction: Transaction/index.html
-    - Usage: Usage/index.html
-    - Change log: CHANGELOG/index.html
+    - Repository: usage/Repository/index.html
+    - Transaction: usage/Transaction/index.html
+    - Usage: usage/Usage/index.html
+    - Change log: usage/CHANGELOG/index.html
