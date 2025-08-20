@@ -1,189 +1,176 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  
-  
-  <link rel="shortcut icon" href="../../../img/favicon.ico">
-  <title>Definition - LambdaORM Wiki</title>
-  <link rel="stylesheet" href="../../../css/theme.css" />
-  <link rel="stylesheet" href="../../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "Definition";
-    var mkdocs_page_input_path = "schema/Definition/SchemaDefinition.md";
-    var mkdocs_page_url = null;
-  </script>
-  
-  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
-  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> 
-  
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Definition - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Definition";
+        var mkdocs_page_input_path = "schema/Definition/SchemaDefinition.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
 
   <div class="wy-grid-for-nav">
-
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="../../.." class="icon icon-home"> LambdaORM Wiki</a>
-        <div role="search">
+          <a href="../../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-                <ul>
-                    <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="" href="../../../Usage/index.html">Usage</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="" href="../../../Features/index.html">Features</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="" href="../../../api/index.html">Api</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="" href="../../../cli/index.html">Cli</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Queries</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="" href="../../../Query-Language/index.html">Query Language</a>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../Expression/index.html">Expression</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="#">DQL</a>
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Features/index.html">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../api/index.html">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../cli/index.html">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/lambda-orm/lambdaorm-labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Query-Language/index.html">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Expression/index.html">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >DQL</a>
     <ul>
-                <li class="toctree-l2"><a class="" href="../../../Select/index.html">Select</a>
+                <li class="toctree-l2"><a class="" href="../../../queries/dql/Select/index.html">Select</a>
                 </li>
-                <li class="toctree-l2"><a class="" href="../../../Join/index.html">Join</a>
+                <li class="toctree-l2"><a class="" href="../../../queries/dql/Join/index.html">Join</a>
                 </li>
-                <li class="toctree-l2"><a class="" href="../../../Grouping/index.html">Grouping</a>
+                <li class="toctree-l2"><a class="" href="../../../queries/dql/Grouping/index.html">Grouping</a>
                 </li>
-                <li class="toctree-l2"><a class="" href="../../../Include/index.html">Include</a>
+                <li class="toctree-l2"><a class="" href="../../../queries/dql/Include/index.html">Include</a>
                 </li>
     </ul>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="#">DML</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >DML</a>
     <ul>
-                <li class="toctree-l2"><a class="" href="../../../Insert/index.html">Insert</a>
+                <li class="toctree-l2"><a class="" href="../../../queries/dml/Insert/index.html">Insert</a>
                 </li>
-                <li class="toctree-l2"><a class="" href="../../../BulkInsert/index.html">Bulk Insert</a>
+                <li class="toctree-l2"><a class="" href="../../../queries/dml/BulkInsert/index.html">Bulk Insert</a>
                 </li>
-                <li class="toctree-l2"><a class="" href="../../../Update/index.html">Update</a>
+                <li class="toctree-l2"><a class="" href="../../../queries/dml/Update/index.html">Update</a>
                 </li>
-                <li class="toctree-l2"><a class="" href="../../../Delete/index.html">Delete</a>
+                <li class="toctree-l2"><a class="" href="../../../queries/dml/Delete/index.html">Delete</a>
                 </li>
     </ul>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../Repository/index.html">Repository</a>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../Transaction/index.html">Transaction</a>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../Metadata/index.html">Metadata</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Schema</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition/index.html">Definition</a>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Expressions/index.html">Expressions</a>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../SchemaDefinition-Composite/index.html">Composite</a>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Listener/index.html">Listeners</a>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Basic/index.html">Basic</a>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Extend/index.html">Extend Entity</a>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../SchemaExample-Composite/index.html">Entity Composite</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="#">Synchronization</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="index.html">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition-Expressions/index.html">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition-EnvironmentVariables/index.html">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../SchemaDefinition-Composite/index.html">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Examples/SchemaExample-Listener/index.html">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Examples/SchemaExample-Basic/index.html">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Examples/SchemaExample-Extend/index.html">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Examples/SchemaExample-MultiplesStages/index.html">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Examples/SchemaExample-StageMultiplesSources/index.html">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Examples/SchemaExample-Composite/index.html">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Synchronization</a>
     <ul>
-                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Push/index.html">Push</a>
+                <li class="toctree-l2"><a class="" href="../../Synchronization/SchemaSynchronization-Push/index.html">Push</a>
                 </li>
-                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Pull/index.html">Pull</a>
+                <li class="toctree-l2"><a class="" href="../../Synchronization/SchemaSynchronization-Pull/index.html">Pull</a>
                 </li>
-                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Fetch/index.html">Fetch</a>
+                <li class="toctree-l2"><a class="" href="../../Synchronization/SchemaSynchronization-Fetch/index.html">Fetch</a>
                 </li>
-                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Introspect/index.html">Introspect</a>
+                <li class="toctree-l2"><a class="" href="../../Synchronization/SchemaSynchronization-Introspect/index.html">Introspect</a>
                 </li>
-                <li class="toctree-l2"><a class="" href="../../../SchemaSynchronization-Incorporate/index.html">Incorporate</a>
+                <li class="toctree-l2"><a class="" href="../../Synchronization/SchemaSynchronization-Incorporate/index.html">Incorporate</a>
                 </li>
     </ul>
-                    </li>
-                    <li class="toctree-l1"><a class="" href="../../../Schema-Use/index.html">Use</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="" href="https://lambda-orm.github.io/wiki/source/README/index.html">Source Code Documentation</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="" href="https://lambda-orm.github.io/wiki/CHANGELOG/index.html">Change log</a>
-                    </li>
-                </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../Schema-Use/index.html">Use</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Repository/index.html">Repository</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Transaction/index.html">Transaction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Usage/index.html">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://lambda-orm.github.io/wiki/CHANGELOG/index.html">Change log</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../..">LambdaORM Wiki</a>
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">λORM Wiki</a>
+        
       </nav>
-
-      
       <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../../..">Docs</a> &raquo;</li>
-    
-      
-    
-    <li>Definition</li>
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Definition</li>
     <li class="wy-breadcrumbs-aside">
-      
     </li>
   </ul>
-  
   <hr/>
 </div>
-          <div role="main">
-            <div class="section">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
               
                 <h1 id="definition">Definition</h1>
 <p>The schema includes all the configuration that the ORM needs.</p>
@@ -294,22 +281,22 @@ infrastructure:
 <table>
 <thead>
 <tr>
-<th align="left">Property</th>
-<th align="left">Description</th>
+<th style="text-align: left;">Property</th>
+<th style="text-align: left;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">domain</td>
-<td align="left">definition of the business model</td>
+<td style="text-align: left;">domain</td>
+<td style="text-align: left;">definition of the business model</td>
 </tr>
 <tr>
-<td align="left">application</td>
-<td align="left">implementation of events and listeners</td>
+<td style="text-align: left;">application</td>
+<td style="text-align: left;">implementation of events and listeners</td>
 </tr>
 <tr>
-<td align="left">infrastructure</td>
-<td align="left">concrete implementation of the data model</td>
+<td style="text-align: left;">infrastructure</td>
+<td style="text-align: left;">concrete implementation of the data model</td>
 </tr>
 </tbody>
 </table>
@@ -343,19 +330,19 @@ infrastructure:
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
+<th style="text-align: center;">required</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>name of enum</td>
-<td align="center">yes</td>
+<td style="text-align: center;">yes</td>
 </tr>
 <tr>
 <td>values</td>
 <td>values of enum</td>
-<td align="center">yes</td>
+<td style="text-align: center;">yes</td>
 </tr>
 </tbody>
 </table>
@@ -399,70 +386,70 @@ infrastructure:
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
-<th align="center">default</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>name of entity</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>abstract</td>
 <td>if the entity is abstract</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>extends</td>
 <td>extension</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>view</td>
 <td>if the entity is a view</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>primaryKey</td>
 <td>primary key</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>uniqueKey</td>
 <td>unique key</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>properties</td>
 <td>entity properties</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>indexes</td>
 <td>indexes</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>relations</td>
 <td>relations</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>constraints</td>
 <td>constraints</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
@@ -516,76 +503,76 @@ infrastructure:
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
-<th align="center">default</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>name of property</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>type</td>
 <td>type of property</td>
-<td align="center">yes</td>
-<td align="center">string</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">string</td>
 </tr>
 <tr>
 <td>length</td>
 <td>length of property type</td>
-<td align="center"></td>
-<td align="center">80</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">80</td>
 </tr>
 <tr>
 <td>required</td>
 <td>if the field is required</td>
-<td align="center"></td>
-<td align="center">false</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">false</td>
 </tr>
 <tr>
 <td>autoIncrement</td>
 <td>if the field is self-incrementing</td>
-<td align="center"></td>
-<td align="center">false</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">false</td>
 </tr>
 <tr>
 <td>view</td>
 <td>if the field is a view</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>default</td>
 <td>expression default resolved on server</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>readExp</td>
 <td>read expression resolved in source</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>readValue</td>
 <td>read expression resolved on server</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>writeValue</td>
 <td>write expression resolved in server</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>key</td>
 <td>key to filter or insert</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
@@ -730,52 +717,52 @@ infrastructure:
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
-<th align="center">default</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>name of property</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>type</td>
 <td>type of relationship</td>
-<td align="center"></td>
-<td align="center">oneToMany</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">oneToMany</td>
 </tr>
 <tr>
 <td>from</td>
 <td>relationship field</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>entity</td>
 <td>entity with which it relates</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>to</td>
 <td>field of the entity to which it relates</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>composite</td>
 <td>if the relationship is composite</td>
-<td align="center"></td>
-<td align="center">false</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">false</td>
 </tr>
 <tr>
 <td>target</td>
 <td>Name of the relation in the related entity</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
@@ -838,19 +825,19 @@ Types of target relation according to the source relation:</p>
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
+<th style="text-align: center;">required</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>message</td>
 <td>message to display</td>
-<td align="center">yes</td>
+<td style="text-align: center;">yes</td>
 </tr>
 <tr>
 <td>condition</td>
 <td>boolean expression to evaluate</td>
-<td align="center">yes</td>
+<td style="text-align: center;">yes</td>
 </tr>
 </tbody>
 </table>
@@ -905,26 +892,26 @@ The defined message will be sent if the condition is not met.</p>
 <table>
 <thead>
 <tr>
-<th align="left">Property</th>
-<th align="left">Description</th>
+<th style="text-align: left;">Property</th>
+<th style="text-align: left;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">start</td>
-<td align="left">commands to execute when starting the application</td>
+<td style="text-align: left;">start</td>
+<td style="text-align: left;">commands to execute when starting the application</td>
 </tr>
 <tr>
-<td align="left">end</td>
-<td align="left">commands to execute when the application is terminated</td>
+<td style="text-align: left;">end</td>
+<td style="text-align: left;">commands to execute when the application is terminated</td>
 </tr>
 <tr>
-<td align="left">errors</td>
-<td align="left">commands to execute when an error occurs</td>
+<td style="text-align: left;">errors</td>
+<td style="text-align: left;">commands to execute when an error occurs</td>
 </tr>
 <tr>
-<td align="left">listeners</td>
-<td align="left">definition of the listeners and the action to be executed</td>
+<td style="text-align: left;">listeners</td>
+<td style="text-align: left;">definition of the listeners and the action to be executed</td>
 </tr>
 </tbody>
 </table>
@@ -973,22 +960,22 @@ The defined message will be sent if the condition is not met.</p>
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
-<th align="center">default</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>name of mapping</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>entities</td>
 <td>list of entity mapping</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
@@ -998,46 +985,46 @@ The defined message will be sent if the condition is not met.</p>
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
-<th align="center">default</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>name of entity</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>abstract</td>
 <td>if the entity is abstract</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>extends</td>
 <td>extension</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>mapping</td>
 <td>table name in the database</td>
-<td align="center">yes</td>
-<td align="center">equal name</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">equal name</td>
 </tr>
 <tr>
 <td>filter</td>
 <td>filter expression</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>properties</td>
 <td>list of property mapping</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
@@ -1102,28 +1089,28 @@ infrastructure:
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
-<th align="center">default</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>name of property</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>mapping</td>
 <td>table name in the database</td>
-<td align="center">yes</td>
-<td align="center">equal name</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">equal name</td>
 </tr>
 <tr>
 <td>readMappingExp</td>
 <td>read expression resolved in source</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
@@ -1154,34 +1141,34 @@ infrastructure:
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
-<th align="center">default</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>name of source</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>mapping</td>
 <td>name of reference to mapping</td>
-<td align="center"></td>
-<td align="center">first</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">first</td>
 </tr>
 <tr>
 <td>dialect</td>
 <td>dialect of data source</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>connection</td>
 <td>string connection</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
@@ -1221,22 +1208,22 @@ infrastructure:
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
-<th align="center">default</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>name of stage</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>sources</td>
 <td>list of sources rules</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
@@ -1246,22 +1233,22 @@ infrastructure:
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
-<th align="center">default</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>name of source</td>
-<td align="center">yes</td>
-<td align="center"></td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>condition</td>
 <td>boolean expression to evaluate</td>
-<td align="center"></td>
-<td align="center">true</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">true</td>
 </tr>
 </tbody>
 </table>
@@ -1332,19 +1319,19 @@ infrastructure:
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
+<th style="text-align: center;">required</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>name that identifies a view</td>
-<td align="center">yes</td>
+<td style="text-align: center;">yes</td>
 </tr>
 <tr>
 <td>entities</td>
 <td>entity view list</td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
@@ -1382,24 +1369,24 @@ infrastructure:
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
+<th style="text-align: center;">required</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>entity name</td>
-<td align="center">yes</td>
+<td style="text-align: center;">yes</td>
 </tr>
 <tr>
 <td>exclude</td>
 <td>determines whether the entity is excluded</td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>properties</td>
 <td>property view list</td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
@@ -1424,24 +1411,24 @@ infrastructure:
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
+<th style="text-align: center;">required</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>property name</td>
-<td align="center">yes</td>
+<td style="text-align: center;">yes</td>
 </tr>
 <tr>
 <td>exclude</td>
 <td>determines whether the property is excluded</td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td>readExp</td>
 <td>read expression resolved in source</td>
-<td align="center"></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
@@ -1483,28 +1470,28 @@ infrastructure:
 <tr>
 <th>Property</th>
 <th>Description</th>
-<th align="center">required</th>
-<th align="center">default</th>
+<th style="text-align: center;">required</th>
+<th style="text-align: center;">default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>src</td>
 <td>set path of source code</td>
-<td align="center"></td>
-<td align="center">src</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">src</td>
 </tr>
 <tr>
 <td>state</td>
 <td>define path of orm state</td>
-<td align="center"></td>
-<td align="center">orm_state</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">orm_state</td>
 </tr>
 <tr>
 <td>model</td>
 <td>define path of   model to generate</td>
-<td align="center"></td>
-<td align="center">model</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">model</td>
 </tr>
 </tbody>
 </table>
@@ -1516,20 +1503,17 @@ infrastructure:
 </code></pre>
               
             </div>
-          </div>
-          <footer>
-  
+          </div><footer>
 
   <hr/>
 
   <div role="contentinfo">
     <!-- Copyright etc -->
-    
   </div>
 
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-      
+          
         </div>
       </div>
 
@@ -1537,20 +1521,22 @@ infrastructure:
 
   </div>
 
-  <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-      
-    </span>
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
 </div>
-    <script>var base_url = '../../..';</script>
-    <script src="../../../js/theme.js" defer></script>
-      <script src="../../../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
-        };
+        });
     </script>
 
 </body>
