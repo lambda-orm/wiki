@@ -1,6 +1,8 @@
 site_name: λORM Wiki
 docs_dir: docs
 site_dir: wiki
+site_url: https://lambda-orm.github.io/wiki/
+use_directory_urls: true
 theme:
   name: readthedocs
 extra_css:
