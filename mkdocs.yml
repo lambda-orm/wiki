@@ -33,12 +33,11 @@ nav:
       - Multiples Stages:  schema/Examples/SchemaExample-MultiplesStages/index.html
       - Stage with Multiples Sources:  schema/Examples/SchemaExample-StageMultiplesSources/index.html
       - Entity Composite:  schema/Examples/SchemaExample-Composite/index.html
-      - Synchronization:
-          - Push: schema/Synchronization/SchemaSynchronization-Push/index.html
-          - Pull: schema/Synchronization/SchemaSynchronization-Pull/index.html
-          - Fetch: schema/Synchronization/SchemaSynchronization-Fetch/index.html
-          - Introspect: schema/Synchronization/SchemaSynchronization-Introspect/index.html
-          - Incorporate: schema/Synchronization/SchemaSynchronization-Incorporate/index.html
+      - Push: schema/Synchronization/SchemaSynchronization-Push/index.html
+      - Pull: schema/Synchronization/SchemaSynchronization-Pull/index.html
+      - Fetch: schema/Synchronization/SchemaSynchronization-Fetch/index.html
+      - Introspect: schema/Synchronization/SchemaSynchronization-Introspect/index.html
+      - Incorporate: schema/Synchronization/SchemaSynchronization-Incorporate/index.html
       - Use: schema/Schema-Use/index.html  
   - Repository: Repository/index.html
   - Transaction: Transaction/index.html
