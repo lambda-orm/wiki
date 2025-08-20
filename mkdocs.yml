@@ -38,8 +38,9 @@ nav:
       - Fetch: schema/Synchronization/SchemaSynchronization-Fetch/index.html
       - Introspect: schema/Synchronization/SchemaSynchronization-Introspect/index.html
       - Incorporate: schema/Synchronization/SchemaSynchronization-Incorporate/index.html
-      - Use: schema/Schema-Use/index.html  
-  - Repository: Repository/index.html
-  - Transaction: Transaction/index.html
-  - Usage: Usage/index.html
-  - Change log: https://lambda-orm.github.io/wiki/CHANGELOG/index.html
+      - Use: schema/Schema-Use/index.html
+  - Usage:      
+    - Repository: Repository/index.html
+    - Transaction: Transaction/index.html
+    - Usage: Usage/index.html
+    - Change log: CHANGELOG/index.html
