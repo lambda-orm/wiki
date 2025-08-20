@@ -13,7 +13,7 @@ markdown_extensions:
       toc_depth: 2
 
 nav:
-  - Home: /
+  - Home: index.md
   - Features: Features
   - Api: api
   - Cli: cli
