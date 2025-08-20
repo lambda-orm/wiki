@@ -14,16 +14,14 @@ nav:
   - Queries:
       - Query Language: queries/Query-Language/index.html
       - Expression: queries/Expression/index.html
-      - DQL:
-          - Select: queries/dql/Select/index.html
-          - Join: queries/dql/Join/index.html
-          - Grouping: queries/dql/Grouping/index.html
-          - Include: queries/dql/Include/index.html
-      - DML:
-          - Insert: queries/dml/Insert/index.html
-          - Bulk Insert: queries/dml/BulkInsert/index.html
-          - Update: queries/dml/Update/index.html
-          - Delete: queries/dml/Delete/index.html      
+      - Select: queries/dql/Select/index.html
+      - Join: queries/dql/Join/index.html
+      - Grouping: queries/dql/Grouping/index.html
+      - Include: queries/dql/Include/index.html
+      - Insert: queries/dml/Insert/index.html
+      - Bulk Insert: queries/dml/BulkInsert/index.html
+      - Update: queries/dml/Update/index.html
+      - Delete: queries/dml/Delete/index.html      
   - Schema:
       - Definition: schema/Definition/SchemaDefinition/index.html
       - Expressions: schema/Definition/SchemaDefinition-Expressions/index.html
