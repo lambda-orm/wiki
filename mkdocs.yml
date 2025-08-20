@@ -39,8 +39,8 @@ nav:
       - Introspect: schema/SchemaSynchronization-Introspect/index.html
       - Incorporate: schema/SchemaSynchronization-Incorporate/index.html
       - Use: schema/Schema-Use/index.html
-  - Usage:      
-    - Repository: usage/Repository/index.html
-    - Transaction: usage/Transaction/index.html
-    - Usage: usage/Usage/index.html
-    - Change log: usage/CHANGELOG/index.html
+  - Use:      
+    - Repository: use/Repository/index.html
+    - Transaction: use/Transaction/index.html
+    - Usage: use/Usage/index.html
+    - Change log: use/CHANGELOG/index.html
