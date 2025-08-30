@@ -1,7 +1,7 @@
 # λORM
 
-[![CLI](https://img.shields.io/badge/Api-CLI-blue.svg)](cli)
-[![Api REST](https://img.shields.io/badge/Api-REST-blue.svg)](api)
+[![CLI](https://img.shields.io/badge/Api-CLI-blue.svg)](https://lambda-orm.github.io/wiki/cli)
+[![Api REST](https://img.shields.io/badge/Api-REST-blue.svg)](https://lambda-orm.github.io/wiki/api)
 [![Join the community on GitHub Discussions](https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue.svg)](https://github.com/lambda-orm/wiki/discussions)
 [![Slack](https://img.shields.io/badge/chat-on%20slack-orange)](https://join.slack.com/t/nuevoespaciod-xo58767/shared_invite/zt-29ix7pc2r-Wd_ZBWnWRDv_5DM4NPtVhQ)
 [![Gitter](https://badges.gitter.im/lambdaorm/community.svg)](https://app.gitter.im/#/room/#lambdaorm-how-to-contribute:gitter.im)
