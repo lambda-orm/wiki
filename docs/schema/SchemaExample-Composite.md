@@ -524,17 +524,17 @@ infrastructure:
 
 Orders collection:
 
-![OrderCompositeInMongo](https://raw.githubusercontent.com/lambda-orm/lambdaorm/HEAD/images/OrderCompositeInMongo.png)
+![OrderCompositeInMongo](../images/OrderCompositeInMongo.png)
 
 ### Orders Composite in Postgres
 
 Orders table:
 
-![OrderCompositeInPostgres](https://raw.githubusercontent.com/lambda-orm/lambdaorm/HEAD/images/OrderCompositeInPostgres.png)
+![OrderCompositeInPostgres](../images/OrderCompositeInPostgres.png)
 
 Orders details table:
 
-![OrderDetailsCompositeInPostgres](https://raw.githubusercontent.com/lambda-orm/lambdaorm/HEAD/images/OrderDetailCompositeInPostgres.png)
+![OrderDetailsCompositeInPostgres](../images/OrderDetailCompositeInPostgres.png)
 
 ## Queries
 

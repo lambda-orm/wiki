@@ -17,7 +17,7 @@ For example:
 
 The schema defines how the entities of the model are mapped with the database tables.
 
-![schema](https://raw.githubusercontent.com/lambda-orm/lambdaorm/HEAD/images/schema.svg)
+![schema](../images/schema.svg)
 
 ```yaml
 domain:

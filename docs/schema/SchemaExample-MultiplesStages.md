@@ -12,7 +12,7 @@ These usage scenarios can be used for different reasons, for example:
 
 In this scheme we can see how to extend the schema.
 
-![schema](https://raw.githubusercontent.com/lambda-orm/lambdaorm/HEAD/images/schema3.svg)
+![schema](../images/schema3.svg)
 
 We use the extends attribute in the definition of the schema to extend it.
 

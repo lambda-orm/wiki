@@ -19,7 +19,7 @@ nav:
   - Features: Features
   - Api: api
   - Cli: cli
-  - Labs: https://github.com/lambda-orm/lambdaorm-labs
+  - Labs: labs
   - Queries:
       - Query Language: queries/Query-Language
       - Expression: queries/Expression

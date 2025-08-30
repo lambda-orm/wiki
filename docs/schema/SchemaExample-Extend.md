@@ -9,7 +9,7 @@ In this scheme we can see how to extend entities. \
 In this case, the Countries and States entities are extended from the abstract entity Positions \
 It is not mandatory that the entity be abstract to be able to use it as a basis to extend
 
-![schema](https://raw.githubusercontent.com/lambda-orm/lambdaorm/HEAD/images/schema2.svg)
+![schema](../images/schema2.svg)
 
 ```yaml
 domain:
