@@ -55,6 +55,6 @@ mkdocs gh-deploy
 
 This will create or update the `gh-pages` branch in the repository and the wiki will be available at:
 
-```
+```sh
 https://<username>.github.io/<repository>/
 ```
