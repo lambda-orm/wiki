@@ -1,4 +1,4 @@
-name: Deploy MkDocs to GitHub Pages
+name: Publish prebuilt wiki/ to GitHub Pages
 
 on:
   push:
@@ -20,24 +20,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'   # no cache
-
-      - name: Install MkDocs (+ tema si aplica)
+      # (Opcional) Verifica que exista index.html en wiki/
+      - name: Check wiki output
         run: |
-          python -m pip install --upgrade pip
-          pip install mkdocs
-          # si usas Material:
-          # pip install mkdocs-material
+          test -f wiki/index.html || (echo "Falta wiki/index.html" && exit 1)
 
-      - name: Build
-        run: mkdocs build --clean
-
-      - name: Upload artifact (site_dir)
+      - name: Upload artifact (wiki)
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./wiki  # tu site_dir
+          path: ./wiki   # ← publicamos exactamente lo que ya está en wiki/
 
   deploy:
     needs: build
