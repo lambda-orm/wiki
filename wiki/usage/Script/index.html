@@ -130,6 +130,8 @@
                   </li>
                   <li class="toctree-l1"><a class="" href=".">Script</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../ScriptExamples">Script examples</a>
+                  </li>
                   <li class="toctree-l1"><a class="" href="../Usage">Usage</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../CHANGELOG">Change log</a>
@@ -163,8 +165,11 @@
 script in <strong>one transaction</strong>: every <code>orm.execute</code> it calls runs on the same connections (one per source, also across
 stages). When the script ends the orm commits; on any error (a query, a function, a <code>throw</code>) it rolls back and the
 promise rejects with that error. The result is the value of the last statement, or of <code>return</code>.</p>
+<p><strong>That is the main feature of a script: all or nothing.</strong> Everything it executes — on every source and stage it
+touches, listeners included — is committed together when it ends, or rolled back together if anything fails.</p>
 <p>It is the way to run a whole use case — reads, conditions, loops and several writes — in a single call, also from the
-<a href="../../api/">REST service</a> (<code>POST /script</code>), the client and the <a href="../../cli/">CLI</a> (<code>lambdaorm script</code>).</p>
+<a href="../../api/">REST service</a> (<code>POST /script</code>), the client and the <a href="../../cli/">CLI</a> (<code>lambdaorm script</code>).
+See <a href="../ScriptExamples/">Script examples</a>, from a single query to a complete use case.</p>
 <pre><code class="language-typescript">const quoteId = await orm.executeScript(`
   account = orm.execute(&quot;Accounts.filter(p =&gt; p.id == accountId)&quot;, { accountId: accountId });
   if (account.length() == 0) {

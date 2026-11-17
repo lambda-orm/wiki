@@ -5,8 +5,12 @@ script in **one transaction**: every `orm.execute` it calls runs on the same con
 stages). When the script ends the orm commits; on any error (a query, a function, a `throw`) it rolls back and the
 promise rejects with that error. The result is the value of the last statement, or of `return`.
 
+**That is the main feature of a script: all or nothing.** Everything it executes — on every source and stage it
+touches, listeners included — is committed together when it ends, or rolled back together if anything fails.
+
 It is the way to run a whole use case — reads, conditions, loops and several writes — in a single call, also from the
 [REST service](../api/index.md) (`POST /script`), the client and the [CLI](../cli/index.md) (`lambdaorm script`).
+See [Script examples](ScriptExamples.md), from a single query to a complete use case.
 
 ```typescript
 const quoteId = await orm.executeScript(`
