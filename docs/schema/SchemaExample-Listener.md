@@ -1,12 +1,40 @@
 # Listener on Schema
 
 Listeners allow us to execute actions when an event occurs in the ORM. \
-events are set to the "on" property. \
-And the events that can be listened to are select, insert, bulkInsert, update and delete. \
+Events are set in the "on" property: select, insert, bulkInsert, update, upsert and delete. \
 The "condition" property allows you to define an expression that is evaluated to determine if the listener is executed. \
-The expressions to be executed can be defined in the "before", "after" and "error" properties. \
+The expressions to be executed are defined in the "before", "after" and "error" properties.
 
-The parameters that we have to use in the expressions are:
+## How listeners run
+
+- `before`, `after` and `error` run one after the other and **are awaited**: `orm.execute` returns when they have
+  finished. An error in `before` prevents the sentence; an error in `after` fails it (the `error` listeners run first).
+- They run **in the sentence's transaction**: the `orm.execute` calls of a listener use the same connections, and a
+  rollback undoes what they wrote. A sentence with listeners that runs on its own opens a transaction for the sentence
+  and its listeners, so both are all or nothing.
+- A listener's `orm.execute` can name **another stage** (`{ stage: "insights" }`): it joins the same transaction
+  (since @lambdaorm/lib 3.3.0).
+- `transactional: false` runs a listener outside the transaction: what it writes is kept even if the transaction
+  rolls back (e.g. an audit log).
+
+```yaml
+application:
+  listeners:
+    - name: touchInstallation
+      on: [insert]
+      condition: entity == "InstallationFiles"
+      after: >-
+        orm.execute("Installations.update(p => ({ lastEventAt: at })).filter(p => p.id == id)",
+          { id: data.installationId, at: data.uploadedAt })
+    - name: audit
+      on: [insert, update, delete]
+      transactional: false
+      after: orm.execute("AuditLogs.insert()", { entity: entity, action: action })
+```
+
+## Arguments
+
+The arguments available in `condition`, `before`, `after` and `error`:
 
 | Parameter   | Description                                                                                                     |
 | ----------- | --------------------------------------------------------------------------------------------------------------- |
@@ -27,7 +55,7 @@ The parameters that we have to use in the expressions are:
 
 In this example we see how a Listener is declared to synchronize data in Insights. \
 When a record is inserted, updated or deleted in the default or cqrs stages, the listener is executed. \
-In this case, the expression is defined in the after property, which executes the same expression with the same data but in the stage insights.
+In this case, the expression is defined in the after property, which executes the same expression with the same data but in the stage insights, in the same transaction as the sentence: if the write in insights fails, the original one is rolled back too.
 
 **Part of the schema where the listener is defined:**
 

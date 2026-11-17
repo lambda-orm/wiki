@@ -6,17 +6,19 @@ The synchronization is the process of updating the schema defined in yaml/json c
 
 The push is the process of updating the sources (Databases) with the schema defined in the configuration file. The push process is done by the command `lambdaorm push`.
 
+Push compares the model with the databases themselves: it creates missing tables, adds and alters columns, renames the columns declared with `previousMapping`, and never drops what exists only in the database. `lambdaorm push -o <dir>` writes the DDL as one script per source (`<stage>.<source>.sql`) without applying it.
+
 [more info](https://lambda-orm.github.io/wiki/SchemaSynchronization-Push)
 
 ## Pull
 
-The pull is the process of updating the schema defined in the configuration file with the structure in the sources (Databases). The pull process is done by the command `lambdaorm pull`.
+The pull is the process of updating the schema defined in the configuration file with the structure in the sources (Databases). The pull process is done by the command `lambdaorm pull`. What was written by hand in the schema (relations, listeners, stages) is kept.
 
 [more info](https://lambda-orm.github.io/wiki/SchemaSynchronization-Pull)
 
 ## Fetch
 
-The fetch is the process show differences between sources and schema but not apply changes.The pull process is done by the command  `lambdaorm fetch`.
+The fetch is the process that shows the differences between the sources and the schema, without applying changes. It is done by the command `lambdaorm fetch`. The result is empty when the databases are in step with the model, and the command exits with code 1 when there are differences (useful in CI).
 
 [more info](https://lambda-orm.github.io/wiki/SchemaSynchronization-Fetch)
 

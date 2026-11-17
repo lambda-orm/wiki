@@ -10,6 +10,7 @@ Export data from a database.
 |stage			| -s 		| Name of stage																										|
 |envfile		| -e 		| Read in a file of environment variables.												|
 |target			| -t 		| Destination file with export data.															|
+|force			| -f 		| If there is an error in a statement, continue executing the next statements	|
 |url				| -u 		| When working with a client you must pass the url of the service	|
 
 ## Example

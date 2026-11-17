@@ -8,7 +8,8 @@ Return model that will be returned in the query execution.
 |-----------|-------|-------------------------------------------------------------------------------------------|
 |workspace	| -w 		| project path.																																							|
 |query			| -q 		| Query expression																																					|
-|output			| -o 		| Generates an output according to the following possible values [json|beautiful|light|yaml]|
+|envfile		| -e 		| Read in a file of environment variables.																									|
+|output			| -o 		| Generates an output according to the following possible values [json\|beautiful\|light\|yaml]|
 |url				| -u 		| When working with a client you must pass the url of the service	                          |
 
 ## Example

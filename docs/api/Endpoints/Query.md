@@ -340,12 +340,14 @@ Response:
 
 ## Execute
 
-Execute the query.
+Execute the query. The body is `{ query, data, options }`: `data` holds the query's parameters and `options` the
+query options, e.g. `{ "stage": "default" }`. Send `data` and `options` as JSON objects (preferred); JSON text
+(`"data": "{\"id\": 10248}"`) is also accepted.
 
 Request:
 
 ```sh
-curl -X POST "http://localhost:9291/execute?format=beautiful" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.id==id).include(p=>p.details)", "data": "{\"id\": 10248}" }'
+curl -X POST "http://localhost:9291/execute?format=beautiful" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.id==id).include(p=>p.details)", "data": {"id": 10248}, "options": {"stage": "default"} }'
 ```
 
 Response:
@@ -393,3 +395,25 @@ Response:
   }
 ]
 ```
+
+### Update and delete
+
+`update` and `delete` answer the number of affected rows (`0` when nothing matched), `insert` answers the inserted
+data. Every answer is JSON.
+
+```sh
+curl -X POST "http://localhost:9291/execute" -H "Content-Type: application/json" -d '{"query": "Orders.update(p => ({ freight: freight })).filter(p => p.id == id)", "data": {"id": 10248, "freight": 40}}'
+```
+
+Response:
+
+```json
+1
+```
+
+A failed query answers `{ error, code, message }` with a status a client can map, e.g. 409 for a unique or foreign key
+violation. See [Errors](../Use/Errors.md).
+
+## Script
+
+To run several queries in one transaction with a single request, use [`POST /script`](Script.md).

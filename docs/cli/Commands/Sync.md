@@ -1,18 +1,7 @@
 # Sync
 
-Synchronize database/s.
-
-## Params
-
-| parameter	| short | describe 																	|
-|-----------|-------|-------------------------------------------|
-|workspace	| -w 		| project path.															|
-|stage			| -s 		| Name of stage															|
-|envfile		| -e 		| Read in a file of environment variables.	|
-|output			| -o 		| Generates the queries but does not apply.	|
-
-## Example
+The `sync` command no longer exists: it was replaced by [push](Push.md).
 
 ```sh
-lambdaorm sync -w lab/countries -e lab/countries/.env
+lambdaorm push -w lab/countries -e lab/countries/.env
 ```

@@ -9,9 +9,9 @@ Execute an query expression.
 |workspace	| -w 		| project path.																																							|
 |stage			| -s 		| Name of stage																																							|
 |query			| -q 		| Query expression																																					|
-|data				| -d 		| Data used to execute expression																														|
+|data				| -d 		| Data (parameters) of the query: JSON, or the path of a JSON file.										|
 |envfile		| -e 		| Read in a file of environment variables.																									|
-|output			| -o 		| Generates an output according to the following possible values [json|beautiful|light|yaml]|
+|output			| -o 		| Generates an output according to the following possible values [json\|beautiful\|light\|yaml]|
 |url				| -u 		| When working with a client you must pass the url of the service	                          |
 
 ## Examples
@@ -19,7 +19,7 @@ Execute an query expression.
 ### BulkInsert
 
 ```sh
-lambdaorm execute -w lab/countries -e lab/countries/.env -q Countries.bulkInsert().include(p => p.states) -d ./lab/countries/countries.json
+lambdaorm execute -w lab/countries -e lab/countries/.env -q "Countries.bulkInsert().include(p => p.states)" -d ./lab/countries/countries.json
 ```
 
 ### Query

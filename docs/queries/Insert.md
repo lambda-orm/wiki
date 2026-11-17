@@ -63,6 +63,37 @@ INSERT INTO `Order Details`(OrderID,ProductID,UnitPrice,Quantity,Discount)
 VALUES(?,?,?,?,?)
 ```
 
+## Upsert
+
+`upsert()` inserts the record or, if a record with the same primary key already exists, updates it. It is written as an insert (same syntax: `upsert()` with all the fields, or with the fields specified). The entity needs a primary key, and the data must carry it (an auto-increment key is not useful here).
+
+**Lambda:**
+
+```Typescript
+// inserts the country, or updates it when one with the same iso3 exists
+Countries.upsert()
+```
+
+```Typescript
+await orm.execute('Countries.upsert()', { iso3: 'ARG', name: 'Argentine' }) // inserted
+await orm.execute('Countries.upsert()', { iso3: 'ARG', name: 'Argentina' }) // updated: the same row
+```
+
+**SQL Result:**
+
+```sql
+-- MySQL / MariaDB
+INSERT INTO Countries(iso3,name) VALUES(?,?) ON DUPLICATE KEY UPDATE name = VALUES(name)
+
+-- PostgreSQL
+INSERT INTO Countries(iso3,name) VALUES($1,$2)
+ON CONFLICT (iso3) DO UPDATE SET name = EXCLUDED.name
+```
+
+Supported on PostgreSQL, MySQL and MariaDB. On SQL Server, Oracle and MongoDB it fails with a clear "not supported yet" error; SQLite (SQLjs) does not support it either.
+
+Upsert is also what [update with include](Update.md#update-an-aggregate-composite-relation) of a composite relation uses to save the children.
+
 ## Code example
 
 ```Typescript
