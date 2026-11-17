@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
                   </li>
@@ -180,7 +184,7 @@
     properties:
       - name: string        
         mapping: string
-        type: string | integer | decimal | boolean | dateTime | date | time
+        type: string | integer | decimal | boolean | dateTime | date | time | json
         length: number 
         required: boolean
         autoIncrement: boolean
@@ -235,6 +239,8 @@ infrastructure:
             - name: string
               mapping: string
               readMappingExp: expression
+              dbType: string
+              previousMapping: string
   sources:
     - name: string
       dialect: [MySQL|MariaDB|PostgreSQL|Oracle|SqlServer|MongoDB|SQLjs] 
@@ -498,15 +504,15 @@ infrastructure:
 </tr>
 <tr>
 <td>type</td>
-<td>type of property</td>
-<td style="text-align: center;">yes</td>
+<td>type of property (see <a href="#property-types">Property types</a>)</td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;">string</td>
 </tr>
 <tr>
 <td>length</td>
-<td>length of property type</td>
+<td>length of a string property</td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;">80</td>
+<td style="text-align: center;">see below</td>
 </tr>
 <tr>
 <td>required</td>
@@ -558,6 +564,80 @@ infrastructure:
 </tr>
 </tbody>
 </table>
+<h5 id="property-types">Property types</h5>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Value in Node</th>
+<th>Column created by push (by default)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>string</td>
+<td>string</td>
+<td><code>VARCHAR(length)</code>; without <code>length</code>: <code>TEXT</code> on PostgreSQL, <code>VARCHAR(80)</code> on other engines</td>
+</tr>
+<tr>
+<td>integer</td>
+<td>number</td>
+<td><code>INTEGER</code> (Oracle <code>NUMBER(10)</code>)</td>
+</tr>
+<tr>
+<td>decimal</td>
+<td>number</td>
+<td><code>DECIMAL(10,4)</code> (Oracle <code>NUMBER(19,4)</code>)</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>boolean</td>
+<td><code>BOOLEAN</code> (SqlServer <code>BIT</code>, Oracle <code>CHAR(1)</code>)</td>
+</tr>
+<tr>
+<td>dateTime</td>
+<td>Date</td>
+<td><code>TIMESTAMP</code> (PostgreSQL), <code>DATETIME</code> (MySQL, MariaDB, SqlServer), <code>DATE</code> (Oracle)</td>
+</tr>
+<tr>
+<td>date</td>
+<td>Date</td>
+<td><code>DATE</code> (SqlServer <code>SMALLDATETIME</code>)</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Date</td>
+<td><code>TIME</code> (Oracle <code>DATE</code>)</td>
+</tr>
+<tr>
+<td>json</td>
+<td>object or list</td>
+<td><code>JSONB</code> (PostgreSQL), <code>JSON</code> (MySQL, MariaDB), <code>NVARCHAR(MAX)</code> (SqlServer), <code>CLOB</code> (Oracle), <code>TEXT</code> (others)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>json</strong>: objects and lists are written and read as such (no need to call <code>JSON.stringify</code> / <code>JSON.parse</code>).</li>
+<li><strong>dateTime</strong>: on PostgreSQL the value is written with milliseconds and its offset, so a <code>timestamptz</code> column (see <code>dbType</code> in <a href="#property-mapping">Property Mapping</a>) keeps the exact instant.</li>
+<li><strong>string without length</strong>: on PostgreSQL it is unbounded (<code>TEXT</code>); on other engines it is <code>VARCHAR(80)</code>, so set <code>length</code> when a value can be longer.</li>
+<li><code>''</code>, <code>0</code> and <code>false</code> are values, never NULL (Oracle is the exception: it stores <code>''</code> as NULL).</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-yaml">domain:
+  entities:
+    - name: Products
+      primaryKey: [&quot;id&quot;]
+      properties:
+        - name: id
+          length: 36
+          required: true
+        - name: name                # TEXT on PostgreSQL, VARCHAR(80) elsewhere
+          required: true
+        - name: settings
+          type: json                # { &quot;color&quot;: &quot;red&quot;, &quot;tags&quot;: [&quot;a&quot;, &quot;b&quot;] } in and out as an object
+        - name: createdAt
+          type: dateTime
+</code></pre>
 <h5 id="set-property-as-view-and-readexp">Set Property as view and readExp</h5>
 <p>A property set to view is a property that will be returned in read queries. \
 The value of this property is defined in <strong>readExp</strong> using the expression language.</p>
@@ -1084,7 +1164,7 @@ infrastructure:
 </tr>
 <tr>
 <td>mapping</td>
-<td>table name in the database</td>
+<td>column name in the database</td>
 <td style="text-align: center;">yes</td>
 <td style="text-align: center;">equal name</td>
 </tr>
@@ -1094,8 +1174,52 @@ infrastructure:
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
+<tr>
+<td>dbType</td>
+<td>column type used by push (DDL), instead of the one deduced from the property type</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>previousMapping</td>
+<td>previous column name: push renames the column instead of adding a new one</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
 </tbody>
 </table>
+<h5 id="column-type-in-property-mapping">Column type in Property Mapping</h5>
+<p><strong>dbType</strong> sets the column type used by every DDL that creates or alters the column (<code>push</code>, <code>push -o</code>).
+It is the way to choose a type the property type alone does not give, for example an instant with milliseconds or a binary JSON on PostgreSQL:</p>
+<pre><code class="language-yaml">infrastructure:
+  mappings:
+    - name: catalog
+      entities:
+        - name: Products
+          mapping: products
+          properties:
+            - name: settings
+              mapping: settings
+              dbType: jsonb
+            - name: createdAt
+              mapping: created_at
+              dbType: timestamptz(3)
+</code></pre>
+<h5 id="rename-a-column-with-previousmapping">Rename a column with previousMapping</h5>
+<p>To rename a column without losing its data, set the new name in <strong>mapping</strong> and the current one in <strong>previousMapping</strong>.
+Push then generates <code>ALTER TABLE … RENAME COLUMN icon TO icon_name</code> (SqlServer <code>sp_rename</code>) instead of adding a new column.</p>
+<pre><code class="language-yaml">infrastructure:
+  mappings:
+    - name: catalog
+      entities:
+        - name: Categories
+          mapping: categories
+          properties:
+            - name: icon
+              mapping: icon_name
+              previousMapping: icon
+</code></pre>
+<p>Remove <strong>previousMapping</strong> once the rename has been applied in every database. Renaming a table is not supported.</p>
 <h5 id="read-expression-in-property-mapping">Read expression in Property Mapping</h5>
 <p>The result of the expression defined in <strong>readMappingExp</strong> using the expression language, will be returned in the read queries.</p>
 <pre><code class="language-yaml">infrastructure:
@@ -1235,8 +1359,8 @@ infrastructure:
 </tbody>
 </table>
 <h4 id="condition-on-source-rule">Condition on Source Rule</h4>
-<p>En <strong>condition</strong> se define la regla para determinar en que source se aplicaran las consultas.
-Las variables de contexto son las siguientes:</p>
+<p><strong>condition</strong> defines the rule that determines on which source the queries are executed.
+The context variables are the following:</p>
 <table>
 <thead>
 <tr>
@@ -1293,6 +1417,18 @@ infrastructure:
           condition: entity != &quot;Users&quot;
         - name: keycloak
           condition: entity == &quot;Users&quot;
+</code></pre>
+<h4 id="catch-all-source">Catch-all source</h4>
+<p>A source rule without <strong>condition</strong> is a catch-all: as the first matching source wins, it only receives the entities that no previous source took.
+This applies to queries (DML) as well as to push and the other stage commands (DDL), so the catch-all source does not get tables of the entities assigned to other sources.
+Put it last.</p>
+<pre><code class="language-yaml">infrastructure:
+  stages:
+    - name: default
+      sources:
+        - name: keycloak
+          condition: entity == &quot;Users&quot;
+        - name: main
 </code></pre>
 <h3 id="view">View</h3>
 <p>The view that can restrict or modify the results of the queries is defined.</p>

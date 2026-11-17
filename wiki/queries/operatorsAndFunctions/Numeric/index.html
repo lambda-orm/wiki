@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../usage/Usage">Usage</a>
                   </li>
@@ -324,11 +328,11 @@
 <td>[{"result":25}]</td>
 </tr>
 <tr>
-<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: (1+(2*<em>3)</em>4)})</td>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: (1+(2**3)*4)})</td>
 <td>[{"result":33}]</td>
 </tr>
 <tr>
-<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: 1+2*<em>(3</em>4)})</td>
+<td>Countries.filter(p=&gt; p.iso3 == "BRA").map(p=&gt; {result: 1+2**(3*4)})</td>
 <td>[{"result":4097}]</td>
 </tr>
 <tr>
@@ -477,7 +481,7 @@ FROM Countries c
 WHERE c.iso3 = 'BRA' 
 </code></pre>
 <p><strong>Lambda:</strong></p>
-<p>Query to get the result of (1+(2*<em>3)</em>4)</p>
+<p>Query to get the result of (1+(2**3)*4)</p>
 <pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: (1+(2**3)*4)})
 </code></pre>
 <p><strong>SQL Result:</strong></p>
@@ -486,7 +490,7 @@ FROM Countries c
 WHERE c.iso3 = 'BRA' 
 </code></pre>
 <p><strong>Lambda:</strong></p>
-<p>Query to get the result of 1+2*<em>(3</em>4)</p>
+<p>Query to get the result of 1+2**(3*4)</p>
 <pre><code class="language-js">Countries.filter(p=&gt; p.iso3 == &quot;BRA&quot;).map(p=&gt; {result: 1+2**(3*4)})
 </code></pre>
 <p><strong>SQL Result:</strong></p>

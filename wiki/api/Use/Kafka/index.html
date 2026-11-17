@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../usage/Usage">Usage</a>
                   </li>
@@ -156,10 +160,10 @@
               
                 <h1 id="kafka">Kafka</h1>
 <h2 id="configuration">Configuration</h2>
-<p>In the case of using Kafka queues, the following configuration must be added to the infrastructure section of the lambdaorm configuration file.</p>
-<pre><code class="language-yaml">...
-infrastructure:
-  queue: 
+<p>To use Kafka, add a <code>queue</code> section to the <code>infrastructure</code> section of the λORM configuration file. <code>config</code> is the
+<a href="https://kafka.js.org/docs/configuration">kafkajs</a> client configuration.</p>
+<pre><code class="language-yaml">infrastructure:
+  queue:
     config: $QUEUE_CONFIG
     consumers:
       - name: syncInsights
@@ -168,19 +172,26 @@ infrastructure:
         subscribe:
           topic: insights-sync
           fromBeginning: true
-
+        execute: orm.execute(message.query, message.data, { stage: &quot;insights&quot; })
 </code></pre>
-<p>Example of environment variable values:</p>
+<p>Each consumer evaluates its <code>execute</code> expression for every message it receives, with the variables <code>message</code> (the
+message's value, parsed as JSON), <code>topic</code> and <code>partition</code>.</p>
 <pre><code class="language-sh">export QUEUE_CONFIG='{&quot;clientId&quot;: &quot;collections&quot;, &quot;brokers&quot;: [&quot;localhost:9093&quot;]}'
 </code></pre>
 <h2 id="send-message">Send message</h2>
-<p>In order to send a message to a Kafka queue, the kafka.send function must be used as shown below:</p>
+<p>To send messages to a Kafka topic, use the <code>queue.send(topic, messages)</code> function, e.g. in a listener:</p>
 <pre><code class="language-yaml">application:
   listeners:
     - name: syncInsights
-      on: [insert, bulkInsert, update, delete ]
+      on: [insert, bulkInsert, update, delete]
       condition: options.stage.in(&quot;default&quot;,&quot;cqrs&quot;)
-       after: kafka.send(&quot;insights-sync&quot;,[{query:query,data:data}])    
+      after: queue.send(&quot;insights-sync&quot;, [{ query: query, data: data }])
+</code></pre>
+<h2 id="execute-queued">Execute queued</h2>
+<p><code>POST /execute-queued</code> runs a query in the background and sends its result to a topic. It answers at once with the
+queue id; the messages carry the keys <code>&lt;queueId&gt;-&lt;chunk&gt;</code>.</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/execute-queued&quot; -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;query&quot;: &quot;Countries.map(p =&gt; [p.iso3, p.name])&quot;, &quot;topic&quot;: &quot;countries&quot;, &quot;chunk&quot;: 1000, &quot;options&quot;: { &quot;stage&quot;: &quot;default&quot; }}'
 </code></pre>
               
             </div>

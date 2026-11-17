@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../../schema/Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
                   </li>
@@ -541,6 +545,31 @@ WHERE  c1.CategoryID IN (?)
     ]
 ]
 </code></pre>
+<h2 id="relations-in-another-source">Relations in another source</h2>
+<p>The related entity can be in another source (another database or schema) of the stage. Since each include is a separate statement, <code>include</code> works across sources at any depth:</p>
+<pre><code class="language-Typescript">// Orders and OrderLines in one source, Products and Categories in another
+Orders.filter(p =&gt; p.id == id).include(p =&gt; p.lines.include(l =&gt; l.product.include(q =&gt; q.category)))
+</code></pre>
+<h3 id="filter-by-a-field-of-a-relation-in-another-source">Filter by a field of a relation in another source</h3>
+<p>A filter can also use a field of a relation whose entity is in another source.
+The other source is queried first, and its keys are then used to filter with <code>in</code>:</p>
+<p><strong>Lambda:</strong></p>
+<pre><code class="language-Typescript">// OrderLines (source &quot;sales&quot;) filtered by the name of its product (source &quot;catalog&quot;)
+OrderLines.filter(p =&gt; p.product.name == name &amp;&amp; p.orderId == orderId)
+</code></pre>
+<p><strong>Executed as:</strong></p>
+<pre><code class="language-Typescript">// 1. on the source of Products
+Products.filter(p =&gt; p.name == name)
+// 2. on the source of OrderLines, with the ids found in 1
+OrderLines.filter(p =&gt; in(p.productId, ids) &amp;&amp; p.orderId == orderId)
+</code></pre>
+<p>Each comparison is replaced on its own, so <code>&amp;&amp;</code>, <code>||</code> and <code>!</code> keep their meaning.</p>
+<ul>
+<li>It can be combined with other conditions, also with <code>||</code>: <code>OrderLines.filter(p =&gt; p.orderId == orderId &amp;&amp; (p.product.name == name || p.quantity &gt; 100))</code>.</li>
+<li>When the other source has no match, the query returns no rows.</li>
+<li>Only one level of relation (<code>p.product.name</code>, not <code>p.product.category.name</code>).</li>
+<li>The other side of each comparison must be a value (a literal or a variable). Comparing with a field, as in <code>p.product.name == p.description</code>, fails with an error saying that the relation is in another source.</li>
+</ul>
 <h2 id="code-example">Code example</h2>
 <pre><code class="language-Typescript">import { orm } from '../../lib'
 import { Orders } from '../northwind/model/__model'

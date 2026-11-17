@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
                   </li>
@@ -156,11 +160,36 @@
               
                 <h1 id="listener-on-schema">Listener on Schema</h1>
 <p>Listeners allow us to execute actions when an event occurs in the ORM. \
-events are set to the "on" property. \
-And the events that can be listened to are select, insert, bulkInsert, update and delete. \
+Events are set in the "on" property: select, insert, bulkInsert, update, upsert and delete. \
 The "condition" property allows you to define an expression that is evaluated to determine if the listener is executed. \
-The expressions to be executed can be defined in the "before", "after" and "error" properties. \</p>
-<p>The parameters that we have to use in the expressions are:</p>
+The expressions to be executed are defined in the "before", "after" and "error" properties.</p>
+<h2 id="how-listeners-run">How listeners run</h2>
+<ul>
+<li><code>before</code>, <code>after</code> and <code>error</code> run one after the other and <strong>are awaited</strong>: <code>orm.execute</code> returns when they have
+  finished. An error in <code>before</code> prevents the sentence; an error in <code>after</code> fails it (the <code>error</code> listeners run first).</li>
+<li>They run <strong>in the sentence's transaction</strong>: the <code>orm.execute</code> calls of a listener use the same connections, and a
+  rollback undoes what they wrote. A sentence with listeners that runs on its own opens a transaction for the sentence
+  and its listeners, so both are all or nothing.</li>
+<li>A listener's <code>orm.execute</code> can name <strong>another stage</strong> (<code>{ stage: "insights" }</code>): it joins the same transaction
+  (since @lambdaorm/lib 3.3.0).</li>
+<li><code>transactional: false</code> runs a listener outside the transaction: what it writes is kept even if the transaction
+  rolls back (e.g. an audit log).</li>
+</ul>
+<pre><code class="language-yaml">application:
+  listeners:
+    - name: touchInstallation
+      on: [insert]
+      condition: entity == &quot;InstallationFiles&quot;
+      after: &gt;-
+        orm.execute(&quot;Installations.update(p =&gt; ({ lastEventAt: at })).filter(p =&gt; p.id == id)&quot;,
+          { id: data.installationId, at: data.uploadedAt })
+    - name: audit
+      on: [insert, update, delete]
+      transactional: false
+      after: orm.execute(&quot;AuditLogs.insert()&quot;, { entity: entity, action: action })
+</code></pre>
+<h2 id="arguments">Arguments</h2>
+<p>The arguments available in <code>condition</code>, <code>before</code>, <code>after</code> and <code>error</code>:</p>
 <table>
 <thead>
 <tr>
@@ -222,7 +251,7 @@ The expressions to be executed can be defined in the "before", "after" and "erro
 <h2 id="listener-example">Listener Example</h2>
 <p>In this example we see how a Listener is declared to synchronize data in Insights. \
 When a record is inserted, updated or deleted in the default or cqrs stages, the listener is executed. \
-In this case, the expression is defined in the after property, which executes the same expression with the same data but in the stage insights.</p>
+In this case, the expression is defined in the after property, which executes the same expression with the same data but in the stage insights, in the same transaction as the sentence: if the write in insights fails, the original one is rolled back too.</p>
 <p><strong>Part of the schema where the listener is defined:</strong></p>
 <pre><code class="language-yaml">...
 application:

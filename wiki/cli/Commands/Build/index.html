@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../usage/Usage">Usage</a>
                   </li>
@@ -179,7 +183,7 @@
 <tr>
 <td>language</td>
 <td>-l</td>
-<td>Develop language.</td>
+<td>Develop language: <code>node</code> (default) or <code>client-node</code>.</td>
 </tr>
 <tr>
 <td>model</td>
@@ -194,22 +198,22 @@
 <tr>
 <td>all</td>
 <td>-a</td>
-<td>Build model and repositories.</td>
+<td>Build model and repositories (the default when none of -m, -r, -a is given).</td>
 </tr>
 <tr>
 <td>src-path</td>
-<td>-s</td>
-<td>Relative source code path in workspace.</td>
+<td></td>
+<td>Relative source code path in workspace (<code>--src-path</code>).</td>
 </tr>
 <tr>
 <td>data-path</td>
-<td>-d</td>
-<td>Relative data path in workspace.</td>
+<td></td>
+<td>Relative data path in workspace (<code>--data-path</code>).</td>
 </tr>
 <tr>
 <td>domain-path</td>
-<td>-o</td>
-<td>Relative domain path in source code path.</td>
+<td></td>
+<td>Relative domain path in source code path (<code>--domain-path</code>).</td>
 </tr>
 </tbody>
 </table>

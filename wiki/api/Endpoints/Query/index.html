@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../usage/Usage">Usage</a>
                   </li>
@@ -453,9 +457,11 @@
 }
 </code></pre>
 <h2 id="execute">Execute</h2>
-<p>Execute the query.</p>
+<p>Execute the query. The body is <code>{ query, data, options }</code>: <code>data</code> holds the query's parameters and <code>options</code> the
+query options, e.g. <code>{ "stage": "default" }</code>. Send <code>data</code> and <code>options</code> as JSON objects (preferred); JSON text
+(<code>"data": "{\"id\": 10248}"</code>) is also accepted.</p>
 <p>Request:</p>
-<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/execute?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.id==id).include(p=&gt;p.details)&quot;, &quot;data&quot;: &quot;{\&quot;id\&quot;: 10248}&quot; }'
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/execute?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.id==id).include(p=&gt;p.details)&quot;, &quot;data&quot;: {&quot;id&quot;: 10248}, &quot;options&quot;: {&quot;stage&quot;: &quot;default&quot;} }'
 </code></pre>
 <p>Response:</p>
 <pre><code class="language-json">[
@@ -500,6 +506,18 @@
   }
 ]
 </code></pre>
+<h3 id="update-and-delete">Update and delete</h3>
+<p><code>update</code> and <code>delete</code> answer the number of affected rows (<code>0</code> when nothing matched), <code>insert</code> answers the inserted
+data. Every answer is JSON.</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/execute&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.update(p =&gt; ({ freight: freight })).filter(p =&gt; p.id == id)&quot;, &quot;data&quot;: {&quot;id&quot;: 10248, &quot;freight&quot;: 40}}'
+</code></pre>
+<p>Response:</p>
+<pre><code class="language-json">1
+</code></pre>
+<p>A failed query answers <code>{ error, code, message }</code> with a status a client can map, e.g. 409 for a unique or foreign key
+violation. See <a href="../../Use/Errors/">Errors</a>.</p>
+<h2 id="script">Script</h2>
+<p>To run several queries in one transaction with a single request, use <a href="../Script/"><code>POST /script</code></a>.</p>
               
             </div>
           </div><footer>

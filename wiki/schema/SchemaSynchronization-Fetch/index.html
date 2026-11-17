@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
                   </li>
@@ -155,33 +159,56 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="fetch">Fetch</h1>
-<p>The fetch is the process show differences between sources and schema but not apply changes.The pull process is done by the command  <code>lambdaorm fetch</code>.</p>
+<p>The fetch is the process that shows the differences between the sources (Databases) and the schema, without applying any change. It is done by the command <code>lambdaorm fetch</code>.</p>
+<h2 id="what-fetch-compares">What fetch compares</h2>
+<p>Fetch reads the databases of the stage and compares them with the model (drift). The result has one entry per mapping, with the entities that differ:</p>
+<ul>
+<li>tables missing in the database or missing in the model,</li>
+<li>columns missing on one side,</li>
+<li>columns with another type, length or nullability,</li>
+<li>a different primary key.</li>
+</ul>
+<p>Each entity carries its <code>differences</code>, readable. <strong>When the databases are in step with the model, every mapping has no entities.</strong></p>
+<p>Relations (foreign keys) and indexes are not compared.
+On MongoDB, which is schemaless, fetch only checks that each collection exists.</p>
+<p>Example of a result, after adding the property <code>phone</code> to <code>Customers</code> in the model:</p>
+<pre><code class="language-yaml">- name: default
+  entities:
+    - name: Customers
+      mapping: customers
+      differences:
+        - column phone missing in the database
+</code></pre>
+<p>In step:</p>
+<pre><code class="language-yaml">- name: default
+  entities: []
+</code></pre>
 <h2 id="cli">CLI</h2>
-<p>The fetch command allows you to obtain the mapping of the database tables. \
-Using the -o argument you can specify the output format, in this case yaml. \
-The mapping.yaml file will contain the mapping of the database tables. \</p>
-<p>Ejecución del comando fetch</p>
-<pre><code class="language-sh">lambdaorm fetch -o yaml  &gt; mapping.yaml
+<pre><code class="language-sh">lambdaorm fetch -s default -o yaml
+</code></pre>
+<p>The <code>-o</code> argument sets the output format: <code>json</code>, <code>beautiful</code>, <code>light</code> or <code>yaml</code>.</p>
+<p><strong>The command exits with code 1 when there are differences</strong> (and 0 when the databases are in step), so it can be used in CI to detect drift:</p>
+<pre><code class="language-sh">lambdaorm fetch -s default || echo &quot;the database differs from the model&quot;
 </code></pre>
 <p><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/10-fetch">View lab</a></p>
 <h2 id="node">Node</h2>
-<p>The fetch command allows you to obtain the mapping of the database tables. \
-Using the -o argument you can specify the output format, in this case yaml. \
-The mapping.yaml file will contain the mapping of the database tables. \</p>
-<pre><code class="language-Typescript">import { Orm } from 'lambdaorm'
+<p><code>orm.stage.fetch()</code> returns the differences. To read the mappings of the databases as they are (every table and column), use <code>orm.stage.read()</code>.</p>
+<pre><code class="language-Typescript">import { Orm } from '@lambdaorm/lib'
 (async () =&gt; {
-    const workspace = process.cwd()
-    const orm = new Orm(workspace)
-    try{        
-        const originalSchema = orm.helper.yaml.load(await orm.helper.fs.read(workspace + '/lambdaOrm.yaml'))
-        await orm.init(originalSchema)  
-        const mappings = await orm.stage.fetch()
-        await orm.helper.fs.write( workspace + '/mappings.yaml', orm.helper.yaml.dump(mappings))
-    }catch(e){
-        console.log(e)
+    const orm = new Orm()
+    try {
+        await orm.init('./lambdaORM.yaml')
+        const mappings = await orm.stage.fetch({ stage: 'default' })
+        const differing: any[] = mappings.flatMap(p =&gt; p.entities || [])
+        for (const entity of differing) {
+            console.log(entity.name, entity.differences)
+        }
+        // the databases' own mappings
+        const database = await orm.stage.read({ stage: 'default' })
+        await orm.helper.fs.write('./mappings.yaml', orm.helper.yaml.dump(database))
     } finally {
         await orm.end()
-    }   
+    }
 })()
 </code></pre>
 <p><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/10-fetch">View lab</a></p>
