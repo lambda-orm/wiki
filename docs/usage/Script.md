@@ -513,8 +513,8 @@ Plus the functions λORM adds:
 - Statements end with `;`; the last one (without `;`) is the result. `return value;` ends the script early.
 - Variables need no declaration: `total = 0;`. `data` is copied: the script never changes the caller's object.
 - Count with `i += 1` (there is no `++`); use `iif(condition, a, b)` (there is no `? :`).
-- Keep a query's result in a variable before indexing it: `rows = orm.execute(…); rows[0].name`.
-- Write an empty list from the data (`items` sent as `[]`), not as a literal in the script.
+- A query's result can be indexed directly: `orm.execute("Customers.filter(p => p.code == code)", { code: code })[0].name`;
+  an empty list is `[]` (both need 3xpr 5.3.1, from @lambdaorm/lib 3.4.1).
 - A script can't read environment variables (`$VAR`).
 
 ## Transaction and stages
