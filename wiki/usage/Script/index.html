@@ -130,8 +130,6 @@
                   </li>
                   <li class="toctree-l1"><a class="" href=".">Script</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="../ScriptExamples">Script examples</a>
-                  </li>
                   <li class="toctree-l1"><a class="" href="../Usage">Usage</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../CHANGELOG">Change log</a>
@@ -165,11 +163,9 @@
 script in <strong>one transaction</strong>: every <code>orm.execute</code> it calls runs on the same connections (one per source, also across
 stages). When the script ends the orm commits; on any error (a query, a function, a <code>throw</code>) it rolls back and the
 promise rejects with that error. The result is the value of the last statement, or of <code>return</code>.</p>
-<p><strong>That is the main feature of a script: all or nothing.</strong> Everything it executes — on every source and stage it
-touches, listeners included — is committed together when it ends, or rolled back together if anything fails.</p>
 <p>It is the way to run a whole use case — reads, conditions, loops and several writes — in a single call, also from the
 <a href="../../api/">REST service</a> (<code>POST /script</code>), the client and the <a href="../../cli/">CLI</a> (<code>lambdaorm script</code>).
-See <a href="../ScriptExamples/">Script examples</a>, from a single query to a complete use case.</p>
+The <a href="#examples">examples</a> go from a single query to a complete use case.</p>
 <pre><code class="language-typescript">const quoteId = await orm.executeScript(`
   account = orm.execute(&quot;Accounts.filter(p =&gt; p.id == accountId)&quot;, { accountId: accountId });
   if (account.length() == 0) {
@@ -196,6 +192,49 @@ See <a href="../ScriptExamples/">Script examples</a>, from a single query to a c
   { stage: 'default', timeout: 10000, maxIterations: 10000 }
 )
 </code></pre>
+<h2 id="the-main-feature-all-or-nothing">The main feature: all or nothing</h2>
+<p><strong>Everything a script executes is one transaction.</strong> Every <code>orm.execute</code> of the script — on one source or on several,
+on the script's stage or on another one, and what the <a href="../../schema/SchemaExample-Listener/">listeners</a> write — runs on
+the same connections:</p>
+<ul>
+<li>when the script ends, <strong>everything is committed</strong>;</li>
+<li>if <strong>anything fails</strong> — a query, a function, a rule that <code>throw</code>s, the <code>timeout</code> — <strong>everything the script did is
+  rolled back</strong>, in every source and stage, and the promise rejects with that error.</li>
+</ul>
+<p>That is what a script is for: a use case with several reads and writes (an order with its lines, a stock movement, a
+transfer) that must happen <strong>completely or not at all</strong>, in a single call — also from the
+<a href="../../api/Endpoints/Script/">REST service</a> (<code>POST /script</code>), the client or the <a href="../../cli/Commands/Script/">CLI</a>,
+where a client could otherwise only send one query per request and could not undo the previous ones.</p>
+<table>
+<thead>
+<tr>
+<th>When the script…</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ends normally</td>
+<td>commit of everything; resolves with the last value (or <code>return</code>)</td>
+</tr>
+<tr>
+<td>throws (<code>throw</code>)</td>
+<td>rollback of everything; rejects with that error</td>
+</tr>
+<tr>
+<td>runs a query that fails (e.g. a duplicate key)</td>
+<td>rollback of everything; rejects with the database's error</td>
+</tr>
+<tr>
+<td>catches an error with <code>try/catch</code></td>
+<td>it goes on; the error does not undo anything by itself</td>
+</tr>
+<tr>
+<td>passes <code>timeout</code> or <code>maxIterations</code></td>
+<td>it stops, rollback of everything; rejects</td>
+</tr>
+</tbody>
+</table>
 <h2 id="arguments">Arguments</h2>
 <table>
 <thead>
@@ -243,6 +282,280 @@ See <a href="../ScriptExamples/">Script examples</a>, from a single query to a c
 </table>
 <p>Up to @lambdaorm/lib 3.3.0 the limits were a fourth argument (<code>executeScript(script, data, options, { timeout,
 maxIterations })</code>); since 3.4.0 everything goes in <code>options</code>.</p>
+<h2 id="examples">Examples</h2>
+<p>Each example says what it does and what happens when it fails.</p>
+<h3 id="the-model-of-the-examples">The model of the examples</h3>
+<pre><code class="language-yaml">domain:
+  entities:
+    - name: Customers
+      primaryKey: [id]
+      uniqueKey: [code]
+      properties:
+        - { name: id, type: integer, required: true, autoIncrement: true }
+        - { name: code, length: 20, required: true }
+        - { name: name, required: true }
+        - { name: notes }
+        - { name: balance, type: decimal }
+    - name: Orders
+      primaryKey: [id]
+      properties:
+        - { name: id, length: 36, required: true }
+        - { name: customerId, type: integer }
+        - { name: status, length: 20, required: true }
+        - { name: version, type: integer, required: true }
+      relations:
+        - { name: lines, type: manyToOne, composite: true, from: id, entity: OrderLines, to: orderId }
+    - name: OrderLines
+      primaryKey: [orderId, line]
+      properties:
+        - { name: orderId, length: 36, required: true }
+        - { name: line, type: integer, required: true }
+        - { name: product, length: 40, required: true }
+        - { name: quantity, type: integer }
+    - name: AuditLogs
+      primaryKey: [id]
+      properties:
+        - { name: id, type: integer, required: true, autoIncrement: true }
+        - { name: entityName, length: 40 }
+        - { name: refId, length: 36 }
+</code></pre>
+<p>The examples run on the stage <code>default</code>; examples 11 and 13 also write on a stage <code>insights</code>. They are the
+<a href="https://github.com/lambda-orm/core/tree/main/packages/lib/src/dev/labs/engines">engines lab</a> model, where the same
+scripts are tested on PostgreSQL, MySQL, MariaDB, SQL Server, Oracle and MongoDB.</p>
+<h3 id="1-a-single-query">1. A single query</h3>
+<p>The simplest script is one <code>orm.execute</code>. The script returns the value of its last statement — here the rows
+of the query. Even this runs in a transaction (it opens, the query runs, it commits).</p>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Customers.filter(p =&gt; p.code == code)&quot;, { code: code })
+`,
+  { code },
+  { stage: 'default' }
+)
+</code></pre>
+<h3 id="2-several-statements-in-order">2. Several statements, in order</h3>
+<p>Statements run one after the other, each <code>orm.execute</code> awaited before the next. A statement sees what the
+previous ones wrote, before the commit (they share the connection).</p>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Customers.insert()&quot;, { code: code, name: name });
+  orm.execute(&quot;Customers.filter(p =&gt; p.code == code).map(p =&gt; p.name)&quot;, { code: code })
+`,
+  { code, name: 'Ana' },
+  { stage: 'default' }
+)
+</code></pre>
+<p><strong>Result:</strong> [{ name: "Ana" }].</p>
+<h3 id="3-using-the-result-of-a-statement">3. Using the result of a statement</h3>
+<p>Assign a result to a variable and use it below. An insert answers <code>{ data }</code> with the values written,
+generated ones included: <code>customer.data.id</code> is the id the database generated.</p>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  customer = orm.execute(&quot;Customers.insert()&quot;, { code: code, name: name });
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, customerId: customer.data.id, status: &quot;new&quot;, version: 1 });
+  customer.data.id
+`,
+  { code, name: 'Ana', orderId },
+  { stage: 'default' }
+)
+</code></pre>
+<p><strong>Result:</strong> the id generated for the customer.</p>
+<h3 id="4-affected-rows-not-found-as-an-error">4. Affected rows: "not found" as an error</h3>
+<p><code>update</code> and <code>delete</code> answer the number of affected rows. A script can turn 0 into an error; <code>throw</code> with
+a <code>status</code> is answered with that HTTP status by the REST service.</p>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  updated = orm.execute(&quot;Customers.update(p =&gt; ({ name: name })).filter(p =&gt; p.code == code)&quot;, { code: code, name: name });
+  if (updated == 0) {
+    throw { status: 404, message: &quot;customer &quot; + code + &quot; not found&quot; };
+  }
+  updated
+`,
+  { code: 'missing', name: 'Bob' },
+  { stage: 'default' }
+)
+</code></pre>
+<p><strong>Result:</strong> rejects: customer missing not found (404).</p>
+<h3 id="5-conditions-create-only-what-is-missing">5. Conditions: create only what is missing</h3>
+<p><code>if</code> with a query in the condition. Run it twice with the same data: the second time it creates nothing.</p>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  created = 0;
+  for (c in customers) {
+    if (orm.execute(&quot;Customers.filter(p =&gt; p.code == code)&quot;, { code: c.code }).length() == 0) {
+      orm.execute(&quot;Customers.insert()&quot;, c);
+      created += 1;
+    }
+  }
+  created
+`,
+  { customers: [{ code: 'c1', name: 'Ana' }, { code: 'c2', name: 'Bob' }] },
+  { stage: 'default' }
+)
+</code></pre>
+<p><strong>Result:</strong> 2 the first time, 0 the second.</p>
+<h3 id="6-loops-one-row-per-item">6. Loops: one row per item</h3>
+<p><code>for (item in list)</code> over the data. Every insert of the loop is in the same transaction: all the lines are
+written, or none. Lists also have <code>filter</code>, <code>map</code>, <code>sum</code>, <code>count</code>…</p>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, status: &quot;new&quot;, version: 1 });
+  for (l in lines) {
+    orm.execute(&quot;OrderLines.insert()&quot;, { orderId: orderId, line: l.line, product: l.product, quantity: l.qty });
+  }
+  lines.sum(p =&gt; p.qty * p.price)
+`,
+  { orderId, lines: [{ line: 1, product: 'camera', qty: 2, price: 10 }, { line: 2, product: 'hub', qty: 1, price: 5 }] },
+  { stage: 'default' }
+)
+</code></pre>
+<p><strong>Result:</strong> 25.</p>
+<h3 id="7-aggregates-with-include">7. Aggregates with include</h3>
+<p>A composite relation can be written with <code>include</code>, as in <code>orm.execute</code> outside a script. Here the order
+and its lines in one sentence, then read back with its lines.</p>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Orders.insert().include(p =&gt; p.lines)&quot;, {
+    id: orderId, status: &quot;new&quot;, version: 1,
+    lines: lines.map(l =&gt; ({ orderId: orderId, line: l.line, product: l.product, quantity: l.qty }))
+  });
+  orders = orm.execute(&quot;Orders.filter(p =&gt; p.id == orderId).include(p =&gt; p.lines)&quot;, { orderId: orderId });
+  orders[0].lines.length()
+`,
+  { orderId, lines: [{ line: 1, product: 'camera', qty: 2 }, { line: 2, product: 'hub', qty: 1 }] },
+  { stage: 'default' }
+)
+</code></pre>
+<p><strong>Result:</strong> 2.</p>
+<h3 id="8-a-business-rule-throw-and-everything-is-undone">8. A business rule: throw, and everything is undone</h3>
+<p>The rule is checked after writing: the order and its lines are already in the database (inside the
+transaction). <code>throw</code> stops the script and <strong>rolls back everything it wrote</strong>: no order and no line is left.</p>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, status: &quot;new&quot;, version: 1 });
+  for (l in lines) {
+    orm.execute(&quot;OrderLines.insert()&quot;, { orderId: orderId, line: l.line, product: l.product, quantity: l.qty });
+  }
+  total = lines.sum(p =&gt; p.qty * p.price);
+  if (total &gt; maxTotal) {
+    throw { status: 400, message: &quot;the order exceeds &quot; + maxTotal };
+  }
+  total
+`,
+  { orderId, maxTotal: 20, lines: [ …total 25… ] },
+  { stage: 'default' }
+)
+</code></pre>
+<p><strong>Result:</strong> rejects: the order exceeds 20 (400); the order and its lines are not in the database.</p>
+<h3 id="9-handling-an-error-try-catch">9. Handling an error: try / catch</h3>
+<p>An error caught with <code>try/catch</code> does not abort the script: it goes on and commits. Use it for optional
+steps; any error not caught rolls everything back.</p>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  try {
+    if (vip) { throw &quot;vip customers are reviewed by hand&quot;; }
+    note = &quot;ok&quot;;
+  } catch (e) {
+    note = e.message;
+  }
+  orm.execute(&quot;Customers.insert()&quot;, { code: code, name: name, notes: note });
+  note
+`,
+  { code, name: 'Ana', vip: true },
+  { stage: 'default' }
+)
+</code></pre>
+<p><strong>Result:</strong> "vip customers are reviewed by hand" (and the customer is written).</p>
+<h3 id="10-listeners-run-inside-the-scripts-transaction">10. Listeners run inside the script's transaction</h3>
+<p>A schema listener (here, one that writes an <code>AuditLogs</code> row after each order insert) runs in the
+script's transaction: committed with it, and undone with it if the script fails.</p>
+<pre><code class="language-yaml">application:
+  listeners:
+    - name: auditOrders
+      on: [insert]
+      condition: entity == &quot;Orders&quot;
+      after: orm.execute(&quot;AuditLogs.insert()&quot;, { entityName: &quot;Orders&quot;, refId: data.id })
+</code></pre>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, status: &quot;new&quot;, version: 1 });
+  throw &quot;cancel&quot;;
+`,
+  { orderId },
+  { stage: 'default' }
+)
+</code></pre>
+<p><strong>Result:</strong> rejects: cancel; neither the order nor its audit row are in the database.</p>
+<h3 id="11-another-stage-in-the-same-transaction">11. Another stage in the same transaction</h3>
+<p><code>orm.execute(query, data, { stage: "insights" })</code> runs on another stage — other sources, even another
+database engine — <strong>in the same transaction</strong>: if anything fails afterwards, the write on the other stage is undone too.</p>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, status: &quot;new&quot;, version: 1 });
+  orm.execute(&quot;AuditLogs.insert()&quot;, { entityName: &quot;new order&quot;, refId: orderId }, { stage: insights });
+  if (fail) { throw &quot;something failed after both writes&quot;; }
+  &quot;done&quot;
+`,
+  { orderId, insights: 'insights', fail: true },
+  { stage: 'default' }
+)
+</code></pre>
+<p><strong>Result:</strong> rejects; the order (default stage) and the audit row (insights stage) are both undone.</p>
+<h3 id="12-limits-timeout-and-maxiterations">12. Limits: timeout and maxIterations</h3>
+<p>Options of the script, with the stage: <code>timeout</code> (ms) stops it — also a loop that never ends — and rolls
+back; <code>maxIterations</code> caps the loop iterations of the whole script. Both are worth setting when scripts come from
+clients.</p>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Customers.insert()&quot;, { code: code, name: &quot;never kept&quot; });
+  while (true) { x = 1; }
+`,
+  { code },
+  { stage: 'default', timeout: 2000, maxIterations: 10000 }
+)
+</code></pre>
+<p><strong>Result:</strong> rejects (maxIterations, or the timeout first); the customer is not written.</p>
+<h3 id="13-a-complete-use-case-place-an-order">13. A complete use case: place an order</h3>
+<p>Everything together: validate, write an aggregate, apply a rule, write on another stage and answer a summary.
+One call, one transaction — <strong>if any step fails, nothing of the order exists anywhere</strong>.</p>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  customers = orm.execute(&quot;Customers.filter(p =&gt; p.code == customerCode)&quot;, { customerCode: customerCode });
+  if (customers.length() == 0) {
+    throw { status: 404, message: &quot;customer &quot; + customerCode + &quot; not found&quot; };
+  }
+  customer = customers[0];
+
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, customerId: customer.id, status: &quot;new&quot;, version: 1 });
+
+  for (l in lines) {
+    orm.execute(&quot;OrderLines.insert()&quot;, {
+      orderId:  orderId,
+      line:     l.line,
+      product:  l.product,
+      quantity: l.qty
+    });
+  }
+
+  total = lines.sum(p =&gt; p.qty * p.price);
+  if (total &gt; customer.balance) {
+    throw { status: 409, message: &quot;insufficient balance&quot; };
+  }
+
+  orm.execute(&quot;Customers.update(p =&gt; ({ balance: balance })).filter(p =&gt; p.id == id)&quot;, {
+    id:      customer.id,
+    balance: customer.balance - total
+  });
+  orm.execute(&quot;AuditLogs.insert()&quot;, { entityName: &quot;order total &quot; + total, refId: orderId }, { stage: insights });
+
+  { orderId: orderId, total: total, balance: customer.balance - total }
+`,
+  { customerCode: 'c1', orderId, insights: 'insights', lines: [{ line: 1, product: 'camera', qty: 2, price: 10 }, { line: 2, product: 'hub', qty: 1, price: 5 }] },
+  { stage: 'default', timeout: 10000, maxIterations: 10000 }
+)
+</code></pre>
+<p><strong>Result:</strong> { orderId, total: 25, balance: 75 } with a balance of 100; with a balance of 20 it rejects (409) and the order, its lines, the balance and the audit row are left as they were.</p>
+<h2 id="the-same-script-from-a-client">The same script from a client</h2>
+<p>The script and its data are the same everywhere; only the call changes.</p>
+<pre><code class="language-typescript">// @lambdaorm/client, against the REST service
+import { orm } from '@lambdaorm/client'
+await orm.init('http://localhost:9291', { token: process.env.SERVICE_TOKEN })
+const result = await orm.executeScript(script, data, { stage: 'default', timeout: 10000 })
+</code></pre>
+<pre><code class="language-bash"># REST (the service runs with SCRIPT_ENABLED=true)
+curl -X POST http://localhost:9291/script -H 'Content-Type: application/json' \
+  -d '{ &quot;script&quot;: &quot;orm.execute(\&quot;Customers.filter(p =&gt; p.code == code)\&quot;, { code: code })&quot;, &quot;data&quot;: { &quot;code&quot;: &quot;c1&quot; }, &quot;options&quot;: { &quot;stage&quot;: &quot;default&quot; } }'
+
+# CLI: a script file, data as JSON
+lambdaorm script -f place-order.3xpr -d '{ &quot;customerCode&quot;: &quot;c1&quot;, &quot;orderId&quot;: &quot;o-1&quot;, &quot;lines&quot;: [] }' -s default
+</code></pre>
 <h2 id="the-language">The language</h2>
 <p>Everything 3xpr has:</p>
 <ul>
@@ -302,6 +615,15 @@ maxIterations })</code>); since 3.4.0 everything goes in <code>options</code>.</
 </tr>
 </tbody>
 </table>
+<h3 id="writing-scripts-a-few-rules">Writing scripts: a few rules</h3>
+<ul>
+<li>Statements end with <code>;</code>; the last one (without <code>;</code>) is the result. <code>return value;</code> ends the script early.</li>
+<li>Variables need no declaration: <code>total = 0;</code>. <code>data</code> is copied: the script never changes the caller's object.</li>
+<li>Count with <code>i += 1</code> (there is no <code>++</code>); use <code>iif(condition, a, b)</code> (there is no <code>? :</code>).</li>
+<li>Keep a query's result in a variable before indexing it: <code>rows = orm.execute(…); rows[0].name</code>.</li>
+<li>Write an empty list from the data (<code>items</code> sent as <code>[]</code>), not as a literal in the script.</li>
+<li>A script can't read environment variables (<code>$VAR</code>).</li>
+</ul>
 <h2 id="transaction-and-stages">Transaction and stages</h2>
 <ul>
 <li>One transaction for the whole script, also across sources and stages: commit at the end; rollback and reject on any
