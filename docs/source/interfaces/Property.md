@@ -6,7 +6,7 @@
 
 # Interface: Property
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:23
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:23
 
 ## Extended by
 
@@ -18,7 +18,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:23
 
 > `optional` **autoIncrement**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:29
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:29
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:29
 
 > `optional` **default**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:33
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:33
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:33
 
 > `optional` **enum**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:36
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:36
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:36
 
 > `optional` **key**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:37
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:37
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:37
 
 > `optional` **length**: `number`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:26
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:26
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:26
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:24
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:24
 
 ***
 
@@ -66,7 +66,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:24
 
 > `optional` **primaryKey**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:28
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:28
 
 ***
 
@@ -74,7 +74,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:28
 
 > `optional` **readExp**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:31
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:31
 
 ***
 
@@ -82,7 +82,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:31
 
 > `optional` **readValue**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:34
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:34
 
 ***
 
@@ -90,7 +90,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:34
 
 > `optional` **required**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:27
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:27
 
 ***
 
@@ -98,7 +98,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:27
 
 > `optional` **type**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:25
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:25
 
 ***
 
@@ -106,7 +106,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:25
 
 > `optional` **view**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:30
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:30
 
 ***
 
@@ -114,7 +114,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:30
 
 > `optional` **writeExp**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:32
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:32
 
 ***
 
@@ -122,4 +122,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:32
 
 > `optional` **writeValue**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:35
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:35

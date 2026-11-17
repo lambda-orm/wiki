@@ -6,7 +6,7 @@
 
 # Interface: DomainSchema
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:157
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:165
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:157
 
 > **entities**: [`Entity`](Entity.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:159
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:167
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:159
 
 > `optional` **enums**: [`Enum`](Enum.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:160
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:168
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:160
 
 > **version**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:158
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:166

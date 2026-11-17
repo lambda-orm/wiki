@@ -8,7 +8,7 @@
 
 > **atan2**(`x`, `y`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:173
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:174
 
 Get the arc tangent of x and y
 

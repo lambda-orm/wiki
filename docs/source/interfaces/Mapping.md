@@ -6,7 +6,7 @@
 
 # Interface: Mapping
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:104
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:106
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:104
 
 > `optional` **entities**: [`EntityMapping`](EntityMapping.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:108
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:110
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:108
 
 > `optional` **extends**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:105
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:107
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:105
 
 > `optional` **format**: [`FormatMapping`](FormatMapping.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:109
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:111
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:109
 
 > `optional` **mapping**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:106
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:108
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:106
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:107
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:109

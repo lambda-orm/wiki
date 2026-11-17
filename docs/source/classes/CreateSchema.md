@@ -6,7 +6,7 @@
 
 # Class: CreateSchema
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/create.d.ts:3
+Defined in: packages/base/build/lib/schema/application/useCases/create.d.ts:3
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/useCases/create.d.ts
 
 > **new CreateSchema**(`schemaService`): `CreateSchema`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/create.d.ts:5
+Defined in: packages/base/build/lib/schema/application/useCases/create.d.ts:5
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/useCases/create.d.ts
 
 > **create**(`dialect?`, `connection?`): [`Schema`](../interfaces/Schema.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/create.d.ts:6
+Defined in: packages/base/build/lib/schema/application/useCases/create.d.ts:6
 
 #### Parameters
 

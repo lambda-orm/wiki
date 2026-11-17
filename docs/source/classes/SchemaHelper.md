@@ -6,7 +6,7 @@
 
 # Class: SchemaHelper
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:3
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:3
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 > **new SchemaHelper**(`str`): `SchemaHelper`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:7
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:7
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 > `readonly` **DEFAULT\_LENGTH**: `80` = `80`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:6
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:6
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 > `readonly` **DEFAULT\_TYPE**: `"string"` = `"string"`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:5
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:5
 
 ## Methods
 
@@ -48,7 +48,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 > **capitalize**(`name`): `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:13
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:13
 
 #### Parameters
 
@@ -66,7 +66,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 > **entityName**(`name`): `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:10
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:10
 
 #### Parameters
 
@@ -84,7 +84,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 > **equalName**(`name1?`, `name2?`): `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:9
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:9
 
 #### Parameters
 
@@ -104,9 +104,9 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 ### getFk()
 
-> **getFk**(`objType`): `undefined` \| `PropertyType`
+> **getFk**(`objType`): `PropertyType` \| `undefined`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:18
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:18
 
 #### Parameters
 
@@ -116,15 +116,15 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 #### Returns
 
-`undefined` \| `PropertyType`
+`PropertyType` \| `undefined`
 
 ***
 
 ### getKey()
 
-> **getKey**(`uniques`): `undefined` \| `PropertyType`
+> **getKey**(`uniques`): `PropertyType` \| `undefined`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:19
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:19
 
 #### Parameters
 
@@ -134,15 +134,15 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 #### Returns
 
-`undefined` \| `PropertyType`
+`PropertyType` \| `undefined`
 
 ***
 
 ### getPk()
 
-> **getPk**(`objType`): `undefined` \| `PropertyType`
+> **getPk**(`objType`): `PropertyType` \| `undefined`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:16
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:16
 
 #### Parameters
 
@@ -152,7 +152,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 #### Returns
 
-`undefined` \| `PropertyType`
+`PropertyType` \| `undefined`
 
 ***
 
@@ -160,7 +160,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 > **getPkName**(`objType`): `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:17
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:17
 
 #### Parameters
 
@@ -178,7 +178,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 > **indexName**(`name`): `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:14
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:14
 
 #### Parameters
 
@@ -194,9 +194,9 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 ### length()
 
-> **length**(`length?`): `undefined` \| `number`
+> **length**(`length?`): `number` \| `undefined`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:21
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:21
 
 #### Parameters
 
@@ -206,15 +206,15 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 #### Returns
 
-`undefined` \| `number`
+`number` \| `undefined`
 
 ***
 
 ### lengthFromType()
 
-> **lengthFromType**(`type`): `undefined` \| `number`
+> **lengthFromType**(`type`): `number` \| `undefined`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:22
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:22
 
 #### Parameters
 
@@ -224,7 +224,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 #### Returns
 
-`undefined` \| `number`
+`number` \| `undefined`
 
 ***
 
@@ -232,7 +232,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 > **newId**(): `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:8
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:8
 
 #### Returns
 
@@ -244,7 +244,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 > **propertyName**(`name`): `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:11
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:11
 
 #### Parameters
 
@@ -262,7 +262,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 > **refPropertyName**(`entityName`, `propertyName`): `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:12
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:12
 
 #### Parameters
 
@@ -284,7 +284,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 > **relationName**(`name`): `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:15
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:15
 
 #### Parameters
 
@@ -300,9 +300,9 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 ### type()
 
-> **type**(`type?`, `length?`): `undefined` \| `string`
+> **type**(`type?`, `length?`): `string` \| `undefined`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts:20
+Defined in: packages/base/build/lib/schema/infrastructure/schemaHelper.d.ts:20
 
 #### Parameters
 
@@ -316,4 +316,4 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/schemaHelper.d.ts
 
 #### Returns
 
-`undefined` \| `string`
+`string` \| `undefined`

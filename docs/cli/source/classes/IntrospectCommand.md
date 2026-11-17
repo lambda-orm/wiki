@@ -1,12 +1,12 @@
-[**Lambda ORM**](../README.md)
+[**λORM CLI**](../README.md)
 
 ***
 
-[Lambda ORM](../README.md) / IntrospectCommand
+[λORM CLI](../README.md) / IntrospectCommand
 
 # Class: IntrospectCommand
 
-Defined in: [src/lib/infrastructure/command/introspect.ts:6](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/introspect.ts#L6)
+Defined in: [packages/cli/src/lib/infrastructure/command/introspect.ts:7](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/cli/src/lib/infrastructure/command/introspect.ts#L7)
 
 ## Implements
 
@@ -28,7 +28,7 @@ Defined in: [src/lib/infrastructure/command/introspect.ts:6](https://github.com/
 
 > **command**: `string` = `'introspect'`
 
-Defined in: [src/lib/infrastructure/command/introspect.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/introspect.ts#L7)
+Defined in: [packages/cli/src/lib/infrastructure/command/introspect.ts:8](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/cli/src/lib/infrastructure/command/introspect.ts#L8)
 
 string (or array of strings) that executes this command when given on the command line, first string may contain positional args
 
@@ -42,7 +42,7 @@ string (or array of strings) that executes this command when given on the comman
 
 > **describe**: `string` = `'Read and analyze data and update schemas'`
 
-Defined in: [src/lib/infrastructure/command/introspect.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/introspect.ts#L8)
+Defined in: [packages/cli/src/lib/infrastructure/command/introspect.ts:9](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/cli/src/lib/infrastructure/command/introspect.ts#L9)
 
 string used as the description for the command in help text, use `false` for a hidden command
 
@@ -56,7 +56,7 @@ string used as the description for the command in help text, use `false` for a h
 
 > **builder**(`args`): `Argv`\<`object` & `object` & `object` & `object` & `object` & `object`\>
 
-Defined in: [src/lib/infrastructure/command/introspect.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/introspect.ts#L10)
+Defined in: [packages/cli/src/lib/infrastructure/command/introspect.ts:11](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/cli/src/lib/infrastructure/command/introspect.ts#L11)
 
 object declaring the options the command accepts, or a function accepting and returning a yargs instance
 
@@ -80,7 +80,7 @@ object declaring the options the command accepts, or a function accepting and re
 
 > **handler**(`args`): `Promise`\<`void`\>
 
-Defined in: [src/lib/infrastructure/command/introspect.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/introspect.ts#L38)
+Defined in: [packages/cli/src/lib/infrastructure/command/introspect.ts:39](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/cli/src/lib/infrastructure/command/introspect.ts#L39)
 
 a function which will be passed the parsed argv.
 

@@ -6,7 +6,7 @@
 
 # Interface: InitializeSchemaArgs
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:13
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:13
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:13
 
 > `optional` **connection**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:18
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:18
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:18
 
 > `optional` **dataPath**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:19
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:19
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:19
 
 > `optional` **dialect**: [`Dialect`](../enumerations/Dialect.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:17
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:17
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:17
 
 > `optional` **source**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:16
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:16
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:16
 
 > `optional` **url**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:15
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:15
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:15
 
 > **workspace**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:14
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:14

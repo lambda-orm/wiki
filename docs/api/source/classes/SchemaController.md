@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / SchemaController
+[λORM service](../README.md) / SchemaController
 
 # Class: SchemaController
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:5](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L5)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:5](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L5)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:5](https://githu
 
 > **new SchemaController**(`service`): `SchemaController`
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:6](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L6)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:6](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L6)
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:6](https://githu
 
 > `protected` **collectRequestParams**(`request`): `any`
 
-Defined in: [src/infrastructure/controllers/Controller.ts:27](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L27)
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:64](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L64)
 
 #### Parameters
 
@@ -62,7 +62,7 @@ Defined in: [src/infrastructure/controllers/Controller.ts:27](https://github.com
 
 > **domain**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:18](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L18)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:18](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L18)
 
 #### Parameters
 
@@ -84,7 +84,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:18](https://gith
 
 > **entities**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:30](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L30)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:30](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L30)
 
 #### Parameters
 
@@ -106,7 +106,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:30](https://gith
 
 > **entity**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:34](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L34)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:34](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L34)
 
 #### Parameters
 
@@ -128,7 +128,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:34](https://gith
 
 > **entityMapping**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:38](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L38)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:38](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L38)
 
 #### Parameters
 
@@ -150,7 +150,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:38](https://gith
 
 > **enum**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:46](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L46)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:46](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L46)
 
 #### Parameters
 
@@ -172,7 +172,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:46](https://gith
 
 > **enums**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:42](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L42)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:42](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L42)
 
 #### Parameters
 
@@ -194,7 +194,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:42](https://gith
 
 > `protected` **handleRequest**(`request`, `response`, `serviceOperation`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/Controller.ts:50](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L50)
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:87](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L87)
 
 #### Parameters
 
@@ -224,7 +224,7 @@ Defined in: [src/infrastructure/controllers/Controller.ts:50](https://github.com
 
 > **mapping**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:54](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L54)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:54](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L54)
 
 #### Parameters
 
@@ -246,7 +246,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:54](https://gith
 
 > **mappings**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:50](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L50)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:50](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L50)
 
 #### Parameters
 
@@ -268,7 +268,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:50](https://gith
 
 > **schema**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:14](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L14)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:14](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L14)
 
 #### Parameters
 
@@ -290,7 +290,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:14](https://gith
 
 > `protected` **sendError**(`response`, `error`): `void`
 
-Defined in: [src/infrastructure/controllers/Controller.ts:18](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L18)
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:38](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L38)
 
 #### Parameters
 
@@ -316,7 +316,7 @@ Defined in: [src/infrastructure/controllers/Controller.ts:18](https://github.com
 
 > `protected` **sendResponse**(`response`, `payload?`): `void`
 
-Defined in: [src/infrastructure/controllers/Controller.ts:3](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L3)
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:28](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L28)
 
 #### Parameters
 
@@ -342,7 +342,7 @@ Defined in: [src/infrastructure/controllers/Controller.ts:3](https://github.com/
 
 > **source**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:22](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L22)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:22](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L22)
 
 #### Parameters
 
@@ -364,7 +364,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:22](https://gith
 
 > **sources**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:26](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L26)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:26](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L26)
 
 #### Parameters
 
@@ -386,7 +386,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:26](https://gith
 
 > **stage**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:62](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L62)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:62](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L62)
 
 #### Parameters
 
@@ -408,7 +408,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:62](https://gith
 
 > **stages**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:58](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L58)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:58](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L58)
 
 #### Parameters
 
@@ -426,11 +426,33 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:58](https://gith
 
 ***
 
+### toHttpError()
+
+> `protected` **toHttpError**(`error`): `HttpError`
+
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:43](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L43)
+
+#### Parameters
+
+##### error
+
+`any`
+
+#### Returns
+
+`HttpError`
+
+#### Inherited from
+
+`Controller.toHttpError`
+
+***
+
 ### version()
 
 > **version**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:10](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L10)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L10)
 
 #### Parameters
 
@@ -452,7 +474,7 @@ Defined in: [src/infrastructure/controllers/schemaController.ts:10](https://gith
 
 > **views**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/schemaController.ts:66](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/schemaController.ts#L66)
+Defined in: [service/src/lib/infrastructure/controllers/schemaController.ts:66](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/schemaController.ts#L66)
 
 #### Parameters
 

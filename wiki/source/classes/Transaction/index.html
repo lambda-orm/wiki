@@ -162,16 +162,20 @@
 <hr />
 <p><a href="../../">Lambda ORM</a> / Transaction</p>
 <h1 id="class-transaction">Class: Transaction</h1>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/transaction.ts#L6">src/lib/execution/domain/transaction.ts:6</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/transaction.ts#L5">packages/lib/src/lib/execution/domain/transaction.ts:5</a></p>
 <h2 id="constructors">Constructors</h2>
 <h3 id="constructor">Constructor</h3>
 <blockquote>
-<p><strong>new Transaction</strong>(<code>queryExecutor</code>): <code>Transaction</code></p>
+<p><strong>new Transaction</strong>(<code>queryExecutor</code>, <code>ofStage?</code>): <code>Transaction</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/transaction.ts#L7">src/lib/execution/domain/transaction.ts:7</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/transaction.ts#L11">packages/lib/src/lib/execution/domain/transaction.ts:11</a></p>
 <h4 id="parameters">Parameters</h4>
 <h5 id="queryexecutor">queryExecutor</h5>
 <p><a href="../../interfaces/QueryExecutor/"><code>QueryExecutor</code></a></p>
+<p>the executor of the transaction's stage</p>
+<h5 id="ofstage">ofStage?</h5>
+<p>(<code>options</code>) =&gt; <a href="../../interfaces/QueryExecutor/"><code>QueryExecutor</code></a></p>
+<p>the executor of another stage, on the same connections (a transaction can span stages)</p>
 <h4 id="returns">Returns</h4>
 <p><code>Transaction</code></p>
 <h2 id="accessors">Accessors</h2>
@@ -180,21 +184,33 @@
 <blockquote>
 <p><strong>get</strong> <strong>options</strong>(): <a href="../../interfaces/QueryOptions/"><code>QueryOptions</code></a></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/transaction.ts#L15">src/lib/execution/domain/transaction.ts:15</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/transaction.ts#L27">packages/lib/src/lib/execution/domain/transaction.ts:27</a></p>
 <h5 id="returns_1">Returns</h5>
 <p><a href="../../interfaces/QueryOptions/"><code>QueryOptions</code></a></p>
 <h2 id="methods">Methods</h2>
+<h3 id="close">close()</h3>
+<blockquote>
+<p><strong>close</strong>(): <code>void</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/transaction.ts#L23">packages/lib/src/lib/execution/domain/transaction.ts:23</a></p>
+<p>After the commit or the rollback: any later execution fails.</p>
+<h4 id="returns_2">Returns</h4>
+<p><code>void</code></p>
+<hr />
 <h3 id="execute">execute()</h3>
 <blockquote>
-<p><strong>execute</strong>(<code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
+<p><strong>execute</strong>(<code>query</code>, <code>data?</code>, <code>options?</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/transaction.ts#L11">src/lib/execution/domain/transaction.ts:11</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/transaction.ts#L16">packages/lib/src/lib/execution/domain/transaction.ts:16</a></p>
+<p>Executes on the transaction's stage, or on the stage of <code>options</code> when it is another one.</p>
 <h4 id="parameters_1">Parameters</h4>
 <h5 id="query">query</h5>
 <p><a href="../Query/"><code>Query</code></a></p>
-<h5 id="data">data</h5>
+<h5 id="data">data?</h5>
 <p><code>any</code> = <code>{}</code></p>
-<h4 id="returns_2">Returns</h4>
+<h5 id="options_1">options?</h5>
+<p><a href="../../interfaces/QueryOptions/"><code>QueryOptions</code></a></p>
+<h4 id="returns_3">Returns</h4>
 <p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
               
             </div>

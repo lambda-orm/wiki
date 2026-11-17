@@ -6,7 +6,7 @@
 
 # Interface: IRouteService
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:4
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:4
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:4
 
 > **eval**(`source`, `info`): `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:5
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:5
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:5
 
 > **getSource**(`info`, `stage?`): `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:6
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:6
 
 #### Parameters
 

@@ -6,11 +6,12 @@
 
 # Interface: QueryOptions
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:8
+Defined in: packages/base/build/lib/query/domain/query.d.ts:8
 
 ## Extended by
 
 - [`StagePullOptions`](StagePullOptions.md)
+- [`ScriptOptions`](ScriptOptions.md)
 
 ## Properties
 
@@ -18,7 +19,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:8
 
 > `optional` **chunkSize**: `number`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:11
+Defined in: packages/base/build/lib/query/domain/query.d.ts:11
 
 ***
 
@@ -26,7 +27,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:11
 
 > `optional` **headers**: \[`string`, `any`\][]
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:13
+Defined in: packages/base/build/lib/query/domain/query.d.ts:13
 
 ***
 
@@ -34,7 +35,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:13
 
 > `optional` **stage**: `string`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:9
+Defined in: packages/base/build/lib/query/domain/query.d.ts:9
 
 ***
 
@@ -42,7 +43,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:9
 
 > `optional` **tryAllCan**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:12
+Defined in: packages/base/build/lib/query/domain/query.d.ts:12
 
 ***
 
@@ -50,4 +51,4 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:12
 
 > `optional` **view**: `string`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:10
+Defined in: packages/base/build/lib/query/domain/query.d.ts:10

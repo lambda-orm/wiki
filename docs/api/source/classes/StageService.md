@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / StageService
+[λORM service](../README.md) / StageService
 
 # Class: StageService
 
-Defined in: [src/application/services/stageService.ts:2](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/stageService.ts#L2)
+Defined in: [service/src/lib/application/services/stageService.ts:2](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/stageService.ts#L2)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/application/services/stageService.ts:2](https://github.com/lamb
 
 > **new StageService**(`orm`): `StageService`
 
-Defined in: [src/application/services/stageService.ts:4](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/stageService.ts#L4)
+Defined in: [service/src/lib/application/services/stageService.ts:4](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/stageService.ts#L4)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/application/services/stageService.ts:4](https://github.com/lamb
 
 > **exists**(`__namedParameters`): `Promise`\<`any`\>
 
-Defined in: [src/application/services/stageService.ts:10](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/stageService.ts#L10)
+Defined in: [service/src/lib/application/services/stageService.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/stageService.ts#L10)
 
 #### Parameters
 
@@ -52,7 +52,7 @@ Defined in: [src/application/services/stageService.ts:10](https://github.com/lam
 
 > **export**(`__namedParameters`): `Promise`\<`SchemaData`\>
 
-Defined in: [src/application/services/stageService.ts:14](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/stageService.ts#L14)
+Defined in: [service/src/lib/application/services/stageService.ts:14](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/stageService.ts#L14)
 
 #### Parameters
 
@@ -72,7 +72,7 @@ Defined in: [src/application/services/stageService.ts:14](https://github.com/lam
 
 > **import**(`__namedParameters`): `Promise`\<`void`\>
 
-Defined in: [src/application/services/stageService.ts:18](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/stageService.ts#L18)
+Defined in: [service/src/lib/application/services/stageService.ts:18](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/stageService.ts#L18)
 
 #### Parameters
 
@@ -96,7 +96,7 @@ Defined in: [src/application/services/stageService.ts:18](https://github.com/lam
 
 > **list**(): `Promise`\<`string`[]\>
 
-Defined in: [src/application/services/stageService.ts:6](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/stageService.ts#L6)
+Defined in: [service/src/lib/application/services/stageService.ts:6](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/stageService.ts#L6)
 
 #### Returns
 

@@ -6,7 +6,7 @@
 
 # Interface: MetadataConstraint
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:13
+Defined in: packages/base/build/lib/sentence/domain/metadata.d.ts:13
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:13
 
 > `optional` **children**: `MetadataConstraint`[]
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:16
+Defined in: packages/base/build/lib/sentence/domain/metadata.d.ts:16
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:16
 
 > **constraints**: [`Constraint`](Constraint.md)[]
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:15
+Defined in: packages/base/build/lib/sentence/domain/metadata.d.ts:15
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:15
 
 > **entity**: `string`
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:14
+Defined in: packages/base/build/lib/sentence/domain/metadata.d.ts:14

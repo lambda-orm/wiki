@@ -6,7 +6,7 @@
 
 # Interface: ObservableExecutor
 
-Defined in: [src/lib/execution/domain/executor.ts:51](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L51)
+Defined in: [packages/lib/src/lib/execution/domain/executor.ts:53](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L53)
 
 ## Extended by
 
@@ -18,7 +18,7 @@ Defined in: [src/lib/execution/domain/executor.ts:51](https://github.com/lambda-
 
 > **subscribe**(`observer`): `void`
 
-Defined in: [src/lib/execution/domain/executor.ts:52](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L52)
+Defined in: [packages/lib/src/lib/execution/domain/executor.ts:54](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L54)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [src/lib/execution/domain/executor.ts:52](https://github.com/lambda-
 
 > **unsubscribe**(`observer`): `void`
 
-Defined in: [src/lib/execution/domain/executor.ts:53](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L53)
+Defined in: [packages/lib/src/lib/execution/domain/executor.ts:55](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L55)
 
 #### Parameters
 

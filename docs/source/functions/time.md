@@ -8,7 +8,7 @@
 
 > **time**(`value`): `Date`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:246
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:247
 
 ## Parameters
 

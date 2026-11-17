@@ -8,7 +8,7 @@
 
 > **cos**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:177
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:178
 
 Get the cosine
 

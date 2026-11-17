@@ -6,7 +6,7 @@
 
 # Class: StageDrop
 
-Defined in: [src/lib/stage/application/useCases/drop.ts:9](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/drop.ts#L9)
+Defined in: [packages/lib/src/lib/stage/application/useCases/drop.ts:9](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/drop.ts#L9)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/lib/stage/application/useCases/drop.ts:9](https://github.com/la
 
 > **new StageDrop**(`executor`, `stateService`, `mappingService`, `schemaState`, `languages`, `options`, `helper`): `StageDrop`
 
-Defined in: [src/lib/stage/application/useCases/drop.ts:11](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/drop.ts#L11)
+Defined in: [packages/lib/src/lib/stage/application/useCases/drop.ts:11](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/drop.ts#L11)
 
 #### Parameters
 
@@ -64,7 +64,7 @@ Defined in: [src/lib/stage/application/useCases/drop.ts:11](https://github.com/l
 
 > **execute**(): `Promise`\<[`ExecuteResult`](../interfaces/ExecuteResult.md)[]\>
 
-Defined in: [src/lib/stage/application/useCases/drop.ts:24](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/drop.ts#L24)
+Defined in: [packages/lib/src/lib/stage/application/useCases/drop.ts:24](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/drop.ts#L24)
 
 #### Returns
 
@@ -80,7 +80,7 @@ Defined in: [src/lib/stage/application/useCases/drop.ts:24](https://github.com/l
 
 > **queries**(): `Promise`\<[`Query`](Query.md)[]\>
 
-Defined in: [src/lib/stage/application/useCases/drop.ts:16](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/drop.ts#L16)
+Defined in: [packages/lib/src/lib/stage/application/useCases/drop.ts:16](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/drop.ts#L16)
 
 #### Returns
 
@@ -96,7 +96,7 @@ Defined in: [src/lib/stage/application/useCases/drop.ts:16](https://github.com/l
 
 > **sentence**(): `Promise`\<`any`[]\>
 
-Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:19](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L19)
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:19](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L19)
 
 #### Returns
 
@@ -105,3 +105,21 @@ Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:19](https://gi
 #### Inherited from
 
 [`StageActionDDL`](StageActionDDL.md).[`sentence`](StageActionDDL.md#sentence)
+
+***
+
+### sentencesBySource()
+
+> **sentencesBySource**(): `Promise`\<`object`[]\>
+
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:29](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L29)
+
+The sentences grouped by source, in the stage's order of sources (one script per database) — L19
+
+#### Returns
+
+`Promise`\<`object`[]\>
+
+#### Inherited from
+
+[`StageActionDDL`](StageActionDDL.md).[`sentencesBySource`](StageActionDDL.md#sentencesbysource)

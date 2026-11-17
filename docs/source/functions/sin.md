@@ -8,7 +8,7 @@
 
 > **sin**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:195
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:196
 
 Get sine
 

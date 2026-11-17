@@ -158,41 +158,76 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p><a href="../../"><strong>orm-service</strong></a></p>
+                <p><a href="../../"><strong>λORM service</strong></a></p>
 <hr />
-<p><a href="../globals.md">orm-service</a> / ServiceConfig</p>
+<p><a href="../../">λORM service</a> / ServiceConfig</p>
 <h1 id="interface-serviceconfig">Interface: ServiceConfig</h1>
-<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/serviceSchema.ts#L4">src/domain/serviceSchema.ts:4</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L4">service/src/lib/domain/serviceSchema.ts:4</a></p>
 <h2 id="properties">Properties</h2>
 <h3 id="host">host?</h3>
 <blockquote>
 <p><code>optional</code> <strong>host</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/serviceSchema.ts#L6">src/domain/serviceSchema.ts:6</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L6">service/src/lib/domain/serviceSchema.ts:6</a></p>
 <hr />
 <h3 id="port">port?</h3>
 <blockquote>
 <p><code>optional</code> <strong>port</strong>: <code>number</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/serviceSchema.ts#L5">src/domain/serviceSchema.ts:5</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L5">service/src/lib/domain/serviceSchema.ts:5</a></p>
 <hr />
 <h3 id="ratelimitmax">rateLimitMax?</h3>
 <blockquote>
 <p><code>optional</code> <strong>rateLimitMax</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/serviceSchema.ts#L9">src/domain/serviceSchema.ts:9</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L9">service/src/lib/domain/serviceSchema.ts:9</a></p>
 <hr />
 <h3 id="ratelimitwindowms">rateLimitWindowMs?</h3>
 <blockquote>
 <p><code>optional</code> <strong>rateLimitWindowMs</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/serviceSchema.ts#L8">src/domain/serviceSchema.ts:8</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L8">service/src/lib/domain/serviceSchema.ts:8</a></p>
 <hr />
 <h3 id="requestbodysize">requestBodySize?</h3>
 <blockquote>
 <p><code>optional</code> <strong>requestBodySize</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/serviceSchema.ts#L7">src/domain/serviceSchema.ts:7</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L7">service/src/lib/domain/serviceSchema.ts:7</a></p>
+<hr />
+<h3 id="scriptenabled">scriptEnabled?</h3>
+<blockquote>
+<p><code>optional</code> <strong>scriptEnabled</strong>: <code>string</code> | <code>boolean</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L11">service/src/lib/domain/serviceSchema.ts:11</a></p>
+<p>POST /script: off unless true (SCRIPT_ENABLED). A script runs several queries in one transaction</p>
+<hr />
+<h3 id="scriptmaxiterations">scriptMaxIterations?</h3>
+<blockquote>
+<p><code>optional</code> <strong>scriptMaxIterations</strong>: <code>string</code> | <code>number</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L17">service/src/lib/domain/serviceSchema.ts:17</a></p>
+<p>Max loop iterations of a script, all its loops together (SCRIPT_MAX_ITERATIONS, default 100000)</p>
+<hr />
+<h3 id="scriptmaxlength">scriptMaxLength?</h3>
+<blockquote>
+<p><code>optional</code> <strong>scriptMaxLength</strong>: <code>string</code> | <code>number</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L13">service/src/lib/domain/serviceSchema.ts:13</a></p>
+<p>Max length of a script in characters (SCRIPT_MAX_LENGTH, default 20000)</p>
+<hr />
+<h3 id="scripttimeoutms">scriptTimeoutMs?</h3>
+<blockquote>
+<p><code>optional</code> <strong>scriptTimeoutMs</strong>: <code>string</code> | <code>number</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L15">service/src/lib/domain/serviceSchema.ts:15</a></p>
+<p>Max time of a script in ms; then it rolls back (SCRIPT_TIMEOUT_MS, default 30000)</p>
+<hr />
+<h3 id="token">token?</h3>
+<blockquote>
+<p><code>optional</code> <strong>token</strong>: <code>string</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L19">service/src/lib/domain/serviceSchema.ts:19</a></p>
+<p>When set (SERVICE_TOKEN), requests need "Authorization: Bearer <token>"; /ping, /health and /metrics don't</p>
               
             </div>
           </div><footer>

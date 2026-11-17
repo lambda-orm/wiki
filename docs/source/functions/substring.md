@@ -8,7 +8,7 @@
 
 > **substring**(`value`, `from`, `count`): `string`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:222
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:223
 
 Get a substring of string
 

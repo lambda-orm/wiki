@@ -6,7 +6,7 @@
 
 # Class: MatchSchema
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/match.d.ts:4
+Defined in: packages/base/build/lib/schema/application/useCases/match.d.ts:4
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/useCases/match.d.ts:
 
 > **new MatchSchema**(`schemaService`, `helper`): `MatchSchema`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/match.d.ts:7
+Defined in: packages/base/build/lib/schema/application/useCases/match.d.ts:7
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/useCases/match.d.ts:
 
 > **match**(`schema`, `mappings`, `options`): `void`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/match.d.ts:8
+Defined in: packages/base/build/lib/schema/application/useCases/match.d.ts:8
 
 #### Parameters
 

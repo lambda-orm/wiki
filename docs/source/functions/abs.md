@@ -8,7 +8,7 @@
 
 > **abs**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:165
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:166
 
 Get the absolute value
 

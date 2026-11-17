@@ -6,7 +6,7 @@
 
 # Interface: ApplicationSchema
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:173
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:181
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:173
 
 > `optional` **end**: [`TaskConfig`](TaskConfig.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:176
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:184
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:176
 
 > `optional` **listeners**: [`ListenerConfig`](ListenerConfig.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:175
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:183
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:175
 
 > `optional` **start**: [`TaskConfig`](TaskConfig.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:174
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:182

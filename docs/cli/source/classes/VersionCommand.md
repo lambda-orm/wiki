@@ -1,12 +1,12 @@
-[**Lambda ORM**](../README.md)
+[**λORM CLI**](../README.md)
 
 ***
 
-[Lambda ORM](../README.md) / VersionCommand
+[λORM CLI](../README.md) / VersionCommand
 
 # Class: VersionCommand
 
-Defined in: [src/lib/infrastructure/command/version.ts:6](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/version.ts#L6)
+Defined in: [packages/cli/src/lib/infrastructure/command/version.ts:7](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/cli/src/lib/infrastructure/command/version.ts#L7)
 
 ## Implements
 
@@ -28,7 +28,7 @@ Defined in: [src/lib/infrastructure/command/version.ts:6](https://github.com/lam
 
 > **command**: `string` = `'version'`
 
-Defined in: [src/lib/infrastructure/command/version.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/version.ts#L7)
+Defined in: [packages/cli/src/lib/infrastructure/command/version.ts:8](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/cli/src/lib/infrastructure/command/version.ts#L8)
 
 string (or array of strings) that executes this command when given on the command line, first string may contain positional args
 
@@ -40,9 +40,9 @@ string (or array of strings) that executes this command when given on the comman
 
 ### describe
 
-> **describe**: `string` = `'Prints lambdaorm version this project uses.'`
+> **describe**: `string` = `'Prints the lambdaorm cli version and the @lambdaorm/lib version this project uses.'`
 
-Defined in: [src/lib/infrastructure/command/version.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/version.ts#L8)
+Defined in: [packages/cli/src/lib/infrastructure/command/version.ts:9](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/cli/src/lib/infrastructure/command/version.ts#L9)
 
 string used as the description for the command in help text, use `false` for a hidden command
 
@@ -56,7 +56,7 @@ string used as the description for the command in help text, use `false` for a h
 
 > **builder**(`args`): `Argv`\<`object` & `object`\>
 
-Defined in: [src/lib/infrastructure/command/version.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/version.ts#L9)
+Defined in: [packages/cli/src/lib/infrastructure/command/version.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/cli/src/lib/infrastructure/command/version.ts#L10)
 
 object declaring the options the command accepts, or a function accepting and returning a yargs instance
 
@@ -80,7 +80,7 @@ object declaring the options the command accepts, or a function accepting and re
 
 > **handler**(`args`): `Promise`\<`void`\>
 
-Defined in: [src/lib/infrastructure/command/version.ts:21](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/version.ts#L21)
+Defined in: [packages/cli/src/lib/infrastructure/command/version.ts:22](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/cli/src/lib/infrastructure/command/version.ts#L22)
 
 a function which will be passed the parsed argv.
 

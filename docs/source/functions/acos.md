@@ -8,7 +8,7 @@
 
 > **acos**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:167
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:168
 
 Get the arc cosine
 

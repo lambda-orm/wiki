@@ -6,7 +6,7 @@
 
 # Class: InterpretSchemaDataService
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/interpretSchemaDataService.d.ts:4
+Defined in: packages/base/build/lib/schema/application/services/interpretSchemaDataService.d.ts:4
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/interpretSc
 
 > **new InterpretSchemaDataService**(`helper`): `InterpretSchemaDataService`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/interpretSchemaDataService.d.ts:6
+Defined in: packages/base/build/lib/schema/application/services/interpretSchemaDataService.d.ts:6
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/interpretSc
 
 > **completeSchemaData**(`source`, `name`, `type`, `schemaData`): `void`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/interpretSchemaDataService.d.ts:7
+Defined in: packages/base/build/lib/schema/application/services/interpretSchemaDataService.d.ts:7
 
 #### Parameters
 

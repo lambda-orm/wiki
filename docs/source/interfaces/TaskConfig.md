@@ -6,7 +6,7 @@
 
 # Interface: TaskConfig
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:147
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:155
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:147
 
 > `optional` **condition**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:149
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:157
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:149
 
 > **expression**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:150
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:158
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:150
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:148
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:156

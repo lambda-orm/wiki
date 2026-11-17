@@ -8,7 +8,7 @@
 
 > **last**(`value`): `any`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:314
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:315
 
 ## Parameters
 

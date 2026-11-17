@@ -10,7 +10,7 @@
 
 > **includes**(`value`, `list`): `boolean`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:161
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:161
 
 ### Parameters
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:161
 
 > **includes**(`field`, `searchString`): `string`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:238
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:239
 
 Returns true if searchString appears as a substring of the result of converting this
 

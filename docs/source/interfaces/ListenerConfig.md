@@ -6,7 +6,7 @@
 
 # Interface: ListenerConfig
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:139
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:141
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:139
 
 > `optional` **after**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:144
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:146
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:144
 
 > `optional` **before**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:143
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:145
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:143
 
 > `optional` **condition**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:142
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:144
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:142
 
 > `optional` **error**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:145
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:147
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:145
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:140
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:142
 
 ***
 
@@ -54,4 +54,16 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:140
 
 > **on**: [`SentenceCategory`](../enumerations/SentenceCategory.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:141
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:143
+
+***
+
+### transactional?
+
+> `optional` **transactional**: `boolean`
+
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:153
+
+true (default): the listener runs in the sentence's transaction (its orm.execute calls use the same connections,
+a rollback undoes them, an error fails the sentence). false: it runs outside it, and its writes are kept even if
+the sentence's transaction rolls back.

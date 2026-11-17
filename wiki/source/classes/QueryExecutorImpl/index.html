@@ -162,7 +162,7 @@
 <hr />
 <p><a href="../../">Lambda ORM</a> / QueryExecutorImpl</p>
 <h1 id="class-queryexecutorimpl">Class: QueryExecutorImpl</h1>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L20">src/lib/execution/application/services/queryExecutor/queryExecutor.ts:20</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L21">packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts:21</a></p>
 <h2 id="implements">Implements</h2>
 <ul>
 <li><a href="../../interfaces/QueryExecutor/"><code>QueryExecutor</code></a></li>
@@ -171,9 +171,9 @@
 <h2 id="constructors">Constructors</h2>
 <h3 id="constructor">Constructor</h3>
 <blockquote>
-<p><strong>new QueryExecutorImpl</strong>(<code>connectionFacade</code>, <code>languages</code>, <code>schemaState</code>, <code>expressions</code>, <code>_options</code>, <code>helper</code>, <code>transactional</code>): <code>QueryExecutorImpl</code></p>
+<p><strong>new QueryExecutorImpl</strong>(<code>connectionFacade</code>, <code>languages</code>, <code>schemaState</code>, <code>expressions</code>, <code>_options</code>, <code>helper</code>, <code>transactional?</code>, <code>connections?</code>): <code>QueryExecutorImpl</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L32">src/lib/execution/application/services/queryExecutor/queryExecutor.ts:32</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L33">packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts:33</a></p>
 <h4 id="parameters">Parameters</h4>
 <h5 id="connectionfacade">connectionFacade</h5>
 <p><a href="../ConnectionFacade/"><code>ConnectionFacade</code></a></p>
@@ -187,8 +187,10 @@
 <p><a href="../../interfaces/QueryOptions/"><code>QueryOptions</code></a></p>
 <h5 id="helper">helper</h5>
 <p><a href="../OrmH3lp/"><code>OrmH3lp</code></a></p>
-<h5 id="transactional">transactional</h5>
+<h5 id="transactional">transactional?</h5>
 <p><code>boolean</code> = <code>false</code></p>
+<h5 id="connections">connections?</h5>
+<p><code>SourceConnections</code></p>
 <h4 id="returns">Returns</h4>
 <p><code>QueryExecutorImpl</code></p>
 <h2 id="accessors">Accessors</h2>
@@ -197,7 +199,7 @@
 <blockquote>
 <p><strong>get</strong> <strong>options</strong>(): <a href="../../interfaces/QueryOptions/"><code>QueryOptions</code></a></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L53">src/lib/execution/application/services/queryExecutor/queryExecutor.ts:53</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L56">packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts:56</a></p>
 <h5 id="returns_1">Returns</h5>
 <p><a href="../../interfaces/QueryOptions/"><code>QueryOptions</code></a></p>
 <h4 id="implementation-of">Implementation of</h4>
@@ -207,7 +209,7 @@
 <blockquote>
 <p><strong>_execute</strong>(<code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L122">src/lib/execution/application/services/queryExecutor/queryExecutor.ts:122</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L105">packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts:105</a></p>
 <h4 id="parameters_1">Parameters</h4>
 <h5 id="query">query</h5>
 <p><a href="../Query/"><code>Query</code></a></p>
@@ -222,7 +224,7 @@
 <blockquote>
 <p><strong>commit</strong>(): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L69">src/lib/execution/application/services/queryExecutor/queryExecutor.ts:69</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L60">packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts:60</a></p>
 <h4 id="returns_3">Returns</h4>
 <p><code>Promise</code>\&lt;<code>void</code>&gt;</p>
 <h4 id="implementation-of_2">Implementation of</h4>
@@ -232,7 +234,7 @@
 <blockquote>
 <p><strong>execute</strong>(<code>query</code>, <code>data</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L91">src/lib/execution/application/services/queryExecutor/queryExecutor.ts:91</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L72">packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts:72</a></p>
 <h4 id="parameters_2">Parameters</h4>
 <h5 id="query_1">query</h5>
 <p><a href="../Query/"><code>Query</code></a></p>
@@ -247,7 +249,7 @@
 <blockquote>
 <p><strong>release</strong>(): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L83">src/lib/execution/application/services/queryExecutor/queryExecutor.ts:83</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L68">packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts:68</a></p>
 <h4 id="returns_5">Returns</h4>
 <p><code>Promise</code>\&lt;<code>void</code>&gt;</p>
 <h4 id="implementation-of_4">Implementation of</h4>
@@ -257,7 +259,7 @@
 <blockquote>
 <p><strong>rollback</strong>(): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L76">src/lib/execution/application/services/queryExecutor/queryExecutor.ts:76</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts#L64">packages/lib/src/lib/execution/application/services/queryExecutor/queryExecutor.ts:64</a></p>
 <h4 id="returns_6">Returns</h4>
 <p><code>Promise</code>\&lt;<code>void</code>&gt;</p>
 <h4 id="implementation-of_5">Implementation of</h4>

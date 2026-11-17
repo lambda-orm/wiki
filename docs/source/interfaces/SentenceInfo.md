@@ -6,7 +6,7 @@
 
 # Interface: SentenceInfo
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:59
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:59
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:59
 
 > **action**: [`SentenceAction`](../enumerations/SentenceAction.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:61
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:61
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:61
 
 > **category**: [`SentenceCategory`](../enumerations/SentenceCategory.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:62
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:62
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:62
 
 > **ddl**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:66
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:66
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:66
 
 > **dml**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:67
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:67
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:67
 
 > **entity**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:60
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:60
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:60
 
 > **read**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:64
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:64
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:64
 
 > **type**: [`SentenceType`](../enumerations/SentenceType.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:63
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:63
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:63
 
 > **write**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:65
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:65

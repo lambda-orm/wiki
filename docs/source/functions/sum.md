@@ -8,7 +8,7 @@
 
 > **sum**(`value`): `any`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:320
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:321
 
 ## Parameters
 

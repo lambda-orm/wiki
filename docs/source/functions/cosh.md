@@ -8,7 +8,7 @@
 
 > **cosh**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:179
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:180
 
 Get hyperbolic cosine
 

@@ -6,7 +6,7 @@
 
 # Enumeration: SentenceType
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:14
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:14
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:14
 
 > **ddl**: `"ddl"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:17
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:17
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:17
 
 > **dml**: `"dml"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:16
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:16
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:16
 
 > **dql**: `"dql"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:15
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:15
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:15
 
 > **metadata**: `"metadata"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:18
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:18

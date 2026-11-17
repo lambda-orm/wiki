@@ -6,7 +6,7 @@
 
 # Interface: SentenceSerializer
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:9
+Defined in: packages/base/build/lib/sentence/domain/services.d.ts:9
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:9
 
 > **clone**(`sentence`): [`Sentence`](../classes/Sentence.md)
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:10
+Defined in: packages/base/build/lib/sentence/domain/services.d.ts:10
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:10
 
 > **deserialize**(`value`): [`Sentence`](../classes/Sentence.md)
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:12
+Defined in: packages/base/build/lib/sentence/domain/services.d.ts:12
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:12
 
 > **serialize**(`sentence`): `string`
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:11
+Defined in: packages/base/build/lib/sentence/domain/services.d.ts:11
 
 #### Parameters
 

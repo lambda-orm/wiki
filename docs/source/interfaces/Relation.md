@@ -6,7 +6,7 @@
 
 # Interface: Relation
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:39
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:39
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:39
 
 > `optional` **composite**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:42
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:42
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:42
 
 > **entity**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:44
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:44
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:44
 
 > **from**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:43
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:43
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:43
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:40
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:40
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:40
 
 > `optional` **target**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:47
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:47
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:47
 
 > **to**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:45
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:45
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:45
 
 > **type**: [`RelationType`](../enumerations/RelationType.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:41
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:41
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:41
 
 > `optional` **weak**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:46
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:46

@@ -8,7 +8,7 @@
 
 > **dateDiff**(`date`, `date2`): `Date`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:280
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:281
 
 ## Parameters
 

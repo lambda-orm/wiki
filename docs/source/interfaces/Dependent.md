@@ -6,7 +6,7 @@
 
 # Interface: Dependent
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:49
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:49
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:49
 
 > **entity**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:50
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:50
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:50
 
 > **relation**: [`Relation`](Relation.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:51
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:51

@@ -6,7 +6,7 @@
 
 # Class: OrmBaseH3lp
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:33
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:33
 
 ## Extends
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:33
 
 > **new OrmBaseH3lp**(`h3lp`, `logger`): `OrmBaseH3lp`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:39
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:39
 
 #### Parameters
 
@@ -48,7 +48,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:39
 
 > `readonly` **array**: `IArrayHelper`
 
-Defined in: node\_modules/h3lp/application/h3lp.d.ts:10
+Defined in: node\_modules/.pnpm/h3lp@5.0.0/node\_modules/h3lp/application/h3lp.d.ts:10
 
 #### Inherited from
 
@@ -60,7 +60,7 @@ Defined in: node\_modules/h3lp/application/h3lp.d.ts:10
 
 > **expression**: `ExpressionHelper`
 
-Defined in: node\_modules/3xpr/shared/infrastructure/helper.d.ts:5
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/infrastructure/helper.d.ts:5
 
 #### Inherited from
 
@@ -72,7 +72,7 @@ Defined in: node\_modules/3xpr/shared/infrastructure/helper.d.ts:5
 
 > `readonly` **fs**: `IFsHelper`
 
-Defined in: node\_modules/h3lp/application/h3lp.d.ts:5
+Defined in: node\_modules/.pnpm/h3lp@5.0.0/node\_modules/h3lp/application/h3lp.d.ts:5
 
 #### Inherited from
 
@@ -84,7 +84,7 @@ Defined in: node\_modules/h3lp/application/h3lp.d.ts:5
 
 > `readonly` **http**: `IHttpHelper`
 
-Defined in: node\_modules/h3lp/application/h3lp.d.ts:6
+Defined in: node\_modules/.pnpm/h3lp@5.0.0/node\_modules/h3lp/application/h3lp.d.ts:6
 
 #### Inherited from
 
@@ -96,7 +96,7 @@ Defined in: node\_modules/h3lp/application/h3lp.d.ts:6
 
 > `readonly` **logger**: [`Logger`](Logger.md)
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:34
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:34
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:34
 
 > `readonly` **obj**: `IObjectHelper`
 
-Defined in: node\_modules/h3lp/application/h3lp.d.ts:7
+Defined in: node\_modules/.pnpm/h3lp@5.0.0/node\_modules/h3lp/application/h3lp.d.ts:7
 
 #### Inherited from
 
@@ -116,7 +116,7 @@ Defined in: node\_modules/h3lp/application/h3lp.d.ts:7
 
 > **operand**: `OperandHelper`
 
-Defined in: node\_modules/3xpr/shared/infrastructure/helper.d.ts:6
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/infrastructure/helper.d.ts:6
 
 #### Inherited from
 
@@ -128,7 +128,7 @@ Defined in: node\_modules/3xpr/shared/infrastructure/helper.d.ts:6
 
 > **query**: [`QueryHelper`](QueryHelper.md)
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:37
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:37
 
 ***
 
@@ -136,7 +136,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:37
 
 > **schema**: [`SchemaHelper`](SchemaHelper.md)
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:35
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:35
 
 ***
 
@@ -144,7 +144,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:35
 
 > `readonly` **str**: `IStringHelper`
 
-Defined in: node\_modules/h3lp/application/h3lp.d.ts:8
+Defined in: node\_modules/.pnpm/h3lp@5.0.0/node\_modules/h3lp/application/h3lp.d.ts:8
 
 #### Inherited from
 
@@ -156,7 +156,7 @@ Defined in: node\_modules/h3lp/application/h3lp.d.ts:8
 
 > `readonly` **test**: `ITestHelper`
 
-Defined in: node\_modules/h3lp/application/h3lp.d.ts:9
+Defined in: node\_modules/.pnpm/h3lp@5.0.0/node\_modules/h3lp/application/h3lp.d.ts:9
 
 #### Inherited from
 
@@ -168,7 +168,7 @@ Defined in: node\_modules/h3lp/application/h3lp.d.ts:9
 
 > `readonly` **utils**: `IUtils`
 
-Defined in: node\_modules/h3lp/application/h3lp.d.ts:3
+Defined in: node\_modules/.pnpm/h3lp@5.0.0/node\_modules/h3lp/application/h3lp.d.ts:3
 
 #### Inherited from
 
@@ -180,7 +180,7 @@ Defined in: node\_modules/h3lp/application/h3lp.d.ts:3
 
 > **uuid**: [`UUIDWrapper`](UUIDWrapper.md)
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:38
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:38
 
 ***
 
@@ -188,7 +188,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:38
 
 > `readonly` **val**: `IValidator`
 
-Defined in: node\_modules/h3lp/application/h3lp.d.ts:4
+Defined in: node\_modules/.pnpm/h3lp@5.0.0/node\_modules/h3lp/application/h3lp.d.ts:4
 
 #### Inherited from
 
@@ -200,4 +200,4 @@ Defined in: node\_modules/h3lp/application/h3lp.d.ts:4
 
 > **yaml**: [`YamlWrapper`](YamlWrapper.md)
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:36
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:36

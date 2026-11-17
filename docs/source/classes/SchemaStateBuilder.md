@@ -6,7 +6,7 @@
 
 # Class: SchemaStateBuilder
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/stateBuilder.d.ts:4
+Defined in: packages/base/build/lib/schema/infrastructure/stateBuilder.d.ts:4
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/stateBuilder.d.ts
 
 > **new SchemaStateBuilder**(`exp`, `facade`, `helper`): `SchemaStateBuilder`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/stateBuilder.d.ts:8
+Defined in: packages/base/build/lib/schema/infrastructure/stateBuilder.d.ts:8
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/stateBuilder.d.ts
 
 > **build**(): [`SchemaState`](SchemaState.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/stateBuilder.d.ts:9
+Defined in: packages/base/build/lib/schema/infrastructure/stateBuilder.d.ts:9
 
 #### Returns
 

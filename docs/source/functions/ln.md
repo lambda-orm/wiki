@@ -8,7 +8,7 @@
 
 > **ln**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:185
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:186
 
 Get natural logarithm of num
 

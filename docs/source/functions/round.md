@@ -8,7 +8,7 @@
 
 > **round**(`value`, `decimals`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:191
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:192
 
 Get rounded value
 

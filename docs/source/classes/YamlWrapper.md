@@ -6,7 +6,7 @@
 
 # Class: YamlWrapper
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:6
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:6
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:6
 
 > **dump**(`obj?`, `options?`): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:8
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:8
 
 #### Parameters
 
@@ -46,13 +46,13 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:8
 
 > **load**(`yaml?`): `any`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:7
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:7
 
 #### Parameters
 
 ##### yaml?
 
-`null` | `string`
+`string` | `null`
 
 #### Returns
 

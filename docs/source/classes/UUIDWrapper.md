@@ -6,7 +6,7 @@
 
 # Class: UUIDWrapper
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:26
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:26
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:26
 
 > **empty**(): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:29
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:29
 
 #### Returns
 
@@ -36,7 +36,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:29
 
 > **fromString**(`text`, `namespace?`): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:30
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:30
 
 #### Parameters
 
@@ -58,7 +58,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:30
 
 > **isUuid**(`id`): `boolean`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:28
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:28
 
 #### Parameters
 
@@ -76,7 +76,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:28
 
 > **jsonSchema**(): `any`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:31
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:31
 
 #### Returns
 
@@ -88,7 +88,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:31
 
 > **v4**(): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:27
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:27
 
 #### Returns
 

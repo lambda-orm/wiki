@@ -162,13 +162,13 @@
 <hr />
 <p><a href="../../">Lambda ORM</a> / StageFetch</p>
 <h1 id="class-stagefetch">Class: StageFetch</h1>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/fetch.ts#L6">src/lib/stage/application/useCases/fetch.ts:6</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/fetch.ts#L6">packages/lib/src/lib/stage/application/useCases/fetch.ts:6</a></p>
 <h2 id="constructors">Constructors</h2>
 <h3 id="constructor">Constructor</h3>
 <blockquote>
 <p><strong>new StageFetch</strong>(<code>executor</code>, <code>schemaState</code>, <code>languages</code>, <code>helper</code>, <code>options</code>): <code>StageFetch</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/fetch.ts#L8">src/lib/stage/application/useCases/fetch.ts:8</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/fetch.ts#L8">packages/lib/src/lib/stage/application/useCases/fetch.ts:8</a></p>
 <h4 id="parameters">Parameters</h4>
 <h5 id="executor">executor</h5>
 <p><a href="../../interfaces/Executor/"><code>Executor</code></a></p>
@@ -183,12 +183,24 @@
 <h4 id="returns">Returns</h4>
 <p><code>StageFetch</code></p>
 <h2 id="methods">Methods</h2>
+<h3 id="differences">differences()</h3>
+<blockquote>
+<p><strong>differences</strong>(): <code>Promise</code>\&lt;<a href="../../interfaces/Mapping/"><code>Mapping</code></a>[]&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/fetch.ts#L39">packages/lib/src/lib/stage/application/useCases/fetch.ts:39</a></p>
+<p>The database compared with the model (L22): per mapping, only the entities that differ — present in one side only,
+or with different columns (name, type, length, required) or primary key. Empty entities: in step.
+Each entity carries <code>differences</code> (what differs, readable) and is the database's version (or the model's, when the
+table is missing). Relations are not compared.</p>
+<h4 id="returns_1">Returns</h4>
+<p><code>Promise</code>\&lt;<a href="../../interfaces/Mapping/"><code>Mapping</code></a>[]&gt;</p>
+<hr />
 <h3 id="execute">execute()</h3>
 <blockquote>
 <p><strong>execute</strong>(): <code>Promise</code>\&lt;<a href="../../interfaces/Mapping/"><code>Mapping</code></a>[]&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/fetch.ts#L16">src/lib/stage/application/useCases/fetch.ts:16</a></p>
-<h4 id="returns_1">Returns</h4>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/fetch.ts#L16">packages/lib/src/lib/stage/application/useCases/fetch.ts:16</a></p>
+<h4 id="returns_2">Returns</h4>
 <p><code>Promise</code>\&lt;<a href="../../interfaces/Mapping/"><code>Mapping</code></a>[]&gt;</p>
               
             </div>

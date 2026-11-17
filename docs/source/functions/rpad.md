@@ -8,7 +8,7 @@
 
 > **rpad**(`value`, `len`, `pad`): `string`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:216
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:217
 
 Pad the right-side of string
 

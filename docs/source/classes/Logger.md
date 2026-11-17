@@ -4,9 +4,9 @@
 
 [Lambda ORM](../README.md) / Logger
 
-# Class: `abstract` Logger
+# Abstract Class: Logger
 
-Defined in: node\_modules/lambdaorm-base/shared/domain/ports/logger.d.ts:5
+Defined in: packages/base/build/lib/shared/domain/ports/logger.d.ts:5
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: node\_modules/lambdaorm-base/shared/domain/ports/logger.d.ts:5
 
 > **log**(`message`, `level?`): `Promise`\<`void`\>
 
-Defined in: node\_modules/lambdaorm-base/shared/domain/ports/logger.d.ts:6
+Defined in: packages/base/build/lib/shared/domain/ports/logger.d.ts:6
 
 #### Parameters
 

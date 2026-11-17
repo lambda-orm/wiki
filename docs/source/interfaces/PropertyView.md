@@ -6,7 +6,7 @@
 
 # Interface: PropertyView
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:111
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:113
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:111
 
 > `optional` **exclude**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:114
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:116
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:114
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:112
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:114
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:112
 
 > `optional` **readExp**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:113
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:115

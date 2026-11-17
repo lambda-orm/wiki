@@ -4,9 +4,9 @@
 
 [Lambda ORM](../README.md) / StageActionDDL
 
-# Class: `abstract` StageActionDDL
+# Abstract Class: StageActionDDL
 
-Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:8](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L8)
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:8](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L8)
 
 ## Extended by
 
@@ -21,7 +21,7 @@ Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:8](https://git
 
 > **new StageActionDDL**(`executor`, `stageModelService`, `schemaState`, `languages`, `options`, `helper`): `StageActionDDL`
 
-Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:10](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L10)
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L10)
 
 #### Parameters
 
@@ -59,7 +59,7 @@ Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:10](https://gi
 
 > `abstract` **execute**(): `Promise`\<[`ExecuteResult`](../interfaces/ExecuteResult.md)[]\>
 
-Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:17](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L17)
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:17](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L17)
 
 #### Returns
 
@@ -71,7 +71,7 @@ Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:17](https://gi
 
 > `abstract` **queries**(): `Promise`\<[`Query`](Query.md)[]\>
 
-Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:18](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L18)
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:18](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L18)
 
 #### Returns
 
@@ -83,8 +83,22 @@ Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:18](https://gi
 
 > **sentence**(): `Promise`\<`any`[]\>
 
-Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:19](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L19)
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:19](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L19)
 
 #### Returns
 
 `Promise`\<`any`[]\>
+
+***
+
+### sentencesBySource()
+
+> **sentencesBySource**(): `Promise`\<`object`[]\>
+
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:29](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L29)
+
+The sentences grouped by source, in the stage's order of sources (one script per database) — L19
+
+#### Returns
+
+`Promise`\<`object`[]\>

@@ -6,7 +6,7 @@
 
 # Interface: ISentenceBuilder
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:3
+Defined in: packages/base/build/lib/sentence/domain/services.d.ts:3
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:3
 
 > **build**(`query`): [`Sentence`](../classes/Sentence.md)
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:4
+Defined in: packages/base/build/lib/sentence/domain/services.d.ts:4
 
 #### Parameters
 

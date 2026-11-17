@@ -6,7 +6,7 @@
 
 # Interface: Behavior
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:196
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:204
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:196
 
 > `optional` **alias**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:197
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:205
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:197
 
 > **expression**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:199
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:207
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:199
 
 > **property**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:198
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:206

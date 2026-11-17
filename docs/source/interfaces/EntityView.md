@@ -6,7 +6,7 @@
 
 # Interface: EntityView
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:116
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:118
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:116
 
 > `optional` **exclude**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:118
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:120
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:118
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:117
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:119
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:117
 
 > **properties**: [`PropertyView`](PropertyView.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:119
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:121

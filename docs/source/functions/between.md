@@ -8,7 +8,7 @@
 
 > **between**(`value`, `from`, `to`): `boolean`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:159
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:159
 
 ## Parameters
 

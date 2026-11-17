@@ -6,7 +6,7 @@
 
 # Interface: FormatMapping
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:99
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:101
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:99
 
 > `optional` **abstract**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:61
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:61
 
 #### Inherited from
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:61
 
 > `optional` **composite**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:77
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:77
 
 #### Inherited from
 
@@ -42,7 +42,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:77
 
 > `optional` **constraints**: [`Constraint`](Constraint.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:70
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:70
 
 #### Inherited from
 
@@ -54,7 +54,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:70
 
 > `optional` **date**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:101
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:103
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:101
 
 > `optional` **dateTime**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:100
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:102
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:100
 
 > `optional` **dependents**: [`Dependent`](Dependent.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:69
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:69
 
 #### Inherited from
 
@@ -82,7 +82,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:69
 
 > `optional` **extends**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:60
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:60
 
 #### Inherited from
 
@@ -94,7 +94,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:60
 
 > `optional` **hadDefaults**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:75
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:75
 
 #### Inherited from
 
@@ -106,7 +106,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:75
 
 > `optional` **hadReadExps**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:71
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:71
 
 #### Inherited from
 
@@ -118,7 +118,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:71
 
 > `optional` **hadReadValues**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:73
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:73
 
 #### Inherited from
 
@@ -130,7 +130,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:73
 
 > `optional` **hadViewReadExp**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:76
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:76
 
 #### Inherited from
 
@@ -142,7 +142,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:76
 
 > `optional` **hadWriteExps**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:72
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:72
 
 #### Inherited from
 
@@ -154,7 +154,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:72
 
 > `optional` **hadWriteValues**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:74
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:74
 
 #### Inherited from
 
@@ -166,7 +166,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:74
 
 > `optional` **indexes**: [`Index`](Index.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:68
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:68
 
 #### Inherited from
 
@@ -178,7 +178,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:68
 
 > `optional` **intermediate**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:78
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:78
 
 #### Inherited from
 
@@ -190,7 +190,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:78
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:58
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:58
 
 #### Inherited from
 
@@ -202,7 +202,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:58
 
 > `optional` **primaryKey**: `string`[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:64
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:64
 
 #### Inherited from
 
@@ -214,7 +214,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:64
 
 > `optional` **properties**: [`Property`](Property.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:59
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:59
 
 #### Inherited from
 
@@ -226,7 +226,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:59
 
 > `optional` **relations**: [`Relation`](Relation.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:66
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:66
 
 #### Inherited from
 
@@ -238,7 +238,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:66
 
 > `optional` **required**: `string`[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:67
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:67
 
 #### Inherited from
 
@@ -250,7 +250,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:67
 
 > `optional` **singular**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:62
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:62
 
 #### Inherited from
 
@@ -262,7 +262,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:62
 
 > `optional` **time**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:102
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:104
 
 ***
 
@@ -270,7 +270,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:102
 
 > `optional` **uniqueKey**: `string`[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:65
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:65
 
 #### Inherited from
 
@@ -282,7 +282,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:65
 
 > `optional` **view**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:63
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:63
 
 #### Inherited from
 

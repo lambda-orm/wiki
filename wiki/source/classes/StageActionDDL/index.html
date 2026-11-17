@@ -161,8 +161,8 @@
                 <p><a href="../../"><strong>Lambda ORM</strong></a></p>
 <hr />
 <p><a href="../../">Lambda ORM</a> / StageActionDDL</p>
-<h1 id="class-abstract-stageactionddl">Class: <code>abstract</code> StageActionDDL</h1>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L8">src/lib/stage/application/useCases/base/actionDDL.ts:8</a></p>
+<h1 id="abstract-class-stageactionddl">Abstract Class: StageActionDDL</h1>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L8">packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:8</a></p>
 <h2 id="extended-by">Extended by</h2>
 <ul>
 <li><a href="../StageDrop/"><code>StageDrop</code></a></li>
@@ -175,7 +175,7 @@
 <blockquote>
 <p><strong>new StageActionDDL</strong>(<code>executor</code>, <code>stageModelService</code>, <code>schemaState</code>, <code>languages</code>, <code>options</code>, <code>helper</code>): <code>StageActionDDL</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L10">src/lib/stage/application/useCases/base/actionDDL.ts:10</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L10">packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:10</a></p>
 <h4 id="parameters">Parameters</h4>
 <h5 id="executor">executor</h5>
 <p><a href="../../interfaces/Executor/"><code>Executor</code></a></p>
@@ -196,7 +196,7 @@
 <blockquote>
 <p><code>abstract</code> <strong>execute</strong>(): <code>Promise</code>\&lt;<a href="../../interfaces/ExecuteResult/"><code>ExecuteResult</code></a>[]&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L17">src/lib/stage/application/useCases/base/actionDDL.ts:17</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L17">packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:17</a></p>
 <h4 id="returns_1">Returns</h4>
 <p><code>Promise</code>\&lt;<a href="../../interfaces/ExecuteResult/"><code>ExecuteResult</code></a>[]&gt;</p>
 <hr />
@@ -204,7 +204,7 @@
 <blockquote>
 <p><code>abstract</code> <strong>queries</strong>(): <code>Promise</code>\&lt;<a href="../Query/"><code>Query</code></a>[]&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L18">src/lib/stage/application/useCases/base/actionDDL.ts:18</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L18">packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:18</a></p>
 <h4 id="returns_2">Returns</h4>
 <p><code>Promise</code>\&lt;<a href="../Query/"><code>Query</code></a>[]&gt;</p>
 <hr />
@@ -212,9 +212,18 @@
 <blockquote>
 <p><strong>sentence</strong>(): <code>Promise</code>\&lt;<code>any</code>[]&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L19">src/lib/stage/application/useCases/base/actionDDL.ts:19</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L19">packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:19</a></p>
 <h4 id="returns_3">Returns</h4>
 <p><code>Promise</code>\&lt;<code>any</code>[]&gt;</p>
+<hr />
+<h3 id="sentencesbysource">sentencesBySource()</h3>
+<blockquote>
+<p><strong>sentencesBySource</strong>(): <code>Promise</code>\&lt;<code>object</code>[]&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L29">packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:29</a></p>
+<p>The sentences grouped by source, in the stage's order of sources (one script per database) — L19</p>
+<h4 id="returns_4">Returns</h4>
+<p><code>Promise</code>\&lt;<code>object</code>[]&gt;</p>
               
             </div>
           </div><footer>

@@ -6,7 +6,7 @@
 
 # Class: Data
 
-Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:1
+Defined in: packages/base/build/lib/query/domain/data.d.ts:1
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:1
 
 > **new Data**(`data`, `parent?`): `Data`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:4
+Defined in: packages/base/build/lib/query/domain/data.d.ts:4
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:4
 
 > **data**: `any`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:2
+Defined in: packages/base/build/lib/query/domain/data.d.ts:2
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:2
 
 > **parent**: `any`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:3
+Defined in: packages/base/build/lib/query/domain/data.d.ts:3
 
 ## Methods
 
@@ -52,7 +52,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:3
 
 > **clone**(): `Data`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:6
+Defined in: packages/base/build/lib/query/domain/data.d.ts:6
 
 #### Returns
 
@@ -64,7 +64,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:6
 
 > **contains**(`name`): `boolean`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:8
+Defined in: packages/base/build/lib/query/domain/data.d.ts:8
 
 #### Parameters
 
@@ -82,7 +82,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:8
 
 > **get**(`name`): `any`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:9
+Defined in: packages/base/build/lib/query/domain/data.d.ts:9
 
 #### Parameters
 
@@ -100,7 +100,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:9
 
 > **getData**(`variable`): `any`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:7
+Defined in: packages/base/build/lib/query/domain/data.d.ts:7
 
 #### Parameters
 
@@ -118,7 +118,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:7
 
 > **init**(`name`, `value`): `void`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:11
+Defined in: packages/base/build/lib/query/domain/data.d.ts:11
 
 #### Parameters
 
@@ -140,7 +140,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:11
 
 > **newData**(): `Data`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:5
+Defined in: packages/base/build/lib/query/domain/data.d.ts:5
 
 #### Returns
 
@@ -152,7 +152,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:5
 
 > **set**(`name`, `value`): `void`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/data.d.ts:10
+Defined in: packages/base/build/lib/query/domain/data.d.ts:10
 
 #### Parameters
 

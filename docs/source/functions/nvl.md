@@ -8,7 +8,7 @@
 
 > **nvl**(`value`, `_default`): `any`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:300
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:301
 
 ## Parameters
 

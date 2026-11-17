@@ -8,7 +8,7 @@
 
 > **addMonth**(`date`, `value`): `Date`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:268
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:269
 
 ## Parameters
 

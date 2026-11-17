@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / QueueExecuteArgs
+[λORM service](../README.md) / QueueExecuteArgs
 
 # Interface: QueueExecuteArgs
 
-Defined in: [src/domain/queuedInfo.ts:13](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/queuedInfo.ts#L13)
+Defined in: [service/src/lib/domain/queuedInfo.ts:13](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/queuedInfo.ts#L13)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/domain/queuedInfo.ts:13](https://github.com/lambda-orm/lambdaor
 
 > `optional` **chunk**: `number`
 
-Defined in: [src/domain/queuedInfo.ts:17](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/queuedInfo.ts#L17)
+Defined in: [service/src/lib/domain/queuedInfo.ts:17](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/queuedInfo.ts#L17)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/domain/queuedInfo.ts:17](https://github.com/lambda-orm/lambdaor
 
 > **data**: `any`
 
-Defined in: [src/domain/queuedInfo.ts:16](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/queuedInfo.ts#L16)
+Defined in: [service/src/lib/domain/queuedInfo.ts:16](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/queuedInfo.ts#L16)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/domain/queuedInfo.ts:16](https://github.com/lambda-orm/lambdaor
 
 > `optional` **options**: `QueryOptions`
 
-Defined in: [src/domain/queuedInfo.ts:18](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/queuedInfo.ts#L18)
+Defined in: [service/src/lib/domain/queuedInfo.ts:18](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/queuedInfo.ts#L18)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/domain/queuedInfo.ts:18](https://github.com/lambda-orm/lambdaor
 
 > **query**: `string`
 
-Defined in: [src/domain/queuedInfo.ts:15](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/queuedInfo.ts#L15)
+Defined in: [service/src/lib/domain/queuedInfo.ts:15](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/queuedInfo.ts#L15)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [src/domain/queuedInfo.ts:15](https://github.com/lambda-orm/lambdaor
 
 > **topic**: `string`
 
-Defined in: [src/domain/queuedInfo.ts:14](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/queuedInfo.ts#L14)
+Defined in: [service/src/lib/domain/queuedInfo.ts:14](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/queuedInfo.ts#L14)

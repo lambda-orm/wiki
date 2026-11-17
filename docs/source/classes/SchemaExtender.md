@@ -6,7 +6,7 @@
 
 # Class: SchemaExtender
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaExtender.d.ts:4
+Defined in: packages/base/build/lib/schema/application/services/schemaExtender.d.ts:4
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaExten
 
 > **new SchemaExtender**(`exp`, `helper`): `SchemaExtender`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaExtender.d.ts:7
+Defined in: packages/base/build/lib/schema/application/services/schemaExtender.d.ts:7
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaExten
 
 > **complete**(`schema`): `void`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaExtender.d.ts:15
+Defined in: packages/base/build/lib/schema/application/services/schemaExtender.d.ts:15
 
 #### Parameters
 
@@ -54,7 +54,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaExten
 
 > **extend**(`schema`): `void`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaExtender.d.ts:8
+Defined in: packages/base/build/lib/schema/application/services/schemaExtender.d.ts:8
 
 #### Parameters
 
@@ -72,7 +72,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaExten
 
 > **isCompound**(`parent`, `child`): `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaExtender.d.ts:16
+Defined in: packages/base/build/lib/schema/application/services/schemaExtender.d.ts:16
 
 #### Parameters
 

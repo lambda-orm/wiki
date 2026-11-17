@@ -8,7 +8,7 @@
 
 > **upper**(`value`): `string`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:226
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:227
 
 Uppercase string
 

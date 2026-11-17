@@ -6,7 +6,7 @@
 
 # Interface: MatchOptions
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:8
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:8
 
 ## Extended by
 
@@ -18,7 +18,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:8
 
 > `optional` **removeEntities**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:9
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:9
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:9
 
 > `optional` **removeProperties**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:10
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:10
 
 ***
 
@@ -34,4 +34,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:10
 
 > `optional` **removeRelations**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:11
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:11

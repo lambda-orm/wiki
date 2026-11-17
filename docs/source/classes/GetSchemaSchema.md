@@ -6,7 +6,7 @@
 
 # Class: GetSchemaSchema
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/getSchemaData.d.ts:4
+Defined in: packages/base/build/lib/schema/application/useCases/getSchemaData.d.ts:4
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/useCases/getSchemaDa
 
 > **new GetSchemaSchema**(`interpretSchemaDataService`): `GetSchemaSchema`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/getSchemaData.d.ts:6
+Defined in: packages/base/build/lib/schema/application/useCases/getSchemaData.d.ts:6
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/useCases/getSchemaDa
 
 > **getData**(`data`, `name`, `type`): [`SchemaData`](../interfaces/SchemaData.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/getSchemaData.d.ts:7
+Defined in: packages/base/build/lib/schema/application/useCases/getSchemaData.d.ts:7
 
 #### Parameters
 

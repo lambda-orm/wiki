@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / GeneralService
+[λORM service](../README.md) / GeneralService
 
 # Class: GeneralService
 
-Defined in: [src/application/services/generalService.ts:2](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/generalService.ts#L2)
+Defined in: [service/src/lib/application/services/generalService.ts:2](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/generalService.ts#L2)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/application/services/generalService.ts:2](https://github.com/la
 
 > **new GeneralService**(`packageVersion`, `orm?`): `GeneralService`
 
-Defined in: [src/application/services/generalService.ts:4](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/generalService.ts#L4)
+Defined in: [service/src/lib/application/services/generalService.ts:4](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/generalService.ts#L4)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [src/application/services/generalService.ts:4](https://github.com/la
 
 > **health**(): `Promise`\<`any`\>
 
-Defined in: [src/application/services/generalService.ts:10](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/generalService.ts#L10)
+Defined in: [service/src/lib/application/services/generalService.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/generalService.ts#L10)
 
 #### Returns
 
@@ -48,7 +48,7 @@ Defined in: [src/application/services/generalService.ts:10](https://github.com/l
 
 > **ping**(): `Promise`\<`any`\>
 
-Defined in: [src/application/services/generalService.ts:28](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/generalService.ts#L28)
+Defined in: [service/src/lib/application/services/generalService.ts:28](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/generalService.ts#L28)
 
 #### Returns
 
@@ -60,7 +60,7 @@ Defined in: [src/application/services/generalService.ts:28](https://github.com/l
 
 > **version**(): `Promise`\<\{ `version`: `string`; \}\>
 
-Defined in: [src/application/services/generalService.ts:6](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/generalService.ts#L6)
+Defined in: [service/src/lib/application/services/generalService.ts:6](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/generalService.ts#L6)
 
 #### Returns
 

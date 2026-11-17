@@ -6,7 +6,7 @@
 
 # Interface: EnumValue
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:9
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:9
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:9
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:10
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:10
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:10
 
 > **value**: `any`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:11
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:11

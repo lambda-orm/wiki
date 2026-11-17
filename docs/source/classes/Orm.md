@@ -6,7 +6,7 @@
 
 # Class: Orm
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:29](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L29)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:30](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L30)
 
 Facade through which you can access all the functionalities of the library.
 
@@ -20,7 +20,7 @@ Facade through which you can access all the functionalities of the library.
 
 > **new Orm**(`_logger?`): `Orm`
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:42](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L42)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:43](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L43)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [src/lib/orm/infrastructure/orm.ts:42](https://github.com/lambda-orm
 
 > **connection**: [`ConnectionFacade`](ConnectionFacade.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:30](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L30)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:31](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L31)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/lib/orm/infrastructure/orm.ts:30](https://github.com/lambda-orm
 
 > **exp**: `Expressions`
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:32](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L32)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:33](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L33)
 
 #### Implementation of
 
@@ -58,7 +58,7 @@ Defined in: [src/lib/orm/infrastructure/orm.ts:32](https://github.com/lambda-orm
 
 > **helper**: [`OrmH3lp`](OrmH3lp.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:36](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L36)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:37](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L37)
 
 ***
 
@@ -66,7 +66,7 @@ Defined in: [src/lib/orm/infrastructure/orm.ts:36](https://github.com/lambda-orm
 
 > **language**: [`LanguagesService`](LanguagesService.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:31](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L31)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:32](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L32)
 
 ***
 
@@ -74,7 +74,7 @@ Defined in: [src/lib/orm/infrastructure/orm.ts:31](https://github.com/lambda-orm
 
 > **schema**: [`SchemaFacade`](SchemaFacade.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:33](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L33)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:34](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L34)
 
 #### Implementation of
 
@@ -86,7 +86,7 @@ Defined in: [src/lib/orm/infrastructure/orm.ts:33](https://github.com/lambda-orm
 
 > **stage**: [`StageFacade`](StageFacade.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:35](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L35)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:36](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L36)
 
 #### Implementation of
 
@@ -98,7 +98,7 @@ Defined in: [src/lib/orm/infrastructure/orm.ts:35](https://github.com/lambda-orm
 
 > **state**: [`SchemaState`](SchemaState.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:34](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L34)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:35](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L35)
 
 #### Implementation of
 
@@ -112,7 +112,7 @@ Defined in: [src/lib/orm/infrastructure/orm.ts:34](https://github.com/lambda-orm
 
 > **get** **defaultStage**(): [`Stage`](../interfaces/Stage.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:66](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L66)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:67](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L67)
 
 ##### Returns
 
@@ -126,7 +126,7 @@ Defined in: [src/lib/orm/infrastructure/orm.ts:66](https://github.com/lambda-orm
 
 > **get** **logger**(): [`Logger`](Logger.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:58](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L58)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:59](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L59)
 
 ##### Returns
 
@@ -136,7 +136,7 @@ Defined in: [src/lib/orm/infrastructure/orm.ts:58](https://github.com/lambda-orm
 
 > **set** **logger**(`value`): `void`
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:62](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L62)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:63](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L63)
 
 ##### Parameters
 
@@ -156,7 +156,7 @@ Defined in: [src/lib/orm/infrastructure/orm.ts:62](https://github.com/lambda-orm
 
 > **constraints**(`query`): [`MetadataConstraint`](../interfaces/MetadataConstraint.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:179](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L179)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:180](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L180)
 
 Get constraints of query
 
@@ -182,7 +182,7 @@ Constraints of query
 
 > **constraints**(`query`): [`MetadataConstraint`](../interfaces/MetadataConstraint.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:180](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L180)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:181](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L181)
 
 Get constraints of query
 
@@ -210,7 +210,7 @@ Constraints of query
 
 > **dialect**(`source`): [`Dialect`](../enumerations/Dialect.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:134](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L134)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:135](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L135)
 
 Get dialect of source
 
@@ -236,7 +236,7 @@ Name of source
 
 > **end**(): `Promise`\<`void`\>
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:116](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L116)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:117](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L117)
 
 Frees the resources used, for example the connection pools
 
@@ -256,7 +256,7 @@ Frees the resources used, for example the connection pools
 
 > **execute**(`query`, `data?`, `options?`): `Promise`\<`any`\>
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:218](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L218)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:219](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L219)
 
 Execute query
 
@@ -294,7 +294,7 @@ Result of execution
 
 > **execute**(`query`, `data?`, `options?`): `Promise`\<`any`\>
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:219](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L219)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:220](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L220)
 
 Execute query
 
@@ -330,11 +330,54 @@ Result of execution
 
 ***
 
+### executeScript()
+
+> **executeScript**(`script`, `data?`, `options?`): `Promise`\<`any`\>
+
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:253](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L253)
+
+Evaluates a 3xpr script whose orm.execute calls all run in one transaction (also across sources):
+commit when it ends, rollback and rethrow when anything fails.
+
+#### Parameters
+
+##### script
+
+`string`
+
+statements calling orm.execute(query, data, options), with variables, if, for, throw, return
+
+##### data?
+
+`any` = `{}`
+
+variables of the script (the script works on a copy)
+
+##### options?
+
+[`ScriptOptions`](../interfaces/ScriptOptions.md)
+
+stage (…) of the script's transaction, shared by every orm.execute without its own; `timeout` (ms:
+when it passes the loops stop, the transaction rolls back and the script rejects) and `maxIterations` (loop
+iterations of the script, all loops together)
+
+#### Returns
+
+`Promise`\<`any`\>
+
+the value of the last statement (or of `return`)
+
+#### Implementation of
+
+[`IOrm`](../interfaces/IOrm.md).[`executeScript`](../interfaces/IOrm.md#executescript)
+
+***
+
 ### init()
 
 > **init**(`source?`, `connect?`): `Promise`\<[`Schema`](../interfaces/Schema.md)\>
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:75](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L75)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:76](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L76)
 
 initialize the orm library
 
@@ -368,7 +411,7 @@ promise void
 
 > **metadata**(`query`): [`Metadata`](../interfaces/Metadata.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:191](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L191)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:192](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L192)
 
 Get metadata of query
 
@@ -394,7 +437,7 @@ metadata of query
 
 > **metadata**(`query`): [`Metadata`](../interfaces/Metadata.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:192](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L192)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:193](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L193)
 
 Get metadata of query
 
@@ -424,7 +467,7 @@ metadata of query
 
 > **model**(`query`): [`MetadataModel`](../interfaces/MetadataModel.md)[]
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:155](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L155)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:156](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L156)
 
 Get model of query
 
@@ -450,7 +493,7 @@ Model of query
 
 > **model**(`query`): [`MetadataModel`](../interfaces/MetadataModel.md)[]
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:156](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L156)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:157](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L157)
 
 Get model of query
 
@@ -480,7 +523,7 @@ Model of query
 
 > **normalize**(`query`): `string`
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:143](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L143)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:144](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L144)
 
 Normalize query
 
@@ -506,7 +549,7 @@ Expression normalized
 
 > **normalize**(`query`): `string`
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:144](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L144)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:145](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L145)
 
 Normalize query
 
@@ -536,7 +579,7 @@ Expression normalized
 
 > **parameters**(`query`): [`MetadataParameter`](../interfaces/MetadataParameter.md)[]
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:167](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L167)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:168](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L168)
 
 Get parameters of query
 
@@ -562,7 +605,7 @@ Parameters of query
 
 > **parameters**(`query`): [`MetadataParameter`](../interfaces/MetadataParameter.md)[]
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:168](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L168)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:169](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L169)
 
 Get parameters of query
 
@@ -592,7 +635,7 @@ Parameters of query
 
 > **plan**(`query`, `options?`): [`QueryPlan`](../interfaces/QueryPlan.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:203](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L203)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:204](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L204)
 
 Get getInfo of query
 
@@ -622,7 +665,7 @@ options of execution
 
 > **plan**(`query`, `options?`): [`QueryPlan`](../interfaces/QueryPlan.md)
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:204](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L204)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:205](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L205)
 
 Get getInfo of query
 
@@ -654,7 +697,7 @@ options of execution
 
 > **subscribe**(`observer`): `void`
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:246](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L246)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:263](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L263)
 
 #### Parameters
 
@@ -672,7 +715,7 @@ Defined in: [src/lib/orm/infrastructure/orm.ts:246](https://github.com/lambda-or
 
 > **transaction**(`options`, `callback`): `Promise`\<`void`\>
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:238](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L238)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:239](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L239)
 
 Create a transaction
 
@@ -682,7 +725,7 @@ Create a transaction
 
 options of execution
 
-`undefined` | [`QueryOptions`](../interfaces/QueryOptions.md)
+[`QueryOptions`](../interfaces/QueryOptions.md) | `undefined`
 
 ##### callback
 
@@ -704,7 +747,7 @@ Code to be executed in transaction
 
 > **unsubscribe**(`observer`): `void`
 
-Defined in: [src/lib/orm/infrastructure/orm.ts:250](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/orm/infrastructure/orm.ts#L250)
+Defined in: [packages/lib/src/lib/orm/infrastructure/orm.ts:267](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/orm/infrastructure/orm.ts#L267)
 
 #### Parameters
 

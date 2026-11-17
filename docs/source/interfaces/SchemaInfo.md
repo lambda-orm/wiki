@@ -6,7 +6,7 @@
 
 # Interface: SchemaInfo
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:184
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:192
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:184
 
 > `optional` **path**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:186
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:194
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:186
 
 > **schema**: [`Schema`](Schema.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:185
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:193

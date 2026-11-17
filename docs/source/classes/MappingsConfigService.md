@@ -6,7 +6,7 @@
 
 # Class: MappingsConfigService
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mappingsConfigService.d.ts:3
+Defined in: packages/base/build/lib/schema/application/services/config/mappingsConfigService.d.ts:3
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mapp
 
 > **new MappingsConfigService**(): `MappingsConfigService`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mappingsConfigService.d.ts:5
+Defined in: packages/base/build/lib/schema/application/services/config/mappingsConfigService.d.ts:5
 
 #### Returns
 
@@ -26,7 +26,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mapp
 
 > **mappings**: [`Mapping`](../interfaces/Mapping.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mappingsConfigService.d.ts:4
+Defined in: packages/base/build/lib/schema/application/services/config/mappingsConfigService.d.ts:4
 
 ## Methods
 
@@ -34,7 +34,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mapp
 
 > **delete**(`name`): `void`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mappingsConfigService.d.ts:7
+Defined in: packages/base/build/lib/schema/application/services/config/mappingsConfigService.d.ts:7
 
 #### Parameters
 
@@ -52,7 +52,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mapp
 
 > **get**(`name`): [`Mapping`](../interfaces/Mapping.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mappingsConfigService.d.ts:8
+Defined in: packages/base/build/lib/schema/application/services/config/mappingsConfigService.d.ts:8
 
 #### Parameters
 
@@ -70,7 +70,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mapp
 
 > **getInstance**(`name`): [`MappingConfigService`](MappingConfigService.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mappingsConfigService.d.ts:9
+Defined in: packages/base/build/lib/schema/application/services/config/mappingsConfigService.d.ts:9
 
 #### Parameters
 
@@ -88,7 +88,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mapp
 
 > **load**(`value`): `void`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/mappingsConfigService.d.ts:6
+Defined in: packages/base/build/lib/schema/application/services/config/mappingsConfigService.d.ts:6
 
 #### Parameters
 

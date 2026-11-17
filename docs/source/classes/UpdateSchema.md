@@ -6,7 +6,7 @@
 
 # Class: UpdateSchema
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/update.d.ts:4
+Defined in: packages/base/build/lib/schema/application/useCases/update.d.ts:4
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/useCases/update.d.ts
 
 > **new UpdateSchema**(`createEntitiesService`): `UpdateSchema`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/update.d.ts:6
+Defined in: packages/base/build/lib/schema/application/useCases/update.d.ts:6
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/useCases/update.d.ts
 
 > **update**(`schema`, `data`, `name`): `Type`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/update.d.ts:7
+Defined in: packages/base/build/lib/schema/application/useCases/update.d.ts:7
 
 #### Parameters
 

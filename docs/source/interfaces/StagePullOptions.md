@@ -6,7 +6,7 @@
 
 # Interface: StagePullOptions
 
-Defined in: [src/lib/stage/domain/index.ts:3](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/domain/index.ts#L3)
+Defined in: [packages/lib/src/lib/stage/domain/index.ts:3](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/domain/index.ts#L3)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/lib/stage/domain/index.ts:3](https://github.com/lambda-orm/wiki
 
 > `optional` **chunkSize**: `number`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:11
+Defined in: packages/base/build/lib/query/domain/query.d.ts:11
 
 #### Inherited from
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:11
 
 > `optional` **headers**: \[`string`, `any`\][]
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:13
+Defined in: packages/base/build/lib/query/domain/query.d.ts:13
 
 #### Inherited from
 
@@ -42,7 +42,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:13
 
 > `optional` **removeEntities**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:9
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:9
 
 #### Inherited from
 
@@ -54,7 +54,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:9
 
 > `optional` **removeProperties**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:10
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:10
 
 #### Inherited from
 
@@ -66,7 +66,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:10
 
 > `optional` **removeRelations**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:11
+Defined in: packages/base/build/lib/schema/domain/services.d.ts:11
 
 #### Inherited from
 
@@ -78,7 +78,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/services.d.ts:11
 
 > `optional` **stage**: `string`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:9
+Defined in: packages/base/build/lib/query/domain/query.d.ts:9
 
 #### Inherited from
 
@@ -90,7 +90,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:9
 
 > `optional` **tryAllCan**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:12
+Defined in: packages/base/build/lib/query/domain/query.d.ts:12
 
 #### Inherited from
 
@@ -102,7 +102,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:12
 
 > `optional` **view**: `string`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:10
+Defined in: packages/base/build/lib/query/domain/query.d.ts:10
 
 #### Inherited from
 

@@ -8,7 +8,7 @@
 
 > **first**(`value`): `any`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:312
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:313
 
 ## Parameters
 

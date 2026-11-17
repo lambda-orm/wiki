@@ -8,7 +8,7 @@
 
 > **now**(): `Date`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:244
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:245
 
 Get the current dateTime
 

@@ -6,7 +6,7 @@
 
 # Interface: ModifyAllClauses\<T\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:108
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:108
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:108
 
 > **include**(`predicate`, `thisArg?`): [`ModifyIncludeClauses`](ModifyIncludeClauses.md)\<`T`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:110
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:110
 
 #### Parameters
 

@@ -6,7 +6,7 @@
 
 # Interface: QueryArgs
 
-Defined in: [src/lib/query/domain/query.ts:4](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L4)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:4](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L4)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/lib/query/domain/query.ts:4](https://github.com/lambda-orm/wiki
 
 > **action**: [`SentenceAction`](../enumerations/SentenceAction.md)
 
-Defined in: [src/lib/query/domain/query.ts:5](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L5)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:5](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L5)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/lib/query/domain/query.ts:5](https://github.com/lambda-orm/wiki
 
 > **category**: [`SentenceCategory`](../enumerations/SentenceCategory.md)
 
-Defined in: [src/lib/query/domain/query.ts:7](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L7)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:7](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L7)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/lib/query/domain/query.ts:7](https://github.com/lambda-orm/wiki
 
 > `optional` **columns**: [`Property`](Property.md)[]
 
-Defined in: [src/lib/query/domain/query.ts:12](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L12)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:12](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L12)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/lib/query/domain/query.ts:12](https://github.com/lambda-orm/wik
 
 > `optional` **constraints**: [`Constraint`](Constraint.md)[]
 
-Defined in: [src/lib/query/domain/query.ts:14](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L14)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:14](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L14)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/lib/query/domain/query.ts:14](https://github.com/lambda-orm/wik
 
 > `optional` **defaults**: [`Behavior`](Behavior.md)[]
 
-Defined in: [src/lib/query/domain/query.ts:16](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L16)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:16](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L16)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [src/lib/query/domain/query.ts:16](https://github.com/lambda-orm/wik
 
 > **description**: `string`
 
-Defined in: [src/lib/query/domain/query.ts:20](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L20)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:20](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L20)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [src/lib/query/domain/query.ts:20](https://github.com/lambda-orm/wik
 
 > **dialect**: `string`
 
-Defined in: [src/lib/query/domain/query.ts:8](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L8)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:8](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L8)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [src/lib/query/domain/query.ts:8](https://github.com/lambda-orm/wiki
 
 > **entity**: `string`
 
-Defined in: [src/lib/query/domain/query.ts:11](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L11)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:11](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L11)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [src/lib/query/domain/query.ts:11](https://github.com/lambda-orm/wik
 
 > `optional` **includes**: [`Include`](../classes/Include.md)[]
 
-Defined in: [src/lib/query/domain/query.ts:18](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L18)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:18](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L18)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [src/lib/query/domain/query.ts:18](https://github.com/lambda-orm/wik
 
 > `optional` **parameters**: `Parameter`[]
 
-Defined in: [src/lib/query/domain/query.ts:13](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L13)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:13](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L13)
 
 ***
 
@@ -94,7 +94,7 @@ Defined in: [src/lib/query/domain/query.ts:13](https://github.com/lambda-orm/wik
 
 > `optional` **query**: `string`
 
-Defined in: [src/lib/query/domain/query.ts:19](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L19)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:19](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L19)
 
 ***
 
@@ -102,7 +102,7 @@ Defined in: [src/lib/query/domain/query.ts:19](https://github.com/lambda-orm/wik
 
 > **sentence**: `string`
 
-Defined in: [src/lib/query/domain/query.ts:10](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L10)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L10)
 
 ***
 
@@ -110,7 +110,7 @@ Defined in: [src/lib/query/domain/query.ts:10](https://github.com/lambda-orm/wik
 
 > **source**: `string`
 
-Defined in: [src/lib/query/domain/query.ts:9](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L9)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:9](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L9)
 
 ***
 
@@ -118,7 +118,7 @@ Defined in: [src/lib/query/domain/query.ts:9](https://github.com/lambda-orm/wiki
 
 > **type**: [`SentenceType`](../enumerations/SentenceType.md)
 
-Defined in: [src/lib/query/domain/query.ts:6](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L6)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:6](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L6)
 
 ***
 
@@ -126,4 +126,4 @@ Defined in: [src/lib/query/domain/query.ts:6](https://github.com/lambda-orm/wiki
 
 > `optional` **values**: [`Behavior`](Behavior.md)[]
 
-Defined in: [src/lib/query/domain/query.ts:15](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/query/domain/query.ts#L15)
+Defined in: [packages/lib/src/lib/query/domain/query.ts:15](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/query/domain/query.ts#L15)

@@ -8,7 +8,7 @@
 
 > **toString**(`value`): `string`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:284
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:285
 
 ## Parameters
 
