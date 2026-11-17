@@ -53,7 +53,7 @@ The arguments available in `condition`, `before`, `after` and `error`:
 
 ## Listener Example
 
-In this example we see how a Listener is declared to synchronize data in Insights. \
+In this example we see how a Listener is declared to synchronize data in Insights.
 When a record is inserted, updated or deleted in the default or cqrs stages, the listener is executed.
 In this case, the expression is defined in the after property, which executes the same expression with the same data but in the stage insights, in the same transaction as the sentence: if the write in insights fails, the original one is rolled back too.
 

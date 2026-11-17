@@ -249,7 +249,7 @@ The expressions to be executed are defined in the "before", "after" and "error" 
 </tbody>
 </table>
 <h2 id="listener-example">Listener Example</h2>
-<p>In this example we see how a Listener is declared to synchronize data in Insights. \
+<p>In this example we see how a Listener is declared to synchronize data in Insights.
 When a record is inserted, updated or deleted in the default or cqrs stages, the listener is executed.
 In this case, the expression is defined in the after property, which executes the same expression with the same data but in the stage insights, in the same transaction as the sentence: if the write in insights fails, the original one is rolled back too.</p>
 <p><strong>Part of the schema where the listener is defined:</strong></p>
