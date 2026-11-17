@@ -229,7 +229,13 @@ file (the file's value wins when both are set). A setting left as an undefined <
 <td><code>SCRIPT_TIMEOUT_MS</code></td>
 <td><code>scriptTimeoutMs</code></td>
 <td><code>30000</code></td>
-<td>Max time of a script in ms; then its transaction rolls back.</td>
+<td>Max time of a script in ms; then its loops stop and its transaction rolls back.</td>
+</tr>
+<tr>
+<td><code>SCRIPT_MAX_ITERATIONS</code></td>
+<td><code>scriptMaxIterations</code></td>
+<td><code>100000</code></td>
+<td>Max loop iterations of a script, all its loops together; past it the script fails and rolls back (service 2.3.2).</td>
 </tr>
 </tbody>
 </table>

@@ -24,7 +24,8 @@ file (the file's value wins when both are set). A setting left as an undefined `
 | `SERVICE_TOKEN` | `token` | — | When set, requests need `Authorization: Bearer <token>` (see [Security](#security)). |
 | `SCRIPT_ENABLED` | `scriptEnabled` | `false` | `true` turns on [`POST /script`](../Endpoints/Script.md) (403 when off). |
 | `SCRIPT_MAX_LENGTH` | `scriptMaxLength` | `20000` | Max length of a script in characters (413 above it). |
-| `SCRIPT_TIMEOUT_MS` | `scriptTimeoutMs` | `30000` | Max time of a script in ms; then its transaction rolls back. |
+| `SCRIPT_TIMEOUT_MS` | `scriptTimeoutMs` | `30000` | Max time of a script in ms; then its loops stop and its transaction rolls back. |
+| `SCRIPT_MAX_ITERATIONS` | `scriptMaxIterations` | `100000` | Max loop iterations of a script, all its loops together; past it the script fails and rolls back (service 2.3.2). |
 
 Example in the configuration file:
 

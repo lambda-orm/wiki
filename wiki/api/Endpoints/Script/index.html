@@ -261,9 +261,10 @@ quoteId
 <p>Every error rolls the transaction back and answers <code>{ error, code, message }</code> (see <a href="../../Use/Errors/">Errors</a>):</p>
 <pre><code class="language-json">{ &quot;error&quot;: &quot;Error&quot;, &quot;message&quot;: &quot;account not found&quot; }
 </code></pre>
-<p>When <code>SCRIPT_TIMEOUT_MS</code> passes, the transaction rolls back and what the script still runs fails without reaching the
-database. A loop without async calls (<code>while (true) {}</code>) blocks the service and can't be interrupted, so keep scripts
-short.</p>
+<p>When <code>SCRIPT_TIMEOUT_MS</code> passes, the script's loops stop, the transaction rolls back and what the script still runs
+fails without reaching the database. <code>SCRIPT_MAX_ITERATIONS</code> (default 100000) limits the loop iterations of a script,
+all its loops together; past it the script fails (500) and rolls back (service 2.3.2). Before service 2.3.2, a loop
+without async calls (<code>while (true) {}</code>) blocked the service.</p>
 <h2 id="clients">Clients</h2>
 <ul>
 <li>Node: <code>@lambdaorm/client</code> → <code>await orm.executeScript(script, data, options)</code>.</li>

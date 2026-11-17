@@ -74,9 +74,10 @@ Every error rolls the transaction back and answers `{ error, code, message }` (s
 { "error": "Error", "message": "account not found" }
 ```
 
-When `SCRIPT_TIMEOUT_MS` passes, the transaction rolls back and what the script still runs fails without reaching the
-database. A loop without async calls (`while (true) {}`) blocks the service and can't be interrupted, so keep scripts
-short.
+When `SCRIPT_TIMEOUT_MS` passes, the script's loops stop, the transaction rolls back and what the script still runs
+fails without reaching the database. `SCRIPT_MAX_ITERATIONS` (default 100000) limits the loop iterations of a script,
+all its loops together; past it the script fails (500) and rolls back (service 2.3.2). Before service 2.3.2, a loop
+without async calls (`while (true) {}`) blocked the service.
 
 ## Clients
 

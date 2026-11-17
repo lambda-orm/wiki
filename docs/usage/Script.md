@@ -29,7 +29,7 @@ const quoteId = await orm.executeScript(`
 | script        | The 3xpr script                                                                                     |
 | data          | The variables of the script. The script works on a copy: `data` is never changed                    |
 | options       | Query options; `stage` is the stage of the transaction and of every `orm.execute` without a stage   |
-| scriptOptions | `timeout` in ms: when it passes, the transaction rolls back and the script rejects                  |
+| scriptOptions | `timeout` in ms: when it passes, the loops stop, the transaction rolls back and the script rejects. `maxIterations`: loop iterations of the script, all loops together; past it the script fails and rolls back |
 
 ## The language
 
@@ -74,7 +74,9 @@ Plus the functions λORM adds:
 ## Security and limits
 
 - The script **cannot read environment variables** (`$VAR` fails), so it can't read connection strings.
-- `timeout`: when it passes, the transaction rolls back and the script rejects; whatever it still executes afterwards
-  fails without reaching the database.
-- A loop with no `orm.execute` inside that never ends (`while (true) {}`) blocks the process and the timeout can't stop
-  it. The REST endpoint is off by default (`SCRIPT_ENABLED`); enable it only for internal clients.
+- `timeout`: when it passes, the script's loops stop, the transaction rolls back and the script rejects; whatever it
+  still executes afterwards fails without reaching the database.
+- `maxIterations`: the loop iterations of the script, all loops together; past it the script fails and rolls back.
+  The REST service uses `SCRIPT_MAX_ITERATIONS` (default 100000).
+- Since @lambdaorm/lib 3.3.0 (3xpr 5.3.0) a `while (true) {}` no longer blocks the process: the timeout and
+  `maxIterations` stop it. The REST endpoint is still off by default (`SCRIPT_ENABLED`); enable it for internal clients.
