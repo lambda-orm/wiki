@@ -50,8 +50,8 @@ const quoteId = await orm.executeScript(`
 | timeout       | Max time in ms: when it passes, the loops stop, the transaction rolls back and the script rejects   |
 | maxIterations | Max loop iterations of the script, all loops together; past it the script fails and rolls back      |
 
-In @lambdaorm/lib 3.2.x the timeout was a fourth argument (`executeScript(script, data, options, { timeout })`); since
-3.3.0 everything goes in `options`.
+Up to @lambdaorm/lib 3.3.0 the limits were a fourth argument (`executeScript(script, data, options, { timeout,
+maxIterations })`); since 3.4.0 everything goes in `options`.
 
 ## The language
 
