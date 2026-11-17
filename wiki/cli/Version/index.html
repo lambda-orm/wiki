@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../../schema/Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
                   </li>
@@ -155,13 +159,41 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="version">Version</h1>
-<p>Prints lambdaorm version this project uses.</p>
+<p>Prints the version of the CLI that runs and the version of <code>@lambdaorm/lib</code> the project uses.</p>
+<h2 id="params">Params</h2>
+<table>
+<thead>
+<tr>
+<th>parameter</th>
+<th>short</th>
+<th>describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>workspace</td>
+<td>-w</td>
+<td>Project path (default: the current directory).</td>
+</tr>
+<tr>
+<td>language</td>
+<td>-l</td>
+<td>Develop language (default <code>node</code>).</td>
+</tr>
+</tbody>
+</table>
 <h2 id="example">Example</h2>
 <pre><code class="language-sh">lambdaorm version
 </code></pre>
 <p>Result:</p>
-<pre><code class="language-sh">Global lambdaorm cli version: 0.9.11
-Local lambdaorm version: 0.8.85
+<pre><code class="language-sh">lambdaorm cli version: 1.6.2
+Local lambdaorm version: 3.2.2
+</code></pre>
+<p><code>Local lambdaorm not found.</code> when the project doesn't depend on <code>@lambdaorm/lib</code>.</p>
+<p>To print only the CLI version:</p>
+<pre><code class="language-sh">lambdaorm --version   # or lambdaorm -v
+</code></pre>
+<pre><code class="language-sh">1.6.2
 </code></pre>
               
             </div>

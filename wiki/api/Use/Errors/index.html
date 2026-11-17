@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lambda-orm.github.io/wiki/api/Use/Errors/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Errors - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Errors";
+        var mkdocs_page_input_path = "api/Use/Errors.md";
+        var mkdocs_page_url = "/wiki/api/Use/Errors/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Features">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../..">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../cli">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Query-Language">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Expression">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Select">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Join">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Grouping">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Include">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Insert">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/BulkInsert">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Update">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Delete">Delete</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/operatorsAndFunctions/OperatorsAndFunctions">Operators & Functions</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Expressions">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-EnvironmentVariables">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Composite">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Listener">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Basic">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Extend">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-MultiplesStages">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-StageMultiplesSources">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Composite">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Push">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Pull">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Fetch">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Introspect">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Incorporate">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use">Use</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Engines">Engines</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Repository">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Script">Script</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Usage">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/CHANGELOG">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Errors</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="errors">Errors</h1>
+<p>When a request fails the service answers a JSON body and an HTTP status a client can map:</p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;ExecutionError&quot;,
+  &quot;code&quot;: &quot;23505&quot;,
+  &quot;message&quot;: &quot;ERROR: duplicate key value violates unique constraint \&quot;device_types_pkey\&quot; SOURCE: default ENTITY: DeviceTypes QUERY: … DATA: …&quot;
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>error</code></td>
+<td>The error's name, e.g. <code>ExecutionError</code>, <code>ValidationError</code>, <code>ScriptDisabledError</code>, <code>Error</code>.</td>
+</tr>
+<tr>
+<td><code>code</code></td>
+<td>The database's error code when there is one (Postgres SQLSTATE such as <code>23505</code>, MySQL code such as <code>ER_DUP_ENTRY</code>).</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>The error's message.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="status">Status</h2>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Not null or check violation, invalid data (Postgres <code>22xxx</code>), an invalid query or schema (<code>ValidationError</code>, <code>SchemaError</code>, <code>SintaxisError</code>, <code>LanguageError</code>).</td>
+</tr>
+<tr>
+<td>401</td>
+<td><code>SERVICE_TOKEN</code> is set and the request has no valid <code>Authorization: Bearer &lt;token&gt;</code> header.</td>
+</tr>
+<tr>
+<td>403</td>
+<td><code>POST /script</code> while scripts are disabled.</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Unique or foreign key violation (Postgres <code>23505</code>, <code>23503</code>; MySQL <code>ER_DUP_ENTRY</code>, <code>ER_NO_REFERENCED_ROW_2</code>, <code>ER_ROW_IS_REFERENCED_2</code>).</td>
+</tr>
+<tr>
+<td>413</td>
+<td><code>POST /script</code> with a script longer than <code>SCRIPT_MAX_LENGTH</code>.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Rate limit reached (<code>RATE_LIMIT_MAX</code> requests per <code>RATE_LIMIT_WINDOWS_MS</code>).</td>
+</tr>
+<tr>
+<td><em>n</em></td>
+<td>A script ran <code>throw { status: n, message: "…" }</code> (400–599).</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Anything else.</td>
+</tr>
+</tbody>
+</table>
+<p>A script can choose the answer, e.g. "not found":</p>
+<pre><code class="language-js">quote = orm.execute(&quot;Quotes.filter(p =&gt; p.id == id)&quot;, { id: id });
+if (quote.length() == 0) { throw { status: 404, message: &quot;quote not found&quot; }; }
+</code></pre>
+<pre><code class="language-json">{ &quot;error&quot;: &quot;Error&quot;, &quot;message&quot;: &quot;quote not found&quot; }
+</code></pre>
+<h2 id="results">Results</h2>
+<p>Every successful answer is JSON, also numbers, <code>0</code> and <code>null</code>:</p>
+<ul>
+<li>a select answers the rows;</li>
+<li><code>update</code> and <code>delete</code> answer the number of affected rows (<code>0</code> when nothing matched, useful for "not found" or an
+  optimistic lock);</li>
+<li><code>insert</code> answers the inserted data.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../extra.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
                   </li>
@@ -156,27 +160,58 @@
               
                 <h1 id="push">Push</h1>
 <p>The push is the process of updating the sources (Databases) with the schema defined in the configuration file. The push process is done by the command <code>lambdaorm push</code>.</p>
-<h2 id="cli">CLI</h2>
-<p>When executing the push command, ddl code will be executed according to the definition in the lambdaorm schema file.</p>
+<h2 id="how-push-works">How push works</h2>
+<p>Push reads the databases of the stage (as <a href="../SchemaSynchronization-Fetch/">fetch</a> does) and generates the DDL that takes them to the model:</p>
 <ul>
-<li>Tables, indexes and keys will be created</li>
-<li>The executed code is added to a file in the data folder.</li>
-<li>The [source-name]-model.json file will be created or updated which maintains the source state since the last synchronization.</li>
+<li>Tables that do not exist are created with their primary key, unique key, foreign keys and indexes.</li>
+<li>In existing tables, missing columns are added (<code>ALTER TABLE … ADD</code>) and columns with another type, length or nullability are altered.</li>
+<li>A column declared with <code>previousMapping</code> in its property mapping is renamed (<code>ALTER TABLE … RENAME COLUMN</code>, SqlServer <code>sp_rename</code>) instead of being added. See <a href="../SchemaDefinition/#rename-a-column-with-previousmapping">Rename a column</a>.</li>
+<li><strong>Push never drops</strong> anything that exists only in the database (tables, columns). <code>fetch</code> reports it, so it can be removed by hand if needed.</li>
+<li>The column types follow the property types and the <code>dbType</code> of the property mapping. See <a href="../SchemaDefinition/#property-types">Property types</a>.</li>
+<li>Each entity goes to the source chosen by the stage rules; a source without condition only gets the entities no other source took.</li>
 </ul>
+<p>Since the comparison is made against the databases, push works the same on any host or CI job: it does not need the <code>orm_state</code> folder of a previous push.
+The <code>orm_state</code> folder is still written, as a record of what was applied.</p>
+<p>Renaming a table is not supported.</p>
+<h2 id="cli">CLI</h2>
+<p>Apply the changes:</p>
 <pre><code class="language-sh">lambdaorm push
 </code></pre>
-<p>Files generated:</p>
-<pre><code class="language-sh">├── orm_state
-│   ├── default-ddl-20231122T154351640Z-push-test.sql
-│   └── default-model.json
-</code></pre>
-<p>Content of the generated file <code>default-ddl-20231122T154351640Z-push-test.sql</code>:</p>
+<p>Example of the generated DDL on an empty database:</p>
 <pre><code class="language-sql">CREATE TABLE Countries (name VARCHAR(80) NOT NULL ,iso3 VARCHAR(3) NOT NULL ,CONSTRAINT Countries_PK PRIMARY KEY (iso3));
 ALTER TABLE Countries ADD CONSTRAINT Countries_UK UNIQUE (name);
 CREATE TABLE States (id INTEGER NOT NULL ,name VARCHAR(80) NOT NULL ,countryCode VARCHAR(3) NOT NULL ,CONSTRAINT States_PK PRIMARY KEY (id));
 ALTER TABLE States ADD CONSTRAINT States_UK UNIQUE (countryCode,name);
 ALTER TABLE States ADD CONSTRAINT States_country_FK FOREIGN KEY (countryCode) REFERENCES Countries (iso3);
 </code></pre>
+<p>After adding a property <code>phone</code> to <code>Customers</code> and renaming the column <code>icon</code> to <code>icon_name</code> (with <code>previousMapping: icon</code>), a push generates only those changes:</p>
+<pre><code class="language-sql">ALTER TABLE customers ADD phone VARCHAR(32);
+ALTER TABLE categories RENAME COLUMN icon TO icon_name;
+</code></pre>
+<h3 id="generate-the-ddl-without-applying-it">Generate the DDL without applying it</h3>
+<p>With <code>-o</code>, push generates the DDL but does not apply it.</p>
+<ul>
+<li><code>-o</code> alone prints the sentences of each source.</li>
+<li><code>-o &lt;dir&gt;</code> writes one script per source that changes, named <code>&lt;stage&gt;.&lt;source&gt;.sql</code>. Sources without changes get no file, and a database in step with the model gives no files at all.</li>
+</ul>
+<pre><code class="language-sh">lambdaorm push -s default -o migrations
+</code></pre>
+<pre><code class="language-sh">migrations
+├── default.catalog.sql
+└── default.accounts.sql
+</code></pre>
+<p>The names are deterministic, so the scripts can be renamed into versioned migrations and applied by your own deploy process.</p>
+<h3 id="files-in-orm_state">Files in orm_state</h3>
+<p>When push applies the changes, it records them in the <code>orm_state</code> folder:</p>
+<pre><code class="language-sh">├── orm_state
+│   ├── default-model.json
+│   └── main
+│       └── V231122154351__push.sql
+</code></pre>
+<ul>
+<li><code>&lt;stage&gt;-model.json</code>: the model of the stage at the last push.</li>
+<li><code>&lt;source&gt;/V&lt;yyMMddHHmmss&gt;__push.sql</code>: the sentences executed on that source.</li>
+</ul>
 <p>View labs:</p>
 <ul>
 <li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/01-simple">Simple</a></li>
@@ -185,6 +220,23 @@ ALTER TABLE States ADD CONSTRAINT States_country_FK FOREIGN KEY (countryCode) RE
 <li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources">Northwind multiple datasources</a></li>
 <li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/08-northwind-cqrs">Northwind CQRS</a></li>
 </ul>
+<h2 id="node">Node</h2>
+<pre><code class="language-Typescript">import { Orm } from '@lambdaorm/lib'
+(async () =&gt; {
+    const orm = new Orm()
+    try {
+        await orm.init('./lambdaORM.yaml')
+        // the sentences, without applying them
+        const sentences = await orm.stage.push({ stage: 'default' }).sentence()
+        // the sentences grouped by source: [{ source: 'accounts', sentences: ['ALTER TABLE accounts ADD phone VARCHAR(32)'] }]
+        const bySource = await orm.stage.push({ stage: 'default' }).sentencesBySource()
+        // apply them
+        await orm.stage.push({ stage: 'default' }).execute()
+    } finally {
+        await orm.end()
+    }
+})()
+</code></pre>
               
             </div>
           </div><footer>

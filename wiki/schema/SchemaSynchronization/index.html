@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
                   </li>
@@ -158,12 +162,13 @@
 <p>The synchronization is the process of updating the schema defined in yaml/json configuration file with structure in sources (Databases). The synchronization is a process that can be done in both directions, from the schema configuration to the sources (Databases) and from the source to the schema file configuration.</p>
 <h2 id="push">Push</h2>
 <p>The push is the process of updating the sources (Databases) with the schema defined in the configuration file. The push process is done by the command <code>lambdaorm push</code>.</p>
+<p>Push compares the model with the databases themselves: it creates missing tables, adds and alters columns, renames the columns declared with <code>previousMapping</code>, and never drops what exists only in the database. <code>lambdaorm push -o &lt;dir&gt;</code> writes the DDL as one script per source (<code>&lt;stage&gt;.&lt;source&gt;.sql</code>) without applying it.</p>
 <p><a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Push">more info</a></p>
 <h2 id="pull">Pull</h2>
-<p>The pull is the process of updating the schema defined in the configuration file with the structure in the sources (Databases). The pull process is done by the command <code>lambdaorm pull</code>.</p>
+<p>The pull is the process of updating the schema defined in the configuration file with the structure in the sources (Databases). The pull process is done by the command <code>lambdaorm pull</code>. What was written by hand in the schema (relations, listeners, stages) is kept.</p>
 <p><a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Pull">more info</a></p>
 <h2 id="fetch">Fetch</h2>
-<p>The fetch is the process show differences between sources and schema but not apply changes.The pull process is done by the command  <code>lambdaorm fetch</code>.</p>
+<p>The fetch is the process that shows the differences between the sources and the schema, without applying changes. It is done by the command <code>lambdaorm fetch</code>. The result is empty when the databases are in step with the model, and the command exits with code 1 when there are differences (useful in CI).</p>
 <p><a href="https://lambda-orm.github.io/wiki/SchemaSynchronization-Fetch">more info</a></p>
 <h2 id="introspect">Introspect</h2>
 <p>Introspection is the process of updating the schema defined in the configuration file by introspecting a data file and then applying the changes to the sources (Databases). The introspection process is performed using the <code>lambdaorm introspect</code> command.</p>

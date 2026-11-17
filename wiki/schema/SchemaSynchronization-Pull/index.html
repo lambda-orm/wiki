@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
                   </li>
@@ -156,20 +160,32 @@
               
                 <h1 id="pull">Pull</h1>
 <p>The pull is the process of updating the schema defined in the configuration file with the structure in the sources (Databases). The pull process is done by the command <code>lambdaorm pull</code>.</p>
+<h2 id="what-pull-keeps">What pull keeps</h2>
+<p>Pull reads the tables and columns of the databases and merges them into the schema: new tables become entities, new columns become properties, and the mappings are updated. Pull does not change the databases.
+By default it also removes from the schema the entities, properties and relations that are no longer in the database
+(<code>orm.stage.pull({ stage, removeEntities: false, removeProperties: false, removeRelations: false })</code> keeps them).
+It can be run on an existing schema: what was written by hand is kept, for example</p>
+<ul>
+<li>relation names chosen by hand and <code>weak</code> relations between sources (which have no foreign key in the database),</li>
+<li><code>application.listeners</code>,</li>
+<li><code>infrastructure.stages</code>.</li>
+</ul>
+<p>Columns named with reserved words (for example <code>order</code>) are supported.</p>
 <h2 id="cli">CLI</h2>
 <p>The pull command is used to update the schema with respect to the sources (Databases). \
 Once executed, the schema will be synchronized with the database. \
-It also adds a file with the pulling scripts. \</p>
+It also records the pulling scripts in the <code>orm_state</code> folder.</p>
 <p>Running the pull command:</p>
 <pre><code class="language-sh">lambdaorm pull
 </code></pre>
 <p>Once the command is executed, the schema file (lambdaORM.yaml in this case) will be updated with respect to the data source.</p>
 <p>Files created:</p>
 <pre><code class="language-sh">├── orm_state
-│   ├── default-ddl-20240501T212640369Z-pull-default.sql
-│   └── default-model.json
+│   ├── default-model.json
+│   └── default
+│       └── V240501212640__pull.sql
 </code></pre>
-<p>Content of the generated file <code>default-ddl-20240501T212640369Z-pull-default.sql</code>:</p>
+<p>Content of the generated file <code>V240501212640__pull.sql</code>:</p>
 <pre><code class="language-sql">CREATE TABLE Categories (CategoryID INTEGER  AUTO_INCREMENT,CategoryName VARCHAR(15) NOT NULL ,Description TEXT  ,Picture LONGBLOB  ,CONSTRAINT Categories_PK PRIMARY KEY (CategoryID));
 CREATE TABLE CustomerCustomerDemo (CustomerID VARCHAR(5) NOT NULL ,CustomerTypeID VARCHAR(10) NOT NULL ,CONSTRAINT CustomerCustomerDemo_PK PRIMARY KEY (CustomerID,CustomerTypeID));
 CREATE TABLE CustomerDemographics (CustomerTypeID VARCHAR(10) NOT NULL ,CustomerDesc TEXT  ,CONSTRAINT CustomerDemographics_PK PRIMARY KEY (CustomerTypeID));
@@ -198,15 +214,12 @@ ALTER TABLE Territories ADD CONSTRAINT Territories_territories_FK FOREIGN KEY (R
 </code></pre>
 <p><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/11-pull">View lab</a></p>
 <h2 id="node">Node</h2>
-<pre><code class="language-Typescript">import { Orm } from 'lambdaorm'
+<pre><code class="language-Typescript">import { Orm } from '@lambdaorm/lib'
 (async () =&gt; {
-    const workspace = process.cwd()
-    const orm = new Orm(workspace)
-    try{        
-        await orm.helper.fs.removeDir(workspace + '/data')
-        const originalSchema = orm.helper.yaml.load(await orm.helper.fs.read(workspace + '/lambdaOrm.yaml'))
-        await orm.init(originalSchema)  
-        await orm.stage.pull()
+    const orm = new Orm()
+    try{
+        await orm.init('./lambdaORM.yaml')
+        await orm.stage.pull({ stage: 'default' })
     }catch(e){
         console.log(e)
     } finally {

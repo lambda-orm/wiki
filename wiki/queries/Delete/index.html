@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../../schema/Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
                   </li>
@@ -155,6 +159,9 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="delete">Delete</h1>
+<p><code>delete</code> returns the <strong>number of affected rows</strong>: <code>0</code> means that no row matched the filter.</p>
+<pre><code class="language-Typescript">const count = await orm.execute('Customers.delete().filter(p =&gt; p.code == code)', { code: 'C001' }) // 1
+</code></pre>
 <h2 id="delete-record-for-filter">Delete record for filter</h2>
 <p><strong>Lambda:</strong></p>
 <pre><code class="language-Typescript">// Deleting records from OrderDetails where orderId matches the provided id
@@ -238,7 +245,9 @@ import { Products } from '../northwind/model/__model'
         // Defining a query to delete orders and include details
         const query = () =&gt; Orders.delete().include(p =&gt; p.details)
         // Executing the query using the ORM with the specified order parameter
-        await orm.execute(query, order)
+        // the number of orders deleted
+        const count = await orm.execute(query, order)
+        console.log(count)
     } catch (error:any) {
         console.error(error.stack)
     } finally {

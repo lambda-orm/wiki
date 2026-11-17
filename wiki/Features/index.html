@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../schema/Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../schema/Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../usage/Usage">Usage</a>
                   </li>
@@ -167,7 +171,8 @@
 </ul>
 </li>
 <li><a href="https://lambda-orm.github.io/wiki/Repository">Repositories and custom repositories</a></li>
-<li><a href="https://lambda-orm.github.io/wiki/Transaction">Transactions and distributed transactions</a></li>
+<li><a href="https://lambda-orm.github.io/wiki/usage/Transaction">Transactions and distributed transactions</a>: across sources and stages</li>
+<li><a href="https://lambda-orm.github.io/wiki/usage/Script">Scripts</a>: a whole use case (variables, conditions, loops, several queries) in one transaction, also over REST</li>
 <li><a href="https://lambda-orm.github.io/wiki/Schema">Schema Configuration</a></li>
 <li>Decoupling the domain model from infrastructure<ul>
 <li>Configuration in json or yml formats</li>
@@ -183,16 +188,13 @@
 <li><a href="https://lambda-orm.github.io/wiki/BulkInsert">BulkInsert</a></li>
 <li>High performance queries</li>
 <li>Connection pooling</li>
-<li><a href="https://lambda-orm.github.io/wiki/SchemaExample-Listener">Listeners and subscribers</a></li>
+<li><a href="https://lambda-orm.github.io/wiki/SchemaExample-Listener">Listeners and subscribers</a>: awaited, in the sentence's transaction</li>
 <li>TypeScript and JavaScript support</li>
-<li><a href="https://github.com/lambda-orm/lambdaorm-cli">CLI Support</a> support</li>
-<li><a href="https://github.com/lambda-orm/lambdaorm-svc">REST API Support</a></li>
+<li><a href="https://www.npmjs.com/package/@lambdaorm/cli">CLI Support</a> (<code>npm i -g @lambdaorm/cli</code>)</li>
+<li><a href="https://hub.docker.com/r/flaviorita/lambdaorm-svc">REST API Support</a> (Docker image <code>flaviorita/lambdaorm-svc</code>)</li>
 <li>HTTP Client Support</li>
-<li><a href="https://www.npmjs.com/package/lambdaorm-client-node">Node Client</a></li>
-<li><a href="https://github.com/lambda-orm/lambdaorm-client-kotlin">Kotlin Client</a> (In Progress)</li>
-<li>Java Client (Coming Soon)</li>
-<li>C# Client (Coming Soon)</li>
-<li>Python Client (Coming Soon)</li>
+<li><a href="https://www.npmjs.com/package/@lambdaorm/client">Node Client</a></li>
+<li>Other languages: generate a client from the service's OpenAPI 3 document</li>
 </ul>
               
             </div>

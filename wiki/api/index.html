@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lambda-orm.github.io/wiki/api/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Lambda ORM service - λORM Wiki</title>
+    <title>λORM service - λORM Wiki</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,7 +13,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Lambda ORM service";
+        var mkdocs_page_name = "\u03bbORM service";
         var mkdocs_page_input_path = "api/index.md";
         var mkdocs_page_url = "/wiki/api/";
       </script>
@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../schema/Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../schema/Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../usage/Usage">Usage</a>
                   </li>
@@ -145,7 +149,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Lambda ORM service</li>
+      <li class="breadcrumb-item active">λORM service</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -154,37 +158,50 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="lambda-orm-service">Lambda ORM service</h1>
-<p>Service that exposes the functionality of the <a href="https://www.npmjs.com/package/lambdaorm">LambdaOrm</a> library</p>
+                <h1 id="orm-service">λORM service</h1>
+<p>REST service that exposes the functionality of <a href="https://www.npmjs.com/package/@lambdaorm/lib">λORM</a>. It is published
+as the Docker image <a href="https://hub.docker.com/r/flaviorita/lambdaorm-svc">flaviorita/lambdaorm-svc</a> (2.3.x, Node 24,
+with the <code>lambdaorm</code> CLI installed); it is not published on npm.</p>
+<p>What is new in 2.3:</p>
+<ul>
+<li><a href="Endpoints/Script/"><code>POST /script</code></a>: several queries in one transaction (off unless <code>SCRIPT_ENABLED=true</code>).</li>
+<li>Optional service token (<code>SERVICE_TOKEN</code>, <code>Authorization: Bearer &lt;token&gt;</code>); <code>RATE_LIMIT_MAX=0</code> turns the rate limit
+  off — see <a href="Use/Configuration/">Configuration</a>.</li>
+<li>Errors answer <code>{ error, code, message }</code> with a status a client can map (409, 400, …) — see <a href="Use/Errors/">Errors</a>.</li>
+<li><code>/execute</code> answers the affected rows of <code>update</code> and <code>delete</code>, and takes <code>data</code> / <code>options</code> as JSON objects.</li>
+</ul>
 <h2 id="service">Service</h2>
 <p>The service exposes the following endpoints:</p>
 <h3 id="queries-endpoints">Queries endpoints</h3>
 <p><img alt="query-methods" src="https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/query-methods.png" /></p>
 <ul>
-<li><a href="https://lambda-orm.github.io/wiki/api/Endpoints/Query/index.html">Query</a></li>
+<li><a href="Endpoints/Query/">Query</a></li>
+<li><a href="Endpoints/Script/">Script</a></li>
 </ul>
 <h3 id="general-endpoints">General endpoints</h3>
 <p><img alt="general-methods" src="https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/general-methods.png" /></p>
 <ul>
-<li><a href="https://lambda-orm.github.io/wiki/api/Endpoints/Genera/index.html">General</a></li>
+<li><a href="Endpoints/General/">General</a></li>
 </ul>
 <h3 id="schema-endpoints">Schema endpoints</h3>
 <p><img alt="schema-methods" src="https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/schema-methods.png" /></p>
 <ul>
-<li><a href="https://lambda-orm.github.io/wiki/api/Endpoints/Schema/index.html">Schema</a></li>
+<li><a href="Endpoints/Schema/">Schema</a></li>
 </ul>
 <h3 id="stage-endpoints">Stage endpoints</h3>
 <p><img alt="stage-methods" src="https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/stage-methods.png" /></p>
 <ul>
-<li><a href="https://lambda-orm.github.io/wiki/api/Endpoints/Stages/index.html">Stages</a></li>
+<li><a href="Endpoints/Stages/">Stages</a></li>
 </ul>
+<p>The OpenAPI 3 document is served at <code>/api-docs</code> (Swagger UI).</p>
 <h2 id="usage">Usage</h2>
 <ul>
-<li><a href="https://lambda-orm.github.io/wiki/api/Use/Configuration/index.html">Configuration</a></li>
-<li><a href="https://lambda-orm.github.io/wiki/api/Use/Queries/index.html">Queries</a></li>
-<li><a href="https://lambda-orm.github.io/wiki/api/Use/Kafka/index.html">Kafka</a></li>
-<li><a href="https://lambda-orm.github.io/wiki/api/source/index.html">source</a></li>
-<li><a href="https://lambda-orm.github.io/wiki/api/CHANGELOG/index.html">Change log</a></li>
+<li><a href="Use/Configuration/">Configuration</a>: settings, security (token) and Docker</li>
+<li><a href="Use/Errors/">Errors</a></li>
+<li><a href="Use/Queries/">Expressions</a></li>
+<li><a href="Use/Kafka/">Kafka</a></li>
+<li><a href="source/">source</a></li>
+<li><a href="CHANGELOG/">Change log</a></li>
 </ul>
 <h3 id="ping">Ping</h3>
 <pre><code class="language-sh">curl -X GET &quot;http://localhost:9291/ping?format=beautiful&quot;
@@ -299,7 +316,7 @@
 <pre><code class="language-sh">curl -X POST -H &quot;Content-Type: application/json&quot; -d @data.json http://localhost:9291/stages/default/import
 </code></pre>
 <h3 id="execute">Execute</h3>
-<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/execute?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;p.details)&quot;, &quot;data&quot;: &quot;{\&quot;customerId\&quot;: \&quot;CENTC\&quot;}&quot; }'
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/execute?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;p.details)&quot;, &quot;data&quot;: {&quot;customerId&quot;: &quot;CENTC&quot;}, &quot;options&quot;: {&quot;stage&quot;: &quot;default&quot;} }'
 </code></pre>
 <p>Result:</p>
 <pre><code class="language-json">[
@@ -324,20 +341,38 @@
   }
 ]
 </code></pre>
+<h3 id="script">Script</h3>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/script&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;script&quot;: &quot;orm.execute(\&quot;Orders.update(p =&gt; ({ freight: freight })).filter(p =&gt; p.id == id)\&quot;, { id: id, freight: freight }); orm.execute(\&quot;Orders.filter(p =&gt; p.id == id)\&quot;, { id: id })&quot;, &quot;data&quot;: {&quot;id&quot;: 12, &quot;freight&quot;: 40}}'
+</code></pre>
+<p>Both queries run in one transaction; the answer is the value of the last one. See <a href="Endpoints/Script/">Script</a>.</p>
 <h2 id="docker-image">Docker Image</h2>
-<p>You can access to image at <a href="https://hub.docker.com/repository/docker/flaviorita/lambdaorm-svc/general">flaviorita/lambdaorm-svc</a></p>
+<p>The image <a href="https://hub.docker.com/r/flaviorita/lambdaorm-svc">flaviorita/lambdaorm-svc</a> runs the service on Node 24 and
+includes the <code>lambdaorm</code> CLI. See <a href="Use/Configuration/#docker">Configuration</a> for a <code>docker-compose</code> example.</p>
 <h2 id="clients">Clients</h2>
-<p>The following clients allow consuming this service</p>
 <ul>
-<li><a href="https://www.npmjs.com/package/lambdaorm-client-node">Node Client</a></li>
+<li>Node: <a href="https://www.npmjs.com/package/@lambdaorm/client">@lambdaorm/client</a> (0.9.x)</li>
 </ul>
-<p>Soon:</p>
+<pre><code class="language-ts">import { orm } from '@lambdaorm/client'
+
+await orm.init('http://localhost:9291', { token: process.env.SERVICE_TOKEN }) // token only when SERVICE_TOKEN is set
+const orders = await orm.execute('Orders.filter(p =&gt; p.customerId == customerId)', { customerId: 'CENTC' })
+const affected = await orm.executeScript('orm.execute(&quot;Orders.update(p =&gt; ({ freight: 40 })).filter(p =&gt; p.id == id)&quot;, { id: id })', { id: 12 })
+</code></pre>
 <ul>
-<li>Kotlin Client</li>
-<li>Python Client</li>
-<li>CSharp Client</li>
-<li>Go Client</li>
+<li>
+<p>CLI: <a href="https://www.npmjs.com/package/@lambdaorm/cli">@lambdaorm/cli</a> with <code>-u &lt;service url&gt;</code> (see <a href="../cli/">CLI</a>).</p>
+</li>
+<li>
+<p>Other languages (Go, Python, Kotlin, C#, …): λORM ships no other client. The service's OpenAPI 3 document is the
+  contract: browse it at <code>/api-docs</code> (Swagger UI), take
+  <a href="https://github.com/lambda-orm/core/blob/HEAD/packages/service/src/lib/infrastructure/swagger.yaml"><code>swagger.yaml</code></a>
+  from the repository and generate a client, e.g. with <a href="https://openapi-generator.tech">openapi-generator</a>:</p>
+</li>
 </ul>
+<pre><code class="language-sh">openapi-generator generate -i swagger.yaml -g go -o ./lambdaorm-client
+openapi-generator generate -i swagger.yaml -g python -o ./lambdaorm-client
+</code></pre>
+<p>Or call it by hand: a <code>POST</code> of JSON, with <code>Authorization: Bearer &lt;token&gt;</code> when the service requires it.</p>
 <h2 id="labs">Labs</h2>
 <p>You can access various labs at <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/svc">github.com/lambda-orm/lambdaorm-labs</a></p>
               

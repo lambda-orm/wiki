@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lambda-orm.github.io/wiki/api/Use/Queries/" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>query on Schema - λORM Wiki</title>
+    <title>Expressions on the schema - λORM Wiki</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,7 +13,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "query on Schema";
+        var mkdocs_page_name = "Expressions on the schema";
         var mkdocs_page_input_path = "api/Use/Queries.md";
         var mkdocs_page_url = "/wiki/api/Use/Queries/";
       </script>
@@ -119,12 +119,16 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use">Use</a>
                   </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Engines">Engines</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
                   <li class="toctree-l1"><a class="" href="../../../usage/Repository">Repository</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Script">Script</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../usage/Usage">Usage</a>
                   </li>
@@ -145,7 +149,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">query on Schema</li>
+      <li class="breadcrumb-item active">Expressions on the schema</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -154,10 +158,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="query-on-schema">query on Schema</h1>
-<p>All the queries that are used for the definition of conditions and for the execution of actions are based on the expression engine <a href="https://www.npmjs.com/package/3xpr">3xpr</a></p>
-<h2 id="lambdaorm-functions">LambdaOrm  functions</h2>
-<p>In addition to the operations and functions defined in <a href="https://www.npmjs.com/package/3xpr">3xpr</a> lambdaorm extends the expression model with the following functions.</p>
+                <h1 id="expressions-on-the-schema">Expressions on the schema</h1>
+<p>The conditions and actions of the schema (listeners, consumers) and the scripts of <a href="../../Endpoints/Script/"><code>POST /script</code></a>
+use the expression engine <a href="https://www.npmjs.com/package/3xpr">3xpr</a>.</p>
+<h2 id="orm-functions">λORM functions</h2>
+<p>Besides the operators and functions of 3xpr, λORM adds these functions:</p>
 <table>
 <thead>
 <tr>
@@ -167,49 +172,53 @@
 </thead>
 <tbody>
 <tr>
-<td>toBase64(value:string):string</td>
+<td><code>toBase64(value:string):string</code></td>
 <td>Encode a string to base64</td>
 </tr>
 <tr>
-<td>getBase64(value:string):string</td>
+<td><code>getBase64(value:string):string</code></td>
 <td>Decode a base64 string</td>
 </tr>
 <tr>
-<td>encrypt(value:string,key:string):string</td>
+<td><code>encrypt(value:string,key:string):string</code></td>
 <td>Encrypt a string with a key</td>
 </tr>
 <tr>
-<td>decrypt(value:string,key:string):string</td>
+<td><code>decrypt(value:string,key:string):string</code></td>
 <td>Decrypt a string with a key</td>
 </tr>
 <tr>
-<td>orm.execute(query:string,data:any,options:any):any</td>
-<td>Execute an query and return the result</td>
+<td><code>orm.execute(query:string,data:any,options:any):any</code></td>
+<td>Execute a query and return the result</td>
 </tr>
 <tr>
-<td>orm.plan(query:string,options:any):any</td>
+<td><code>orm.plan(query:string,options:any):any</code></td>
 <td>Return the execution plan of the query</td>
 </tr>
 <tr>
-<td>orm.metadata(query:string):any</td>
+<td><code>orm.metadata(query:string):any</code></td>
 <td>Return the metadata of the query</td>
 </tr>
 <tr>
-<td>orm.model(query:string):any</td>
+<td><code>orm.model(query:string):any</code></td>
 <td>Return the model of the query</td>
 </tr>
 <tr>
-<td>orm.parameters(query:string):any</td>
+<td><code>orm.parameters(query:string):any</code></td>
 <td>Return the parameters of the query</td>
 </tr>
 <tr>
-<td>orm.constraints(query:string):any</td>
+<td><code>orm.constraints(query:string):any</code></td>
 <td>Return the constraints of the query</td>
 </tr>
 </tbody>
 </table>
+<p><code>orm.execute</code> called from a listener or a script joins the transaction in progress. With <code>options.stage</code> it runs on
+another stage, in the same transaction (from <code>@lambdaorm/lib</code> 3.3.0):</p>
+<pre><code class="language-js">orm.execute(&quot;Insights.insert()&quot;, { quoteId: quoteId }, { stage: &quot;insights&quot; })
+</code></pre>
 <h2 id="service-functions">Service functions</h2>
-<p>In addition to the operations and functions defined in <a href="https://www.npmjs.com/package/3xpr">3xpr</a> and <a href="https://github.com/lambda-orm/wiki/wiki/SchemaDefinition-Queries">lambdaorm</a>, lambdaOrm Service extends the expression model with the following functions.</p>
+<p>The service adds:</p>
 <table>
 <thead>
 <tr>
@@ -219,8 +228,8 @@
 </thead>
 <tbody>
 <tr>
-<td>kafka.send(topic:string,messages:any[]):void</td>
-<td>Send a message to a kafka topic</td>
+<td><code>queue.send(topic:string,messages:any[]):void</code></td>
+<td>Send messages to a Kafka topic (see <a href="../Kafka/">Kafka</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -228,9 +237,9 @@
 <pre><code class="language-yaml">application:
   listeners:
     - name: syncInsights
-      on: [insert, bulkInsert, update, delete ]
+      on: [insert, bulkInsert, update, delete]
       condition: options.stage.in(&quot;default&quot;,&quot;cqrs&quot;)
-       after: kafka.send(&quot;insights-sync&quot;,[{query:query,data:data}])    
+      after: queue.send(&quot;insights-sync&quot;, [{ query: query, data: data }])
 </code></pre>
               
             </div>

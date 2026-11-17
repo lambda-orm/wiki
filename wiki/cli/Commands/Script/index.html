@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lambda-orm.github.io/wiki/cli/Commands/Script/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Script - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Script";
+        var mkdocs_page_input_path = "cli/Commands/Script.md";
+        var mkdocs_page_url = "/wiki/cli/Commands/Script/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../Features">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../api">Api</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../..">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Query-Language">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Expression">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Select">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Join">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Grouping">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Include">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Insert">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/BulkInsert">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Update">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/Delete">Delete</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../queries/operatorsAndFunctions/OperatorsAndFunctions">Operators & Functions</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Expressions">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-EnvironmentVariables">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaDefinition-Composite">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Listener">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Basic">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Extend">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-MultiplesStages">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-StageMultiplesSources">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaExample-Composite">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Push">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Pull">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Fetch">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Introspect">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/SchemaSynchronization-Incorporate">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Schema-Use">Use</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../schema/Engines">Engines</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Repository">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Script">Script</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/Usage">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../usage/CHANGELOG">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Script</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="script">Script</h1>
+<p>Runs a script: several queries in <strong>one transaction</strong>. The script is a <a href="https://www.npmjs.com/package/3xpr">3xpr</a>
+script whose <code>orm.execute(query, data, options)</code> calls all run in the same transaction, also across sources; it commits
+when the script ends and rolls back on any error (a query or a <code>throw</code>). The result is the value of the last statement
+(or of <code>return</code>).</p>
+<p>It runs locally with the workspace (<code>-w</code>) or on a λORM service (<code>-u</code>, <a href="../../../api/Endpoints/Script/"><code>POST /script</code></a>;
+the service must run with <code>SCRIPT_ENABLED=true</code>).</p>
+<h2 id="params">Params</h2>
+<table>
+<thead>
+<tr>
+<th>parameter</th>
+<th>short</th>
+<th>describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>workspace</td>
+<td>-w</td>
+<td>Project path.</td>
+</tr>
+<tr>
+<td>stage</td>
+<td>-s</td>
+<td>Name of stage.</td>
+</tr>
+<tr>
+<td>script</td>
+<td>-x</td>
+<td>Script (3xpr statements calling <code>orm.execute(query, data, options)</code>).</td>
+</tr>
+<tr>
+<td>file</td>
+<td>-f</td>
+<td>File with the script (instead of <code>-x</code>).</td>
+</tr>
+<tr>
+<td>data</td>
+<td>-d</td>
+<td>Variables of the script: JSON, or the path of a JSON file.</td>
+</tr>
+<tr>
+<td>envfile</td>
+<td>-e</td>
+<td>Read in a file of environment variables.</td>
+</tr>
+<tr>
+<td>output</td>
+<td>-o</td>
+<td>Generates an output according to the following possible values [json|beautiful|light|yaml]</td>
+</tr>
+<tr>
+<td>url</td>
+<td>-u</td>
+<td>Url of the service (<code>POST /script</code>).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<h3 id="inline">Inline</h3>
+<pre><code class="language-sh">lambdaorm script -w lab/northwind -e lab/northwind/.env -o beautiful \
+  -x 'orm.execute(&quot;Orders.update(p =&gt; ({ freight: freight })).filter(p =&gt; p.id == id)&quot;, { id: id, freight: freight }); orm.execute(&quot;Orders.filter(p =&gt; p.id == id)&quot;, { id: id })' \
+  -d '{&quot;id&quot;: 10248, &quot;freight&quot;: 40}'
+</code></pre>
+<h3 id="from-a-file">From a file</h3>
+<p><code>create-quote.3xpr</code>:</p>
+<pre><code class="language-js">account = orm.execute(&quot;Accounts.filter(p =&gt; p.id == accountId)&quot;, { accountId: accountId });
+if (account.length() == 0) { throw { status: 404, message: &quot;account not found&quot; }; }
+orm.execute(&quot;Quotes.insert()&quot;, { id: quoteId, accountId: accountId, status: &quot;draft&quot; });
+for (line in lines) {
+  orm.execute(&quot;QuoteLines.insert()&quot;, { id: line.id, quoteId: quoteId, quantity: line.qty });
+}
+orm.execute(&quot;QuoteEvents.insert()&quot;, { quoteId: quoteId, event: &quot;created&quot; }, { stage: &quot;insights&quot; });
+quoteId
+</code></pre>
+<pre><code class="language-sh">lambdaorm script -w . -f create-quote.3xpr -d quote.json
+</code></pre>
+<p><code>orm.execute(…, { stage: "insights" })</code> runs on another stage and joins the same transaction (from <code>@lambdaorm/lib</code>
+3.3.0).</p>
+<h3 id="on-a-service">On a service</h3>
+<pre><code class="language-sh">lambdaorm script -u http://localhost:9291 -f create-quote.3xpr -d '{&quot;quoteId&quot;: 10, &quot;accountId&quot;: 1, &quot;lines&quot;: []}'
+</code></pre>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>Language: variables, <code>if</code> / <code>else</code>, <code>for</code>, <code>for … in</code>, <code>while</code>, <code>switch</code>, <code>try</code> / <code>catch</code>, <code>throw</code>, <code>return</code>; no
+  <code>? :</code> operator, no <code>++</code> / <code>--</code> (use <code>i += 1</code>), no user-defined functions.</li>
+<li>The script works on a copy of the data and can't read environment variables (<code>$VAR</code> fails).</li>
+<li>Errors are printed as <code>error: …</code> and nothing of the script is written.</li>
+<li>With <code>-u</code>, a service started with <code>SERVICE_TOKEN</code> needs the same <code>SERVICE_TOKEN</code> in the CLI's environment
+  (sent as <code>Authorization: Bearer</code>; @lambdaorm/cli 1.6.3).</li>
+<li>The command exits with code 1 when the script fails (@lambdaorm/cli 1.6.3).</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../extra.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
