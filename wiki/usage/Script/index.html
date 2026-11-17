@@ -200,7 +200,7 @@ promise rejects with that error. The result is the value of the last statement, 
 </tr>
 <tr>
 <td>scriptOptions</td>
-<td><code>timeout</code> in ms: when it passes, the transaction rolls back and the script rejects</td>
+<td><code>timeout</code> in ms: when it passes, the loops stop, the transaction rolls back and the script rejects. <code>maxIterations</code>: loop iterations of the script, all loops together; past it the script fails and rolls back</td>
 </tr>
 </tbody>
 </table>
@@ -275,10 +275,12 @@ promise rejects with that error. The result is the value of the last statement, 
 <h2 id="security-and-limits">Security and limits</h2>
 <ul>
 <li>The script <strong>cannot read environment variables</strong> (<code>$VAR</code> fails), so it can't read connection strings.</li>
-<li><code>timeout</code>: when it passes, the transaction rolls back and the script rejects; whatever it still executes afterwards
-  fails without reaching the database.</li>
-<li>A loop with no <code>orm.execute</code> inside that never ends (<code>while (true) {}</code>) blocks the process and the timeout can't stop
-  it. The REST endpoint is off by default (<code>SCRIPT_ENABLED</code>); enable it only for internal clients.</li>
+<li><code>timeout</code>: when it passes, the script's loops stop, the transaction rolls back and the script rejects; whatever it
+  still executes afterwards fails without reaching the database.</li>
+<li><code>maxIterations</code>: the loop iterations of the script, all loops together; past it the script fails and rolls back.
+  The REST service uses <code>SCRIPT_MAX_ITERATIONS</code> (default 100000).</li>
+<li>Since @lambdaorm/lib 3.3.0 (3xpr 5.3.0) a <code>while (true) {}</code> no longer blocks the process: the timeout and
+  <code>maxIterations</code> stop it. The REST endpoint is still off by default (<code>SCRIPT_ENABLED</code>); enable it for internal clients.</li>
 </ul>
               
             </div>
