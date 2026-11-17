@@ -661,8 +661,8 @@ lambdaorm script -f place-order.3xpr -d '{ &quot;customerCode&quot;: &quot;c1&qu
 <li>Statements end with <code>;</code>; the last one (without <code>;</code>) is the result. <code>return value;</code> ends the script early.</li>
 <li>Variables need no declaration: <code>total = 0;</code>. <code>data</code> is copied: the script never changes the caller's object.</li>
 <li>Count with <code>i += 1</code> (there is no <code>++</code>); use <code>iif(condition, a, b)</code> (there is no <code>? :</code>).</li>
-<li>Keep a query's result in a variable before indexing it: <code>rows = orm.execute(…); rows[0].name</code>.</li>
-<li>Write an empty list from the data (<code>items</code> sent as <code>[]</code>), not as a literal in the script.</li>
+<li>A query's result can be indexed directly: <code>orm.execute("Customers.filter(p =&gt; p.code == code)", { code: code })[0].name</code>;
+  an empty list is <code>[]</code> (both need 3xpr 5.3.1, from @lambdaorm/lib 3.4.1).</li>
 <li>A script can't read environment variables (<code>$VAR</code>).</li>
 </ul>
 <h2 id="transaction-and-stages">Transaction and stages</h2>
