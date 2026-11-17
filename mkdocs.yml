@@ -5,12 +5,13 @@ site_url: https://lambda-orm.github.io/wiki/
 use_directory_urls: true
 theme:
   name: readthedocs
-  # code as in VS Code / Monaco (dark): extra.css sets the font, extra.js colours the scripts inside `…`
+  # code as in VS Code / Monaco (dark): assets/wiki-v2.css sets the font, assets/wiki-v2.js colours the scripts inside `…`
   hljs_style: vs2015
 extra_css:
-  - extra.css
+  # a new name when they change: a browser never mixes a cached old one with the new pages
+  - assets/wiki-v2.css
 extra_javascript:
-  - extra.js
+  - assets/wiki-v2.js
 markdown_extensions:
   - toc:
       permalink: false
