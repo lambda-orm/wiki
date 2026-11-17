@@ -1,39 +1,53 @@
 # Script
 
-`orm.executeScript(script, data, options)` evaluates a [3xpr](https://www.npmjs.com/package/3xpr)
-script in **one transaction**: every `orm.execute` it calls runs on the same connections (one per source, also across
-stages). When the script ends the orm commits; on any error (a query, a function, a `throw`) it rolls back and the
-promise rejects with that error. The result is the value of the last statement, or of `return`.
+A **script** is a small program, written in [3xpr](https://www.npmjs.com/package/3xpr) (a JavaScript-like expression
+language), that λORM runs with `orm.executeScript(script, data, options)`. Inside it, `orm.execute(query, data,
+options)` runs λORM queries, and variables, conditions and loops decide which ones and with what data.
 
-It is the way to run a whole use case — reads, conditions, loops and several writes — in a single call, also from the
-[REST service](../api/index.md) (`POST /script`), the client and the [CLI](../cli/index.md) (`lambdaorm script`).
-The [examples](#examples) go from a single query to a complete use case.
+## What it is for
+
+Many use cases are more than one query: place an order (the order, its lines, the customer's balance), move stock
+between warehouses, register a payment and its audit. Their writes must happen **completely or not at all**: an order
+without its lines, or a balance discounted for an order that was not saved, is a corrupt state.
+
+`orm.transaction(callback)` solves it in Node code. A script solves it **in a single call that carries the whole use
+case**, wherever the call comes from: Node (`orm.executeScript`), the [REST service](../api/Endpoints/Script.md)
+(`POST /script`), the client (`@lambdaorm/client`) or the [CLI](../cli/Commands/Script.md) (`lambdaorm script`). A
+client in any language can run a use case with several reads and writes in one transaction, which it could not do
+sending one query per request.
+
+## Features
+
+- **All or nothing**: everything the script executes is one transaction — committed when it ends, rolled back if
+  anything fails (a query, a `throw`, the timeout). See [below](#the-main-feature-all-or-nothing).
+- **Across sources and stages**: queries on several databases, and on another stage with
+  `orm.execute(query, data, { stage: "insights" })`, are part of the same transaction.
+- **Listeners included**: what the schema's [listeners](../schema/SchemaExample-Listener.md) write is committed or
+  undone with the script.
+- **A language, not only queries**: variables, `if`, `for`, `while`, `switch`, `try/catch`, `throw`, `return`, list
+  functions (`filter`, `map`, `sum`, …) and every function of 3xpr and λORM.
+- **Read your writes**: a statement sees what the previous ones wrote, before the commit.
+- **A result**: the value of the last statement (or of `return`) — a value, a row, an object built by the script.
+- **Safe for scripts sent by clients**: no access to environment variables, works on a copy of `data`, `timeout` and
+  `maxIterations` stop it (also a loop that never ends), and the REST endpoint is off unless `SCRIPT_ENABLED=true`.
+
+A first look — the [examples](#examples) go step by step, from a single query to a complete use case:
 
 ```typescript
-const quoteId = await orm.executeScript(`
-  account = orm.execute("Accounts.filter(p => p.id == accountId)", { accountId: accountId });
-  if (account.length() == 0) {
-    throw { status: 404, message: "account not found" };
-  }
-
-  orm.execute("Quotes.insert()", { id: quoteId, accountId: accountId, status: "draft" });
-
-  for (line in lines) {
-    orm.execute("QuoteLines.insert()", {
-      id:        line.id,
-      quoteId:   quoteId,
-      productId: line.productId,
-      quantity:  line.qty
+const total = await orm.executeScript(`
+  orm.execute("Orders.insert()", { id: orderId, status: "new", version: 1 });
+  for (l in lines) {
+    orm.execute("OrderLines.insert()", {
+      orderId:  orderId,
+      line:     l.line,
+      product:  l.product,
+      quantity: l.qty
     });
   }
-
-  total = lines.sum(p => p.qty * p.price);
-  orm.execute("QuoteTotals.insert()", { quoteId: quoteId, total: total }, { stage: "insights" });
-
-  quoteId
+  lines.sum(p => p.qty * p.price)
 `,
-  { quoteId, accountId, lines },
-  { stage: 'default', timeout: 10000, maxIterations: 10000 }
+  { orderId, lines },
+  { stage: 'default' }
 )
 ```
 
@@ -408,6 +422,40 @@ const result = await orm.executeScript(`
 ```
 
 **Result:** { orderId, total: 25, balance: 75 } with a balance of 100; with a balance of 20 it rejects (409) and the order, its lines, the balance and the audit row are left as they were.
+
+### 14. Another use case: a quote with its total on insights
+
+A quote with its lines on the main stage and its total on the `insights` stage (other sources, possibly another
+database), in one transaction. The account must exist; if any step fails, neither the quote, nor its lines, nor the
+total are left anywhere. (A model with `Accounts`, `Quotes`, `QuoteLines` and `QuoteTotals`.)
+
+```typescript
+const quoteId = await orm.executeScript(`
+  account = orm.execute("Accounts.filter(p => p.id == accountId)", { accountId: accountId });
+  if (account.length() == 0) {
+    throw { status: 404, message: "account not found" };
+  }
+
+  orm.execute("Quotes.insert()", { id: quoteId, accountId: accountId, status: "draft" });
+
+  for (line in lines) {
+    orm.execute("QuoteLines.insert()", {
+      id:        line.id,
+      quoteId:   quoteId,
+      productId: line.productId,
+      quantity:  line.qty
+    });
+  }
+
+  total = lines.sum(p => p.qty * p.price);
+  orm.execute("QuoteTotals.insert()", { quoteId: quoteId, total: total }, { stage: "insights" });
+
+  quoteId
+`,
+  { quoteId, accountId, lines },
+  { stage: 'default', timeout: 10000, maxIterations: 10000 }
+)
+```
 
 ## The same script from a client
 
