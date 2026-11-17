@@ -57,5 +57,6 @@ nav:
     - Repository: usage/Repository
     - Transaction: usage/Transaction
     - Script: usage/Script
+    - Script examples: usage/ScriptExamples
     - Usage: usage/Usage
     - Change log: usage/CHANGELOG
