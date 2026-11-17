@@ -159,7 +159,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="script">Script</h1>
-<p><code>orm.executeScript(script, data, options, scriptOptions)</code> evaluates a <a href="https://www.npmjs.com/package/3xpr">3xpr</a>
+<p><code>orm.executeScript(script, data, options)</code> evaluates a <a href="https://www.npmjs.com/package/3xpr">3xpr</a>
 script in <strong>one transaction</strong>: every <code>orm.execute</code> it calls runs on the same connections (one per source, also across
 stages). When the script ends the orm commits; on any error (a query, a function, a <code>throw</code>) it rolls back and the
 promise rejects with that error. The result is the value of the last statement, or of <code>return</code>.</p>
@@ -175,7 +175,7 @@ promise rejects with that error. The result is the value of the last statement, 
   total = lines.sum(p =&gt; p.qty * p.price);
   orm.execute(&quot;QuoteTotals.insert()&quot;, { quoteId: quoteId, total: total }, { stage: &quot;insights&quot; });
   quoteId
-`, { quoteId, accountId, lines }, { stage: 'default' }, { timeout: 10000 })
+`, { quoteId, accountId, lines }, { stage: 'default', timeout: 10000, maxIterations: 10000 })
 </code></pre>
 <h2 id="arguments">Arguments</h2>
 <table>
@@ -196,14 +196,34 @@ promise rejects with that error. The result is the value of the last statement, 
 </tr>
 <tr>
 <td>options</td>
-<td>Query options; <code>stage</code> is the stage of the transaction and of every <code>orm.execute</code> without a stage</td>
-</tr>
-<tr>
-<td>scriptOptions</td>
-<td><code>timeout</code> in ms: when it passes, the loops stop, the transaction rolls back and the script rejects. <code>maxIterations</code>: loop iterations of the script, all loops together; past it the script fails and rolls back</td>
+<td>The query options plus the script's limits (<code>ScriptOptions</code>), see below</td>
 </tr>
 </tbody>
 </table>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stage</td>
+<td>The stage of the transaction and of every <code>orm.execute</code> without a stage</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>Max time in ms: when it passes, the loops stop, the transaction rolls back and the script rejects</td>
+</tr>
+<tr>
+<td>maxIterations</td>
+<td>Max loop iterations of the script, all loops together; past it the script fails and rolls back</td>
+</tr>
+</tbody>
+</table>
+<p>In @lambdaorm/lib 3.2.x the timeout was a fourth argument (<code>executeScript(script, data, options, { timeout })</code>); since
+3.3.0 everything goes in <code>options</code>.</p>
 <h2 id="the-language">The language</h2>
 <p>Everything 3xpr has:</p>
 <ul>

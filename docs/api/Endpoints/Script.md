@@ -8,7 +8,7 @@ The body is `{ script, data, options }`:
 | --- | --- |
 | `script` | A [3xpr](https://www.npmjs.com/package/3xpr) script. Each `orm.execute(query, data, options)` call in it is awaited and runs in the script's transaction. |
 | `data` | The script's variables, as a JSON object. The script works on a copy of it. |
-| `options` | Query options, e.g. `{ "stage": "default" }`. |
+| `options` | Query options, e.g. `{ "stage": "default" }`, and the script's limits `timeout` (ms) and `maxIterations`: a client may lower them, never above the service's `SCRIPT_TIMEOUT_MS` / `SCRIPT_MAX_ITERATIONS` (service 2.3.2). |
 
 The endpoint is **off by default**. Start the service with `SCRIPT_ENABLED=true` to turn it on (see [Configuration](../Use/Configuration.md)).
 
