@@ -6,7 +6,7 @@
 
 # Interface: ISentenceCompleteBuilder
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:6
+Defined in: packages/base/build/lib/sentence/domain/services.d.ts:6
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:6
 
 > **build**(`query`, `view`, `stage`): [`Sentence`](../classes/Sentence.md)
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/services.d.ts:7
+Defined in: packages/base/build/lib/sentence/domain/services.d.ts:7
 
 #### Parameters
 

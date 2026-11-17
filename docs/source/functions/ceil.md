@@ -8,7 +8,7 @@
 
 > **ceil**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:175
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:176
 
 Get the smallest following integer
 

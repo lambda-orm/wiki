@@ -8,7 +8,7 @@
 
 > **floor**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:183
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:184
 
 Get the largest preceding integer
 

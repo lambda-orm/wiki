@@ -8,7 +8,7 @@
 
 > **curTime**(): `Date`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:240
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:241
 
 Get the current time
 

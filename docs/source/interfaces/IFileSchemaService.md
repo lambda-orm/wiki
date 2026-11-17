@@ -6,15 +6,15 @@
 
 # Interface: IFileSchemaService
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/ports/fileSchemaService.d.ts:2
+Defined in: packages/base/build/lib/schema/domain/ports/fileSchemaService.d.ts:2
 
 ## Methods
 
 ### read()
 
-> **read**(`source`): `Promise`\<`null` \| [`SchemaInfo`](SchemaInfo.md)\>
+> **read**(`source`): `Promise`\<[`SchemaInfo`](SchemaInfo.md) \| `null`\>
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/ports/fileSchemaService.d.ts:3
+Defined in: packages/base/build/lib/schema/domain/ports/fileSchemaService.d.ts:3
 
 #### Parameters
 
@@ -24,7 +24,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/ports/fileSchemaService.d
 
 #### Returns
 
-`Promise`\<`null` \| [`SchemaInfo`](SchemaInfo.md)\>
+`Promise`\<[`SchemaInfo`](SchemaInfo.md) \| `null`\>
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/ports/fileSchemaService.d
 
 > **write**(`schema`, `fullPath`): `Promise`\<`void`\>
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/ports/fileSchemaService.d.ts:4
+Defined in: packages/base/build/lib/schema/domain/ports/fileSchemaService.d.ts:4
 
 #### Parameters
 

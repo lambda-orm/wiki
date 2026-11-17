@@ -6,7 +6,7 @@
 
 # Interface: SchemaData
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:205
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:213
 
 ## Properties
 
@@ -14,4 +14,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:205
 
 > **entities**: [`SchemaEntityData`](SchemaEntityData.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:206
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:214

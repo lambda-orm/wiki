@@ -6,7 +6,7 @@
 
 # Class: ViewConfigService
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewConfigService.d.ts:2
+Defined in: packages/base/build/lib/schema/application/services/config/viewConfigService.d.ts:2
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 > **new ViewConfigService**(`view`): `ViewConfigService`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewConfigService.d.ts:4
+Defined in: packages/base/build/lib/schema/application/services/config/viewConfigService.d.ts:4
 
 #### Parameters
 
@@ -34,7 +34,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 > **get** **entities**(): [`EntityView`](../interfaces/EntityView.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewConfigService.d.ts:8
+Defined in: packages/base/build/lib/schema/application/services/config/viewConfigService.d.ts:8
 
 ##### Returns
 
@@ -48,7 +48,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 > **get** **name**(): `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewConfigService.d.ts:5
+Defined in: packages/base/build/lib/schema/application/services/config/viewConfigService.d.ts:5
 
 ##### Returns
 
@@ -60,7 +60,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 > **excludeEntity**(`name`): `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewConfigService.d.ts:11
+Defined in: packages/base/build/lib/schema/application/services/config/viewConfigService.d.ts:11
 
 #### Parameters
 
@@ -78,7 +78,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 > **get**(): [`View`](../interfaces/View.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewConfigService.d.ts:6
+Defined in: packages/base/build/lib/schema/application/services/config/viewConfigService.d.ts:6
 
 #### Returns
 
@@ -88,9 +88,9 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 ### getEntity()
 
-> **getEntity**(`name`): `undefined` \| [`EntityView`](../interfaces/EntityView.md)
+> **getEntity**(`name`): [`EntityView`](../interfaces/EntityView.md) \| `undefined`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewConfigService.d.ts:9
+Defined in: packages/base/build/lib/schema/application/services/config/viewConfigService.d.ts:9
 
 #### Parameters
 
@@ -100,15 +100,15 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 #### Returns
 
-`undefined` \| [`EntityView`](../interfaces/EntityView.md)
+[`EntityView`](../interfaces/EntityView.md) \| `undefined`
 
 ***
 
 ### getProperty()
 
-> **getProperty**(`entityName`, `name`): `undefined` \| [`PropertyView`](../interfaces/PropertyView.md)
+> **getProperty**(`entityName`, `name`): [`PropertyView`](../interfaces/PropertyView.md) \| `undefined`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewConfigService.d.ts:10
+Defined in: packages/base/build/lib/schema/application/services/config/viewConfigService.d.ts:10
 
 #### Parameters
 
@@ -122,7 +122,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 #### Returns
 
-`undefined` \| [`PropertyView`](../interfaces/PropertyView.md)
+[`PropertyView`](../interfaces/PropertyView.md) \| `undefined`
 
 ***
 
@@ -130,7 +130,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 > **set**(`value`): `void`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewConfigService.d.ts:7
+Defined in: packages/base/build/lib/schema/application/services/config/viewConfigService.d.ts:7
 
 #### Parameters
 

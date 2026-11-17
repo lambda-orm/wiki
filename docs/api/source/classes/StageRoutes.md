@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / StageRoutes
+[λORM service](../README.md) / StageRoutes
 
 # Class: StageRoutes
 
-Defined in: [src/infrastructure/routes/stageRoutes.ts:5](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/routes/stageRoutes.ts#L5)
+Defined in: [service/src/lib/infrastructure/routes/stageRoutes.ts:5](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/routes/stageRoutes.ts#L5)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/infrastructure/routes/stageRoutes.ts:5](https://github.com/lamb
 
 > **new StageRoutes**(`service`): `StageRoutes`
 
-Defined in: [src/infrastructure/routes/stageRoutes.ts:7](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/routes/stageRoutes.ts#L7)
+Defined in: [service/src/lib/infrastructure/routes/stageRoutes.ts:7](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/routes/stageRoutes.ts#L7)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/infrastructure/routes/stageRoutes.ts:7](https://github.com/lamb
 
 > **getRoutes**(): `Router`
 
-Defined in: [src/infrastructure/routes/stageRoutes.ts:11](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/routes/stageRoutes.ts#L11)
+Defined in: [service/src/lib/infrastructure/routes/stageRoutes.ts:11](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/routes/stageRoutes.ts#L11)
 
 #### Returns
 

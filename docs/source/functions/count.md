@@ -8,7 +8,7 @@
 
 > **count**(`value`): `any`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:310
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:311
 
 ## Parameters
 

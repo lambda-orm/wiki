@@ -6,7 +6,7 @@
 
 # Interface: MappingConfig
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:191
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:199
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:191
 
 > **inconsistency**: `any`[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:194
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:202
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:194
 
 > **mapping**: `any`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:192
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:200
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:192
 
 > **pending**: `any`[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:193
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:201

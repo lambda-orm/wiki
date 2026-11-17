@@ -162,13 +162,13 @@
 <hr />
 <p><a href="../../">Lambda ORM</a> / SchemaFacade</p>
 <h1 id="class-schemafacade">Class: SchemaFacade</h1>
-<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:10</p>
+<p>Defined in: packages/base/build/lib/schema/application/facade.d.ts:10</p>
 <h2 id="constructors">Constructors</h2>
 <h3 id="constructor">Constructor</h3>
 <blockquote>
 <p><strong>new SchemaFacade</strong>(<code>schemaService</code>, <code>getSchemaData</code>, <code>extender</code>, <code>createSchema</code>, <code>initializeSchema</code>, <code>updateSchema</code>, <code>matchSchema</code>, <code>fileService</code>): <code>SchemaFacade</code></p>
 </blockquote>
-<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:19</p>
+<p>Defined in: packages/base/build/lib/schema/application/facade.d.ts:19</p>
 <h4 id="parameters">Parameters</h4>
 <h5 id="schemaservice">schemaService</h5>
 <p><a href="../SchemaService/"><code>SchemaService</code></a></p>
@@ -193,13 +193,13 @@
 <blockquote>
 <p><code>readonly</code> <strong>schemaService</strong>: <a href="../SchemaService/"><code>SchemaService</code></a></p>
 </blockquote>
-<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:11</p>
+<p>Defined in: packages/base/build/lib/schema/application/facade.d.ts:11</p>
 <h2 id="methods">Methods</h2>
 <h3 id="complete">complete()</h3>
 <blockquote>
 <p><strong>complete</strong>(<code>schema</code>): <code>void</code></p>
 </blockquote>
-<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:25</p>
+<p>Defined in: packages/base/build/lib/schema/application/facade.d.ts:25</p>
 <h4 id="parameters_1">Parameters</h4>
 <h5 id="schema">schema</h5>
 <p><a href="../../interfaces/Schema/"><code>Schema</code></a></p>
@@ -210,7 +210,7 @@
 <blockquote>
 <p><strong>create</strong>(<code>dialect?</code>, <code>connection?</code>): <a href="../../interfaces/Schema/"><code>Schema</code></a></p>
 </blockquote>
-<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:20</p>
+<p>Defined in: packages/base/build/lib/schema/application/facade.d.ts:20</p>
 <h4 id="parameters_2">Parameters</h4>
 <h5 id="dialect">dialect?</h5>
 <p><a href="../../enumerations/Dialect/"><code>Dialect</code></a></p>
@@ -223,7 +223,7 @@
 <blockquote>
 <p><strong>initialize</strong>(<code>schema</code>, <code>args</code>): <a href="../../interfaces/Schema/"><code>Schema</code></a></p>
 </blockquote>
-<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:21</p>
+<p>Defined in: packages/base/build/lib/schema/application/facade.d.ts:21</p>
 <h4 id="parameters_3">Parameters</h4>
 <h5 id="schema_1">schema</h5>
 <p><a href="../../interfaces/Schema/"><code>Schema</code></a></p>
@@ -236,7 +236,7 @@
 <blockquote>
 <p><strong>introspect</strong>(<code>schema</code>, <code>data</code>, <code>name</code>): <a href="../../interfaces/SchemaData/"><code>SchemaData</code></a></p>
 </blockquote>
-<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:22</p>
+<p>Defined in: packages/base/build/lib/schema/application/facade.d.ts:22</p>
 <h4 id="parameters_4">Parameters</h4>
 <h5 id="schema_2">schema</h5>
 <p><a href="../../interfaces/Schema/"><code>Schema</code></a></p>
@@ -251,7 +251,7 @@
 <blockquote>
 <p><strong>match</strong>(<code>schema</code>, <code>mappings</code>, <code>options?</code>): <code>void</code></p>
 </blockquote>
-<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:23</p>
+<p>Defined in: packages/base/build/lib/schema/application/facade.d.ts:23</p>
 <h4 id="parameters_5">Parameters</h4>
 <h5 id="schema_3">schema</h5>
 <p><a href="../../interfaces/Schema/"><code>Schema</code></a></p>
@@ -264,20 +264,20 @@
 <hr />
 <h3 id="read">read()</h3>
 <blockquote>
-<p><strong>read</strong>(<code>workspace</code>): <code>Promise</code>\&lt;<code>null</code> | <a href="../../interfaces/SchemaInfo/"><code>SchemaInfo</code></a>&gt;</p>
+<p><strong>read</strong>(<code>workspace</code>): <code>Promise</code>\&lt;<a href="../../interfaces/SchemaInfo/"><code>SchemaInfo</code></a> | <code>null</code>&gt;</p>
 </blockquote>
-<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:26</p>
+<p>Defined in: packages/base/build/lib/schema/application/facade.d.ts:26</p>
 <h4 id="parameters_6">Parameters</h4>
 <h5 id="workspace">workspace</h5>
 <p><code>string</code></p>
 <h4 id="returns_6">Returns</h4>
-<p><code>Promise</code>\&lt;<code>null</code> | <a href="../../interfaces/SchemaInfo/"><code>SchemaInfo</code></a>&gt;</p>
+<p><code>Promise</code>\&lt;<a href="../../interfaces/SchemaInfo/"><code>SchemaInfo</code></a> | <code>null</code>&gt;</p>
 <hr />
 <h3 id="schemadata">schemaData()</h3>
 <blockquote>
 <p><strong>schemaData</strong>(<code>source</code>, <code>name</code>, <code>type</code>): <a href="../../interfaces/SchemaData/"><code>SchemaData</code></a></p>
 </blockquote>
-<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:24</p>
+<p>Defined in: packages/base/build/lib/schema/application/facade.d.ts:24</p>
 <h4 id="parameters_7">Parameters</h4>
 <h5 id="source">source</h5>
 <p><code>any</code></p>
@@ -292,7 +292,7 @@
 <blockquote>
 <p><strong>write</strong>(<code>schema</code>, <code>path</code>): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
 </blockquote>
-<p>Defined in: node_modules/lambdaorm-base/schema/application/facade.d.ts:27</p>
+<p>Defined in: packages/base/build/lib/schema/application/facade.d.ts:27</p>
 <h4 id="parameters_8">Parameters</h4>
 <h5 id="schema_4">schema</h5>
 <p><a href="../../interfaces/Schema/"><code>Schema</code></a></p>

@@ -6,7 +6,7 @@
 
 # Class: CryptoHelper
 
-Defined in: [src/lib/shared/infrastructure/helper.ts:5](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/shared/infrastructure/helper.ts#L5)
+Defined in: [packages/lib/src/lib/shared/infrastructure/helper.ts:5](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/shared/infrastructure/helper.ts#L5)
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: [src/lib/shared/infrastructure/helper.ts:5](https://github.com/lambd
 
 > **decrypt**(`value`, `key`): `string`
 
-Defined in: [src/lib/shared/infrastructure/helper.ts:10](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/shared/infrastructure/helper.ts#L10)
+Defined in: [packages/lib/src/lib/shared/infrastructure/helper.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/shared/infrastructure/helper.ts#L10)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [src/lib/shared/infrastructure/helper.ts:10](https://github.com/lamb
 
 > **encrypt**(`value`, `key`): `string`
 
-Defined in: [src/lib/shared/infrastructure/helper.ts:6](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/shared/infrastructure/helper.ts#L6)
+Defined in: [packages/lib/src/lib/shared/infrastructure/helper.ts:6](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/shared/infrastructure/helper.ts#L6)
 
 #### Parameters
 
@@ -68,7 +68,9 @@ Defined in: [src/lib/shared/infrastructure/helper.ts:6](https://github.com/lambd
 
 > **getBase64**(`value`): `string`
 
-Defined in: [src/lib/shared/infrastructure/helper.ts:18](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/shared/infrastructure/helper.ts#L18)
+Defined in: [packages/lib/src/lib/shared/infrastructure/helper.ts:20](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/shared/infrastructure/helper.ts#L20)
+
+"YWJj" → "abc"
 
 #### Parameters
 
@@ -86,7 +88,9 @@ Defined in: [src/lib/shared/infrastructure/helper.ts:18](https://github.com/lamb
 
 > **toBase64**(`value`): `string`
 
-Defined in: [src/lib/shared/infrastructure/helper.ts:14](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/shared/infrastructure/helper.ts#L14)
+Defined in: [packages/lib/src/lib/shared/infrastructure/helper.ts:15](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/shared/infrastructure/helper.ts#L15)
+
+"abc" → "YWJj"
 
 #### Parameters
 

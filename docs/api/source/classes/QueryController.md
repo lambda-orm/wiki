@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / QueryController
+[λORM service](../README.md) / QueryController
 
 # Class: QueryController
 
-Defined in: [src/infrastructure/controllers/queryController.ts:5](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/queryController.ts#L5)
+Defined in: [service/src/lib/infrastructure/controllers/queryController.ts:5](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/queryController.ts#L5)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/infrastructure/controllers/queryController.ts:5](https://github
 
 > **new QueryController**(`service`, `queue?`): `QueryController`
 
-Defined in: [src/infrastructure/controllers/queryController.ts:6](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/queryController.ts#L6)
+Defined in: [service/src/lib/infrastructure/controllers/queryController.ts:6](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/queryController.ts#L6)
 
 #### Parameters
 
@@ -44,7 +44,7 @@ Defined in: [src/infrastructure/controllers/queryController.ts:6](https://github
 
 > `protected` **collectRequestParams**(`request`): `any`
 
-Defined in: [src/infrastructure/controllers/Controller.ts:27](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L27)
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:64](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L64)
 
 #### Parameters
 
@@ -66,7 +66,7 @@ Defined in: [src/infrastructure/controllers/Controller.ts:27](https://github.com
 
 > **constraints**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/queryController.ts:10](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/queryController.ts#L10)
+Defined in: [service/src/lib/infrastructure/controllers/queryController.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/queryController.ts#L10)
 
 #### Parameters
 
@@ -88,7 +88,7 @@ Defined in: [src/infrastructure/controllers/queryController.ts:10](https://githu
 
 > **execute**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/queryController.ts:14](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/queryController.ts#L14)
+Defined in: [service/src/lib/infrastructure/controllers/queryController.ts:14](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/queryController.ts#L14)
 
 #### Parameters
 
@@ -110,7 +110,7 @@ Defined in: [src/infrastructure/controllers/queryController.ts:14](https://githu
 
 > **executeQueued**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/queryController.ts:18](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/queryController.ts#L18)
+Defined in: [service/src/lib/infrastructure/controllers/queryController.ts:18](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/queryController.ts#L18)
 
 #### Parameters
 
@@ -132,7 +132,7 @@ Defined in: [src/infrastructure/controllers/queryController.ts:18](https://githu
 
 > `protected` **handleRequest**(`request`, `response`, `serviceOperation`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/Controller.ts:50](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L50)
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:87](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L87)
 
 #### Parameters
 
@@ -162,7 +162,7 @@ Defined in: [src/infrastructure/controllers/Controller.ts:50](https://github.com
 
 > **metadata**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/queryController.ts:25](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/queryController.ts#L25)
+Defined in: [service/src/lib/infrastructure/controllers/queryController.ts:25](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/queryController.ts#L25)
 
 #### Parameters
 
@@ -184,7 +184,7 @@ Defined in: [src/infrastructure/controllers/queryController.ts:25](https://githu
 
 > **model**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/queryController.ts:29](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/queryController.ts#L29)
+Defined in: [service/src/lib/infrastructure/controllers/queryController.ts:29](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/queryController.ts#L29)
 
 #### Parameters
 
@@ -206,7 +206,7 @@ Defined in: [src/infrastructure/controllers/queryController.ts:29](https://githu
 
 > **parameters**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/queryController.ts:33](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/queryController.ts#L33)
+Defined in: [service/src/lib/infrastructure/controllers/queryController.ts:33](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/queryController.ts#L33)
 
 #### Parameters
 
@@ -228,7 +228,29 @@ Defined in: [src/infrastructure/controllers/queryController.ts:33](https://githu
 
 > **plan**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/queryController.ts:37](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/queryController.ts#L37)
+Defined in: [service/src/lib/infrastructure/controllers/queryController.ts:41](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/queryController.ts#L41)
+
+#### Parameters
+
+##### request
+
+`Request`
+
+##### response
+
+`Response`
+
+#### Returns
+
+`Promise`\<`void`\>
+
+***
+
+### script()
+
+> **script**(`request`, `response`): `Promise`\<`void`\>
+
+Defined in: [service/src/lib/infrastructure/controllers/queryController.ts:37](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/queryController.ts#L37)
 
 #### Parameters
 
@@ -250,7 +272,7 @@ Defined in: [src/infrastructure/controllers/queryController.ts:37](https://githu
 
 > `protected` **sendError**(`response`, `error`): `void`
 
-Defined in: [src/infrastructure/controllers/Controller.ts:18](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L18)
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:38](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L38)
 
 #### Parameters
 
@@ -276,7 +298,7 @@ Defined in: [src/infrastructure/controllers/Controller.ts:18](https://github.com
 
 > `protected` **sendResponse**(`response`, `payload?`): `void`
 
-Defined in: [src/infrastructure/controllers/Controller.ts:3](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L3)
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:28](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L28)
 
 #### Parameters
 
@@ -295,3 +317,25 @@ Defined in: [src/infrastructure/controllers/Controller.ts:3](https://github.com/
 #### Inherited from
 
 `Controller.sendResponse`
+
+***
+
+### toHttpError()
+
+> `protected` **toHttpError**(`error`): `HttpError`
+
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:43](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L43)
+
+#### Parameters
+
+##### error
+
+`any`
+
+#### Returns
+
+`HttpError`
+
+#### Inherited from
+
+`Controller.toHttpError`

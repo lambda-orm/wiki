@@ -6,7 +6,7 @@
 
 # Class: QueryHelper
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:10
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:10
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:10
 
 > **new QueryHelper**(`str`): `QueryHelper`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:12
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:12
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:12
 
 > **arrayToList**(`array`, `timeZone`): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:15
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:15
 
 #### Parameters
 
@@ -54,7 +54,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:15
 
 > **bufferToString**(`buffer`): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:19
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:19
 
 #### Parameters
 
@@ -72,7 +72,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:19
 
 > **dateFormat**(`value`, `format?`): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:18
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:18
 
 #### Parameters
 
@@ -94,7 +94,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:18
 
 > **dateToString**(`date`, `timeZone?`): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:17
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:17
 
 #### Parameters
 
@@ -116,7 +116,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:17
 
 > **escape**(`name`): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:14
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:14
 
 #### Parameters
 
@@ -134,7 +134,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:14
 
 > **escapeId**(`name`): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:13
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:13
 
 #### Parameters
 
@@ -152,7 +152,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:13
 
 > **format**(`sql`, `values`, `stringifyObjects`, `timeZone`): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:16
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:16
 
 #### Parameters
 
@@ -182,7 +182,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:16
 
 > **getInfo**(`action`, `entity`, `type?`): [`SentenceInfo`](../interfaces/SentenceInfo.md)
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:24
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:24
 
 #### Parameters
 
@@ -208,7 +208,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:24
 
 > **getSentenceCategory**(`action`): [`SentenceCategory`](../enumerations/SentenceCategory.md)
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:23
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:23
 
 #### Parameters
 
@@ -226,7 +226,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:23
 
 > **getSentenceType**(`action`): [`SentenceType`](../enumerations/SentenceType.md)
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:22
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:22
 
 #### Parameters
 
@@ -244,7 +244,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:22
 
 > **raw**(`sql`): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:20
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:20
 
 #### Parameters
 
@@ -262,7 +262,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:20
 
 > **transformParameter**(`name`): `string`
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/helper.d.ts:21
+Defined in: packages/base/build/lib/shared/infrastructure/helper.d.ts:21
 
 #### Parameters
 

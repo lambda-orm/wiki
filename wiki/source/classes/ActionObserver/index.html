@@ -161,8 +161,8 @@
                 <p><a href="../../"><strong>Lambda ORM</strong></a></p>
 <hr />
 <p><a href="../../">Lambda ORM</a> / ActionObserver</p>
-<h1 id="class-abstract-actionobserver">Class: <code>abstract</code> ActionObserver</h1>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L22">src/lib/execution/domain/executor.ts:22</a></p>
+<h1 id="abstract-class-actionobserver">Abstract Class: ActionObserver</h1>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L22">packages/lib/src/lib/execution/domain/executor.ts:22</a></p>
 <h2 id="extended-by">Extended by</h2>
 <ul>
 <li><a href="../ExecutionActionObserver/"><code>ExecutionActionObserver</code></a></li>
@@ -172,7 +172,7 @@
 <blockquote>
 <p><strong>new ActionObserver</strong>(<code>on</code>, <code>condition?</code>, <code>transactional?</code>): <code>ActionObserver</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L26">src/lib/execution/domain/executor.ts:26</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L26">packages/lib/src/lib/execution/domain/executor.ts:26</a></p>
 <h4 id="parameters">Parameters</h4>
 <h5 id="on">on</h5>
 <p><a href="../../enumerations/SentenceCategory/"><code>SentenceCategory</code></a>[]</p>
@@ -187,25 +187,25 @@
 <blockquote>
 <p><code>optional</code> <strong>condition</strong>: <code>string</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L24">src/lib/execution/domain/executor.ts:24</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L24">packages/lib/src/lib/execution/domain/executor.ts:24</a></p>
 <hr />
 <h3 id="on_1">on</h3>
 <blockquote>
 <p><strong>on</strong>: <a href="../../enumerations/SentenceCategory/"><code>SentenceCategory</code></a>[]</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L23">src/lib/execution/domain/executor.ts:23</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L23">packages/lib/src/lib/execution/domain/executor.ts:23</a></p>
 <hr />
 <h3 id="transactional_1">transactional?</h3>
 <blockquote>
 <p><code>optional</code> <strong>transactional</strong>: <code>boolean</code></p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L25">src/lib/execution/domain/executor.ts:25</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L25">packages/lib/src/lib/execution/domain/executor.ts:25</a></p>
 <h2 id="methods">Methods</h2>
 <h3 id="after">after()</h3>
 <blockquote>
 <p><strong>after</strong>(<code>args</code>): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L33">src/lib/execution/domain/executor.ts:33</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L33">packages/lib/src/lib/execution/domain/executor.ts:33</a></p>
 <h4 id="parameters_1">Parameters</h4>
 <h5 id="args">args</h5>
 <p><a href="../../interfaces/ActionObserverArgs/"><code>ActionObserverArgs</code></a></p>
@@ -216,7 +216,7 @@
 <blockquote>
 <p><strong>before</strong>(<code>args</code>): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L32">src/lib/execution/domain/executor.ts:32</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L32">packages/lib/src/lib/execution/domain/executor.ts:32</a></p>
 <h4 id="parameters_2">Parameters</h4>
 <h5 id="args_1">args</h5>
 <p><a href="../../interfaces/ActionObserverArgs/"><code>ActionObserverArgs</code></a></p>
@@ -227,7 +227,7 @@
 <blockquote>
 <p><strong>error</strong>(<code>args</code>): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L34">src/lib/execution/domain/executor.ts:34</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L34">packages/lib/src/lib/execution/domain/executor.ts:34</a></p>
 <h4 id="parameters_3">Parameters</h4>
 <h5 id="args_2">args</h5>
 <p><a href="../../interfaces/ActionObserverArgs/"><code>ActionObserverArgs</code></a></p>

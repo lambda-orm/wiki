@@ -6,7 +6,7 @@
 
 # Interface: RelationMapClauses\<T\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:112
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:112
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:112
 
 > **filter**(`predicate`, `thisArg?`): [`FilterClauses`](../classes/FilterClauses.md)\<`T`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:116
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:116
 
 #### Parameters
 
@@ -42,7 +42,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:116
 
 > **include**(`predicate`, `thisArg?`): [`IncludeClauses`](../classes/IncludeClauses.md)\<`T`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:118
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:118
 
 #### Parameters
 
@@ -64,7 +64,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:118
 
 > **sort**(`predicate`, ...`args`): `void`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:114
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:114
 
 #### Parameters
 

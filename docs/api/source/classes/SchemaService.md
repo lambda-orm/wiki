@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / SchemaService
+[λORM service](../README.md) / SchemaService
 
 # Class: SchemaService
 
-Defined in: [src/application/services/schemaService.ts:2](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L2)
+Defined in: [service/src/lib/application/services/schemaService.ts:2](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L2)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/application/services/schemaService.ts:2](https://github.com/lam
 
 > **new SchemaService**(`orm`): `SchemaService`
 
-Defined in: [src/application/services/schemaService.ts:4](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L4)
+Defined in: [service/src/lib/application/services/schemaService.ts:4](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L4)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/application/services/schemaService.ts:4](https://github.com/lam
 
 > **domain**(): `Promise`\<`DomainSchema`\>
 
-Defined in: [src/application/services/schemaService.ts:10](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L10)
+Defined in: [service/src/lib/application/services/schemaService.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L10)
 
 #### Returns
 
@@ -44,7 +44,7 @@ Defined in: [src/application/services/schemaService.ts:10](https://github.com/la
 
 > **entities**(): `Promise`\<`Entity`[]\>
 
-Defined in: [src/application/services/schemaService.ts:31](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L31)
+Defined in: [service/src/lib/application/services/schemaService.ts:31](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L31)
 
 #### Returns
 
@@ -54,9 +54,9 @@ Defined in: [src/application/services/schemaService.ts:31](https://github.com/la
 
 ### entity()
 
-> **entity**(`__namedParameters`): `Promise`\<`undefined` \| `Entity`\>
+> **entity**(`__namedParameters`): `Promise`\<`Entity` \| `undefined`\>
 
-Defined in: [src/application/services/schemaService.ts:35](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L35)
+Defined in: [service/src/lib/application/services/schemaService.ts:35](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L35)
 
 #### Parameters
 
@@ -68,15 +68,15 @@ Defined in: [src/application/services/schemaService.ts:35](https://github.com/la
 
 #### Returns
 
-`Promise`\<`undefined` \| `Entity`\>
+`Promise`\<`Entity` \| `undefined`\>
 
 ***
 
 ### entityMapping()
 
-> **entityMapping**(`__namedParameters`): `Promise`\<`undefined` \| `EntityMapping`\>
+> **entityMapping**(`__namedParameters`): `Promise`\<`EntityMapping` \| `undefined`\>
 
-Defined in: [src/application/services/schemaService.ts:55](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L55)
+Defined in: [service/src/lib/application/services/schemaService.ts:55](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L55)
 
 #### Parameters
 
@@ -92,15 +92,15 @@ Defined in: [src/application/services/schemaService.ts:55](https://github.com/la
 
 #### Returns
 
-`Promise`\<`undefined` \| `EntityMapping`\>
+`Promise`\<`EntityMapping` \| `undefined`\>
 
 ***
 
 ### enum()
 
-> **enum**(`__namedParameters`): `Promise`\<`undefined` \| `Enum`\>
+> **enum**(`__namedParameters`): `Promise`\<`Enum` \| `undefined`\>
 
-Defined in: [src/application/services/schemaService.ts:43](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L43)
+Defined in: [service/src/lib/application/services/schemaService.ts:43](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L43)
 
 #### Parameters
 
@@ -112,7 +112,7 @@ Defined in: [src/application/services/schemaService.ts:43](https://github.com/la
 
 #### Returns
 
-`Promise`\<`undefined` \| `Enum`\>
+`Promise`\<`Enum` \| `undefined`\>
 
 ***
 
@@ -120,7 +120,7 @@ Defined in: [src/application/services/schemaService.ts:43](https://github.com/la
 
 > **enums**(): `Promise`\<`Enum`[]\>
 
-Defined in: [src/application/services/schemaService.ts:39](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L39)
+Defined in: [service/src/lib/application/services/schemaService.ts:39](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L39)
 
 #### Returns
 
@@ -130,9 +130,9 @@ Defined in: [src/application/services/schemaService.ts:39](https://github.com/la
 
 ### mapping()
 
-> **mapping**(`__namedParameters`): `Promise`\<`undefined` \| `Mapping`\>
+> **mapping**(`__namedParameters`): `Promise`\<`Mapping` \| `undefined`\>
 
-Defined in: [src/application/services/schemaService.ts:51](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L51)
+Defined in: [service/src/lib/application/services/schemaService.ts:51](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L51)
 
 #### Parameters
 
@@ -144,7 +144,7 @@ Defined in: [src/application/services/schemaService.ts:51](https://github.com/la
 
 #### Returns
 
-`Promise`\<`undefined` \| `Mapping`\>
+`Promise`\<`Mapping` \| `undefined`\>
 
 ***
 
@@ -152,7 +152,7 @@ Defined in: [src/application/services/schemaService.ts:51](https://github.com/la
 
 > **mappings**(): `Promise`\<`Mapping`[]\>
 
-Defined in: [src/application/services/schemaService.ts:47](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L47)
+Defined in: [service/src/lib/application/services/schemaService.ts:47](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L47)
 
 #### Returns
 
@@ -164,7 +164,7 @@ Defined in: [src/application/services/schemaService.ts:47](https://github.com/la
 
 > **schema**(): `Promise`\<`Schema`\>
 
-Defined in: [src/application/services/schemaService.ts:14](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L14)
+Defined in: [service/src/lib/application/services/schemaService.ts:14](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L14)
 
 #### Returns
 
@@ -176,7 +176,7 @@ Defined in: [src/application/services/schemaService.ts:14](https://github.com/la
 
 > **source**(`__namedParameters`): `Promise`\<\{ `dialect`: `string`; `name`: `string`; \}\>
 
-Defined in: [src/application/services/schemaService.ts:27](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L27)
+Defined in: [service/src/lib/application/services/schemaService.ts:27](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L27)
 
 #### Parameters
 
@@ -196,7 +196,7 @@ Defined in: [src/application/services/schemaService.ts:27](https://github.com/la
 
 > **sources**(): `Promise`\<`object`[]\>
 
-Defined in: [src/application/services/schemaService.ts:23](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L23)
+Defined in: [service/src/lib/application/services/schemaService.ts:23](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L23)
 
 #### Returns
 
@@ -206,9 +206,9 @@ Defined in: [src/application/services/schemaService.ts:23](https://github.com/la
 
 ### stage()
 
-> **stage**(`__namedParameters`): `Promise`\<`undefined` \| `Stage`\>
+> **stage**(`__namedParameters`): `Promise`\<`Stage` \| `undefined`\>
 
-Defined in: [src/application/services/schemaService.ts:63](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L63)
+Defined in: [service/src/lib/application/services/schemaService.ts:63](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L63)
 
 #### Parameters
 
@@ -220,7 +220,7 @@ Defined in: [src/application/services/schemaService.ts:63](https://github.com/la
 
 #### Returns
 
-`Promise`\<`undefined` \| `Stage`\>
+`Promise`\<`Stage` \| `undefined`\>
 
 ***
 
@@ -228,7 +228,7 @@ Defined in: [src/application/services/schemaService.ts:63](https://github.com/la
 
 > **stages**(): `Promise`\<`Stage`[]\>
 
-Defined in: [src/application/services/schemaService.ts:59](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L59)
+Defined in: [service/src/lib/application/services/schemaService.ts:59](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L59)
 
 #### Returns
 
@@ -240,7 +240,7 @@ Defined in: [src/application/services/schemaService.ts:59](https://github.com/la
 
 > **version**(): `Promise`\<\{ `version`: `string`; \}\>
 
-Defined in: [src/application/services/schemaService.ts:6](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L6)
+Defined in: [service/src/lib/application/services/schemaService.ts:6](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L6)
 
 #### Returns
 
@@ -252,7 +252,7 @@ Defined in: [src/application/services/schemaService.ts:6](https://github.com/lam
 
 > **views**(): `Promise`\<`string`[]\>
 
-Defined in: [src/application/services/schemaService.ts:67](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/schemaService.ts#L67)
+Defined in: [service/src/lib/application/services/schemaService.ts:67](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/schemaService.ts#L67)
 
 #### Returns
 

@@ -6,7 +6,7 @@
 
 # Class: DDLBuilderService
 
-Defined in: [src/lib/language/application/services/ddlBuilder.ts:11](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/application/services/ddlBuilder.ts#L11)
+Defined in: [packages/lib/src/lib/language/application/services/ddlBuilder.ts:12](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/application/services/ddlBuilder.ts#L12)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/lib/language/application/services/ddlBuilder.ts:11](https://git
 
 > **new DDLBuilderService**(`schemaState`, `languages`, `stage`, `helper`): `DDLBuilderService`
 
-Defined in: [src/lib/language/application/services/ddlBuilder.ts:13](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/application/services/ddlBuilder.ts#L13)
+Defined in: [packages/lib/src/lib/language/application/services/ddlBuilder.ts:14](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/application/services/ddlBuilder.ts#L14)
 
 #### Parameters
 
@@ -44,7 +44,7 @@ Defined in: [src/lib/language/application/services/ddlBuilder.ts:13](https://git
 
 > `readonly` **stage**: `string`
 
-Defined in: [src/lib/language/application/services/ddlBuilder.ts:15](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/application/services/ddlBuilder.ts#L15)
+Defined in: [packages/lib/src/lib/language/application/services/ddlBuilder.ts:16](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/application/services/ddlBuilder.ts#L16)
 
 ## Methods
 
@@ -52,7 +52,7 @@ Defined in: [src/lib/language/application/services/ddlBuilder.ts:15](https://git
 
 > **drop**(`mappings`): [`Query`](Query.md)[]
 
-Defined in: [src/lib/language/application/services/ddlBuilder.ts:21](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/application/services/ddlBuilder.ts#L21)
+Defined in: [packages/lib/src/lib/language/application/services/ddlBuilder.ts:22](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/application/services/ddlBuilder.ts#L22)
 
 #### Parameters
 
@@ -70,7 +70,7 @@ Defined in: [src/lib/language/application/services/ddlBuilder.ts:21](https://git
 
 > **sync**(`mappings`): [`Query`](Query.md)[]
 
-Defined in: [src/lib/language/application/services/ddlBuilder.ts:47](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/application/services/ddlBuilder.ts#L47)
+Defined in: [packages/lib/src/lib/language/application/services/ddlBuilder.ts:48](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/application/services/ddlBuilder.ts#L48)
 
 #### Parameters
 
@@ -84,11 +84,35 @@ Defined in: [src/lib/language/application/services/ddlBuilder.ts:47](https://git
 
 ***
 
+### syncWithDatabase()
+
+> **syncWithDatabase**(`database`): [`Query`](Query.md)[]
+
+Defined in: [packages/lib/src/lib/language/application/services/ddlBuilder.ts:77](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/application/services/ddlBuilder.ts#L77)
+
+The DDL that takes the databases (as fetch reads them) to the model — L19, L27, L20:
+tables missing in the database are created (with their keys, FKs and indexes, as the usual sync does from a state
+without them); in the existing tables, missing columns are added (or renamed from previousMapping), and columns
+with another type, length or nullability are altered. Nothing that exists only in the database is dropped
+(stage.fetch reports it).
+
+#### Parameters
+
+##### database
+
+[`Mapping`](../interfaces/Mapping.md)[]
+
+#### Returns
+
+[`Query`](Query.md)[]
+
+***
+
 ### truncate()
 
 > **truncate**(`mappings`): [`Query`](Query.md)[]
 
-Defined in: [src/lib/language/application/services/ddlBuilder.ts:34](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/application/services/ddlBuilder.ts#L34)
+Defined in: [packages/lib/src/lib/language/application/services/ddlBuilder.ts:35](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/application/services/ddlBuilder.ts#L35)
 
 #### Parameters
 

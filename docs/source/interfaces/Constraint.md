@@ -6,7 +6,7 @@
 
 # Interface: Constraint
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:19
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:19
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:19
 
 > **condition**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:21
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:21
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:21
 
 > **message**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:20
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:20

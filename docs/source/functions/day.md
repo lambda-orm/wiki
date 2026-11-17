@@ -8,7 +8,7 @@
 
 > **day**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:256
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:257
 
 ## Parameters
 

@@ -6,7 +6,7 @@
 
 # Class: QueryAction
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:4
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:4
 
 ## Extended by
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:4
 
 > **new QueryAction**(`actions`, `query`): `QueryAction`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:7
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:7
 
 #### Parameters
 
@@ -44,7 +44,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:7
 
 > **constraints**(): `Promise`\<[`MetadataConstraint`](../interfaces/MetadataConstraint.md)\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:11
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:11
 
 #### Returns
 
@@ -56,7 +56,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:11
 
 > **execute**(`data`): `Promise`\<`any`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:8
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:8
 
 #### Parameters
 
@@ -74,7 +74,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:8
 
 > **metadata**(): `Promise`\<[`Metadata`](../interfaces/Metadata.md)\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:14
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:14
 
 #### Returns
 
@@ -86,7 +86,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:14
 
 > **model**(): `Promise`\<[`MetadataModel`](../interfaces/MetadataModel.md)[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:10
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:10
 
 #### Returns
 
@@ -98,7 +98,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:10
 
 > **normalize**(): `string`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:9
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:9
 
 #### Returns
 
@@ -110,7 +110,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:9
 
 > **parameters**(): `Promise`\<[`MetadataParameter`](../interfaces/MetadataParameter.md)[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:12
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:12
 
 #### Returns
 
@@ -122,7 +122,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:12
 
 > **sentence**(): `Promise`\<[`QueryPlan`](../interfaces/QueryPlan.md)\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:13
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:13
 
 #### Returns
 

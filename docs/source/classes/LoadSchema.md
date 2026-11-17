@@ -6,7 +6,7 @@
 
 # Class: LoadSchema
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/load.d.ts:8
+Defined in: packages/base/build/lib/schema/application/useCases/load.d.ts:8
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/useCases/load.d.ts:8
 
 > **new LoadSchema**(`source`, `domain`, `mapping`, `stage`, `view`, `helper`): `LoadSchema`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/load.d.ts:15
+Defined in: packages/base/build/lib/schema/application/useCases/load.d.ts:15
 
 #### Parameters
 
@@ -52,7 +52,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/useCases/load.d.ts:1
 
 > **load**(`source`): [`Schema`](../interfaces/Schema.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/useCases/load.d.ts:16
+Defined in: packages/base/build/lib/schema/application/useCases/load.d.ts:16
 
 #### Parameters
 

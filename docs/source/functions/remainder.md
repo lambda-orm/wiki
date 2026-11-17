@@ -8,7 +8,7 @@
 
 > **remainder**(`n1`, `n2`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:189
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:190
 
 Get remainder
 

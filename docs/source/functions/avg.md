@@ -8,7 +8,7 @@
 
 > **avg**(`value`): `any`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:308
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:309
 
 ## Parameters
 

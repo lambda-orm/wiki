@@ -6,7 +6,7 @@
 
 # Class: StageTruncate
 
-Defined in: [src/lib/stage/application/useCases/truncate.ts:4](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/truncate.ts#L4)
+Defined in: [packages/lib/src/lib/stage/application/useCases/truncate.ts:4](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/truncate.ts#L4)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/lib/stage/application/useCases/truncate.ts:4](https://github.co
 
 > **new StageTruncate**(`executor`, `stageModelService`, `schemaState`, `languages`, `options`, `helper`): `StageTruncate`
 
-Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:10](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L10)
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L10)
 
 #### Parameters
 
@@ -60,7 +60,7 @@ Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:10](https://gi
 
 > **execute**(): `Promise`\<[`ExecuteResult`](../interfaces/ExecuteResult.md)[]\>
 
-Defined in: [src/lib/stage/application/useCases/truncate.ts:13](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/truncate.ts#L13)
+Defined in: [packages/lib/src/lib/stage/application/useCases/truncate.ts:13](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/truncate.ts#L13)
 
 #### Returns
 
@@ -76,7 +76,7 @@ Defined in: [src/lib/stage/application/useCases/truncate.ts:13](https://github.c
 
 > **queries**(): `Promise`\<[`Query`](Query.md)[]\>
 
-Defined in: [src/lib/stage/application/useCases/truncate.ts:5](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/truncate.ts#L5)
+Defined in: [packages/lib/src/lib/stage/application/useCases/truncate.ts:5](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/truncate.ts#L5)
 
 #### Returns
 
@@ -92,7 +92,7 @@ Defined in: [src/lib/stage/application/useCases/truncate.ts:5](https://github.co
 
 > **sentence**(): `Promise`\<`any`[]\>
 
-Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:19](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDDL.ts#L19)
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:19](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L19)
 
 #### Returns
 
@@ -101,3 +101,21 @@ Defined in: [src/lib/stage/application/useCases/base/actionDDL.ts:19](https://gi
 #### Inherited from
 
 [`StageActionDDL`](StageActionDDL.md).[`sentence`](StageActionDDL.md#sentence)
+
+***
+
+### sentencesBySource()
+
+> **sentencesBySource**(): `Promise`\<`object`[]\>
+
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts:29](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDDL.ts#L29)
+
+The sentences grouped by source, in the stage's order of sources (one script per database) — L19
+
+#### Returns
+
+`Promise`\<`object`[]\>
+
+#### Inherited from
+
+[`StageActionDDL`](StageActionDDL.md).[`sentencesBySource`](StageActionDDL.md#sentencesbysource)

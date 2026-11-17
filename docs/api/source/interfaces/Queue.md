@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / Queue
+[λORM service](../README.md) / Queue
 
 # Interface: Queue
 
-Defined in: [src/application/ports/queue.ts:3](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/queue.ts#L3)
+Defined in: [service/src/lib/application/ports/queue.ts:3](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/queue.ts#L3)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [src/application/ports/queue.ts:3](https://github.com/lambda-orm/lam
 
 > **execute**(`args`): `string`
 
-Defined in: [src/application/ports/queue.ts:6](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/queue.ts#L6)
+Defined in: [service/src/lib/application/ports/queue.ts:6](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/queue.ts#L6)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/application/ports/queue.ts:6](https://github.com/lambda-orm/lam
 
 > **executeInBackground**(`queueId`, `args`): `Promise`\<`void`\>
 
-Defined in: [src/application/ports/queue.ts:7](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/queue.ts#L7)
+Defined in: [service/src/lib/application/ports/queue.ts:7](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/queue.ts#L7)
 
 #### Parameters
 
@@ -54,7 +54,7 @@ Defined in: [src/application/ports/queue.ts:7](https://github.com/lambda-orm/lam
 
 > **send**(`topic`, `messages`): `Promise`\<`void`\>
 
-Defined in: [src/application/ports/queue.ts:8](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/queue.ts#L8)
+Defined in: [service/src/lib/application/ports/queue.ts:8](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/queue.ts#L8)
 
 #### Parameters
 
@@ -76,7 +76,7 @@ Defined in: [src/application/ports/queue.ts:8](https://github.com/lambda-orm/lam
 
 > **start**(`queuedInfo`): `Promise`\<`void`\>
 
-Defined in: [src/application/ports/queue.ts:4](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/queue.ts#L4)
+Defined in: [service/src/lib/application/ports/queue.ts:4](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/queue.ts#L4)
 
 #### Parameters
 
@@ -94,7 +94,7 @@ Defined in: [src/application/ports/queue.ts:4](https://github.com/lambda-orm/lam
 
 > **stop**(): `Promise`\<`void`\>
 
-Defined in: [src/application/ports/queue.ts:5](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/queue.ts#L5)
+Defined in: [service/src/lib/application/ports/queue.ts:5](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/queue.ts#L5)
 
 #### Returns
 

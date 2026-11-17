@@ -6,7 +6,7 @@
 
 # Interface: Schema
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:178
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:186
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:178
 
 > `optional` **application**: [`ApplicationSchema`](ApplicationSchema.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:182
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:190
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:182
 
 > **domain**: [`DomainSchema`](DomainSchema.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:180
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:188
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:180
 
 > `optional` **infrastructure**: [`InfrastructureSchema`](InfrastructureSchema.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:181
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:189
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:181
 
 > **version**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:179
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:187

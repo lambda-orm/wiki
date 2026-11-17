@@ -6,15 +6,15 @@
 
 # Interface: DdlBuilder
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:4](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L4)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:4](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L4)
 
 ## Methods
 
 ### addFk()
 
-> **addFk**(`entity`, `relation`): `undefined` \| [`Query`](../classes/Query.md)
+> **addFk**(`entity`, `relation`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:24](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L24)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:25](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L25)
 
 #### Parameters
 
@@ -28,15 +28,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:24](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### addPk()
 
-> **addPk**(`entity`, `primaryKey`): `undefined` \| [`Query`](../classes/Query.md)
+> **addPk**(`entity`, `primaryKey`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:22](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L22)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:23](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L23)
 
 #### Parameters
 
@@ -50,15 +50,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:22](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### addProperty()
 
-> **addProperty**(`entity`, `property`): `undefined` \| [`Query`](../classes/Query.md)
+> **addProperty**(`entity`, `property`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:14](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L14)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:14](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L14)
 
 #### Parameters
 
@@ -72,15 +72,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:14](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### addUk()
 
-> **addUk**(`entity`, `uniqueKey`): `undefined` \| [`Query`](../classes/Query.md)
+> **addUk**(`entity`, `uniqueKey`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:23](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L23)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:24](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L24)
 
 #### Parameters
 
@@ -94,15 +94,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:23](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### ~~alterProperty()~~
 
-> **alterProperty**(`entity`, `property`): `undefined` \| [`Query`](../classes/Query.md)
+> **alterProperty**(`entity`, `property`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:18](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L18)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:19](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L19)
 
 #### Parameters
 
@@ -116,7 +116,7 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:18](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 #### Deprecated
 
@@ -126,9 +126,9 @@ Use alterPropertyType or alterPropertyRequired
 
 ### alterPropertyRequired()
 
-> **alterPropertyRequired**(`entity`, `property`): `undefined` \| [`Query`](../classes/Query.md)
+> **alterPropertyRequired**(`entity`, `property`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:20](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L20)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:21](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L21)
 
 #### Parameters
 
@@ -142,15 +142,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:20](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### alterPropertyType()
 
-> **alterPropertyType**(`entity`, `property`): `undefined` \| [`Query`](../classes/Query.md)
+> **alterPropertyType**(`entity`, `property`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:19](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L19)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:20](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L20)
 
 #### Parameters
 
@@ -164,15 +164,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:19](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### createEntity()
 
-> **createEntity**(`entity`): `undefined` \| [`Query`](../classes/Query.md)
+> **createEntity**(`entity`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:13](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L13)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:13](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L13)
 
 #### Parameters
 
@@ -182,15 +182,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:13](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### createFk()
 
-> **createFk**(`entity`, `relation`): `undefined` \| [`Query`](../classes/Query.md)
+> **createFk**(`entity`, `relation`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:25](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L25)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:26](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L26)
 
 #### Parameters
 
@@ -204,15 +204,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:25](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### createIndex()
 
-> **createIndex**(`entity`, `index`): `undefined` \| [`Query`](../classes/Query.md)
+> **createIndex**(`entity`, `index`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:26](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L26)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:27](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L27)
 
 #### Parameters
 
@@ -226,15 +226,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:26](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### createSequence()
 
-> **createSequence**(`entity`): `undefined` \| [`Query`](../classes/Query.md)
+> **createSequence**(`entity`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:27](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L27)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:28](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L28)
 
 #### Parameters
 
@@ -244,15 +244,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:27](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### dropEntity()
 
-> **dropEntity**(`entity`): `undefined` \| [`Query`](../classes/Query.md)
+> **dropEntity**(`entity`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:10](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L10)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L10)
 
 #### Parameters
 
@@ -262,15 +262,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:10](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### dropFk()
 
-> **dropFk**(`entity`, `relation`): `undefined` \| [`Query`](../classes/Query.md)
+> **dropFk**(`entity`, `relation`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:7](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L7)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:7](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L7)
 
 #### Parameters
 
@@ -284,15 +284,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:7](https://github.com/l
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### dropIndex()
 
-> **dropIndex**(`entity`, `index`): `undefined` \| [`Query`](../classes/Query.md)
+> **dropIndex**(`entity`, `index`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:8](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L8)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:8](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L8)
 
 #### Parameters
 
@@ -306,15 +306,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:8](https://github.com/l
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### dropPk()
 
-> **dropPk**(`entity`): `undefined` \| [`Query`](../classes/Query.md)
+> **dropPk**(`entity`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:11](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L11)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:11](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L11)
 
 #### Parameters
 
@@ -324,15 +324,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:11](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### dropProperty()
 
-> **dropProperty**(`entity`, `property`): `undefined` \| [`Query`](../classes/Query.md)
+> **dropProperty**(`entity`, `property`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:21](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L21)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:22](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L22)
 
 #### Parameters
 
@@ -346,15 +346,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:21](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### dropSequence()
 
-> **dropSequence**(`entity`): `undefined` \| [`Query`](../classes/Query.md)
+> **dropSequence**(`entity`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:9](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L9)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:9](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L9)
 
 #### Parameters
 
@@ -364,15 +364,15 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:9](https://github.com/l
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
 ### dropUk()
 
-> **dropUk**(`entity`): `undefined` \| [`Query`](../classes/Query.md)
+> **dropUk**(`entity`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:12](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L12)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:12](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L12)
 
 #### Parameters
 
@@ -382,7 +382,7 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:12](https://github.com/
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
@@ -390,7 +390,7 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:12](https://github.com/
 
 > **foreignKeys**(`tableNames`): [`Query`](../classes/Query.md)
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:33](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L33)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:34](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L34)
 
 #### Parameters
 
@@ -408,7 +408,7 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:33](https://github.com/
 
 > **indexes**(`tableNames`): [`Query`](../classes/Query.md)
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:34](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L34)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:35](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L35)
 
 #### Parameters
 
@@ -426,7 +426,7 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:34](https://github.com/
 
 > **objects**(): [`Query`](../classes/Query.md)
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:28](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L28)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:29](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L29)
 
 #### Returns
 
@@ -438,7 +438,7 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:28](https://github.com/
 
 > **primaryKeys**(`tableNames`): [`Query`](../classes/Query.md)
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:31](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L31)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:32](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L32)
 
 #### Parameters
 
@@ -452,11 +452,37 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:31](https://github.com/
 
 ***
 
+### renameProperty()
+
+> **renameProperty**(`entity`, `previousMapping`, `property`): [`Query`](../classes/Query.md) \| `undefined`
+
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:15](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L15)
+
+#### Parameters
+
+##### entity
+
+[`EntityMapping`](EntityMapping.md)
+
+##### previousMapping
+
+`string`
+
+##### property
+
+[`PropertyMapping`](PropertyMapping.md)
+
+#### Returns
+
+[`Query`](../classes/Query.md) \| `undefined`
+
+***
+
 ### sequences()
 
 > **sequences**(): [`Query`](../classes/Query.md)
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:35](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L35)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:36](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L36)
 
 #### Returns
 
@@ -466,9 +492,9 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:35](https://github.com/
 
 ### setNull()
 
-> **setNull**(`entity`, `relation`): `undefined` \| [`Query`](../classes/Query.md)
+> **setNull**(`entity`, `relation`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:6](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L6)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:6](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L6)
 
 #### Parameters
 
@@ -482,7 +508,7 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:6](https://github.com/l
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
@@ -490,7 +516,7 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:6](https://github.com/l
 
 > **tables**(`names`): [`Query`](../classes/Query.md)
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:29](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L29)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:30](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L30)
 
 #### Parameters
 
@@ -506,9 +532,9 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:29](https://github.com/
 
 ### truncateEntity()
 
-> **truncateEntity**(`entity`): `undefined` \| [`Query`](../classes/Query.md)
+> **truncateEntity**(`entity`): [`Query`](../classes/Query.md) \| `undefined`
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:5](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L5)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:5](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L5)
 
 #### Parameters
 
@@ -518,7 +544,7 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:5](https://github.com/l
 
 #### Returns
 
-`undefined` \| [`Query`](../classes/Query.md)
+[`Query`](../classes/Query.md) \| `undefined`
 
 ***
 
@@ -526,7 +552,7 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:5](https://github.com/l
 
 > **uniqueKeys**(`tableNames`): [`Query`](../classes/Query.md)
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:32](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L32)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:33](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L33)
 
 #### Parameters
 
@@ -544,7 +570,7 @@ Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:32](https://github.com/
 
 > **views**(`names`): [`Query`](../classes/Query.md)
 
-Defined in: [src/lib/language/domain/ports/DdlBuilder.ts:30](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/language/domain/ports/DdlBuilder.ts#L30)
+Defined in: [packages/lib/src/lib/language/domain/ports/DdlBuilder.ts:31](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/language/domain/ports/DdlBuilder.ts#L31)
 
 #### Parameters
 

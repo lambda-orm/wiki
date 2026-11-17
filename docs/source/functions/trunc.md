@@ -8,7 +8,7 @@
 
 > **trunc**(`value`, `decimals`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:203
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:204
 
 Truncate num
 

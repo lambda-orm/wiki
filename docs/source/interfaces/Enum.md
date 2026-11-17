@@ -6,7 +6,7 @@
 
 # Interface: Enum
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:13
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:13
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:13
 
 > `optional` **abstract**: `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:16
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:16
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:16
 
 > `optional` **extends**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:15
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:15
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:15
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:14
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:14
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:14
 
 > **values**: [`EnumValue`](EnumValue.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:17
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:17

@@ -8,7 +8,7 @@
 
 > **nvl2**(`value`, `a`, `b`): `any`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:302
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:303
 
 ## Parameters
 

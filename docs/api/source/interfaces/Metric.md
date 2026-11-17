@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / Metric
+[λORM service](../README.md) / Metric
 
 # Interface: Metric
 
-Defined in: [src/application/ports/metric.ts:1](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/metric.ts#L1)
+Defined in: [service/src/lib/application/ports/metric.ts:1](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/metric.ts#L1)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [src/application/ports/metric.ts:1](https://github.com/lambda-orm/la
 
 > **after**(`req`, `res`, `next`): `void`
 
-Defined in: [src/application/ports/metric.ts:3](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/metric.ts#L3)
+Defined in: [service/src/lib/application/ports/metric.ts:3](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/metric.ts#L3)
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: [src/application/ports/metric.ts:3](https://github.com/lambda-orm/la
 
 > **before**(`req`, `res`, `next`): `void`
 
-Defined in: [src/application/ports/metric.ts:2](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/metric.ts#L2)
+Defined in: [service/src/lib/application/ports/metric.ts:2](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/metric.ts#L2)
 
 #### Parameters
 
@@ -66,7 +66,7 @@ Defined in: [src/application/ports/metric.ts:2](https://github.com/lambda-orm/la
 
 > **metrics**(): `Promise`\<`any`\>
 
-Defined in: [src/application/ports/metric.ts:4](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/metric.ts#L4)
+Defined in: [service/src/lib/application/ports/metric.ts:4](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/metric.ts#L4)
 
 #### Returns
 

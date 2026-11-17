@@ -6,7 +6,7 @@
 
 # Enumeration: Dialect
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:1
+Defined in: packages/base/build/lib/schema/domain/dialect.d.ts:1
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:1
 
 > **MariaDB**: `"MariaDB"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:3
+Defined in: packages/base/build/lib/schema/domain/dialect.d.ts:3
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:3
 
 > **MongoDB**: `"MongoDB"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:8
+Defined in: packages/base/build/lib/schema/domain/dialect.d.ts:8
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:8
 
 > **MySQL**: `"MySQL"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:2
+Defined in: packages/base/build/lib/schema/domain/dialect.d.ts:2
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:2
 
 > **Oracle**: `"Oracle"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:7
+Defined in: packages/base/build/lib/schema/domain/dialect.d.ts:7
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:7
 
 > **PostgreSQL**: `"PostgreSQL"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:4
+Defined in: packages/base/build/lib/schema/domain/dialect.d.ts:4
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:4
 
 > **SQLjs**: `"SQLjs"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:6
+Defined in: packages/base/build/lib/schema/domain/dialect.d.ts:6
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:6
 
 > **SqlLite**: `"SqlLite"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:9
+Defined in: packages/base/build/lib/schema/domain/dialect.d.ts:9
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:9
 
 > **SqlServer**: `"SqlServer"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/dialect.d.ts:5
+Defined in: packages/base/build/lib/schema/domain/dialect.d.ts:5

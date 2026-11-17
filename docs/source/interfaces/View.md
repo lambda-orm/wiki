@@ -6,7 +6,7 @@
 
 # Interface: View
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:121
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:123
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:121
 
 > **entities**: [`EntityView`](EntityView.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:123
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:125
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:123
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:122
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:124

@@ -8,7 +8,7 @@
 
 > **asin**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:169
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:170
 
 Get the arc sine
 

@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / StageController
+[λORM service](../README.md) / StageController
 
 # Class: StageController
 
-Defined in: [src/infrastructure/controllers/stageController.ts:5](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/stageController.ts#L5)
+Defined in: [service/src/lib/infrastructure/controllers/stageController.ts:5](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/stageController.ts#L5)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/infrastructure/controllers/stageController.ts:5](https://github
 
 > **new StageController**(`service`): `StageController`
 
-Defined in: [src/infrastructure/controllers/stageController.ts:6](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/stageController.ts#L6)
+Defined in: [service/src/lib/infrastructure/controllers/stageController.ts:6](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/stageController.ts#L6)
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: [src/infrastructure/controllers/stageController.ts:6](https://github
 
 > `protected` **collectRequestParams**(`request`): `any`
 
-Defined in: [src/infrastructure/controllers/Controller.ts:27](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L27)
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:64](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L64)
 
 #### Parameters
 
@@ -62,7 +62,7 @@ Defined in: [src/infrastructure/controllers/Controller.ts:27](https://github.com
 
 > **exists**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/stageController.ts:14](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/stageController.ts#L14)
+Defined in: [service/src/lib/infrastructure/controllers/stageController.ts:14](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/stageController.ts#L14)
 
 #### Parameters
 
@@ -84,7 +84,7 @@ Defined in: [src/infrastructure/controllers/stageController.ts:14](https://githu
 
 > **export**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/stageController.ts:18](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/stageController.ts#L18)
+Defined in: [service/src/lib/infrastructure/controllers/stageController.ts:18](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/stageController.ts#L18)
 
 #### Parameters
 
@@ -106,7 +106,7 @@ Defined in: [src/infrastructure/controllers/stageController.ts:18](https://githu
 
 > `protected` **handleRequest**(`request`, `response`, `serviceOperation`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/Controller.ts:50](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L50)
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:87](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L87)
 
 #### Parameters
 
@@ -136,7 +136,7 @@ Defined in: [src/infrastructure/controllers/Controller.ts:50](https://github.com
 
 > **import**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/stageController.ts:22](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/stageController.ts#L22)
+Defined in: [service/src/lib/infrastructure/controllers/stageController.ts:22](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/stageController.ts#L22)
 
 #### Parameters
 
@@ -158,7 +158,7 @@ Defined in: [src/infrastructure/controllers/stageController.ts:22](https://githu
 
 > **list**(`request`, `response`): `Promise`\<`void`\>
 
-Defined in: [src/infrastructure/controllers/stageController.ts:10](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/stageController.ts#L10)
+Defined in: [service/src/lib/infrastructure/controllers/stageController.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/stageController.ts#L10)
 
 #### Parameters
 
@@ -180,7 +180,7 @@ Defined in: [src/infrastructure/controllers/stageController.ts:10](https://githu
 
 > `protected` **sendError**(`response`, `error`): `void`
 
-Defined in: [src/infrastructure/controllers/Controller.ts:18](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L18)
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:38](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L38)
 
 #### Parameters
 
@@ -206,7 +206,7 @@ Defined in: [src/infrastructure/controllers/Controller.ts:18](https://github.com
 
 > `protected` **sendResponse**(`response`, `payload?`): `void`
 
-Defined in: [src/infrastructure/controllers/Controller.ts:3](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/controllers/Controller.ts#L3)
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:28](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L28)
 
 #### Parameters
 
@@ -225,3 +225,25 @@ Defined in: [src/infrastructure/controllers/Controller.ts:3](https://github.com/
 #### Inherited from
 
 `Controller.sendResponse`
+
+***
+
+### toHttpError()
+
+> `protected` **toHttpError**(`error`): `HttpError`
+
+Defined in: [service/src/lib/infrastructure/controllers/Controller.ts:43](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/controllers/Controller.ts#L43)
+
+#### Parameters
+
+##### error
+
+`any`
+
+#### Returns
+
+`HttpError`
+
+#### Inherited from
+
+`Controller.toHttpError`

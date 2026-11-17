@@ -6,7 +6,7 @@
 
 # Interface: ModifyFilterClauses\<T\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:94
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:94
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:94
 
 > **include**(`predicate`, `thisArg?`): `void`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:96
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:96
 
 #### Parameters
 

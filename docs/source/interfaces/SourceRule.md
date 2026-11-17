@@ -6,7 +6,7 @@
 
 # Interface: SourceRule
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:131
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:133
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:131
 
 > `optional` **condition**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:133
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:135
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:133
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:132
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:134

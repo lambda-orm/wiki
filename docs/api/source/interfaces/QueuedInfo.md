@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / QueuedInfo
+[λORM service](../README.md) / QueuedInfo
 
 # Interface: QueuedInfo
 
-Defined in: [src/domain/queuedInfo.ts:8](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/queuedInfo.ts#L8)
+Defined in: [service/src/lib/domain/queuedInfo.ts:8](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/queuedInfo.ts#L8)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/domain/queuedInfo.ts:8](https://github.com/lambda-orm/lambdaorm
 
 > **config**: `any`
 
-Defined in: [src/domain/queuedInfo.ts:9](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/queuedInfo.ts#L9)
+Defined in: [service/src/lib/domain/queuedInfo.ts:9](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/queuedInfo.ts#L9)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [src/domain/queuedInfo.ts:9](https://github.com/lambda-orm/lambdaorm
 
 > **consumers**: [`ConsumerInfo`](ConsumerInfo.md)[]
 
-Defined in: [src/domain/queuedInfo.ts:10](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/queuedInfo.ts#L10)
+Defined in: [service/src/lib/domain/queuedInfo.ts:10](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/queuedInfo.ts#L10)

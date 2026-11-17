@@ -6,7 +6,7 @@
 
 # Interface: MetadataParameter
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:3
+Defined in: packages/base/build/lib/sentence/domain/metadata.d.ts:3
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:3
 
 > `optional` **children**: `MetadataParameter`[]
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:6
+Defined in: packages/base/build/lib/sentence/domain/metadata.d.ts:6
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:6
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:4
+Defined in: packages/base/build/lib/sentence/domain/metadata.d.ts:4
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:4
 
 > **type**: `string`
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/metadata.d.ts:5
+Defined in: packages/base/build/lib/sentence/domain/metadata.d.ts:5

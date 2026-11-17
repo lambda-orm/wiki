@@ -6,7 +6,7 @@
 
 # Interface: ModelConfig
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:188
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:196
 
 ## Properties
 
@@ -14,4 +14,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:188
 
 > **mappings**: [`Mapping`](Mapping.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:189
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:197

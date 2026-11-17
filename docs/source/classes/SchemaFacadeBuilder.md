@@ -6,7 +6,7 @@
 
 # Class: SchemaFacadeBuilder
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/facadeBuilder.d.ts:4
+Defined in: packages/base/build/lib/schema/infrastructure/facadeBuilder.d.ts:4
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/facadeBuilder.d.t
 
 > **new SchemaFacadeBuilder**(`exp`, `helper`): `SchemaFacadeBuilder`
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/facadeBuilder.d.ts:7
+Defined in: packages/base/build/lib/schema/infrastructure/facadeBuilder.d.ts:7
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: node\_modules/lambdaorm-base/schema/infrastructure/facadeBuilder.d.t
 
 > **build**(): [`SchemaFacade`](SchemaFacade.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/infrastructure/facadeBuilder.d.ts:8
+Defined in: packages/base/build/lib/schema/infrastructure/facadeBuilder.d.ts:8
 
 #### Returns
 

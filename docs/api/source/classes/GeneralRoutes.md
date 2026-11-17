@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / GeneralRoutes
+[λORM service](../README.md) / GeneralRoutes
 
 # Class: GeneralRoutes
 
-Defined in: [src/infrastructure/routes/generalRoutes.ts:5](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/routes/generalRoutes.ts#L5)
+Defined in: [service/src/lib/infrastructure/routes/generalRoutes.ts:5](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/routes/generalRoutes.ts#L5)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/infrastructure/routes/generalRoutes.ts:5](https://github.com/la
 
 > **new GeneralRoutes**(`service`, `metric`): `GeneralRoutes`
 
-Defined in: [src/infrastructure/routes/generalRoutes.ts:7](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/routes/generalRoutes.ts#L7)
+Defined in: [service/src/lib/infrastructure/routes/generalRoutes.ts:7](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/routes/generalRoutes.ts#L7)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [src/infrastructure/routes/generalRoutes.ts:7](https://github.com/la
 
 > **getRoutes**(): `Router`
 
-Defined in: [src/infrastructure/routes/generalRoutes.ts:11](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/infrastructure/routes/generalRoutes.ts#L11)
+Defined in: [service/src/lib/infrastructure/routes/generalRoutes.ts:11](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/infrastructure/routes/generalRoutes.ts#L11)
 
 #### Returns
 

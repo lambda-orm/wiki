@@ -6,7 +6,7 @@
 
 # Interface: Index
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:53
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:53
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:53
 
 > **fields**: `string`[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:55
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:55
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:55
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:54
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:54

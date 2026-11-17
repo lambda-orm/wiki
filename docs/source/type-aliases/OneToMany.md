@@ -8,7 +8,7 @@
 
 > **OneToMany**\<`T`\> = [`IRelation`](../interfaces/IRelation.md)\<`T`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:149
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:149
 
 ## Type Parameters
 

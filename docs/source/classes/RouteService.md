@@ -6,7 +6,7 @@
 
 # Class: RouteService
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/routeService.d.ts:4
+Defined in: packages/base/build/lib/schema/application/services/routeService.d.ts:4
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/routeServic
 
 > **new RouteService**(`stageConfigService`, `exp`): `RouteService`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/routeService.d.ts:7
+Defined in: packages/base/build/lib/schema/application/services/routeService.d.ts:7
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/routeServic
 
 > **eval**(`source`, `info`): `boolean`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/routeService.d.ts:8
+Defined in: packages/base/build/lib/schema/application/services/routeService.d.ts:8
 
 #### Parameters
 
@@ -66,7 +66,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/routeServic
 
 > **getSource**(`info`, `stage?`): `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/routeService.d.ts:9
+Defined in: packages/base/build/lib/schema/application/services/routeService.d.ts:9
 
 #### Parameters
 

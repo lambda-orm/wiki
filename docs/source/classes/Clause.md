@@ -6,7 +6,7 @@
 
 # Class: Clause
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/sentence.d.ts:17
+Defined in: packages/base/build/lib/sentence/domain/sentence.d.ts:17
 
 ## Extends
 
@@ -36,7 +36,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/sentence.d.ts:17
 
 > **new Clause**(`pos`, `name`, `children`, `entity`, `alias`): `Clause`
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/sentence.d.ts:20
+Defined in: packages/base/build/lib/sentence/domain/sentence.d.ts:20
 
 #### Parameters
 
@@ -74,7 +74,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/sentence.d.ts:20
 
 > **alias**: `string`
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/sentence.d.ts:18
+Defined in: packages/base/build/lib/sentence/domain/sentence.d.ts:18
 
 ***
 
@@ -82,7 +82,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/sentence.d.ts:18
 
 > **children**: `Operand`[]
 
-Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:44
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/domain/operand.d.ts:45
 
 #### Inherited from
 
@@ -94,7 +94,7 @@ Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:44
 
 > **entity**: `string`
 
-Defined in: node\_modules/lambdaorm-base/sentence/domain/sentence.d.ts:19
+Defined in: packages/base/build/lib/sentence/domain/sentence.d.ts:19
 
 ***
 
@@ -102,7 +102,7 @@ Defined in: node\_modules/lambdaorm-base/sentence/domain/sentence.d.ts:19
 
 > `optional` **evaluator**: `IEvaluator`
 
-Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:46
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/domain/operand.d.ts:47
 
 #### Inherited from
 
@@ -114,7 +114,7 @@ Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:46
 
 > `optional` **id**: `string`
 
-Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:48
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/domain/operand.d.ts:49
 
 #### Inherited from
 
@@ -126,7 +126,7 @@ Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:48
 
 > **name**: `any`
 
-Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:42
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/domain/operand.d.ts:43
 
 #### Inherited from
 
@@ -138,7 +138,7 @@ Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:42
 
 > `optional` **number**: `number`
 
-Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:47
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/domain/operand.d.ts:48
 
 #### Inherited from
 
@@ -150,7 +150,7 @@ Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:47
 
 > `readonly` **pos**: `Position`
 
-Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:41
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/domain/operand.d.ts:42
 
 #### Inherited from
 
@@ -162,7 +162,7 @@ Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:41
 
 > `optional` **returnType**: `Type`
 
-Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:45
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/domain/operand.d.ts:46
 
 #### Inherited from
 
@@ -174,7 +174,7 @@ Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:45
 
 > `readonly` **type**: `OperandType`
 
-Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:43
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/domain/operand.d.ts:44
 
 #### Inherited from
 
@@ -186,7 +186,7 @@ Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:43
 
 > **eval**(`context`): `any`
 
-Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:50
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/domain/operand.d.ts:51
 
 #### Parameters
 
@@ -208,7 +208,7 @@ Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:50
 
 > **evalAsync**(`context`): `Promise`\<`any`\>
 
-Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:51
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/domain/operand.d.ts:52
 
 #### Parameters
 
@@ -230,7 +230,7 @@ Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:51
 
 > **isAsync**(): `boolean`
 
-Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:52
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/domain/operand.d.ts:53
 
 #### Returns
 
@@ -246,7 +246,7 @@ Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:52
 
 > **solve**(`context`): `Promise`\<`any`\>
 
-Defined in: node\_modules/3xpr/shared/domain/operand.d.ts:53
+Defined in: node\_modules/.pnpm/3xpr@5.3.1/node\_modules/3xpr/shared/domain/operand.d.ts:54
 
 #### Parameters
 

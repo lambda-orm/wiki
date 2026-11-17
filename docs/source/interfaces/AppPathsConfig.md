@@ -6,7 +6,7 @@
 
 # Interface: AppPathsConfig
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:152
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:160
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:152
 
 > `optional` **domain**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:155
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:163
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:155
 
 > `optional` **src**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:153
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:161
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:153
 
 > `optional` **state**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:154
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:162

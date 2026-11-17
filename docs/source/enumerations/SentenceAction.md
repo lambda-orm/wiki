@@ -6,7 +6,7 @@
 
 # Enumeration: SentenceAction
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:20
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:20
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:20
 
 > **addFk**: `"addFk"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:41
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:41
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:41
 
 > **addPk**: `"addPk"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:39
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:39
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:39
 
 > **addProperty**: `"addProperty"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:38
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:38
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:38
 
 > **addUk**: `"addUk"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:40
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:40
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:40
 
 > **alterProperty**: `"alterProperty"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:37
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:37
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:37
 
 > **bulkDelete**: `"bulkDelete"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:26
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:26
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:26
 
 > **bulkInsert**: `"bulkInsert"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:25
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:25
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:25
 
 > **bulkMerge**: `"bulkMerge"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:31
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:31
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:31
 
 > **createEntity**: `"createEntity"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:33
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:33
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:33
 
 > **createFk**: `"createFk"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:35
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:35
 
 ***
 
@@ -94,7 +94,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:35
 
 > **createIndex**: `"createIndex"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:36
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:36
 
 ***
 
@@ -102,7 +102,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:36
 
 > **createSequence**: `"createSequence"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:34
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:34
 
 ***
 
@@ -110,7 +110,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:34
 
 > **delete**: `"delete"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:29
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:29
 
 ***
 
@@ -118,7 +118,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:29
 
 > **dropEntity**: `"dropEntity"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:43
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:43
 
 ***
 
@@ -126,7 +126,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:43
 
 > **dropFk**: `"dropFk"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:47
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:47
 
 ***
 
@@ -134,7 +134,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:47
 
 > **dropIndex**: `"dropIndex"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:48
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:48
 
 ***
 
@@ -142,7 +142,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:48
 
 > **dropPk**: `"dropPk"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:45
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:45
 
 ***
 
@@ -150,7 +150,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:45
 
 > **dropProperty**: `"dropProperty"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:44
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:44
 
 ***
 
@@ -158,7 +158,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:44
 
 > **dropSequence**: `"dropSequence"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:42
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:42
 
 ***
 
@@ -166,7 +166,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:42
 
 > **dropUk**: `"dropUk"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:46
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:46
 
 ***
 
@@ -174,7 +174,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:46
 
 > **foreignKeys**: `"foreignKeys"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:56
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:56
 
 ***
 
@@ -182,7 +182,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:56
 
 > **indexes**: `"indexes"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:53
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:53
 
 ***
 
@@ -190,7 +190,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:53
 
 > **insert**: `"insert"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:23
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:23
 
 ***
 
@@ -198,7 +198,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:23
 
 > **insertConditional**: `"insertConditional"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:24
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:24
 
 ***
 
@@ -206,7 +206,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:24
 
 > **merge**: `"merge"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:30
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:30
 
 ***
 
@@ -214,7 +214,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:30
 
 > **objects**: `"objects"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:49
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:49
 
 ***
 
@@ -222,7 +222,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:49
 
 > **partitions**: `"partitions"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:57
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:57
 
 ***
 
@@ -230,7 +230,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:57
 
 > **primaryKeys**: `"primaryKeys"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:54
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:54
 
 ***
 
@@ -238,7 +238,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:54
 
 > **select**: `"select"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:22
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:22
 
 ***
 
@@ -246,7 +246,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:22
 
 > **sequences**: `"sequences"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:52
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:52
 
 ***
 
@@ -254,7 +254,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:52
 
 > **tables**: `"tables"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:50
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:50
 
 ***
 
@@ -262,7 +262,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:50
 
 > **truncateEntity**: `"truncateEntity"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:32
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:32
 
 ***
 
@@ -270,7 +270,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:32
 
 > **undefined**: `"undefined"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:21
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:21
 
 ***
 
@@ -278,7 +278,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:21
 
 > **uniqueKeys**: `"uniqueKeys"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:55
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:55
 
 ***
 
@@ -286,7 +286,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:55
 
 > **update**: `"update"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:27
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:27
 
 ***
 
@@ -294,7 +294,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:27
 
 > **upsert**: `"upsert"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:28
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:28
 
 ***
 
@@ -302,4 +302,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:28
 
 > **views**: `"views"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/sentence.d.ts:51
+Defined in: packages/base/build/lib/schema/domain/sentence.d.ts:51

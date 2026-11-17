@@ -6,7 +6,7 @@
 
 # Interface: IRelation\<T\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:130
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:130
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:130
 
 > **distinct**\<`U`\>(`predicate`, `thisArg?`): [`RelationMapClauses`](RelationMapClauses.md)\<`T`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:138
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:138
 
 #### Type Parameters
 
@@ -48,7 +48,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:138
 
 > **filter**(`predicate`, `thisArg?`): [`FilterClauses`](../classes/FilterClauses.md)\<`T`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:147
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:147
 
 #### Parameters
 
@@ -70,7 +70,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:147
 
 > **first**\<`U`\>(`predicate`, `thisArg?`): [`RelationMapClauses`](RelationMapClauses.md)\<`T`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:134
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:134
 
 #### Type Parameters
 
@@ -98,7 +98,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:134
 
 > **include**(`predicate`, `thisArg?`): [`RelationIncludeClauses`](RelationIncludeClauses.md)\<`T`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:140
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:140
 
 #### Parameters
 
@@ -120,7 +120,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:140
 
 > **insert**(`predicate?`): `void`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:144
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:144
 
 #### Parameters
 
@@ -138,7 +138,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:144
 
 > **last**\<`U`\>(`predicate`, `thisArg?`): [`RelationMapClauses`](RelationMapClauses.md)\<`T`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:136
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:136
 
 #### Type Parameters
 
@@ -166,7 +166,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:136
 
 > **map**\<`U`\>(`predicate`, `thisArg?`): [`RelationMapClauses`](RelationMapClauses.md)\<`T`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:132
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:132
 
 #### Type Parameters
 
@@ -194,7 +194,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:132
 
 > **update**(`predicate?`): `void`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:142
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:142
 
 #### Parameters
 
@@ -212,7 +212,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:142
 
 > **upsert**(`predicate?`): `void`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:146
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:146
 
 #### Parameters
 

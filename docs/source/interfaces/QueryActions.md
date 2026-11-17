@@ -6,7 +6,7 @@
 
 # Interface: QueryActions
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:3
+Defined in: packages/base/build/lib/repository/domain/actions.d.ts:3
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:3
 
 > **constraints**(`query`): `Promise`\<[`MetadataConstraint`](MetadataConstraint.md)\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:8
+Defined in: packages/base/build/lib/repository/domain/actions.d.ts:8
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:8
 
 > **execute**(`query`, `data`): `Promise`\<`any`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:4
+Defined in: packages/base/build/lib/repository/domain/actions.d.ts:4
 
 #### Parameters
 
@@ -54,7 +54,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:4
 
 > **metadata**(`query`): `Promise`\<[`Metadata`](Metadata.md)\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:9
+Defined in: packages/base/build/lib/repository/domain/actions.d.ts:9
 
 #### Parameters
 
@@ -72,7 +72,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:9
 
 > **model**(`query`): `Promise`\<[`MetadataModel`](MetadataModel.md)[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:6
+Defined in: packages/base/build/lib/repository/domain/actions.d.ts:6
 
 #### Parameters
 
@@ -90,7 +90,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:6
 
 > **normalize**(`query`): `string`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:5
+Defined in: packages/base/build/lib/repository/domain/actions.d.ts:5
 
 #### Parameters
 
@@ -108,7 +108,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:5
 
 > **parameters**(`query`): `Promise`\<[`MetadataParameter`](MetadataParameter.md)[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:7
+Defined in: packages/base/build/lib/repository/domain/actions.d.ts:7
 
 #### Parameters
 
@@ -126,7 +126,7 @@ Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:7
 
 > **plan**(`query`): `Promise`\<[`QueryPlan`](QueryPlan.md)\>
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/actions.d.ts:10
+Defined in: packages/base/build/lib/repository/domain/actions.d.ts:10
 
 #### Parameters
 

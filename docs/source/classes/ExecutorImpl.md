@@ -6,7 +6,7 @@
 
 # Class: ExecutorImpl
 
-Defined in: [src/lib/execution/application/services/executor.ts:10](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/executor.ts#L10)
+Defined in: [packages/lib/src/lib/execution/application/services/executor.ts:13](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/executor.ts#L13)
 
 ## Implements
 
@@ -19,7 +19,7 @@ Defined in: [src/lib/execution/application/services/executor.ts:10](https://gith
 
 > **new ExecutorImpl**(`connectionFacade`, `languages`, `schemaState`, `expressions`, `helper`): `ExecutorImpl`
 
-Defined in: [src/lib/execution/application/services/executor.ts:12](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/executor.ts#L12)
+Defined in: [packages/lib/src/lib/execution/application/services/executor.ts:22](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/executor.ts#L22)
 
 #### Parameters
 
@@ -49,11 +49,29 @@ Defined in: [src/lib/execution/application/services/executor.ts:12](https://gith
 
 ## Methods
 
+### currentTransaction()
+
+> **currentTransaction**(): [`Transaction`](Transaction.md) \| `undefined`
+
+Defined in: [packages/lib/src/lib/execution/application/services/executor.ts:44](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/executor.ts#L44)
+
+The transaction this code runs in, or undefined outside a transaction.
+
+#### Returns
+
+[`Transaction`](Transaction.md) \| `undefined`
+
+#### Implementation of
+
+[`Executor`](../interfaces/Executor.md).[`currentTransaction`](../interfaces/Executor.md#currenttransaction)
+
+***
+
 ### execute()
 
 > **execute**(`query`, `data`, `options`): `Promise`\<`any`\>
 
-Defined in: [src/lib/execution/application/services/executor.ts:33](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/executor.ts#L33)
+Defined in: [packages/lib/src/lib/execution/application/services/executor.ts:48](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/executor.ts#L48)
 
 #### Parameters
 
@@ -83,7 +101,7 @@ Defined in: [src/lib/execution/application/services/executor.ts:33](https://gith
 
 > **executeList**(`queries`, `options`): `Promise`\<[`ExecuteResult`](../interfaces/ExecuteResult.md)[]\>
 
-Defined in: [src/lib/execution/application/services/executor.ts:56](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/executor.ts#L56)
+Defined in: [packages/lib/src/lib/execution/application/services/executor.ts:69](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/executor.ts#L69)
 
 #### Parameters
 
@@ -109,7 +127,7 @@ Defined in: [src/lib/execution/application/services/executor.ts:56](https://gith
 
 > **subscribe**(`observer`): `void`
 
-Defined in: [src/lib/execution/application/services/executor.ts:21](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/executor.ts#L21)
+Defined in: [packages/lib/src/lib/execution/application/services/executor.ts:31](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/executor.ts#L31)
 
 #### Parameters
 
@@ -131,9 +149,12 @@ Defined in: [src/lib/execution/application/services/executor.ts:21](https://gith
 
 > **transaction**(`options`, `callback`): `Promise`\<`void`\>
 
-Defined in: [src/lib/execution/application/services/executor.ts:86](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/executor.ts#L86)
+Defined in: [packages/lib/src/lib/execution/application/services/executor.ts:110](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/executor.ts#L110)
 
-Create a transaction
+Create a transaction: commit when the callback ends, rollback (and rethrow its error) when it fails.
+Inside a transaction in course, the callback joins it: the outer transaction commits or rolls back.
+A transaction can run on several stages (an execution with another stage joins it too); all of them share the
+connections, one per source, and commit or roll back together.
 
 #### Parameters
 
@@ -163,7 +184,7 @@ Code to be executed in transaction
 
 > **unsubscribe**(`observer`): `void`
 
-Defined in: [src/lib/execution/application/services/executor.ts:25](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/application/services/executor.ts#L25)
+Defined in: [packages/lib/src/lib/execution/application/services/executor.ts:35](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/application/services/executor.ts#L35)
 
 #### Parameters
 

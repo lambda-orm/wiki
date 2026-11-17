@@ -6,7 +6,7 @@
 
 # Interface: Stage
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:135
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:137
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:135
 
 > **name**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:136
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:138
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:136
 
 > **sources**: [`SourceRule`](SourceRule.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:137
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:139

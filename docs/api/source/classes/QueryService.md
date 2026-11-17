@@ -1,26 +1,30 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / QueryService
+[λORM service](../README.md) / QueryService
 
 # Class: QueryService
 
-Defined in: [src/application/services/queryService.ts:2](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/queryService.ts#L2)
+Defined in: [service/src/lib/application/services/queryService.ts:19](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/queryService.ts#L19)
 
 ## Constructors
 
 ### Constructor
 
-> **new QueryService**(`orm`): `QueryService`
+> **new QueryService**(`orm`, `scripts?`): `QueryService`
 
-Defined in: [src/application/services/queryService.ts:4](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/queryService.ts#L4)
+Defined in: [service/src/lib/application/services/queryService.ts:21](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/queryService.ts#L21)
 
 #### Parameters
 
 ##### orm
 
 `IOrm`
+
+##### scripts?
+
+[`ScriptSettings`](../interfaces/ScriptSettings.md) = `...`
 
 #### Returns
 
@@ -32,7 +36,7 @@ Defined in: [src/application/services/queryService.ts:4](https://github.com/lamb
 
 > **constraints**(`__namedParameters`): `Promise`\<`MetadataConstraint`\>
 
-Defined in: [src/application/services/queryService.ts:6](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/queryService.ts#L6)
+Defined in: [service/src/lib/application/services/queryService.ts:23](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/queryService.ts#L23)
 
 #### Parameters
 
@@ -56,7 +60,7 @@ Defined in: [src/application/services/queryService.ts:6](https://github.com/lamb
 
 > **execute**(`__namedParameters`): `Promise`\<`any`\>
 
-Defined in: [src/application/services/queryService.ts:26](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/queryService.ts#L26)
+Defined in: [service/src/lib/application/services/queryService.ts:43](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/queryService.ts#L43)
 
 #### Parameters
 
@@ -88,7 +92,7 @@ Defined in: [src/application/services/queryService.ts:26](https://github.com/lam
 
 > **metadata**(`__namedParameters`): `Promise`\<`Metadata`\>
 
-Defined in: [src/application/services/queryService.ts:10](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/queryService.ts#L10)
+Defined in: [service/src/lib/application/services/queryService.ts:27](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/queryService.ts#L27)
 
 #### Parameters
 
@@ -112,7 +116,7 @@ Defined in: [src/application/services/queryService.ts:10](https://github.com/lam
 
 > **model**(`__namedParameters`): `Promise`\<`MetadataModel`[]\>
 
-Defined in: [src/application/services/queryService.ts:14](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/queryService.ts#L14)
+Defined in: [service/src/lib/application/services/queryService.ts:31](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/queryService.ts#L31)
 
 #### Parameters
 
@@ -136,7 +140,7 @@ Defined in: [src/application/services/queryService.ts:14](https://github.com/lam
 
 > **parameters**(`__namedParameters`): `Promise`\<`MetadataParameter`[]\>
 
-Defined in: [src/application/services/queryService.ts:18](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/queryService.ts#L18)
+Defined in: [service/src/lib/application/services/queryService.ts:35](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/queryService.ts#L35)
 
 #### Parameters
 
@@ -160,7 +164,7 @@ Defined in: [src/application/services/queryService.ts:18](https://github.com/lam
 
 > **plan**(`__namedParameters`): `Promise`\<`QueryPlan`\>
 
-Defined in: [src/application/services/queryService.ts:22](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/services/queryService.ts#L22)
+Defined in: [service/src/lib/application/services/queryService.ts:39](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/queryService.ts#L39)
 
 #### Parameters
 
@@ -181,3 +185,37 @@ Defined in: [src/application/services/queryService.ts:22](https://github.com/lam
 #### Returns
 
 `Promise`\<`QueryPlan`\>
+
+***
+
+### script()
+
+> **script**(`__namedParameters`): `Promise`\<`any`\>
+
+Defined in: [service/src/lib/application/services/queryService.ts:48](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/services/queryService.ts#L48)
+
+Several queries in one transaction: a 3xpr script calling orm.execute (orm.executeScript)
+
+#### Parameters
+
+##### \_\_namedParameters
+
+###### body
+
+\{ `data?`: `any`; `options?`: `ScriptOptions`; `script`: `string`; \}
+
+###### body.data?
+
+`any`
+
+###### body.options?
+
+`ScriptOptions`
+
+###### body.script
+
+`string`
+
+#### Returns
+
+`Promise`\<`any`\>

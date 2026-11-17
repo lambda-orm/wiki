@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / Logger
+[λORM service](../README.md) / Logger
 
 # Interface: Logger
 
-Defined in: [src/application/ports/logger.ts:1](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/logger.ts#L1)
+Defined in: [service/src/lib/application/ports/logger.ts:1](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/logger.ts#L1)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [src/application/ports/logger.ts:1](https://github.com/lambda-orm/la
 
 > **error**(`message`): `Promise`\<`void`\>
 
-Defined in: [src/application/ports/logger.ts:2](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/logger.ts#L2)
+Defined in: [service/src/lib/application/ports/logger.ts:2](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/logger.ts#L2)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/application/ports/logger.ts:2](https://github.com/lambda-orm/la
 
 > **info**(`message`): `Promise`\<`void`\>
 
-Defined in: [src/application/ports/logger.ts:3](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/application/ports/logger.ts#L3)
+Defined in: [service/src/lib/application/ports/logger.ts:3](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/application/ports/logger.ts#L3)
 
 #### Parameters
 

@@ -6,7 +6,7 @@
 
 # Interface: QueryPlan
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:1
+Defined in: packages/base/build/lib/query/domain/query.d.ts:1
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:1
 
 > `optional` **children**: `QueryPlan`[]
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:6
+Defined in: packages/base/build/lib/query/domain/query.d.ts:6
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:6
 
 > **dialect**: `string`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:3
+Defined in: packages/base/build/lib/query/domain/query.d.ts:3
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:3
 
 > **entity**: `string`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:2
+Defined in: packages/base/build/lib/query/domain/query.d.ts:2
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:2
 
 > **sentence**: `string`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:5
+Defined in: packages/base/build/lib/query/domain/query.d.ts:5
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:5
 
 > **source**: `string`
 
-Defined in: node\_modules/lambdaorm-base/query/domain/query.d.ts:4
+Defined in: packages/base/build/lib/query/domain/query.d.ts:4

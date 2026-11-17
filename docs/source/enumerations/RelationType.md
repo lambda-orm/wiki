@@ -6,7 +6,7 @@
 
 # Enumeration: RelationType
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:4
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:4
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:4
 
 > **manyToOne**: `"manyToOne"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:6
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:6
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:6
 
 > **oneToMany**: `"oneToMany"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:5
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:5
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:5
 
 > **oneToOne**: `"oneToOne"`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:7
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:7

@@ -8,7 +8,7 @@
 
 > **addMinutes**(`date`, `value`): `Date`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:274
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:275
 
 ## Parameters
 

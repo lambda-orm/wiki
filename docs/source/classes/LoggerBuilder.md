@@ -6,7 +6,7 @@
 
 # Class: LoggerBuilder
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/loggerBuilder.d.ts:2
+Defined in: packages/base/build/lib/shared/infrastructure/loggerBuilder.d.ts:2
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: node\_modules/lambdaorm-base/shared/infrastructure/loggerBuilder.d.t
 
 > **build**(`name?`): [`Logger`](Logger.md)
 
-Defined in: node\_modules/lambdaorm-base/shared/infrastructure/loggerBuilder.d.ts:3
+Defined in: packages/base/build/lib/shared/infrastructure/loggerBuilder.d.ts:3
 
 #### Parameters
 

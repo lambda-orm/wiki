@@ -6,7 +6,7 @@
 
 # Class: SchemaService
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaService.d.ts:2
+Defined in: packages/base/build/lib/schema/application/services/schemaService.d.ts:2
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaServi
 
 > **complete**(`schema`): `void`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaService.d.ts:8
+Defined in: packages/base/build/lib/schema/application/services/schemaService.d.ts:8
 
 #### Parameters
 
@@ -40,13 +40,13 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaServi
 
 ### newApplication()
 
-> **newApplication**(): `undefined` \| [`ApplicationSchema`](../interfaces/ApplicationSchema.md)
+> **newApplication**(): [`ApplicationSchema`](../interfaces/ApplicationSchema.md) \| `undefined`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaService.d.ts:6
+Defined in: packages/base/build/lib/schema/application/services/schemaService.d.ts:6
 
 #### Returns
 
-`undefined` \| [`ApplicationSchema`](../interfaces/ApplicationSchema.md)
+[`ApplicationSchema`](../interfaces/ApplicationSchema.md) \| `undefined`
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaServi
 
 > **newDomain**(): [`DomainSchema`](../interfaces/DomainSchema.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaService.d.ts:5
+Defined in: packages/base/build/lib/schema/application/services/schemaService.d.ts:5
 
 #### Returns
 
@@ -66,7 +66,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaServi
 
 > **newInfrastructure**(): [`InfrastructureSchema`](../interfaces/InfrastructureSchema.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaService.d.ts:4
+Defined in: packages/base/build/lib/schema/application/services/schemaService.d.ts:4
 
 #### Returns
 
@@ -78,7 +78,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaServi
 
 > **newPathsApp**(): [`AppPathsConfig`](../interfaces/AppPathsConfig.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaService.d.ts:7
+Defined in: packages/base/build/lib/schema/application/services/schemaService.d.ts:7
 
 #### Returns
 
@@ -90,7 +90,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaServi
 
 > **newSchema**(): [`Schema`](../interfaces/Schema.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/schemaService.d.ts:3
+Defined in: packages/base/build/lib/schema/application/services/schemaService.d.ts:3
 
 #### Returns
 

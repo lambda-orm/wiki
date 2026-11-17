@@ -6,7 +6,7 @@
 
 # Class: CreateEntitiesService
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/createEntitiesService.d.ts:4
+Defined in: packages/base/build/lib/schema/application/services/createEntitiesService.d.ts:4
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/createEntit
 
 > **new CreateEntitiesService**(`helper`): `CreateEntitiesService`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/createEntitiesService.d.ts:6
+Defined in: packages/base/build/lib/schema/application/services/createEntitiesService.d.ts:6
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/createEntit
 
 > **getEntities**(`name`, `type`): [`Entity`](../interfaces/Entity.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/createEntitiesService.d.ts:7
+Defined in: packages/base/build/lib/schema/application/services/createEntitiesService.d.ts:7
 
 #### Parameters
 

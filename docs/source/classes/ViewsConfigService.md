@@ -6,7 +6,7 @@
 
 # Class: ViewsConfigService
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewsConfigService.d.ts:3
+Defined in: packages/base/build/lib/schema/application/services/config/viewsConfigService.d.ts:3
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 > **new ViewsConfigService**(): `ViewsConfigService`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewsConfigService.d.ts:5
+Defined in: packages/base/build/lib/schema/application/services/config/viewsConfigService.d.ts:5
 
 #### Returns
 
@@ -26,7 +26,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 > **views**: [`View`](../interfaces/View.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewsConfigService.d.ts:4
+Defined in: packages/base/build/lib/schema/application/services/config/viewsConfigService.d.ts:4
 
 ## Methods
 
@@ -34,7 +34,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 > **get**(`name?`): [`View`](../interfaces/View.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewsConfigService.d.ts:7
+Defined in: packages/base/build/lib/schema/application/services/config/viewsConfigService.d.ts:7
 
 #### Parameters
 
@@ -52,7 +52,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 > **getInstance**(`name?`): [`ViewConfigService`](ViewConfigService.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewsConfigService.d.ts:8
+Defined in: packages/base/build/lib/schema/application/services/config/viewsConfigService.d.ts:8
 
 #### Parameters
 
@@ -70,7 +70,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/view
 
 > **load**(`value`): `void`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/viewsConfigService.d.ts:6
+Defined in: packages/base/build/lib/schema/application/services/config/viewsConfigService.d.ts:6
 
 #### Parameters
 

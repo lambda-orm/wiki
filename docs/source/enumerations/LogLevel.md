@@ -6,7 +6,7 @@
 
 # Enumeration: LogLevel
 
-Defined in: node\_modules/lambdaorm-base/shared/domain/ports/logger.d.ts:1
+Defined in: packages/base/build/lib/shared/domain/ports/logger.d.ts:1
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/shared/domain/ports/logger.d.ts:1
 
 > **ERROR**: `"error"`
 
-Defined in: node\_modules/lambdaorm-base/shared/domain/ports/logger.d.ts:3
+Defined in: packages/base/build/lib/shared/domain/ports/logger.d.ts:3
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: node\_modules/lambdaorm-base/shared/domain/ports/logger.d.ts:3
 
 > **INFO**: `"info"`
 
-Defined in: node\_modules/lambdaorm-base/shared/domain/ports/logger.d.ts:2
+Defined in: packages/base/build/lib/shared/domain/ports/logger.d.ts:2

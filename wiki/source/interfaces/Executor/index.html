@@ -162,17 +162,26 @@
 <hr />
 <p><a href="../../">Lambda ORM</a> / Executor</p>
 <h1 id="interface-executor">Interface: Executor</h1>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L45">src/lib/execution/domain/executor.ts:45</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L45">packages/lib/src/lib/execution/domain/executor.ts:45</a></p>
 <h2 id="extended-by">Extended by</h2>
 <ul>
 <li><a href="../ObservableExecutorDecorator/"><code>ObservableExecutorDecorator</code></a></li>
 </ul>
 <h2 id="methods">Methods</h2>
+<h3 id="currenttransaction">currentTransaction()?</h3>
+<blockquote>
+<p><code>optional</code> <strong>currentTransaction</strong>(): <a href="../../classes/Transaction/"><code>Transaction</code></a> | <code>undefined</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L50">packages/lib/src/lib/execution/domain/executor.ts:50</a></p>
+<p>The transaction this code runs in (orm.transaction, orm.executeScript), or undefined outside one.</p>
+<h4 id="returns">Returns</h4>
+<p><a href="../../classes/Transaction/"><code>Transaction</code></a> | <code>undefined</code></p>
+<hr />
 <h3 id="execute">execute()</h3>
 <blockquote>
 <p><strong>execute</strong>(<code>query</code>, <code>data</code>, <code>options</code>): <code>Promise</code>\&lt;<code>any</code>&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L46">src/lib/execution/domain/executor.ts:46</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L46">packages/lib/src/lib/execution/domain/executor.ts:46</a></p>
 <h4 id="parameters">Parameters</h4>
 <h5 id="query">query</h5>
 <p><a href="../../classes/Query/"><code>Query</code></a></p>
@@ -180,33 +189,33 @@
 <p><code>any</code></p>
 <h5 id="options">options</h5>
 <p><a href="../QueryOptions/"><code>QueryOptions</code></a></p>
-<h4 id="returns">Returns</h4>
+<h4 id="returns_1">Returns</h4>
 <p><code>Promise</code>\&lt;<code>any</code>&gt;</p>
 <hr />
 <h3 id="executelist">executeList()</h3>
 <blockquote>
 <p><strong>executeList</strong>(<code>queries</code>, <code>options</code>): <code>Promise</code>\&lt;<a href="../ExecuteResult/"><code>ExecuteResult</code></a>[]&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L47">src/lib/execution/domain/executor.ts:47</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L47">packages/lib/src/lib/execution/domain/executor.ts:47</a></p>
 <h4 id="parameters_1">Parameters</h4>
 <h5 id="queries">queries</h5>
 <p><a href="../../classes/Query/"><code>Query</code></a>[]</p>
 <h5 id="options_1">options</h5>
 <p><a href="../QueryOptions/"><code>QueryOptions</code></a></p>
-<h4 id="returns_1">Returns</h4>
+<h4 id="returns_2">Returns</h4>
 <p><code>Promise</code>\&lt;<a href="../ExecuteResult/"><code>ExecuteResult</code></a>[]&gt;</p>
 <hr />
 <h3 id="transaction">transaction()</h3>
 <blockquote>
 <p><strong>transaction</strong>(<code>options</code>, <code>callback</code>): <code>Promise</code>\&lt;<code>void</code>&gt;</p>
 </blockquote>
-<p>Defined in: <a href="https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/execution/domain/executor.ts#L48">src/lib/execution/domain/executor.ts:48</a></p>
+<p>Defined in: <a href="https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/execution/domain/executor.ts#L48">packages/lib/src/lib/execution/domain/executor.ts:48</a></p>
 <h4 id="parameters_2">Parameters</h4>
 <h5 id="options_2">options</h5>
 <p><a href="../QueryOptions/"><code>QueryOptions</code></a></p>
 <h5 id="callback">callback</h5>
 <p>(<code>tr</code>) =&gt; <code>Promise</code>\&lt;<code>void</code>&gt;</p>
-<h4 id="returns_2">Returns</h4>
+<h4 id="returns_3">Returns</h4>
 <p><code>Promise</code>\&lt;<code>void</code>&gt;</p>
               
             </div>

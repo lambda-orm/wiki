@@ -1,4 +1,8 @@
-# orm-service
+**λORM service**
+
+***
+
+# λORM service
 
 ## Classes
 
@@ -23,6 +27,7 @@
 - [Queue](interfaces/Queue.md)
 - [QueuedInfo](interfaces/QueuedInfo.md)
 - [QueueExecuteArgs](interfaces/QueueExecuteArgs.md)
+- [ScriptSettings](interfaces/ScriptSettings.md)
 - [ServiceConfig](interfaces/ServiceConfig.md)
 - [ServiceInfrastructureSchema](interfaces/ServiceInfrastructureSchema.md)
 - [ServiceSchema](interfaces/ServiceSchema.md)

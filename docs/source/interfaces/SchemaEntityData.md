@@ -6,7 +6,7 @@
 
 # Interface: SchemaEntityData
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:201
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:209
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:201
 
 > **entity**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:202
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:210
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:202
 
 > **rows**: `any`[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:203
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:211

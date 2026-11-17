@@ -8,7 +8,7 @@
 
 > **hours**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:260
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:261
 
 ## Parameters
 

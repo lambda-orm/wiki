@@ -6,7 +6,7 @@
 
 # Interface: IRepository\<TEntity, TQuery\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:2
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:2
 
 ## Type Parameters
 
@@ -26,7 +26,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **bulkDelete**(`entities`): `Promise`\<`any`[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:26
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:26
 
 ##### Parameters
 
@@ -42,7 +42,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **bulkDelete**(`entities`, `include`): `Promise`\<`any`[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:27
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:27
 
 ##### Parameters
 
@@ -62,7 +62,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **bulkDelete**(`entities`, `include?`): `Promise`\<`any`[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:28
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:28
 
 ##### Parameters
 
@@ -86,7 +86,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **bulkInsert**(`entities`): `Promise`\<`any`[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:7
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:7
 
 ##### Parameters
 
@@ -102,7 +102,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **bulkInsert**(`entities`, `include`): `Promise`\<`any`[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:8
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:8
 
 ##### Parameters
 
@@ -122,7 +122,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **bulkInsert**(`entities`, `include?`): `Promise`\<`any`[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:9
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:9
 
 ##### Parameters
 
@@ -146,7 +146,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **bulkMerge**(`entities`): `Promise`\<`any`[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:20
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:20
 
 ##### Parameters
 
@@ -162,7 +162,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **bulkMerge**(`entities`, `include`): `Promise`\<`any`[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:21
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:21
 
 ##### Parameters
 
@@ -182,7 +182,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **bulkMerge**(`entities`, `include?`): `Promise`\<`any`[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:22
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:22
 
 ##### Parameters
 
@@ -206,7 +206,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **delete**(`entity`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:23
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:23
 
 ##### Parameters
 
@@ -222,7 +222,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **delete**(`entity`, `include`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:24
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:24
 
 ##### Parameters
 
@@ -242,7 +242,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **delete**(`entity`, `include?`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:25
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:25
 
 ##### Parameters
 
@@ -264,7 +264,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **deleteAll**(`data`, `filter?`, `include?`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:29
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:29
 
 #### Parameters
 
@@ -290,7 +290,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **distinct**(`data`, `filter?`, `include?`): `Promise`\<`any`[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:31
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:31
 
 #### Parameters
 
@@ -316,7 +316,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **execute**(`query`, `data?`): `Promise`\<`any`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:3
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:3
 
 #### Parameters
 
@@ -336,9 +336,9 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 ### first()
 
-> **first**(`data`, `filter?`, `include?`): `Promise`\<`null` \| `TEntity`\>
+> **first**(`data`, `filter?`, `include?`): `Promise`\<`TEntity` \| `null`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:32
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:32
 
 #### Parameters
 
@@ -356,7 +356,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 #### Returns
 
-`Promise`\<`null` \| `TEntity`\>
+`Promise`\<`TEntity` \| `null`\>
 
 ***
 
@@ -366,7 +366,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **insert**(`entity`): `Promise`\<`any`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:4
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:4
 
 ##### Parameters
 
@@ -382,7 +382,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **insert**(`entity`, `include`): `Promise`\<`any`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:5
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:5
 
 ##### Parameters
 
@@ -402,7 +402,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **insert**(`entity`, `include?`): `Promise`\<`any`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:6
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:6
 
 ##### Parameters
 
@@ -422,9 +422,9 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 ### last()
 
-> **last**(`data`, `filter?`, `include?`): `Promise`\<`null` \| `TEntity`\>
+> **last**(`data`, `filter?`, `include?`): `Promise`\<`TEntity` \| `null`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:33
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:33
 
 #### Parameters
 
@@ -442,7 +442,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 #### Returns
 
-`Promise`\<`null` \| `TEntity`\>
+`Promise`\<`TEntity` \| `null`\>
 
 ***
 
@@ -450,7 +450,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **list**(`data`, `filter?`, `include?`): `Promise`\<`TEntity`[]\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:30
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:30
 
 #### Parameters
 
@@ -478,7 +478,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **merge**(`entity`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:17
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:17
 
 ##### Parameters
 
@@ -494,7 +494,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **merge**(`entity`, `include`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:18
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:18
 
 ##### Parameters
 
@@ -514,7 +514,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **merge**(`entity`, `include?`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:19
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:19
 
 ##### Parameters
 
@@ -536,7 +536,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **query**(): [`Queryable`](../classes/Queryable.md)\<`TQuery`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:34
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:34
 
 #### Returns
 
@@ -550,7 +550,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **update**(`entity`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:10
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:10
 
 ##### Parameters
 
@@ -566,7 +566,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **update**(`entity`, `include`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:11
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:11
 
 ##### Parameters
 
@@ -586,7 +586,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **update**(`entity`, `include?`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:12
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:12
 
 ##### Parameters
 
@@ -608,7 +608,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **updateAll**(`data`, `map`, `filter?`, `include?`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:16
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:16
 
 #### Parameters
 
@@ -640,7 +640,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **upsert**(`entity`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:13
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:13
 
 ##### Parameters
 
@@ -656,7 +656,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **upsert**(`entity`, `include`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:14
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:14
 
 ##### Parameters
 
@@ -676,7 +676,7 @@ Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:
 
 > **upsert**(`entity`, `include?`): `Promise`\<`number`\>
 
-Defined in: node\_modules/lambdaorm-base/repository/application/repository.d.ts:15
+Defined in: packages/base/build/lib/repository/application/repository.d.ts:15
 
 ##### Parameters
 

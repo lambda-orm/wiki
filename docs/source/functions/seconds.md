@@ -8,7 +8,7 @@
 
 > **seconds**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:264
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:265
 
 ## Parameters
 

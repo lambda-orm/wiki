@@ -6,7 +6,7 @@
 
 # Interface: InfrastructureSchema
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:165
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:173
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:165
 
 > `optional` **mappings**: [`Mapping`](Mapping.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:167
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:175
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:167
 
 > `optional` **paths**: [`AppPathsConfig`](AppPathsConfig.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:166
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:174
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:166
 
 > `optional` **server**: [`ServerConfig`](ServerConfig.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:171
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:179
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:171
 
 > `optional` **sources**: [`Source`](Source.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:169
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:177
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:169
 
 > `optional` **stages**: [`Stage`](Stage.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:170
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:178
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:170
 
 > `optional` **views**: [`View`](View.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:168
+Defined in: packages/base/build/lib/schema/domain/schema.d.ts:176

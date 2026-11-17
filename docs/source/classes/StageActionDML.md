@@ -4,9 +4,9 @@
 
 [Lambda ORM](../README.md) / StageActionDML
 
-# Class: `abstract` StageActionDML
+# Abstract Class: StageActionDML
 
-Defined in: [src/lib/stage/application/useCases/base/actionDML.ts:7](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDML.ts#L7)
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDML.ts:7](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDML.ts#L7)
 
 ## Extended by
 
@@ -20,7 +20,7 @@ Defined in: [src/lib/stage/application/useCases/base/actionDML.ts:7](https://git
 
 > **new StageActionDML**(`stageMappingService`, `domain`, `expressionFacade`, `executor`, `options`): `StageActionDML`
 
-Defined in: [src/lib/stage/application/useCases/base/actionDML.ts:15](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDML.ts#L15)
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDML.ts:15](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDML.ts#L15)
 
 #### Parameters
 
@@ -54,7 +54,7 @@ Defined in: [src/lib/stage/application/useCases/base/actionDML.ts:15](https://gi
 
 > **queries**(): [`Query`](Query.md)[]
 
-Defined in: [src/lib/stage/application/useCases/base/actionDML.ts:33](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDML.ts#L33)
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDML.ts:33](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDML.ts#L33)
 
 #### Returns
 
@@ -66,7 +66,7 @@ Defined in: [src/lib/stage/application/useCases/base/actionDML.ts:33](https://gi
 
 > **sentence**(): `Promise`\<`any`\>
 
-Defined in: [src/lib/stage/application/useCases/base/actionDML.ts:24](https://github.com/lambda-orm/wiki/blob/d7eed5bd6f40e7e5946b35121d5564379ef251ff/src/lib/stage/application/useCases/base/actionDML.ts#L24)
+Defined in: [packages/lib/src/lib/stage/application/useCases/base/actionDML.ts:24](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/lib/src/lib/stage/application/useCases/base/actionDML.ts#L24)
 
 #### Returns
 

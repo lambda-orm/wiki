@@ -1,12 +1,12 @@
-[**orm-service**](../README.md)
+[**λORM service**](../README.md)
 
 ***
 
-[orm-service](../globals.md) / ServiceSchema
+[λORM service](../README.md) / ServiceSchema
 
 # Interface: ServiceSchema
 
-Defined in: [src/domain/serviceSchema.ts:17](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/serviceSchema.ts#L17)
+Defined in: [service/src/lib/domain/serviceSchema.ts:27](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L27)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/domain/serviceSchema.ts:17](https://github.com/lambda-orm/lambd
 
 > `optional` **application**: `ApplicationSchema`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:182
+Defined in: base/build/lib/schema/domain/schema.d.ts:190
 
 #### Inherited from
 
@@ -30,7 +30,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:182
 
 > **domain**: `DomainSchema`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:180
+Defined in: base/build/lib/schema/domain/schema.d.ts:188
 
 #### Inherited from
 
@@ -42,7 +42,7 @@ Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:180
 
 > **infrastructure**: [`ServiceInfrastructureSchema`](ServiceInfrastructureSchema.md)
 
-Defined in: [src/domain/serviceSchema.ts:18](https://github.com/lambda-orm/lambdaorm-svc/blob/b85161d80fb94d76aed52272905d40acde9ea6fd/src/domain/serviceSchema.ts#L18)
+Defined in: [service/src/lib/domain/serviceSchema.ts:28](https://github.com/lambda-orm/core/blob/937bdc8d9ed3c74f813dedaec3b7e46eae140170/packages/service/src/lib/domain/serviceSchema.ts#L28)
 
 #### Overrides
 
@@ -54,7 +54,7 @@ Defined in: [src/domain/serviceSchema.ts:18](https://github.com/lambda-orm/lambd
 
 > **version**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/domain/schema.d.ts:179
+Defined in: base/build/lib/schema/domain/schema.d.ts:187
 
 #### Inherited from
 

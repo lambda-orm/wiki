@@ -8,7 +8,7 @@
 
 > **sign**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:193
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:194
 
 Get sign of exp
 

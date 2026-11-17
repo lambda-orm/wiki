@@ -6,7 +6,7 @@
 
 # Class: DataSourceConfigService
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/dataSourceConfigService.d.ts:2
+Defined in: packages/base/build/lib/schema/application/services/config/dataSourceConfigService.d.ts:2
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/data
 
 > **new DataSourceConfigService**(): `DataSourceConfigService`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/dataSourceConfigService.d.ts:5
+Defined in: packages/base/build/lib/schema/application/services/config/dataSourceConfigService.d.ts:5
 
 #### Returns
 
@@ -26,7 +26,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/data
 
 > `optional` **default**: `string`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/dataSourceConfigService.d.ts:4
+Defined in: packages/base/build/lib/schema/application/services/config/dataSourceConfigService.d.ts:4
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/data
 
 > **sources**: [`Source`](../interfaces/Source.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/dataSourceConfigService.d.ts:3
+Defined in: packages/base/build/lib/schema/application/services/config/dataSourceConfigService.d.ts:3
 
 ## Methods
 
@@ -42,7 +42,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/data
 
 > **get**(`name?`): [`Source`](../interfaces/Source.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/dataSourceConfigService.d.ts:7
+Defined in: packages/base/build/lib/schema/application/services/config/dataSourceConfigService.d.ts:7
 
 #### Parameters
 
@@ -60,7 +60,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/data
 
 > **load**(`value`): `void`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/dataSourceConfigService.d.ts:6
+Defined in: packages/base/build/lib/schema/application/services/config/dataSourceConfigService.d.ts:6
 
 #### Parameters
 

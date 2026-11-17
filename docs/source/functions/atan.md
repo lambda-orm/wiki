@@ -8,7 +8,7 @@
 
 > **atan**(`value`): `number`
 
-Defined in: node\_modules/lambdaorm-base/repository/domain/queryable.d.ts:171
+Defined in: packages/base/build/lib/repository/domain/queryable.d.ts:172
 
 Get the arc tangent
 

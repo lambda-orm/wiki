@@ -6,7 +6,7 @@
 
 # Class: StageConfigService
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/stageConfigService.d.ts:2
+Defined in: packages/base/build/lib/schema/application/services/config/stageConfigService.d.ts:2
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/stag
 
 > **new StageConfigService**(): `StageConfigService`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/stageConfigService.d.ts:4
+Defined in: packages/base/build/lib/schema/application/services/config/stageConfigService.d.ts:4
 
 #### Returns
 
@@ -26,7 +26,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/stag
 
 > **stages**: [`Stage`](../interfaces/Stage.md)[]
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/stageConfigService.d.ts:3
+Defined in: packages/base/build/lib/schema/application/services/config/stageConfigService.d.ts:3
 
 ## Methods
 
@@ -34,7 +34,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/stag
 
 > **get**(`name?`): [`Stage`](../interfaces/Stage.md)
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/stageConfigService.d.ts:6
+Defined in: packages/base/build/lib/schema/application/services/config/stageConfigService.d.ts:6
 
 #### Parameters
 
@@ -52,7 +52,7 @@ Defined in: node\_modules/lambdaorm-base/schema/application/services/config/stag
 
 > **load**(`value`): `void`
 
-Defined in: node\_modules/lambdaorm-base/schema/application/services/config/stageConfigService.d.ts:5
+Defined in: packages/base/build/lib/schema/application/services/config/stageConfigService.d.ts:5
 
 #### Parameters
 
