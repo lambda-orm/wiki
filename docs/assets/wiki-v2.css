@@ -45,7 +45,8 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
 }
 .rst-content pre code,
-.rst-content pre code.hljs {
+.rst-content pre code.hljs,
+.rst-content pre .hljs {
   display: block;
   background: #1e1e1e;
   color: #d4d4d4;
