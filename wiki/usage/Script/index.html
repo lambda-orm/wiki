@@ -8,7 +8,7 @@
     <title>Script - λORM Wiki</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs2015.min.css" />
         <link href="../../extra.css" rel="stylesheet" />
     
       <script>
@@ -165,17 +165,31 @@ stages). When the script ends the orm commits; on any error (a query, a function
 promise rejects with that error. The result is the value of the last statement, or of <code>return</code>.</p>
 <p>It is the way to run a whole use case — reads, conditions, loops and several writes — in a single call, also from the
 <a href="../../api/">REST service</a> (<code>POST /script</code>), the client and the <a href="../../cli/">CLI</a> (<code>lambdaorm script</code>).</p>
-<pre><code class="language-Typescript">const quoteId = await orm.executeScript(`
+<pre><code class="language-typescript">const quoteId = await orm.executeScript(`
   account = orm.execute(&quot;Accounts.filter(p =&gt; p.id == accountId)&quot;, { accountId: accountId });
-  if (account.length() == 0) { throw { status: 404, message: &quot;account not found&quot; }; }
-  orm.execute(&quot;Quotes.insert()&quot;, { id: quoteId, accountId: accountId, status: &quot;draft&quot; });
-  for (line in lines) {
-    orm.execute(&quot;QuoteLines.insert()&quot;, { id: line.id, quoteId: quoteId, productId: line.productId, quantity: line.qty });
+  if (account.length() == 0) {
+    throw { status: 404, message: &quot;account not found&quot; };
   }
+
+  orm.execute(&quot;Quotes.insert()&quot;, { id: quoteId, accountId: accountId, status: &quot;draft&quot; });
+
+  for (line in lines) {
+    orm.execute(&quot;QuoteLines.insert()&quot;, {
+      id:        line.id,
+      quoteId:   quoteId,
+      productId: line.productId,
+      quantity:  line.qty
+    });
+  }
+
   total = lines.sum(p =&gt; p.qty * p.price);
   orm.execute(&quot;QuoteTotals.insert()&quot;, { quoteId: quoteId, total: total }, { stage: &quot;insights&quot; });
+
   quoteId
-`, { quoteId, accountId, lines }, { stage: 'default', timeout: 10000, maxIterations: 10000 })
+`,
+  { quoteId, accountId, lines },
+  { stage: 'default', timeout: 10000, maxIterations: 10000 }
+)
 </code></pre>
 <h2 id="arguments">Arguments</h2>
 <table>

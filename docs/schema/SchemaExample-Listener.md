@@ -1,8 +1,8 @@
 # Listener on Schema
 
-Listeners allow us to execute actions when an event occurs in the ORM. \
-Events are set in the "on" property: select, insert, bulkInsert, update, upsert and delete. \
-The "condition" property allows you to define an expression that is evaluated to determine if the listener is executed. \
+Listeners allow us to execute actions when an event occurs in the ORM.
+Events are set in the "on" property: select, insert, bulkInsert, update, upsert and delete.
+The "condition" property allows you to define an expression that is evaluated to determine if the listener is executed.
 The expressions to be executed are defined in the "before", "after" and "error" properties.
 
 ## How listeners run
@@ -54,7 +54,7 @@ The arguments available in `condition`, `before`, `after` and `error`:
 ## Listener Example
 
 In this example we see how a Listener is declared to synchronize data in Insights. \
-When a record is inserted, updated or deleted in the default or cqrs stages, the listener is executed. \
+When a record is inserted, updated or deleted in the default or cqrs stages, the listener is executed.
 In this case, the expression is defined in the after property, which executes the same expression with the same data but in the stage insights, in the same transaction as the sentence: if the write in insights fails, the original one is rolled back too.
 
 **Part of the schema where the listener is defined:**

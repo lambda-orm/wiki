@@ -37,3 +37,26 @@
     });
   })();
   
+
+// A 3xpr script written inside a template string (orm.executeScript(`…`)) is coloured as code, not as one string.
+(function () {
+  if (!window.hljs) return
+  const embedScripts = (el) => {
+    el.querySelectorAll('.hljs-string').forEach(span => {
+      const text = span.textContent
+      if (text.length > 2 && text[0] === '`' && text.endsWith('`') && text.includes('\n')) {
+        const code = hljs.highlight(text.slice(1, -1), { language: 'javascript', ignoreIllegals: true }).value
+        span.className = 'embedded-script'
+        span.innerHTML = '<span class="hljs-string">`</span>' + code + '<span class="hljs-string">`</span>'
+      }
+    })
+  }
+  const CONTROL = new Set(['if', 'else', 'for', 'in', 'of', 'while', 'do', 'switch', 'case', 'default', 'break',
+    'continue', 'return', 'throw', 'try', 'catch', 'finally', 'await'])
+  const markControl = (el) => {
+    el.querySelectorAll('.hljs-keyword').forEach(k => { if (CONTROL.has(k.textContent)) k.classList.add('control') })
+  }
+  hljs.addPlugin({ 'after:highlightElement': ({ el }) => { embedScripts(el); markControl(el) } })
+  // in case the blocks were highlighted before this file loaded
+  document.querySelectorAll('pre code.hljs').forEach(el => { embedScripts(el); markControl(el) })
+})()

@@ -8,18 +8,32 @@ promise rejects with that error. The result is the value of the last statement, 
 It is the way to run a whole use case — reads, conditions, loops and several writes — in a single call, also from the
 [REST service](../api/index.md) (`POST /script`), the client and the [CLI](../cli/index.md) (`lambdaorm script`).
 
-```Typescript
+```typescript
 const quoteId = await orm.executeScript(`
   account = orm.execute("Accounts.filter(p => p.id == accountId)", { accountId: accountId });
-  if (account.length() == 0) { throw { status: 404, message: "account not found" }; }
-  orm.execute("Quotes.insert()", { id: quoteId, accountId: accountId, status: "draft" });
-  for (line in lines) {
-    orm.execute("QuoteLines.insert()", { id: line.id, quoteId: quoteId, productId: line.productId, quantity: line.qty });
+  if (account.length() == 0) {
+    throw { status: 404, message: "account not found" };
   }
+
+  orm.execute("Quotes.insert()", { id: quoteId, accountId: accountId, status: "draft" });
+
+  for (line in lines) {
+    orm.execute("QuoteLines.insert()", {
+      id:        line.id,
+      quoteId:   quoteId,
+      productId: line.productId,
+      quantity:  line.qty
+    });
+  }
+
   total = lines.sum(p => p.qty * p.price);
   orm.execute("QuoteTotals.insert()", { quoteId: quoteId, total: total }, { stage: "insights" });
+
   quoteId
-`, { quoteId, accountId, lines }, { stage: 'default', timeout: 10000, maxIterations: 10000 })
+`,
+  { quoteId, accountId, lines },
+  { stage: 'default', timeout: 10000, maxIterations: 10000 }
+)
 ```
 
 ## Arguments
