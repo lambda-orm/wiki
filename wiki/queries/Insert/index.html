@@ -212,8 +212,26 @@ INSERT INTO Countries(iso3,name) VALUES(?,?) ON DUPLICATE KEY UPDATE name = VALU
 -- PostgreSQL
 INSERT INTO Countries(iso3,name) VALUES($1,$2)
 ON CONFLICT (iso3) DO UPDATE SET name = EXCLUDED.name
+
+-- SQL Server
+MERGE INTO Countries WITH (HOLDLOCK) AS t
+USING (SELECT 1 AS x) AS s
+ON t.iso3 = @iso3
+WHEN MATCHED THEN UPDATE SET name = @name
+WHEN NOT MATCHED THEN INSERT (iso3,name) VALUES (@iso3,@name);
+
+-- Oracle
+MERGE INTO Countries t
+USING (SELECT 1 FROM DUAL) s
+ON (t.iso3 = :iso3)
+WHEN MATCHED THEN UPDATE SET name = :name
+WHEN NOT MATCHED THEN INSERT (iso3,name) VALUES (:iso3,:name)
 </code></pre>
-<p>Supported on PostgreSQL, MySQL and MariaDB. On SQL Server, Oracle and MongoDB it fails with a clear "not supported yet" error; SQLite (SQLjs) does not support it either.</p>
+<p>Supported on PostgreSQL, MySQL, MariaDB, SQL Server and Oracle (these two with <code>MERGE</code>, from @lambdaorm/lib 3.5.0).
+On MongoDB it fails with a clear "not supported yet" error; SQLite (SQLjs) does not support it either.</p>
+<p>When the key is generated (auto-increment) and not sent, the upsert inserts. On SQL Server the identity column is
+never inserted (the database generates it) and <code>OUTPUT INSERTED</code> answers it; Oracle's <code>MERGE</code> cannot return values,
+so it answers the key that was sent.</p>
 <p>Upsert is also what <a href="../Update/#update-an-aggregate-composite-relation">update with include</a> of a composite relation uses to save the children.</p>
 <h2 id="code-example">Code example</h2>
 <pre><code class="language-Typescript">import { orm } from '../../lib'

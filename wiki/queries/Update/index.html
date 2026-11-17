@@ -301,7 +301,7 @@ ON CONFLICT (order_id,line) DO UPDATE SET product = EXCLUDED.product, quantity =
 -- the children not sent
 DELETE FROM order_lines WHERE order_id = $1 AND NOT ((order_id = $2 AND line = $3) OR (order_id = $4 AND line = $5))
 </code></pre>
-<p>Supported on PostgreSQL, MySQL and MariaDB, which have <a href="../Insert/#upsert">upsert</a>. On SQL Server and Oracle it fails with a clear "not supported yet" error. On MongoDB the composite children are embedded in the parent's document, so they are replaced there.</p>
+<p>Supported on every SQL engine — PostgreSQL, MySQL, MariaDB, SQL Server and Oracle (these two from @lambdaorm/lib 3.5.0) — which use <a href="../Insert/#upsert">upsert</a>. On MongoDB the composite children are embedded in the parent's document, so they are replaced there.</p>
 <p>To only update the children sent (without inserting or deleting), include the relation with an explicit update: <code>Orders.update().include(p =&gt; p.lines.update(l =&gt; ({ quantity: l.quantity })))</code>.</p>
 <h2 id="code-example">Code example</h2>
 <pre><code class="language-Typescript">import { orm } from '../../lib'
