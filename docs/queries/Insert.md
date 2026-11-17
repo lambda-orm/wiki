@@ -88,9 +88,28 @@ INSERT INTO Countries(iso3,name) VALUES(?,?) ON DUPLICATE KEY UPDATE name = VALU
 -- PostgreSQL
 INSERT INTO Countries(iso3,name) VALUES($1,$2)
 ON CONFLICT (iso3) DO UPDATE SET name = EXCLUDED.name
+
+-- SQL Server
+MERGE INTO Countries WITH (HOLDLOCK) AS t
+USING (SELECT 1 AS x) AS s
+ON t.iso3 = @iso3
+WHEN MATCHED THEN UPDATE SET name = @name
+WHEN NOT MATCHED THEN INSERT (iso3,name) VALUES (@iso3,@name);
+
+-- Oracle
+MERGE INTO Countries t
+USING (SELECT 1 FROM DUAL) s
+ON (t.iso3 = :iso3)
+WHEN MATCHED THEN UPDATE SET name = :name
+WHEN NOT MATCHED THEN INSERT (iso3,name) VALUES (:iso3,:name)
 ```
 
-Supported on PostgreSQL, MySQL and MariaDB. On SQL Server, Oracle and MongoDB it fails with a clear "not supported yet" error; SQLite (SQLjs) does not support it either.
+Supported on PostgreSQL, MySQL, MariaDB, SQL Server and Oracle (these two with `MERGE`, from @lambdaorm/lib 3.5.0).
+On MongoDB it fails with a clear "not supported yet" error; SQLite (SQLjs) does not support it either.
+
+When the key is generated (auto-increment) and not sent, the upsert inserts. On SQL Server the identity column is
+never inserted (the database generates it) and `OUTPUT INSERTED` answers it; Oracle's `MERGE` cannot return values,
+so it answers the key that was sent.
 
 Upsert is also what [update with include](Update.md#update-an-aggregate-composite-relation) of a composite relation uses to save the children.
 

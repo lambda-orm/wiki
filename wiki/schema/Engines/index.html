@@ -203,16 +203,16 @@ They are checked by the <a href="https://github.com/lambda-orm/core/tree/main/pa
 <td><code>upsert()</code></td>
 <td>yes</td>
 <td>yes</td>
-<td>not yet (clear error)</td>
-<td>not yet (clear error)</td>
+<td>yes (<code>MERGE</code>)</td>
+<td>yes (<code>MERGE</code>)</td>
 <td>not yet (clear error)</td>
 </tr>
 <tr>
 <td><code>update().include()</code> of a composite relation</td>
 <td>yes</td>
 <td>yes</td>
-<td>not yet (clear error)</td>
-<td>not yet (clear error)</td>
+<td>yes</td>
+<td>yes</td>
 <td>yes (children are embedded)</td>
 </tr>
 <tr>
@@ -252,7 +252,7 @@ They are checked by the <a href="https://github.com/lambda-orm/core/tree/main/pa
 <h2 id="writes">Writes</h2>
 <ul>
 <li><code>update</code> and <code>delete</code> return the number of affected rows on every engine.</li>
-<li><a href="../../queries/Insert/#upsert"><code>upsert()</code></a> uses <code>ON CONFLICT … DO UPDATE</code> on PostgreSQL and <code>ON DUPLICATE KEY UPDATE</code> on MySQL and MariaDB. On SQL Server, Oracle and MongoDB it fails with a "not supported yet" error.</li>
+<li><a href="../../queries/Insert/#upsert"><code>upsert()</code></a> uses <code>ON CONFLICT … DO UPDATE</code> on PostgreSQL, <code>ON DUPLICATE KEY UPDATE</code> on MySQL and MariaDB, and <code>MERGE</code> on SQL Server and Oracle (from @lambdaorm/lib 3.5.0). On MongoDB it fails with a "not supported yet" error.</li>
 <li><a href="../../queries/Update/#update-an-aggregate-composite-relation"><code>update().include()</code> of a composite relation</a> inserts, updates and deletes the children with upsert, so it has the same support. On MongoDB the composite children are embedded in the parent's document, so the update replaces them there.</li>
 </ul>
 <h2 id="stage-commands">Stage commands</h2>

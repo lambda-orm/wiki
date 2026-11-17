@@ -11,8 +11,8 @@ They are checked by the [engines lab](https://github.com/lambda-orm/core/tree/ma
 | string without `length` | `TEXT` | `VARCHAR(80)` | `VARCHAR(80)` | `VARCHAR2(80)` | — |
 | `json` | `JSONB` | `JSON` | `NVARCHAR(MAX)` | `CLOB` | native |
 | `''` (empty string) | `''` | `''` | `''` | **NULL** | `''` |
-| `upsert()` | yes | yes | not yet (clear error) | not yet (clear error) | not yet (clear error) |
-| `update().include()` of a composite relation | yes | yes | not yet (clear error) | not yet (clear error) | yes (children are embedded) |
+| `upsert()` | yes | yes | yes (`MERGE`) | yes (`MERGE`) | not yet (clear error) |
+| `update().include()` of a composite relation | yes | yes | yes | yes | yes (children are embedded) |
 | composite children | own table | own table | own table | own table | embedded in the parent's document |
 | push / fetch of columns | yes | yes | yes | yes | schemaless: only whether the collection exists |
 | column rename (`previousMapping`) | `RENAME COLUMN` | `RENAME COLUMN` | `sp_rename` | `RENAME COLUMN` | — |
@@ -29,7 +29,7 @@ See [Property types](SchemaDefinition.md#property-types).
 ## Writes
 
 - `update` and `delete` return the number of affected rows on every engine.
-- [`upsert()`](../queries/Insert.md#upsert) uses `ON CONFLICT … DO UPDATE` on PostgreSQL and `ON DUPLICATE KEY UPDATE` on MySQL and MariaDB. On SQL Server, Oracle and MongoDB it fails with a "not supported yet" error.
+- [`upsert()`](../queries/Insert.md#upsert) uses `ON CONFLICT … DO UPDATE` on PostgreSQL, `ON DUPLICATE KEY UPDATE` on MySQL and MariaDB, and `MERGE` on SQL Server and Oracle (from @lambdaorm/lib 3.5.0). On MongoDB it fails with a "not supported yet" error.
 - [`update().include()` of a composite relation](../queries/Update.md#update-an-aggregate-composite-relation) inserts, updates and deletes the children with upsert, so it has the same support. On MongoDB the composite children are embedded in the parent's document, so the update replaces them there.
 
 ## Stage commands
