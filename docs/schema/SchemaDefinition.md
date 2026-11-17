@@ -34,7 +34,7 @@ domain:
     properties:
       - name: string		
         mapping: string
-        type: string | integer | decimal | boolean | dateTime | date | time
+        type: string | integer | decimal | boolean | dateTime | date | time | json
         length: number 
         required: boolean
         autoIncrement: boolean
@@ -89,6 +89,8 @@ infrastructure:
             - name: string
               mapping: string
               readMappingExp: expression
+              dbType: string
+              previousMapping: string
   sources:
     - name: string
       dialect: [MySQL|MariaDB|PostgreSQL|Oracle|SqlServer|MongoDB|SQLjs] 
@@ -256,8 +258,8 @@ domain:
 | Property 				|      Description					 								|	required	|	default		|
 |-----------------|-------------------------------------------|:---------:|:---------:|
 | name 		 				| name of property  												| yes				|						|
-| type 		 				| type of property													| yes				|	 string		|
-| length 		 			| length of property type										| 					|		80			|
+| type 		 				| type of property (see [Property types](#property-types))	| 				|	 string		|
+| length 		 			| length of a string property								| 					|	see below	|
 | required 		 		| if the field is required									| 					|		false		|
 | autoIncrement		| if the field is self-incrementing					| 					|		false		|
 | view 		 		    | if the field is a view										| 					|						|
@@ -266,6 +268,43 @@ domain:
 | readValue 		 	| read expression resolved on server	      | 					|						|
 | writeValue 		 	| write expression resolved in server	      | 					|						|
 | key 		 		    | key to filter or insert										| 					|						|
+
+##### Property types
+
+| Type      | Value in Node            | Column created by push (by default)                                                        |
+|-----------|--------------------------|--------------------------------------------------------------------------------------------|
+| string    | string                   | `VARCHAR(length)`; without `length`: `TEXT` on PostgreSQL, `VARCHAR(80)` on other engines  |
+| integer   | number                   | `INTEGER` (Oracle `NUMBER(10)`)                                                            |
+| decimal   | number                   | `DECIMAL(10,4)` (Oracle `NUMBER(19,4)`)                                                    |
+| boolean   | boolean                  | `BOOLEAN` (SqlServer `BIT`, Oracle `CHAR(1)`)                                              |
+| dateTime  | Date                     | `TIMESTAMP` (PostgreSQL), `DATETIME` (MySQL, MariaDB, SqlServer), `DATE` (Oracle)          |
+| date      | Date                     | `DATE` (SqlServer `SMALLDATETIME`)                                                         |
+| time      | Date                     | `TIME` (Oracle `DATE`)                                                                     |
+| json      | object or list           | `JSONB` (PostgreSQL), `JSON` (MySQL, MariaDB), `NVARCHAR(MAX)` (SqlServer), `CLOB` (Oracle), `TEXT` (others) |
+
+- **json**: objects and lists are written and read as such (no need to call `JSON.stringify` / `JSON.parse`).
+- **dateTime**: on PostgreSQL the value is written with milliseconds and its offset, so a `timestamptz` column (see `dbType` in [Property Mapping](#property-mapping)) keeps the exact instant.
+- **string without length**: on PostgreSQL it is unbounded (`TEXT`); on other engines it is `VARCHAR(80)`, so set `length` when a value can be longer.
+- `''`, `0` and `false` are values, never NULL (Oracle is the exception: it stores `''` as NULL).
+
+Example:
+
+```yaml
+domain:
+  entities:
+    - name: Products
+      primaryKey: ["id"]
+      properties:
+        - name: id
+          length: 36
+          required: true
+        - name: name                # TEXT on PostgreSQL, VARCHAR(80) elsewhere
+          required: true
+        - name: settings
+          type: json                # { "color": "red", "tags": ["a", "b"] } in and out as an object
+        - name: createdAt
+          type: dateTime
+```
 
 ##### Set Property as view and readExp
 
@@ -650,8 +689,51 @@ infrastructure:
 | Property 				|      Description					 								|	required	|	default		|
 |-----------------|-------------------------------------------|:---------:|:---------:|
 | name 		 				| name of property 													| yes				|						|
-| mapping 				| table name in the database 								| yes				|equal name |
+| mapping 				| column name in the database 							| yes				|equal name |
 | readMappingExp	| read expression resolved in source				| 				  |           |
+| dbType      		| column type used by push (DDL), instead of the one deduced from the property type | |    |
+| previousMapping	| previous column name: push renames the column instead of adding a new one |   |        |
+
+##### Column type in Property Mapping
+
+**dbType** sets the column type used by every DDL that creates or alters the column (`push`, `push -o`).
+It is the way to choose a type the property type alone does not give, for example an instant with milliseconds or a binary JSON on PostgreSQL:
+
+```yaml
+infrastructure:
+  mappings:
+    - name: catalog
+      entities:
+        - name: Products
+          mapping: products
+          properties:
+            - name: settings
+              mapping: settings
+              dbType: jsonb
+            - name: createdAt
+              mapping: created_at
+              dbType: timestamptz(3)
+```
+
+##### Rename a column with previousMapping
+
+To rename a column without losing its data, set the new name in **mapping** and the current one in **previousMapping**.
+Push then generates `ALTER TABLE … RENAME COLUMN icon TO icon_name` (SqlServer `sp_rename`) instead of adding a new column.
+
+```yaml
+infrastructure:
+  mappings:
+    - name: catalog
+      entities:
+        - name: Categories
+          mapping: categories
+          properties:
+            - name: icon
+              mapping: icon_name
+              previousMapping: icon
+```
+
+Remove **previousMapping** once the rename has been applied in every database. Renaming a table is not supported.
 
 ##### Read expression in Property Mapping
 
@@ -743,8 +825,8 @@ The stage is defined in which the rules that relate an entity to a source are de
 
 #### Condition on Source Rule
 
-En **condition** se define la regla para determinar en que source se aplicaran las consultas.
-Las variables de contexto son las siguientes:
+**condition** defines the rule that determines on which source the queries are executed.
+The context variables are the following:
 
 | Variable|      Description			|	value                                           |
 |---------|-----------------------|-------------------------------------------------|
@@ -774,6 +856,22 @@ infrastructure:
           condition: entity != "Users"
         - name: keycloak
           condition: entity == "Users"
+```
+
+#### Catch-all source
+
+A source rule without **condition** is a catch-all: as the first matching source wins, it only receives the entities that no previous source took.
+This applies to queries (DML) as well as to push and the other stage commands (DDL), so the catch-all source does not get tables of the entities assigned to other sources.
+Put it last.
+
+```yaml
+infrastructure:
+  stages:
+    - name: default
+      sources:
+        - name: keycloak
+          condition: entity == "Users"
+        - name: main
 ```
 
 ### View

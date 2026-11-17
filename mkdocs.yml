@@ -49,8 +49,10 @@ nav:
       - Introspect: schema/SchemaSynchronization-Introspect
       - Incorporate: schema/SchemaSynchronization-Incorporate
       - Use: schema/Schema-Use
+      - Engines: schema/Engines
   - Usage:     
     - Repository: usage/Repository
     - Transaction: usage/Transaction
+    - Script: usage/Script
     - Usage: usage/Usage
     - Change log: usage/CHANGELOG

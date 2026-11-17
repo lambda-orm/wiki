@@ -4,6 +4,18 @@ Since the queries are based on both the expression and the definition in the sch
 
 The mapping to the source(s) is resolved according to the mapping configuration associated with each source in the schema.
 
+## Result: affected rows
+
+`update` returns the **number of affected rows** (as `delete` does). `0` means that no row matched the filter, which is useful to answer "not found" or to detect a conflict with an optimistic lock:
+
+```Typescript
+const query = 'Orders.update(p => ({ status: status, version: version + 1 })).filter(p => p.id == id && p.version == version)'
+const first = await orm.execute(query, { id: orderId, status: 'sent', version: 1 })     // 1
+const second = await orm.execute(query, { id: orderId, status: 'accepted', version: 1 }) // 0: the version changed
+```
+
+When the update has includes, the result is the number of rows affected in the main entity.
+
 ## Update one entity complete
 
 **Lambda:**
@@ -132,10 +144,66 @@ WHERE c.CustomerID = ?
 UPDATE Orders o SET CustomerID = ?,EmployeeID = ?,OrderDate = ?,RequiredDate = ?,ShippedDate = ?,ShipVia = ?,Freight = ?,ShipName = ?,ShipAddress = ?,ShipCity = ?,ShipRegion = ?,ShipPostalCode = ?,ShipCountry = ? 
 WHERE o.OrderID = ? 
 
--- Updates all fields of the Order Details table where OrderID and ProductID match the provided parameters
-UPDATE `Order Details` o1 SET OrderID = ?,ProductID = ?,UnitPrice = ?,Quantity = ?,Discount = ? 
-WHERE (o1.OrderID = ? AND o1.ProductID = ?)
+-- details is a composite relation included as it is: each detail sent is inserted or updated (upsert),
+-- and the details of the order that were not sent are deleted (see "Update an aggregate" below)
+INSERT INTO `Order Details`(OrderID,ProductID,UnitPrice,Quantity,Discount) VALUES(?,?,?,?,?)
+ON DUPLICATE KEY UPDATE UnitPrice = VALUES(UnitPrice),Quantity = VALUES(Quantity),Discount = VALUES(Discount)
 ```
+
+## Update an aggregate (composite relation)
+
+When the included relation is **composite** (`composite: true`) and is included as it is (`include(p => p.lines)`), the update saves the whole aggregate:
+
+- children sent that already exist are updated,
+- children sent that do not exist are inserted (with the parent's key),
+- children of the parent that were not sent are deleted,
+- if the relation is absent from the data, the children are untouched.
+
+The child entity needs a primary key.
+
+```yaml
+domain:
+  entities:
+    - name: Orders
+      primaryKey: [id]
+      properties:
+        - { name: id, length: 36, required: true }
+        - { name: status, length: 20, required: true }
+      relations:
+        - { name: lines, type: manyToOne, composite: true, from: id, entity: OrderLines, to: orderId }
+    - name: OrderLines
+      primaryKey: [orderId, line]
+      properties:
+        - { name: orderId, length: 36, required: true }
+        - { name: line, type: integer, required: true }
+        - { name: product, length: 40, required: true }
+        - { name: quantity, type: integer }
+```
+
+**Lambda:**
+
+```Typescript
+const [order] = await orm.execute('Orders.filter(p => p.id == id).include(p => p.lines)', { id: orderId })
+const kept = { ...order.lines.find(p => p.line === 1), quantity: 7 } // updated
+const added = { orderId, line: 3, product: 'c', quantity: 3 }        // inserted
+// line 2 is not sent: deleted
+await orm.execute('Orders.update().include(p => p.lines)', { ...order, status: 'sent', lines: [kept, added] })
+```
+
+**SQL Result (PostgreSQL):**
+
+```sql
+UPDATE orders o SET status = $1 WHERE o.id = $2
+-- one per child sent
+INSERT INTO order_lines(order_id,line,product,quantity) VALUES($1,$2,$3,$4)
+ON CONFLICT (order_id,line) DO UPDATE SET product = EXCLUDED.product, quantity = EXCLUDED.quantity
+-- the children not sent
+DELETE FROM order_lines WHERE order_id = $1 AND NOT ((order_id = $2 AND line = $3) OR (order_id = $4 AND line = $5))
+```
+
+Supported on PostgreSQL, MySQL and MariaDB, which have [upsert](Insert.md#upsert). On SQL Server and Oracle it fails with a clear "not supported yet" error. On MongoDB the composite children are embedded in the parent's document, so they are replaced there.
+
+To only update the children sent (without inserting or deleting), include the relation with an explicit update: `Orders.update().include(p => p.lines.update(l => ({ quantity: l.quantity })))`.
 
 ## Code example
 
@@ -226,8 +294,9 @@ import { Customers } from '../northwind/model/__model'
 		// Defining a query to update Customers and include related orders and details
 		const query = () => Customers.update().include(p => p.orders.include(p => p.details))
 		// Executing the query using the ORM with the specified customer parameter
+		// the number of customers updated
 		const result = await orm.execute(query, customer)
-		console.log(JSON.stringify(result, null, 2))		
+		console.log(result)		
 	} catch (error:any) {
 		console.error(error.stack)
 	} finally {

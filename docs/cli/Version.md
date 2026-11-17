@@ -1,6 +1,13 @@
 # Version
 
-Prints lambdaorm version this project uses.
+Prints the version of the CLI that runs and the version of `@lambdaorm/lib` the project uses.
+
+## Params
+
+| parameter | short | describe |
+|-----------|-------|----------|
+| workspace | -w | Project path (default: the current directory). |
+| language | -l | Develop language (default `node`). |
 
 ## Example
 
@@ -11,6 +18,18 @@ lambdaorm version
 Result:
 
 ```sh
-Global lambdaorm cli version: 0.9.11
-Local lambdaorm version: 0.8.85
+lambdaorm cli version: 1.6.2
+Local lambdaorm version: 3.2.2
+```
+
+`Local lambdaorm not found.` when the project doesn't depend on `@lambdaorm/lib`.
+
+To print only the CLI version:
+
+```sh
+lambdaorm --version   # or lambdaorm -v
+```
+
+```sh
+1.6.2
 ```

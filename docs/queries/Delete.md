@@ -1,5 +1,11 @@
 # Delete
 
+`delete` returns the **number of affected rows**: `0` means that no row matched the filter.
+
+```Typescript
+const count = await orm.execute('Customers.delete().filter(p => p.code == code)', { code: 'C001' }) // 1
+```
+
 ## Delete record for filter
 
 **Lambda:**
@@ -115,7 +121,9 @@ import { Products } from '../northwind/model/__model'
 		// Defining a query to delete orders and include details
 		const query = () => Orders.delete().include(p => p.details)
 		// Executing the query using the ORM with the specified order parameter
-		await orm.execute(query, order)
+		// the number of orders deleted
+		const count = await orm.execute(query, order)
+		console.log(count)
 	} catch (error:any) {
 		console.error(error.stack)
 	} finally {

@@ -1,6 +1,16 @@
-# Lambda ORM service
+# λORM service
 
-Service that exposes the functionality of the [LambdaOrm](https://www.npmjs.com/package/lambdaorm) library
+REST service that exposes the functionality of [λORM](https://www.npmjs.com/package/@lambdaorm/lib). It is published
+as the Docker image [flaviorita/lambdaorm-svc](https://hub.docker.com/r/flaviorita/lambdaorm-svc) (2.3.x, Node 24,
+with the `lambdaorm` CLI installed); it is not published on npm.
+
+What is new in 2.3:
+
+* [`POST /script`](Endpoints/Script.md): several queries in one transaction (off unless `SCRIPT_ENABLED=true`).
+* Optional service token (`SERVICE_TOKEN`, `Authorization: Bearer <token>`); `RATE_LIMIT_MAX=0` turns the rate limit
+  off — see [Configuration](Use/Configuration.md).
+* Errors answer `{ error, code, message }` with a status a client can map (409, 400, …) — see [Errors](Use/Errors.md).
+* `/execute` answers the affected rows of `update` and `delete`, and takes `data` / `options` as JSON objects.
 
 ## Service
 
@@ -10,33 +20,37 @@ The service exposes the following endpoints:
 
 ![query-methods](https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/query-methods.png)
 
-* [Query](https://lambda-orm.github.io/wiki/api/Endpoints/Query/index.html)
+* [Query](Endpoints/Query.md)
+* [Script](Endpoints/Script.md)
 
 ### General endpoints
 
 ![general-methods](https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/general-methods.png)
 
-* [General](https://lambda-orm.github.io/wiki/api/Endpoints/Genera/index.html)
+* [General](Endpoints/General.md)
 
 ### Schema endpoints
 
 ![schema-methods](https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/schema-methods.png)
 
-* [Schema](https://lambda-orm.github.io/wiki/api/Endpoints/Schema/index.html)
+* [Schema](Endpoints/Schema.md)
 
 ### Stage endpoints
 
 ![stage-methods](https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/stage-methods.png)
 
-* [Stages](https://lambda-orm.github.io/wiki/api/Endpoints/Stages/index.html)
+* [Stages](Endpoints/Stages.md)
+
+The OpenAPI 3 document is served at `/api-docs` (Swagger UI).
 
 ## Usage
 
-* [Configuration](https://lambda-orm.github.io/wiki/api/Use/Configuration/index.html)
-* [Queries](https://lambda-orm.github.io/wiki/api/Use/Queries/index.html)
-* [Kafka](https://lambda-orm.github.io/wiki/api/Use/Kafka/index.html)
-* [source](https://lambda-orm.github.io/wiki/api/source/index.html)
-* [Change log](https://lambda-orm.github.io/wiki/api/CHANGELOG/index.html)
+* [Configuration](Use/Configuration.md): settings, security (token) and Docker
+* [Errors](Use/Errors.md)
+* [Expressions](Use/Queries.md)
+* [Kafka](Use/Kafka.md)
+* [source](source/README.md)
+* [Change log](CHANGELOG.md)
 
 ### Ping
 
@@ -186,7 +200,7 @@ curl -X POST -H "Content-Type: application/json" -d @data.json http://localhost:
 ### Execute
 
 ```sh
-curl -X POST "http://localhost:9291/execute?format=beautiful" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>p.details)", "data": "{\"customerId\": \"CENTC\"}" }'
+curl -X POST "http://localhost:9291/execute?format=beautiful" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>p.details)", "data": {"customerId": "CENTC"}, "options": {"stage": "default"} }'
 ```
 
 Result:
@@ -215,22 +229,44 @@ Result:
 ]
 ```
 
+### Script
+
+```sh
+curl -X POST "http://localhost:9291/script" -H "Content-Type: application/json" -d '{"script": "orm.execute(\"Orders.update(p => ({ freight: freight })).filter(p => p.id == id)\", { id: id, freight: freight }); orm.execute(\"Orders.filter(p => p.id == id)\", { id: id })", "data": {"id": 12, "freight": 40}}'
+```
+
+Both queries run in one transaction; the answer is the value of the last one. See [Script](Endpoints/Script.md).
+
 ## Docker Image
 
-You can access to image at [flaviorita/lambdaorm-svc](https://hub.docker.com/repository/docker/flaviorita/lambdaorm-svc/general)
+The image [flaviorita/lambdaorm-svc](https://hub.docker.com/r/flaviorita/lambdaorm-svc) runs the service on Node 24 and
+includes the `lambdaorm` CLI. See [Configuration](Use/Configuration.md#docker) for a `docker-compose` example.
 
 ## Clients
 
-The following clients allow consuming this service
+* Node: [@lambdaorm/client](https://www.npmjs.com/package/@lambdaorm/client) (0.9.x)
 
-* [Node Client](https://www.npmjs.com/package/lambdaorm-client-node)
+```ts
+import { orm } from '@lambdaorm/client'
 
-Soon:
+await orm.init('http://localhost:9291', { token: process.env.SERVICE_TOKEN }) // token only when SERVICE_TOKEN is set
+const orders = await orm.execute('Orders.filter(p => p.customerId == customerId)', { customerId: 'CENTC' })
+const affected = await orm.executeScript('orm.execute("Orders.update(p => ({ freight: 40 })).filter(p => p.id == id)", { id: id })', { id: 12 })
+```
 
-* Kotlin Client
-* Python Client
-* CSharp Client
-* Go Client
+* CLI: [@lambdaorm/cli](https://www.npmjs.com/package/@lambdaorm/cli) with `-u <service url>` (see [CLI](../cli/index.md)).
+
+* Other languages (Go, Python, Kotlin, C#, …): λORM ships no other client. The service's OpenAPI 3 document is the
+  contract: browse it at `/api-docs` (Swagger UI), take
+  [`swagger.yaml`](https://github.com/lambda-orm/core/blob/HEAD/packages/service/src/lib/infrastructure/swagger.yaml)
+  from the repository and generate a client, e.g. with [openapi-generator](https://openapi-generator.tech):
+
+```sh
+openapi-generator generate -i swagger.yaml -g go -o ./lambdaorm-client
+openapi-generator generate -i swagger.yaml -g python -o ./lambdaorm-client
+```
+
+  Or call it by hand: a `POST` of JSON, with `Authorization: Bearer <token>` when the service requires it.
 
 ## Labs
 

@@ -434,6 +434,43 @@ WHERE  c1.CategoryID IN (?)
 ]
 ```
 
+## Relations in another source
+
+The related entity can be in another source (another database or schema) of the stage. Since each include is a separate statement, `include` works across sources at any depth:
+
+```Typescript
+// Orders and OrderLines in one source, Products and Categories in another
+Orders.filter(p => p.id == id).include(p => p.lines.include(l => l.product.include(q => q.category)))
+```
+
+### Filter by a field of a relation in another source
+
+A filter can also use a field of a relation whose entity is in another source.
+The other source is queried first, and its keys are then used to filter with `in`:
+
+**Lambda:**
+
+```Typescript
+// OrderLines (source "sales") filtered by the name of its product (source "catalog")
+OrderLines.filter(p => p.product.name == name && p.orderId == orderId)
+```
+
+**Executed as:**
+
+```Typescript
+// 1. on the source of Products
+Products.filter(p => p.name == name)
+// 2. on the source of OrderLines, with the ids found in 1
+OrderLines.filter(p => in(p.productId, ids) && p.orderId == orderId)
+```
+
+Each comparison is replaced on its own, so `&&`, `||` and `!` keep their meaning.
+
+- It can be combined with other conditions, also with `||`: `OrderLines.filter(p => p.orderId == orderId && (p.product.name == name || p.quantity > 100))`.
+- When the other source has no match, the query returns no rows.
+- Only one level of relation (`p.product.name`, not `p.product.category.name`).
+- The other side of each comparison must be a value (a literal or a variable). Comparing with a field, as in `p.product.name == p.description`, fails with an error saying that the relation is in another source.
+
 ## Code example
 
 ```Typescript

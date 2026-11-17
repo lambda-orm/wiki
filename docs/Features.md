@@ -9,7 +9,8 @@
 	- [Eager loading using the Include() method.](https://lambda-orm.github.io/wiki/Include)
 	- [Query expression metadata](https://lambda-orm.github.io/wiki/Metadata)
 - [Repositories and custom repositories](https://lambda-orm.github.io/wiki/Repository)
-- [Transactions and distributed transactions](https://lambda-orm.github.io/wiki/Transaction)
+- [Transactions and distributed transactions](https://lambda-orm.github.io/wiki/usage/Transaction): across sources and stages
+- [Scripts](https://lambda-orm.github.io/wiki/usage/Script): a whole use case (variables, conditions, loops, several queries) in one transaction, also over REST
 - [Schema Configuration](https://lambda-orm.github.io/wiki/Schema)
   - Decoupling the domain model from infrastructure
 	- Configuration in json or yml formats
@@ -23,13 +24,10 @@
   - [BulkInsert](https://lambda-orm.github.io/wiki/BulkInsert)
   - High performance queries
   - Connection pooling
-- [Listeners and subscribers](https://lambda-orm.github.io/wiki/SchemaExample-Listener)
+- [Listeners and subscribers](https://lambda-orm.github.io/wiki/SchemaExample-Listener): awaited, in the sentence's transaction
 - TypeScript and JavaScript support
-- [CLI Support](https://github.com/lambda-orm/lambdaorm-cli) support
-- [REST API Support](https://github.com/lambda-orm/lambdaorm-svc)
+- [CLI Support](https://www.npmjs.com/package/@lambdaorm/cli) (`npm i -g @lambdaorm/cli`)
+- [REST API Support](https://hub.docker.com/r/flaviorita/lambdaorm-svc) (Docker image `flaviorita/lambdaorm-svc`)
 - HTTP Client Support
-  - [Node Client](https://www.npmjs.com/package/lambdaorm-client-node)
-  - [Kotlin Client](https://github.com/lambda-orm/lambdaorm-client-kotlin) (In Progress)
-  - Java Client (Coming Soon)
-  - C# Client (Coming Soon)
-  - Python Client (Coming Soon)
+  - [Node Client](https://www.npmjs.com/package/@lambdaorm/client)
+  - Other languages: generate a client from the service's OpenAPI 3 document

@@ -1,6 +1,7 @@
 # General Endpoints
 
-General endpoints are used to get information about the service.
+General endpoints are used to get information about the service. `/ping`, `/health` and `/metrics` stay open when the
+service requires a token (`SERVICE_TOKEN`); `/version` needs it.
 
 ![general-methods](https://raw.githubusercontent.com/lambda-orm/wiki/HEAD/docs/api/images/general-methods.png)
 
@@ -57,7 +58,7 @@ Response
 
 ```json
 {
-  "version": "0.8.49"
+  "version": "2.3.1"
 }
 ```
 

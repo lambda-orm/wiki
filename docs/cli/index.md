@@ -1,51 +1,74 @@
 # λORM CLI
 
-λORM CLI is a command line application to use [λORM](https://www.npmjs.com/package/lambdaorm)
+λORM CLI (`@lambdaorm/cli`, 1.6.x) is a command line application to use [λORM](https://www.npmjs.com/package/@lambdaorm/lib),
+locally with a workspace (`-w`) or on a [λORM service](../api/index.md) (`-u <url>`).
 
 ## Installation
 
-Install the package globally to use the CLI commands to help you create and maintain projects
+Install the package globally; it adds the `lambdaorm` command:
 
 ```sh
-npm install lambdaorm-cli -g
+npm i -g @lambdaorm/cli
+lambdaorm --version
 ```
+
+It needs Node 20 or later. The unscoped `lambdaorm-cli` package is the old, unmaintained one. The service's Docker image
+([flaviorita/lambdaorm-svc](https://hub.docker.com/r/flaviorita/lambdaorm-svc)) already includes the CLI.
 
 ## CLI
 
-| Command    	| Description                                  									  		|
-|:------------|:--------------------------------------------------------------------|
-|	version	 		| Prints lambdaorm version this project uses.													|
-|	init				| Generates lambdaorm project structure.															|
-|	sync				|	Synchronize database.																								|
-|	import			| Import data from file to database.																	|
-|	export			| Export data from a database. 																				|
-|	execute			| Execute an expression lambda.																				|
-| metadata		|	Return metadata of query expression.																|
-| parameters	|	Return parameters of query expression.															|
-| model				|	Return model of query expression.																		|
-| plan				|	Return plan execution of query expression.													|
-|	build				| add configuration, model and repositories according to the language.|
-|	drop				|	Removes all database objects but not the database.									|
+| Command | Description |
+|:--|:--|
+| version | Prints the CLI version and the `@lambdaorm/lib` version the project uses. |
+| init | Generates the λORM project structure. |
+| build | Adds configuration, model and repositories according to the language. |
+| schema | Returns schema information. |
+| push | Synchronizes the databases with the model (`-o` writes the scripts instead). |
+| pull | Pulls the stage with the sources. |
+| fetch | Shows the differences between the databases and the model; exit code 1 when there are any. |
+| introspect | Reads and analyzes data and updates the schema. |
+| incorporate | Updates the schema, pushes the sources and imports the data. |
+| drop | Removes all database objects but not the database. |
+| import | Imports data from a file to the database. |
+| export | Exports data from a database. |
+| execute | Executes a query. |
+| script | Runs a script: several queries in one transaction. |
+| plan | Returns the execution plan of a query. |
+| metadata | Returns the metadata of a query. |
+| parameters | Returns the parameters of a query. |
+| model | Returns the model of a query. |
+| constraints | Returns the constraints of a query. |
+
+`lambdaorm <command> -h` lists the options of a command.
+
+Every command exits with code 1 when it fails (from @lambdaorm/cli 1.6.3). Commands on a service (`-u <url>`) send
+`SERVICE_TOKEN` from the environment as `Authorization: Bearer` when it is set.
 
 ## Usage
 
 * Commands
   * Infrastructure Commands
-    * [Version](https://lambda-orm.github.io/wiki/cli/Commands/Version/index.html)
-    * [Init](https://lambda-orm.github.io/wiki/cli/Commands/Init/index.html)
-    * [Build](https://lambda-orm.github.io/wiki/cli/Commands/Build/index.html)
+    * [Version](Version.md)
+    * [Init](Commands/Init.md)
+    * [Build](Commands/Build.md)
   * DDL Commands
-    * [Sync](https://lambda-orm.github.io/wiki/cli/Commands/Sync/index.html)
-    * [Drop](https://lambda-orm.github.io/wiki/cli/Commands/Drop/index.html)
+    * [Push](Commands/Push.md)
+    * [Fetch](Commands/Fetch.md)
+    * [Drop](Commands/Drop.md)
+    * Pull, Introspect, Incorporate: see [Schema synchronization](../schema/SchemaSynchronization.md)
+  * Data Commands
+    * [Import](Commands/Import.md)
+    * [Export](Commands/Export.md)
   * Query Commands
-    * [Execute](https://lambda-orm.github.io/wiki/cli/Commands/Execute/index.html)
-    * [Plan](https://lambda-orm.github.io/wiki/cli/Commands/Plan/index.html)
-    * [Metadata](https://lambda-orm.github.io/wiki/cli/Commands/Metadata/index.html)
-    * [Parameters](https://lambda-orm.github.io/wiki/cli/Commands/Parameters/index.html)
-    * [Model](https://lambda-orm.github.io/wiki/cli/Commands/Model/index.html)
-    * [Constraints](https://lambda-orm.github.io/wiki/cli/Commands/Constraints/index.html)
-* [source](https://lambda-orm.github.io/wiki/cli/source/README/index.html)
-* [Change log](https://lambda-orm.github.io/wiki/cli/CHANGELOG/index.html)
+    * [Execute](Commands/Execute.md)
+    * [Script](Commands/Script.md)
+    * [Plan](Commands/Plan.md)
+    * [Metadata](Commands/Metadata.md)
+    * [Parameters](Commands/Parameters.md)
+    * [Model](Commands/Model.md)
+    * [Constraints](Commands/Constraints.md)
+* [source](source/README.md)
+* [Change log](CHANGELOG.md)
 
 ## Labs
 

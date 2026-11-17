@@ -2,11 +2,24 @@
 
 The pull is the process of updating the schema defined in the configuration file with the structure in the sources (Databases). The pull process is done by the command `lambdaorm pull`.
 
+## What pull keeps
+
+Pull reads the tables and columns of the databases and merges them into the schema: new tables become entities, new columns become properties, and the mappings are updated. Pull does not change the databases.
+By default it also removes from the schema the entities, properties and relations that are no longer in the database
+(`orm.stage.pull({ stage, removeEntities: false, removeProperties: false, removeRelations: false })` keeps them).
+It can be run on an existing schema: what was written by hand is kept, for example
+
+- relation names chosen by hand and `weak` relations between sources (which have no foreign key in the database),
+- `application.listeners`,
+- `infrastructure.stages`.
+
+Columns named with reserved words (for example `order`) are supported.
+
 ## CLI
 
 The pull command is used to update the schema with respect to the sources (Databases). \
 Once executed, the schema will be synchronized with the database. \
-It also adds a file with the pulling scripts. \
+It also records the pulling scripts in the `orm_state` folder.
 
 Running the pull command:
 
@@ -20,11 +33,12 @@ Files created:
 
 ```sh
 ├── orm_state
-│   ├── default-ddl-20240501T212640369Z-pull-default.sql
-│   └── default-model.json
+│   ├── default-model.json
+│   └── default
+│       └── V240501212640__pull.sql
 ```
 
-Content of the generated file `default-ddl-20240501T212640369Z-pull-default.sql`:
+Content of the generated file `V240501212640__pull.sql`:
 
 ```sql
 CREATE TABLE Categories (CategoryID INTEGER  AUTO_INCREMENT,CategoryName VARCHAR(15) NOT NULL ,Description TEXT  ,Picture LONGBLOB  ,CONSTRAINT Categories_PK PRIMARY KEY (CategoryID));
@@ -59,15 +73,12 @@ ALTER TABLE Territories ADD CONSTRAINT Territories_territories_FK FOREIGN KEY (R
 ## Node
 
 ```Typescript
-import { Orm } from 'lambdaorm'
+import { Orm } from '@lambdaorm/lib'
 (async () => {
-	const workspace = process.cwd()
-	const orm = new Orm(workspace)
-	try{		
-		await orm.helper.fs.removeDir(workspace + '/data')
-		const originalSchema = orm.helper.yaml.load(await orm.helper.fs.read(workspace + '/lambdaOrm.yaml'))
-		await orm.init(originalSchema)	
-		await orm.stage.pull()
+	const orm = new Orm()
+	try{
+		await orm.init('./lambdaORM.yaml')
+		await orm.stage.pull({ stage: 'default' })
 	}catch(e){
 		console.log(e)
 	} finally {
