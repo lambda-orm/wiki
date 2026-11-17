@@ -1,6 +1,6 @@
 # Script
 
-`orm.executeScript(script, data, options, scriptOptions)` evaluates a [3xpr](https://www.npmjs.com/package/3xpr)
+`orm.executeScript(script, data, options)` evaluates a [3xpr](https://www.npmjs.com/package/3xpr)
 script in **one transaction**: every `orm.execute` it calls runs on the same connections (one per source, also across
 stages). When the script ends the orm commits; on any error (a query, a function, a `throw`) it rolls back and the
 promise rejects with that error. The result is the value of the last statement, or of `return`.
@@ -19,17 +19,25 @@ const quoteId = await orm.executeScript(`
   total = lines.sum(p => p.qty * p.price);
   orm.execute("QuoteTotals.insert()", { quoteId: quoteId, total: total }, { stage: "insights" });
   quoteId
-`, { quoteId, accountId, lines }, { stage: 'default' }, { timeout: 10000 })
+`, { quoteId, accountId, lines }, { stage: 'default', timeout: 10000, maxIterations: 10000 })
 ```
 
 ## Arguments
 
-| Argument      | Description                                                                                         |
+| Argument | Description                                                                              |
+| -------- | ---------------------------------------------------------------------------------------- |
+| script   | The 3xpr script                                                                          |
+| data     | The variables of the script. The script works on a copy: `data` is never changed         |
+| options  | The query options plus the script's limits (`ScriptOptions`), see below                  |
+
+| Option        | Description                                                                                         |
 | ------------- | --------------------------------------------------------------------------------------------------- |
-| script        | The 3xpr script                                                                                     |
-| data          | The variables of the script. The script works on a copy: `data` is never changed                    |
-| options       | Query options; `stage` is the stage of the transaction and of every `orm.execute` without a stage   |
-| scriptOptions | `timeout` in ms: when it passes, the loops stop, the transaction rolls back and the script rejects. `maxIterations`: loop iterations of the script, all loops together; past it the script fails and rolls back |
+| stage         | The stage of the transaction and of every `orm.execute` without a stage                            |
+| timeout       | Max time in ms: when it passes, the loops stop, the transaction rolls back and the script rejects   |
+| maxIterations | Max loop iterations of the script, all loops together; past it the script fails and rolls back      |
+
+In @lambdaorm/lib 3.2.x the timeout was a fourth argument (`executeScript(script, data, options, { timeout })`); since
+3.3.0 everything goes in `options`.
 
 ## The language
 
