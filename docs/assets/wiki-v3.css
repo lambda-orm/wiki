@@ -67,3 +67,6 @@
 .rst-content pre code .hljs-params { color: #9cdcfe; }
 .rst-content pre code .hljs-title.class_ { color: #4ec9b0; }
 .rst-content pre code .hljs-keyword.control { color: #c586c0; }
+
+/* the headings of the current page are not repeated in the side menu: they are in the page */
+.wy-menu-vertical li.toctree-l1.current > ul { display: none; }
