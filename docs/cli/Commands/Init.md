@@ -11,7 +11,7 @@ Generates lambdaorm project structure.
 |dialect		| -d 		| Database type you\'ll use in your project.											|
 |connection	| -c 		| string connection to database																		|
 |data-path	|  		| Relative data path in workspace (`--data-path`).								|
-|url				| -u 		| When working with a client you must pass the url of the service	|
+|url				| -u 		| URL of the schema on a Data Gateway	|
 
 ## Example
 

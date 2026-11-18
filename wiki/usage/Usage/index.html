@@ -49,16 +49,39 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="../../api">Api</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="" href="../../cli">Cli</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="" href="../../labs">Labs</a>
                 </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/GettingStarted/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Transports/">Transports</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Security/">Security</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Operations/">Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/CHANGELOG/">Change log</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Queries</span></p>
               <ul>
@@ -395,8 +418,8 @@ application:
       after: orm.execute(query,data,{stage:&quot;insights&quot;})        
 </code></pre>
 <p><strong>Query:</strong></p>
-<p>In this case we will execute the query from the REST service.</p>
-<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/execute?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;[p.details.include(p=&gt;p.product.map(p=&gt;p.name)).map(p=&gt;{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=&gt;p.name)]).order(p=&gt;p.orderDate).page(1,1)&quot;,&quot;data&quot;:&quot;{\&quot;customerId\&quot;: \&quot;CENTC\&quot;}&quot;, &quot;options&quot;:&quot;{\&quot;stage\&quot;: \&quot;default\&quot;}&quot;}'
+<p>In this case we will execute the query on a <a href="../../data-gateway/">Data Gateway</a>.</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:8080/execute?format=beautiful&quot; -H &quot;X-Api-Key: $KEY&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;[p.details.include(p=&gt;p.product.map(p=&gt;p.name)).map(p=&gt;{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=&gt;p.name)]).order(p=&gt;p.orderDate).page(1,1)&quot;, &quot;data&quot;: {&quot;customerId&quot;: &quot;CENTC&quot;}, &quot;options&quot;: {&quot;stage&quot;: &quot;default&quot;}}'
 </code></pre>
 <p><strong>Result:</strong></p>
 <pre><code class="language-json">[
@@ -426,7 +449,7 @@ application:
 </code></pre>
 <p><strong>Read Query Plan on Default Stage:</strong></p>
 <p>When a query is executed in the default stage, data will be obtained from different data sources according to the stage configuration.</p>
-<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/plan?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;[p.details.include(p=&gt;p.product.map(p=&gt;p.name)).map(p=&gt;{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=&gt;p.name)]).order(p=&gt;p.orderDate).page(1,1)&quot;, &quot;options&quot;:&quot;{\&quot;default\&quot;: \&quot;cqrs\&quot;}&quot;}'
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:8080/plan?format=beautiful&quot; -H &quot;X-Api-Key: $KEY&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;[p.details.include(p=&gt;p.product.map(p=&gt;p.name)).map(p=&gt;{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=&gt;p.name)]).order(p=&gt;p.orderDate).page(1,1)&quot;, &quot;options&quot;: {&quot;stage&quot;: &quot;default&quot;}}'
 </code></pre>
 <p><strong>Result:</strong></p>
 <pre><code class="language-sh">{
@@ -460,7 +483,7 @@ application:
 <p><strong>Read Query Plan on CQRS Stage:</strong></p>
 <p>When you run a query on the cqrs stage, you will get data from a single data source according to the stage configuration.
 But if the query is for insert, update or delete, it will be executed in the corresponding data source.</p>
-<pre><code class="language-sh">curl -X POST &quot;http://localhost:9291/plan?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;[p.details.include(p=&gt;p.product.map(p=&gt;p.name)).map(p=&gt;{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=&gt;p.name)]).order(p=&gt;p.orderDate).page(1,1)&quot;, &quot;options&quot;:&quot;{\&quot;stage\&quot;: \&quot;cqrs\&quot;}&quot;}'
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:8080/plan?format=beautiful&quot; -H &quot;X-Api-Key: $KEY&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Orders.filter(p=&gt;p.customerId==customerId).include(p=&gt;[p.details.include(p=&gt;p.product.map(p=&gt;p.name)).map(p=&gt;{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=&gt;p.name)]).order(p=&gt;p.orderDate).page(1,1)&quot;, &quot;options&quot;: {&quot;stage&quot;: &quot;cqrs&quot;}}'
 </code></pre>
 <p><strong>Result:</strong></p>
 <pre><code class="language-json">{
@@ -492,9 +515,8 @@ But if the query is for insert, update or delete, it will be executed in the cor
   ]
 }
 </code></pre>
-<p><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/svc/03-northwind-cqrs">view complete laboratory</a></p>
 <h2 id="cqrs-command-query-responsibility-segregation-with-kafka"><a href="https://microservices.io/patterns/data/cqrs.html">CQRS (Command Query Responsibility Segregation)</a> with Kafka</h2>
-<p>If we use the ORM from the REST service, we can use Kafka to publish the insert, update and delete data events in the default and cqrs scenario. And configure Kafka consumers to update the data in the insights scenario.</p>
+<p>If we use the ORM from a <a href="../../data-gateway/">Data Gateway</a>, we can use Kafka to publish the insert, update and delete data events in the default and cqrs scenario. And configure Kafka consumers to update the data in the insights scenario.</p>
 <p><strong>Schema:</strong></p>
 <pre><code class="language-yaml">...
 infrastructure:
@@ -516,11 +538,10 @@ application:
       condition: options.stage.in(&quot;default&quot;,&quot;cqrs&quot;)
       after: queue.send(&quot;insights-sync&quot;,[{query,data}]) 
 </code></pre>
-<p><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/svc/04-northwind-cqrs-kafka">view complete laboratory</a></p>
 <h3 id="node-client">Node Client</h3>
 <p><strong>Schema:</strong></p>
-<p>In the case of using a rest service client, the schema only defines the domain and the paths in the infrastructure.
-Since the infrastructure definition is done in the rest service configuration.</p>
+<p>In the case of using a client, the schema only defines the domain and the paths in the infrastructure, since the
+sources and their connections are in the schema served by the <a href="../../data-gateway/">Data Gateway</a>.</p>
 <pre><code class="language-yaml">domain:  
   entities:
   - name: Categories
@@ -534,14 +555,14 @@ infrastructure:
     domain: northwind/domain 
 </code></pre>
 <p><strong>Query:</strong></p>
-<p>In this case we will use a Node client that will connect to the REST service to execute the query.
+<p>In this case we will use the <a href="../../data-gateway/Clients/">Node client</a> (<code>@lambdaorm/client</code>), which connects to a Data Gateway to execute the query.
 And in this case we will write the query in string format.</p>
-<pre><code class="language-typescript">import { orm } from 'lambdaorm-client-node'
+<pre><code class="language-typescript">import { orm } from '@lambdaorm/client'
 import fs from 'fs'
 import path from'path'
 ( async () =&gt; {
  try { 
-  await orm.init('http://localhost:9291')
+  await orm.init('http://localhost:8080', { headers: { 'X-Api-Key': process.env.BACKEND_KEY } })
   // test connection
   console.log(await orm.general.ping())
   // Gets the content of the data.json file to insert the data
@@ -570,8 +591,7 @@ import path from'path'
 })()
 </code></pre>
 <h2 id="considerations">Considerations</h2>
-<p><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/client-node/02-import-data">view complete laboratory</a></p>
-<p>Keep in mind that whether we use the "lambdaorm" or "lambdaorm-client-node" library we can write the queries in lambda or string format.</p>
+<p>Keep in mind that whether we use the <code>@lambdaorm/lib</code> or the <code>@lambdaorm/client</code> library we can write the queries in lambda or string format.</p>
 <p>We could start a development by proposing a simple infrastructure and then make modifications to it and this would not affect our code, since the queries are written based on the domain model and are independent of the infrastructure.</p>
 <p>You could also have development, test and production environments with different infrastructure configurations without having to alter the code.</p>
 <p>In addition to the examples presented previously, there are many other use cases that can be solved with λORM by configuring the schema and queries language. Therefore, we invite you to explore the different <a href="https://github.com/lambda-orm/lambdaorm-labs">laboratories</a> and read the <a href="https://github.com/lambda-orm/wiki/wiki">documentation</a>.</p>

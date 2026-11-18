@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lambda-orm.github.io/wiki/data-gateway/Rest/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>REST API - λORM Wiki</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs2015.min.css" />
+        <link href="../../assets/wiki-v2.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "REST API";
+        var mkdocs_page_input_path = "data-gateway/Rest.md";
+        var mkdocs_page_url = "/wiki/data-gateway/Rest/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Features">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../cli">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../GettingStarted/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Transports/">Transports</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">REST API</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#routes">Routes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#gateway-methods">Gateway methods</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#state-of-a-schema">State of a schema</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#query-methods">Query methods</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#schema-methods">Schema methods</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#stage-methods">Stage methods</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Security/">Security</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Operations/">Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Change log</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../queries/Query-Language">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Expression">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Select">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Join">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Grouping">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Include">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Insert">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/BulkInsert">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Update">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Delete">Delete</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/operatorsAndFunctions/OperatorsAndFunctions">Operators & Functions</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Expressions">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-EnvironmentVariables">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Composite">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Listener">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Basic">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Extend">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-MultiplesStages">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-StageMultiplesSources">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Composite">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Push">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Pull">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Fetch">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Introspect">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Incorporate">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Schema-Use">Use</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Engines">Engines</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/CHANGELOG">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Data Gateway</li>
+      <li class="breadcrumb-item active">REST API</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="rest-api">REST API</h1>
+<p>The <code>http</code> transport (<a href="../Transports/#http">Transports</a>) exposes every operation of λORM on a schema as REST, with JSON
+in and out. The OpenAPI 3 document is served by the gateway at <code>/doc</code> (Swagger UI) and <code>/api-docs</code>.</p>
+<h2 id="routes">Routes</h2>
+<p>The examples use a gateway at <code>http://localhost:8080</code> with an API key. Each schema's methods are under its route:</p>
+<table>
+<thead>
+<tr>
+<th>Gateway</th>
+<th>Schema <code>iot/v1</code></th>
+<th>Only schema at the root</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>http://localhost:8080</code></td>
+<td><code>http://localhost:8080/iot/v1/execute</code></td>
+<td><code>http://localhost:8080/execute</code></td>
+</tr>
+</tbody>
+</table>
+<p>With <code>transports.http.basePath: /data-gateway</code>, every route is under it: <code>/data-gateway/iot/v1/execute</code>.</p>
+<ul>
+<li>Every request needs the credential, except <code>/ping</code>, <code>/health</code> and <code>/metrics</code> (at the root and under each schema),
+  <code>/schemas</code>, <code>/version</code>, <code>/doc</code> and the UI. How it is sent depends on the <a href="../Security/">authentication</a>:
+  <code>X-Api-Key: &lt;key&gt;</code>, <code>Authorization: Bearer &lt;token&gt;</code> or <code>Authorization: Basic &lt;base64&gt;</code>.</li>
+<li><code>?format=beautiful</code> indents the JSON of the answer.</li>
+<li><code>data</code> (the parameters of a query) and <code>options</code> (for example <code>{ "stage": "default" }</code>) are JSON objects; JSON text
+  (<code>"data": "{\"id\": 10}"</code>) is also accepted.</li>
+<li>An error answers a status and <code>{ "error", "code"?, "message" }</code> (<a href="../Security/#errors">Errors</a>).</li>
+</ul>
+<h2 id="gateway-methods">Gateway methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>Answers</th>
+<th>Credential</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/ping</code></td>
+<td><code>{ "message": "pong", "time" }</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/health</code></td>
+<td><code>200</code> while some schema is <code>ready</code>, <code>503</code> if none</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/metrics</code></td>
+<td>the metrics of every worker, Prometheus text</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/version</code></td>
+<td>the version of the gateway</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/schemas</code></td>
+<td>each schema with its state</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/whoami</code></td>
+<td>the name and permissions of the credential</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-sh">curl http://localhost:8080/schemas
+</code></pre>
+<pre><code class="language-json">[
+  { &quot;path&quot;: &quot;iot/v1&quot;, &quot;status&quot;: &quot;ready&quot;, &quot;since&quot;: &quot;2026-11-18T13:35:56.407Z&quot;, &quot;restarts&quot;: 0 },
+  { &quot;path&quot;: &quot;iot/v2&quot;, &quot;status&quot;: &quot;error&quot;, &quot;reason&quot;: &quot;connect ECONNREFUSED 10.0.0.5:5432&quot;, &quot;since&quot;: &quot;…&quot;, &quot;restarts&quot;: 3 }
+]
+</code></pre>
+<p>The states are <code>starting</code>, <code>ready</code>, <code>error</code> and <code>restarting</code>.</p>
+<h2 id="state-of-a-schema">State of a schema</h2>
+<p>Under each schema's route (<code>/iot/v1/…</code>), these answer only about that schema:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>Answers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/ping</code></td>
+<td><code>200</code> if the schema is <code>ready</code>, <code>503</code> if not</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/health</code></td>
+<td>the state of the schema; <code>503</code> if it is not <code>ready</code></td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/metrics</code></td>
+<td>the metrics of that schema</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/version</code></td>
+<td>the versions of the gateway and the schema</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/whoami</code></td>
+<td>the name and permissions of the credential with the authentication of that schema, and whether it has scripts enabled</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-sh">curl http://localhost:8080/iot/v1/whoami -H &quot;X-Api-Key: $KEY&quot;
+</code></pre>
+<pre><code class="language-json">{ &quot;name&quot;: &quot;reader&quot;, &quot;permissions&quot;: [&quot;read&quot;], &quot;schema&quot;: &quot;iot/v1&quot;, &quot;scripts&quot;: true }
+</code></pre>
+<p>The secret of the credential is never answered.</p>
+<h2 id="query-methods">Query methods</h2>
+<h3 id="execute">execute</h3>
+<p><code>POST /{schema}/execute</code> runs a query. The body is <code>{ query, data?, options? }</code>.</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:8080/execute?format=beautiful&quot; -H &quot;X-Api-Key: $KEY&quot; -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;query&quot;: &quot;Orders.filter(p =&gt; p.customerId == customerId).include(p =&gt; p.details)&quot;, &quot;data&quot;: {&quot;customerId&quot;: &quot;CENTC&quot;}}'
+</code></pre>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 12,
+    &quot;customerId&quot;: &quot;CENTC&quot;,
+    &quot;orderDate&quot;: &quot;1996-07-18T00:00:00.000Z&quot;,
+    &quot;details&quot;: [
+      { &quot;orderId&quot;: 12, &quot;productId&quot;: 21, &quot;unitPrice&quot;: 8, &quot;quantity&quot;: 10 },
+      { &quot;orderId&quot;: 12, &quot;productId&quot;: 37, &quot;unitPrice&quot;: 20.8, &quot;quantity&quot;: 1 }
+    ]
+  }
+]
+</code></pre>
+<ul>
+<li>A select answers the rows; <code>update</code> and <code>delete</code> answer the number of affected rows (<code>0</code> when nothing matched);
+  <code>insert</code> answers the inserted data.</li>
+<li>With only the <code>read</code> permission, a query that writes (<code>insert</code>, <code>update</code>, <code>delete</code>, <code>upsert</code>, <code>merge</code>, <code>bulk*</code>) is
+  refused with <code>403</code> before reaching the database.</li>
+</ul>
+<pre><code class="language-sh">curl -X POST http://localhost:8080/execute -H &quot;X-Api-Key: $KEY&quot; -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;query&quot;: &quot;Orders.update(p =&gt; ({ freight: freight })).filter(p =&gt; p.id == id)&quot;, &quot;data&quot;: {&quot;id&quot;: 10248, &quot;freight&quot;: 40}}'
+</code></pre>
+<pre><code class="language-json">1
+</code></pre>
+<h3 id="plan">plan</h3>
+<p><code>POST /{schema}/plan</code> answers how the query is executed: the dialect, the source and the sentence of each part, without
+running it. Body <code>{ query, options? }</code>.</p>
+<pre><code class="language-sh">curl -X POST http://localhost:8080/plan -H &quot;X-Api-Key: $KEY&quot; -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;query&quot;: &quot;Orders.filter(p =&gt; p.customerId == customerId).include(p =&gt; p.details)&quot;}'
+</code></pre>
+<pre><code class="language-json">{
+  &quot;entity&quot;: &quot;Orders&quot;,
+  &quot;dialect&quot;: &quot;PostgreSQL&quot;,
+  &quot;source&quot;: &quot;default&quot;,
+  &quot;sentence&quot;: &quot;SELECT o.OrderID AS \&quot;id\&quot;, o.CustomerID AS \&quot;customerId\&quot;, o.OrderDate AS \&quot;orderDate\&quot;, o.OrderID AS \&quot;__id\&quot; FROM Orders o  WHERE o.CustomerID = $1 &quot;,
+  &quot;children&quot;: [
+    {
+      &quot;entity&quot;: &quot;Orders.details&quot;,
+      &quot;dialect&quot;: &quot;PostgreSQL&quot;,
+      &quot;source&quot;: &quot;default&quot;,
+      &quot;sentence&quot;: &quot;SELECT o1.OrderID AS \&quot;orderId\&quot;, o1.ProductID AS \&quot;productId\&quot;, o1.UnitPrice AS \&quot;unitPrice\&quot;, o1.Quantity AS \&quot;quantity\&quot;, o1.OrderID AS \&quot;LambdaOrmParentId\&quot; FROM \&quot;Order Details\&quot; o1  WHERE  o1.OrderID IN ($1) &quot;
+    }
+  ]
+}
+</code></pre>
+<h3 id="model">model</h3>
+<p><code>POST /{schema}/model</code> answers the shape of the result: its properties and their types.</p>
+<pre><code class="language-json">[
+  { &quot;name&quot;: &quot;id&quot;, &quot;type&quot;: &quot;integer&quot; },
+  { &quot;name&quot;: &quot;customerId&quot;, &quot;type&quot;: &quot;string&quot; },
+  { &quot;name&quot;: &quot;orderDate&quot;, &quot;type&quot;: &quot;dateTime&quot; },
+  { &quot;name&quot;: &quot;details&quot;, &quot;type&quot;: &quot;Orders.details[]&quot;, &quot;children&quot;: [
+    { &quot;name&quot;: &quot;orderId&quot;, &quot;type&quot;: &quot;integer&quot; },
+    { &quot;name&quot;: &quot;productId&quot;, &quot;type&quot;: &quot;integer&quot; },
+    { &quot;name&quot;: &quot;unitPrice&quot;, &quot;type&quot;: &quot;decimal&quot; },
+    { &quot;name&quot;: &quot;quantity&quot;, &quot;type&quot;: &quot;decimal&quot; }
+  ] }
+]
+</code></pre>
+<h3 id="parameters">parameters</h3>
+<p><code>POST /{schema}/parameters</code> answers the variables the query uses, which go in <code>data</code>.</p>
+<pre><code class="language-json">[ { &quot;name&quot;: &quot;customerId&quot;, &quot;type&quot;: &quot;string&quot; } ]
+</code></pre>
+<h3 id="constraints">constraints</h3>
+<p><code>POST /{schema}/constraints</code> answers the constraints that apply to the entities of the query.</p>
+<pre><code class="language-json">{ &quot;entity&quot;: &quot;Orders&quot;, &quot;constraints&quot;: [], &quot;children&quot;: [ { &quot;entity&quot;: &quot;Orders.details&quot;, &quot;constraints&quot;: [] } ] }
+</code></pre>
+<h3 id="metadata">metadata</h3>
+<p><code>POST /{schema}/metadata</code> answers the analysed tree of the query: each sentence with its action (<code>select</code>, <code>insert</code>,
+…), entity, columns, parameters and constraints.</p>
+<pre><code class="language-json">{ &quot;classtype&quot;: &quot;Sentence&quot;, &quot;name&quot;: &quot;select&quot;, &quot;entity&quot;: &quot;Orders&quot;, &quot;columns&quot;: [ { &quot;name&quot;: &quot;id&quot; } ], &quot;parameters&quot;: [ { &quot;name&quot;: &quot;customerId&quot;, &quot;type&quot;: &quot;any&quot; } ], &quot;constraints&quot;: [] }
+</code></pre>
+<h3 id="script">script</h3>
+<p><code>POST /{schema}/script</code> runs a <a href="../../usage/Script/">script</a>: several queries and logic in one transaction. Body
+<code>{ script, data?, options? }</code>. It needs <code>scripts.enabled</code> (otherwise <code>403</code>) and the <code>script</code> permission; the limits of
+<code>scripts</code> apply (<code>maxLength</code>, <code>timeoutMs</code>, <code>maxIterations</code>).</p>
+<pre><code class="language-sh">curl -X POST http://localhost:8080/script -H &quot;X-Api-Key: $KEY&quot; -H &quot;Content-Type: application/json&quot; -d '{
+  &quot;script&quot;: &quot;order = orm.execute(\&quot;Orders.filter(p =&gt; p.id == id)\&quot;, { id: id }); if (order.length() == 0) { throw { status: 404, message: \&quot;order not found\&quot; }; } order[0]&quot;,
+  &quot;data&quot;: { &quot;id&quot;: 10248 }
+}'
+</code></pre>
+<p>A script can choose the status of the answer with <code>throw { status, message }</code>.</p>
+<h3 id="execute-queued">execute-queued</h3>
+<p><code>POST /{schema}/execute-queued</code> runs a query in the background and sends its result to a Kafka topic, in chunks. It
+answers at once <code>{ "queueId": "…" }</code>; the messages carry the keys <code>&lt;queueId&gt;-&lt;chunk&gt;</code>. Body
+<code>{ topic, query, data?, chunk?, options? }</code>. It needs the <code>queue</code> permission (and <code>write</code> if the query writes) and an
+<code>infrastructure.queue</code> in the schema's <code>lambdaORM.yaml</code>.</p>
+<pre><code class="language-sh">curl -X POST http://localhost:8080/execute-queued -H &quot;X-Api-Key: $KEY&quot; -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;query&quot;: &quot;Countries.map(p =&gt; [p.iso3, p.name])&quot;, &quot;topic&quot;: &quot;countries&quot;, &quot;chunk&quot;: 1000}'
+</code></pre>
+<p>The queue of a schema is configured in its <code>lambdaORM.yaml</code> (<code>config</code> is the <a href="https://kafka.js.org/docs/configuration">kafkajs</a>
+configuration), where consumers can also be declared:</p>
+<pre><code class="language-yaml">infrastructure:
+  queue:
+    config: $QUEUE_CONFIG
+    consumers:
+      - name: syncInsights
+        config: { groupId: group1 }
+        subscribe: { topic: insights-sync, fromBeginning: true }
+        execute: orm.execute(message.query, message.data, { stage: &quot;insights&quot; })
+</code></pre>
+<p>Over the <a href="../WebSocket/">WebSocket API</a>, <code>query.executeQueued</code> with <code>notify: true</code> also tells the connection when the
+execution ends.</p>
+<h2 id="schema-methods">Schema methods</h2>
+<p>The model of the schema. They need <code>read</code>. The connections of the sources are never answered.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>Answers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/schema</code></td>
+<td>the version and the domain of the schema</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/schema/version</code></td>
+<td>the version of the schema</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/domain</code></td>
+<td>the domain: entities (properties, relations, keys, indexes, constraints) and enums</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/entities</code></td>
+<td>the entities</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/entities/{entity}</code></td>
+<td>one entity</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/enums</code></td>
+<td>the enums</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/enums/{enum}</code></td>
+<td>one enum</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/sources</code></td>
+<td>the sources, with their name and dialect</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/sources/{source}</code></td>
+<td>one source</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/mappings</code></td>
+<td>the mappings (entities to tables and columns)</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/mappings/{mapping}</code></td>
+<td>one mapping</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/mappings/{mapping}/{entity}</code></td>
+<td>the mapping of one entity</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/views</code></td>
+<td>the views</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/stages</code></td>
+<td>the stages, with their sources</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/stages/{stage}</code></td>
+<td>one stage</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/typings</code></td>
+<td>the domain as TypeScript declarations (<code>text/plain</code>), for an editor's autocompletion</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-sh">curl http://localhost:8080/sources -H &quot;X-Api-Key: $KEY&quot;
+</code></pre>
+<pre><code class="language-json">[ { &quot;name&quot;: &quot;catalog&quot;, &quot;dialect&quot;: &quot;PostgreSQL&quot; }, { &quot;name&quot;: &quot;accounts&quot;, &quot;dialect&quot;: &quot;PostgreSQL&quot; } ]
+</code></pre>
+<pre><code class="language-sh">curl http://localhost:8080/entities/Categories -H &quot;X-Api-Key: $KEY&quot;
+</code></pre>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Categories&quot;,
+  &quot;primaryKey&quot;: [&quot;id&quot;],
+  &quot;uniqueKey&quot;: [&quot;name&quot;],
+  &quot;properties&quot;: [
+    { &quot;name&quot;: &quot;id&quot;, &quot;type&quot;: &quot;integer&quot;, &quot;required&quot;: true, &quot;autoIncrement&quot;: true },
+    { &quot;name&quot;: &quot;name&quot;, &quot;type&quot;: &quot;string&quot;, &quot;length&quot;: 80, &quot;required&quot;: true },
+    { &quot;name&quot;: &quot;description&quot;, &quot;type&quot;: &quot;string&quot;, &quot;length&quot;: 1000 }
+  ],
+  &quot;relations&quot;: []
+}
+</code></pre>
+<h2 id="stage-methods">Stage methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>Answers</th>
+<th>Permission</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/stages/{stage}/exists</code></td>
+<td><code>{ "exists": true }</code> when the stage was created and its state file exists</td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{schema}/stages/{stage}/export</code></td>
+<td>the rows of every entity of the stage</td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/{schema}/stages/{stage}/import</code></td>
+<td>imports rows (the body is an export) into the entities of the stage</td>
+<td><code>stageImport</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-sh">curl http://localhost:8080/stages/default/export -H &quot;X-Api-Key: $KEY&quot; &gt; data.json
+curl -X POST http://localhost:8080/stages/default/import -H &quot;X-Api-Key: $BACKEND_KEY&quot; -H &quot;Content-Type: application/json&quot; -d @data.json
+</code></pre>
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>REST</th>
+<th><a href="../Mcp/#tools">MCP tool</a></th>
+<th><a href="../WebSocket/#methods">WebSocket method</a></th>
+<th>Permission</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>execute</td>
+<td><code>POST /execute</code></td>
+<td><code>orm_execute</code></td>
+<td><code>query.execute</code></td>
+<td><code>read</code> (selects) / <code>write</code></td>
+</tr>
+<tr>
+<td>script</td>
+<td><code>POST /script</code></td>
+<td><code>orm_execute_script</code></td>
+<td><code>query.script</code></td>
+<td><code>script</code></td>
+</tr>
+<tr>
+<td>execute queued</td>
+<td><code>POST /execute-queued</code></td>
+<td><code>orm_execute_queued</code></td>
+<td><code>query.executeQueued</code></td>
+<td><code>queue</code></td>
+</tr>
+<tr>
+<td>plan</td>
+<td><code>POST /plan</code></td>
+<td><code>orm_plan</code></td>
+<td><code>query.plan</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>metadata</td>
+<td><code>POST /metadata</code></td>
+<td><code>orm_metadata</code></td>
+<td><code>query.metadata</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>model</td>
+<td><code>POST /model</code></td>
+<td><code>orm_model</code></td>
+<td><code>query.model</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>parameters</td>
+<td><code>POST /parameters</code></td>
+<td><code>orm_parameters</code></td>
+<td><code>query.parameters</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>constraints</td>
+<td><code>POST /constraints</code></td>
+<td><code>orm_constraints</code></td>
+<td><code>query.constraints</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>schema</td>
+<td><code>GET /schema</code></td>
+<td><code>schema_get</code></td>
+<td><code>schema.schema</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>schema version</td>
+<td><code>GET /schema/version</code></td>
+<td><code>schema_version</code></td>
+<td><code>schema.version</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>domain</td>
+<td><code>GET /domain</code></td>
+<td><code>schema_domain</code></td>
+<td><code>schema.domain</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>entities</td>
+<td><code>GET /entities[/{entity}]</code></td>
+<td><code>schema_entities</code></td>
+<td><code>schema.entities</code>, <code>schema.entity</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>enums</td>
+<td><code>GET /enums[/{enum}]</code></td>
+<td><code>schema_enums</code></td>
+<td><code>schema.enums</code>, <code>schema.enum</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>sources</td>
+<td><code>GET /sources[/{source}]</code></td>
+<td><code>schema_sources</code></td>
+<td><code>schema.sources</code>, <code>schema.source</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>mappings</td>
+<td><code>GET /mappings[/{mapping}[/{entity}]]</code></td>
+<td><code>schema_mappings</code></td>
+<td><code>schema.mappings</code>, <code>schema.mapping</code>, <code>schema.entityMapping</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>views</td>
+<td><code>GET /views</code></td>
+<td><code>schema_views</code></td>
+<td><code>schema.views</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>stages</td>
+<td><code>GET /stages[/{stage}]</code></td>
+<td><code>schema_stages</code></td>
+<td><code>schema.stages</code>, <code>schema.stage</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>typings</td>
+<td><code>GET /typings</code></td>
+<td>—</td>
+<td><code>schema.typings</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>stage exists</td>
+<td><code>GET /stages/{stage}/exists</code></td>
+<td><code>stage_exists</code></td>
+<td><code>stage.exists</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>stage export</td>
+<td><code>GET /stages/{stage}/export</code></td>
+<td><code>stage_export</code></td>
+<td><code>stage.export</code></td>
+<td><code>read</code></td>
+</tr>
+<tr>
+<td>stage import</td>
+<td><code>POST /stages/{stage}/import</code></td>
+<td><code>stage_import</code></td>
+<td><code>stage.import</code></td>
+<td><code>stageImport</code></td>
+</tr>
+<tr>
+<td>version</td>
+<td><code>GET /version</code></td>
+<td><code>gateway_version</code></td>
+<td><code>general.version</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>health</td>
+<td><code>GET /health</code></td>
+<td><code>gateway_health</code></td>
+<td><code>general.health</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>ping</td>
+<td><code>GET /ping</code></td>
+<td>—</td>
+<td><code>general.ping</code></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Transports/" class="btn btn-neutral float-left" title="Transports"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Mcp/" class="btn btn-neutral float-right" title="MCP">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Transports/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Mcp/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../assets/wiki-v2.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

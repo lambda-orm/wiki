@@ -49,16 +49,39 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="../../../api">Api</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="" href="../..">Cli</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="" href="../../../labs">Labs</a>
                 </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-gateway/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-gateway/GettingStarted/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-gateway/Configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-gateway/Transports/">Transports</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-gateway/Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-gateway/Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-gateway/WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-gateway/Security/">Security</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-gateway/Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-gateway/Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-gateway/Operations/">Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-gateway/CHANGELOG/">Change log</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Queries</span></p>
               <ul>
@@ -163,8 +186,9 @@
 script whose <code>orm.execute(query, data, options)</code> calls all run in the same transaction, also across sources; it commits
 when the script ends and rolls back on any error (a query or a <code>throw</code>). The result is the value of the last statement
 (or of <code>return</code>).</p>
-<p>It runs locally with the workspace (<code>-w</code>) or on a λORM service (<code>-u</code>, <a href="../../../api/Endpoints/Script/"><code>POST /script</code></a>;
-the service must run with <code>SCRIPT_ENABLED=true</code>).</p>
+<p>It runs locally with the workspace (<code>-w</code>) or on a <a href="../../../data-gateway/">Data Gateway</a> (<code>-u</code>,
+<a href="../../../data-gateway/Rest/#script"><code>POST /script</code></a>; the gateway must have <code>scripts.enabled</code> and the credential the
+<code>script</code> permission).</p>
 <h2 id="params">Params</h2>
 <table>
 <thead>
@@ -213,7 +237,7 @@ the service must run with <code>SCRIPT_ENABLED=true</code>).</p>
 <tr>
 <td>url</td>
 <td>-u</td>
-<td>Url of the service (<code>POST /script</code>).</td>
+<td>URL of the schema on a Data Gateway (<code>POST /script</code>).</td>
 </tr>
 </tbody>
 </table>
@@ -238,8 +262,8 @@ quoteId
 </code></pre>
 <p><code>orm.execute(…, { stage: "insights" })</code> runs on another stage and joins the same transaction (from <code>@lambdaorm/lib</code>
 3.3.0).</p>
-<h3 id="on-a-service">On a service</h3>
-<pre><code class="language-sh">lambdaorm script -u http://localhost:9291 -f create-quote.3xpr -d '{&quot;quoteId&quot;: 10, &quot;accountId&quot;: 1, &quot;lines&quot;: []}'
+<h3 id="on-a-data-gateway">On a Data Gateway</h3>
+<pre><code class="language-sh">lambdaorm script -u http://localhost:8080 -f create-quote.3xpr -d '{&quot;quoteId&quot;: 10, &quot;accountId&quot;: 1, &quot;lines&quot;: []}'
 </code></pre>
 <h2 id="notes">Notes</h2>
 <ul>
@@ -247,7 +271,7 @@ quoteId
   <code>? :</code> operator, no <code>++</code> / <code>--</code> (use <code>i += 1</code>), no user-defined functions.</li>
 <li>The script works on a copy of the data and can't read environment variables (<code>$VAR</code> fails).</li>
 <li>Errors are printed as <code>error: …</code> and nothing of the script is written.</li>
-<li>With <code>-u</code>, a service started with <code>SERVICE_TOKEN</code> needs the same <code>SERVICE_TOKEN</code> in the CLI's environment
+<li>With <code>-u</code>, a Data Gateway with bearer authentication needs the token in <code>SERVICE_TOKEN</code> in the CLI's environment
   (sent as <code>Authorization: Bearer</code>; @lambdaorm/cli 1.6.3).</li>
 <li>The command exits with code 1 when the script fails (@lambdaorm/cli 1.6.3).</li>
 </ul>

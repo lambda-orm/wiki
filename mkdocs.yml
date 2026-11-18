@@ -20,9 +20,21 @@ markdown_extensions:
 nav:
   - Home: index.html
   - Features: Features
-  - Api: api
   - Cli: cli
   - Labs: labs
+  - Data Gateway:
+      - Overview: data-gateway/index.md
+      - Getting started: data-gateway/GettingStarted.md
+      - Configuration: data-gateway/Configuration.md
+      - Transports: data-gateway/Transports.md
+      - REST API: data-gateway/Rest.md
+      - MCP: data-gateway/Mcp.md
+      - WebSocket API: data-gateway/WebSocket.md
+      - Security: data-gateway/Security.md
+      - UI: data-gateway/Ui.md
+      - Clients: data-gateway/Clients.md
+      - Operations: data-gateway/Operations.md
+      - Change log: data-gateway/CHANGELOG.md
   - Queries:
       - Query Language: queries/Query-Language
       - Expression: queries/Expression

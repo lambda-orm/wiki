@@ -49,16 +49,39 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="api">Api</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="" href="cli">Cli</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="" href="labs">Labs</a>
                 </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/GettingStarted/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Transports/">Transports</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Security/">Security</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Operations/">Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/CHANGELOG/">Change log</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Queries</span></p>
               <ul>
@@ -171,8 +194,8 @@
 <a href="https://github.com/semantic-release/semantic-release"><img alt="semantic-release" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" /></a></p>
 <p>λORM is an ORM that allows us to perform distributed queries on different database engines.</p>
 <p>In λORM, queries are defined using lambda expressions based on a domain model which abstracts us from the infrastructure. For example, in a query you can obtain or modify records from different entities, where some persist in MySQL, others in Postgres, and others in Mongo.</p>
-<p>λORM allows you to define different scenarios for the same domain. For example, in one scenario, the infrastructure may consist of distributed instances across SQL Server, MongoDB, and Oracle, while in another scenario it may be a single Postgres instance. This allows the <a href="https://microservices.io/patterns/data/cqrs.html">CQRS</a> pattern to be implemented through configuration, without needing to write a single line of code. <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/svc/04-northwind-cqrs-with-kafka">view example</a></p>
-<p>In addition to being used as a Node.js library, it can be consumed from a command line interface (CLI), a REST service, or a REST service client in other programming languages.</p>
+<p>λORM allows you to define different scenarios for the same domain. For example, in one scenario, the infrastructure may consist of distributed instances across SQL Server, MongoDB, and Oracle, while in another scenario it may be a single Postgres instance. This allows the <a href="https://microservices.io/patterns/data/cqrs.html">CQRS</a> pattern to be implemented through configuration, without needing to write a single line of code.</p>
+<p>In addition to being used as a Node.js library, it can be consumed from a command line interface (CLI), or through the <a href="data-gateway/">Data Gateway</a>: a REST API, MCP for AI agents, a WebSocket API and a web UI, with the clients for Node and other languages.</p>
 <h2 id="query-language">Query Language</h2>
 <p>Example of a query where orders and their details associated with a customer are obtained:</p>
 <pre><code class="language-Typescript">const query = (country: string) =&gt; Products
@@ -288,9 +311,9 @@ In this example the query is expressed as a text string. (Which is another alter
 <p>You can access various labs at <a href="https://github.com/lambda-orm/lambdaorm-labs">lambdaorm labs</a></p>
 <h2 id="related-projects">Related projects</h2>
 <ul>
-<li><a href="https://www.npmjs.com/package/lambdaorm-cli">Lambda ORM CLI</a>: Command line interface for λORM</li>
-<li><a href="https://lambda-orm.github.io/wiki/api/index.html">Lambda ORM Service</a>: REST service for λORM</li>
-<li><a href="https://www.npmjs.com/package/lambdaorm-client-node">Client Node</a>: HTTP client for λORM</li>
+<li><a href="https://www.npmjs.com/package/@lambdaorm/cli">λORM CLI</a>: Command line interface for λORM</li>
+<li><a href="https://lambda-orm.github.io/wiki/data-gateway/">Data Gateway</a>: λORM schemas over REST, MCP and WebSocket, with a web UI</li>
+<li><a href="https://www.npmjs.com/package/@lambdaorm/client">Client</a>: Node client for the Data Gateway</li>
 <li><a href="https://www.npmjs.com/package/3xpr">3xpr</a>: Extensible expression engine, which allows evaluating mathematical and logical expressions.</li>
 </ul>
               
@@ -337,5 +360,5 @@ In this example the query is expressed as a text string. (Which is another alter
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-11-17 14:48:22.499223+00:00
+Build Date UTC : 2026-11-18 14:11:23.194913+00:00
 -->

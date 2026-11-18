@@ -1,7 +1,7 @@
 # λORM CLI
 
 λORM CLI (`@lambdaorm/cli`, 1.6.x) is a command line application to use [λORM](https://www.npmjs.com/package/@lambdaorm/lib),
-locally with a workspace (`-w`) or on a [λORM service](../api/index.md) (`-u <url>`).
+locally with a workspace (`-w`) or on a [Data Gateway](../data-gateway/index.md) (`-u <url>`).
 
 ## Installation
 
@@ -12,8 +12,8 @@ npm i -g @lambdaorm/cli
 lambdaorm --version
 ```
 
-It needs Node 20 or later. The unscoped `lambdaorm-cli` package is the old, unmaintained one. The service's Docker image
-([flaviorita/lambdaorm-svc](https://hub.docker.com/r/flaviorita/lambdaorm-svc)) already includes the CLI.
+It needs Node 20 or later. The unscoped `lambdaorm-cli` package is the old, unmaintained one. The Data Gateway's Docker image
+([flaviorita/data-gateway](https://hub.docker.com/r/flaviorita/data-gateway)) already includes the CLI.
 
 ## CLI
 
@@ -41,8 +41,9 @@ It needs Node 20 or later. The unscoped `lambdaorm-cli` package is the old, unma
 
 `lambdaorm <command> -h` lists the options of a command.
 
-Every command exits with code 1 when it fails (from @lambdaorm/cli 1.6.3). Commands on a service (`-u <url>`) send
-`SERVICE_TOKEN` from the environment as `Authorization: Bearer` when it is set.
+Every command exits with code 1 when it fails (from @lambdaorm/cli 1.6.3). Commands on a Data Gateway (`-u <url>`, the
+URL of the schema: `http://gateway:8080/iot/v1`) send `SERVICE_TOKEN` from the environment as `Authorization: Bearer`
+when it is set (a gateway with [bearer authentication](../data-gateway/Security.md#authentication)).
 
 ## Usage
 

@@ -10,7 +10,7 @@ Return constraints associated with the query expression.
 |query			| -q 		| Query expression																																					|
 |envfile		| -e 		| Read in a file of environment variables.																									|
 |output			| -o 		| Generates an output according to the following possible values [json\|beautiful\|light\|yaml]|
-|url					| -u 		| When working with a client you must pass the url of the service	                        |
+|url					| -u 		| URL of the schema on a Data Gateway	                        |
 
 ## Example
 

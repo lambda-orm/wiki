@@ -14,7 +14,7 @@ empty when the databases are in step with the model. Relations and indexes are n
 | stage | -s | Name of stage. |
 | envfile | -e | Read in a file of environment variables. |
 | output | -o | Generates an output according to the following possible values [json\|beautiful\|light\|yaml] |
-| url | -u | Url of service. |
+| url | -u | URL of the schema on a Data Gateway. |
 
 ## Example
 

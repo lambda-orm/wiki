@@ -49,16 +49,39 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="../api">Api</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="" href=".">Cli</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="" href="../labs">Labs</a>
                 </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/GettingStarted/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Transports/">Transports</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Security/">Security</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Operations/">Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/CHANGELOG/">Change log</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Queries</span></p>
               <ul>
@@ -160,14 +183,14 @@
               
                 <h1 id="orm-cli">λORM CLI</h1>
 <p>λORM CLI (<code>@lambdaorm/cli</code>, 1.6.x) is a command line application to use <a href="https://www.npmjs.com/package/@lambdaorm/lib">λORM</a>,
-locally with a workspace (<code>-w</code>) or on a <a href="../api/">λORM service</a> (<code>-u &lt;url&gt;</code>).</p>
+locally with a workspace (<code>-w</code>) or on a <a href="../data-gateway/">Data Gateway</a> (<code>-u &lt;url&gt;</code>).</p>
 <h2 id="installation">Installation</h2>
 <p>Install the package globally; it adds the <code>lambdaorm</code> command:</p>
 <pre><code class="language-sh">npm i -g @lambdaorm/cli
 lambdaorm --version
 </code></pre>
-<p>It needs Node 20 or later. The unscoped <code>lambdaorm-cli</code> package is the old, unmaintained one. The service's Docker image
-(<a href="https://hub.docker.com/r/flaviorita/lambdaorm-svc">flaviorita/lambdaorm-svc</a>) already includes the CLI.</p>
+<p>It needs Node 20 or later. The unscoped <code>lambdaorm-cli</code> package is the old, unmaintained one. The Data Gateway's Docker image
+(<a href="https://hub.docker.com/r/flaviorita/data-gateway">flaviorita/data-gateway</a>) already includes the CLI.</p>
 <h2 id="cli">CLI</h2>
 <table>
 <thead>
@@ -256,8 +279,9 @@ lambdaorm --version
 </tbody>
 </table>
 <p><code>lambdaorm &lt;command&gt; -h</code> lists the options of a command.</p>
-<p>Every command exits with code 1 when it fails (from @lambdaorm/cli 1.6.3). Commands on a service (<code>-u &lt;url&gt;</code>) send
-<code>SERVICE_TOKEN</code> from the environment as <code>Authorization: Bearer</code> when it is set.</p>
+<p>Every command exits with code 1 when it fails (from @lambdaorm/cli 1.6.3). Commands on a Data Gateway (<code>-u &lt;url&gt;</code>, the
+URL of the schema: <code>http://gateway:8080/iot/v1</code>) send <code>SERVICE_TOKEN</code> from the environment as <code>Authorization: Bearer</code>
+when it is set (a gateway with <a href="../data-gateway/Security/#authentication">bearer authentication</a>).</p>
 <h2 id="usage">Usage</h2>
 <ul>
 <li>Commands</li>

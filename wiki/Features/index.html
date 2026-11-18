@@ -49,16 +49,39 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="../api">Api</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="" href="../cli">Cli</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="" href="../labs">Labs</a>
                 </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/GettingStarted/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Transports/">Transports</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Security/">Security</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/Operations/">Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data-gateway/CHANGELOG/">Change log</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Queries</span></p>
               <ul>
@@ -191,10 +214,13 @@
 <li><a href="https://lambda-orm.github.io/wiki/SchemaExample-Listener">Listeners and subscribers</a>: awaited, in the sentence's transaction</li>
 <li>TypeScript and JavaScript support</li>
 <li><a href="https://www.npmjs.com/package/@lambdaorm/cli">CLI Support</a> (<code>npm i -g @lambdaorm/cli</code>)</li>
-<li><a href="https://hub.docker.com/r/flaviorita/lambdaorm-svc">REST API Support</a> (Docker image <code>flaviorita/lambdaorm-svc</code>)</li>
-<li>HTTP Client Support</li>
-<li><a href="https://www.npmjs.com/package/@lambdaorm/client">Node Client</a></li>
-<li>Other languages: generate a client from the service's OpenAPI 3 document</li>
+<li><a href="https://lambda-orm.github.io/wiki/data-gateway/">Data Gateway</a> (Docker image <code>flaviorita/data-gateway</code>)</li>
+<li>REST API, MCP for AI agents and a WebSocket API, several schemas per instance</li>
+<li>Credentials with permissions, audit of writes, metrics and health</li>
+<li>A web UI: explorer, entity forms, saved queries and diagrams of the domain</li>
+<li>Client Support</li>
+<li><a href="https://www.npmjs.com/package/@lambdaorm/client">Node Client</a> (REST or WebSocket)</li>
+<li>Other languages: generate a client from the Data Gateway's OpenAPI 3 document</li>
 </ul>
               
             </div>
