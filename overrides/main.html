@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{#- the language selector: the same page in each language (a page without a translation shows the English one) -#}
+{%- block search_button %}
+  {{ super() }}
+  {%- if i18n_config is defined and page %}
+    {%- set prefix = i18n_page_locale ~ '/' %}
+    {%- set path = page.url[prefix|length:] if page.url.startswith(prefix) else page.url %}
+    <div class="lang-switch">
+      {%- for lang in i18n_config.languages if lang.build %}
+        <a href="{{ base_url }}/{{ '' if lang.default else lang.locale ~ '/' }}{{ path }}" class="{{ 'current' if lang.locale == i18n_page_locale }}" hreflang="{{ lang.locale }}">{{ lang.name }}</a>
+      {%- endfor %}
+    </div>
+  {%- endif %}
+{%- endblock %}

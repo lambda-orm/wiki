@@ -1,4 +1,4 @@
-site_name: λORM
+site_name: λORM Wiki
 site_description: λORM — an ORM of lambda queries over several databases, and the Data Gateway that publishes its schemas
 docs_dir: docs
 site_dir: wiki
@@ -6,37 +6,19 @@ site_url: https://lambda-orm.github.io/wiki/
 use_directory_urls: true
 
 theme:
-  name: material
-  language: en
-  icon:
-    logo: material/lambda
-  palette:
-    - media: "(prefers-color-scheme)"
-      toggle: { icon: material/brightness-auto, name: Switch to light mode }
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: white
-      accent: indigo
-      toggle: { icon: material/brightness-7, name: Switch to dark mode }
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: black
-      accent: indigo
-      toggle: { icon: material/brightness-4, name: Switch to system preference }
-  features:
-    # a wiki: the whole index is a tree on the left, with folding sections (no tabs on top)
-    - navigation.indexes
-    - navigation.top
-    - navigation.footer
-    - navigation.tracking
-    - toc.follow
-    - search.suggest
-    - search.highlight
-    - content.code.copy
+  name: readthedocs
+  # the language selector (overrides/main.html)
+  custom_dir: overrides
+  # code as in VS Code / Monaco (dark): assets/wiki-v4.css sets the font, assets/wiki-v2.js colours the scripts inside `…`
+  hljs_style: vs2015
+  # the side menu lists the pages only, not the headings of the current page: they are in the page
+  titles_only: true
 
 extra_css:
-  # a new name when it changes: a browser never mixes a cached old one with the new pages
-  - assets/lambdaorm-v2.css
+  # a new name when they change: a browser never mixes a cached old one with the new pages
+  - assets/wiki-v4.css
+extra_javascript:
+  - assets/wiki-v2.js
 
 plugins:
   - search
@@ -44,7 +26,6 @@ plugins:
       # a translation is next to its page: GettingStarted.md, GettingStarted.de.md, GettingStarted.es.md, GettingStarted.pt.md
       docs_structure: suffix
       fallback_to_default: true
-      reconfigure_material: true
       reconfigure_search: true
       languages:
         - locale: en
@@ -156,6 +137,9 @@ plugins:
         - locale: pt
           name: Português
           build: true
+          # the theme's own words (search, next, previous): it has them in Brazilian Portuguese
+          theme:
+            locale: pt_BR
           site_description: λORM — um ORM de consultas lambda sobre vários bancos de dados, e o Data Gateway que publica seus esquemas
           nav_translations:
             Home: Início
@@ -207,19 +191,14 @@ plugins:
 
 markdown_extensions:
   - toc:
-      permalink: true
+      permalink: false
+      toc_depth: 2
   - admonition
   - attr_list
   - md_in_html
   - tables
   - def_list
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.inlinehilite
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - pymdownx.tabbed:
-      alternate_style: true
+  - fenced_code
 
 nav:
   - Home:
