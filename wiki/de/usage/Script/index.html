@@ -1,3245 +1,271 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="de" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lambda-orm.github.io/wiki/de/usage/Script/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Skript - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs2015.min.css" />
+        <link href="../../../assets/wiki-v4.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Skript";
+        var mkdocs_page_input_path = "usage/Script.de.md";
+        var mkdocs_page_url = "/wiki/de/usage/Script/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
 
-<!doctype html>
-<html lang="de" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-        <meta name="description" content="λORM — ein ORM für Lambda-Abfragen über mehrere Datenbanken und das Data Gateway, das seine Schemas veröffentlicht">
-      
-      
-      
-        <link rel="canonical" href="https://lambda-orm.github.io/wiki/de/usage/Script/">
-      
-      
-        <link rel="prev" href="../Transaction/">
-      
-      
-        <link rel="next" href="../CHANGELOG/">
-      
-      
-      <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
-    
-    
-      
-        <title>Skript - λORM</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
-      
-        
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
-      
-      
+<body class="wy-body-for-nav" role="document">
 
-
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-      <link rel="stylesheet" href="../../../assets/lambdaorm-v2.css">
-    
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-
-    
-    
-    
-  </head>
-  
-  
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#script" class="md-skip">
-          Zum Inhalt
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../" class="icon icon-home"> λORM Wiki
         </a>
-      
+  <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Durchsuchen" aria-label="Durchsuchen" title="Tragen Sie hier den gesuchten Begriff ein" />
+  </form>
+</div>
+    <div class="lang-switch">
+        <a href="../../../usage/Script/" class="" hreflang="en">English</a>
+        <a href="../../../de/usage/Script/" class="current" hreflang="de">Deutsch</a>
+        <a href="../../../es/usage/Script/" class="" hreflang="es">Español</a>
+        <a href="../../../pt/usage/Script/" class="" hreflang="pt">Português</a>
     </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
+      </div>
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
-    <a href="../../" title="λORM" class="md-header__button md-logo" aria-label="λORM" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6 20 4.16-12.09L9.34 6H8V4h2c.42 0 .78.26.93.63L16.66 18H18v2h-2c-.43 0-.79-.27-.93-.64l-3.74-8.71L8.12 20z"/></svg>
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
-            λORM
-          </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              Skript
-            
-          </span>
-        </div>
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigationsmenü">
+              <p class="caption"><span class="caption-text">Start</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../">λORM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Features/">Funktionen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../labs/">Labs</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/">Überblick</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/GettingStarted/">Erste Schritte</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Configuration/">Konfiguration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Transports/">Transporte</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Security/">Sicherheit</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Operations/">Betrieb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/CHANGELOG/">Änderungsprotokoll</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Abfragen</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Query-Language/">Abfragesprache</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Expression/">Ausdruck</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Select/">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Join/">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Grouping/">Gruppierung</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Include/">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Insert/">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/BulkInsert/">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Update/">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Delete/">Delete</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Metadata/">Metadaten</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Operatoren und Funktionen</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/OperatorsAndFunctions/">Operatoren und Funktionen</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Comparison/">Vergleich</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Logical/">Logisch</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Numeric/">Numerisch</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/String/">Zeichenketten</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Datetime/">Datum und Uhrzeit</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Nullable/">Nullwerte</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Bitwise/">Bitweise</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Group/">Aggregation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Sort/">Sortierung</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/Schema/">Schema</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/SchemaDefinition/">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/SchemaDefinition-Expressions/">Ausdrücke</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/SchemaDefinition-EnvironmentVariables/">Umgebungsvariablen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/SchemaDefinition-Composite/">Zusammengesetzt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/SchemaExample-Listener/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Beispiele</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaExample-Basic/">Grundlagen</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaExample-Extend/">Entität erweitern</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaExample-MultiplesStages/">Mehrere Stages</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaExample-StageMultiplesSources/">Stage mit mehreren Quellen</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaExample-Composite/">Zusammengesetzte Entität</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Synchronisierung</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaSynchronization/">Synchronisierung</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaSynchronization-Push/">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaSynchronization-Pull/">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaSynchronization-Fetch/">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaSynchronization-Introspect/">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaSynchronization-Incorporate/">Incorporate</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/Schema-Use/">Verwendung</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/Engines/">Datenbanken</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Verwendung</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../Usage/">Verwendung</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Repository/">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Transaction/">Transaktion</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Skript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Änderungsprotokoll</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CLI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cli/">λORM CLI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Befehle</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Init/">Init</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Build/">Build</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Sync/">Sync</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Push/">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Drop/">Drop</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Fetch/">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Import/">Import</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Export/">Export</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Execute/">Execute</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Script/">Skript</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Plan/">Plan</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Metadata/">Metadaten</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Model/">Model</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Parameters/">Parameters</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Constraints/">Constraints</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cli/Version/">Version</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cli/CHANGELOG/">Änderungsprotokoll</a>
+                  </li>
+              </ul>
       </div>
     </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
-    
-      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-</form>
-      
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-      <div class="md-header__option">
-  <div class="md-select">
-    
-    <button class="md-header__button md-icon" aria-label="Sprache wechseln">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
-    </button>
-    <div class="md-select__inner">
-      <ul class="md-select__list">
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile Navigationsmenü">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">λORM Wiki</a>
         
-          <li class="md-select__item">
-            <a href="../../../usage/Script/" hreflang="en" class="md-select__link">
-              English
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="./" hreflang="de" class="md-select__link">
-              Deutsch
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="../../../es/usage/Script/" hreflang="es" class="md-select__link">
-              Español
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="../../../pt/usage/Script/" hreflang="pt" class="md-select__link">
-              Português
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</div>
-    
-    
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Suche">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
       </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Suche wird initialisiert
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-      
-    
-    
-  </nav>
-  
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../../" title="λORM" class="md-nav__button md-logo" aria-label="λORM" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6 20 4.16-12.09L9.34 6H8V4h2c.42 0 .78.26.93.63L16.66 18H18v2h-2c-.43 0-.79-.27-.93-.64l-3.74-8.71L8.12 20z"/></svg>
-
-    </a>
-    λORM
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    Start
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1">
-            <span class="md-nav__icon md-icon"></span>
-            Start
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Features/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Funktionen
-    
-  </span>
-  
-
-      </a>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../" class="icon icon-home" aria-label="Dokumentation"></a></li>
+          <li class="breadcrumb-item">Verwendung</li>
+      <li class="breadcrumb-item active">Skript</li>
+    <li class="wy-breadcrumbs-aside">
     </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../labs/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Labs
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../data-gateway/" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    Data Gateway
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            Data Gateway
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data-gateway/GettingStarted/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Erste Schritte
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data-gateway/Configuration/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Konfiguration
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data-gateway/Transports/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Transporte
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data-gateway/Rest/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    REST API
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data-gateway/Mcp/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    MCP
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data-gateway/WebSocket/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    WebSocket API
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data-gateway/Security/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Sicherheit
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data-gateway/Ui/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    UI
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data-gateway/Clients/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Clients
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data-gateway/Operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Betrieb
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data-gateway/CHANGELOG/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Änderungsprotokoll
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Abfragen
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            Abfragen
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Query-Language/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Abfragesprache
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Expression/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Ausdruck
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Select/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Select
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Join/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Join
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Grouping/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Gruppierung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Include/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Include
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Insert/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Insert
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/BulkInsert/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Bulk Insert
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Update/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Update
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Delete/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Delete
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Metadata/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Metadaten
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12" >
-        
-          
-          <label class="md-nav__link" for="__nav_3_12" id="__nav_3_12_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Operatoren und Funktionen
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_12_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_12">
-            <span class="md-nav__icon md-icon"></span>
-            Operatoren und Funktionen
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/OperatorsAndFunctions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Operatoren und Funktionen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Comparison/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Vergleich
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Logical/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Logisch
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Numeric/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Numerisch
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/String/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Zeichenketten
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Datetime/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Datum und Uhrzeit
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Nullable/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Nullwerte
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Bitwise/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Bitweise
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Group/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Aggregation
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Sort/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Sortierung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Schema
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Schema
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/Schema/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Schema
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaDefinition/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Definition
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaDefinition-Expressions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Ausdrücke
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaDefinition-EnvironmentVariables/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Umgebungsvariablen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaDefinition-Composite/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Zusammengesetzt
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaExample-Listener/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Listener
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Beispiele
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_7">
-            <span class="md-nav__icon md-icon"></span>
-            Beispiele
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaExample-Basic/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Grundlagen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaExample-Extend/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Entität erweitern
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaExample-MultiplesStages/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Mehrere Stages
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaExample-StageMultiplesSources/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Stage mit mehreren Quellen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaExample-Composite/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Zusammengesetzte Entität
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Synchronisierung
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_8">
-            <span class="md-nav__icon md-icon"></span>
-            Synchronisierung
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaSynchronization/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Synchronisierung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaSynchronization-Push/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Push
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaSynchronization-Pull/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Pull
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaSynchronization-Fetch/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Fetch
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaSynchronization-Introspect/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Introspect
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaSynchronization-Incorporate/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Incorporate
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/Schema-Use/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Verwendung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/Engines/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Datenbanken
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Verwendung
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            Verwendung
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Usage/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Verwendung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Repository/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Repository
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Transaction/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Transaktion
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Skript
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    Skript
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-it-is-for" class="md-nav__link">
-    <span class="md-ellipsis">
-      Wofür es gedacht ist
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
-    <span class="md-ellipsis">
-      Funktionsumfang
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-main-feature-all-or-nothing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Die Hauptfunktion: alles oder nichts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#arguments" class="md-nav__link">
-    <span class="md-ellipsis">
-      Argumente
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Beispiele
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Beispiele">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-model-of-the-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Das Modell der Beispiele
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-a-single-query" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Eine einzelne Abfrage
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-several-statements-in-order" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Mehrere Anweisungen nacheinander
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-using-the-result-of-a-statement" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Das Ergebnis einer Anweisung verwenden
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-affected-rows-not-found-as-an-error" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Betroffene Zeilen: „nicht gefunden“ als Fehler
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-conditions-create-only-what-is-missing" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Bedingungen: nur Fehlendes anlegen
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-loops-one-row-per-item" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Schleifen: eine Zeile pro Element
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#7-aggregates-with-include" class="md-nav__link">
-    <span class="md-ellipsis">
-      7. Aggregate mit include
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#8-a-business-rule-throw-and-everything-is-undone" class="md-nav__link">
-    <span class="md-ellipsis">
-      8. Eine Geschäftsregel: throw, und alles wird rückgängig gemacht
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#9-handling-an-error-try-catch" class="md-nav__link">
-    <span class="md-ellipsis">
-      9. Einen Fehler behandeln: try / catch
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#10-listeners-run-inside-the-scripts-transaction" class="md-nav__link">
-    <span class="md-ellipsis">
-      10. Listener laufen in der Transaktion des Skripts
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#11-another-stage-in-the-same-transaction" class="md-nav__link">
-    <span class="md-ellipsis">
-      11. Ein anderer Stage in derselben Transaktion
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-limits-timeout-and-maxiterations" class="md-nav__link">
-    <span class="md-ellipsis">
-      12. Limits: timeout und maxIterations
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-a-complete-use-case-place-an-order" class="md-nav__link">
-    <span class="md-ellipsis">
-      13. Ein vollständiger Anwendungsfall: eine Bestellung aufgeben
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#14-another-use-case-a-quote-with-its-total-on-insights" class="md-nav__link">
-    <span class="md-ellipsis">
-      14. Ein weiterer Anwendungsfall: ein Angebot mit seiner Summe auf insights
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-same-script-from-a-client" class="md-nav__link">
-    <span class="md-ellipsis">
-      Dasselbe Skript von einem Client
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-language" class="md-nav__link">
-    <span class="md-ellipsis">
-      Die Sprache
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Die Sprache">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#writing-scripts-a-few-rules" class="md-nav__link">
-    <span class="md-ellipsis">
-      Skripte schreiben: einige Regeln
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transaction-and-stages" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transaktion und Stages
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#security-and-limits" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sicherheit und Limits
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CHANGELOG/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Änderungsprotokoll
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../cli/" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    CLI
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            CLI
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Befehle
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_2">
-            <span class="md-nav__icon md-icon"></span>
-            Befehle
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Init/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Init
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Build/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Build
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Sync
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Push/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Push
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Drop/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Drop
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Fetch/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Fetch
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Import/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Import
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Export/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Export
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Execute/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Execute
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Script/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Skript
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Plan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Plan
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Metadata/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Metadaten
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Model/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Model
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Parameters/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Parameters
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Constraints/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Constraints
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Version/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Version
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/CHANGELOG/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Änderungsprotokoll
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
   </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-it-is-for" class="md-nav__link">
-    <span class="md-ellipsis">
-      Wofür es gedacht ist
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
-    <span class="md-ellipsis">
-      Funktionsumfang
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-main-feature-all-or-nothing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Die Hauptfunktion: alles oder nichts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#arguments" class="md-nav__link">
-    <span class="md-ellipsis">
-      Argumente
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Beispiele
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Beispiele">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-model-of-the-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Das Modell der Beispiele
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-a-single-query" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Eine einzelne Abfrage
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-several-statements-in-order" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Mehrere Anweisungen nacheinander
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-using-the-result-of-a-statement" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Das Ergebnis einer Anweisung verwenden
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-affected-rows-not-found-as-an-error" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Betroffene Zeilen: „nicht gefunden“ als Fehler
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-conditions-create-only-what-is-missing" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Bedingungen: nur Fehlendes anlegen
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-loops-one-row-per-item" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Schleifen: eine Zeile pro Element
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#7-aggregates-with-include" class="md-nav__link">
-    <span class="md-ellipsis">
-      7. Aggregate mit include
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#8-a-business-rule-throw-and-everything-is-undone" class="md-nav__link">
-    <span class="md-ellipsis">
-      8. Eine Geschäftsregel: throw, und alles wird rückgängig gemacht
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#9-handling-an-error-try-catch" class="md-nav__link">
-    <span class="md-ellipsis">
-      9. Einen Fehler behandeln: try / catch
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#10-listeners-run-inside-the-scripts-transaction" class="md-nav__link">
-    <span class="md-ellipsis">
-      10. Listener laufen in der Transaktion des Skripts
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#11-another-stage-in-the-same-transaction" class="md-nav__link">
-    <span class="md-ellipsis">
-      11. Ein anderer Stage in derselben Transaktion
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-limits-timeout-and-maxiterations" class="md-nav__link">
-    <span class="md-ellipsis">
-      12. Limits: timeout und maxIterations
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-a-complete-use-case-place-an-order" class="md-nav__link">
-    <span class="md-ellipsis">
-      13. Ein vollständiger Anwendungsfall: eine Bestellung aufgeben
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#14-another-use-case-a-quote-with-its-total-on-insights" class="md-nav__link">
-    <span class="md-ellipsis">
-      14. Ein weiterer Anwendungsfall: ein Angebot mit seiner Summe auf insights
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-same-script-from-a-client" class="md-nav__link">
-    <span class="md-ellipsis">
-      Dasselbe Skript von einem Client
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-language" class="md-nav__link">
-    <span class="md-ellipsis">
-      Die Sprache
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Die Sprache">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#writing-scripts-a-few-rules" class="md-nav__link">
-    <span class="md-ellipsis">
-      Skripte schreiben: einige Regeln
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transaction-and-stages" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transaktion und Stages
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#security-and-limits" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sicherheit und Limits
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-
-
-<h1 id="script">Skript<a class="headerlink" href="#script" title="Permanent link">&para;</a></h1>
+                <h1 id="script">Skript</h1>
 <p>Ein <strong>Skript</strong> ist ein kleines Programm, geschrieben in <a href="https://www.npmjs.com/package/3xpr">3xpr</a> (einer JavaScript-ähnlichen
 Ausdruckssprache), das λORM mit <code>orm.executeScript(script, data, options)</code> ausführt. Darin führt <code>orm.execute(query, data,
 options)</code> λORM-Abfragen aus, und Variablen, Bedingungen und Schleifen entscheiden, welche und mit welchen Daten.</p>
-<h2 id="what-it-is-for">Wofür es gedacht ist<a class="headerlink" href="#what-it-is-for" title="Permanent link">&para;</a></h2>
+<h2 id="what-it-is-for">Wofür es gedacht ist</h2>
 <p>Viele Anwendungsfälle bestehen aus mehr als einer Abfrage: eine Bestellung aufgeben (die Bestellung, ihre Positionen, der Saldo des Kunden), Bestand
 zwischen Lagern umbuchen, eine Zahlung samt Audit erfassen. Ihre Schreibvorgänge müssen <strong>vollständig oder gar nicht</strong> erfolgen: Eine Bestellung
 ohne ihre Positionen oder ein Saldo, der für eine nicht gespeicherte Bestellung abgezogen wurde, ist ein inkonsistenter Zustand.</p>
@@ -3248,7 +274,7 @@ Aufruf, der den gesamten Anwendungsfall enthält</strong>, unabhängig davon, wo
 <a href="../../data-gateway/Rest/#script">Data Gateway</a> (<code>POST /script</code>), der Node.js-Client (<code>@lambdaorm/client</code>) oder die
 <a href="../../cli/Commands/Script/">CLI</a> (<code>lambdaorm script</code>). Ein Client in jeder beliebigen Sprache kann einen Anwendungsfall mit mehreren Lese-
 und Schreibvorgängen in einer Transaktion ausführen, was ihm nicht möglich wäre, wenn er eine Abfrage pro Anfrage sendet.</p>
-<h2 id="features">Funktionsumfang<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<h2 id="features">Funktionsumfang</h2>
 <ul>
 <li><strong>Alles oder nichts</strong>: Alles, was das Skript ausführt, ist eine Transaktion — bestätigt, wenn es endet, zurückgerollt, wenn
   irgendetwas fehlschlägt (eine Abfrage, ein <code>throw</code>, das Timeout). Siehe <a href="#the-main-feature-all-or-nothing">unten</a>.</li>
@@ -3265,23 +291,23 @@ und Schreibvorgängen in einer Transaktion ausführen, was ihm nicht möglich w�
   Skripte nur aus, wenn seine Konfiguration sie aktiviert (<code>scripts.enabled</code>) und die Zugangsdaten die Berechtigung <code>script</code> haben.</li>
 </ul>
 <p>Ein erster Eindruck — die <a href="#examples">Beispiele</a> gehen Schritt für Schritt vor, von einer einzelnen Abfrage bis zu einem vollständigen Anwendungsfall:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="sb">  orm.execute("Orders.insert()", { id: orderId, status: "new", version: 1 });</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="sb">  for (l in lines) {</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sb">    orm.execute("OrderLines.insert()", {</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sb">      orderId:  orderId,</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sb">      line:     l.line,</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sb">      product:  l.product,</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sb">      quantity: l.qty</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sb">    });</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sb">  }</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sb">  lines.sum(p =&gt; p.qty * p.price)</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">orderId</span><span class="p">,</span><span class="w"> </span><span class="nx">lines</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">)</span>
-</code></pre></div>
-<h2 id="the-main-feature-all-or-nothing">Die Hauptfunktion: alles oder nichts<a class="headerlink" href="#the-main-feature-all-or-nothing" title="Permanent link">&para;</a></h2>
+<pre><code class="language-typescript">const total = await orm.executeScript(`
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, status: &quot;new&quot;, version: 1 });
+  for (l in lines) {
+    orm.execute(&quot;OrderLines.insert()&quot;, {
+      orderId:  orderId,
+      line:     l.line,
+      product:  l.product,
+      quantity: l.qty
+    });
+  }
+  lines.sum(p =&gt; p.qty * p.price)
+`,
+  { orderId, lines },
+  { stage: 'default' }
+)
+</code></pre>
+<h2 id="the-main-feature-all-or-nothing">Die Hauptfunktion: alles oder nichts</h2>
 <p><strong>Alles, was ein Skript ausführt, ist eine Transaktion.</strong> Jedes <code>orm.execute</code> des Skripts — auf einer Quelle oder auf mehreren,
 auf dem Stage des Skripts oder auf einem anderen, und was die <a href="../../schema/SchemaExample-Listener/">Listener</a> schreiben — läuft auf
 denselben Verbindungen:</p>
@@ -3324,7 +350,7 @@ wo ein Client sonst nur eine Abfrage pro Anfrage senden und die vorherigen nicht
 </tr>
 </tbody>
 </table>
-<h2 id="arguments">Argumente<a class="headerlink" href="#arguments" title="Permanent link">&para;</a></h2>
+<h2 id="arguments">Argumente</h2>
 <table>
 <thead>
 <tr>
@@ -3371,312 +397,312 @@ wo ein Client sonst nur eine Abfrage pro Anfrage senden und die vorherigen nicht
 </table>
 <p>Bis @lambdaorm/lib 3.3.0 waren die Limits ein viertes Argument (<code>executeScript(script, data, options, { timeout,
 maxIterations })</code>); seit 3.4.0 gehört alles in <code>options</code>.</p>
-<h2 id="examples">Beispiele<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h2 id="examples">Beispiele</h2>
 <p>Jedes Beispiel beschreibt, was es tut und was passiert, wenn es fehlschlägt.</p>
-<h3 id="the-model-of-the-examples">Das Modell der Beispiele<a class="headerlink" href="#the-model-of-the-examples" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">domain</span><span class="p">:</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Customers</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="nt">primaryKey</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">id</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">uniqueKey</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">code</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">id</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">integer</span><span class="p p-Indicator">,</span><span class="nt"> required</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="p p-Indicator">,</span><span class="nt"> autoIncrement</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">code</span><span class="p p-Indicator">,</span><span class="nt"> length</span><span class="p">:</span><span class="w"> </span><span class="nv">20</span><span class="p p-Indicator">,</span><span class="nt"> required</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">name</span><span class="p p-Indicator">,</span><span class="nt"> required</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">notes</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">balance</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">decimal</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Orders</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="nt">primaryKey</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">id</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">id</span><span class="p p-Indicator">,</span><span class="nt"> length</span><span class="p">:</span><span class="w"> </span><span class="nv">36</span><span class="p p-Indicator">,</span><span class="nt"> required</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">customerId</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">integer</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">status</span><span class="p p-Indicator">,</span><span class="nt"> length</span><span class="p">:</span><span class="w"> </span><span class="nv">20</span><span class="p p-Indicator">,</span><span class="nt"> required</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">version</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">integer</span><span class="p p-Indicator">,</span><span class="nt"> required</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="nt">relations</span><span class="p">:</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">lines</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">manyToOne</span><span class="p p-Indicator">,</span><span class="nt"> composite</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="p p-Indicator">,</span><span class="nt"> from</span><span class="p">:</span><span class="w"> </span><span class="nv">id</span><span class="p p-Indicator">,</span><span class="nt"> entity</span><span class="p">:</span><span class="w"> </span><span class="nv">OrderLines</span><span class="p p-Indicator">,</span><span class="nt"> to</span><span class="p">:</span><span class="w"> </span><span class="nv">orderId</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OrderLines</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">      </span><span class="nt">primaryKey</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">orderId</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">line</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">orderId</span><span class="p p-Indicator">,</span><span class="nt"> length</span><span class="p">:</span><span class="w"> </span><span class="nv">36</span><span class="p p-Indicator">,</span><span class="nt"> required</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">line</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">integer</span><span class="p p-Indicator">,</span><span class="nt"> required</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">product</span><span class="p p-Indicator">,</span><span class="nt"> length</span><span class="p">:</span><span class="w"> </span><span class="nv">40</span><span class="p p-Indicator">,</span><span class="nt"> required</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">quantity</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">integer</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AuditLogs</span>
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">      </span><span class="nt">primaryKey</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">id</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
-<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">id</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">integer</span><span class="p p-Indicator">,</span><span class="nt"> required</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="p p-Indicator">,</span><span class="nt"> autoIncrement</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">entityName</span><span class="p p-Indicator">,</span><span class="nt"> length</span><span class="p">:</span><span class="w"> </span><span class="nv">40</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">refId</span><span class="p p-Indicator">,</span><span class="nt"> length</span><span class="p">:</span><span class="w"> </span><span class="nv">36</span><span class="w"> </span><span class="p p-Indicator">}</span>
-</code></pre></div>
+<h3 id="the-model-of-the-examples">Das Modell der Beispiele</h3>
+<pre><code class="language-yaml">domain:
+  entities:
+    - name: Customers
+      primaryKey: [id]
+      uniqueKey: [code]
+      properties:
+        - { name: id, type: integer, required: true, autoIncrement: true }
+        - { name: code, length: 20, required: true }
+        - { name: name, required: true }
+        - { name: notes }
+        - { name: balance, type: decimal }
+    - name: Orders
+      primaryKey: [id]
+      properties:
+        - { name: id, length: 36, required: true }
+        - { name: customerId, type: integer }
+        - { name: status, length: 20, required: true }
+        - { name: version, type: integer, required: true }
+      relations:
+        - { name: lines, type: manyToOne, composite: true, from: id, entity: OrderLines, to: orderId }
+    - name: OrderLines
+      primaryKey: [orderId, line]
+      properties:
+        - { name: orderId, length: 36, required: true }
+        - { name: line, type: integer, required: true }
+        - { name: product, length: 40, required: true }
+        - { name: quantity, type: integer }
+    - name: AuditLogs
+      primaryKey: [id]
+      properties:
+        - { name: id, type: integer, required: true, autoIncrement: true }
+        - { name: entityName, length: 40 }
+        - { name: refId, length: 36 }
+</code></pre>
 <p>Die Beispiele laufen auf dem Stage <code>default</code>; die Beispiele 11 und 13 schreiben zusätzlich auf einen Stage <code>insights</code>. Es handelt sich um das Modell des
 <a href="https://github.com/lambda-orm/core/tree/main/packages/lib/src/dev/labs/engines">Engines-Labs</a>, in dem dieselben
 Skripte auf PostgreSQL, MySQL, MariaDB, SQL Server, Oracle und MongoDB getestet werden.</p>
-<h3 id="1-a-single-query">1. Eine einzelne Abfrage<a class="headerlink" href="#1-a-single-query" title="Permanent link">&para;</a></h3>
+<h3 id="1-a-single-query">1. Eine einzelne Abfrage</h3>
 <p>Das einfachste Skript ist ein einziges <code>orm.execute</code>. Das Skript gibt den Wert seiner letzten Anweisung zurück — hier die Zeilen
 der Abfrage. Selbst das läuft in einer Transaktion (sie wird geöffnet, die Abfrage läuft, es folgt der Commit).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="sb">  orm.execute("Customers.filter(p =&gt; p.code == code)", { code: code })</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">code</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">)</span>
-</code></pre></div>
-<h3 id="2-several-statements-in-order">2. Mehrere Anweisungen nacheinander<a class="headerlink" href="#2-several-statements-in-order" title="Permanent link">&para;</a></h3>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Customers.filter(p =&gt; p.code == code)&quot;, { code: code })
+`,
+  { code },
+  { stage: 'default' }
+)
+</code></pre>
+<h3 id="2-several-statements-in-order">2. Mehrere Anweisungen nacheinander</h3>
 <p>Anweisungen laufen nacheinander, wobei auf jedes <code>orm.execute</code> gewartet wird, bevor das nächste beginnt. Eine Anweisung sieht, was die
 vorherigen geschrieben haben, noch vor dem Commit (sie teilen sich die Verbindung).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="sb">  orm.execute("Customers.insert()", { code: code, name: name });</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="sb">  orm.execute("Customers.filter(p =&gt; p.code == code).map(p =&gt; p.name)", { code: code })</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">code</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'Ana'</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">)</span>
-</code></pre></div>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Customers.insert()&quot;, { code: code, name: name });
+  orm.execute(&quot;Customers.filter(p =&gt; p.code == code).map(p =&gt; p.name)&quot;, { code: code })
+`,
+  { code, name: 'Ana' },
+  { stage: 'default' }
+)
+</code></pre>
 <p><strong>Ergebnis:</strong> [{ name: "Ana" }].</p>
-<h3 id="3-using-the-result-of-a-statement">3. Das Ergebnis einer Anweisung verwenden<a class="headerlink" href="#3-using-the-result-of-a-statement" title="Permanent link">&para;</a></h3>
+<h3 id="3-using-the-result-of-a-statement">3. Das Ergebnis einer Anweisung verwenden</h3>
 <p>Weisen Sie ein Ergebnis einer Variablen zu und verwenden Sie es weiter unten. Ein Insert antwortet mit <code>{ data }</code> und den geschriebenen Werten,
 einschließlich der generierten: <code>customer.data.id</code> ist die von der Datenbank generierte ID.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="sb">  customer = orm.execute("Customers.insert()", { code: code, name: name });</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="sb">  orm.execute("Orders.insert()", { id: orderId, customerId: customer.data.id, status: "new", version: 1 });</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="sb">  customer.data.id</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">code</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'Ana'</span><span class="p">,</span><span class="w"> </span><span class="nx">orderId</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">)</span>
-</code></pre></div>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  customer = orm.execute(&quot;Customers.insert()&quot;, { code: code, name: name });
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, customerId: customer.data.id, status: &quot;new&quot;, version: 1 });
+  customer.data.id
+`,
+  { code, name: 'Ana', orderId },
+  { stage: 'default' }
+)
+</code></pre>
 <p><strong>Ergebnis:</strong> die für den Kunden generierte ID.</p>
-<h3 id="4-affected-rows-not-found-as-an-error">4. Betroffene Zeilen: „nicht gefunden“ als Fehler<a class="headerlink" href="#4-affected-rows-not-found-as-an-error" title="Permanent link">&para;</a></h3>
+<h3 id="4-affected-rows-not-found-as-an-error">4. Betroffene Zeilen: „nicht gefunden“ als Fehler</h3>
 <p><code>update</code> und <code>delete</code> antworten mit der Anzahl der betroffenen Zeilen. Ein Skript kann 0 in einen Fehler umwandeln; ein <code>throw</code> mit
 einem <code>status</code> wird vom Data Gateway mit diesem HTTP-Status beantwortet.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="sb">  updated = orm.execute("Customers.update(p =&gt; ({ name: name })).filter(p =&gt; p.code == code)", { code: code, name: name });</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="sb">  if (updated == 0) {</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="sb">    throw { status: 404, message: "customer " + code + " not found" };</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="sb">  }</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="sb">  updated</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="s1">'missing'</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'Bob'</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="p">)</span>
-</code></pre></div>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  updated = orm.execute(&quot;Customers.update(p =&gt; ({ name: name })).filter(p =&gt; p.code == code)&quot;, { code: code, name: name });
+  if (updated == 0) {
+    throw { status: 404, message: &quot;customer &quot; + code + &quot; not found&quot; };
+  }
+  updated
+`,
+  { code: 'missing', name: 'Bob' },
+  { stage: 'default' }
+)
+</code></pre>
 <p><strong>Ergebnis:</strong> wird abgelehnt: customer missing not found (404).</p>
-<h3 id="5-conditions-create-only-what-is-missing">5. Bedingungen: nur Fehlendes anlegen<a class="headerlink" href="#5-conditions-create-only-what-is-missing" title="Permanent link">&para;</a></h3>
+<h3 id="5-conditions-create-only-what-is-missing">5. Bedingungen: nur Fehlendes anlegen</h3>
 <p><code>if</code> mit einer Abfrage in der Bedingung. Führen Sie es zweimal mit denselben Daten aus: Beim zweiten Mal wird nichts angelegt.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="sb">  created = 0;</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="sb">  for (c in customers) {</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="sb">    if (orm.execute("Customers.filter(p =&gt; p.code == code)", { code: c.code }).length() == 0) {</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="sb">      orm.execute("Customers.insert()", c);</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="sb">      created += 1;</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="sb">    }</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="sb">  }</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="sb">  created</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">customers</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="s1">'c1'</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'Ana'</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="s1">'c2'</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'Bob'</span><span class="w"> </span><span class="p">}]</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="p">)</span>
-</code></pre></div>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  created = 0;
+  for (c in customers) {
+    if (orm.execute(&quot;Customers.filter(p =&gt; p.code == code)&quot;, { code: c.code }).length() == 0) {
+      orm.execute(&quot;Customers.insert()&quot;, c);
+      created += 1;
+    }
+  }
+  created
+`,
+  { customers: [{ code: 'c1', name: 'Ana' }, { code: 'c2', name: 'Bob' }] },
+  { stage: 'default' }
+)
+</code></pre>
 <p><strong>Ergebnis:</strong> 2 beim ersten Mal, 0 beim zweiten.</p>
-<h3 id="6-loops-one-row-per-item">6. Schleifen: eine Zeile pro Element<a class="headerlink" href="#6-loops-one-row-per-item" title="Permanent link">&para;</a></h3>
+<h3 id="6-loops-one-row-per-item">6. Schleifen: eine Zeile pro Element</h3>
 <p><code>for (item in list)</code> über die Daten. Jeder Insert der Schleife liegt in derselben Transaktion: Entweder werden alle Positionen
 geschrieben oder keine. Listen bieten außerdem <code>filter</code>, <code>map</code>, <code>sum</code>, <code>count</code> …</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="sb">  orm.execute("Orders.insert()", { id: orderId, status: "new", version: 1 });</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="sb">  for (l in lines) {</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="sb">    orm.execute("OrderLines.insert()", { orderId: orderId, line: l.line, product: l.product, quantity: l.qty });</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="sb">  }</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="sb">  lines.sum(p =&gt; p.qty * p.price)</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">orderId</span><span class="p">,</span><span class="w"> </span><span class="nx">lines</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="kt">1</span><span class="p">,</span><span class="w"> </span><span class="nx">product</span><span class="o">:</span><span class="w"> </span><span class="s1">'camera'</span><span class="p">,</span><span class="w"> </span><span class="nx">qty</span><span class="o">:</span><span class="w"> </span><span class="kt">2</span><span class="p">,</span><span class="w"> </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="kt">10</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="kt">2</span><span class="p">,</span><span class="w"> </span><span class="nx">product</span><span class="o">:</span><span class="w"> </span><span class="s1">'hub'</span><span class="p">,</span><span class="w"> </span><span class="nx">qty</span><span class="o">:</span><span class="w"> </span><span class="kt">1</span><span class="p">,</span><span class="w"> </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="kt">5</span><span class="w"> </span><span class="p">}]</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="p">)</span>
-</code></pre></div>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, status: &quot;new&quot;, version: 1 });
+  for (l in lines) {
+    orm.execute(&quot;OrderLines.insert()&quot;, { orderId: orderId, line: l.line, product: l.product, quantity: l.qty });
+  }
+  lines.sum(p =&gt; p.qty * p.price)
+`,
+  { orderId, lines: [{ line: 1, product: 'camera', qty: 2, price: 10 }, { line: 2, product: 'hub', qty: 1, price: 5 }] },
+  { stage: 'default' }
+)
+</code></pre>
 <p><strong>Ergebnis:</strong> 25.</p>
-<h3 id="7-aggregates-with-include">7. Aggregate mit include<a class="headerlink" href="#7-aggregates-with-include" title="Permanent link">&para;</a></h3>
+<h3 id="7-aggregates-with-include">7. Aggregate mit include</h3>
 <p>Eine zusammengesetzte Beziehung kann mit <code>include</code> geschrieben werden, wie bei <code>orm.execute</code> außerhalb eines Skripts. Hier die Bestellung
 und ihre Positionen in einer Anweisung, die anschließend mit ihren Positionen zurückgelesen wird.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="sb">  orm.execute("Orders.insert().include(p =&gt; p.lines)", {</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="sb">    id: orderId, status: "new", version: 1,</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="sb">    lines: lines.map(l =&gt; ({ orderId: orderId, line: l.line, product: l.product, quantity: l.qty }))</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="sb">  });</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="sb">  orders = orm.execute("Orders.filter(p =&gt; p.id == orderId).include(p =&gt; p.lines)", { orderId: orderId });</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="sb">  orders[0].lines.length()</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">orderId</span><span class="p">,</span><span class="w"> </span><span class="nx">lines</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="kt">1</span><span class="p">,</span><span class="w"> </span><span class="nx">product</span><span class="o">:</span><span class="w"> </span><span class="s1">'camera'</span><span class="p">,</span><span class="w"> </span><span class="nx">qty</span><span class="o">:</span><span class="w"> </span><span class="kt">2</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="kt">2</span><span class="p">,</span><span class="w"> </span><span class="nx">product</span><span class="o">:</span><span class="w"> </span><span class="s1">'hub'</span><span class="p">,</span><span class="w"> </span><span class="nx">qty</span><span class="o">:</span><span class="w"> </span><span class="kt">1</span><span class="w"> </span><span class="p">}]</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="p">)</span>
-</code></pre></div>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Orders.insert().include(p =&gt; p.lines)&quot;, {
+    id: orderId, status: &quot;new&quot;, version: 1,
+    lines: lines.map(l =&gt; ({ orderId: orderId, line: l.line, product: l.product, quantity: l.qty }))
+  });
+  orders = orm.execute(&quot;Orders.filter(p =&gt; p.id == orderId).include(p =&gt; p.lines)&quot;, { orderId: orderId });
+  orders[0].lines.length()
+`,
+  { orderId, lines: [{ line: 1, product: 'camera', qty: 2 }, { line: 2, product: 'hub', qty: 1 }] },
+  { stage: 'default' }
+)
+</code></pre>
 <p><strong>Ergebnis:</strong> 2.</p>
-<h3 id="8-a-business-rule-throw-and-everything-is-undone">8. Eine Geschäftsregel: throw, und alles wird rückgängig gemacht<a class="headerlink" href="#8-a-business-rule-throw-and-everything-is-undone" title="Permanent link">&para;</a></h3>
+<h3 id="8-a-business-rule-throw-and-everything-is-undone">8. Eine Geschäftsregel: throw, und alles wird rückgängig gemacht</h3>
 <p>Die Regel wird nach dem Schreiben geprüft: Die Bestellung und ihre Positionen sind bereits in der Datenbank (innerhalb der
 Transaktion). <code>throw</code> stoppt das Skript und <strong>rollt alles zurück, was es geschrieben hat</strong>: Es bleibt weder eine Bestellung noch eine Position übrig.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="sb">  orm.execute("Orders.insert()", { id: orderId, status: "new", version: 1 });</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="sb">  for (l in lines) {</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="sb">    orm.execute("OrderLines.insert()", { orderId: orderId, line: l.line, product: l.product, quantity: l.qty });</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="sb">  }</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="sb">  total = lines.sum(p =&gt; p.qty * p.price);</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="sb">  if (total &gt; maxTotal) {</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="sb">    throw { status: 400, message: "the order exceeds " + maxTotal };</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="sb">  }</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="sb">  total</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">orderId</span><span class="p">,</span><span class="w"> </span><span class="nx">maxTotal</span><span class="o">:</span><span class="w"> </span><span class="kt">20</span><span class="p">,</span><span class="w"> </span><span class="nx">lines</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">…</span><span class="nx">total</span><span class="w"> </span><span class="mf">25</span><span class="err">…</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="p">)</span>
-</code></pre></div>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, status: &quot;new&quot;, version: 1 });
+  for (l in lines) {
+    orm.execute(&quot;OrderLines.insert()&quot;, { orderId: orderId, line: l.line, product: l.product, quantity: l.qty });
+  }
+  total = lines.sum(p =&gt; p.qty * p.price);
+  if (total &gt; maxTotal) {
+    throw { status: 400, message: &quot;the order exceeds &quot; + maxTotal };
+  }
+  total
+`,
+  { orderId, maxTotal: 20, lines: [ …total 25… ] },
+  { stage: 'default' }
+)
+</code></pre>
 <p><strong>Ergebnis:</strong> wird abgelehnt: the order exceeds 20 (400); die Bestellung und ihre Positionen sind nicht in der Datenbank.</p>
-<h3 id="9-handling-an-error-try-catch">9. Einen Fehler behandeln: try / catch<a class="headerlink" href="#9-handling-an-error-try-catch" title="Permanent link">&para;</a></h3>
+<h3 id="9-handling-an-error-try-catch">9. Einen Fehler behandeln: try / catch</h3>
 <p>Ein mit <code>try/catch</code> abgefangener Fehler bricht das Skript nicht ab: Es läuft weiter und führt den Commit aus. Verwenden Sie dies für optionale
 Schritte; jeder nicht abgefangene Fehler rollt alles zurück.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="sb">  try {</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="sb">    if (vip) { throw "vip customers are reviewed by hand"; }</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="sb">    note = "ok";</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="sb">  } catch (e) {</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="sb">    note = e.message;</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="sb">  }</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="sb">  orm.execute("Customers.insert()", { code: code, name: name, notes: note });</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="sb">  note</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">code</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'Ana'</span><span class="p">,</span><span class="w"> </span><span class="nx">vip</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="p">)</span>
-</code></pre></div>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  try {
+    if (vip) { throw &quot;vip customers are reviewed by hand&quot;; }
+    note = &quot;ok&quot;;
+  } catch (e) {
+    note = e.message;
+  }
+  orm.execute(&quot;Customers.insert()&quot;, { code: code, name: name, notes: note });
+  note
+`,
+  { code, name: 'Ana', vip: true },
+  { stage: 'default' }
+)
+</code></pre>
 <p><strong>Ergebnis:</strong> "vip customers are reviewed by hand" (und der Kunde wird geschrieben).</p>
-<h3 id="10-listeners-run-inside-the-scripts-transaction">10. Listener laufen in der Transaktion des Skripts<a class="headerlink" href="#10-listeners-run-inside-the-scripts-transaction" title="Permanent link">&para;</a></h3>
+<h3 id="10-listeners-run-inside-the-scripts-transaction">10. Listener laufen in der Transaktion des Skripts</h3>
 <p>Ein Listener des Schemas (hier einer, der nach jedem Insert einer Bestellung eine Zeile in <code>AuditLogs</code> schreibt) läuft in der
 Transaktion des Skripts: Er wird mit ihr bestätigt und mit ihr rückgängig gemacht, wenn das Skript fehlschlägt.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">application</span><span class="p">:</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">auditOrders</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">      </span><span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">insert</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">entity == "Orders"</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">      </span><span class="nt">after</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">orm.execute("AuditLogs.insert()", { entityName</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"Orders"</span><span class="err">,</span><span class="w"> </span><span class="nt">refId</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data.id })</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="sb">  orm.execute("Orders.insert()", { id: orderId, status: "new", version: 1 });</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="sb">  throw "cancel";</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">orderId</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">)</span>
-</code></pre></div>
+<pre><code class="language-yaml">application:
+  listeners:
+    - name: auditOrders
+      on: [insert]
+      condition: entity == &quot;Orders&quot;
+      after: orm.execute(&quot;AuditLogs.insert()&quot;, { entityName: &quot;Orders&quot;, refId: data.id })
+</code></pre>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, status: &quot;new&quot;, version: 1 });
+  throw &quot;cancel&quot;;
+`,
+  { orderId },
+  { stage: 'default' }
+)
+</code></pre>
 <p><strong>Ergebnis:</strong> wird abgelehnt: cancel; weder die Bestellung noch ihre Audit-Zeile sind in der Datenbank.</p>
-<h3 id="11-another-stage-in-the-same-transaction">11. Ein anderer Stage in derselben Transaktion<a class="headerlink" href="#11-another-stage-in-the-same-transaction" title="Permanent link">&para;</a></h3>
+<h3 id="11-another-stage-in-the-same-transaction">11. Ein anderer Stage in derselben Transaktion</h3>
 <p><code>orm.execute(query, data, { stage: "insights" })</code> läuft auf einem anderen Stage — andere Quellen, sogar eine andere
 Datenbank-Engine — <strong>in derselben Transaktion</strong>: Schlägt danach irgendetwas fehl, wird auch der Schreibvorgang auf dem anderen Stage rückgängig gemacht.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="sb">  orm.execute("Orders.insert()", { id: orderId, status: "new", version: 1 });</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="sb">  orm.execute("AuditLogs.insert()", { entityName: "new order", refId: orderId }, { stage: insights });</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="sb">  if (fail) { throw "something failed after both writes"; }</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="sb">  "done"</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">orderId</span><span class="p">,</span><span class="w"> </span><span class="nx">insights</span><span class="o">:</span><span class="w"> </span><span class="s1">'insights'</span><span class="p">,</span><span class="w"> </span><span class="nx">fail</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="p">)</span>
-</code></pre></div>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, status: &quot;new&quot;, version: 1 });
+  orm.execute(&quot;AuditLogs.insert()&quot;, { entityName: &quot;new order&quot;, refId: orderId }, { stage: insights });
+  if (fail) { throw &quot;something failed after both writes&quot;; }
+  &quot;done&quot;
+`,
+  { orderId, insights: 'insights', fail: true },
+  { stage: 'default' }
+)
+</code></pre>
 <p><strong>Ergebnis:</strong> wird abgelehnt; die Bestellung (Stage default) und die Audit-Zeile (Stage insights) werden beide rückgängig gemacht.</p>
-<h3 id="12-limits-timeout-and-maxiterations">12. Limits: timeout und maxIterations<a class="headerlink" href="#12-limits-timeout-and-maxiterations" title="Permanent link">&para;</a></h3>
+<h3 id="12-limits-timeout-and-maxiterations">12. Limits: timeout und maxIterations</h3>
 <p>Optionen des Skripts, zusammen mit dem Stage: <code>timeout</code> (ms) stoppt es — auch eine Endlosschleife — und rollt
 zurück; <code>maxIterations</code> begrenzt die Schleifendurchläufe des gesamten Skripts. Beide sollten gesetzt werden, wenn Skripte von
 Clients kommen.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="sb">  orm.execute("Customers.insert()", { code: code, name: "never kept" });</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="sb">  while (true) { x = 1; }</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">code</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="p">,</span><span class="w"> </span><span class="nx">timeout</span><span class="o">:</span><span class="w"> </span><span class="kt">2000</span><span class="p">,</span><span class="w"> </span><span class="nx">maxIterations</span><span class="o">:</span><span class="w"> </span><span class="kt">10000</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="p">)</span>
-</code></pre></div>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  orm.execute(&quot;Customers.insert()&quot;, { code: code, name: &quot;never kept&quot; });
+  while (true) { x = 1; }
+`,
+  { code },
+  { stage: 'default', timeout: 2000, maxIterations: 10000 }
+)
+</code></pre>
 <p><strong>Ergebnis:</strong> wird abgelehnt (maxIterations oder zuerst das Timeout); der Kunde wird nicht geschrieben.</p>
-<h3 id="13-a-complete-use-case-place-an-order">13. Ein vollständiger Anwendungsfall: eine Bestellung aufgeben<a class="headerlink" href="#13-a-complete-use-case-place-an-order" title="Permanent link">&para;</a></h3>
+<h3 id="13-a-complete-use-case-place-an-order">13. Ein vollständiger Anwendungsfall: eine Bestellung aufgeben</h3>
 <p>Alles zusammen: validieren, ein Aggregat schreiben, eine Regel anwenden, auf einen anderen Stage schreiben und eine Zusammenfassung zurückgeben.
 Ein Aufruf, eine Transaktion — <strong>schlägt irgendein Schritt fehl, existiert nirgendwo etwas von der Bestellung</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="sb">  customers = orm.execute("Customers.filter(p =&gt; p.code == customerCode)", { customerCode: customerCode });</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="sb">  if (customers.length() == 0) {</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="sb">    throw { status: 404, message: "customer " + customerCode + " not found" };</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="sb">  }</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="sb">  customer = customers[0];</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="sb">  orm.execute("Orders.insert()", { id: orderId, customerId: customer.id, status: "new", version: 1 });</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="sb">  for (l in lines) {</span>
-<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="sb">    orm.execute("OrderLines.insert()", {</span>
-<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="sb">      orderId:  orderId,</span>
-<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="sb">      line:     l.line,</span>
-<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="sb">      product:  l.product,</span>
-<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="sb">      quantity: l.qty</span>
-<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="sb">    });</span>
-<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="sb">  }</span>
-<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>
-<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="sb">  total = lines.sum(p =&gt; p.qty * p.price);</span>
-<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="sb">  if (total &gt; customer.balance) {</span>
-<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="sb">    throw { status: 409, message: "insufficient balance" };</span>
-<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a><span class="sb">  }</span>
-<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>
-<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a><span class="sb">  orm.execute("Customers.update(p =&gt; ({ balance: balance })).filter(p =&gt; p.id == id)", {</span>
-<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a><span class="sb">    id:      customer.id,</span>
-<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a><span class="sb">    balance: customer.balance - total</span>
-<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a><span class="sb">  });</span>
-<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a><span class="sb">  orm.execute("AuditLogs.insert()", { entityName: "order total " + total, refId: orderId }, { stage: insights });</span>
-<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>
-<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a><span class="sb">  { orderId: orderId, total: total, balance: customer.balance - total }</span>
-<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">customerCode</span><span class="o">:</span><span class="w"> </span><span class="s1">'c1'</span><span class="p">,</span><span class="w"> </span><span class="nx">orderId</span><span class="p">,</span><span class="w"> </span><span class="nx">insights</span><span class="o">:</span><span class="w"> </span><span class="s1">'insights'</span><span class="p">,</span><span class="w"> </span><span class="nx">lines</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="kt">1</span><span class="p">,</span><span class="w"> </span><span class="nx">product</span><span class="o">:</span><span class="w"> </span><span class="s1">'camera'</span><span class="p">,</span><span class="w"> </span><span class="nx">qty</span><span class="o">:</span><span class="w"> </span><span class="kt">2</span><span class="p">,</span><span class="w"> </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="kt">10</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="kt">2</span><span class="p">,</span><span class="w"> </span><span class="nx">product</span><span class="o">:</span><span class="w"> </span><span class="s1">'hub'</span><span class="p">,</span><span class="w"> </span><span class="nx">qty</span><span class="o">:</span><span class="w"> </span><span class="kt">1</span><span class="p">,</span><span class="w"> </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="kt">5</span><span class="w"> </span><span class="p">}]</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="p">,</span><span class="w"> </span><span class="nx">timeout</span><span class="o">:</span><span class="w"> </span><span class="kt">10000</span><span class="p">,</span><span class="w"> </span><span class="nx">maxIterations</span><span class="o">:</span><span class="w"> </span><span class="kt">10000</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a><span class="p">)</span>
-</code></pre></div>
+<pre><code class="language-typescript">const result = await orm.executeScript(`
+  customers = orm.execute(&quot;Customers.filter(p =&gt; p.code == customerCode)&quot;, { customerCode: customerCode });
+  if (customers.length() == 0) {
+    throw { status: 404, message: &quot;customer &quot; + customerCode + &quot; not found&quot; };
+  }
+  customer = customers[0];
+
+  orm.execute(&quot;Orders.insert()&quot;, { id: orderId, customerId: customer.id, status: &quot;new&quot;, version: 1 });
+
+  for (l in lines) {
+    orm.execute(&quot;OrderLines.insert()&quot;, {
+      orderId:  orderId,
+      line:     l.line,
+      product:  l.product,
+      quantity: l.qty
+    });
+  }
+
+  total = lines.sum(p =&gt; p.qty * p.price);
+  if (total &gt; customer.balance) {
+    throw { status: 409, message: &quot;insufficient balance&quot; };
+  }
+
+  orm.execute(&quot;Customers.update(p =&gt; ({ balance: balance })).filter(p =&gt; p.id == id)&quot;, {
+    id:      customer.id,
+    balance: customer.balance - total
+  });
+  orm.execute(&quot;AuditLogs.insert()&quot;, { entityName: &quot;order total &quot; + total, refId: orderId }, { stage: insights });
+
+  { orderId: orderId, total: total, balance: customer.balance - total }
+`,
+  { customerCode: 'c1', orderId, insights: 'insights', lines: [{ line: 1, product: 'camera', qty: 2, price: 10 }, { line: 2, product: 'hub', qty: 1, price: 5 }] },
+  { stage: 'default', timeout: 10000, maxIterations: 10000 }
+)
+</code></pre>
 <p><strong>Ergebnis:</strong> { orderId, total: 25, balance: 75 } bei einem Saldo von 100; bei einem Saldo von 20 wird es abgelehnt (409), und die Bestellung, ihre Positionen, der Saldo und die Audit-Zeile bleiben unverändert.</p>
-<h3 id="14-another-use-case-a-quote-with-its-total-on-insights">14. Ein weiterer Anwendungsfall: ein Angebot mit seiner Summe auf insights<a class="headerlink" href="#14-another-use-case-a-quote-with-its-total-on-insights" title="Permanent link">&para;</a></h3>
+<h3 id="14-another-use-case-a-quote-with-its-total-on-insights">14. Ein weiterer Anwendungsfall: ein Angebot mit seiner Summe auf insights</h3>
 <p>Ein Angebot mit seinen Positionen auf dem Haupt-Stage und seiner Summe auf dem Stage <code>insights</code> (andere Quellen, möglicherweise eine andere
 Datenbank), in einer Transaktion. Das Konto muss existieren; schlägt irgendein Schritt fehl, bleiben weder das Angebot noch seine Positionen noch die
 Summe irgendwo erhalten. (Ein Modell mit <code>Accounts</code>, <code>Quotes</code>, <code>QuoteLines</code> und <code>QuoteTotals</code>.)</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">quoteId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="sb">`</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="sb">  account = orm.execute("Accounts.filter(p =&gt; p.id == accountId)", { accountId: accountId });</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="sb">  if (account.length() == 0) {</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="sb">    throw { status: 404, message: "account not found" };</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="sb">  }</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="sb">  orm.execute("Quotes.insert()", { id: quoteId, accountId: accountId, status: "draft" });</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>
-<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="sb">  for (line in lines) {</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="sb">    orm.execute("QuoteLines.insert()", {</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="sb">      id:        line.id,</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="sb">      quoteId:   quoteId,</span>
-<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="sb">      productId: line.productId,</span>
-<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="sb">      quantity:  line.qty</span>
-<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="sb">    });</span>
-<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="sb">  }</span>
-<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>
-<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="sb">  total = lines.sum(p =&gt; p.qty * p.price);</span>
-<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="sb">  orm.execute("QuoteTotals.insert()", { quoteId: quoteId, total: total }, { stage: "insights" });</span>
-<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>
-<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a><span class="sb">  quoteId</span>
-<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a><span class="sb">`</span><span class="p">,</span>
-<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">quoteId</span><span class="p">,</span><span class="w"> </span><span class="nx">accountId</span><span class="p">,</span><span class="w"> </span><span class="nx">lines</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="p">,</span><span class="w"> </span><span class="nx">timeout</span><span class="o">:</span><span class="w"> </span><span class="kt">10000</span><span class="p">,</span><span class="w"> </span><span class="nx">maxIterations</span><span class="o">:</span><span class="w"> </span><span class="kt">10000</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a><span class="p">)</span>
-</code></pre></div>
-<h2 id="the-same-script-from-a-client">Dasselbe Skript von einem Client<a class="headerlink" href="#the-same-script-from-a-client" title="Permanent link">&para;</a></h2>
+<pre><code class="language-typescript">const quoteId = await orm.executeScript(`
+  account = orm.execute(&quot;Accounts.filter(p =&gt; p.id == accountId)&quot;, { accountId: accountId });
+  if (account.length() == 0) {
+    throw { status: 404, message: &quot;account not found&quot; };
+  }
+
+  orm.execute(&quot;Quotes.insert()&quot;, { id: quoteId, accountId: accountId, status: &quot;draft&quot; });
+
+  for (line in lines) {
+    orm.execute(&quot;QuoteLines.insert()&quot;, {
+      id:        line.id,
+      quoteId:   quoteId,
+      productId: line.productId,
+      quantity:  line.qty
+    });
+  }
+
+  total = lines.sum(p =&gt; p.qty * p.price);
+  orm.execute(&quot;QuoteTotals.insert()&quot;, { quoteId: quoteId, total: total }, { stage: &quot;insights&quot; });
+
+  quoteId
+`,
+  { quoteId, accountId, lines },
+  { stage: 'default', timeout: 10000, maxIterations: 10000 }
+)
+</code></pre>
+<h2 id="the-same-script-from-a-client">Dasselbe Skript von einem Client</h2>
 <p>Das Skript und seine Daten sind überall gleich; nur der Aufruf ändert sich. Die URL des Data Gateway enthält die Route
 des Schemas, es sei denn, das Gateway stellt wie in diesen Beispielen ein einziges Schema im Stammpfad bereit.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">// @lambdaorm/client, against a Data Gateway</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/client'</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="s1">'http://localhost:8080'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s1">'X-Api-Key'</span><span class="o">:</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">BACKEND_KEY</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">})</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="nx">script</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="p">,</span><span class="w"> </span><span class="nx">timeout</span><span class="o">:</span><span class="w"> </span><span class="kt">10000</span><span class="w"> </span><span class="p">})</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># REST: a Data Gateway with scripts.enabled and a credential with the script permission</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/script<span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-Api-Key: </span><span class="nv">$BACKEND_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{ "script": "orm.execute(\"Customers.filter(p =&gt; p.code == code)\", { code: code })", "data": { "code": "c1" }, "options": { "stage": "default" } }'</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1"># CLI: a script file, data as JSON</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>lambdaorm<span class="w"> </span>script<span class="w"> </span>-f<span class="w"> </span>place-order.3xpr<span class="w"> </span>-d<span class="w"> </span><span class="s1">'{ "customerCode": "c1", "orderId": "o-1", "lines": [] }'</span><span class="w"> </span>-s<span class="w"> </span>default
-</code></pre></div>
-<h2 id="the-language">Die Sprache<a class="headerlink" href="#the-language" title="Permanent link">&para;</a></h2>
+<pre><code class="language-typescript">// @lambdaorm/client, against a Data Gateway
+import { orm } from '@lambdaorm/client'
+await orm.init('http://localhost:8080', { headers: { 'X-Api-Key': process.env.BACKEND_KEY } })
+const result = await orm.executeScript(script, data, { stage: 'default', timeout: 10000 })
+</code></pre>
+<pre><code class="language-sh"># REST: a Data Gateway with scripts.enabled and a credential with the script permission
+curl -X POST http://localhost:8080/script -H 'Content-Type: application/json' -H &quot;X-Api-Key: $BACKEND_KEY&quot; \
+  -d '{ &quot;script&quot;: &quot;orm.execute(\&quot;Customers.filter(p =&gt; p.code == code)\&quot;, { code: code })&quot;, &quot;data&quot;: { &quot;code&quot;: &quot;c1&quot; }, &quot;options&quot;: { &quot;stage&quot;: &quot;default&quot; } }'
+
+# CLI: a script file, data as JSON
+lambdaorm script -f place-order.3xpr -d '{ &quot;customerCode&quot;: &quot;c1&quot;, &quot;orderId&quot;: &quot;o-1&quot;, &quot;lines&quot;: [] }' -s default
+</code></pre>
+<h2 id="the-language">Die Sprache</h2>
 <p>Alles, was 3xpr bietet:</p>
 <ul>
 <li>Variablen: <code>total = 0;</code>, Objekte <code>{ id: id, name: "x" }</code>, Listen <code>[1, 2]</code>, <code>items[0].name</code>.</li>
@@ -3735,7 +761,7 @@ des Schemas, es sei denn, das Gateway stellt wie in diesen Beispielen ein einzig
 </tr>
 </tbody>
 </table>
-<h3 id="writing-scripts-a-few-rules">Skripte schreiben: einige Regeln<a class="headerlink" href="#writing-scripts-a-few-rules" title="Permanent link">&para;</a></h3>
+<h3 id="writing-scripts-a-few-rules">Skripte schreiben: einige Regeln</h3>
 <ul>
 <li>Anweisungen enden mit <code>;</code>; die letzte (ohne <code>;</code>) ist das Ergebnis. <code>return value;</code> beendet das Skript vorzeitig.</li>
 <li>Variablen müssen nicht deklariert werden: <code>total = 0;</code>. <code>data</code> wird kopiert: Das Skript verändert nie das Objekt des Aufrufers.</li>
@@ -3744,7 +770,7 @@ des Schemas, es sei denn, das Gateway stellt wie in diesen Beispielen ein einzig
   eine leere Liste ist <code>[]</code> (beides erfordert 3xpr 5.3.1, ab @lambdaorm/lib 3.4.1).</li>
 <li>Ein Skript kann keine Umgebungsvariablen lesen (<code>$VAR</code>).</li>
 </ul>
-<h2 id="transaction-and-stages">Transaktion und Stages<a class="headerlink" href="#transaction-and-stages" title="Permanent link">&para;</a></h2>
+<h2 id="transaction-and-stages">Transaktion und Stages</h2>
 <ul>
 <li>Eine Transaktion für das gesamte Skript, auch über Quellen und Stages hinweg: Commit am Ende; Rollback und Ablehnung bei jedem
   Fehler.</li>
@@ -3753,7 +779,7 @@ des Schemas, es sei denn, das Gateway stellt wie in diesen Beispielen ein einzig
 <li>Eine Anweisung sieht, was die vorherigen geschrieben haben (dieselbe Verbindung), noch vor dem Commit.</li>
 <li>Es gibt keinen Zwei-Phasen-Commit: Bei mehreren Datenbanken erfolgt der Commit Quelle für Quelle.</li>
 </ul>
-<h2 id="security-and-limits">Sicherheit und Limits<a class="headerlink" href="#security-and-limits" title="Permanent link">&para;</a></h2>
+<h2 id="security-and-limits">Sicherheit und Limits</h2>
 <ul>
 <li>Das Skript <strong>kann keine Umgebungsvariablen lesen</strong> (<code>$VAR</code> schlägt fehl) und daher auch keine Verbindungszeichenfolgen.</li>
 <li><code>timeout</code>: Ist es überschritten, stoppen die Schleifen des Skripts, die Transaktion wird zurückgerollt und das Skript abgelehnt; alles, was es
@@ -3763,105 +789,52 @@ des Schemas, es sei denn, das Gateway stellt wie in diesen Beispielen ein einzig
 <li>Seit @lambdaorm/lib 3.3.0 (3xpr 5.3.0) blockiert ein <code>while (true) {}</code> den Prozess nicht mehr: Das Timeout und
   <code>maxIterations</code> stoppen es. Im Data Gateway sind Skripte standardmäßig deaktiviert (<code>scripts.enabled</code>) und erfordern die Berechtigung <code>script</code>.</li>
 </ul>
-
-
-
-
-
-
-
-
-
-
-
-
-                
-              </article>
-            </div>
-          
-          
-<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Zurück zum Seitenanfang
-</button>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Fußzeile" >
-        
-          
-          <a href="../Transaction/" class="md-footer__link md-footer__link--prev" aria-label="Zurück: Transaktion">
-            <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Zurück
-              </span>
-              <div class="md-ellipsis">
-                Transaktion
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../CHANGELOG/" class="md-footer__link md-footer__link--next" aria-label="Weiter: Änderungsprotokoll">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Weiter
-              </span>
-              <div class="md-ellipsis">
-                Änderungsprotokoll
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
-</div>
-      
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer-Navigation">
+        <a href="../Transaction/" class="btn btn-neutral float-left" title="Transaktion"><span class="icon icon-circle-arrow-left"></span> Zurück</a>
+        <a href="../CHANGELOG/" class="btn btn-neutral float-right" title="Änderungsprotokoll">Weiter <span class="icon icon-circle-arrow-right"></span></a>
     </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
   </div>
+
+  Erzeugt mit <a href="https://www.mkdocs.org/">MkDocs</a> mit einem <a href="https://github.com/readthedocs/sphinx_rtd_theme">Thema</a> von <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versionen">
+  <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-    
-      
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
+      <span><a href="../Transaction/" style="color: #fcfcfc">&laquo; Zurück</a></span>
     
     
-      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
-      
+      <span><a href="../CHANGELOG/" style="color: #fcfcfc">Weiter &raquo;</a></span>
     
-  </body>
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../assets/wiki-v2.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
 </html>

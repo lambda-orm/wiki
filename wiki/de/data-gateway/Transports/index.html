@@ -1,2839 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="de" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lambda-orm.github.io/wiki/de/data-gateway/Transports/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Transporte - λORM Wiki</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs2015.min.css" />
+        <link href="../../../assets/wiki-v4.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Transporte";
+        var mkdocs_page_input_path = "data-gateway/Transports.de.md";
+        var mkdocs_page_url = "/wiki/de/data-gateway/Transports/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
 
-<!doctype html>
-<html lang="de" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-        <meta name="description" content="λORM — ein ORM für Lambda-Abfragen über mehrere Datenbanken und das Data Gateway, das seine Schemas veröffentlicht">
-      
-      
-      
-        <link rel="canonical" href="https://lambda-orm.github.io/wiki/de/data-gateway/Transports/">
-      
-      
-        <link rel="prev" href="../Configuration/">
-      
-      
-        <link rel="next" href="../Rest/">
-      
-      
-      <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
-    
-    
-      
-        <title>Transporte - λORM</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
-      
-        
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
-      
-      
+<body class="wy-body-for-nav" role="document">
 
-
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-      <link rel="stylesheet" href="../../../assets/lambdaorm-v2.css">
-    
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-
-    
-    
-    
-  </head>
-  
-  
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#transports" class="md-skip">
-          Zum Inhalt
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../" class="icon icon-home"> λORM Wiki
         </a>
-      
+  <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Durchsuchen" aria-label="Durchsuchen" title="Tragen Sie hier den gesuchten Begriff ein" />
+  </form>
+</div>
+    <div class="lang-switch">
+        <a href="../../../data-gateway/Transports/" class="" hreflang="en">English</a>
+        <a href="../../../de/data-gateway/Transports/" class="current" hreflang="de">Deutsch</a>
+        <a href="../../../es/data-gateway/Transports/" class="" hreflang="es">Español</a>
+        <a href="../../../pt/data-gateway/Transports/" class="" hreflang="pt">Português</a>
     </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
+      </div>
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
-    <a href="../../" title="λORM" class="md-header__button md-logo" aria-label="λORM" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6 20 4.16-12.09L9.34 6H8V4h2c.42 0 .78.26.93.63L16.66 18H18v2h-2c-.43 0-.79-.27-.93-.64l-3.74-8.71L8.12 20z"/></svg>
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
-            λORM
-          </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              Transporte
-            
-          </span>
-        </div>
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigationsmenü">
+              <p class="caption"><span class="caption-text">Start</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../">λORM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Features/">Funktionen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../labs/">Labs</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Überblick</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../GettingStarted/">Erste Schritte</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Configuration/">Konfiguration</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Transporte</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Security/">Sicherheit</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Operations/">Betrieb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Änderungsprotokoll</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Abfragen</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Query-Language/">Abfragesprache</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Expression/">Ausdruck</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Select/">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Join/">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Grouping/">Gruppierung</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Include/">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Insert/">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/BulkInsert/">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Update/">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Delete/">Delete</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../queries/Metadata/">Metadaten</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Operatoren und Funktionen</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/OperatorsAndFunctions/">Operatoren und Funktionen</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Comparison/">Vergleich</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Logical/">Logisch</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Numeric/">Numerisch</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/String/">Zeichenketten</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Datetime/">Datum und Uhrzeit</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Nullable/">Nullwerte</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Bitwise/">Bitweise</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Group/">Aggregation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../queries/operatorsAndFunctions/Sort/">Sortierung</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/Schema/">Schema</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/SchemaDefinition/">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/SchemaDefinition-Expressions/">Ausdrücke</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/SchemaDefinition-EnvironmentVariables/">Umgebungsvariablen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/SchemaDefinition-Composite/">Zusammengesetzt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/SchemaExample-Listener/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Beispiele</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaExample-Basic/">Grundlagen</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaExample-Extend/">Entität erweitern</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaExample-MultiplesStages/">Mehrere Stages</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaExample-StageMultiplesSources/">Stage mit mehreren Quellen</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaExample-Composite/">Zusammengesetzte Entität</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Synchronisierung</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaSynchronization/">Synchronisierung</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaSynchronization-Push/">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaSynchronization-Pull/">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaSynchronization-Fetch/">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaSynchronization-Introspect/">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/SchemaSynchronization-Incorporate/">Incorporate</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/Schema-Use/">Verwendung</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/Engines/">Datenbanken</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Verwendung</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../usage/Usage/">Verwendung</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../usage/Repository/">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../usage/Transaction/">Transaktion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../usage/Script/">Skript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../usage/CHANGELOG/">Änderungsprotokoll</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CLI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cli/">λORM CLI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Befehle</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Init/">Init</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Build/">Build</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Sync/">Sync</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Push/">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Drop/">Drop</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Fetch/">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Import/">Import</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Export/">Export</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Execute/">Execute</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Script/">Skript</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Plan/">Plan</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Metadata/">Metadaten</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Model/">Model</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Parameters/">Parameters</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../cli/Commands/Constraints/">Constraints</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cli/Version/">Version</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cli/CHANGELOG/">Änderungsprotokoll</a>
+                  </li>
+              </ul>
       </div>
     </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
-    
-      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-</form>
-      
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-      <div class="md-header__option">
-  <div class="md-select">
-    
-    <button class="md-header__button md-icon" aria-label="Sprache wechseln">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
-    </button>
-    <div class="md-select__inner">
-      <ul class="md-select__list">
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile Navigationsmenü">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">λORM Wiki</a>
         
-          <li class="md-select__item">
-            <a href="../../../data-gateway/Transports/" hreflang="en" class="md-select__link">
-              English
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="./" hreflang="de" class="md-select__link">
-              Deutsch
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="../../../es/data-gateway/Transports/" hreflang="es" class="md-select__link">
-              Español
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="../../../pt/data-gateway/Transports/" hreflang="pt" class="md-select__link">
-              Português
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</div>
-    
-    
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Suche">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
       </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Suche wird initialisiert
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-      
-    
-    
-  </nav>
-  
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../../" title="λORM" class="md-nav__button md-logo" aria-label="λORM" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6 20 4.16-12.09L9.34 6H8V4h2c.42 0 .78.26.93.63L16.66 18H18v2h-2c-.43 0-.79-.27-.93-.64l-3.74-8.71L8.12 20z"/></svg>
-
-    </a>
-    λORM
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    Start
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1">
-            <span class="md-nav__icon md-icon"></span>
-            Start
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Features/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Funktionen
-    
-  </span>
-  
-
-      </a>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../" class="icon icon-home" aria-label="Dokumentation"></a></li>
+          <li class="breadcrumb-item">Data Gateway</li>
+      <li class="breadcrumb-item active">Transporte</li>
+    <li class="wy-breadcrumbs-aside">
     </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../labs/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Labs
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    Data Gateway
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            Data Gateway
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GettingStarted/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Erste Schritte
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Configuration/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Konfiguration
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Transporte
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    Transporte
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#http" class="md-nav__link">
-    <span class="md-ellipsis">
-      http
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mcphttp" class="md-nav__link">
-    <span class="md-ellipsis">
-      mcpHttp
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mcpwebsocket" class="md-nav__link">
-    <span class="md-ellipsis">
-      mcpWebSocket
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#websocket" class="md-nav__link">
-    <span class="md-ellipsis">
-      webSocket
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Rest/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    REST API
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Mcp/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    MCP
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../WebSocket/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    WebSocket API
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Security/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Sicherheit
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Ui/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    UI
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Clients/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Clients
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Betrieb
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CHANGELOG/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Änderungsprotokoll
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Abfragen
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            Abfragen
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Query-Language/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Abfragesprache
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Expression/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Ausdruck
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Select/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Select
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Join/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Join
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Grouping/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Gruppierung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Include/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Include
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Insert/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Insert
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/BulkInsert/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Bulk Insert
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Update/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Update
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Delete/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Delete
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/Metadata/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Metadaten
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12" >
-        
-          
-          <label class="md-nav__link" for="__nav_3_12" id="__nav_3_12_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Operatoren und Funktionen
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_12_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_12">
-            <span class="md-nav__icon md-icon"></span>
-            Operatoren und Funktionen
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/OperatorsAndFunctions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Operatoren und Funktionen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Comparison/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Vergleich
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Logical/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Logisch
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Numeric/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Numerisch
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/String/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Zeichenketten
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Datetime/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Datum und Uhrzeit
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Nullable/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Nullwerte
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Bitwise/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Bitweise
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Group/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Aggregation
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../queries/operatorsAndFunctions/Sort/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Sortierung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Schema
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Schema
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/Schema/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Schema
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaDefinition/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Definition
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaDefinition-Expressions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Ausdrücke
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaDefinition-EnvironmentVariables/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Umgebungsvariablen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaDefinition-Composite/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Zusammengesetzt
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaExample-Listener/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Listener
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Beispiele
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_7">
-            <span class="md-nav__icon md-icon"></span>
-            Beispiele
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaExample-Basic/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Grundlagen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaExample-Extend/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Entität erweitern
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaExample-MultiplesStages/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Mehrere Stages
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaExample-StageMultiplesSources/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Stage mit mehreren Quellen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaExample-Composite/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Zusammengesetzte Entität
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Synchronisierung
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_8">
-            <span class="md-nav__icon md-icon"></span>
-            Synchronisierung
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaSynchronization/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Synchronisierung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaSynchronization-Push/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Push
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaSynchronization-Pull/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Pull
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaSynchronization-Fetch/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Fetch
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaSynchronization-Introspect/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Introspect
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/SchemaSynchronization-Incorporate/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Incorporate
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/Schema-Use/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Verwendung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../schema/Engines/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Datenbanken
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Verwendung
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            Verwendung
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../usage/Usage/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Verwendung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../usage/Repository/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Repository
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../usage/Transaction/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Transaktion
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../usage/Script/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Skript
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../usage/CHANGELOG/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Änderungsprotokoll
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../cli/" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    CLI
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            CLI
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Befehle
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_2">
-            <span class="md-nav__icon md-icon"></span>
-            Befehle
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Init/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Init
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Build/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Build
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Sync
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Push/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Push
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Drop/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Drop
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Fetch/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Fetch
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Import/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Import
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Export/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Export
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Execute/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Execute
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Script/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Skript
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Plan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Plan
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Metadata/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Metadaten
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Model/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Model
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Parameters/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Parameters
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Commands/Constraints/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Constraints
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/Version/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Version
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cli/CHANGELOG/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Änderungsprotokoll
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
   </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#http" class="md-nav__link">
-    <span class="md-ellipsis">
-      http
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mcphttp" class="md-nav__link">
-    <span class="md-ellipsis">
-      mcpHttp
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mcpwebsocket" class="md-nav__link">
-    <span class="md-ellipsis">
-      mcpWebSocket
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#websocket" class="md-nav__link">
-    <span class="md-ellipsis">
-      webSocket
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-
-
-<h1 id="transports">Transporte<a class="headerlink" href="#transports" title="Permanent link">&para;</a></h1>
+                <h1 id="transports">Transporte</h1>
 <p>Das Gateway hat vier Transporte. Jeder lauscht auf einem eigenen Port, nur wenn der Port konfiguriert ist
 (<a href="../Configuration/#transports-and-ports">Konfiguration</a>), und jeder erreicht jedes Schema über dessen Route.</p>
 <table>
@@ -2881,16 +309,16 @@
 <li>Jeder Transport authentifiziert jede Anfrage (bzw. das WebSocket-Upgrade) mit der effektiven Authentifizierung des
   Schemas (<a href="../Security/">Sicherheit</a>).</li>
 </ul>
-<h2 id="http">http<a class="headerlink" href="#http" title="Permanent link">&para;</a></h2>
+<h2 id="http">http</h2>
 <p>Die REST API: alle Operationen von λORM auf einem Schema (Abfragen, Skripte, das Schema, Stages) sowie die Routen des
 Gateways. JSON als Ein- und Ausgabe. Methoden und Beispiele unter <a href="../Rest/">REST API</a>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">transports</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">http</span><span class="p">:</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">basePath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data-gateway</span><span class="w">   </span><span class="c1"># optional</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">swagger</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> enabled</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w">   </span><span class="c1"># /doc and /api-docs (Swagger UI, OpenAPI 3)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">ui</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> enabled</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w">        </span><span class="c1"># the web UI at /ui</span>
-</code></pre></div>
+<pre><code class="language-yaml">transports:
+  http:
+    port: 8080
+    basePath: /data-gateway   # optional
+    swagger: { enabled: true }   # /doc and /api-docs (Swagger UI, OpenAPI 3)
+    ui: { enabled: true }        # the web UI at /ui
+</code></pre>
 <ul>
 <li><code>GET /doc</code> (und <code>/api-docs</code>) stellt Swagger UI mit dem OpenAPI-Dokument bereit. Die Schaltfläche <strong>Authorize</strong> fragt
   die Zugangsdaten so ab, wie die Schemas konfiguriert sind: einen API-Key in seinem Header, ein Bearer-Token oder
@@ -2898,15 +326,15 @@ Gateways. JSON als Ein- und Ausgabe. Methoden und Beispiele unter <a href="../Re
 <li><code>/ping</code>, <code>/health</code> und <code>/metrics</code> benötigen keine Zugangsdaten (Kubernetes-Probes, Prometheus).</li>
 <li>Das Rate Limit (<code>rateLimit</code>) gilt nur für diesen Transport.</li>
 </ul>
-<h2 id="mcphttp">mcpHttp<a class="headerlink" href="#mcphttp" title="Permanent link">&para;</a></h2>
+<h2 id="mcphttp">mcpHttp</h2>
 <p><a href="https://modelcontextprotocol.io">Model Context Protocol</a> für KI-Agenten: ein Server pro Schema, mit einem Tool pro
 Operation. Siehe <a href="../Mcp/">MCP</a>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">transports</span><span class="p">:</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">mcpHttp</span><span class="p">:</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8081</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">legacySse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">    </span><span class="c1"># also the older HTTP+SSE transport, for older clients</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">stateful</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">    </span><span class="c1"># stateless: any replica answers any request, no session affinity needed</span>
-</code></pre></div>
+<pre><code class="language-yaml">transports:
+  mcpHttp:
+    port: 8081
+    legacySse: true    # also the older HTTP+SSE transport, for older clients
+    stateful: false    # stateless: any replica answers any request, no session affinity needed
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -2935,127 +363,74 @@ Operation. Siehe <a href="../Mcp/">MCP</a>.</p>
 </table>
 <p>Die Zugangsdaten werden mit jeder Anfrage gesendet (Streamable HTTP) bzw. im <code>GET</code> und in jedem <code>POST</code> (SSE). HTTP+SSE
 hält eine Sitzung im Speicher: Bei mehreren Replikas ist Session-Affinität erforderlich.</p>
-<h2 id="mcpwebsocket">mcpWebSocket<a class="headerlink" href="#mcpwebsocket" title="Permanent link">&para;</a></h2>
+<h2 id="mcpwebsocket">mcpWebSocket</h2>
 <p>Dieselben MCP-Server über WebSocket. <strong>Es ist kein Standard-MCP-Transport</strong>: Er wird für Clients und Gateways angeboten,
 die ihn von sich aus unterstützen; die meisten Clients verwenden <code>mcpHttp</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">transports</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">mcpWebSocket</span><span class="p">:</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8082</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">maxConnections</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
-</code></pre></div>
+<pre><code class="language-yaml">transports:
+  mcpWebSocket:
+    port: 8082
+    maxConnections: 100
+</code></pre>
 <p>Die Verbindung ist ein Upgrade unter <code>{basePath}/{schema}/mcp</code>, authentifiziert im Handshake (ohne Zugangsdaten
 antwortet er mit <code>401</code> und schließt). Die Nachrichten sind JSON-RPC 2.0 mit den MCP-Methoden (<code>initialize</code>, <code>ping</code>,
 <code>tools/list</code>, <code>tools/call</code>, <code>resources/*</code>, …). <code>GET {basePath}/status</code> und <code>GET {basePath}/asyncapi</code> (das
 AsyncAPI-Dokument) sind reines HTTP.</p>
-<h2 id="websocket">webSocket<a class="headerlink" href="#websocket" title="Permanent link">&para;</a></h2>
+<h2 id="websocket">webSocket</h2>
 <p>Eine JSON-RPC-2.0-API über eine einzige dauerhafte Verbindung, mit denselben Operationen wie REST, dazu
 <strong>Benachrichtigungen</strong>, die REST nicht bieten kann: das Ende einer Ausführung in der Warteschlange und die
 Zustandsänderungen des Schemas. Siehe <a href="../WebSocket/">WebSocket API</a>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">transports</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">webSocket</span><span class="p">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8083</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">maxConnections</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">asyncapi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> enabled</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w">   </span><span class="c1"># GET /asyncapi, /asyncapi.json</span>
-</code></pre></div>
-
-
-
-
-
-
-
-
-
-
-
-
-                
-              </article>
-            </div>
-          
-          
-<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Zurück zum Seitenanfang
-</button>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Fußzeile" >
-        
-          
-          <a href="../Configuration/" class="md-footer__link md-footer__link--prev" aria-label="Zurück: Konfiguration">
-            <div class="md-footer__button md-icon">
+<pre><code class="language-yaml">transports:
+  webSocket:
+    port: 8083
+    maxConnections: 100
+    asyncapi: { enabled: true }   # GET /asyncapi, /asyncapi.json
+</code></pre>
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Zurück
-              </span>
-              <div class="md-ellipsis">
-                Konfiguration
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../Rest/" class="md-footer__link md-footer__link--next" aria-label="Weiter: REST API">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Weiter
-              </span>
-              <div class="md-ellipsis">
-                REST API
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
-</div>
-      
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer-Navigation">
+        <a href="../Configuration/" class="btn btn-neutral float-left" title="Konfiguration"><span class="icon icon-circle-arrow-left"></span> Zurück</a>
+        <a href="../Rest/" class="btn btn-neutral float-right" title="REST API">Weiter <span class="icon icon-circle-arrow-right"></span></a>
     </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
   </div>
+
+  Erzeugt mit <a href="https://www.mkdocs.org/">MkDocs</a> mit einem <a href="https://github.com/readthedocs/sphinx_rtd_theme">Thema</a> von <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versionen">
+  <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-    
-      
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
+      <span><a href="../Configuration/" style="color: #fcfcfc">&laquo; Zurück</a></span>
     
     
-      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
-      
+      <span><a href="../Rest/" style="color: #fcfcfc">Weiter &raquo;</a></span>
     
-  </body>
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../assets/wiki-v2.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
 </html>

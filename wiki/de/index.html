@@ -1,2807 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="de" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lambda-orm.github.io/wiki/de/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>λORM - λORM Wiki</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs2015.min.css" />
+        <link href="../assets/wiki-v4.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u03bbORM";
+        var mkdocs_page_input_path = "index.de.md";
+        var mkdocs_page_url = "/wiki/de/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
 
-<!doctype html>
-<html lang="de" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-        <meta name="description" content="λORM — ein ORM für Lambda-Abfragen über mehrere Datenbanken und das Data Gateway, das seine Schemas veröffentlicht">
-      
-      
-      
-        <link rel="canonical" href="https://lambda-orm.github.io/wiki/de/">
-      
-      
-      
-        <link rel="next" href="Features/">
-      
-      
-      <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
-    
-    
-      
-        <title>λORM - λORM</title>
-      
-    
-    
-      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
-      
-        
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
-      
-      
+<body class="wy-body-for-nav" role="document">
 
-
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-      <link rel="stylesheet" href="../assets/lambdaorm-v2.css">
-    
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-
-    
-    
-    
-  </head>
-  
-  
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#orm" class="md-skip">
-          Zum Inhalt
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="./" class="icon icon-home"> λORM Wiki
         </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
-
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
-    <a href="./" title="λORM" class="md-header__button md-logo" aria-label="λORM" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6 20 4.16-12.09L9.34 6H8V4h2c.42 0 .78.26.93.63L16.66 18H18v2h-2c-.43 0-.79-.27-.93-.64l-3.74-8.71L8.12 20z"/></svg>
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
-            λORM
-          </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              λORM
-            
-          </span>
-        </div>
-      </div>
-    </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
-    
-      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-</form>
-      
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-      <div class="md-header__option">
-  <div class="md-select">
-    
-    <button class="md-header__button md-icon" aria-label="Sprache wechseln">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
-    </button>
-    <div class="md-select__inner">
-      <ul class="md-select__list">
-        
-          <li class="md-select__item">
-            <a href="/wiki/" hreflang="en" class="md-select__link">
-              English
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="/wiki/de/" hreflang="de" class="md-select__link">
-              Deutsch
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="/wiki/es/" hreflang="es" class="md-select__link">
-              Español
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="/wiki/pt/" hreflang="pt" class="md-select__link">
-              Português
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+  <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Durchsuchen" aria-label="Durchsuchen" title="Tragen Sie hier den gesuchten Begriff ein" />
+  </form>
 </div>
-    
-    
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Suche">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Suche wird initialisiert
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
+    <div class="lang-switch">
+        <a href="../" class="" hreflang="en">English</a>
+        <a href="../de/" class="current" hreflang="de">Deutsch</a>
+        <a href="../es/" class="" hreflang="es">Español</a>
+        <a href="../pt/" class="" hreflang="pt">Português</a>
     </div>
-  </div>
-</div>
-      
-    
-    
-  </nav>
-  
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="./" title="λORM" class="md-nav__button md-logo" aria-label="λORM" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6 20 4.16-12.09L9.34 6H8V4h2c.42 0 .78.26.93.63L16.66 18H18v2h-2c-.43 0-.79-.27-.93-.64l-3.74-8.71L8.12 20z"/></svg>
-
-    </a>
-    λORM
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
-              
-  
-  
-  <span class="md-ellipsis">
-    Start
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link md-nav__link--active" for="__nav_1" id="__nav_1_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_1">
-            <span class="md-nav__icon md-icon"></span>
-            Start
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="Features/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Funktionen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="labs/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Labs
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="data-gateway/" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    Data Gateway
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            Data Gateway
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="data-gateway/GettingStarted/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Erste Schritte
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="data-gateway/Configuration/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Konfiguration
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="data-gateway/Transports/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Transporte
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="data-gateway/Rest/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    REST API
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="data-gateway/Mcp/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    MCP
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="data-gateway/WebSocket/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    WebSocket API
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="data-gateway/Security/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Sicherheit
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="data-gateway/Ui/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    UI
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="data-gateway/Clients/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Clients
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="data-gateway/Operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Betrieb
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="data-gateway/CHANGELOG/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Änderungsprotokoll
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Abfragen
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            Abfragen
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/Query-Language/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Abfragesprache
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/Expression/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Ausdruck
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/Select/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Select
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/Join/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Join
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/Grouping/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Gruppierung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/Include/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Include
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/Insert/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Insert
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/BulkInsert/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Bulk Insert
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/Update/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Update
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/Delete/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Delete
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/Metadata/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Metadaten
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12" >
-        
-          
-          <label class="md-nav__link" for="__nav_3_12" id="__nav_3_12_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Operatoren und Funktionen
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_12_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_12">
-            <span class="md-nav__icon md-icon"></span>
-            Operatoren und Funktionen
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/operatorsAndFunctions/OperatorsAndFunctions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Operatoren und Funktionen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/operatorsAndFunctions/Comparison/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Vergleich
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/operatorsAndFunctions/Logical/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Logisch
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/operatorsAndFunctions/Numeric/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Numerisch
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/operatorsAndFunctions/String/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Zeichenketten
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/operatorsAndFunctions/Datetime/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Datum und Uhrzeit
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/operatorsAndFunctions/Nullable/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Nullwerte
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/operatorsAndFunctions/Bitwise/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Bitweise
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/operatorsAndFunctions/Group/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Aggregation
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="queries/operatorsAndFunctions/Sort/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Sortierung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Schema
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Schema
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/Schema/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Schema
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaDefinition/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Definition
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaDefinition-Expressions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Ausdrücke
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaDefinition-EnvironmentVariables/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Umgebungsvariablen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaDefinition-Composite/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Zusammengesetzt
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaExample-Listener/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Listener
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Beispiele
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_7">
-            <span class="md-nav__icon md-icon"></span>
-            Beispiele
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaExample-Basic/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Grundlagen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaExample-Extend/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Entität erweitern
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaExample-MultiplesStages/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Mehrere Stages
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaExample-StageMultiplesSources/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Stage mit mehreren Quellen
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaExample-Composite/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Zusammengesetzte Entität
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Synchronisierung
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_8">
-            <span class="md-nav__icon md-icon"></span>
-            Synchronisierung
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaSynchronization/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Synchronisierung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaSynchronization-Push/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Push
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaSynchronization-Pull/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Pull
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaSynchronization-Fetch/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Fetch
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaSynchronization-Introspect/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Introspect
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/SchemaSynchronization-Incorporate/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Incorporate
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/Schema-Use/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Verwendung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema/Engines/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Datenbanken
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Verwendung
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            Verwendung
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="usage/Usage/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Verwendung
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="usage/Repository/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Repository
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="usage/Transaction/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Transaktion
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="usage/Script/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Skript
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="usage/CHANGELOG/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Änderungsprotokoll
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="cli/" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    CLI
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            CLI
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Befehle
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_2">
-            <span class="md-nav__icon md-icon"></span>
-            Befehle
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Init/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Init
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Build/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Build
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Sync
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Push/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Push
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Drop/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Drop
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Fetch/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Fetch
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Import/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Import
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Export/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Export
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Execute/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Execute
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Script/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Skript
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Plan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Plan
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Metadata/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Metadaten
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Model/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Model
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Parameters/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Parameters
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Commands/Constraints/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Constraints
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/Version/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Version
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cli/CHANGELOG/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Änderungsprotokoll
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-use-it" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verwendung
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#query-language" class="md-nav__link">
-    <span class="md-ellipsis">
-      Abfragesprache
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Abfragesprache">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#include" class="md-nav__link">
-    <span class="md-ellipsis">
-      Include
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#schema" class="md-nav__link">
-    <span class="md-ellipsis">
-      Schema
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Schema">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#synchronization" class="md-nav__link">
-    <span class="md-ellipsis">
-      Synchronisierung
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transactions-and-scripts" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transaktionen und Skripte
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#labs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Labs
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related-projects" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verwandte Projekte
-    </span>
-  </a>
-  
-</li>
-      
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigationsmenü">
+              <p class="caption"><span class="caption-text">Start</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">λORM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="Features/">Funktionen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="labs/">Labs</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/">Überblick</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/GettingStarted/">Erste Schritte</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Configuration/">Konfiguration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Transports/">Transporte</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Security/">Sicherheit</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/Operations/">Betrieb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data-gateway/CHANGELOG/">Änderungsprotokoll</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Abfragen</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="queries/Query-Language/">Abfragesprache</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="queries/Expression/">Ausdruck</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="queries/Select/">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="queries/Join/">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="queries/Grouping/">Gruppierung</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="queries/Include/">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="queries/Insert/">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="queries/BulkInsert/">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="queries/Update/">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="queries/Delete/">Delete</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="queries/Metadata/">Metadaten</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Operatoren und Funktionen</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="queries/operatorsAndFunctions/OperatorsAndFunctions/">Operatoren und Funktionen</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="queries/operatorsAndFunctions/Comparison/">Vergleich</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="queries/operatorsAndFunctions/Logical/">Logisch</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="queries/operatorsAndFunctions/Numeric/">Numerisch</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="queries/operatorsAndFunctions/String/">Zeichenketten</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="queries/operatorsAndFunctions/Datetime/">Datum und Uhrzeit</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="queries/operatorsAndFunctions/Nullable/">Nullwerte</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="queries/operatorsAndFunctions/Bitwise/">Bitweise</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="queries/operatorsAndFunctions/Group/">Aggregation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="queries/operatorsAndFunctions/Sort/">Sortierung</a>
+                </li>
     </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                
-                  
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="schema/Schema/">Schema</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="schema/SchemaDefinition/">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="schema/SchemaDefinition-Expressions/">Ausdrücke</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="schema/SchemaDefinition-EnvironmentVariables/">Umgebungsvariablen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="schema/SchemaDefinition-Composite/">Zusammengesetzt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="schema/SchemaExample-Listener/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Beispiele</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="schema/SchemaExample-Basic/">Grundlagen</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="schema/SchemaExample-Extend/">Entität erweitern</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="schema/SchemaExample-MultiplesStages/">Mehrere Stages</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="schema/SchemaExample-StageMultiplesSources/">Stage mit mehreren Quellen</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="schema/SchemaExample-Composite/">Zusammengesetzte Entität</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Synchronisierung</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="schema/SchemaSynchronization/">Synchronisierung</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="schema/SchemaSynchronization-Push/">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="schema/SchemaSynchronization-Pull/">Pull</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="schema/SchemaSynchronization-Fetch/">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="schema/SchemaSynchronization-Introspect/">Introspect</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="schema/SchemaSynchronization-Incorporate/">Incorporate</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="schema/Schema-Use/">Verwendung</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="schema/Engines/">Datenbanken</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Verwendung</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="usage/Usage/">Verwendung</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="usage/Repository/">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="usage/Transaction/">Transaktion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="usage/Script/">Skript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="usage/CHANGELOG/">Änderungsprotokoll</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CLI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="cli/">λORM CLI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Befehle</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Init/">Init</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Build/">Build</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Sync/">Sync</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Push/">Push</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Drop/">Drop</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Fetch/">Fetch</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Import/">Import</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Export/">Export</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Execute/">Execute</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Script/">Skript</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Plan/">Plan</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Metadata/">Metadaten</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Model/">Model</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Parameters/">Parameters</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="cli/Commands/Constraints/">Constraints</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="cli/Version/">Version</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="cli/CHANGELOG/">Änderungsprotokoll</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
 
-
-
-<h1 id="orm">λORM<a class="headerlink" href="#orm" title="Permanent link">&para;</a></h1>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile Navigationsmenü">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="./">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="./" class="icon icon-home" aria-label="Dokumentation"></a></li>
+          <li class="breadcrumb-item">Start</li>
+      <li class="breadcrumb-item active">λORM</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="orm">λORM</h1>
 <p><a href="https://www.npmjs.com/package/@lambdaorm/lib"><img alt="npm-Version" src="https://img.shields.io/npm/v/@lambdaorm/lib.svg" /></a>
 <a href="https://www.npmjs.com/package/@lambdaorm/lib"><img alt="Sprache TypeScript" src="https://img.shields.io/badge/language-typescript-blue" /></a>
 <a href="https://opensource.org/licenses/MIT"><img alt="Lizenz: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
@@ -2819,7 +279,7 @@ und führt die Ergebnisse zusammen.</p>
 MongoDB und Oracle verteilt sein; in einem anderen kann alles in einer einzigen PostgreSQL-Datenbank liegen. So lassen sich
 Muster wie <a href="https://microservices.io/patterns/data/cqrs.html">CQRS</a> per Konfiguration umsetzen, ohne den Code zu ändern.</p>
 <p>Eine vollständige Liste finden Sie unter <a href="Features/">Funktionen</a>.</p>
-<h2 id="how-to-use-it">Verwendung<a class="headerlink" href="#how-to-use-it" title="Permanent link">&para;</a></h2>
+<h2 id="how-to-use-it">Verwendung</h2>
 <table>
 <thead>
 <tr>
@@ -2851,31 +311,31 @@ Muster wie <a href="https://microservices.io/patterns/data/cqrs.html">CQRS</a> p
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>npm<span class="w"> </span>install<span class="w"> </span>@lambdaorm/lib<span class="w">      </span><span class="c1"># the library</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@lambdaorm/cli<span class="w">   </span><span class="c1"># the lambdaorm command</span>
-</code></pre></div>
+<pre><code class="language-sh">npm install @lambdaorm/lib      # the library
+npm install -g @lambdaorm/cli   # the lambdaorm command
+</code></pre>
 <div class="admonition note">
 <p class="admonition-title">Hinweis</p>
 <p>Die Pakete ohne Scope <code>lambdaorm</code>, <code>lambdaorm-cli</code> und <code>lambdaorm-client-node</code> werden nicht mehr gepflegt: Verwenden
 Sie die Pakete <code>@lambdaorm/*</code>.</p>
 </div>
-<h2 id="query-language">Abfragesprache<a class="headerlink" href="#query-language" title="Permanent link">&para;</a></h2>
+<h2 id="query-language">Abfragesprache</h2>
 <p>Die folgende Abfrage liefert den höchsten Preis jeder Produktkategorie, wobei nur die Produkte berücksichtigt werden, die
 dem Filter entsprechen, und nur die Kategorien, deren höchster Preis über 50 liegt:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Products</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./northwind/domain/model'</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">country</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">Products</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">price</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">5</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">supplier</span><span class="p">.</span><span class="nx">country</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">country</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">inStock</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">3</span><span class="p">))</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="p">.</span><span class="nx">having</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">max</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">price</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">50</span><span class="p">)</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">p.category.name</span><span class="p">,</span><span class="w"> </span><span class="nx">largestPrice</span><span class="o">:</span><span class="w"> </span><span class="kt">max</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">price</span><span class="p">)</span><span class="w"> </span><span class="p">}))</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">desc</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">largestPrice</span><span class="p">))</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="s1">'./lambdaORM.yaml'</span><span class="p">)</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1">// run the query, passing the value of the country parameter</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">country</span><span class="o">:</span><span class="w"> </span><span class="s1">'ARG'</span><span class="w"> </span><span class="p">})</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">end</span><span class="p">()</span>
-</code></pre></div>
+<pre><code class="language-typescript">import { orm } from '@lambdaorm/lib'
+import { Products } from './northwind/domain/model'
+
+const query = (country: string) =&gt; Products
+  .filter(p =&gt; (p.price &gt; 5 &amp;&amp; p.supplier.country == country) || (p.inStock &lt; 3))
+  .having(p =&gt; max(p.price) &gt; 50)
+  .map(p =&gt; ({ category: p.category.name, largestPrice: max(p.price) }))
+  .sort(p =&gt; desc(p.largestPrice))
+
+await orm.init('./lambdaORM.yaml')
+// run the query, passing the value of the country parameter
+const result = await orm.execute(query, { country: 'ARG' })
+await orm.end()
+</code></pre>
 <p>In dieser Abfrage:</p>
 <ul>
 <li><code>filter</code> behält die Produkte, deren Preis größer als 5 ist und deren Lieferant im angegebenen Land ansässig ist, sowie
@@ -2898,71 +358,71 @@ dem Filter entsprechen, und nur die Kategorien, deren höchster Preis über 50 l
 <a href="queries/Metadata/">Metadaten</a> |
 <a href="usage/Repository/">Repository</a> |
 <a href="usage/Usage/">Verwendung</a></p>
-<h3 id="include">Include<a class="headerlink" href="#include" title="Permanent link">&para;</a></h3>
+<h3 id="include">Include</h3>
 <p><code>include</code> liefert eine Entität zusammen mit ihren Beziehungen in derselben Abfrage, auch wenn diese in verschiedenen
 Datenbanken gespeichert sind. In diesem Beispiel wird die Abfrage als String geschrieben, eine Alternative zum
 Lambda-Ausdruck:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="s1">'./config/northwind.yaml'</span><span class="p">)</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`Orders</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="sb">      .filter(p =&gt; p.id === id)</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="sb">      .include(p =&gt; [</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="sb">        p.customer.map(p =&gt; p.name),</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="sb">        p.details</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="sb">          .include(p =&gt; p.product</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="sb">            .include(p =&gt; p.category.map(p =&gt; p.name))</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="sb">            .map(p =&gt; p.name))</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="sb">          .map(p =&gt; [p.quantity, p.unitPrice])</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="sb">      ])`</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">102</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'PostgreSQL'</span><span class="w"> </span><span class="p">})</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">))</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">end</span><span class="p">()</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="p">})()</span>
-</code></pre></div>
+<pre><code class="language-typescript">import { orm } from '@lambdaorm/lib'
+
+(async () =&gt; {
+  try {
+    await orm.init('./config/northwind.yaml')
+    const query = `Orders
+      .filter(p =&gt; p.id === id)
+      .include(p =&gt; [
+        p.customer.map(p =&gt; p.name),
+        p.details
+          .include(p =&gt; p.product
+            .include(p =&gt; p.category.map(p =&gt; p.name))
+            .map(p =&gt; p.name))
+          .map(p =&gt; [p.quantity, p.unitPrice])
+      ])`
+    const result = await orm.execute(query, { id: 102 }, { stage: 'PostgreSQL' })
+    console.log(JSON.stringify(result, null, 2))
+  } catch (error: any) {
+    console.error(error.message)
+  } finally {
+    await orm.end()
+  }
+})()
+</code></pre>
 <p><strong>Ergebnis:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">[</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p">{</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">102</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">"customerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPLIR"</span><span class="p">,</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">"employeeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">"orderDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1996-11-07T23:00:00.000Z"</span><span class="p">,</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">"requiredDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1996-12-05T23:00:00.000Z"</span><span class="p">,</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">"shippedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1996-11-14T23:00:00.000Z"</span><span class="p">,</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nt">"shipViaId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">"freight"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.63</span><span class="p">,</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Rail Beer &amp; Ale"</span><span class="p">,</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"P.O. Box 555"</span><span class="p">,</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lander"</span><span class="p">,</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WY"</span><span class="p">,</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="nt">"postalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"82520"</span><span class="p">,</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA"</span><span class="p">,</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Rail Beer &amp; Ale"</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="nt">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">      </span><span class="p">{</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">        </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">        </span><span class="nt">"unitPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.9</span><span class="p">,</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">        </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tourtire"</span><span class="p">,</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">          </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Meat/Poultry"</span>
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">          </span><span class="p">}</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">      </span><span class="p">}</span>
-<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="p">]</span>
-<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="p">]</span>
-</code></pre></div>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 102,
+    &quot;customerId&quot;: &quot;SPLIR&quot;,
+    &quot;employeeId&quot;: 7,
+    &quot;orderDate&quot;: &quot;1996-11-07T23:00:00.000Z&quot;,
+    &quot;requiredDate&quot;: &quot;1996-12-05T23:00:00.000Z&quot;,
+    &quot;shippedDate&quot;: &quot;1996-11-14T23:00:00.000Z&quot;,
+    &quot;shipViaId&quot;: 1,
+    &quot;freight&quot;: 8.63,
+    &quot;name&quot;: &quot;Split Rail Beer &amp; Ale&quot;,
+    &quot;address&quot;: &quot;P.O. Box 555&quot;,
+    &quot;city&quot;: &quot;Lander&quot;,
+    &quot;region&quot;: &quot;WY&quot;,
+    &quot;postalCode&quot;: &quot;82520&quot;,
+    &quot;country&quot;: &quot;USA&quot;,
+    &quot;customer&quot;: {
+      &quot;name&quot;: &quot;Split Rail Beer &amp; Ale&quot;
+    },
+    &quot;details&quot;: [
+      {
+        &quot;quantity&quot;: 24,
+        &quot;unitPrice&quot;: 5.9,
+        &quot;product&quot;: {
+          &quot;name&quot;: &quot;Tourtire&quot;,
+          &quot;category&quot;: {
+            &quot;name&quot;: &quot;Meat/Poultry&quot;
+          }
+        }
+      }
+    ]
+  }
+]
+</code></pre>
 <p><strong>Weitere Informationen:</strong> <a href="queries/Include/">include</a></p>
-<h2 id="schema">Schema<a class="headerlink" href="#schema" title="Permanent link">&para;</a></h2>
+<h2 id="schema">Schema</h2>
 <p>Das Schema definiert Entitäten, Enumerationen, Indizes, eindeutige Schlüssel, Standardwerte, Constraints, Mappings,
 Quellen, Stages, Listener und mehr. Es wird in YAML oder JSON geschrieben. Bedingungen und Aktionen verwenden dieselbe
 <a href="https://www.npmjs.com/package/3xpr">Ausdruckssprache</a> wie Abfragen.</p>
@@ -2976,7 +436,7 @@ Quellen, Stages, Listener und mehr. Es wird in YAML oder JSON geschrieben. Bedin
 <a href="schema/SchemaExample-MultiplesStages/">mehrere Stages</a> |
 <a href="schema/SchemaExample-StageMultiplesSources/">mehrere Quellen</a> |
 <a href="schema/Engines/">Datenbank-Engines</a></p>
-<h3 id="synchronization">Synchronisierung<a class="headerlink" href="#synchronization" title="Permanent link">&para;</a></h3>
+<h3 id="synchronization">Synchronisierung</h3>
 <p>λORM hält die Datenbanken und das Schema in beide Richtungen synchron:
 <a href="schema/SchemaSynchronization/">Synchronisierung</a> |
 <a href="schema/SchemaSynchronization-Push/">push</a> |
@@ -2984,16 +444,16 @@ Quellen, Stages, Listener und mehr. Es wird in YAML oder JSON geschrieben. Bedin
 <a href="schema/SchemaSynchronization-Fetch/">fetch</a> |
 <a href="schema/SchemaSynchronization-Introspect/">introspect</a> |
 <a href="schema/SchemaSynchronization-Incorporate/">incorporate</a></p>
-<h2 id="transactions-and-scripts">Transaktionen und Skripte<a class="headerlink" href="#transactions-and-scripts" title="Permanent link">&para;</a></h2>
+<h2 id="transactions-and-scripts">Transaktionen und Skripte</h2>
 <ul>
 <li><a href="usage/Transaction/">Transaktionen</a>: <code>orm.transaction</code> führt mehrere Abfragen in einer Transaktion aus, auch über
   Quellen und Stages hinweg.</li>
 <li><a href="usage/Script/">Skripte</a>: ein ganzer Anwendungsfall (Variablen, Bedingungen, Schleifen und mehrere Abfragen) in
   einer Transaktion und in einem einzigen Aufruf – aus Node.js, der CLI oder dem Data Gateway.</li>
 </ul>
-<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h2 id="labs">Labs</h2>
 <p>Vollständige Beispiele finden Sie in den <a href="labs/">λORM Labs</a>.</p>
-<h2 id="related-projects">Verwandte Projekte<a class="headerlink" href="#related-projects" title="Permanent link">&para;</a></h2>
+<h2 id="related-projects">Verwandte Projekte</h2>
 <ul>
 <li><a href="https://www.npmjs.com/package/@lambdaorm/cli">λORM CLI</a>: Kommandozeilenschnittstelle für λORM.</li>
 <li><a href="data-gateway/">Data Gateway</a>: λORM-Schemas über REST, MCP und WebSocket, mit einer Web-UI.</li>
@@ -3001,89 +461,49 @@ Quellen, Stages, Listener und mehr. Es wird in YAML oder JSON geschrieben. Bedin
 <li><a href="https://www.npmjs.com/package/3xpr">3xpr</a>: erweiterbare Ausdrucks-Engine, die mathematische und logische Ausdrücke
   auswertet; λORM-Abfragen und -Skripte bauen darauf auf.</li>
 </ul>
-
-
-
-
-
-
-
-
-
-
-
-
-                
-              </article>
-            </div>
-          
-          
-<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Zurück zum Seitenanfang
-</button>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Fußzeile" >
-        
-        
-          
-          <a href="Features/" class="md-footer__link md-footer__link--next" aria-label="Weiter: Funktionen">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Weiter
-              </span>
-              <div class="md-ellipsis">
-                Funktionen
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
             </div>
-          </a>
-        
-      </nav>
-    
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
-</div>
-      
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer-Navigation">
+        <a href="Features/" class="btn btn-neutral float-right" title="Funktionen">Weiter <span class="icon icon-circle-arrow-right"></span></a>
     </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
   </div>
+
+  Erzeugt mit <a href="https://www.mkdocs.org/">MkDocs</a> mit einem <a href="https://github.com/readthedocs/sphinx_rtd_theme">Thema</a> von <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versionen">
+  <span class="rst-current-version" data-toggle="rst-current-version">
     
     
     
-      
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
+      <span><a href="Features/" style="color: #fcfcfc">Weiter &raquo;</a></span>
     
-    
-      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
-      
-    
-  </body>
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../assets/wiki-v2.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
 </html>
