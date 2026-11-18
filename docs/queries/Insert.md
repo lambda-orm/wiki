@@ -1,80 +1,77 @@
 # Insert
 
-Since the queries are based on both the expression and the definition in the schema, in the case of wanting to insert all the fields it is not necessary to define them since it is assumed if none are defined.
+This page shows how to insert records: with all the properties of the entity or only some of them, together with related entities (`include`), and how to insert or update in one step (`upsert`). To insert many records at once, see [Bulk Insert](BulkInsert.md). The SQL shown is the one generated for MySQL, unless stated otherwise.
 
-The mapping to the source(s) is resolved according to the mapping configuration associated with each source in the schema.
+A query is based on both the expression and the schema. If you do not specify the properties to insert, all the properties of the entity are inserted. How each property is stored in each source (table and column names) is resolved by the mapping of that source in the schema.
 
-## Insert Simple
+## Insert all the properties
 
-In the case that the fields to be inserted are not specified, it is assumed that an object with all fields will be passed.
+When the properties are not specified, the data passed must be an object with the properties of the entity.
 
 **Lambda:**
 
-```Typescript
-// Inserting into Categories table without specifying fields
+```typescript
 Categories.insert()
 ```
 
 **SQL Result:**
 
 ```sql
--- Inserting into Categories table with CategoryName and Description fields
 INSERT INTO Categories(CategoryName,Description) VALUES(?,?)
 ```
 
-## Insert specific
+The primary key `id` is not inserted because it is auto-increment: the database generates it.
 
-In this case, only the fields that are specified will be inserted
+## Insert some properties
+
+Only the properties specified are inserted. Here, `name` is a variable of the data passed to the query.
 
 **Lambda:**
 
-```Typescript
-// Inserting into Categories table with only the name field specified
+```typescript
 Categories.insert({ name: name })
 ```
 
 **SQL Result:**
 
 ```sql
--- Inserting into Categories table with CategoryName field specified
 INSERT INTO Categories(CategoryName) VALUES(?)
 ```
 
 ## Insert with include
 
-In the case that we need to insert an object which in turn has a relation, we can insert the set using include.
+To insert an object together with its related objects, include the relation. This example inserts an order and its details; the key of the new order is assigned to each detail.
 
 **Lambda:**
 
-```Typescript
-// Inserting into Orders table and including details
+```typescript
 Orders.insert().include(p => p.details)
 ```
 
 **SQL Result:**
 
 ```sql
--- Inserting into Orders table with all required fields
-INSERT INTO Orders(CustomerID,EmployeeID,OrderDate,RequiredDate,ShippedDate,ShipVia,Freight,ShipName,ShipAddress,ShipCity,ShipRegion,ShipPostalCode,ShipCountry) 
+-- the order
+INSERT INTO Orders(CustomerID,EmployeeID,OrderDate,RequiredDate,ShippedDate,ShipVia,Freight,ShipName,ShipAddress,ShipCity,ShipRegion,ShipPostalCode,ShipCountry)
 VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)
 
--- Inserting into Order Details table with all required fields
-INSERT INTO `Order Details`(OrderID,ProductID,UnitPrice,Quantity,Discount) 
+-- each detail of the order
+INSERT INTO `Order Details`(OrderID,ProductID,UnitPrice,Quantity,Discount)
 VALUES(?,?,?,?,?)
 ```
 
 ## Upsert
 
-`upsert()` inserts the record or, if a record with the same primary key already exists, updates it. It is written as an insert (same syntax: `upsert()` with all the fields, or with the fields specified). The entity needs a primary key, and the data must carry it (an auto-increment key is not useful here).
+`upsert()` inserts the record or, if a record with the same primary key already exists, updates it. It is written like an insert: `upsert()` with all the properties, or with the properties specified. The entity needs a primary key, and the data must include it (so an auto-increment key is of little use here).
 
 **Lambda:**
 
-```Typescript
+```typescript
 // inserts the country, or updates it when one with the same iso3 exists
 Countries.upsert()
 ```
 
-```Typescript
+```typescript
 await orm.execute('Countries.upsert()', { iso3: 'ARG', name: 'Argentine' }) // inserted
 await orm.execute('Countries.upsert()', { iso3: 'ARG', name: 'Argentina' }) // updated: the same row
 ```
@@ -104,23 +101,26 @@ WHEN MATCHED THEN UPDATE SET name = :name
 WHEN NOT MATCHED THEN INSERT (iso3,name) VALUES (:iso3,:name)
 ```
 
-Supported on PostgreSQL, MySQL, MariaDB, SQL Server and Oracle (these two with `MERGE`, from @lambdaorm/lib 3.5.0).
-On MongoDB it fails with a clear "not supported yet" error; SQLite (SQLjs) does not support it either.
+Upsert is supported on PostgreSQL, MySQL, MariaDB, SQL Server and Oracle (these two with `MERGE`, from `@lambdaorm/lib` 3.5.0).
 
-When the key is generated (auto-increment) and not sent, the upsert inserts. On SQL Server the identity column is
-never inserted (the database generates it) and `OUTPUT INSERTED` answers it; Oracle's `MERGE` cannot return values,
-so it answers the key that was sent.
+!!! warning
+    On MongoDB, upsert fails with a "not supported yet" error. SQLite (SQL.js) does not support it either.
 
-Upsert is also what [update with include](Update.md#update-an-aggregate-composite-relation) of a composite relation uses to save the children.
+When the key is generated (auto-increment) and not sent, the upsert inserts. On SQL Server the identity column is never inserted (the database generates it) and `OUTPUT INSERTED` returns it; Oracle's `MERGE` cannot return values, so it returns the key that was sent.
+
+Upsert is also what an [update with include](Update.md#update-an-aggregate-composite-relation) of a composite relation uses to save the children.
 
 ## Code example
 
-```Typescript
-import { orm } from '../../lib'
-import { Orders } from '../northwind/model/__model'
-(async () => {	
-	try {		
-		await orm.init('./config/northwind.yaml')
+Inserts an order with two details and prints the id of the new order.
+
+```typescript
+import { orm } from '@lambdaorm/lib'
+import { Orders } from './domain/model' // model generated by `lambdaorm build`
+
+(async () => {
+	try {
+		await orm.init('./lambdaORM.yaml')
 		const order = {
 			customerId: 'VINET',
 			employeeId: 5,
@@ -134,33 +134,20 @@ import { Orders } from '../northwind/model/__model'
 			city: 'Reims',
 			postalCode: '51100',
 			country: 'France',
+			// orderId is assigned from the new order
 			details: [
-				{
-					productId: 11,
-					unitPrice: 14,
-					quantity: 12,
-					discount: 10,
-					orderId: 833
-				},
-				{
-					productId: 42,
-					unitPrice: 9.8,
-					quantity: 10,
-					discount: 10,
-					orderId: 833
-				}
+				{ productId: 11, unitPrice: 14, quantity: 12, discount: 10 },
+				{ productId: 42, unitPrice: 9.8, quantity: 10, discount: 10 }
 			]
 		}
-		// Defining a query to insert into Orders and include details
 		const query = () => Orders.insert().include(p => p.details)
-		// Executing the query using the ORM with the specified order parameter
+		// returns the id of the order created
 		const result = await orm.execute(query, order)
-		// return ID of order created
-		console.log(JSON.stringify(result))		
-	} catch (error:any) {
+		console.log(JSON.stringify(result))
+	} catch (error: any) {
 		console.error(error.stack)
 	} finally {
-		// Ending the ORM connection
+		// releases the connections
 		await orm.end()
 	}
 })()

@@ -1,798 +1,621 @@
-|Operator |Description                                   	|
-|---------|-----------------------------------------------|
-|-				|negative /subtraction													|
-|+				|addition																				|
-|*				|multiplication																	|
-|/				|division																				|
-|**				|exponentiation																	|
-|//				|floorDivision																	|
-|%				|mod																						|
+# Numeric Operators and Functions
 
-|Function    	|Description                                   	|
-|-------------|-----------------------------------------------|
-|abs					|Get the absolute value													|
-|acos					|Get the arc cosine															|
-|asin					|Get the arc sine																|
-|atan					|Get the arc tangent														|
-|atan2				|Get the arc tangent of x and y									|
-|ceil					|Get the smallest following integer							|
-|cos					|Get the cosine																	|
-|cosh					|Get hyperbolic cosine													|
-|exp					|Raise e to the nth power												|
-|floor				|Get the largest preceding integer							|
-|ln						|Get natural logarithm of num										|
-|log					|Get logarithm, base num1, of num2							|
-|log10				|Return the base 10 logarithm of x							|
-|remainder		|Get remainder																	|
-|round				|Get rounded value															|
-|sign					|Get sign of exp																|
-|sin					|Get sine																				|
-|sinh					|Get hyperbolic sine														|
-|tan					|Get tangent																		|
-|tanh					|Get hyperbolic tangent													|
-|trunc				|Truncate num																		|
-|toNumber			|convert to number															|
+Numeric operators and functions perform arithmetic, rounding, trigonometric and logarithmic calculations.
 
-## Examples
+!!! note "About the examples"
+    The examples run against the `Countries` entity of the countries sample schema. Each one shows the query, the result it returned on the test database and the SQL sentence that λORM generated for MySQL. Other engines receive their own translation; to see the sentence generated for your data source, use [`orm.plan`](../Metadata.md).
 
-| Example           																														| Result 													|
-|-------------------------------------------------------------------------------|---------------------------------|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: 3+2-1 })								|[{"result":4}]										|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: 3*4-1})									|[{"result":11}]									|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: 1-2-5})									|[{"result":-6}]									|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: (2+3)*2})								|[{"result":10}]									|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: 2*(3+2)})								|[{"result":10}]									|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: 1+2*3*4})								|[{"result":25}]									|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: (1+(2**3)*4)})					|[{"result":33}]									|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: 1+2**(3*4)})						|[{"result":4097}]								|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: abs(-9)})								|[{"result":9}]										|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: acos(0.434)})						|[{"result":1.121868332427735}]		|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: asin(0.434)})						|[{"result":0.44892799436716174}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: atan(2)})								|[{"result":1.1071487177940904}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: atan2(90, 15)})					|[{"result":1.4056476493802699}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: ceil(2)})								|[{"result":2}]										|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: cos(2)})								|[{"result":-0.4161468365471424}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: cosh(2)})								|[{"result":3.7621956910836314}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: exp(7)})								|[{"result":1096.6331584284585}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: floor(7)})							|[{"result":7}]										|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: ln(7)})									|[{"result":1.9459101490553132}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: log(7,10)})							|[{"result":1.1832946624549385}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: log10(7)})							|[{"result":0.8450980400142568}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: remainder(7,2)})				|[{"result":-1}]									|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: round(7.984938,2)})			|[{"result":7.98}]								|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: sign(-7)})							|[{"result":-1}]									|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: sin(7)})								|[{"result":0.6569865987187891}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: sinh(7)})								|[{"result":548.3161232732465}]		|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: tan(7)})								|[{"result":0.8714479827243188}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: tanh(7)})								|[{"result":0.9999983369439447}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: trunc(7.984938,2)})			|[{"result":7.98}]								|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: toNumber("3.141516")})	|[{"result":3}]										|
+## Summary
 
-## Sentences
+### Operators
 
-**Lambda:**
+| Operator | Description |
+|---|---|
+| `-` | Negation (`-a`) or subtraction (`a - b`) |
+| `+` | Addition |
+| `*` | Multiplication |
+| `/` | Division |
+| `**` | Exponentiation: `a` raised to the power of `b` |
+| `//` | Root: the `b`-th root of `a` |
+| `%` | Modulus: remainder of `a / b` |
 
-Query to get the result of 3+2-1
+### Functions
 
-```js
+| Function | Description |
+|---|---|
+| `abs` | Absolute value |
+| `acos` | Arc cosine |
+| `asin` | Arc sine |
+| `atan` | Arc tangent |
+| `atan2` | Arc tangent of `y / x` |
+| `ceil` | Smallest integer greater than or equal to a number |
+| `cos` | Cosine |
+| `cosh` | Hyperbolic cosine |
+| `exp` | *e* raised to a power |
+| `floor` | Largest integer less than or equal to a number |
+| `ln` | Natural logarithm |
+| `log` | Logarithm in a given base |
+| `log10` | Base 10 logarithm |
+| `remainder` | Remainder of a division |
+| `round` | Rounds to a number of decimals |
+| `sign` | Sign of a number |
+| `sin` | Sine |
+| `sinh` | Hyperbolic sine |
+| `tan` | Tangent |
+| `tanh` | Hyperbolic tangent |
+| `trunc` | Truncates to a number of decimals |
+| `toNumber` | Converts a value to a number |
+
+## Arithmetic operators
+
+The arithmetic operators take numbers and return a number. Precedence follows the usual arithmetic rules (`**` before `*` and `/`, which go before `+` and `-`); use parentheses to change it. In SQL, `**` is translated to `POWER(a,b)`, `//` to `POWER(a,(1/b))` and `%` to `MOD(a,b)`.
+
+**Syntax:**
+
+- `-a`, `a - b`
+- `a + b`
+- `a * b`
+- `a / b`
+- `a ** b`
+- `a // b`
+- `a % b`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: 3+2-1 })
 ```
 
-**SQL Result:**
+**Result:** `[{"result":4}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ((3 + 2) - 1) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT ((3 + 2) - 1) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
-
-Query to get the result of 3*4-1
-
-```js
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: 3*4-1})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":11}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ((3 * 4) - 1) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT ((3 * 4) - 1) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
-
-Query to get the result of 1-2-5
-
-```js
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: 1-2-5})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":-6}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ((1 - 2) - 5) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT ((1 - 2) - 5) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
-
-Query to get the result of (2+3)*2
-
-```js
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: (2+3)*2})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":10}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ((2 + 3) * 2) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT ((2 + 3) * 2) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
-
-Query to get the result of 2*(3+2)
-
-```js
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: 2*(3+2)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":10}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT (2 * (3 + 2)) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT (2 * (3 + 2)) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
-
-Query to get the result of 1+2*3*4
-
-```js
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: 1+2*3*4})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":25}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT (1 + ((2 * 3) * 4)) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT (1 + ((2 * 3) * 4)) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
-
-Query to get the result of (1+(2**3)*4)
-
-```js
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: (1+(2**3)*4)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":33}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT (1 + (POWER(2,3) * 4)) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT (1 + (POWER(2,3) * 4)) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
-
-Query to get the result of 1+2**(3*4)
-
-```js
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: 1+2**(3*4)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":4097}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT (1 + POWER(2,(3 * 4))) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT (1 + POWER(2,(3 * 4))) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## abs
 
-Query to get the absolute value of -9
+Returns the absolute value of `value`.
 
-```js
+**Signature:** `abs(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: abs(-9)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":9}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ABS(-9) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT ABS(-9) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## acos
 
-Query to get the arc cosine of 0.434
+Returns the arc cosine of `value`, in radians.
 
-```js
+**Signature:** `acos(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: acos(0.434)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":1.121868332427735}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ACOS(0.434) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT ACOS(0.434) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## asin
 
-Query to get the arc sine of 0.434
+Returns the arc sine of `value`, in radians.
 
-```js
+**Signature:** `asin(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: asin(0.434)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":0.44892799436716174}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ASIN(0.434) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT ASIN(0.434) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## atan
 
-Query to get the arc tangent of 2
+Returns the arc tangent of `value`, in radians.
 
-```js
+**Signature:** `atan(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: atan(2)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":1.1071487177940904}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ATAN(2) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT ATAN(2) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## atan2
 
-Query to get the arc tangent of 90 and 15
+Returns the arc tangent of `y / x`, in radians, using the signs of both arguments to choose the quadrant.
 
-```js
+**Signature:** `atan2(y: number, x: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: atan2(90, 15)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":1.4056476493802699}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ATAN(90,15) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT ATAN(90,15) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## ceil
 
-Query to get the smallest following integer of 2
+Returns the smallest integer greater than or equal to `value`.
 
-```js
+**Signature:** `ceil(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: ceil(2)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":2}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
 SELECT CEIL(2) AS result
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## cos
 
-Query to get the cosine of 2
+Returns the cosine of `value` (in radians).
 
-```js
+**Signature:** `cos(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: cos(2)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":-0.4161468365471424}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT COS(2) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT COS(2) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## cosh
 
-Query to get the hyperbolic cosine of 2
+Returns the hyperbolic cosine of `value`.
 
-```js
+**Signature:** `cosh(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: cosh(2)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":3.7621956910836314}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ((EXP(2) + EXP(-2)) / 2) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT ((EXP(2) + EXP(-2)) / 2) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## exp
 
-Query to get e to the nth power of 7
+Returns *e* raised to the power of `value`.
 
-```js
+**Signature:** `exp(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: exp(7)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":1096.6331584284585}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT EXP(7) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT EXP(7) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## floor
 
-Query to get the largest preceding integer of 7
+Returns the largest integer less than or equal to `value`.
 
-```js
+**Signature:** `floor(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: floor(7)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":7}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT FLOOR(7) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT FLOOR(7) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## ln
 
-Query to get the natural logarithm of 7
+Returns the natural logarithm (base *e*) of `value`.
 
-```js
+**Signature:** `ln(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: ln(7)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":1.9459101490553132}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT LN(7) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT LN(7) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## log
 
-Query to get the logarithm, base 7, of 10
+Returns the logarithm of `value` in base `base`. For example, `log(7,10)` is the base 7 logarithm of 10.
 
-```js
+**Signature:** `log(base: number, value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: log(7,10)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":1.1832946624549385}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT LOG(7,10) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT LOG(7,10) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## log10
 
-Query to get the base 10 logarithm of 7
+Returns the base 10 logarithm of `value`.
 
-```js
+**Signature:** `log10(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: log10(7)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":0.8450980400142568}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT LOG10(7) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT LOG10(7) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## remainder
 
-Query to get the remainder of 7 and 2
+Returns the remainder of dividing `n1` by `n2`. On MySQL, MariaDB and SQLite it is calculated as `n1 - n2 * ROUND(n1 / n2)`, so the result can be negative (see the example); on PostgreSQL it is translated to `MOD(n1,n2)`, which returns 1 for the same example.
 
-```js
+**Signature:** `remainder(n1: number, n2: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: remainder(7,2)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":-1}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT (7 - 2*ROUND(7/2)) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT (7 - 2*ROUND(7/2)) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## round
 
-Query to get the rounded value of 7.984938 with 2 decimals
+Rounds `value` to `decimals` decimal places.
 
-```js
+**Signature:** `round(value: number, decimals: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: round(7.984938,2)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":7.98}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ROUND(7.984938,2) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT ROUND(7.984938,2) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## sign
 
-Query to get the sign of -7
+Returns the sign of `value`: -1 if it is negative, 0 if it is zero and 1 if it is positive.
 
-```js
+**Signature:** `sign(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: sign(-7)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":-1}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT SIGN(-7) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT SIGN(-7) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## sin
 
-Query to get the sine of 7
+Returns the sine of `value` (in radians).
 
-```js
+**Signature:** `sin(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: sin(7)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":0.6569865987187891}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT SIN(7) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT SIN(7) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## sinh
 
-Query to get the hyperbolic sine of 7
+Returns the hyperbolic sine of `value`.
 
-```js
+**Signature:** `sinh(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: sinh(7)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":548.3161232732465}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ((EXP(7) - EXP(-7)) / 2) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT ((EXP(7) - EXP(-7)) / 2) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## tan
 
-Query to get the tangent of 7
+Returns the tangent of `value` (in radians).
 
-```js
+**Signature:** `tan(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: tan(7)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":0.8714479827243188}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT TAN(7) AS result 
-FROM Countries c 
-WHERE c.iso3 = 'BRA' 
+SELECT TAN(7) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## tanh
 
-Query to get the hyperbolic tangent of 7
+Returns the hyperbolic tangent of `value`.
 
-```js
+**Signature:** `tanh(value: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: tanh(7)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":0.9999983369439447}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT (EXP(2*7) - 1)/(EXP(2*7) + 1) AS result 
-FROM Countries c 
-WHERE c.iso3 = 'BRA' 
+SELECT (EXP(2*7) - 1)/(EXP(2*7) + 1) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## trunc
 
-Query to get the truncated value of 7.984938
+Truncates `value` to `decimals` decimal places, without rounding.
 
-```js
+**Signature:** `trunc(value: number, decimals: number): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: trunc(7.984938,2)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":7.98}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT TRUNCATE(7.984938,2) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT TRUNCATE(7.984938,2) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## toNumber
 
-Query to convert the string "3.141516" to number
+Converts `value` to a number. On MySQL it is translated to `CONVERT(value, DECIMAL)`, which has no decimal places, so the example returns 3; on PostgreSQL it is translated to `CAST(value AS INTEGER)`.
 
-```js
+**Signature:** `toNumber(value: any): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: toNumber("3.141516")})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":3}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT CONVERT('3.141516', DECIMAL) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT CONVERT('3.141516', DECIMAL) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-## Definition
+## Database support
 
-### Operator -
+Some functions have no direct equivalent in every engine, so λORM translates them to an equivalent expression. For example, on MySQL, MariaDB and SQLite `cosh`, `sinh` and `tanh` are calculated with `EXP`, and `trunc` is translated to `TRUNCATE`; on SQL Server `trunc` is translated to `ROUND(value,decimals,1)`, `ceil` to `CEILING` and `atan2` to `ATN2`.
 
-Negative:
-
-- description: negative
-- return: number
-- params:
-	- value: number
-
-Subtraction:
-
-- description: subtraction
-- return: number
-- params:
-	- a: number
-	- b: number
-
-### Operator +
-
-- description: addition
-- return: number
-- params:
-	- a: number
-	- b: number
-
-### Operator *
-
-- description: multiplication
-- return: number
-- params:
-	- a: number
-	- b: number
-
-### Operator /
-
-- description: division
-- return: number
-- params:
-	- a: number
-	- b: number
-
-### Operator **
-
-- description: exponentiation
-- return: number
-- params:
-	- a: number
-	- b: number
-
-### Operator //
-
-- description: floorDivision
-- return: number
-- params:
-	- a: number
-	- b: number
-
-### Operator %
-
-- description: mod
-- return: number
-- params:
-	- a: number
-	- b: number
-
-### abs
-
-- description: Get the absolute value
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### acos
-
-- description: Get the arc cosine
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### asin
-
-- description: Get the arc sine
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### atan
-
-- description: Get the arc tangent
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### atan2
-
-- description: Get the arc tangent of x and y
-- deterministic: true
-- return: number
-- params:
-	- x: number
-	- y: number
-
-### ceil
-
-- description: Get the smallest following integer
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### cos
-
-- description: Get the cosine
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### cosh
-
-- description: Get hyperbolic cosine
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### exp
-
-- description: Raise e to the nth power
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### floor
-
-- description: Get the largest preceding integer
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### ln
-
-- description: Get natural logarithm of num
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### log
-
-- description: Get logarithm, base num1, of num2
-- deterministic: true
-- return: number
-- params:
-	- n1: number
-	- n2: number
-
-### log10
-
-- description: Return the base 10 logarithm of x
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### remainder
-
-- description: Get remainder
-- deterministic: true
-- return: number
-- params:
-	- n1: number
-	- n2: number
-
-### round
-
-- description: Get rounded value
-- deterministic: true
-- return: number
-- params:
-	- value: number
-	- decimals: number
-
-### sign
-
-- description: Get sign of exp
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### sin
-
-- description: Get sine
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### sinh
-
-- description: Get hyperbolic sine
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### tan
-
-- description: Get tangent
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### tanh
-
-- description: Get hyperbolic tangent
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### trunc
-
-- description: Truncate num
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### toNumber
-
-- description: convert to number
-- deterministic: true
-- return: number
-- params:
-	- value: string
+!!! warning "MongoDB"
+    - `remainder` and `toNumber` cannot currently be translated to MongoDB queries.
+    - `trunc` is translated to `$trunc` without the number of decimals, so the value is truncated to an integer.

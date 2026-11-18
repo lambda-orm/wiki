@@ -1,8 +1,10 @@
 # Engines
 
-λORM runs the same queries and stage commands on PostgreSQL, MySQL, MariaDB, SQL Server, Oracle, MongoDB and SQLite (SQLjs).
+This page lists the differences between the database engines supported by λORM.
+
+λORM runs the same queries and stage commands on PostgreSQL, MySQL, MariaDB, SQL Server, Oracle, MongoDB and SQLite (dialect `SQLjs`).
 The same model gives the same results on every engine, except for the differences below.
-They are checked by the [engines lab](https://github.com/lambda-orm/core/tree/main/packages/lib/src/dev/labs/engines), which runs the same tests on PostgreSQL 17, MySQL 8.4, MariaDB 11.4, SQL Server 2022, Oracle 23 Free and MongoDB 7.
+These differences are checked by the [engines lab](https://github.com/lambda-orm/core/tree/main/packages/lib/src/dev/labs/engines), which runs the same tests on PostgreSQL 17, MySQL 8.4, MariaDB 11.4, SQL Server 2022, Oracle 23 Free and MongoDB 7.
 
 ## Summary
 

@@ -1,26 +1,33 @@
 # Schema
 
-The schema includes all the configuration that the ORM needs.
+This section explains the schema of λORM: what it contains, how it is defined and used, and how it is synchronized with the databases.
 
-The schema separates the definition of the business model (Domain) from the persistence of the data (Infrastructure).
+The schema holds all the configuration the ORM needs. It separates the business model (**domain**) from the persistence of the data (**infrastructure**):
 
-In the domain, the entities and enumerators that represent the business model are completely clean, without any attributes that couple them to persistence.
+- In the domain, the entities and enums that represent the business model are completely clean, without any attribute that couples them to persistence.
+- All queries are written against the business model, so they are decoupled from the physical model of the data.
+- In the infrastructure, everything needed to store and read the data in the different sources (databases) is defined.
 
-All queries are made according to the business model, so all queries are decoupled from the physical model of the data.
+The schema can be written in a YAML or JSON file (usually `lambdaORM.yaml`), or passed as an object when the ORM is initialized.
 
-In the infrastructure, all the necessary configuration is defined to be able to persist and obtain the data from the different sources.
+All the expressions used to define conditions and actions are evaluated by the expression engine [3xpr](https://www.npmjs.com/package/3xpr).
 
-The schema configuration can be done in a yaml, json file or passed as a parameter when initializing the ORM.
+## Example
 
-All the expressions that are used for the definition of conditions and for the execution of actions are based on the expression engine [3xpr](https://www.npmjs.com/package/3xpr)
+This example shows a stage that uses two sources: source 1 is MySQL and holds the `Countries` table, and source 2 is PostgreSQL and holds the `States` table.
 
-## Example:
+For the `Countries` entity, the names of the table and its columns are the same as the names of the entity and its properties, so no mapping needs to be written.
+For the `States` entity, the names of the table and its columns are different, so the mapping defines them.
 
-This example poses a stage where two sources are accessed.
-Data source 1 is MySQL and contains the Countries table and source 2 is PostgreSQL contains the States table.
+![diagram](images/schema5.svg)
 
-In the case of the Countries entity, both the name of the table and the fields coincide with the name of the entity and the name of the properties, so the mapping is transparent.
+## In this section
 
-But in the case of the States entity, the name of the table and its fields differ, so the mapping defines the mapping.
+- [Definition](SchemaDefinition.md): every key of the schema.
+- [Expressions](SchemaDefinition-Expressions.md), [Environment variables](SchemaDefinition-EnvironmentVariables.md) and [Composite entities](SchemaDefinition-Composite.md).
+- [Schema Use](Schema-Use.md): how to load the schema and generate the model.
+- Examples: [Basic](SchemaExample-Basic.md), [Extend](SchemaExample-Extend.md), [Multiple stages](SchemaExample-MultiplesStages.md), [Stage with multiple sources](SchemaExample-StageMultiplesSources.md), [Composite](SchemaExample-Composite.md) and [Listener](SchemaExample-Listener.md).
+- [Synchronization](SchemaSynchronization.md): push, pull, fetch, introspect and incorporate.
+- [Engines](Engines.md): differences between database engines.
 
-![diagram](../images/schema5.svg)
+The [Data Gateway](../data-gateway/index.md) publishes a schema over the network; its own settings are in a separate [configuration file](../data-gateway/Configuration.md).

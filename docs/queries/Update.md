@@ -1,14 +1,14 @@
 # Update
 
-Since the queries are based on both the expression and the definition in the schema, in the case of wanting to update all the fields it is not necessary to define them since it is assumed if none are defined.
+This page shows how to update records: all the properties or only some of them, with a filter or for all the records, together with related entities, and how to save a whole aggregate (a parent with its composite children). The SQL shown is the one generated for MySQL, unless stated otherwise.
 
-The mapping to the source(s) is resolved according to the mapping configuration associated with each source in the schema.
+A query is based on both the expression and the schema. If you do not specify the properties to update, all the properties of the entity are updated. How each property is stored in each source (table and column names) is resolved by the mapping of that source in the schema.
 
 ## Result: affected rows
 
 `update` returns the **number of affected rows** (as `delete` does). `0` means that no row matched the filter, which is useful to answer "not found" or to detect a conflict with an optimistic lock:
 
-```Typescript
+```typescript
 const query = 'Orders.update(p => ({ status: status, version: version + 1 })).filter(p => p.id == id && p.version == version)'
 const first = await orm.execute(query, { id: orderId, status: 'sent', version: 1 })     // 1
 const second = await orm.execute(query, { id: orderId, status: 'accepted', version: 1 }) // 0: the version changed
@@ -16,20 +16,20 @@ const second = await orm.execute(query, { id: orderId, status: 'accepted', versi
 
 When the update has includes, the result is the number of rows affected in the main entity.
 
-## Update one entity complete
+## Update all the properties of a record
+
+Without a filter, `update` filters by the primary key, whose value is taken from the data passed.
 
 **Lambda:**
 
-```Typescript
-// Updates all fields of the Orders entity
+```typescript
 Orders.update()
 ```
 
 **SQL Result:**
 
 ```sql
--- Updates all fields of the Orders entity where OrderID matches the provided parameter
-UPDATE Orders o SET 
+UPDATE Orders o SET
 	CustomerID = ?,
 	EmployeeID = ?,
 	OrderDate = ?,
@@ -42,107 +42,113 @@ UPDATE Orders o SET
 	ShipCity = ?,
 	ShipRegion = ?,
 	ShipPostalCode = ?,
-	ShipCountry = ? 
+	ShipCountry = ?
 WHERE o.OrderID = ?
 ```
 
-## Update one field of entity in all records
+## Update one property in all the records
+
+To update all the records of an entity, use `updateAll` instead of `update`. This prevents updating all the records by mistake.
 
 **Lambda:**
 
-```Typescript
-// Updates the ShipPostalCode field in all records of the Orders entity
+```typescript
 Orders.updateAll({ postalCode: postalCode })
 ```
 
 **SQL Result:**
 
 ```sql
--- Updates the ShipPostalCode field in all records of the Orders entity
 UPDATE Orders o SET ShipPostalCode = ?
 ```
 
-## Update one field of entity filtered
+## Update one property with a filter
+
+Updates the name of the order whose id is `entity.id`.
 
 **Lambda:**
 
-```Typescript
-// Updates the ShipName field of the Orders entity where OrderID matches the provided entity's ID
+```typescript
 Orders.update({ name: entity.name }).filter(p => p.id === entity.id)
 ```
 
 **SQL Result:**
 
 ```sql
--- Updates the ShipName field of the Orders entity where OrderID matches the provided entity's ID
 UPDATE Orders o SET ShipName = ? WHERE o.OrderID = ?
 ```
 
-## Update one field of entity filtered and related entity
+## Update with a related entity
+
+Updates the name of an order and, for each detail sent, all the properties of the detail. Each detail is filtered by its primary key.
 
 **Lambda:**
 
-```Typescript
-// Updates the ShipName field of the Orders entity and updates related details
-Orders.update({ name: entity.name }).include(p => p.details(p => p)).filter(p => p.id === entity.id)
-```
-
-**SQL Result:**
-
-```sql
--- Updates the ShipName field of the Orders entity where OrderID matches the provided entity's ID
-UPDATE Orders o SET ShipName = ? 
-WHERE o.OrderID = ? 
-
--- Updates UnitPrice, Quantity, and Discount fields in the Order Details table where OrderID and ProductID 
--- match the provided parameters
-UPDATE `Order Details` o1 SET UnitPrice = o1.UnitPrice,Quantity = o1.Quantity,Discount = o1.Discount 
-WHERE (o1.OrderID = ? AND o1.ProductID = ?)
-```
-
-## Update one field of entity filtered and fields of related entity
-
-**Lambda:**
-
-```Typescript
-// Updates the ShipName field of the Orders entity and updates related details' UnitPrice and ProductID
+```typescript
 Orders.update({ name: entity.name })
-      .include(p => p.details(p => ({ unitPrice: p.unitPrice, productId: p.productId })))
-			.filter(p => p.id === entity.id)
+	.include(p => p.details.update(p => p))
+	.filter(p => p.id === entity.id)
 ```
 
 **SQL Result:**
 
 ```sql
--- Updates the ShipName field of the Orders entity where OrderID matches the provided entity's ID
+-- the order
 UPDATE Orders o SET ShipName = ?
 WHERE o.OrderID = ?
 
--- Updates UnitPrice and ProductID fields in the Order Details table where OrderID and ProductID 
--- match the provided parameters
-UPDATE `Order Details` o1 SET UnitPrice = o1.UnitPrice,ProductID = o1.ProductID 
+-- each detail sent
+UPDATE `Order Details` o1 SET UnitPrice = ?,Quantity = ?,Discount = ?
 WHERE (o1.OrderID = ? AND o1.ProductID = ?)
 ```
 
-## Update entity and multiples related entities
+## Update fields of the related entity
+
+Updates the name of an order and only the unit price of each detail sent. In the update of the relation, `unitPrice` is the value sent for each detail.
 
 **Lambda:**
 
-```Typescript
-// Updates all fields of the Customers entity and includes related orders and details
+```typescript
+Orders.update({ name: entity.name })
+	.include(p => p.details.update(p => ({ unitPrice: unitPrice })))
+	.filter(p => p.id === entity.id)
+```
+
+**SQL Result:**
+
+```sql
+-- the order
+UPDATE Orders o SET ShipName = ?
+WHERE o.OrderID = ?
+
+-- each detail sent
+UPDATE `Order Details` o1 SET UnitPrice = ?
+WHERE (o1.OrderID = ? AND o1.ProductID = ?)
+```
+
+!!! note
+    Inside the update of a relation, `p.unitPrice` refers to the current value of the column, not to the value sent: `p.details.update(p => ({ unitPrice: p.unitPrice }))` generates `SET UnitPrice = o1.UnitPrice`, which leaves the column as it is.
+
+## Update an entity and several related entities
+
+Updates a customer, its orders and the details of each order.
+
+**Lambda:**
+
+```typescript
 Customers.update().include(p => p.orders.include(p => p.details))
 ```
 
 **SQL Result:**
 
 ```sql
--- Updates all fields of the Customers entity where CustomerID matches the provided parameter
-UPDATE Customers c SET CustomerID = ?,CompanyName = ?,ContactName = ?,ContactTitle = ?,Address = ?,City = ?,Region = ?,PostalCode = ?,Country = ? 
-WHERE c.CustomerID = ? 
+-- the customer
+UPDATE Customers c SET CustomerID = ?,CompanyName = ?,ContactName = ?,ContactTitle = ?,Address = ?,City = ?,Region = ?,PostalCode = ?,Country = ?
+WHERE c.CustomerID = ?
 
--- Updates all fields of the Orders entity where CustomerID matches the provided parameter
-UPDATE Orders o SET CustomerID = ?,EmployeeID = ?,OrderDate = ?,RequiredDate = ?,ShippedDate = ?,ShipVia = ?,Freight = ?,ShipName = ?,ShipAddress = ?,ShipCity = ?,ShipRegion = ?,ShipPostalCode = ?,ShipCountry = ? 
-WHERE o.OrderID = ? 
+-- each order of the customer
+UPDATE Orders o SET CustomerID = ?,EmployeeID = ?,OrderDate = ?,RequiredDate = ?,ShippedDate = ?,ShipVia = ?,Freight = ?,ShipName = ?,ShipAddress = ?,ShipCity = ?,ShipRegion = ?,ShipPostalCode = ?,ShipCountry = ?
+WHERE o.OrderID = ?
 
 -- details is a composite relation included as it is: each detail sent is inserted or updated (upsert),
 -- and the details of the order that were not sent are deleted (see "Update an aggregate" below)
@@ -159,7 +165,7 @@ When the included relation is **composite** (`composite: true`) and is included 
 - children of the parent that were not sent are deleted,
 - if the relation is absent from the data, the children are untouched.
 
-The child entity needs a primary key.
+The child entity needs a primary key. In this example, `Orders` has a composite relation `lines`:
 
 ```yaml
 domain:
@@ -182,7 +188,7 @@ domain:
 
 **Lambda:**
 
-```Typescript
+```typescript
 const [order] = await orm.execute('Orders.filter(p => p.id == id).include(p => p.lines)', { id: orderId })
 const kept = { ...order.lines.find(p => p.line === 1), quantity: 7 } // updated
 const added = { orderId, line: 3, product: 'c', quantity: 3 }        // inserted
@@ -201,19 +207,22 @@ ON CONFLICT (order_id,line) DO UPDATE SET product = EXCLUDED.product, quantity =
 DELETE FROM order_lines WHERE order_id = $1 AND NOT ((order_id = $2 AND line = $3) OR (order_id = $4 AND line = $5))
 ```
 
-Supported on every SQL engine — PostgreSQL, MySQL, MariaDB, SQL Server and Oracle (these two from @lambdaorm/lib 3.5.0) — which use [upsert](Insert.md#upsert). On MongoDB the composite children are embedded in the parent's document, so they are replaced there.
+It is supported on PostgreSQL, MySQL, MariaDB, SQL Server and Oracle (these two from `@lambdaorm/lib` 3.5.0), which save the children with [upsert](Insert.md#upsert). On MongoDB the composite children are embedded in the parent's document, so they are replaced there.
 
-To only update the children sent (without inserting or deleting), include the relation with an explicit update: `Orders.update().include(p => p.lines.update(l => ({ quantity: l.quantity })))`.
+To only update the children sent (without inserting or deleting), include the relation with an explicit update: `Orders.update().include(p => p.lines.update(l => ({ quantity: quantity })))`. Inside it, `quantity` is the value sent for each child (see [Update fields of the related entity](#update-fields-of-the-related-entity)).
 
 ## Code example
 
-```Typescript
-import { orm } from '../../lib'
-import { Customers } from '../northwind/model/__model'
-(async () => {	
-	try {		
-		await orm.init('./config/northwind.yaml')
-		// entity customer with orders and order details
+Updates a customer with its orders and their details, and prints the number of customers updated.
+
+```typescript
+import { orm } from '@lambdaorm/lib'
+import { Customers } from './domain/model' // model generated by `lambdaorm build`
+
+(async () => {
+	try {
+		await orm.init('./lambdaORM.yaml')
+		// customer with its orders and their details
 		const customer = {
 			id: 'ALFKI',
 			name: 'Alfreds Futterkiste',
@@ -291,16 +300,14 @@ import { Customers } from '../northwind/model/__model'
 				}
 			]
 		}
-		// Defining a query to update Customers and include related orders and details
 		const query = () => Customers.update().include(p => p.orders.include(p => p.details))
-		// Executing the query using the ORM with the specified customer parameter
-		// the number of customers updated
+		// returns the number of customers updated
 		const result = await orm.execute(query, customer)
-		console.log(result)		
-	} catch (error:any) {
+		console.log(result)
+	} catch (error: any) {
 		console.error(error.stack)
 	} finally {
-		// Ending the ORM connection
+		// releases the connections
 		await orm.end()
 	}
 })()

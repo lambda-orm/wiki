@@ -1,23 +1,26 @@
 # Basic Schema Example
 
-In the basic configuration of a schema, the entities, mapping and data sources are defined.
-Properties, relationships and keys are defined in entities.
-In the mapping, the mappings of the entities with the database tables are defined.
-In the data sources, the dialect of the data source and the connections are defined.
+This page shows a basic schema: two related entities stored in one MySQL database.
 
-Many properties can be omitted since they have a default value.
-For example:
+A basic schema defines the entities, the mapping and the sources:
 
-- If the type of a property is not defined in an entity, it is assumed to be a string.
-- If it is not specified that the property is required, it is assumed that it is not.
-- If the length of a property is not defined, it is assumed to be 80.
-- If the mapping information is not defined, it is assumed that the entities are called the same in the source data and that the properties are called the same as the field in the table or collection.
+- The **entities** define the properties, relations and keys.
+- The **mapping** defines how the entities are mapped to the tables of the database.
+- The **sources** define the dialect and the connection of each database.
+
+Many keys can be omitted, because they have a default value. For example:
+
+- A property without `type` is a string.
+- A property without `required` is not required (unless it is part of the primary or unique key).
+- A string property without `length` is `TEXT` on PostgreSQL and `VARCHAR(80)` on the other engines.
+- Without mapping information, the tables and columns have the same names as the entities and properties.
 
 ## Schema Example
 
-The schema defines how the entities of the model are mapped with the database tables.
+In this schema, `Countries` has many `States`: the relation `states` of `Countries` returns the list of its states, and the relation `country` of `States` returns its country.
+The mapping `test` is empty, so the tables and columns have the same names as the entities and properties.
 
-![schema](../images/schema.svg)
+![schema](images/schema.svg)
 
 ```yaml
 domain:
@@ -74,6 +77,6 @@ infrastructure:
         - name: test
 ```
 
-## Laboratories
+## Labs
 
 - [CLI - simple](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/01-simple)

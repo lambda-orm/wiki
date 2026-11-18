@@ -1,0 +1,6752 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="λORM — un ORM de consultas lambda sobre varias bases de datos, y el Data Gateway que publica sus esquemas">
+      
+      
+      
+        <link rel="canonical" href="https://lambda-orm.github.io/wiki/es/cli/CHANGELOG/">
+      
+      
+        <link rel="prev" href="../Version/">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Cambios - λORM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/lambdaorm-v1.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#changelog" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../" title="λORM" class="md-header__button md-logo" aria-label="λORM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6 20 4.16-12.09L9.34 6H8V4h2c.42 0 .78.26.93.63L16.66 18H18v2h-2c-.43 0-.79-.27-.93-.64l-3.74-8.71L8.12 20z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            λORM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cambios
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Seleccionar idioma">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../cli/CHANGELOG/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../de/cli/CHANGELOG/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../pt/cli/CHANGELOG/" hreflang="pt" class="md-select__link">
+              Português
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Inicio
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../data-gateway/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Data Gateway
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../queries/Query-Language/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Consultas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../schema/Schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Esquema
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../usage/Usage/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Uso
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  CLI
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="λORM" class="md-nav__button md-logo" aria-label="λORM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6 20 4.16-12.09L9.34 6H8V4h2c.42 0 .78.26.93.63L16.66 18H18v2h-2c-.43 0-.79-.27-.93-.64l-3.74-8.71L8.12 20z"/></svg>
+
+    </a>
+    λORM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Inicio
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Características
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Labs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../data-gateway/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Data Gateway
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data Gateway
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-gateway/GettingStarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-gateway/Configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuración
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-gateway/Transports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transportes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-gateway/Rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    REST API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-gateway/Mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-gateway/WebSocket/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WebSocket API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-gateway/Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Seguridad
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-gateway/Ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-gateway/Clients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clientes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-gateway/Operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operación
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-gateway/CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cambios
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Consultas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Consultas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/Query-Language/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lenguaje de consultas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/Expression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Expresión
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/Select/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Select
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/Join/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Join
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/Grouping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agrupamiento
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/Include/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Include
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/Insert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Insert
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/BulkInsert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bulk Insert
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/Update/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Update
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/Delete/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Delete
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/Metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metadatos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_12" id="__nav_3_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Operadores y funciones
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_12">
+            <span class="md-nav__icon md-icon"></span>
+            Operadores y funciones
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/operatorsAndFunctions/OperatorsAndFunctions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operators and Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/operatorsAndFunctions/Comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comparación
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/operatorsAndFunctions/Logical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lógicos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/operatorsAndFunctions/Numeric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Numéricos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/operatorsAndFunctions/String/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Texto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/operatorsAndFunctions/Datetime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fecha y hora
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/operatorsAndFunctions/Nullable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nulos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/operatorsAndFunctions/Bitwise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A nivel de bits
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/operatorsAndFunctions/Group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agregación
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/operatorsAndFunctions/Sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ordenamiento
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Esquema
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Esquema
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/Schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaDefinition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Definición
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaDefinition-Expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Expresiones
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaDefinition-EnvironmentVariables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Variables de entorno
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaDefinition-Composite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compuestos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaExample-Listener/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Listeners
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ejemplos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            Ejemplos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaExample-Basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Básico
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaExample-Extend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extender una entidad
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaExample-MultiplesStages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Varios stages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaExample-StageMultiplesSources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stage con varias fuentes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaExample-Composite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Entidad compuesta
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Sincronización
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            Sincronización
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaSynchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Synchronization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaSynchronization-Push/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Push
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaSynchronization-Pull/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pull
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaSynchronization-Fetch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fetch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaSynchronization-Introspect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introspect
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/SchemaSynchronization-Incorporate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Incorporate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/Schema-Use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uso
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/Engines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Motores
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Uso
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Uso
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/Usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/Repository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Repositorio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/Transaction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transacción
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/Script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Script
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cambios
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    CLI
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            CLI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Comandos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Comandos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Init/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Init
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sync
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Push/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Push
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Drop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Drop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Fetch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fetch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Import/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Import
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Export
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Execute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Execute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Script
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metadatos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/Constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Constraints
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Version/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Versión
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Cambios
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cambios
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lambdaormcli" class="md-nav__link">
+    <span class="md-ellipsis">
+      @lambdaorm/cli
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="@lambdaorm/cli">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#162" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6.2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#patch-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patch Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#161" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6.1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#patch-changes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patch Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#160" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minor-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minor Changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-changes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patch Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#150" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minor-changes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minor Changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-changes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patch Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#149-2026-03-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.9 (2026-03-11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#148-2025-05-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.8 (2025-05-31)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#147-2025-05-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.7 (2025-05-31)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#146-2025-05-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.6 (2025-05-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#145-2024-06-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.5 (2024-06-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144-2024-05-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.4 (2024-05-13)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-2024-05-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.3 (2024-05-11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-2024-05-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 (2024-05-11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#141-2024-05-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 (2024-05-09)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#140-2024-05-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.0 (2024-05-09)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1310-2024-05-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.10 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#139-2024-05-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.9 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#138-2024-05-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.8 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#137-2024-05-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.7 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#136-2024-05-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.6 (2024-05-07)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#135-2024-05-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.5 (2024-05-07)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134-2024-05-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.4 (2024-05-04)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-2024-05-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.3 (2024-05-03)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-2024-05-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.2 (2024-05-02)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#131-2024-05-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.1 (2024-05-02)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#130-2024-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.0 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#126-2024-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.6 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#125-2024-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.5 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-2024-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.4 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-2024-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.3 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-2024-04-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2 (2024-04-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#121-2024-04-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 (2024-04-29)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#120-2024-04-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.0 (2024-04-18)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#110-2024-04-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.0 (2024-04-17)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0934-2024-04-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.34 (2024-04-14)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0933-2024-01-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.33 (2024-01-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0932-2023-12-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.32 (2023-12-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0931-2023-12-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.31 (2023-12-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0930-2023-12-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.30 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0929-2023-12-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.29 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0928-2023-12-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.28 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0927-2023-12-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.27 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0926-2023-12-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.26 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0925-2023-12-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.25 (2023-12-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0924-2023-12-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.24 (2023-12-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0923-2023-12-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.23 (2023-12-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0922-2023-12-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.22 (2023-12-17)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0921-2023-12-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.21 (2023-12-16)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0920-2023-12-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.20 (2023-12-16)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0919-2023-12-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.19 (2023-12-16)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0918-2023-12-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.18 (2023-12-02)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0917-2023-12-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.17 (2023-12-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0916-2023-12-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.16 (2023-12-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0915-2023-11-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.15 (2023-11-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0914-2023-11-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.14 (2023-11-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0913-2023-11-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.13 (2023-11-29)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0912-2023-11-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.12 (2023-11-29)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0911-2023-11-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.11 (2023-11-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0910-2023-11-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.10 (2023-11-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#099-2023-11-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.9 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#098-2023-11-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.8 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#097-2023-11-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.7 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#096-2023-11-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.6 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#095-2023-11-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.5 (2023-11-23)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#094-2023-11-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.4 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#093-2023-11-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.3 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#092-2023-11-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.2 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#091-2023-11-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.1 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0812-2023-11-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.12 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0811-2023-11-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.11 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0810-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.10 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#089-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.9 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#088-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.8 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#087-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.7 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#086-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.6 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#085-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.5 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#084-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.4 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#083-2023-11-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.3 (2023-11-15)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#082-2023-11-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.2 (2023-11-15)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#081-2023-11-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.1 (2023-11-15)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0710-2023-11-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.10 (2023-11-09)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#079-2023-11-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.9 (2023-11-09)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#078-2023-11-06" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.8 (2023-11-06)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#077-2023-11-05" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.7 (2023-11-05)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#earlier-versions-lambdaorm-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Earlier versions (lambdaorm-cli)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Earlier versions (lambdaorm-cli)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#148-2025-05-31_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.8 (2025-05-31)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#147-2025-05-31_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.7 (2025-05-31)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#146-2025-05-30_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.6 (2025-05-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#145-2024-06-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.5 (2024-06-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144-2024-05-13_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.4 (2024-05-13)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-2024-05-11_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.3 (2024-05-11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-2024-05-11_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 (2024-05-11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#141-2024-05-09_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 (2024-05-09)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#140-2024-05-09_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.0 (2024-05-09)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4.0 (2024-05-09)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1310-2024-05-08_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.10 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#139-2024-05-08_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.9 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#138-2024-05-08_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.8 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#137-2024-05-08_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.7 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#136-2024-05-07_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.6 (2024-05-07)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#135-2024-05-07_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.5 (2024-05-07)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134-2024-05-04_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.4 (2024-05-04)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-2024-05-03_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.3 (2024-05-03)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-2024-05-02_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.2 (2024-05-02)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#131-2024-05-02_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.1 (2024-05-02)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#130-2024-05-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.0 (2024-05-01)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3.0 (2024-05-01)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#126-2024-05-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.6 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#125-2024-05-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.5 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-2024-05-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.4 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-2024-05-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.3 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-2024-04-30_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2 (2024-04-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#121-2024-04-29_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 (2024-04-29)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#120-2024-04-18_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.0 (2024-04-18)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-2024-04-17_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.0 (2024-04-17)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1.0 (2024-04-17)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0934-2024-04-14_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.34 (2024-04-14)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0933-2024-01-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.33 (2024-01-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0932-2023-12-28_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.32 (2023-12-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0931-2023-12-28_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.31 (2023-12-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0930-2023-12-27_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.30 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0929-2023-12-27_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.29 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0928-2023-12-27_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.28 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0927-2023-12-27_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.27 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0926-2023-12-27_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.26 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0925-2023-12-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.25 (2023-12-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0924-2023-12-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.24 (2023-12-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0923-2023-12-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.23 (2023-12-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0922-2023-12-17_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.22 (2023-12-17)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0921-2023-12-16_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.21 (2023-12-16)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0920-2023-12-16_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.20 (2023-12-16)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0919-2023-12-16_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.19 (2023-12-16)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0918-2023-12-02_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.18 (2023-12-02)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0917-2023-12-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.17 (2023-12-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0916-2023-12-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.16 (2023-12-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0915-2023-11-30_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.15 (2023-11-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0914-2023-11-30_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.14 (2023-11-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0913-2023-11-29_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.13 (2023-11-29)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0912-2023-11-29_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.12 (2023-11-29)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0911-2023-11-28_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.11 (2023-11-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0910-2023-11-28_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.10 (2023-11-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#099-2023-11-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.9 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#098-2023-11-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.8 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#097-2023-11-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.7 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#096-2023-11-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.6 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#095-2023-11-23_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.5 (2023-11-23)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#094-2023-11-22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.4 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#093-2023-11-22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.3 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#092-2023-11-22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.2 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#091-2023-11-22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.1 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0812-2023-11-22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.12 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0811-2023-11-22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.11 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0810-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.10 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#089-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.9 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#088-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.8 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#087-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.7 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#086-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.6 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#085-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.5 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#084-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.4 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#083-2023-11-15_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.3 (2023-11-15)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#082-2023-11-15_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.2 (2023-11-15)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#081-2023-11-15_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.1 (2023-11-15)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0710-2023-11-09_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.10 (2023-11-09)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#079-2023-11-09_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.9 (2023-11-09)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#078-2023-11-06_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.8 (2023-11-06)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#077-2023-11-05_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.7 (2023-11-05)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lambdaormcli" class="md-nav__link">
+    <span class="md-ellipsis">
+      @lambdaorm/cli
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="@lambdaorm/cli">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#162" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6.2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#patch-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patch Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#161" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6.1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#patch-changes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patch Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#160" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minor-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minor Changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-changes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patch Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#150" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minor-changes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minor Changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-changes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patch Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#149-2026-03-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.9 (2026-03-11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#148-2025-05-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.8 (2025-05-31)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#147-2025-05-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.7 (2025-05-31)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#146-2025-05-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.6 (2025-05-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#145-2024-06-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.5 (2024-06-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144-2024-05-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.4 (2024-05-13)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-2024-05-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.3 (2024-05-11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-2024-05-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 (2024-05-11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#141-2024-05-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 (2024-05-09)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#140-2024-05-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.0 (2024-05-09)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1310-2024-05-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.10 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#139-2024-05-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.9 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#138-2024-05-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.8 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#137-2024-05-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.7 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#136-2024-05-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.6 (2024-05-07)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#135-2024-05-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.5 (2024-05-07)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134-2024-05-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.4 (2024-05-04)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-2024-05-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.3 (2024-05-03)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-2024-05-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.2 (2024-05-02)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#131-2024-05-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.1 (2024-05-02)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#130-2024-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.0 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#126-2024-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.6 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#125-2024-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.5 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-2024-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.4 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-2024-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.3 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-2024-04-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2 (2024-04-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#121-2024-04-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 (2024-04-29)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#120-2024-04-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.0 (2024-04-18)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#110-2024-04-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.0 (2024-04-17)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0934-2024-04-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.34 (2024-04-14)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0933-2024-01-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.33 (2024-01-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0932-2023-12-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.32 (2023-12-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0931-2023-12-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.31 (2023-12-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0930-2023-12-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.30 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0929-2023-12-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.29 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0928-2023-12-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.28 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0927-2023-12-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.27 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0926-2023-12-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.26 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0925-2023-12-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.25 (2023-12-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0924-2023-12-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.24 (2023-12-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0923-2023-12-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.23 (2023-12-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0922-2023-12-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.22 (2023-12-17)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0921-2023-12-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.21 (2023-12-16)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0920-2023-12-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.20 (2023-12-16)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0919-2023-12-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.19 (2023-12-16)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0918-2023-12-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.18 (2023-12-02)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0917-2023-12-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.17 (2023-12-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0916-2023-12-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.16 (2023-12-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0915-2023-11-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.15 (2023-11-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0914-2023-11-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.14 (2023-11-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0913-2023-11-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.13 (2023-11-29)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0912-2023-11-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.12 (2023-11-29)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0911-2023-11-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.11 (2023-11-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0910-2023-11-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.10 (2023-11-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#099-2023-11-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.9 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#098-2023-11-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.8 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#097-2023-11-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.7 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#096-2023-11-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.6 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#095-2023-11-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.5 (2023-11-23)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#094-2023-11-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.4 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#093-2023-11-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.3 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#092-2023-11-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.2 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#091-2023-11-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.1 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0812-2023-11-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.12 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0811-2023-11-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.11 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0810-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.10 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#089-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.9 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#088-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.8 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#087-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.7 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#086-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.6 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#085-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.5 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#084-2023-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.4 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#083-2023-11-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.3 (2023-11-15)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#082-2023-11-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.2 (2023-11-15)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#081-2023-11-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.1 (2023-11-15)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0710-2023-11-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.10 (2023-11-09)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#079-2023-11-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.9 (2023-11-09)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#078-2023-11-06" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.8 (2023-11-06)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#077-2023-11-05" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.7 (2023-11-05)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#earlier-versions-lambdaorm-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Earlier versions (lambdaorm-cli)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Earlier versions (lambdaorm-cli)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#148-2025-05-31_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.8 (2025-05-31)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#147-2025-05-31_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.7 (2025-05-31)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#146-2025-05-30_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.6 (2025-05-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#145-2024-06-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.5 (2024-06-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144-2024-05-13_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.4 (2024-05-13)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-2024-05-11_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.3 (2024-05-11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-2024-05-11_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 (2024-05-11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#141-2024-05-09_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 (2024-05-09)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#140-2024-05-09_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.0 (2024-05-09)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4.0 (2024-05-09)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1310-2024-05-08_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.10 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#139-2024-05-08_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.9 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#138-2024-05-08_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.8 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#137-2024-05-08_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.7 (2024-05-08)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#136-2024-05-07_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.6 (2024-05-07)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#135-2024-05-07_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.5 (2024-05-07)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134-2024-05-04_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.4 (2024-05-04)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-2024-05-03_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.3 (2024-05-03)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-2024-05-02_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.2 (2024-05-02)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#131-2024-05-02_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.1 (2024-05-02)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#130-2024-05-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.0 (2024-05-01)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3.0 (2024-05-01)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#126-2024-05-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.6 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#125-2024-05-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.5 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-2024-05-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.4 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-2024-05-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.3 (2024-05-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-2024-04-30_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2 (2024-04-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#121-2024-04-29_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 (2024-04-29)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#120-2024-04-18_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.0 (2024-04-18)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-2024-04-17_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.0 (2024-04-17)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1.0 (2024-04-17)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0934-2024-04-14_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.34 (2024-04-14)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0933-2024-01-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.33 (2024-01-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0932-2023-12-28_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.32 (2023-12-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0931-2023-12-28_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.31 (2023-12-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0930-2023-12-27_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.30 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0929-2023-12-27_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.29 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0928-2023-12-27_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.28 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0927-2023-12-27_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.27 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0926-2023-12-27_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.26 (2023-12-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0925-2023-12-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.25 (2023-12-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0924-2023-12-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.24 (2023-12-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0923-2023-12-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.23 (2023-12-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0922-2023-12-17_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.22 (2023-12-17)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0921-2023-12-16_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.21 (2023-12-16)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0920-2023-12-16_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.20 (2023-12-16)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0919-2023-12-16_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.19 (2023-12-16)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0918-2023-12-02_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.18 (2023-12-02)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0917-2023-12-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.17 (2023-12-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0916-2023-12-01_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.16 (2023-12-01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0915-2023-11-30_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.15 (2023-11-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0914-2023-11-30_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.14 (2023-11-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0913-2023-11-29_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.13 (2023-11-29)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0912-2023-11-29_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.12 (2023-11-29)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0911-2023-11-28_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.11 (2023-11-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0910-2023-11-28_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.10 (2023-11-28)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#099-2023-11-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.9 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#098-2023-11-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.8 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#097-2023-11-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.7 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#096-2023-11-26_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.6 (2023-11-26)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#095-2023-11-23_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.5 (2023-11-23)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#094-2023-11-22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.4 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#093-2023-11-22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.3 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#092-2023-11-22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.2 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#091-2023-11-22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.1 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0812-2023-11-22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.12 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0811-2023-11-22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.11 (2023-11-22)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0810-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.10 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#089-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.9 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#088-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.8 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#087-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.7 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#086-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.6 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#085-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.5 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#084-2023-11-21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.4 (2023-11-21)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#083-2023-11-15_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.3 (2023-11-15)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#082-2023-11-15_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.2 (2023-11-15)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#081-2023-11-15_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.1 (2023-11-15)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0710-2023-11-09_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.10 (2023-11-09)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#079-2023-11-09_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.9 (2023-11-09)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#078-2023-11-06_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.8 (2023-11-06)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#077-2023-11-05_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.7 (2023-11-05)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
+<p>All notable changes to this project will be documented in this file.</p>
+<h2 id="lambdaormcli">@lambdaorm/cli<a class="headerlink" href="#lambdaormcli" title="Permanent link">&para;</a></h2>
+<h3 id="162">1.6.2<a class="headerlink" href="#162" title="Permanent link">&para;</a></h3>
+<h4 id="patch-changes">Patch Changes<a class="headerlink" href="#patch-changes" title="Permanent link">&para;</a></h4>
+<ul>
+<li>e4ce3af: 3xpr 5.2.0 in every package (one copy of it). lib builds each Orm's 3xpr instance with the <code>ExpressionsBuilder</code> 3xpr
+  now exports, instead of importing it from one of its files.</li>
+<li>b22e580: <code>lambdaorm --version</code> and <code>lambdaorm version</code> print this CLI's version (they printed the version of the project's
+  package.json in the current directory, or looked for the old <code>lambdaorm-cli</code> package).</li>
+<li>Updated dependencies [e4ce3af]</li>
+<li>@lambdaorm/base@3.2.1</li>
+<li>@lambdaorm/lib@3.2.2</li>
+<li>@lambdaorm/client@0.9.1</li>
+</ul>
+<h3 id="161">1.6.1<a class="headerlink" href="#161" title="Permanent link">&para;</a></h3>
+<h4 id="patch-changes_1">Patch Changes<a class="headerlink" href="#patch-changes_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Updated dependencies [2dc1ac1]</li>
+<li>Updated dependencies [68faedb]</li>
+<li>@lambdaorm/lib@3.2.1</li>
+</ul>
+<h3 id="160">1.6.0<a class="headerlink" href="#160" title="Permanent link">&para;</a></h3>
+<h4 id="minor-changes">Minor Changes<a class="headerlink" href="#minor-changes" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>0e683c6: Scripts: several queries in one transaction.</p>
+</li>
+<li>
+<p>client: <code>orm.executeScript(script, data, options)</code> calls the service's <code>POST /script</code> (the service must run with
+    <code>SCRIPT_ENABLED=true</code>).</p>
+</li>
+<li>
+<p>cli: new <code>lambdaorm script</code> command, with the script inline (<code>-x</code>) or in a file (<code>-f</code>), its variables in <code>-d</code>; local
+    with the workspace or on a service with <code>-u</code>.</p>
+</li>
+<li>
+<p>d16b60a: <code>stage.push().sentencesBySource()</code>: the DDL grouped per source (one script per database). cli: <code>lambdaorm push -o &lt;dir&gt;</code>
+  writes one script per source that changes, <code>&lt;stage&gt;.&lt;source&gt;.sql</code> (deterministic names, to rename into a versioned
+  migration); <code>-o</code> without a folder prints the DDL grouped by source — L19.</p>
+</li>
+</ul>
+<h4 id="patch-changes_2">Patch Changes<a class="headerlink" href="#patch-changes_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>2ee8930: Upgrade the data7expressions dependencies to their latest major: <code>3xpr</code> from 1.x to <code>^5.1.1</code>, <code>h3lp</code> and <code>typ3s</code> to
+  <code>^5.0.0</code> (and <code>json-light</code> to <code>^5.0.0</code> in the CLI). No API changes were needed. Behaviour inherited from 3xpr:</p>
+</li>
+<li>
+<p><code>&lt;=</code> now has the same precedence as the other comparison operators (<code>a &lt;= b == true</code> used to evaluate as
+    <code>a &lt;= (b == true)</code>).</p>
+</li>
+<li>
+<p>3xpr 5.1.0 evaluates async expressions statement by statement (listeners, <code>orm.execute</code> inside expressions), never
+    runs an async function while building an expression, and adds <code>throw</code>, <code>try</code>/<code>catch</code>, <code>return</code>, <code>break</code> and
+    <code>continue</code>; 3xpr 5.1.1 parses the empty string literal <code>""</code> (it used to swallow the rest of the expression).</p>
+</li>
+<li>
+<p>ee1e7ac: Packaging:</p>
+</li>
+<li>
+<p>The published <code>exports</code> pointed to <code>./build/lib/index.js</code>, a path the package doesn't have: <code>require('@lambdaorm/lib')</code>
+    (and base, client) failed for everyone installing from npm. dist now rewrites <code>exports</code> (and <code>bin</code>) like <code>main</code> — L7.</p>
+</li>
+<li>cli: declares <code>bin: lambdaorm</code>, so <code>npm i -g @lambdaorm/cli</code> installs the <code>lambdaorm</code> command — L29.</li>
+<li>
+<p>Every package's dist is smoke-tested before it can be released: required by its name (so <code>exports</code> applies) and,
+    for the CLI, <code>lambdaorm --help</code>.</p>
+</li>
+<li>
+<p>8b8f470: Stage commands:</p>
+</li>
+<li>
+<p>push/DDL: a stage's last source without condition is a catch-all, as in DML: it gets only the entities no other
+    source took (it used to receive every entity) — L25.</p>
+</li>
+<li>fetch/pull on PostgreSQL work with reserved words as column names (<code>order</code>): the metadata query quoted the column
+    twice — L6, L21.</li>
+<li><code>stage.fetch()</code> reports the drift: per mapping, the entities that differ from the model (present in one side only,
+    different columns, types, lengths, required, primary key), each with its <code>differences</code>; no entities when in step.
+    <code>stage.read()</code> returns the databases' mappings as <code>fetch</code> did (pull uses it) — L22.</li>
+<li>
+<p>cli: <code>lambdaorm fetch</code> exits with code 1 when there are differences (for CI). <code>fetch</code>, <code>pull</code>, <code>schema</code>,
+    <code>introspect</code> and <code>incorporate</code> load the <code>--envfile</code> they declared (it was ignored).</p>
+</li>
+<li>
+<p>Updated dependencies [2ee8930]</p>
+</li>
+<li>Updated dependencies [0e683c6]</li>
+<li>Updated dependencies [77496b5]</li>
+<li>Updated dependencies [7c18bef]</li>
+<li>Updated dependencies [38e7d3b]</li>
+<li>Updated dependencies [3f3e1cc]</li>
+<li>Updated dependencies [ee1e7ac]</li>
+<li>Updated dependencies [c2be59f]</li>
+<li>Updated dependencies [d16b60a]</li>
+<li>Updated dependencies [e961817]</li>
+<li>Updated dependencies [b1dcd8b]</li>
+<li>Updated dependencies [8b8f470]</li>
+<li>Updated dependencies [907074b]</li>
+<li>Updated dependencies [7c8edd7]</li>
+<li>Updated dependencies [de140f3]</li>
+<li>Updated dependencies [6319468]</li>
+<li>@lambdaorm/base@3.2.0</li>
+<li>@lambdaorm/lib@3.2.0</li>
+<li>@lambdaorm/client@0.9.0</li>
+</ul>
+<h3 id="150">1.5.0<a class="headerlink" href="#150" title="Permanent link">&para;</a></h3>
+<h4 id="minor-changes_1">Minor Changes<a class="headerlink" href="#minor-changes_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>14d7c93: ci test</li>
+</ul>
+<h4 id="patch-changes_3">Patch Changes<a class="headerlink" href="#patch-changes_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Updated dependencies [14d7c93]</li>
+<li>@lambdaorm/client@0.8.0</li>
+<li>@lambdaorm/base@3.1.0</li>
+<li>@lambdaorm/lib@3.1.0</li>
+</ul>
+<p>All notable changes to this project will be documented in this file.</p>
+<h3 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">&para;</a></h3>
+<h3 id="149-2026-03-11">1.4.9 (2026-03-11)<a class="headerlink" href="#149-2026-03-11" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>dependences (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/bfb86adb0c9702bab3d4fee05082e577e6463977">bfb86ad</a>)</li>
+<li>solve lint fix (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/3c97c7ec411955c3203cd87a328234f87952115c">3c97c7e</a>)</li>
+</ul>
+<h3 id="148-2025-05-31"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.7...v1.4.8">1.4.8</a> (2025-05-31)<a class="headerlink" href="#148-2025-05-31" title="Permanent link">&para;</a></h3>
+<h3 id="147-2025-05-31"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.6...v1.4.7">1.4.7</a> (2025-05-31)<a class="headerlink" href="#147-2025-05-31" title="Permanent link">&para;</a></h3>
+<h3 id="146-2025-05-30"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.5...v1.4.6">1.4.6</a> (2025-05-30)<a class="headerlink" href="#146-2025-05-30" title="Permanent link">&para;</a></h3>
+<h3 id="145-2024-06-01"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.4...v1.4.5">1.4.5</a> (2024-06-01)<a class="headerlink" href="#145-2024-06-01" title="Permanent link">&para;</a></h3>
+<h3 id="144-2024-05-13"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.3...v1.4.4">1.4.4</a> (2024-05-13)<a class="headerlink" href="#144-2024-05-13" title="Permanent link">&para;</a></h3>
+<h3 id="143-2024-05-11"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.2...v1.4.3">1.4.3</a> (2024-05-11)<a class="headerlink" href="#143-2024-05-11" title="Permanent link">&para;</a></h3>
+<h3 id="142-2024-05-11"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.1...v1.4.2">1.4.2</a> (2024-05-11)<a class="headerlink" href="#142-2024-05-11" title="Permanent link">&para;</a></h3>
+<h3 id="141-2024-05-09"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.0...v1.4.1">1.4.1</a> (2024-05-09)<a class="headerlink" href="#141-2024-05-09" title="Permanent link">&para;</a></h3>
+<h3 id="140-2024-05-09"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.10...v1.4.0">1.4.0</a> (2024-05-09)<a class="headerlink" href="#140-2024-05-09" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>show result in stages commands (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/3dd4e71487d712defd5e9b16aec23b71ec8cb5c4">3dd4e71</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/0">#0</a></li>
+</ul>
+<h3 id="1310-2024-05-08"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.9...v1.3.10">1.3.10</a> (2024-05-08)<a class="headerlink" href="#1310-2024-05-08" title="Permanent link">&para;</a></h3>
+<h3 id="139-2024-05-08"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.8...v1.3.9">1.3.9</a> (2024-05-08)<a class="headerlink" href="#139-2024-05-08" title="Permanent link">&para;</a></h3>
+<h3 id="138-2024-05-08"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.7...v1.3.8">1.3.8</a> (2024-05-08)<a class="headerlink" href="#138-2024-05-08" title="Permanent link">&para;</a></h3>
+<h3 id="137-2024-05-08"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.6...v1.3.7">1.3.7</a> (2024-05-08)<a class="headerlink" href="#137-2024-05-08" title="Permanent link">&para;</a></h3>
+<h3 id="136-2024-05-07"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.5...v1.3.6">1.3.6</a> (2024-05-07)<a class="headerlink" href="#136-2024-05-07" title="Permanent link">&para;</a></h3>
+<h3 id="135-2024-05-07"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.4...v1.3.5">1.3.5</a> (2024-05-07)<a class="headerlink" href="#135-2024-05-07" title="Permanent link">&para;</a></h3>
+<h3 id="134-2024-05-04"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.3...v1.3.4">1.3.4</a> (2024-05-04)<a class="headerlink" href="#134-2024-05-04" title="Permanent link">&para;</a></h3>
+<h3 id="133-2024-05-03"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.2...v1.3.3">1.3.3</a> (2024-05-03)<a class="headerlink" href="#133-2024-05-03" title="Permanent link">&para;</a></h3>
+<h3 id="132-2024-05-02"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.1...v1.3.2">1.3.2</a> (2024-05-02)<a class="headerlink" href="#132-2024-05-02" title="Permanent link">&para;</a></h3>
+<h3 id="131-2024-05-02"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.0...v1.3.1">1.3.1</a> (2024-05-02)<a class="headerlink" href="#131-2024-05-02" title="Permanent link">&para;</a></h3>
+<h3 id="130-2024-05-01"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.6...v1.3.0">1.3.0</a> (2024-05-01)<a class="headerlink" href="#130-2024-05-01" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>add match command (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/94ec9d1f8b81f6b4ae4a7409478ad6a2a53b5d17">94ec9d1</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/0">#0</a></li>
+</ul>
+<h3 id="126-2024-05-01"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.5...v1.2.6">1.2.6</a> (2024-05-01)<a class="headerlink" href="#126-2024-05-01" title="Permanent link">&para;</a></h3>
+<h3 id="125-2024-05-01"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.4...v1.2.5">1.2.5</a> (2024-05-01)<a class="headerlink" href="#125-2024-05-01" title="Permanent link">&para;</a></h3>
+<h3 id="124-2024-05-01"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.3...v1.2.4">1.2.4</a> (2024-05-01)<a class="headerlink" href="#124-2024-05-01" title="Permanent link">&para;</a></h3>
+<h3 id="123-2024-05-01"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.2...v1.2.3">1.2.3</a> (2024-05-01)<a class="headerlink" href="#123-2024-05-01" title="Permanent link">&para;</a></h3>
+<h3 id="122-2024-04-30"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.1...v1.2.2">1.2.2</a> (2024-04-30)<a class="headerlink" href="#122-2024-04-30" title="Permanent link">&para;</a></h3>
+<h3 id="121-2024-04-29"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.0...v1.2.1">1.2.1</a> (2024-04-29)<a class="headerlink" href="#121-2024-04-29" title="Permanent link">&para;</a></h3>
+<h3 id="120-2024-04-18"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.1.0...v1.2.0">1.2.0</a> (2024-04-18)<a class="headerlink" href="#120-2024-04-18" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>add fetch, match, incorporate and introspect commands (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/900ce023968e46fc83e0f297bcdd7c7cc027624c">900ce02</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/0">#0</a></li>
+<li>add introspect and incorporate (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/a6147ee02cd2fb5a492da7e5ac6abc4b0595e847">a6147ee</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/0">#0</a></li>
+</ul>
+<h3 id="110-2024-04-17"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.34...v1.1.0">1.1.0</a> (2024-04-17)<a class="headerlink" href="#110-2024-04-17" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>adjust for update dependences (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/49f4585d4bf96cb51e0244298e55cb0d45555a08">49f4585</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/0">#0</a></li>
+<li>update lib local schema (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/28e2a3b89c46bb863a4f422bc081a7c4d74baed3">28e2a3b</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/0">#0</a></li>
+</ul>
+<h3 id="0934-2024-04-14"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.33...v0.9.34">0.9.34</a> (2024-04-14)<a class="headerlink" href="#0934-2024-04-14" title="Permanent link">&para;</a></h3>
+<h3 id="0933-2024-01-01"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.32...v0.9.33">0.9.33</a> (2024-01-01)<a class="headerlink" href="#0933-2024-01-01" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>add schema command (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/5395a393ccbe73421b138b861cfe4c9691c502ff">5395a39</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/223">#223</a></li>
+</ul>
+<h3 id="0932-2023-12-28"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.31...v0.9.32">0.9.32</a> (2023-12-28)<a class="headerlink" href="#0932-2023-12-28" title="Permanent link">&para;</a></h3>
+<h3 id="0931-2023-12-28"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.30...v0.9.31">0.9.31</a> (2023-12-28)<a class="headerlink" href="#0931-2023-12-28" title="Permanent link">&para;</a></h3>
+<h3 id="0930-2023-12-27"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.29...v0.9.30">0.9.30</a> (2023-12-27)<a class="headerlink" href="#0930-2023-12-27" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>parameters command (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/022d635a91817efee93f74cfd432ac5268d238e4">022d635</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/223">#223</a></li>
+</ul>
+<h3 id="0929-2023-12-27"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.28...v0.9.29">0.9.29</a> (2023-12-27)<a class="headerlink" href="#0929-2023-12-27" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li><strong>plan:</strong> method without await (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/ab0e697c46bbdc599134bb98905f58df9c9e4eea">ab0e697</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/223">#223</a></li>
+</ul>
+<h3 id="0928-2023-12-27"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.27...v0.9.28">0.9.28</a> (2023-12-27)<a class="headerlink" href="#0928-2023-12-27" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li><strong>orm:</strong> solve rest adapter (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/38fc82c78bf99a604a02c4eb1026c905c1ed807f">38fc82c</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/223">#223</a></li>
+</ul>
+<h3 id="0927-2023-12-27"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.26...v0.9.27">0.9.27</a> (2023-12-27)<a class="headerlink" href="#0927-2023-12-27" title="Permanent link">&para;</a></h3>
+<h3 id="0926-2023-12-27"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.25...v0.9.26">0.9.26</a> (2023-12-27)<a class="headerlink" href="#0926-2023-12-27" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>add url parameter in commands (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/10110f1994a104ca826134ecca864135fd96af67">10110f1</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/224">#224</a></li>
+</ul>
+<h3 id="0925-2023-12-26"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.24...v0.9.25">0.9.25</a> (2023-12-26)<a class="headerlink" href="#0925-2023-12-26" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve init and build commands with client (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/0ad94fd559a9a7e7ab906e510b409c5aaee4b809">0ad94fd</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/224">#224</a></li>
+</ul>
+<h3 id="0924-2023-12-26"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.23...v0.9.24">0.9.24</a> (2023-12-26)<a class="headerlink" href="#0924-2023-12-26" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve import (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/8cc5ecb91233e98b7789115722103588a7ac42d0">8cc5ecb</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/224">#224</a></li>
+</ul>
+<h3 id="0923-2023-12-26"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.22...v0.9.23">0.9.23</a> (2023-12-26)<a class="headerlink" href="#0923-2023-12-26" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>refactoring cli (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/c3b9b54d2d24220297be6fdc5948ea256300aaf3">c3b9b54</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/224">#224</a></li>
+<li>reorganize (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/660ef5f3d9ffaea4e25a1a6d8073481a6a388c08">660ef5f</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/223">#223</a></li>
+</ul>
+<h3 id="0922-2023-12-17"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.21...v0.9.22">0.9.22</a> (2023-12-17)<a class="headerlink" href="#0922-2023-12-17" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>add usage on readme (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/0fbf2e6b6c4a8d6ff3791144aeaf58095e7db4f6">0fbf2e6</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0921-2023-12-16"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.20...v0.9.21">0.9.21</a> (2023-12-16)<a class="headerlink" href="#0921-2023-12-16" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>dependencies:</strong> update lambdaorm dependence (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/c1cb78803072dd81971350a69111f8b03f178c50">c1cb788</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0920-2023-12-16"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.19...v0.9.20">0.9.20</a> (2023-12-16)<a class="headerlink" href="#0920-2023-12-16" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>update dependencies (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/84fc36529f4d958215b83290372f9be892e7a311">84fc365</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0919-2023-12-16"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.18...v0.9.19">0.9.19</a> (2023-12-16)<a class="headerlink" href="#0919-2023-12-16" title="Permanent link">&para;</a></h3>
+<h3 id="0918-2023-12-02"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.17...v0.9.18">0.9.18</a> (2023-12-02)<a class="headerlink" href="#0918-2023-12-02" title="Permanent link">&para;</a></h3>
+<h3 id="0917-2023-12-01"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.16...v0.9.17">0.9.17</a> (2023-12-01)<a class="headerlink" href="#0917-2023-12-01" title="Permanent link">&para;</a></h3>
+<h3 id="0916-2023-12-01"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.15...v0.9.16">0.9.16</a> (2023-12-01)<a class="headerlink" href="#0916-2023-12-01" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve plan command (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/770da35fe694142ca506c4cea9f4418cacaaea57">770da35</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0915-2023-11-30"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.14...v0.9.15">0.9.15</a> (2023-11-30)<a class="headerlink" href="#0915-2023-11-30" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li><strong>commands:</strong> duplicate execute name command (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/abfd6c632a35d6aac5fb8c366fc73bb42364deda">abfd6c6</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0914-2023-11-30"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.13...v0.9.14">0.9.14</a> (2023-11-30)<a class="headerlink" href="#0914-2023-11-30" title="Permanent link">&para;</a></h3>
+<h3 id="0913-2023-11-29"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.12...v0.9.13">0.9.13</a> (2023-11-29)<a class="headerlink" href="#0913-2023-11-29" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>complete wiki and readme (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/dc472e065664f1ac9be95e68389dcdcb493b629c">dc472e0</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/169">#169</a></li>
+</ul>
+<h3 id="0912-2023-11-29"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.11...v0.9.12">0.9.12</a> (2023-11-29)<a class="headerlink" href="#0912-2023-11-29" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>complete wiki and readme (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/d4bb44875a398b745dd1daf1cd7cf55e34221d55">d4bb448</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/169">#169</a></li>
+</ul>
+<h3 id="0911-2023-11-28"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.10...v0.9.11">0.9.11</a> (2023-11-28)<a class="headerlink" href="#0911-2023-11-28" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li><strong>build:</strong> ignore build composite entity (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/e3b402ff345d564b80234e19da21622f37259a06">e3b402f</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+<li><strong>build:</strong> solve entities name with dot (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/9933620495595bb61e400030d8ea907290c8958f">9933620</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0910-2023-11-28"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.9...v0.9.10">0.9.10</a> (2023-11-28)<a class="headerlink" href="#0910-2023-11-28" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>deps:</strong> update lambdaorm dependencie (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/0f483055d866c9f538c292bfb2b947037b2ba57a">0f48305</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="099-2023-11-26"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.8...v0.9.9">0.9.9</a> (2023-11-26)<a class="headerlink" href="#099-2023-11-26" title="Permanent link">&para;</a></h3>
+<h3 id="098-2023-11-26"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.7...v0.9.8">0.9.8</a> (2023-11-26)<a class="headerlink" href="#098-2023-11-26" title="Permanent link">&para;</a></h3>
+<h3 id="097-2023-11-26"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.6...v0.9.7">0.9.7</a> (2023-11-26)<a class="headerlink" href="#097-2023-11-26" title="Permanent link">&para;</a></h3>
+<h3 id="096-2023-11-26"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.5...v0.9.6">0.9.6</a> (2023-11-26)<a class="headerlink" href="#096-2023-11-26" title="Permanent link">&para;</a></h3>
+<h3 id="095-2023-11-23"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.4...v0.9.5">0.9.5</a> (2023-11-23)<a class="headerlink" href="#095-2023-11-23" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>refactorize init and build command and remove update command (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/d68232410435d93f395073a60df42dd2e3d03494">d682324</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="094-2023-11-22"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.3...v0.9.4">0.9.4</a> (2023-11-22)<a class="headerlink" href="#094-2023-11-22" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve data path (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/60f2f1db0880f9ecb1f59145ad470f1f8553a31c">60f2f1d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="093-2023-11-22"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.2...v0.9.3">0.9.3</a> (2023-11-22)<a class="headerlink" href="#093-2023-11-22" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve domain path (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/767930c7d03d13dab8ce05e6fa43b9bc073cc7a7">767930c</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="092-2023-11-22"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.1...v0.9.2">0.9.2</a> (2023-11-22)<a class="headerlink" href="#092-2023-11-22" title="Permanent link">&para;</a></h3>
+<h3 id="091-2023-11-22"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.12...v0.9.1">0.9.1</a> (2023-11-22)<a class="headerlink" href="#091-2023-11-22" title="Permanent link">&para;</a></h3>
+<h3 id="0812-2023-11-22"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.11...v0.8.12">0.8.12</a> (2023-11-22)<a class="headerlink" href="#0812-2023-11-22" title="Permanent link">&para;</a></h3>
+<h3 id="0811-2023-11-22"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.10...v0.8.11">0.8.11</a> (2023-11-22)<a class="headerlink" href="#0811-2023-11-22" title="Permanent link">&para;</a></h3>
+<h3 id="0810-2023-11-21"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.9...v0.8.10">0.8.10</a> (2023-11-21)<a class="headerlink" href="#0810-2023-11-21" title="Permanent link">&para;</a></h3>
+<h3 id="089-2023-11-21"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.8...v0.8.9">0.8.9</a> (2023-11-21)<a class="headerlink" href="#089-2023-11-21" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li><strong>lab:</strong> remove client-node lab (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/a160a7de42f4806c2713471221f2b35a9b4d2e34">a160a7d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/202">#202</a></li>
+</ul>
+<h3 id="088-2023-11-21"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.7...v0.8.8">0.8.8</a> (2023-11-21)<a class="headerlink" href="#088-2023-11-21" title="Permanent link">&para;</a></h3>
+<h3 id="087-2023-11-21"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.6...v0.8.7">0.8.7</a> (2023-11-21)<a class="headerlink" href="#087-2023-11-21" title="Permanent link">&para;</a></h3>
+<h3 id="086-2023-11-21"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.5...v0.8.6">0.8.6</a> (2023-11-21)<a class="headerlink" href="#086-2023-11-21" title="Permanent link">&para;</a></h3>
+<h3 id="085-2023-11-21"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.4...v0.8.5">0.8.5</a> (2023-11-21)<a class="headerlink" href="#085-2023-11-21" title="Permanent link">&para;</a></h3>
+<h3 id="084-2023-11-21"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.3...v0.8.4">0.8.4</a> (2023-11-21)<a class="headerlink" href="#084-2023-11-21" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>build:</strong> refactorize update and build model (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/77e2297ac03daa2dff6436334a042eeb054d3709">77e2297</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/202">#202</a></li>
+<li><strong>build:</strong> refactorize update and build model (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/8aabe01c62b14dbd20fa65e8c9e3cebe7a9003d7">8aabe01</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/202">#202</a></li>
+</ul>
+<h3 id="083-2023-11-15"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.2...v0.8.3">0.8.3</a> (2023-11-15)<a class="headerlink" href="#083-2023-11-15" title="Permanent link">&para;</a></h3>
+<h3 id="082-2023-11-15"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.1...v0.8.2">0.8.2</a> (2023-11-15)<a class="headerlink" href="#082-2023-11-15" title="Permanent link">&para;</a></h3>
+<h3 id="081-2023-11-15"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.7.10...v0.8.1">0.8.1</a> (2023-11-15)<a class="headerlink" href="#081-2023-11-15" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>syntax:</strong> remove creation of syntax and update model (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/4c4c6a8b6a073601007c193c76dfe1d63e0fe169">4c4c6a8</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/189">#189</a></li>
+</ul>
+<h3 id="0710-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.7.9...v0.7.10">0.7.10</a> (2023-11-09)<a class="headerlink" href="#0710-2023-11-09" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>dependencies:</strong> add dependabot (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/4f6812006a8444610a9ab3fd5d7b982de32ef094">4f68120</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="079-2023-11-09"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.7.8...v0.7.9">0.7.9</a> (2023-11-09)<a class="headerlink" href="#079-2023-11-09" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>changelog:</strong> define header changelog (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/7fd433369c788d9985ca74b01094481a032468ad">7fd4333</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+<li><strong>release:</strong> refactoring github workflow (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/2789d9c5ce71a69a152039ec6ee788cf15191715">2789d9c</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="078-2023-11-06"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.7.7...v0.7.8">0.7.8</a> (2023-11-06)<a class="headerlink" href="#078-2023-11-06" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>adjust release workflow (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/d3940ab6aef744746abe89e170ffa47be3e3ad1f">d3940ab</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="077-2023-11-05">0.7.7 (2023-11-05)<a class="headerlink" href="#077-2023-11-05" title="Permanent link">&para;</a></h3>
+<h2 id="earlier-versions-lambdaorm-cli">Earlier versions (lambdaorm-cli)<a class="headerlink" href="#earlier-versions-lambdaorm-cli" title="Permanent link">&para;</a></h2>
+<h3 id="148-2025-05-31_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.7...v1.4.8">1.4.8</a> (2025-05-31)<a class="headerlink" href="#148-2025-05-31_1" title="Permanent link">&para;</a></h3>
+<h3 id="147-2025-05-31_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.6...v1.4.7">1.4.7</a> (2025-05-31)<a class="headerlink" href="#147-2025-05-31_1" title="Permanent link">&para;</a></h3>
+<h3 id="146-2025-05-30_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.5...v1.4.6">1.4.6</a> (2025-05-30)<a class="headerlink" href="#146-2025-05-30_1" title="Permanent link">&para;</a></h3>
+<h3 id="145-2024-06-01_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.4...v1.4.5">1.4.5</a> (2024-06-01)<a class="headerlink" href="#145-2024-06-01_1" title="Permanent link">&para;</a></h3>
+<h3 id="144-2024-05-13_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.3...v1.4.4">1.4.4</a> (2024-05-13)<a class="headerlink" href="#144-2024-05-13_1" title="Permanent link">&para;</a></h3>
+<h3 id="143-2024-05-11_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.2...v1.4.3">1.4.3</a> (2024-05-11)<a class="headerlink" href="#143-2024-05-11_1" title="Permanent link">&para;</a></h3>
+<h3 id="142-2024-05-11_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.1...v1.4.2">1.4.2</a> (2024-05-11)<a class="headerlink" href="#142-2024-05-11_1" title="Permanent link">&para;</a></h3>
+<h3 id="141-2024-05-09_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.4.0...v1.4.1">1.4.1</a> (2024-05-09)<a class="headerlink" href="#141-2024-05-09_1" title="Permanent link">&para;</a></h3>
+<h2 id="140-2024-05-09_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.10...v1.4.0">1.4.0</a> (2024-05-09)<a class="headerlink" href="#140-2024-05-09_1" title="Permanent link">&para;</a></h2>
+<p><strong>Features:</strong></p>
+<ul>
+<li>show result in stages commands (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/3dd4e71487d712defd5e9b16aec23b71ec8cb5c4">3dd4e71</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/0">#0</a></li>
+</ul>
+<h3 id="1310-2024-05-08_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.9...v1.3.10">1.3.10</a> (2024-05-08)<a class="headerlink" href="#1310-2024-05-08_1" title="Permanent link">&para;</a></h3>
+<h3 id="139-2024-05-08_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.8...v1.3.9">1.3.9</a> (2024-05-08)<a class="headerlink" href="#139-2024-05-08_1" title="Permanent link">&para;</a></h3>
+<h3 id="138-2024-05-08_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.7...v1.3.8">1.3.8</a> (2024-05-08)<a class="headerlink" href="#138-2024-05-08_1" title="Permanent link">&para;</a></h3>
+<h3 id="137-2024-05-08_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.6...v1.3.7">1.3.7</a> (2024-05-08)<a class="headerlink" href="#137-2024-05-08_1" title="Permanent link">&para;</a></h3>
+<h3 id="136-2024-05-07_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.5...v1.3.6">1.3.6</a> (2024-05-07)<a class="headerlink" href="#136-2024-05-07_1" title="Permanent link">&para;</a></h3>
+<h3 id="135-2024-05-07_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.4...v1.3.5">1.3.5</a> (2024-05-07)<a class="headerlink" href="#135-2024-05-07_1" title="Permanent link">&para;</a></h3>
+<h3 id="134-2024-05-04_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.3...v1.3.4">1.3.4</a> (2024-05-04)<a class="headerlink" href="#134-2024-05-04_1" title="Permanent link">&para;</a></h3>
+<h3 id="133-2024-05-03_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.2...v1.3.3">1.3.3</a> (2024-05-03)<a class="headerlink" href="#133-2024-05-03_1" title="Permanent link">&para;</a></h3>
+<h3 id="132-2024-05-02_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.1...v1.3.2">1.3.2</a> (2024-05-02)<a class="headerlink" href="#132-2024-05-02_1" title="Permanent link">&para;</a></h3>
+<h3 id="131-2024-05-02_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.0...v1.3.1">1.3.1</a> (2024-05-02)<a class="headerlink" href="#131-2024-05-02_1" title="Permanent link">&para;</a></h3>
+<h2 id="130-2024-05-01_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.6...v1.3.0">1.3.0</a> (2024-05-01)<a class="headerlink" href="#130-2024-05-01_1" title="Permanent link">&para;</a></h2>
+<p><strong>Features:</strong></p>
+<ul>
+<li>add match command (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/94ec9d1f8b81f6b4ae4a7409478ad6a2a53b5d17">94ec9d1</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/0">#0</a></li>
+</ul>
+<h3 id="126-2024-05-01_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.5...v1.2.6">1.2.6</a> (2024-05-01)<a class="headerlink" href="#126-2024-05-01_1" title="Permanent link">&para;</a></h3>
+<h3 id="125-2024-05-01_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.4...v1.2.5">1.2.5</a> (2024-05-01)<a class="headerlink" href="#125-2024-05-01_1" title="Permanent link">&para;</a></h3>
+<h3 id="124-2024-05-01_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.3...v1.2.4">1.2.4</a> (2024-05-01)<a class="headerlink" href="#124-2024-05-01_1" title="Permanent link">&para;</a></h3>
+<h3 id="123-2024-05-01_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.2...v1.2.3">1.2.3</a> (2024-05-01)<a class="headerlink" href="#123-2024-05-01_1" title="Permanent link">&para;</a></h3>
+<h3 id="122-2024-04-30_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.1...v1.2.2">1.2.2</a> (2024-04-30)<a class="headerlink" href="#122-2024-04-30_1" title="Permanent link">&para;</a></h3>
+<h3 id="121-2024-04-29_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.0...v1.2.1">1.2.1</a> (2024-04-29)<a class="headerlink" href="#121-2024-04-29_1" title="Permanent link">&para;</a></h3>
+<h2 id="120-2024-04-18_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v1.1.0...v1.2.0">1.2.0</a> (2024-04-18)<a class="headerlink" href="#120-2024-04-18_1" title="Permanent link">&para;</a></h2>
+<p><strong>Features:</strong></p>
+<ul>
+<li>add fetch, match, incorporate and introspect commands (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/900ce023968e46fc83e0f297bcdd7c7cc027624c">900ce02</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/0">#0</a></li>
+<li>add introspect and incorporate (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/a6147ee02cd2fb5a492da7e5ac6abc4b0595e847">a6147ee</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/0">#0</a></li>
+</ul>
+<h2 id="110-2024-04-17_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.34...v1.1.0">1.1.0</a> (2024-04-17)<a class="headerlink" href="#110-2024-04-17_1" title="Permanent link">&para;</a></h2>
+<p><strong>Features:</strong></p>
+<ul>
+<li>adjust for update dependences (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/49f4585d4bf96cb51e0244298e55cb0d45555a08">49f4585</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/0">#0</a></li>
+<li>update lib local schema (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/28e2a3b89c46bb863a4f422bc081a7c4d74baed3">28e2a3b</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/0">#0</a></li>
+</ul>
+<h3 id="0934-2024-04-14_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.33...v0.9.34">0.9.34</a> (2024-04-14)<a class="headerlink" href="#0934-2024-04-14_1" title="Permanent link">&para;</a></h3>
+<h3 id="0933-2024-01-01_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.32...v0.9.33">0.9.33</a> (2024-01-01)<a class="headerlink" href="#0933-2024-01-01_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>add schema command (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/5395a393ccbe73421b138b861cfe4c9691c502ff">5395a39</a>), closes <a href="https://github.com/lambda-orm/lambdaorm-cli/issues/223">#223</a></li>
+</ul>
+<h3 id="0932-2023-12-28_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.31...v0.9.32">0.9.32</a> (2023-12-28)<a class="headerlink" href="#0932-2023-12-28_1" title="Permanent link">&para;</a></h3>
+<h3 id="0931-2023-12-28_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.30...v0.9.31">0.9.31</a> (2023-12-28)<a class="headerlink" href="#0931-2023-12-28_1" title="Permanent link">&para;</a></h3>
+<h3 id="0930-2023-12-27_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.29...v0.9.30">0.9.30</a> (2023-12-27)<a class="headerlink" href="#0930-2023-12-27_1" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>parameters command (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/022d635a91817efee93f74cfd432ac5268d238e4">022d635</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/223">#223</a></li>
+</ul>
+<h3 id="0929-2023-12-27_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.28...v0.9.29">0.9.29</a> (2023-12-27)<a class="headerlink" href="#0929-2023-12-27_1" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li><strong>plan:</strong> method without await (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/ab0e697c46bbdc599134bb98905f58df9c9e4eea">ab0e697</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/223">#223</a></li>
+</ul>
+<h3 id="0928-2023-12-27_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.27...v0.9.28">0.9.28</a> (2023-12-27)<a class="headerlink" href="#0928-2023-12-27_1" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li><strong>orm:</strong> solve rest adapter (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/38fc82c78bf99a604a02c4eb1026c905c1ed807f">38fc82c</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/223">#223</a></li>
+</ul>
+<h3 id="0927-2023-12-27_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.26...v0.9.27">0.9.27</a> (2023-12-27)<a class="headerlink" href="#0927-2023-12-27_1" title="Permanent link">&para;</a></h3>
+<h3 id="0926-2023-12-27_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.25...v0.9.26">0.9.26</a> (2023-12-27)<a class="headerlink" href="#0926-2023-12-27_1" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>add url parameter in commands (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/10110f1994a104ca826134ecca864135fd96af67">10110f1</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/224">#224</a></li>
+</ul>
+<h3 id="0925-2023-12-26_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.24...v0.9.25">0.9.25</a> (2023-12-26)<a class="headerlink" href="#0925-2023-12-26_1" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve init and build commands with client (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/0ad94fd559a9a7e7ab906e510b409c5aaee4b809">0ad94fd</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/224">#224</a></li>
+</ul>
+<h3 id="0924-2023-12-26_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.23...v0.9.24">0.9.24</a> (2023-12-26)<a class="headerlink" href="#0924-2023-12-26_1" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve import (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/8cc5ecb91233e98b7789115722103588a7ac42d0">8cc5ecb</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/224">#224</a></li>
+</ul>
+<h3 id="0923-2023-12-26_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.22...v0.9.23">0.9.23</a> (2023-12-26)<a class="headerlink" href="#0923-2023-12-26_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>refactoring cli (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/c3b9b54d2d24220297be6fdc5948ea256300aaf3">c3b9b54</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/224">#224</a></li>
+<li>reorganize (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/660ef5f3d9ffaea4e25a1a6d8073481a6a388c08">660ef5f</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/223">#223</a></li>
+</ul>
+<h3 id="0922-2023-12-17_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.21...v0.9.22">0.9.22</a> (2023-12-17)<a class="headerlink" href="#0922-2023-12-17_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>add usage on readme (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/0fbf2e6b6c4a8d6ff3791144aeaf58095e7db4f6">0fbf2e6</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0921-2023-12-16_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.20...v0.9.21">0.9.21</a> (2023-12-16)<a class="headerlink" href="#0921-2023-12-16_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>dependencies:</strong> update lambdaorm dependence (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/c1cb78803072dd81971350a69111f8b03f178c50">c1cb788</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0920-2023-12-16_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.19...v0.9.20">0.9.20</a> (2023-12-16)<a class="headerlink" href="#0920-2023-12-16_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>update dependencies (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/84fc36529f4d958215b83290372f9be892e7a311">84fc365</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0919-2023-12-16_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.18...v0.9.19">0.9.19</a> (2023-12-16)<a class="headerlink" href="#0919-2023-12-16_1" title="Permanent link">&para;</a></h3>
+<h3 id="0918-2023-12-02_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.17...v0.9.18">0.9.18</a> (2023-12-02)<a class="headerlink" href="#0918-2023-12-02_1" title="Permanent link">&para;</a></h3>
+<h3 id="0917-2023-12-01_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.16...v0.9.17">0.9.17</a> (2023-12-01)<a class="headerlink" href="#0917-2023-12-01_1" title="Permanent link">&para;</a></h3>
+<h3 id="0916-2023-12-01_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.15...v0.9.16">0.9.16</a> (2023-12-01)<a class="headerlink" href="#0916-2023-12-01_1" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve plan command (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/770da35fe694142ca506c4cea9f4418cacaaea57">770da35</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0915-2023-11-30_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.14...v0.9.15">0.9.15</a> (2023-11-30)<a class="headerlink" href="#0915-2023-11-30_1" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li><strong>commands:</strong> duplicate execute name command (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/abfd6c632a35d6aac5fb8c366fc73bb42364deda">abfd6c6</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0914-2023-11-30_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.13...v0.9.14">0.9.14</a> (2023-11-30)<a class="headerlink" href="#0914-2023-11-30_1" title="Permanent link">&para;</a></h3>
+<h3 id="0913-2023-11-29_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.12...v0.9.13">0.9.13</a> (2023-11-29)<a class="headerlink" href="#0913-2023-11-29_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>complete wiki and readme (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/dc472e065664f1ac9be95e68389dcdcb493b629c">dc472e0</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/169">#169</a></li>
+</ul>
+<h3 id="0912-2023-11-29_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.11...v0.9.12">0.9.12</a> (2023-11-29)<a class="headerlink" href="#0912-2023-11-29_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>complete wiki and readme (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/d4bb44875a398b745dd1daf1cd7cf55e34221d55">d4bb448</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/169">#169</a></li>
+</ul>
+<h3 id="0911-2023-11-28_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.10...v0.9.11">0.9.11</a> (2023-11-28)<a class="headerlink" href="#0911-2023-11-28_1" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li><strong>build:</strong> ignore build composite entity (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/e3b402ff345d564b80234e19da21622f37259a06">e3b402f</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+<li><strong>build:</strong> solve entities name with dot (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/9933620495595bb61e400030d8ea907290c8958f">9933620</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="0910-2023-11-28_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.9...v0.9.10">0.9.10</a> (2023-11-28)<a class="headerlink" href="#0910-2023-11-28_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>deps:</strong> update lambdaorm dependencie (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/0f483055d866c9f538c292bfb2b947037b2ba57a">0f48305</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="099-2023-11-26_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.8...v0.9.9">0.9.9</a> (2023-11-26)<a class="headerlink" href="#099-2023-11-26_1" title="Permanent link">&para;</a></h3>
+<h3 id="098-2023-11-26_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.7...v0.9.8">0.9.8</a> (2023-11-26)<a class="headerlink" href="#098-2023-11-26_1" title="Permanent link">&para;</a></h3>
+<h3 id="097-2023-11-26_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.6...v0.9.7">0.9.7</a> (2023-11-26)<a class="headerlink" href="#097-2023-11-26_1" title="Permanent link">&para;</a></h3>
+<h3 id="096-2023-11-26_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.5...v0.9.6">0.9.6</a> (2023-11-26)<a class="headerlink" href="#096-2023-11-26_1" title="Permanent link">&para;</a></h3>
+<h3 id="095-2023-11-23_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.4...v0.9.5">0.9.5</a> (2023-11-23)<a class="headerlink" href="#095-2023-11-23_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>refactorize init and build command and remove update command (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/d68232410435d93f395073a60df42dd2e3d03494">d682324</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="094-2023-11-22_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.3...v0.9.4">0.9.4</a> (2023-11-22)<a class="headerlink" href="#094-2023-11-22_1" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve data path (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/60f2f1db0880f9ecb1f59145ad470f1f8553a31c">60f2f1d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="093-2023-11-22_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.2...v0.9.3">0.9.3</a> (2023-11-22)<a class="headerlink" href="#093-2023-11-22_1" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li>solve domain path (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/767930c7d03d13dab8ce05e6fa43b9bc073cc7a7">767930c</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/201">#201</a></li>
+</ul>
+<h3 id="092-2023-11-22_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.1...v0.9.2">0.9.2</a> (2023-11-22)<a class="headerlink" href="#092-2023-11-22_1" title="Permanent link">&para;</a></h3>
+<h3 id="091-2023-11-22_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.12...v0.9.1">0.9.1</a> (2023-11-22)<a class="headerlink" href="#091-2023-11-22_1" title="Permanent link">&para;</a></h3>
+<h3 id="0812-2023-11-22_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.11...v0.8.12">0.8.12</a> (2023-11-22)<a class="headerlink" href="#0812-2023-11-22_1" title="Permanent link">&para;</a></h3>
+<h3 id="0811-2023-11-22_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.10...v0.8.11">0.8.11</a> (2023-11-22)<a class="headerlink" href="#0811-2023-11-22_1" title="Permanent link">&para;</a></h3>
+<h3 id="0810-2023-11-21_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.9...v0.8.10">0.8.10</a> (2023-11-21)<a class="headerlink" href="#0810-2023-11-21_1" title="Permanent link">&para;</a></h3>
+<h3 id="089-2023-11-21_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.8...v0.8.9">0.8.9</a> (2023-11-21)<a class="headerlink" href="#089-2023-11-21_1" title="Permanent link">&para;</a></h3>
+<p><strong>Bug Fixes:</strong></p>
+<ul>
+<li><strong>lab:</strong> remove client-node lab (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/a160a7de42f4806c2713471221f2b35a9b4d2e34">a160a7d</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/202">#202</a></li>
+</ul>
+<h3 id="088-2023-11-21_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.7...v0.8.8">0.8.8</a> (2023-11-21)<a class="headerlink" href="#088-2023-11-21_1" title="Permanent link">&para;</a></h3>
+<h3 id="087-2023-11-21_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.6...v0.8.7">0.8.7</a> (2023-11-21)<a class="headerlink" href="#087-2023-11-21_1" title="Permanent link">&para;</a></h3>
+<h3 id="086-2023-11-21_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.5...v0.8.6">0.8.6</a> (2023-11-21)<a class="headerlink" href="#086-2023-11-21_1" title="Permanent link">&para;</a></h3>
+<h3 id="085-2023-11-21_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.4...v0.8.5">0.8.5</a> (2023-11-21)<a class="headerlink" href="#085-2023-11-21_1" title="Permanent link">&para;</a></h3>
+<h3 id="084-2023-11-21_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.3...v0.8.4">0.8.4</a> (2023-11-21)<a class="headerlink" href="#084-2023-11-21_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>build:</strong> refactorize update and build model (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/77e2297ac03daa2dff6436334a042eeb054d3709">77e2297</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/202">#202</a></li>
+<li><strong>build:</strong> refactorize update and build model (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/8aabe01c62b14dbd20fa65e8c9e3cebe7a9003d7">8aabe01</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/202">#202</a></li>
+</ul>
+<h3 id="083-2023-11-15_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.2...v0.8.3">0.8.3</a> (2023-11-15)<a class="headerlink" href="#083-2023-11-15_1" title="Permanent link">&para;</a></h3>
+<h3 id="082-2023-11-15_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.8.1...v0.8.2">0.8.2</a> (2023-11-15)<a class="headerlink" href="#082-2023-11-15_1" title="Permanent link">&para;</a></h3>
+<h3 id="081-2023-11-15_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.7.10...v0.8.1">0.8.1</a> (2023-11-15)<a class="headerlink" href="#081-2023-11-15_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>syntax:</strong> remove creation of syntax and update model (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/4c4c6a8b6a073601007c193c76dfe1d63e0fe169">4c4c6a8</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/189">#189</a></li>
+</ul>
+<h3 id="0710-2023-11-09_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.7.9...v0.7.10">0.7.10</a> (2023-11-09)<a class="headerlink" href="#0710-2023-11-09_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>dependencies:</strong> add dependabot (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/4f6812006a8444610a9ab3fd5d7b982de32ef094">4f68120</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="079-2023-11-09_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.7.8...v0.7.9">0.7.9</a> (2023-11-09)<a class="headerlink" href="#079-2023-11-09_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>changelog:</strong> define header changelog (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/7fd433369c788d9985ca74b01094481a032468ad">7fd4333</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+<li><strong>release:</strong> refactoring github workflow (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/2789d9c5ce71a69a152039ec6ee788cf15191715">2789d9c</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="078-2023-11-06_1"><a href="https://github.com/lambda-orm/lambdaorm-cli/compare/v0.7.7...v0.7.8">0.7.8</a> (2023-11-06)<a class="headerlink" href="#078-2023-11-06_1" title="Permanent link">&para;</a></h3>
+<p><strong>Features:</strong></p>
+<ul>
+<li>adjust release workflow (<a href="https://github.com/lambda-orm/lambdaorm-cli/commit/d3940ab6aef744746abe89e170ffa47be3e3ad1f">d3940ab</a>), closes <a href="https://github.com/lambda-orm/lambdaorm/issues/176">#176</a></li>
+</ul>
+<h3 id="077-2023-11-05_1">0.7.7 (2023-11-05)<a class="headerlink" href="#077-2023-11-05_1" title="Permanent link">&para;</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../Version/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Versión">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Versión
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -10,11 +10,11 @@ Many use cases are more than one query: place an order (the order, its lines, th
 between warehouses, register a payment and its audit. Their writes must happen **completely or not at all**: an order
 without its lines, or a balance discounted for an order that was not saved, is a corrupt state.
 
-`orm.transaction(callback)` solves it in Node code. A script solves it **in a single call that carries the whole use
-case**, wherever the call comes from: Node (`orm.executeScript`), the [Data Gateway](../data-gateway/Rest.md#script)
-(`POST /script`), the client (`@lambdaorm/client`) or the [CLI](../cli/Commands/Script.md) (`lambdaorm script`). A
-client in any language can run a use case with several reads and writes in one transaction, which it could not do
-sending one query per request.
+[`orm.transaction(options, callback)`](Transaction.md) solves it in Node.js code. A script solves it **in a single
+call that carries the whole use case**, wherever the call comes from: Node.js (`orm.executeScript`), the
+[Data Gateway](../data-gateway/Rest.md#script) (`POST /script`), the Node.js client (`@lambdaorm/client`) or the
+[CLI](../cli/Commands/Script.md) (`lambdaorm script`). A client in any language can run a use case with several reads
+and writes in one transaction, which it could not do by sending one query per request.
 
 ## Features
 
@@ -460,7 +460,8 @@ const quoteId = await orm.executeScript(`
 
 ## The same script from a client
 
-The script and its data are the same everywhere; only the call changes.
+The script and its data are the same everywhere; only the call changes. The URL of the Data Gateway includes the route
+of the schema, unless the gateway serves a single schema at the root, as in these examples.
 
 ```typescript
 // @lambdaorm/client, against a Data Gateway
@@ -469,7 +470,7 @@ await orm.init('http://localhost:8080', { headers: { 'X-Api-Key': process.env.BA
 const result = await orm.executeScript(script, data, { stage: 'default', timeout: 10000 })
 ```
 
-```bash
+```sh
 # REST: a Data Gateway with scripts.enabled and a credential with the script permission
 curl -X POST http://localhost:8080/script -H 'Content-Type: application/json' -H "X-Api-Key: $BACKEND_KEY" \
   -d '{ "script": "orm.execute(\"Customers.filter(p => p.code == code)\", { code: code })", "data": { "code": "c1" }, "options": { "stage": "default" } }'

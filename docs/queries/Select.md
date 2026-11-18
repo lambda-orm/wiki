@@ -1,151 +1,119 @@
 # Select
 
-All queries are based on the schema from which it deduces the fields that an entity contains, primary key, indexes, relationships and constraints.
+This page shows how to read records: all the properties of an entity or only some of them, the first or last record, distinct values and pagination. The SQL shown is the one generated for MySQL.
 
-Therefore, if you want to obtain all the fields of an entity, it is not necessary to specify them.
+Every query is based on the schema, from which λORM knows the properties of each entity, its primary key, indexes, relations and constraints. That is why, to read all the properties of an entity, you do not need to list them.
 
-## All Fields from entity
+## All the properties of an entity
 
-Selecting all fields from the Products entity
+Reads all the properties of all the products.
 
 **Lambda:**
 
-``` ts
+```typescript
 Products
 ```
 
 **SQL Result:**
 
-``` sql
--- SQL query to select all fields from the Products table
-SELECT 
-    p.ProductID AS `id`, 
-    p.ProductName AS `name`, 
-    p.SupplierID AS `supplierId`, 
-    p.CategoryID AS `categoryId`, 
-    p.QuantityPerUnit AS `quantity`, 
-    p.UnitPrice AS `price`, 
-    p.UnitsInStock AS `inStock`, 
-    p.UnitsOnOrder AS `onOrder`, 
-    p.ReorderLevel AS `reorderLevel`, 
-    p.Discontinued AS `discontinued` 
-FROM 
-    Products p  
+```sql
+SELECT
+    p.ProductID AS id,
+    p.ProductName AS name,
+    p.SupplierID AS supplierId,
+    p.CategoryID AS categoryId,
+    p.QuantityPerUnit AS quantity,
+    p.UnitPrice AS price,
+    p.UnitsInStock AS inStock,
+    p.UnitsOnOrder AS onOrder,
+    p.ReorderLevel AS reorderLevel,
+    p.Discontinued AS discontinued
+FROM Products p
 ```
 
-## One Field
+## One property
 
-Selecting only the 'name' field from the Products entity
+Reads only the name of each product.
 
 **Lambda:**
 
-``` ts
+```typescript
 Products.map(p => p.name)
 ```
 
 **SQL Result:**
 
-``` sql
--- SQL query to select only the 'ProductName' field from the Products table
-SELECT p.ProductName FROM Products p 
+```sql
+SELECT p.ProductName AS name FROM Products p
 ```
 
 ## First
 
-Selecting the first record from the Products entity
+Reads the first product, ordered by its primary key.
 
 **Lambda:**
 
-``` ts
+```typescript
 Products.first()
 ```
 
 **SQL Result:**
 
-``` sql
--- SQL query to select the first record from the Products table
-SELECT 
-    p.ProductID AS `id`, 
-    p.ProductName AS `name`, 
-    p.SupplierID AS `supplierId`, 
-    p.CategoryID AS `categoryId`, 
-    p.QuantityPerUnit AS `quantity`, 
-    p.UnitPrice AS `price`, 
-    p.UnitsInStock AS `inStock`, 
-    p.UnitsOnOrder AS `onOrder`, 
-    p.ReorderLevel AS `reorderLevel`, 
-    p.Discontinued AS `discontinued`
-FROM Products p  
-ORDER BY `id` 
+```sql
+SELECT
+    p.ProductID AS id,
+    p.ProductName AS name,
+    p.SupplierID AS supplierId,
+    p.CategoryID AS categoryId,
+    p.QuantityPerUnit AS quantity,
+    p.UnitPrice AS price,
+    p.UnitsInStock AS inStock,
+    p.UnitsOnOrder AS onOrder,
+    p.ReorderLevel AS reorderLevel,
+    p.Discontinued AS discontinued
+FROM Products p
+ORDER BY p.ProductID asc
 LIMIT 0,1
 ```
 
+`first` can also receive the properties to return, as `map` does: `Products.first(p => ({ name: p.name, price: p.price }))`. In that case the records are ordered by the first property returned.
+
 ## Last
 
-Selecting the last record from the Products entity
+Reads the last product, ordered by its primary key.
 
 **Lambda:**
 
-``` ts
+```typescript
 Products.last()
 ```
 
 **SQL Result:**
 
-``` sql
--- SQL query to select the last record from the Products table
-SELECT 
-    p.ProductID AS `id`, 
-    p.ProductName AS `name`, 
-    p.SupplierID AS `supplierId`, 
-    p.CategoryID AS `categoryId`, 
-    p.QuantityPerUnit AS `quantity`, 
-    p.UnitPrice AS `price`, 
-    p.UnitsInStock AS `inStock`, 
-    p.UnitsOnOrder AS `onOrder`, 
-    p.ReorderLevel AS `reorderLevel`, 
-    p.Discontinued AS `discontinued` 
-FROM Products p  
-ORDER BY `id` desc 
-LIMIT 0,1 
-```
-
-## Take
-
-Selecting a single record from the Products entity
-
-**Lambda:**
-
-``` ts
-Products.take()
-```
-
-**SQL Result:**
-
 ```sql
--- SQL query to select a single record from the Products table
-SELECT 
-    p.ProductID AS `id`, 
-    p.ProductName AS `name`, 
-    p.SupplierID AS `supplierId`, 
-    p.CategoryID AS `categoryId`, 
-    p.QuantityPerUnit AS `quantity`, 
-    p.UnitPrice AS `price`, 
-    p.UnitsInStock AS `inStock`, 
-    p.UnitsOnOrder AS `onOrder`, 
-    p.ReorderLevel AS `reorderLevel`, 
-    p.Discontinued AS `discontinued` 
-FROM Products p  
-LIMIT 0,1 
+SELECT
+    p.ProductID AS id,
+    p.ProductName AS name,
+    p.SupplierID AS supplierId,
+    p.CategoryID AS categoryId,
+    p.QuantityPerUnit AS quantity,
+    p.UnitPrice AS price,
+    p.UnitsInStock AS inStock,
+    p.UnitsOnOrder AS onOrder,
+    p.ReorderLevel AS reorderLevel,
+    p.Discontinued AS discontinued
+FROM Products p
+ORDER BY p.ProductID desc
+LIMIT 0,1
 ```
 
 ## Distinct
 
-Selecting distinct values of quantity and category name from the Products entity
+Reads the distinct combinations of quantity per unit and category name, sorted by category. The category name comes from the `category` relation, so λORM adds the join (see [Join](Join.md)).
 
 **Lambda:**
 
-``` ts
+```typescript
 Products
 	.distinct(p => ({ quantity: p.quantity, category: p.category.name }))
 	.sort(p => p.category)
@@ -154,71 +122,66 @@ Products
 **SQL Result:**
 
 ```sql
--- SQL query to select distinct values of quantity and category name from the Products table
-SELECT DISTINCT p.QuantityPerUnit AS `quantity`, c.CategoryName AS `category` 
-FROM Products p 
-INNER JOIN Categories c ON c.CategoryID = p.CategoryID 
-ORDER BY `category` 
+SELECT DISTINCT p.QuantityPerUnit AS quantity, c.CategoryName AS category
+FROM Products p
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID
+ORDER BY category asc
 ```
 
 ## Pagination
 
-Selecting records with price greater than 10, mapping to name and category, sorting by category, and paginating
+Reads the name and category of the products with a price greater than 10, sorted by category, and returns the first page of 10 records.
 
 **Lambda:**
 
-``` ts
+```typescript
 Products
 	.filter(p => p.price > 10)
-	.map(p => ({ name: p.name, category: p.category.name}))
+	.map(p => ({ name: p.name, category: p.category.name }))
 	.sort(p => p.category)
 	.page(1, 10)
 ```
 
 **SQL Result:**
 
-``` sql
--- Selección de productos y categorías por precio unitario
--- Selecciona el nombre del producto y categoría
--- Filtra productos con precio superior a ?
--- Ordena por categoría ascendente
--- Limita a 10 resultados
-SELECT 
-	p.ProductName AS name, 
-	c.CategoryName AS category 
-FROM Products p 
-INNER JOIN Categories c ON c.CategoryID = p.CategoryID 
-WHERE p.UnitPrice > ? 
-ORDER BY category asc  
+```sql
+SELECT p.ProductName AS name, c.CategoryName AS category
+FROM Products p
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID
+WHERE p.UnitPrice > 10
+ORDER BY category asc
 LIMIT 0,10
 ```
 
+`page(page, records)` receives the page number (starting at 1) and the number of records per page. How the page is expressed depends on the dialect: `LIMIT` on MySQL, `OFFSET … FETCH NEXT … ROWS ONLY` on Oracle, and so on.
+
 ## Usage
+
+The same query, with the minimum price as a parameter (`maxPrice`), run in three ways.
 
 ### Node
 
-```Typescript
-import { orm } from '../../lib'
-import { Products } from '../northwind/model/__model'
-(async () => {	
-	try {		
-		await orm.init('./config/northwind.yaml')
-		// Defining a query function that accepts a maximum price parameter
-		// Filtering products based on price greater than the maximum price parameter
-		// Mapping the results to extract name and category
-		// Sorting the results by category
-		// Paginating the results to get the first 10 items
-		const query = (maxPrice:number) => Products
-						.filter(p => p.price > maxPrice)
-						.map(p => ({ name: p.name, category: p.category.name}))
-						.sort(p => p.category)
-						.page(1, 10)
-		const result = await orm.execute(query, {maxPrice:10})
-		console.log(JSON.stringify(result, null, 2))		
-	} catch (error:any) {
+With the library [`@lambdaorm/lib`](../usage/Usage.md):
+
+```typescript
+import { orm } from '@lambdaorm/lib'
+import { Products } from './domain/model' // model generated by `lambdaorm build`
+
+(async () => {
+	try {
+		await orm.init('./lambdaORM.yaml')
+		// products with a price greater than maxPrice, with their category, first page of 10
+		const query = (maxPrice: number) => Products
+			.filter(p => p.price > maxPrice)
+			.map(p => ({ name: p.name, category: p.category.name }))
+			.sort(p => p.category)
+			.page(1, 10)
+		const result = await orm.execute(query, { maxPrice: 10 })
+		console.log(JSON.stringify(result, null, 2))
+	} catch (error: any) {
 		console.error(error.stack)
 	} finally {
-		// Ending the ORM connection
+		// releases the connections
 		await orm.end()
 	}
 })()
@@ -226,12 +189,17 @@ import { Products } from '../northwind/model/__model'
 
 ### CLI
 
-```bash
-lambdaorm execute -q "Products.filter(p=>p.price>10).map(p=>({name:p.name,category:p.category.name})).sort(p=>p.category).page(1, 10)" -d "{\"maxPrice\":10}"
+With the [CLI](../cli/index.md) `@lambdaorm/cli`:
+
+```sh
+lambdaorm execute -q "Products.filter(p=>p.price>maxPrice).map(p=>({name:p.name,category:p.category.name})).sort(p=>p.category).page(1,10)" -d "{\"maxPrice\":10}"
 ```
 
 ### Data Gateway
 
-```bash
-curl -X POST "http://localhost:8080/plan?format=beautiful" -H "X-Api-Key: $KEY" -H "Content-Type: application/json" -d '{"query": "Products.filter(p=>p.price>10).map(p=>({name:p.name,category:p.category.name})).sort(p=>p.category).page(1, 10)", "data": {"maxPrice": 10}}'
+Through the [REST API](../data-gateway/Rest.md) of the [Data Gateway](../data-gateway/index.md):
+
+```sh
+curl -X POST "http://localhost:8080/execute?format=beautiful" -H "X-Api-Key: $KEY" -H "Content-Type: application/json" \
+  -d '{"query": "Products.filter(p=>p.price>maxPrice).map(p=>({name:p.name,category:p.category.name})).sort(p=>p.category).page(1,10)", "data": {"maxPrice": 10}}'
 ```

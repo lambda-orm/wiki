@@ -1,404 +1,315 @@
-|Function   			|Description                                   																														|
-|-----------------|---------------------------------------------------------------------------------------------------------|
-|chr							|Get character from ASCII code																																						|
-|concat						|String concatenation																																											|
-|lower						|Lowercase string																																													|
-|lpad							|Pad the left-side of string																																							|
-|ltrim						|Remove leading chars																																											|
-|replace					|Searches a string for a specified value and returns a new string where the specified values are replaced	|
-|match						|Returns an array containing all matches, including capturing groups, or null if no matches are found			|
-|mask							|General-purpose function that mask parts of arbitrary strings based on position within the string				|
-|rpad							|Pad the right-side of string																																							|
-|rtrim						|Remove trailing spaces																																										|
-|substr substring	|Get a substring of string																																								|
-|trim							|Remove characters																																												|
-|upper						|Uppercase string																																													|
-|strCount					|Count value in source																																										|
-|isEmpty					|Evaluate if it is empty																																									|
-|toString					|Convert to string																																												|
+# String Functions
 
-## Examples
+String functions transform text values: change the case, pad, trim, replace or extract part of a string, and convert values to strings.
 
-| Example                                   																								| Result 															|
-|-------------------------------------------------------------------------------------------|-------------------------------------|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: lower(p.subregion) })								|[{"result":"south america"}]					|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: upper(p.subregion) })								|[{"result":"SOUTH AMERICA"}]					|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: concat(p.region," ",p.subregion) })	|[{"result":"Americas South America"}]|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: lpad(p.region,12,"_") })						|[{"result":"____Americas"}]					|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: rpad(p.region,12,"_") })						|[{"result":"Americas____"}]					|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: chr(68)})														|[{"result":"D"}]											|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: ltrim("  a  ")})										|[{"result":"a  "}]										|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: rtrim("  a  ")})										|[{"result":"  a"}]										|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: replace(p.region,"a","*")})					|[{"result":"Americ*s"}]							|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: mask(p.subregion)})									|[{"result":"Sou***ica"}]							|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: substr(p.subregion,1,3)})						|[{"result":"Sou"}]										|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: substring(p.subregion,1,3)})				|[{"result":"Sou"}]										|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: strCount(p.subregion,"a")})					|[{"result":1}]												|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: toString(p.latitude)})							|[{"result":"-10.0000"}]							|
+!!! note "About the examples"
+    The examples run against the `Countries` entity of the countries sample schema. Each one shows the query, the result it returned on the test database and the SQL sentence that λORM generated for MySQL. Other engines receive their own translation; to see the sentence generated for your data source, use [`orm.plan`](../Metadata.md).
 
-## Sentences
+## Summary
 
-**Lambda:**
+| Function | Description |
+|---|---|
+| `chr` | Character for an ASCII code |
+| `concat` | Concatenates strings |
+| `lower` | Converts to lowercase |
+| `upper` | Converts to uppercase |
+| `lpad` | Pads the left side of a string |
+| `rpad` | Pads the right side of a string |
+| `ltrim` | Removes leading spaces |
+| `rtrim` | Removes trailing spaces |
+| `trim` | Removes leading and trailing spaces |
+| `replace` | Replaces every occurrence of a value |
+| `mask` | Hides the middle of a string |
+| `substr`, `substring` | Extracts part of a string |
+| `strCount` | Counts the occurrences of a value |
+| `toString` | Converts a value to a string |
 
-Query to get the subregion in lowercase for the country with the iso3 code "BRA"
+## chr
 
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: lower(p.subregion) })
-```
+Returns the character whose ASCII code is `ascii`.
 
-**SQL Result:**
+**Signature:** `chr(ascii: number): string`
 
-```sql
-SELECT LOWER(c.subregion) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to get the subregion in uppercase for the country with the iso3 code "BRA"
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: upper(p.subregion) })
-```
-
-**SQL Result:**
-
-```sql
-SELECT UPPER(c.subregion) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to get the region and subregion concatenated for the country with the iso3 code "BRA"
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: concat(p.region," ",p.subregion) })
-```
-
-**SQL Result:**
-
-```sql
-SELECT CONCAT(CONCAT(c.region,' '),c.subregion) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to get the region left-padded with "_" for the country with the iso3 code "BRA"
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: lpad(p.region,12,"_") })
-```
-
-**SQL Result:**
-
-```sql
-SELECT LPAD(c.region,12,'_') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to get the region right-padded with "_" for the country with the iso3 code "BRA"
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: rpad(p.region,12,"_") })
-```
-
-**SQL Result:**
-
-```sql
-SELECT RPAD(c.region,12,'_') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to get the character "D" from ASCII code 68 for the country with the iso3 code "BRA"
-
-```js
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: chr(68)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":"D"}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT CHAR(68 USING ASCII) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT CHAR(68 USING ASCII) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## concat
 
-Query to get the subregion with leading spaces removed for the country with the iso3 code "BRA"
+Concatenates all its arguments into one string.
 
-```js
+**Signature:** `concat(...values: any): string`
+
+Region and subregion of Brazil, separated by a space:
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: concat(p.region," ",p.subregion) })
+```
+
+**Result:** `[{"result":"Americas South America"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT CONCAT(CONCAT(c.region,' '),c.subregion) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+## lower
+
+Converts `value` to lowercase.
+
+**Signature:** `lower(value: string): string`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: lower(p.subregion) })
+```
+
+**Result:** `[{"result":"south america"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT LOWER(c.subregion) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+## upper
+
+Converts `value` to uppercase.
+
+**Signature:** `upper(value: string): string`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: upper(p.subregion) })
+```
+
+**Result:** `[{"result":"SOUTH AMERICA"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT UPPER(c.subregion) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+## lpad
+
+Pads the left side of `value` with `pad` until it is `len` characters long.
+
+**Signature:** `lpad(value: string, len: number, pad: string): string`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: lpad(p.region,12,"_") })
+```
+
+**Result:** `[{"result":"____Americas"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT LPAD(c.region,12,'_') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+## rpad
+
+Pads the right side of `value` with `pad` until it is `len` characters long.
+
+**Signature:** `rpad(value: string, len: number, pad: string): string`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: rpad(p.region,12,"_") })
+```
+
+**Result:** `[{"result":"Americas____"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT RPAD(c.region,12,'_') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+## ltrim
+
+Removes the leading spaces of `value`.
+
+**Signature:** `ltrim(value: string): string`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: ltrim("  a  ")})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":"a  "}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT LTRIM('  a  ') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT LTRIM(' a ') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## rtrim
 
-Query to get the subregion with trailing spaces removed for the country with the iso3 code "BRA"
+Removes the trailing spaces of `value`.
 
-```js
+**Signature:** `rtrim(value: string): string`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: rtrim("  a  ")})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":"  a"}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT RTRIM('  a  ') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT RTRIM(' a ') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## trim
 
-Query to get the region with "a" replaced by "*" for the country with the iso3 code "BRA"
+Removes the leading and trailing spaces of `value`. It is translated to `TRIM(value)` in SQL.
 
-```js
+**Signature:** `trim(value: string): string`
+
+## replace
+
+Returns `value` with every occurrence of `source` replaced by `target`.
+
+**Signature:** `replace(value: string, source: string, target: string): string`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: replace(p.region,"a","*")})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":"Americ*s"}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT REPLACE(c.region,'a','*') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT REPLACE(c.region,'a','*') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## mask
 
-Query to get the subregion masked for the country with the iso3 code "BRA"
+Masks a sensitive value: keeps its first three and last three characters and replaces the rest with `***`.
 
-```js
+**Signature:** `mask(value: string): string`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: mask(p.subregion)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":"Sou***ica"}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT Concat(LEFT(c.subregion,3),'***',RIGHT(c.subregion,3)) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT Concat(LEFT(c.subregion,3),'***',RIGHT(c.subregion,3)) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## substr, substring
 
-Query to get the first 3 characters of the subregion for the country with the iso3 code "BRA"
+Returns the part of `value` that starts at position `from` (the first character is position 1 in SQL) and is `count` characters long. `substr` and `substring` are equivalent.
 
-```js
+**Signature:**
+
+- `substr(value: string, from: number, count: number): string`
+- `substring(value: string, from: number, count: number): string`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: substr(p.subregion,1,3)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":"Sou"}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
 SELECT SUBSTR(c.subregion,1,3) AS result
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
-
-Query to get the first 3 characters of the subregion for the country with the iso3 code "BRA"
-
-```js
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: substring(p.subregion,1,3)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":"Sou"}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT SUBSTR(c.subregion,1,3) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT SUBSTR(c.subregion,1,3) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## strCount
 
-Query to get the count of "a" in the subregion for the country with the iso3 code "BRA"
+Returns the number of times `value` appears in `source`. The search is case-sensitive.
 
-```js
+**Signature:** `strCount(source: string, value: string): number`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: strCount(p.subregion,"a")})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":1}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT (LENGTH(c.subregion)-LENGTH(REPLACE(c.subregion,'a',''))) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT (LENGTH(c.subregion)-LENGTH(REPLACE(c.subregion,'a',''))) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-**Lambda:**
+## toString
 
-Query to get the latitude as string for the country with the iso3 code "BRA"
+Converts `value` to a string.
 
-```js
+**Signature:** `toString(value: any): string`
+
+```typescript
 Countries.filter(p=> p.iso3 == "BRA").map(p=> {result: toString(p.latitude)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":"-10.0000"}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT CONVERT(c.latitude, CHAR) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
+SELECT CONVERT(c.latitude, CHAR) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
 ```
 
-## Definition
+## Database support
 
-### chr
-
-- description: Get character from ASCII code
-- deterministic: true
-- return: string
-- params:
-	- ascii: number
-
-### strCount
-
-- description: Count value in source
-- deterministic: true
-- return: number
-- params:
-	- source: string
-	- value: string
-
-### lower
-
-- description: Lowercase string
-- deterministic: true
-- return: string
-- params:
-	- value: string
-
-### lpad
-
-- description: Pad the left-side of string
-- deterministic: true
-- return: string
-- params:
-	- value: string
-	- len: number
-	- pad: string
-
-### ltrim
-
-- description: Remove leading chars
-- deterministic: true
-- return: string
-- params:
-	- value: string
-
-### replace
-
-- description: The replace() method searches a string for a specified value and returns a new string where the specified values are replaced.
-- deterministic: true
-- return: string
-- params:
-	- value: string
-	- source: string
-	- target: string
-
-### rpad
-
-- description: Pad the right-side of string
-- deterministic: true
-- return: string
-- params:
-	- value: string
-	- len: number
-	- pad: string
-
-### rtrim
-
-- description: Remove trailing spaces
-- deterministic: true
-- return: string
-- params:
-	- value: string
-
-### substr
-
-- description: Get a substring of string
-- deterministic: true
-- return: string
-- params:
-	- value: string
-	- from: number
-	- count: number
-
-### substring
-
-- description: Get a substring of string
-- deterministic: true
-- return: string
-- params:
-	- value: string
-	- from: number
-	- count: number
-
-### trim
-
-- description: Remove characters
-- deterministic: true
-- return: string
-- params:
-	- value: string
-
-### upper
-
-- description: Uppercase string
-- deterministic: true
-- return: string
-- params:
-	- value: string
-
-### concat
-
-- description: String concatenation
-- deterministic: true
-- return: string
-- params:
-	- values: string
-
-### mask
-
-- description: General-purpose function that mask parts of arbitrary strings based on position within the string
-- deterministic: true
-- return: string
-- params:
-	- value: string
-
-### isEmpty
-
-- description: Evaluate if it is empty
-- deterministic: true
-- return: boolean
-- params:
-	- value: any
-
-### toString
-
-- description: convert to string
-- deterministic: true
-- return: string
-- params:
-	- value: any
+!!! warning "MongoDB"
+    In the current version, `chr`, `lpad`, `rpad`, `ltrim`, `rtrim`, `trim`, `replace`, `mask`, `substr`, `substring` and `strCount` cannot be translated to MongoDB queries. `concat`, `lower`, `upper` and `toString` are supported.

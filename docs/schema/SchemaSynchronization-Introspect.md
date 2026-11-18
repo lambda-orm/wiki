@@ -1,80 +1,86 @@
 # Introspect
 
-Introspection is the process of updating the schema defined in the configuration file by introspecting a data file and then applying the changes to the sources (Databases). The introspection process is performed using the `lambdaorm introspect` command.
+This page explains introspect, which updates the schema from the structure of a JSON data file and then pushes the changes to the sources (databases): the CLI command `lambdaorm introspect` and the `orm.stage.introspect()` method.
+
+Introspect:
+
+1. Deduces the entities, properties and relations from the data and adds them to the schema file.
+2. Runs a [push](SchemaSynchronization-Push.md), so the databases of the stage get the new tables and columns.
+
+The data is not imported; to import it too, use [incorporate](SchemaSynchronization-Incorporate.md).
 
 ## CLI
 
-The introspect command allows you to obtain the schema from data introspection.
-
-Running the introspect command:
-
 ```sh
-lambdaorm introspect -d countries.json -n counties
+lambdaorm introspect -d countries.json -n countries
 ```
 
-This command updates the schema based on data introspection, in this case from the country.json file.
+| Option | Description |
+|--------|-------------|
+| `-d`, `--data` | JSON data file (or the data as inline JSON). Required. |
+| `-n`, `--name` | Name of the root entity (default: the name of the file). |
+| `-w`, `--workspace` | Folder of the project (default: the current folder). |
+| `-s`, `--stage` | Name of the stage (default: the first stage). |
+| `-e`, `--envfile` | File of environment variables to read. |
 
-Files created:
+This command updates `lambdaORM.yaml` with the structure of the data in `countries.json`, with `Countries` as the root entity, and pushes the changes.
+Like push, it writes the model of the stage and the DDL applied to each source in the `orm_state` folder:
 
 ```sh
 ├── countries.json
-├── orm_state
-│   ├── default-ddl-20240502T182117031Z-push-default.sql
-│   └── default-model.json
-├── docker compose.yaml
-└── lambdaORM.yaml
+├── lambdaORM.yaml
+└── orm_state
+    ├── default-model.json
+    └── <source>
+        └── V<yyMMddHHmmss>__push.sql
 ```
 
-Script the synchronization in file "default-ddl-20240502T182117031Z-push-default.sql":
+DDL applied (MySQL):
 
 ```sql
-CREATE TABLE CountiesLanguages (id INTEGER  AUTO_INCREMENT,languageCode VARCHAR(4) NOT NULL ,countyName VARCHAR(32) NOT NULL ,CONSTRAINT CountiesLanguages_PK PRIMARY KEY (id));
-ALTER TABLE CountiesLanguages ADD CONSTRAINT CountiesLanguages_UK UNIQUE (countyName,languageCode);
+CREATE TABLE CountriesLanguages (id INTEGER  AUTO_INCREMENT,languageCode VARCHAR(4) NOT NULL ,countryName VARCHAR(32) NOT NULL ,CONSTRAINT CountriesLanguages_PK PRIMARY KEY (id));
+ALTER TABLE CountriesLanguages ADD CONSTRAINT CountriesLanguages_UK UNIQUE (countryName,languageCode);
 CREATE TABLE Languages (code VARCHAR(4) NOT NULL ,name VARCHAR(16) NOT NULL ,CONSTRAINT Languages_PK PRIMARY KEY (code));
 CREATE TABLE Regions (code VARCHAR(2) NOT NULL ,name VARCHAR(32) NOT NULL ,CONSTRAINT Regions_PK PRIMARY KEY (code));
 CREATE TABLE Positions (lat DECIMAL(10,4) NOT NULL ,`long` DECIMAL(10,4) NOT NULL ,CONSTRAINT Positions_PK PRIMARY KEY (lat));
 ALTER TABLE Positions ADD CONSTRAINT Positions_UK UNIQUE (`long`);
-CREATE TABLE Timezones (GmtOffset INTEGER  ,name VARCHAR(32) NOT NULL ,positionLat DECIMAL(10,4) NOT NULL ,countyName VARCHAR(32) NOT NULL ,CONSTRAINT Timezones_PK PRIMARY KEY (name));
-CREATE TABLE Counties (name VARCHAR(32) NOT NULL ,phoneCode INTEGER NOT NULL ,priority INTEGER NOT NULL ,regionCode VARCHAR(2) NOT NULL ,CONSTRAINT Counties_PK PRIMARY KEY (name));
-ALTER TABLE Counties ADD CONSTRAINT Counties_UK UNIQUE (phoneCode);
-ALTER TABLE CountiesLanguages ADD CONSTRAINT CountiesLanguages_counties_FK FOREIGN KEY (countyName) REFERENCES Counties (name);
-ALTER TABLE CountiesLanguages ADD CONSTRAINT CountiesLanguages_languages_FK FOREIGN KEY (languageCode) REFERENCES Languages (code);
+CREATE TABLE Timezones (GmtOffset INTEGER  ,name VARCHAR(32) NOT NULL ,positionLat DECIMAL(10,4) NOT NULL ,countryName VARCHAR(32) NOT NULL ,CONSTRAINT Timezones_PK PRIMARY KEY (name));
+CREATE TABLE Countries (name VARCHAR(32) NOT NULL ,phoneCode INTEGER NOT NULL ,priority INTEGER NOT NULL ,regionCode VARCHAR(2) NOT NULL ,CONSTRAINT Countries_PK PRIMARY KEY (name));
+ALTER TABLE Countries ADD CONSTRAINT Countries_UK UNIQUE (phoneCode);
+ALTER TABLE CountriesLanguages ADD CONSTRAINT CountriesLanguages_countries_FK FOREIGN KEY (countryName) REFERENCES Countries (name);
+ALTER TABLE CountriesLanguages ADD CONSTRAINT CountriesLanguages_languages_FK FOREIGN KEY (languageCode) REFERENCES Languages (code);
 ALTER TABLE Timezones ADD CONSTRAINT Timezones_position_FK FOREIGN KEY (positionLat) REFERENCES Positions (lat);
-ALTER TABLE Timezones ADD CONSTRAINT Timezones_counties_FK FOREIGN KEY (countyName) REFERENCES Counties (name);
-ALTER TABLE Counties ADD CONSTRAINT Counties_region_FK FOREIGN KEY (regionCode) REFERENCES Regions (code);
+ALTER TABLE Timezones ADD CONSTRAINT Timezones_countries_FK FOREIGN KEY (countryName) REFERENCES Countries (name);
+ALTER TABLE Countries ADD CONSTRAINT Countries_region_FK FOREIGN KEY (regionCode) REFERENCES Regions (code);
 ```
 
-[View lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/12-introspect)
+See the [CLI lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/12-introspect).
 
 ## Node
 
-- How to run the introspect method to:
-   - Update the schema according to the introspected type of data.
-   - Synchronize the schema with the data source.
-   - Create files with the model status and update scripts.
+`orm.stage.introspect(data, name, options)` receives the data, the name of the root entity and, optionally, the query options (for example the stage):
 
-```Typescript
-import { Orm } from 'lambdaorm'
+```typescript
+import { Orm } from '@lambdaorm/lib'
 (async () => {
 	const workspace = process.cwd()
-	const schemaPath = workspace + '/lambdaORM.yaml'		
-	const orm = new Orm(workspace)
-	try{
-		const data = JSON.parse( await orm.helper.fs.read(workspace + '/countries.json') || '{}')
-		await orm.init(schemaPath)	
-		await orm.stage.introspect(data, 'countries')
-	}catch(e){
+	const orm = new Orm()
+	try {
+		const data = JSON.parse(await orm.helper.fs.read(workspace + '/countries.json') || '{}')
+		await orm.init(workspace + '/lambdaORM.yaml')
+		await orm.stage.introspect(data, 'countries', { stage: 'default' })
+	} catch (e) {
 		console.log(e)
 	} finally {
 		await orm.end()
-	}	
+	}
 })()
 ```
 
-**As a result:**
+As a result:
 
-- The "lambdaORM.yaml" file will be updated according to the type introspected from the data.
-- The updated schema is synchronized with the data source.
-- Files are created with the model status and update scripts.
+- The `lambdaORM.yaml` file is updated with the structure deduced from the data.
+- The databases of the stage are updated with the new schema.
+- The model of the stage and the applied DDL are written in the `orm_state` folder.
 
-[View lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/12-introspect)
+See the [Node lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/12-introspect).

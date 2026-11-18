@@ -1,17 +1,17 @@
 # Export
 
-Export data from a database.
+Exports the data of the databases of a stage to a JSON file, `<stage>-export.json`, in the target folder. The file can be loaded with [import](Import.md).
 
-## Params
+## Options
 
-| parameter	| short | describe 																												|
-|-----------|-------|-----------------------------------------------------------------|
-|workspace	| -w 		| project path.																										|
-|stage			| -s 		| Name of stage																										|
-|envfile		| -e 		| Read in a file of environment variables.												|
-|target			| -t 		| Destination file with export data.															|
-|force			| -f 		| If there is an error in a statement, continue executing the next statements	|
-|url				| -u 		| URL of the schema on a Data Gateway	|
+| Option | Short | Description |
+| :-- | :-- | :-- |
+| workspace | `-w` | Project path (default: the current directory). |
+| stage | `-s` | Name of the stage (default: the first stage of the schema). |
+| envfile | `-e` | Reads a file of environment variables. |
+| target | `-t` | Folder where the export file is written (default: the current directory). |
+| force | `-f` | If a statement fails, continue with the next statements. |
+| url | `-u` | URL of the schema on a [Data Gateway](../../data-gateway/index.md), to run the command there. |
 
 ## Example
 

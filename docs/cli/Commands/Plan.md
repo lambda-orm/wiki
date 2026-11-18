@@ -1,17 +1,17 @@
 # Plan
 
-Return plan execution of query expression.
+Returns the execution plan of a query expression: the sentence that runs on each source, without executing it.
 
-## Params
+## Options
 
-| parameter	| short | describe 																																									|
-|-----------|-------|-------------------------------------------------------------------------------------------|
-|workspace	| -w 		| project path.																																							|
-|stage			| -s 		| Name of stage																																							|
-|query			| -q 		| Query expression																																					|
-|envfile		| -e 		| Read in a file of environment variables.																									|
-|output			| -o 		| Generates an output according to the following possible values [json\|beautiful\|light\|yaml]|
-|url				| -u 		| URL of the schema on a Data Gateway	                          |
+| Option | Short | Description |
+| :-- | :-- | :-- |
+| workspace | `-w` | Project path (default: the current directory). |
+| stage | `-s` | Name of the stage (default: the first stage of the schema). |
+| query | `-q` | Query expression. |
+| envfile | `-e` | Reads a file of environment variables. |
+| output | `-o` | Output format: `json`, `beautiful`, `light` or `yaml`. |
+| url | `-u` | URL of the schema on a [Data Gateway](../../data-gateway/index.md), to run the command there. |
 
 ## Example
 

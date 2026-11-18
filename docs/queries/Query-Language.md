@@ -1,87 +1,78 @@
 # Query Language
 
-The query language is based on [javascript lambda expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).
-These Queries can be written as javascript code by browsing the business model entities.
+This page introduces the λORM query language: what a query looks like, the kinds of queries there are and where each one is documented.
 
-Queries can also be sent as a string
+λORM queries are written as [JavaScript lambda expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) over the entities of the domain. You can write them as TypeScript/JavaScript code, navigating the entities of the model, or send them as a string (for example from the [CLI](../cli/index.md) or to the [Data Gateway](../data-gateway/index.md)).
 
-λOrm translates the query into the language corresponding to each database engine.
+λORM translates each query into the language of the database engine of each source (SQL for MySQL, MariaDB, PostgreSQL, SQL Server, Oracle and SQLite, or MongoDB queries).
 
-## Queries type
+## Query types
 
 ### DQL
 
-Las consultas DQL (Data Query Language) son consultas utilizadas para recuperar datos de una base de datos.
+DQL (Data Query Language) queries retrieve data. They can be as simple as reading all the records of an entity, or they can filter, sort, group and paginate the records, compute values from them and load related entities.
 
-Las consultas DQL pueden ser bastante simples o pueden incluir cláusulas adicionales para filtrar, ordenar o agrupar datos, así como para realizar cálculos y operaciones en los datos recuperados. Esto permite a los desarrolladores obtener los datos exactos que necesitan de una base de datos según los requisitos de la aplicación.
-
-**View:** [Select](https://lambda-orm.github.io/wiki/Select)
-[Join](https://lambda-orm.github.io/wiki/Join)
-[Grouping](https://lambda-orm.github.io/wiki/Grouping)
-[Include](https://lambda-orm.github.io/wiki/Include)
+**See:** [Select](Select.md), [Join](Join.md), [Grouping](Grouping.md), [Include](Include.md)
 
 ### DML
 
-DML (Data Manipulation Language) queries are used to manipulate data in a database. Mainly, they include the following operations:
+DML (Data Manipulation Language) queries change data. They include the following operations:
 
-- INSERT: Used to add new records to a table.
-- UPDATE: Used to modify existing records in a table.
-- DELETE: Used to delete records from a table.
+- **insert**: adds new records to an entity (also `bulkInsert` and `upsert`).
+- **update**: modifies existing records.
+- **delete**: removes records.
 
-**View:** [Insert](https://lambda-orm.github.io/wiki/Insert)
-[BulkInsert](https://lambda-orm.github.io/wiki/BulkInsert)
-[Update](https://lambda-orm.github.io/wiki/Update)
-[Delete](https://lambda-orm.github.io/wiki/Delete)
+**See:** [Insert](Insert.md), [Bulk Insert](BulkInsert.md), [Update](Update.md), [Delete](Delete.md)
 
 ### DDL
 
-DDL (Data Definition Language) are used to define, modify and delete database structures and related objects. Mainly, they include the following operations:
+DDL (Data Definition Language) statements create, modify and drop database structures and related objects:
 
-- CREATE: Used to create new objects in the database, such as tables, indexes, views and other objects.
-- ALTER: Used to modify the structure of existing objects in the database, such as adding, modifying or deleting columns from a table, changing the data type of a column, renaming an object, among others.
-- DROP: Used to delete database objects, such as tables, indexes, views and other objects.
+- **CREATE**: creates new objects in the database, such as tables and indexes.
+- **ALTER**: modifies the structure of existing objects, for example adding, changing or removing the columns of a table.
+- **DROP**: deletes objects from the database.
 
-These queries are created and executed when you use the schema synchronization commands.
+You do not write DDL queries: λORM generates and runs them when you use the schema synchronization commands.
 
-**View:** [Push](https://lambda-orm.github.io/wiki/SchemaSynchronization-Push)
-[Pull](https://lambda-orm.github.io/wiki/SchemaSynchronization-Pull)
-[Fetch](https://lambda-orm.github.io/wiki/SchemaSynchronization-Fetch)
-[Introspect](https://lambda-orm.github.io/wiki/SchemaSynchronization-Introspect)
-[Incorporate](https://lambda-orm.github.io/wiki/SchemaSynchronization-Incorporate)
+**See:** [Push](../schema/SchemaSynchronization-Push.md), [Pull](../schema/SchemaSynchronization-Pull.md), [Fetch](../schema/SchemaSynchronization-Fetch.md), [Introspect](../schema/SchemaSynchronization-Introspect.md), [Incorporate](../schema/SchemaSynchronization-Incorporate.md)
 
-## Example:
+## Example
 
-```Typescript
-// Selecting countries filtering by region and including related states starting with 'F', with pagination
+The following query reads the countries of a region, with their states whose name starts with "F". It returns the name, subregion and position of each country, 3 countries per page:
+
+```typescript
 Countries
-	.filter(p=> p.region == region)	
-	.map(p=> [p.name,p.subregion,p.latitude,p.longitude]) // Selecting country fields
-	.include(p => p.states.filter(p=> substr(p.name,1,1)=="F") // Including states starting with 'F'
-		  .map(p=> [p.name,p.latitude,p.longitude])
+	.filter(p => p.region == region)
+	.map(p => [p.name, p.subregion, p.latitude, p.longitude]) // properties of the country
+	.include(p => p.states.filter(p => substr(p.name, 1, 1) == "F") // states starting with 'F'
+		.map(p => [p.name, p.latitude, p.longitude])
 	)
-	.page(1,3) // Pagination for countries, 3 records per page
+	.page(1, 3) // first page, 3 countries per page
 ```
 
-where the SQL equivalent of the query is:
+In this schema, `Countries` is in a MySQL source and `States` in a PostgreSQL source (see [Stage with multiple sources](../schema/SchemaExample-StageMultiplesSources.md)). λORM runs one statement per source:
 
 ```sql
--- Selecting countries based on region and limiting to 3 records
-SELECT c.name AS `name`, c.subregion AS `subregion`, c.latitude AS `latitude`, c.longitude AS `longitude`, c.iso3 AS `__iso3` 
-FROM Countries c  
-WHERE c.region = ? 
+-- MySQL: the countries of the region, first page of 3 records
+SELECT c.name AS name, c.subregion AS subregion, c.latitude AS latitude, c.longitude AS longitude, c.iso3 AS `__iso3`
+FROM Countries c
+WHERE c.region = ?
+ORDER BY c.name asc
 LIMIT 0,3
 
--- Selecting states starting with 'F' belonging to the specified countries
-SELECT s.NAME AS "name", s.LATITUDE AS "latitude", s.LONGITUDE AS "longitude", s.COUNTRY_CODE AS "__parentId" 
-FROM TBL_STATES s  
+-- PostgreSQL: the states starting with 'F' of the countries read above
+SELECT s.NAME AS "name", s.LATITUDE AS "latitude", s.LONGITUDE AS "longitude", s.COUNTRY_CODE AS "LambdaOrmParentId"
+FROM TBL_STATES s
 WHERE SUBSTR(s.NAME,1,1) = 'F'
-  AND s.s.COUNTRY_CODE IN (?) 
+  AND s.COUNTRY_CODE IN (?)
 ```
 
-## Advantage of Query Language
+The states are then attached to their country in memory, so each country of the result has a `states` array.
 
-- Use of the same programming language.
-- No need to learn a new language.
-- queries easy to write and understand.
-- Use of the intellisense offered by the IDE to write the expressions.
-- Avoid syntax errors.
+## Advantages
+
+- Queries are written in the same programming language as the application.
+- There is no new language to learn.
+- Queries are easy to write and to read.
+- The IDE's IntelliSense helps you write the expressions.
+- Syntax errors are caught while you write.
