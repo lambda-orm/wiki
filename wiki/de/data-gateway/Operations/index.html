@@ -917,7 +917,7 @@
         <li class="md-nav__item">
   <a href="#metrics" class="md-nav__link">
     <span class="md-ellipsis">
-      Metrics
+      Metriken
     </span>
   </a>
   
@@ -1370,7 +1370,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -2053,7 +2053,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2307,7 +2307,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -3018,7 +3018,7 @@
         <li class="md-nav__item">
   <a href="#metrics" class="md-nav__link">
     <span class="md-ellipsis">
-      Metrics
+      Metriken
     </span>
   </a>
   
@@ -3049,12 +3049,12 @@
 
 
 
-<h1 id="operations">Operations<a class="headerlink" href="#operations" title="Permanent link">&para;</a></h1>
+<h1 id="operations">Betrieb<a class="headerlink" href="#operations" title="Permanent link">&para;</a></h1>
 <h2 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h2>
-<p>The image is <a href="https://hub.docker.com/r/flaviorita/data-gateway"><code>flaviorita/data-gateway</code></a>: Node 24, the <code>lambdaorm</code>
-CLI and the Oracle Instant Client. It runs <code>node index.js</code> as the user 1000, reads the configuration from
-<code>/config/data-gateway.config.yaml</code> (<code>DATA_GATEWAY_CONFIG_PATH</code>) and the workspaces from where the configuration says
-(<code>/workspace</code> by convention). It has no <code>EXPOSE</code>: the ports are only in the configuration.</p>
+<p>Das Image ist <a href="https://hub.docker.com/r/flaviorita/data-gateway"><code>flaviorita/data-gateway</code></a>: Node 24, die <code>lambdaorm</code>-CLI
+und der Oracle Instant Client. Es führt <code>node index.js</code> als Benutzer 1000 aus, liest die Konfiguration aus
+<code>/config/data-gateway.config.yaml</code> (<code>DATA_GATEWAY_CONFIG_PATH</code>) und die Workspaces von dort, wo die Konfiguration es
+angibt (per Konvention <code>/workspace</code>). Es hat kein <code>EXPOSE</code>: Die Ports stehen nur in der Konfiguration.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># docker-compose.yml</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">services</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">data-gateway</span><span class="p">:</span>
@@ -3074,59 +3074,60 @@ CLI and the Oracle Instant Client. It runs <code>node index.js</code> as the use
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10s</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
 </code></pre></div>
-<p>The versions <code>3.0.0-rc.*</code> are prereleases: they don't move <code>latest</code>.</p>
+<p>Die Versionen <code>3.0.0-rc.*</code> sind Vorabversionen: Sie verschieben <code>latest</code> nicht.</p>
 <h2 id="kubernetes">Kubernetes<a class="headerlink" href="#kubernetes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Probes:</strong> <code>livenessProbe</code> on <code>GET /ping</code> (the gateway is up), <code>readinessProbe</code> on <code>GET /health</code> (<code>200</code> while some
-  schema is <code>ready</code>). A probe per schema: <code>GET /{schema}/health</code>.</li>
-<li><strong>Configuration</strong> in a <code>ConfigMap</code> mounted at <code>/config</code>, secrets as environment variables from a <code>Secret</code>
-  (<code>value: $READER_KEY</code> in the file).</li>
-<li><strong>Replicas:</strong> REST, WebSocket and stateless MCP (<code>stateful: false</code>) need no session affinity; the older HTTP+SSE of
-  MCP does.</li>
-<li><strong>Behind an ingress with a path:</strong> <code>transports.&lt;t&gt;.basePath: /data-gateway</code>.</li>
-<li><strong>Shutdown:</strong> <code>SIGTERM</code> stops accepting connections, waits for the operations in progress (up to <code>server.timeout</code>),
-  closes the queues and the pools, and exits. Give <code>terminationGracePeriodSeconds</code> at least that time.</li>
+<li><strong>Probes:</strong> <code>livenessProbe</code> auf <code>GET /ping</code> (das Gateway läuft), <code>readinessProbe</code> auf <code>GET /health</code> (<code>200</code>, solange
+  irgendein Schema <code>ready</code> ist). Eine Probe pro Schema: <code>GET /{schema}/health</code>.</li>
+<li><strong>Konfiguration</strong> in einer <code>ConfigMap</code>, die unter <code>/config</code> eingebunden wird, Secrets als Umgebungsvariablen aus einem
+  <code>Secret</code> (<code>value: $READER_KEY</code> in der Datei).</li>
+<li><strong>Replikas:</strong> REST, WebSocket und zustandsloses MCP (<code>stateful: false</code>) benötigen keine Session-Affinität; das ältere
+  HTTP+SSE von MCP schon.</li>
+<li><strong>Hinter einem Ingress mit Pfad:</strong> <code>transports.&lt;t&gt;.basePath: /data-gateway</code>.</li>
+<li><strong>Herunterfahren:</strong> <code>SIGTERM</code> nimmt keine Verbindungen mehr an, wartet auf laufende Operationen (bis zu
+  <code>server.timeout</code>), schließt die Warteschlangen und die Pools und beendet sich. Setzen Sie
+  <code>terminationGracePeriodSeconds</code> auf mindestens diese Zeit.</li>
 </ul>
 <h2 id="health">Health<a class="headerlink" href="#health" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Route</th>
-<th>Answers</th>
+<th>Antwortet</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>GET /ping</code></td>
-<td><code>{ "message": "pong", "time" }</code>: the gateway answers</td>
+<td><code>{ "message": "pong", "time" }</code>: das Gateway antwortet</td>
 </tr>
 <tr>
 <td><code>GET /health</code></td>
-<td><code>200</code> while some schema is <code>ready</code>, <code>503</code> if none</td>
+<td><code>200</code>, solange irgendein Schema <code>ready</code> ist, <code>503</code>, wenn keines</td>
 </tr>
 <tr>
 <td><code>GET /schemas</code></td>
-<td>each schema with <code>status</code> (<code>starting</code>, <code>ready</code>, <code>error</code>, <code>restarting</code>), <code>reason</code>, <code>since</code> and <code>restarts</code></td>
+<td>jedes Schema mit <code>status</code> (<code>starting</code>, <code>ready</code>, <code>error</code>, <code>restarting</code>), <code>reason</code>, <code>since</code> und <code>restarts</code></td>
 </tr>
 <tr>
 <td><code>GET /{schema}/health</code></td>
-<td><code>200</code> when that schema is <code>ready</code>, <code>503</code> if not</td>
+<td><code>200</code>, wenn dieses Schema <code>ready</code> ist, sonst <code>503</code></td>
 </tr>
 <tr>
 <td><code>GET /status</code></td>
-<td>in <code>mcpHttp</code> and <code>mcpWebSocket</code>: the state of the transport</td>
+<td>in <code>mcpHttp</code> und <code>mcpWebSocket</code>: der Zustand des Transports</td>
 </tr>
 </tbody>
 </table>
-<p>A schema in <code>error</code> is retried with a growing wait (<code>runtime.restart</code>) and goes back to <code>ready</code> when its database
-does, without restarting anything else.</p>
-<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
-<p><code>GET /metrics</code> answers the metrics of every worker in Prometheus format (<code>GET /{schema}/metrics</code>, those of one schema),
-each with the label <code>worker</code> (<code>edge</code>, <code>schema:iot/v1</code>):</p>
+<p>Ein Schema im Zustand <code>error</code> wird mit wachsender Wartezeit erneut versucht (<code>runtime.restart</code>) und kehrt zu <code>ready</code>
+zurück, sobald seine Datenbank wieder verfügbar ist, ohne dass etwas anderes neu gestartet wird.</p>
+<h2 id="metrics">Metriken<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
+<p><code>GET /metrics</code> liefert die Metriken aller Worker im Prometheus-Format (<code>GET /{schema}/metrics</code> die eines Schemas), jeweils
+mit dem Label <code>worker</code> (<code>edge</code>, <code>schema:iot/v1</code>):</p>
 <table>
 <thead>
 <tr>
-<th>Metric</th>
+<th>Metrik</th>
 <th>Labels</th>
 </tr>
 </thead>
@@ -3145,7 +3146,7 @@ each with the label <code>worker</code> (<code>edge</code>, <code>schema:iot/v1<
 </tr>
 <tr>
 <td><code>data_gateway_throttled_total</code></td>
-<td><code>schema</code>, <code>transport</code> (answers <code>429</code> by <code>maxConcurrent</code>)</td>
+<td><code>schema</code>, <code>transport</code> (Antworten <code>429</code> durch <code>maxConcurrent</code>)</td>
 </tr>
 <tr>
 <td><code>data_gateway_connections</code></td>
@@ -3165,14 +3166,14 @@ each with the label <code>worker</code> (<code>edge</code>, <code>schema:iot/v1<
 </tr>
 </tbody>
 </table>
-<p>and the usual metrics of Node (memory, CPU, event loop). <code>metrics.enabled: false</code> turns them off.</p>
+<p>sowie die üblichen Metriken von Node (Speicher, CPU, Event Loop). <code>metrics.enabled: false</code> deaktiviert sie.</p>
 <h2 id="logs">Logs<a class="headerlink" href="#logs" title="Permanent link">&para;</a></h2>
-<p>Each worker logs with its label (<code>[supervisor]</code>, <code>[edge]</code>, <code>[schema:iot/v1]</code>): the start, the transports exposed or
-not, the effective configuration without secrets, the states of the schemas, falls and restarts, heartbeats missed,
-and every operation with the name of its credential (never its secret). <code>logger.level</code>: <code>error</code>, <code>warn</code>, <code>info</code>,
-<code>debug</code>; <code>logger.adapter</code>: <code>console</code> or <code>winston</code>.</p>
-<p>The <a href="../Security/#audit">audit</a> of writes goes to the standard output as JSON lines with <code>"type": "audit"</code>, to be kept
-apart by the log collector.</p>
+<p>Jeder Worker protokolliert mit seinem Label (<code>[supervisor]</code>, <code>[edge]</code>, <code>[schema:iot/v1]</code>): den Start, die
+bereitgestellten oder nicht bereitgestellten Transporte, die effektive Konfiguration ohne Secrets, die Zustände der
+Schemas, Ausfälle und Neustarts, verpasste Heartbeats und jede Operation mit dem Namen ihrer Zugangsdaten (nie deren
+Secret). <code>logger.level</code>: <code>error</code>, <code>warn</code>, <code>info</code>, <code>debug</code>; <code>logger.adapter</code>: <code>console</code> oder <code>winston</code>.</p>
+<p>Das <a href="../Security/#audit">Audit</a> von Schreibvorgängen geht als JSON-Zeilen mit <code>"type": "audit"</code> an die Standardausgabe,
+damit der Log-Collector es getrennt ablegen kann.</p>
 
 
 

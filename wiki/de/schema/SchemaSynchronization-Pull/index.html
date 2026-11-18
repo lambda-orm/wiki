@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1974,7 +1974,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2067,7 +2067,7 @@
         <li class="md-nav__item">
   <a href="#what-pull-keeps" class="md-nav__link">
     <span class="md-ellipsis">
-      What pull keeps
+      Was pull erhält
     </span>
   </a>
   
@@ -2297,7 +2297,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2981,7 +2981,7 @@
         <li class="md-nav__item">
   <a href="#what-pull-keeps" class="md-nav__link">
     <span class="md-ellipsis">
-      What pull keeps
+      Was pull erhält
     </span>
   </a>
   
@@ -3022,53 +3022,53 @@
 
 
 <h1 id="pull">Pull<a class="headerlink" href="#pull" title="Permanent link">&para;</a></h1>
-<p>This page explains pull, which updates the schema file with the structure of the sources (databases) of a stage: what it keeps, the CLI command <code>lambdaorm pull</code> and the <code>orm.stage.pull()</code> method.</p>
-<h2 id="what-pull-keeps">What pull keeps<a class="headerlink" href="#what-pull-keeps" title="Permanent link">&para;</a></h2>
-<p>Pull reads the tables and columns of the databases and merges them into the schema: new tables become entities, new columns become properties, and the mappings are updated. Pull does not change the databases.
-By default it also removes from the schema the entities, properties and relations that are no longer in the database
-(<code>orm.stage.pull({ stage, removeEntities: false, removeProperties: false, removeRelations: false })</code> keeps them).
-It can be run on an existing schema: what was written by hand is kept, for example</p>
+<p>Diese Seite erklärt pull, das die Schema-Datei mit der Struktur der Quellen (Datenbanken) eines Stages aktualisiert: was erhalten bleibt, den CLI-Befehl <code>lambdaorm pull</code> und die Methode <code>orm.stage.pull()</code>.</p>
+<h2 id="what-pull-keeps">Was pull erhält<a class="headerlink" href="#what-pull-keeps" title="Permanent link">&para;</a></h2>
+<p>Pull liest die Tabellen und Spalten der Datenbanken und führt sie im Schema zusammen: Neue Tabellen werden zu Entitäten, neue Spalten zu Eigenschaften, und die Mappings werden aktualisiert. Pull ändert die Datenbanken nicht.
+Standardmäßig entfernt es außerdem die Entitäten, Eigenschaften und Beziehungen aus dem Schema, die nicht mehr in der Datenbank vorhanden sind
+(<code>orm.stage.pull({ stage, removeEntities: false, removeProperties: false, removeRelations: false })</code> behält sie bei).
+Es kann auf ein bestehendes Schema angewendet werden: Was von Hand geschrieben wurde, bleibt erhalten, zum Beispiel</p>
 <ul>
-<li>relation names chosen by hand and <code>weak</code> relations between sources (which have no foreign key in the database),</li>
+<li>von Hand gewählte Beziehungsnamen und <code>weak</code>-Beziehungen zwischen Quellen (die in der Datenbank keinen Fremdschlüssel haben),</li>
 <li><code>application.listeners</code>,</li>
 <li><code>infrastructure.stages</code>.</li>
 </ul>
-<p>Columns named with reserved words (for example <code>order</code>) are supported.</p>
+<p>Spalten, deren Namen reservierte Wörter sind (zum Beispiel <code>order</code>), werden unterstützt.</p>
 <h2 id="cli">CLI<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h2>
-<p>The <code>pull</code> command updates the schema file (<code>lambdaORM.yaml</code> in this example) with the structure of the databases of the stage:</p>
+<p>Der Befehl <code>pull</code> aktualisiert die Schema-Datei (in diesem Beispiel <code>lambdaORM.yaml</code>) mit der Struktur der Datenbanken des Stages:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lambdaorm<span class="w"> </span>pull
 </code></pre></div>
 <table>
 <thead>
 <tr>
 <th>Option</th>
-<th>Description</th>
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>-w</code>, <code>--workspace</code></td>
-<td>Folder of the project (default: the current folder).</td>
+<td>Ordner des Projekts (Standard: der aktuelle Ordner).</td>
 </tr>
 <tr>
 <td><code>-s</code>, <code>--stage</code></td>
-<td>Name of the stage (default: the first stage).</td>
+<td>Name des Stages (Standard: der erste Stage).</td>
 </tr>
 <tr>
 <td><code>-e</code>, <code>--envfile</code></td>
-<td>File of environment variables to read.</td>
+<td>Zu lesende Datei mit Umgebungsvariablen.</td>
 </tr>
 </tbody>
 </table>
-<p>Pull also writes, in the <code>orm_state</code> folder, the model of the stage and the DDL of the pulled structure, in one folder per source.
-The DDL is a record: it is not executed.</p>
-<p>Files created:</p>
+<p>Pull schreibt außerdem in den Ordner <code>orm_state</code> das Modell des Stages und die DDL der übernommenen Struktur, in einem Ordner pro Quelle.
+Die DDL dient als Protokoll: Sie wird nicht ausgeführt.</p>
+<p>Erstellte Dateien:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>├──<span class="w"> </span>orm_state
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│<span class="w">   </span>├──<span class="w"> </span>default-model.json
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│<span class="w">   </span>└──<span class="w"> </span>default
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│<span class="w">       </span>└──<span class="w"> </span>V240501212640__pull.sql
 </code></pre></div>
-<p>Content of the generated file <code>V240501212640__pull.sql</code> (Northwind on MySQL):</p>
+<p>Inhalt der generierten Datei <code>V240501212640__pull.sql</code> (Northwind auf MySQL):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Categories</span><span class="w"> </span><span class="p">(</span><span class="n">CategoryID</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w">  </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span><span class="n">CategoryName</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="n">Description</span><span class="w"> </span><span class="nb">TEXT</span><span class="w">  </span><span class="p">,</span><span class="n">Picture</span><span class="w"> </span><span class="n">LONGBLOB</span><span class="w">  </span><span class="p">,</span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">Categories_PK</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">CategoryID</span><span class="p">));</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">CustomerCustomerDemo</span><span class="w"> </span><span class="p">(</span><span class="n">CustomerID</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="n">CustomerTypeID</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">CustomerCustomerDemo_PK</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">CustomerID</span><span class="p">,</span><span class="n">CustomerTypeID</span><span class="p">));</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">CustomerDemographics</span><span class="w"> </span><span class="p">(</span><span class="n">CustomerTypeID</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="n">CustomerDesc</span><span class="w"> </span><span class="nb">TEXT</span><span class="w">  </span><span class="p">,</span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">CustomerDemographics_PK</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">CustomerTypeID</span><span class="p">));</span>
@@ -3095,9 +3095,9 @@ The DDL is a record: it is not executed.</p>
 <a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Products</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">Products_products_FK</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">SupplierID</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Suppliers</span><span class="w"> </span><span class="p">(</span><span class="n">SupplierID</span><span class="p">);</span>
 <a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Territories</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">Territories_territories_FK</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">RegionID</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Region</span><span class="w"> </span><span class="p">(</span><span class="n">RegionID</span><span class="p">);</span>
 </code></pre></div>
-<p>See the <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/11-pull">CLI lab</a>.</p>
+<p>Siehe das <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/11-pull">CLI-Lab</a>.</p>
 <h2 id="node">Node<a class="headerlink" href="#node" title="Permanent link">&para;</a></h2>
-<p><code>orm.stage.pull()</code> updates the schema file with the structure of the databases of the stage:</p>
+<p><code>orm.stage.pull()</code> aktualisiert die Schema-Datei mit der Struktur der Datenbanken des Stages:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Orm</span><span class="p">()</span>
@@ -3111,7 +3111,7 @@ The DDL is a record: it is not executed.</p>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="p">})()</span>
 </code></pre></div>
-<p>See the <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/11-pull">Node lab</a>.</p>
+<p>Siehe das <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/11-pull">Node-Lab</a>.</p>
 
 
 

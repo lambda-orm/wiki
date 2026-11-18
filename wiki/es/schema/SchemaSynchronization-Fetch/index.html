@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1593,7 +1593,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1974,7 +1974,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2090,7 +2090,7 @@
         <li class="md-nav__item">
   <a href="#what-fetch-compares" class="md-nav__link">
     <span class="md-ellipsis">
-      What fetch compares
+      Qué compara fetch
     </span>
   </a>
   
@@ -2297,7 +2297,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2981,7 +2981,7 @@
         <li class="md-nav__item">
   <a href="#what-fetch-compares" class="md-nav__link">
     <span class="md-ellipsis">
-      What fetch compares
+      Qué compara fetch
     </span>
   </a>
   
@@ -3022,19 +3022,19 @@
 
 
 <h1 id="fetch">Fetch<a class="headerlink" href="#fetch" title="Permanent link">&para;</a></h1>
-<p>This page explains fetch, which shows the differences between the sources (databases) of a stage and the schema without applying any change: what it compares, the CLI command <code>lambdaorm fetch</code> and the <code>orm.stage.fetch()</code> method.</p>
-<h2 id="what-fetch-compares">What fetch compares<a class="headerlink" href="#what-fetch-compares" title="Permanent link">&para;</a></h2>
-<p>Fetch reads the databases of the stage and compares them with the model (drift). The result has one entry per mapping, with the entities that differ:</p>
+<p>Esta página explica fetch, que muestra las diferencias entre las fuentes (bases de datos) de un stage y el esquema sin aplicar ningún cambio: qué compara, el comando de la CLI <code>lambdaorm fetch</code> y el método <code>orm.stage.fetch()</code>.</p>
+<h2 id="what-fetch-compares">Qué compara fetch<a class="headerlink" href="#what-fetch-compares" title="Permanent link">&para;</a></h2>
+<p>Fetch lee las bases de datos del stage y las compara con el modelo (desviaciones). El resultado tiene una entrada por mapping, con las entidades que difieren:</p>
 <ul>
-<li>tables missing in the database or missing in the model,</li>
-<li>columns missing on one side,</li>
-<li>columns with another type, length or nullability,</li>
-<li>a different primary key.</li>
+<li>tablas que faltan en la base de datos o en el modelo,</li>
+<li>columnas que faltan en uno de los dos lados,</li>
+<li>columnas con otro tipo, longitud o nulabilidad,</li>
+<li>una clave primaria distinta.</li>
 </ul>
-<p>Each entity has its <code>differences</code>, in readable text. <strong>When the databases are in step with the model, every mapping has no entities.</strong></p>
-<p>Relations (foreign keys) and indexes are not compared.
-On MongoDB, which is schemaless, fetch only checks that each collection exists.</p>
-<p>Example of a result, after adding the property <code>phone</code> to <code>Customers</code> in the model:</p>
+<p>Cada entidad tiene sus <code>differences</code>, en texto legible. <strong>Cuando las bases de datos están sincronizadas con el modelo, ningún mapping tiene entidades.</strong></p>
+<p>Las relaciones (claves foráneas) y los índices no se comparan.
+En MongoDB, que no tiene esquema, fetch solo comprueba que cada colección exista.</p>
+<p>Ejemplo de resultado, tras añadir la propiedad <code>phone</code> a <code>Customers</code> en el modelo:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Customers</span>
@@ -3042,7 +3042,7 @@ On MongoDB, which is schemaless, fetch only checks that each collection exists.<
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">differences</span><span class="p">:</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">column phone missing in the database</span>
 </code></pre></div>
-<p>Result when the database is in step with the model:</p>
+<p>Resultado cuando la base de datos está sincronizada con el modelo:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
 </code></pre></div>
@@ -3052,35 +3052,35 @@ On MongoDB, which is schemaless, fetch only checks that each collection exists.<
 <table>
 <thead>
 <tr>
-<th>Option</th>
-<th>Description</th>
+<th>Opción</th>
+<th>Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>-w</code>, <code>--workspace</code></td>
-<td>Folder of the project (default: the current folder).</td>
+<td>Carpeta del proyecto (por defecto: la carpeta actual).</td>
 </tr>
 <tr>
 <td><code>-s</code>, <code>--stage</code></td>
-<td>Name of the stage (default: the first stage).</td>
+<td>Nombre del stage (por defecto: el primer stage).</td>
 </tr>
 <tr>
 <td><code>-e</code>, <code>--envfile</code></td>
-<td>File of environment variables to read.</td>
+<td>Archivo de variables de entorno que se lee.</td>
 </tr>
 <tr>
 <td><code>-o</code>, <code>--output</code></td>
-<td>Output format: <code>json</code>, <code>beautiful</code>, <code>light</code> or <code>yaml</code>.</td>
+<td>Formato de salida: <code>json</code>, <code>beautiful</code>, <code>light</code> o <code>yaml</code>.</td>
 </tr>
 </tbody>
 </table>
-<p><strong>The command exits with code 1 when there are differences</strong> (and 0 when the databases are in step), so it can be used in CI to detect drift:</p>
+<p><strong>El comando termina con código 1 cuando hay diferencias</strong> (y con 0 cuando las bases de datos están sincronizadas), por lo que se puede usar en CI para detectar desviaciones:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>lambdaorm<span class="w"> </span>fetch<span class="w"> </span>-s<span class="w"> </span>default<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"the database differs from the model"</span>
 </code></pre></div>
-<p>See the <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/10-fetch">CLI lab</a>.</p>
+<p>Ver el <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/10-fetch">laboratorio de la CLI</a>.</p>
 <h2 id="node">Node<a class="headerlink" href="#node" title="Permanent link">&para;</a></h2>
-<p><code>orm.stage.fetch()</code> returns the differences. To read the mappings of the databases as they are (every table and column), use <code>orm.stage.read()</code>.</p>
+<p><code>orm.stage.fetch()</code> devuelve las diferencias. Para leer los mappings de las bases de datos tal como están (todas las tablas y columnas), se usa <code>orm.stage.read()</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Orm</span><span class="p">()</span>
@@ -3099,7 +3099,7 @@ On MongoDB, which is schemaless, fetch only checks that each collection exists.<
 <a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="p">})()</span>
 </code></pre></div>
-<p>See the <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/10-fetch">Node lab</a>.</p>
+<p>Ver el <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/10-fetch">laboratorio de Node</a>.</p>
 
 
 

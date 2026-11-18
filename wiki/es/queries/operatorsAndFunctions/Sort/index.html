@@ -1288,7 +1288,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1542,7 +1542,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Resumen
     </span>
   </a>
   
@@ -1551,7 +1551,7 @@
         <li class="md-nav__item">
   <a href="#default-order" class="md-nav__link">
     <span class="md-ellipsis">
-      Default order
+      Orden por defecto
     </span>
   </a>
   
@@ -1676,7 +1676,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2049,7 +2049,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2303,7 +2303,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2987,7 +2987,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Resumen
     </span>
   </a>
   
@@ -2996,7 +2996,7 @@
         <li class="md-nav__item">
   <a href="#default-order" class="md-nav__link">
     <span class="md-ellipsis">
-      Default order
+      Orden por defecto
     </span>
   </a>
   
@@ -3036,37 +3036,37 @@
 
 
 
-<h1 id="sort-functions">Sort Functions<a class="headerlink" href="#sort-functions" title="Permanent link">&para;</a></h1>
-<p>The <code>sort</code> method orders the rows of a query (<code>ORDER BY</code> in SQL). Its predicate returns the field to sort by, optionally wrapped in <code>asc</code> or <code>desc</code> to set the direction. Without <code>asc</code> or <code>desc</code>, rows are sorted in ascending order.</p>
+<h1 id="sort-functions">Funciones de ordenación<a class="headerlink" href="#sort-functions" title="Permanent link">&para;</a></h1>
+<p>El método <code>sort</code> ordena las filas de una consulta (<code>ORDER BY</code> en SQL). Su predicado devuelve el campo por el que ordenar, opcionalmente envuelto en <code>asc</code> o <code>desc</code> para indicar la dirección. Sin <code>asc</code> ni <code>desc</code>, las filas se ordenan en orden ascendente.</p>
 <div class="admonition note">
-<p class="admonition-title">About the examples</p>
-<p>The examples run against the <code>Countries</code> entity of the countries sample schema. Each one shows the query, the result it returned on the test database and the SQL sentence that λORM generated for MySQL. Other engines receive their own translation; to see the sentence generated for your data source, use <a href="../../Metadata/"><code>orm.plan</code></a>.</p>
+<p class="admonition-title">Sobre los ejemplos</p>
+<p>Los ejemplos se ejecutan sobre la entidad <code>Countries</code> del esquema de ejemplo de países. Cada uno muestra la consulta, el resultado que devolvió en la base de datos de pruebas y la sentencia SQL que λORM generó para MySQL. Los demás motores de base de datos reciben su propia traducción; para ver la sentencia generada para tu fuente de datos, se usa <a href="../../Metadata/"><code>orm.plan</code></a>.</p>
 </div>
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<h2 id="summary">Resumen<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Function</th>
-<th>Description</th>
+<th>Función</th>
+<th>Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>asc</code></td>
-<td>Sorts in ascending order (the default)</td>
+<td>Ordena en orden ascendente (por defecto)</td>
 </tr>
 <tr>
 <td><code>desc</code></td>
-<td>Sorts in descending order</td>
+<td>Ordena en orden descendente</td>
 </tr>
 </tbody>
 </table>
-<h2 id="default-order">Default order<a class="headerlink" href="#default-order" title="Permanent link">&para;</a></h2>
-<p>When the predicate returns a field without <code>asc</code> or <code>desc</code>, rows are sorted in ascending order.</p>
-<p>Number of countries in each region, from the smallest to the largest:</p>
+<h2 id="default-order">Orden por defecto<a class="headerlink" href="#default-order" title="Permanent link">&para;</a></h2>
+<p>Cuando el predicado devuelve un campo sin <code>asc</code> ni <code>desc</code>, las filas se ordenan en orden ascendente.</p>
+<p>Número de países de cada región, de menor a mayor:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">region</span><span class="o">:</span><span class="kt">p.region</span><span class="p">,</span><span class="nx">countries</span><span class="o">:</span><span class="kt">count</span><span class="p">(</span><span class="mf">1</span><span class="p">)}).</span><span class="nx">sort</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">countries</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Result:</strong></p>
+<p><strong>Resultado:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">[{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Polar"</span><span class="p">,</span><span class="nt">"countries"</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"countries"</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Oceania"</span><span class="p">,</span><span class="nt">"countries"</span><span class="p">:</span><span class="mi">27</span><span class="p">}</span>
@@ -3076,19 +3076,19 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Africa"</span><span class="p">,</span><span class="nt">"countries"</span><span class="p">:</span><span class="mi">60</span><span class="p">}</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">]</span>
 </code></pre></div>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>SQL generado (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">countries</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">countries</span><span class="w"> </span><span class="k">asc</span>
 </code></pre></div>
 <h2 id="asc">asc<a class="headerlink" href="#asc" title="Permanent link">&para;</a></h2>
-<p>Sorts the rows by <code>value</code> in ascending order.</p>
-<p><strong>Signature:</strong> <code>asc(value: any): void</code></p>
-<p>Maximum latitude of each region, sorted by that maximum:</p>
+<p>Ordena las filas por <code>value</code> en orden ascendente.</p>
+<p><strong>Firma:</strong> <code>asc(value: any): void</code></p>
+<p>Latitud máxima de cada región, ordenada por ese máximo:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">region</span><span class="o">:</span><span class="kt">p.region</span><span class="p">,</span><span class="nx">max</span><span class="o">:</span><span class="kt">max</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">latitude</span><span class="p">)}).</span><span class="nx">sort</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">asc</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">max</span><span class="p">))</span>
 </code></pre></div>
-<p><strong>Result:</strong></p>
+<p><strong>Resultado:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">[{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Polar"</span><span class="p">,</span><span class="nt">"max"</span><span class="p">:</span><span class="mf">-74.65</span><span class="p">}</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"max"</span><span class="p">:</span><span class="mf">-53.1</span><span class="p">}</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Oceania"</span><span class="p">,</span><span class="nt">"max"</span><span class="p">:</span><span class="mf">15.2</span><span class="p">}</span>
@@ -3098,19 +3098,19 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Europe"</span><span class="p">,</span><span class="nt">"max"</span><span class="p">:</span><span class="mi">78</span><span class="p">}</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">]</span>
 </code></pre></div>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>SQL generado (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">latitude</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">max</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">max</span><span class="w"> </span><span class="k">asc</span>
 </code></pre></div>
 <h2 id="desc">desc<a class="headerlink" href="#desc" title="Permanent link">&para;</a></h2>
-<p>Sorts the rows by <code>value</code> in descending order.</p>
-<p><strong>Signature:</strong> <code>desc(value: any): void</code></p>
-<p>ISO 3 codes of the countries of South America in descending order:</p>
+<p>Ordena las filas por <code>value</code> en orden descendente.</p>
+<p><strong>Firma:</strong> <code>desc(value: any): void</code></p>
+<p>Códigos ISO 3 de los países de América del Sur en orden descendente:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">subregion</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"South America"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="p">).</span><span class="nx">sort</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">desc</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="p">))</span>
 </code></pre></div>
-<p><strong>Result:</strong></p>
+<p><strong>Resultado:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">[{</span><span class="nt">"iso3"</span><span class="p">:</span><span class="s2">"VEN"</span><span class="p">}</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">,{</span><span class="nt">"iso3"</span><span class="p">:</span><span class="s2">"URY"</span><span class="p">}</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">,{</span><span class="nt">"iso3"</span><span class="p">:</span><span class="s2">"SUR"</span><span class="p">}</span>
@@ -3128,15 +3128,15 @@
 <a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="p">,{</span><span class="nt">"iso3"</span><span class="p">:</span><span class="s2">"ARG"</span><span class="p">}</span>
 <a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="p">]</span>
 </code></pre></div>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>SQL generado (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">iso3</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">subregion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'South America'</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="k">desc</span>
 </code></pre></div>
 <div class="admonition warning">
-<p class="admonition-title">Reference fields through the lambda parameter</p>
-<p>Write <code>desc(p.iso3)</code>, not <code>desc(iso3)</code>. A name that is not reached through the lambda parameter (<code>p</code>) is read as a query parameter: <code>sort(p=&gt; desc(iso3))</code> generates <code>ORDER BY ? desc</code>, and the rows are not sorted by the field.</p>
+<p class="admonition-title">Hacer referencia a los campos a través del parámetro de la lambda</p>
+<p>Hay que escribir <code>desc(p.iso3)</code>, no <code>desc(iso3)</code>. Un nombre al que no se accede a través del parámetro de la lambda (<code>p</code>) se interpreta como un parámetro de la consulta: <code>sort(p=&gt; desc(iso3))</code> genera <code>ORDER BY ? desc</code>, y las filas no se ordenan por el campo.</p>
 </div>
 
 
@@ -3190,13 +3190,13 @@
         
         
           
-          <a href="../../../schema/Schema/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Schema">
+          <a href="../../../schema/Schema/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Esquema">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Schema
+                Esquema
               </div>
             </div>
             <div class="md-footer__button md-icon">

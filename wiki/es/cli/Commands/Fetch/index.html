@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1588,7 +1588,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1961,7 +1961,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2215,7 +2215,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2648,7 +2648,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Opciones
     </span>
   </a>
   
@@ -2657,7 +2657,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Ejemplo
     </span>
   </a>
   
@@ -2969,7 +2969,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Opciones
     </span>
   </a>
   
@@ -2978,7 +2978,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Ejemplo
     </span>
   </a>
   
@@ -3001,51 +3001,52 @@
 
 
 <h1 id="fetch">Fetch<a class="headerlink" href="#fetch" title="Permanent link">&para;</a></h1>
-<p>Shows the drift between the databases of a stage and the model: per mapping, the entities that differ (missing on one
-side, different columns, types, lengths, nullability or primary key), each with its <code>differences</code>. The entities are
-empty when the databases are in step with the model. Relations and indexes are not compared.</p>
-<p>It <strong>exits with code 1 when there are differences</strong>, so it can be used in CI.</p>
-<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<p>Muestra las diferencias entre las bases de datos de un stage y el modelo: por mapping, las entidades que difieren
+(ausentes en uno de los lados, con columnas, tipos, longitudes, nulabilidad o clave primaria distintos), cada una con
+sus <code>differences</code>. La lista de entidades está vacía cuando las bases de datos están al día con el modelo. No se comparan
+las relaciones ni los índices.</p>
+<p><strong>Termina con código 1 cuando hay diferencias</strong>, por lo que se puede usar en CI.</p>
+<h2 id="options">Opciones<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Option</th>
-<th style="text-align: left;">Short</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Opción</th>
+<th style="text-align: left;">Corta</th>
+<th style="text-align: left;">Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">workspace</td>
 <td style="text-align: left;"><code>-w</code></td>
-<td style="text-align: left;">Project path (default: the current directory).</td>
+<td style="text-align: left;">Ruta del proyecto (por defecto: el directorio actual).</td>
 </tr>
 <tr>
 <td style="text-align: left;">stage</td>
 <td style="text-align: left;"><code>-s</code></td>
-<td style="text-align: left;">Name of the stage (default: the first stage of the schema).</td>
+<td style="text-align: left;">Nombre del stage (por defecto: el primer stage del esquema).</td>
 </tr>
 <tr>
 <td style="text-align: left;">envfile</td>
 <td style="text-align: left;"><code>-e</code></td>
-<td style="text-align: left;">Reads a file of environment variables.</td>
+<td style="text-align: left;">Lee un archivo de variables de entorno.</td>
 </tr>
 <tr>
 <td style="text-align: left;">output</td>
 <td style="text-align: left;"><code>-o</code></td>
-<td style="text-align: left;">Output format: <code>json</code>, <code>beautiful</code>, <code>light</code> or <code>yaml</code>.</td>
+<td style="text-align: left;">Formato de salida: <code>json</code>, <code>beautiful</code>, <code>light</code> o <code>yaml</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">url</td>
 <td style="text-align: left;"><code>-u</code></td>
-<td style="text-align: left;">URL of the schema on a <a href="../../../data-gateway/">Data Gateway</a>, to run the command there.</td>
+<td style="text-align: left;">URL del esquema en un <a href="../../../data-gateway/">Data Gateway</a>, para ejecutar el comando allí.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<h2 id="example">Ejemplo<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lambdaorm<span class="w"> </span>fetch<span class="w"> </span>-w<span class="w"> </span>lab/countries<span class="w"> </span>-e<span class="w"> </span>lab/countries/.env<span class="w"> </span>-o<span class="w"> </span>beautiful<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"the database differs from the model"</span>
 </code></pre></div>
-<p>Result:</p>
+<p>Resultado:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">[</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span>
@@ -3060,7 +3061,7 @@ empty when the databases are in step with the model. Relations and indexes are n
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">]</span>
 </code></pre></div>
-<p>In step:</p>
+<p>Al día:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">[</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span>

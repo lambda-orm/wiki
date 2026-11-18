@@ -1127,7 +1127,7 @@
         <li class="md-nav__item">
   <a href="#include-a-onetomany-relation" class="md-nav__link">
     <span class="md-ellipsis">
-      Include a oneToMany relation
+      Incluir una relación oneToMany
     </span>
   </a>
   
@@ -1136,7 +1136,7 @@
         <li class="md-nav__item">
   <a href="#include-manytoone-and-onetomany-relations" class="md-nav__link">
     <span class="md-ellipsis">
-      Include manyToOne and oneToMany relations
+      Incluir relaciones manyToOne y oneToMany
     </span>
   </a>
   
@@ -1145,7 +1145,7 @@
         <li class="md-nav__item">
   <a href="#nested-includes" class="md-nav__link">
     <span class="md-ellipsis">
-      Nested includes
+      Includes anidados
     </span>
   </a>
   
@@ -1154,7 +1154,7 @@
         <li class="md-nav__item">
   <a href="#include-only-some-properties" class="md-nav__link">
     <span class="md-ellipsis">
-      Include only some properties
+      Incluir solo algunas propiedades
     </span>
   </a>
   
@@ -1163,17 +1163,17 @@
         <li class="md-nav__item">
   <a href="#relations-in-another-source" class="md-nav__link">
     <span class="md-ellipsis">
-      Relations in another source
+      Relaciones en otra fuente
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Relations in another source">
+    <nav class="md-nav" aria-label="Relaciones en otra fuente">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#filter-by-a-field-of-a-relation-in-another-source" class="md-nav__link">
     <span class="md-ellipsis">
-      Filter by a field of a relation in another source
+      Filtrar por un campo de una relación en otra fuente
     </span>
   </a>
   
@@ -1187,7 +1187,7 @@
         <li class="md-nav__item">
   <a href="#code-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Code example
+      Ejemplo de código
     </span>
   </a>
   
@@ -1397,7 +1397,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1707,7 +1707,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2080,7 +2080,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2334,7 +2334,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -3018,7 +3018,7 @@
         <li class="md-nav__item">
   <a href="#include-a-onetomany-relation" class="md-nav__link">
     <span class="md-ellipsis">
-      Include a oneToMany relation
+      Incluir una relación oneToMany
     </span>
   </a>
   
@@ -3027,7 +3027,7 @@
         <li class="md-nav__item">
   <a href="#include-manytoone-and-onetomany-relations" class="md-nav__link">
     <span class="md-ellipsis">
-      Include manyToOne and oneToMany relations
+      Incluir relaciones manyToOne y oneToMany
     </span>
   </a>
   
@@ -3036,7 +3036,7 @@
         <li class="md-nav__item">
   <a href="#nested-includes" class="md-nav__link">
     <span class="md-ellipsis">
-      Nested includes
+      Includes anidados
     </span>
   </a>
   
@@ -3045,7 +3045,7 @@
         <li class="md-nav__item">
   <a href="#include-only-some-properties" class="md-nav__link">
     <span class="md-ellipsis">
-      Include only some properties
+      Incluir solo algunas propiedades
     </span>
   </a>
   
@@ -3054,17 +3054,17 @@
         <li class="md-nav__item">
   <a href="#relations-in-another-source" class="md-nav__link">
     <span class="md-ellipsis">
-      Relations in another source
+      Relaciones en otra fuente
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Relations in another source">
+    <nav class="md-nav" aria-label="Relaciones en otra fuente">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#filter-by-a-field-of-a-relation-in-another-source" class="md-nav__link">
     <span class="md-ellipsis">
-      Filter by a field of a relation in another source
+      Filtrar por un campo de una relación en otra fuente
     </span>
   </a>
   
@@ -3078,7 +3078,7 @@
         <li class="md-nav__item">
   <a href="#code-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Code example
+      Ejemplo de código
     </span>
   </a>
   
@@ -3101,16 +3101,16 @@
 
 
 <h1 id="include">Include<a class="headerlink" href="#include" title="Permanent link">&para;</a></h1>
-<p>This page shows how to load related entities together with the main entity, using the <code>include</code> method. Use it when the result must contain an object with its relations (an order with its customer and its details), or when the related entity is in another source.</p>
-<p><code>include</code> works with every type of relation (<code>oneToMany</code>, <code>manyToOne</code> and <code>oneToOne</code>, see <a href="../../schema/SchemaDefinition/">relations</a>). In λORM terms, a <code>oneToMany</code> relation points to one record (each order has one <code>customer</code>) and a <code>manyToOne</code> relation is a collection (each order has many <code>details</code>). Inside an include you can also filter the related records and choose their properties.</p>
-<p>For each include, λORM runs one statement that reads all the related records needed, and then assembles the objects in memory. This avoids running one statement per record, which considerably improves performance. To link the records, λORM adds the keys it needs to the statements (<code>__customerId</code>, <code>LambdaOrmParentId</code>…); they are removed from the result.</p>
-<p>Includes can be used in selects, inserts, upserts, updates, deletes and bulk inserts. The SQL shown on this page is the one generated for MySQL.</p>
-<h2 id="include-a-onetomany-relation">Include a <code>oneToMany</code> relation<a class="headerlink" href="#include-a-onetomany-relation" title="Permanent link">&para;</a></h2>
-<p>Reads an order and its customer.</p>
+<p>Esta página muestra cómo cargar entidades relacionadas junto con la entidad principal, usando el método <code>include</code>. Se usa cuando el resultado debe contener un objeto con sus relaciones (un pedido con su cliente y sus detalles), o cuando la entidad relacionada está en otra fuente.</p>
+<p><code>include</code> funciona con todos los tipos de relación (<code>oneToMany</code>, <code>manyToOne</code> y <code>oneToOne</code>, ver <a href="../../schema/SchemaDefinition/">relaciones</a>). En términos de λORM, una relación <code>oneToMany</code> apunta a un registro (cada pedido tiene un <code>customer</code>) y una relación <code>manyToOne</code> es una colección (cada pedido tiene muchos <code>details</code>). Dentro de un include también se pueden filtrar los registros relacionados y elegir sus propiedades.</p>
+<p>Por cada include, λORM ejecuta una sentencia que lee todos los registros relacionados necesarios y después arma los objetos en memoria. Así se evita ejecutar una sentencia por registro, lo que mejora considerablemente el rendimiento. Para vincular los registros, λORM añade a las sentencias las claves que necesita (<code>__customerId</code>, <code>LambdaOrmParentId</code>…); estas se eliminan del resultado.</p>
+<p>Los includes se pueden usar en selects, inserts, upserts, updates, deletes e inserciones masivas. El SQL que se muestra en esta página es el generado para MySQL.</p>
+<h2 id="include-a-onetomany-relation">Incluir una relación <code>oneToMany</code><a class="headerlink" href="#include-a-onetomany-relation" title="Permanent link">&para;</a></h2>
+<p>Lee un pedido y su cliente.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">Orders</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">id</span><span class="p">).</span><span class="nx">include</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">customer</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL resultante:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">-- the order</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">OrderID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">CustomerID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">customerId</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">EmployeeID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">employeeId</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">OrderDate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">orderDate</span><span class="p">,</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="n">o</span><span class="p">.</span><span class="n">RequiredDate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">requiredDate</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">ShippedDate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">shippedDate</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">ShipVia</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">shipViaId</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">Freight</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">freight</span><span class="p">,</span>
@@ -3126,7 +3126,7 @@
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Customers</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">CustomerID</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="o">?</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Data Result:</strong></p>
+<p><strong>Datos resultantes:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">[</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10248</span><span class="p">,</span>
@@ -3157,12 +3157,12 @@
 <a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="p">]</span>
 </code></pre></div>
-<h2 id="include-manytoone-and-onetomany-relations">Include <code>manyToOne</code> and <code>oneToMany</code> relations<a class="headerlink" href="#include-manytoone-and-onetomany-relations" title="Permanent link">&para;</a></h2>
-<p>Reads an order with its details and its customer. To include several relations, return them in an array.</p>
+<h2 id="include-manytoone-and-onetomany-relations">Incluir relaciones <code>manyToOne</code> y <code>oneToMany</code><a class="headerlink" href="#include-manytoone-and-onetomany-relations" title="Permanent link">&para;</a></h2>
+<p>Lee un pedido con sus detalles y su cliente. Para incluir varias relaciones, se devuelven en un array.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">Orders</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">id</span><span class="p">).</span><span class="nx">include</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="nx">p</span><span class="p">.</span><span class="nx">details</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">customer</span><span class="p">])</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL resultante:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">-- the order</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">OrderID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">CustomerID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">customerId</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">EmployeeID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">employeeId</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">OrderDate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">orderDate</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="n">o</span><span class="p">.</span><span class="n">RequiredDate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">requiredDate</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">ShippedDate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">shippedDate</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">ShipVia</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">shipViaId</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">Freight</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">freight</span><span class="p">,</span>
@@ -3184,7 +3184,7 @@
 <a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Customers</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">CustomerID</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="o">?</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Data Result:</strong></p>
+<p><strong>Datos resultantes:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">[</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="p">{</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10248</span><span class="p">,</span>
@@ -3238,14 +3238,14 @@
 <a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a><span class="p">]</span>
 </code></pre></div>
-<h2 id="nested-includes">Nested includes<a class="headerlink" href="#nested-includes" title="Permanent link">&para;</a></h2>
-<p>An included relation can include its own relations. This example reads an order with its customer and its details; for each detail it reads the product, and for each product its category.</p>
+<h2 id="nested-includes">Includes anidados<a class="headerlink" href="#nested-includes" title="Permanent link">&para;</a></h2>
+<p>Una relación incluida puede incluir sus propias relaciones. Este ejemplo lee un pedido con su cliente y sus detalles; para cada detalle lee el producto, y para cada producto su categoría.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">Orders</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">id</span><span class="p">)</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="nx">p</span><span class="p">.</span><span class="nx">details</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="nx">q</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">q</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">category</span><span class="p">)),</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">customer</span><span class="p">])</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL resultante:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">-- the order</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">OrderID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">CustomerID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">customerId</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">EmployeeID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">employeeId</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">OrderDate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">orderDate</span><span class="p">,</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="n">o</span><span class="p">.</span><span class="n">RequiredDate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">requiredDate</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">ShippedDate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">shippedDate</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">ShipVia</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">shipViaId</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">Freight</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">freight</span><span class="p">,</span>
@@ -3280,7 +3280,7 @@
 <a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Customers</span><span class="w"> </span><span class="n">c1</span>
 <a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">c1</span><span class="p">.</span><span class="n">CustomerID</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="o">?</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Data Result:</strong></p>
+<p><strong>Datos resultantes:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">[</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="p">{</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10248</span><span class="p">,</span>
@@ -3385,8 +3385,8 @@
 <a id="__codelineno-8-102" name="__codelineno-8-102" href="#__codelineno-8-102"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-8-103" name="__codelineno-8-103" href="#__codelineno-8-103"></a><span class="p">]</span>
 </code></pre></div>
-<h2 id="include-only-some-properties">Include only some properties<a class="headerlink" href="#include-only-some-properties" title="Permanent link">&para;</a></h2>
-<p>You can choose the properties to return both for the main entity and for each included entity, so that the query returns only the data you need. This example reads the date of an order; the name and full address of its customer; the quantity and unit price of its details; the name of each product and the name of its category.</p>
+<h2 id="include-only-some-properties">Incluir solo algunas propiedades<a class="headerlink" href="#include-only-some-properties" title="Permanent link">&para;</a></h2>
+<p>Se pueden elegir las propiedades a devolver tanto para la entidad principal como para cada entidad incluida, de modo que la consulta devuelva solo los datos necesarios. Este ejemplo lee la fecha de un pedido; el nombre y la dirección completa de su cliente; la cantidad y el precio unitario de sus detalles; el nombre de cada producto y el nombre de su categoría.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nx">Orders</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">id</span><span class="p">)</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[</span>
@@ -3404,7 +3404,7 @@
 <a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="c1">// date of the order</span>
 <a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">    </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">orderDate</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL resultante:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1">-- the order</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">OrderDate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">orderDate</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">CustomerID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="n">__customerId</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">OrderID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="n">__id</span><span class="o">`</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Orders</span><span class="w"> </span><span class="n">o</span>
@@ -3432,7 +3432,7 @@
 <a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Categories</span><span class="w"> </span><span class="n">c1</span>
 <a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">c1</span><span class="p">.</span><span class="n">CategoryID</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="o">?</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Data Result:</strong></p>
+<p><strong>Datos resultantes:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">[</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="p">{</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">"orderDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1996-07-03T22:00:00.000Z"</span><span class="p">,</span>
@@ -3475,32 +3475,32 @@
 <a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a><span class="p">]</span>
 </code></pre></div>
-<h2 id="relations-in-another-source">Relations in another source<a class="headerlink" href="#relations-in-another-source" title="Permanent link">&para;</a></h2>
-<p>The related entity can be in another source (another database or schema) of the stage. Since each include runs as a separate statement, <code>include</code> works across sources at any depth:</p>
+<h2 id="relations-in-another-source">Relaciones en otra fuente<a class="headerlink" href="#relations-in-another-source" title="Permanent link">&para;</a></h2>
+<p>La entidad relacionada puede estar en otra fuente (otra base de datos u otro esquema) del stage. Como cada include se ejecuta como una sentencia separada, <code>include</code> funciona entre fuentes a cualquier profundidad:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// Orders and OrderLines in one source, Products and Categories in another</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nx">Orders</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">id</span><span class="p">).</span><span class="nx">include</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">lines</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="nx">l</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">l</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="nx">q</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">q</span><span class="p">.</span><span class="nx">category</span><span class="p">)))</span>
 </code></pre></div>
-<h3 id="filter-by-a-field-of-a-relation-in-another-source">Filter by a field of a relation in another source<a class="headerlink" href="#filter-by-a-field-of-a-relation-in-another-source" title="Permanent link">&para;</a></h3>
-<p>A filter can also use a property of a relation whose entity is in another source. The other source is queried first, and the keys found are then used to filter with <code>in</code>:</p>
+<h3 id="filter-by-a-field-of-a-relation-in-another-source">Filtrar por un campo de una relación en otra fuente<a class="headerlink" href="#filter-by-a-field-of-a-relation-in-another-source" title="Permanent link">&para;</a></h3>
+<p>Un filtro también puede usar una propiedad de una relación cuya entidad está en otra fuente. Primero se consulta la otra fuente, y después las claves encontradas se usan para filtrar con <code>in</code>:</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">// OrderLines (source "sales") filtered by the name of its product (source "catalog")</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nx">OrderLines</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">orderId</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">orderId</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Executed as:</strong></p>
+<p><strong>Se ejecuta como:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1">// 1. on the source of Products</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nx">Products</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1">// 2. on the source of OrderLines, with the ids found in 1</span>
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="nx">OrderLines</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">in</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">productId</span><span class="p">,</span><span class="w"> </span><span class="nx">ids</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">orderId</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">orderId</span><span class="p">)</span>
 </code></pre></div>
-<p>Each comparison is replaced on its own, so <code>&amp;&amp;</code>, <code>||</code> and <code>!</code> keep their meaning.</p>
+<p>Cada comparación se reemplaza por separado, por lo que <code>&amp;&amp;</code>, <code>||</code> y <code>!</code> mantienen su significado.</p>
 <ul>
-<li>It can be combined with other conditions, also with <code>||</code>: <code>OrderLines.filter(p =&gt; p.orderId == orderId &amp;&amp; (p.product.name == name || p.quantity &gt; 100))</code>.</li>
-<li>When the other source has no match, the query returns no rows.</li>
-<li>Only one level of relation is supported (<code>p.product.name</code>, not <code>p.product.category.name</code>).</li>
-<li>The other side of each comparison must be a value (a literal or a variable). Comparing with a property, as in <code>p.product.name == p.description</code>, fails with an error saying that the relation is in another source.</li>
+<li>Se puede combinar con otras condiciones, también con <code>||</code>: <code>OrderLines.filter(p =&gt; p.orderId == orderId &amp;&amp; (p.product.name == name || p.quantity &gt; 100))</code>.</li>
+<li>Cuando la otra fuente no tiene coincidencias, la consulta no devuelve filas.</li>
+<li>Solo se admite un nivel de relación (<code>p.product.name</code>, no <code>p.product.category.name</code>).</li>
+<li>El otro lado de cada comparación debe ser un valor (un literal o una variable). Comparar con una propiedad, como en <code>p.product.name == p.description</code>, falla con un error que indica que la relación está en otra fuente.</li>
 </ul>
-<h2 id="code-example">Code example<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h2>
-<p>The query of <a href="#include-only-some-properties">Include only some properties</a>, run from Node with <code>@lambdaorm/lib</code>:</p>
+<h2 id="code-example">Ejemplo de código<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h2>
+<p>La consulta de <a href="#include-only-some-properties">Incluir solo algunas propiedades</a>, ejecutada desde Node con <code>@lambdaorm/lib</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Orders</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./domain/model'</span><span class="w"> </span><span class="c1">// model generated by `lambdaorm build`</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>

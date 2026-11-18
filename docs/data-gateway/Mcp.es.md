@@ -1,0 +1,109 @@
+# MCP {#mcp}
+
+El gateway es un servidor [Model Context Protocol](https://modelcontextprotocol.io), de modo que los agentes de IA (Claude Code y cualquier
+cliente MCP) pueden explorar el dominio y consultar los datos con el lenguaje de λORM. Hay **un servidor MCP por esquema**
+(`/iot/v1/mcp`): sus herramientas describen el dominio de ese esquema, y cada versión se registra como un servidor distinto en el
+cliente (`iot-v1`, `iot-v2`).
+
+```sh
+claude mcp add --transport http iot-v1 http://localhost:8081/iot/v1/mcp --header "X-Api-Key: $KEY"
+```
+
+Con un único esquema en la raíz: `http://localhost:8081/mcp`.
+
+## Herramientas {#tools}
+
+Una herramienta por cada operación del esquema, **escrituras incluidas**: un agente puede hacer lo mismo que una aplicación, **si su
+credencial lo permite**. Las descripciones y los esquemas de entrada se generan al arrancar el esquema y contienen su dominio
+(entidades, propiedades, relaciones, enums), de modo que el modelo sabe qué consultar sin una llamada previa.
+
+| Herramienta | Argumentos | Equivalente REST | Permiso | Indicación |
+| --- | --- | --- | --- | --- |
+| `orm_execute` | `query`, `data?`, `options?` | `POST /execute` | `read` (selects) o `write` | solo lectura con `read`; destructiva con `write` |
+| `orm_execute_script` | `script`, `data?`, `options?` | `POST /script` | `script` | destructiva |
+| `orm_execute_queued` | `topic`, `query`, `data?`, `chunk?`, `options?` | `POST /execute-queued` | `queue` | destructiva |
+| `orm_plan` | `query`, `options?` | `POST /plan` | `read` | solo lectura |
+| `orm_metadata` | `query` | `POST /metadata` | `read` | solo lectura |
+| `orm_model` | `query` | `POST /model` | `read` | solo lectura |
+| `orm_parameters` | `query` | `POST /parameters` | `read` | solo lectura |
+| `orm_constraints` | `query` | `POST /constraints` | `read` | solo lectura |
+| `schema_get` | — | `GET /schema` | `read` | solo lectura |
+| `schema_version` | — | `GET /schema/version` | `read` | solo lectura |
+| `schema_domain` | — | `GET /domain` | `read` | solo lectura |
+| `schema_entities` | `entity?` | `GET /entities[/{entity}]` | `read` | solo lectura |
+| `schema_enums` | `enum?` | `GET /enums[/{enum}]` | `read` | solo lectura |
+| `schema_sources` | `source?` | `GET /sources[/{source}]` | `read` | solo lectura |
+| `schema_mappings` | `mapping?`, `entity?` | `GET /mappings…` | `read` | solo lectura |
+| `schema_views` | — | `GET /views` | `read` | solo lectura |
+| `schema_stages` | `stage?` | `GET /stages[/{stage}]` | `read` | solo lectura |
+| `stage_exists` | `stage` | `GET /stages/{stage}/exists` | `read` | solo lectura |
+| `stage_export` | `stage` | `GET /stages/{stage}/export` | `read` | solo lectura |
+| `stage_import` | `stage`, `data` | `POST /stages/{stage}/import` | `stageImport` | destructiva |
+| `gateway_version` | — | `GET /version` | `read` | solo lectura |
+| `gateway_health` | — | `GET /health` | `read` | solo lectura |
+
+- **`tools/list` muestra a cada credencial solo las herramientas que puede usar.** Sin `script`, `orm_execute_script` no
+  aparece; con solo `read`, `orm_execute` se describe como "read-only queries with this credential".
+- Las indicaciones (`readOnlyHint`, `destructiveHint`) no bloquean nada: le dicen al cliente qué herramientas modifican datos,
+  para que pueda pedir confirmación. Lo que bloquea son los [permisos](Security.md#permissions).
+- Las mismas reglas que en REST: `orm_execute_script` falla si los scripts están deshabilitados; `orm_execute_queued`, si el esquema no tiene
+  cola.
+- `mcp.tools.include` / `exclude` (globales o por esquema) restringen aún más la lista, por ejemplo
+  `exclude: [ orm_execute_script, stage_import ]`.
+
+## Resultados y errores {#results-and-errors}
+
+- Un resultado es `{ content: [{ type: "text", text: <JSON> }] }`, con `structuredContent` también cuando es pequeño.
+- **Límite de filas (`mcp.maxRows`, por defecto 500).** Cuando `orm_execute` u `orm_execute_script` responden una lista más larga, se
+  corta y se le indica al modelo cómo pedir menos:
+
+  ```json
+  { "rows": [ "…500 rows…" ], "truncated": true, "returned": 500, "total": 18234,
+    "hint": "The result was cut to 500 rows. Use .page(1, 500) (or a smaller page), aggregate with map/count, or filter the query more." }
+  ```
+
+  Se aplica solo a MCP y después de ejecutarse la consulta: protege el contexto del modelo. La base de datos está protegida por
+  `server.maxResponseBytes` y `server.timeout`.
+- Un error de λORM (sintaxis, una entidad desconocida, una restricción, un script deshabilitado) o un permiso que falta responde
+  `isError: true` con el mensaje, para que el modelo pueda leerlo y corregir la consulta.
+
+## Recursos {#resources}
+
+| URI | Contenido |
+| --- | --- |
+| `lambdaorm://guide/expressions` | una guía breve del lenguaje de consultas (Markdown), para dar contexto al modelo |
+| `lambdaorm://schema/domain` | el dominio completo del esquema, en JSON |
+| `lambdaorm://entities/{entity}` | una entidad (plantilla) |
+
+## Qué puede hacer un agente {#what-an-agent-can-do}
+
+No hay un modo de solo lectura del transporte: lo que un agente puede hacer lo deciden **los permisos de su credencial**. Un
+agente que solo consulta recibe una credencial con `[ read ]`: puede ejecutar selects pero no escribir, ejecutar scripts, encolar ni
+importar, por ningún transporte. Además: `schemas[].transports` para dejar un esquema fuera de MCP, `mcp.tools.exclude`, las indicaciones
+y los permisos del usuario de la base de datos (la garantía de fondo). Cada escritura que hace un agente queda
+[auditada](Security.md#audit) con el nombre de su credencial y `"transport": "mcpHttp"`.
+
+## Transportes {#transports}
+
+### mcpHttp {#mcphttp}
+
+| Ruta | Protocolo |
+| --- | --- |
+| `POST/GET/DELETE {basePath}/{schema}/mcp` | Streamable HTTP: Claude Code `--transport http` y los clientes actuales |
+| `GET {basePath}/{schema}/sse` + `POST {basePath}/{schema}/messages?sessionId=<id>` | HTTP+SSE (obsoleto), con `legacySse: true` |
+| `GET {basePath}/status` | el estado del transporte, los esquemas y las sesiones SSE abiertas |
+
+Streamable HTTP no tiene estado por defecto (`stateful: false`): cada `POST` es independiente y cualquier réplica lo responde. La
+credencial va en cada petición.
+
+### mcpWebSocket {#mcpwebsocket}
+
+Un upgrade en `{basePath}/{schema}/mcp`, autenticado en el handshake; mensajes JSON-RPC 2.0 con los métodos de MCP
+(`initialize`, `ping`, `tools/list`, `tools/call`, `resources/list`, `resources/read`, …). No es un transporte MCP
+estándar: se ofrece para clientes y gateways que lo soportan por su cuenta. Su documento AsyncAPI está en
+`GET {basePath}/asyncapi`.
+
+```json
+→ { "jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": { "name": "orm_execute", "arguments": { "query": "Products.filter(p => p.price > 50).map(p => p.name)" } } }
+← { "jsonrpc": "2.0", "id": 1, "result": { "content": [ { "type": "text", "text": "[\"Côte de Blaye\", \"Thüringer Rostbratwurst\"]" } ] } }
+```

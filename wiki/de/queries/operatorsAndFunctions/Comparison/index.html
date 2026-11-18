@@ -1288,7 +1288,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1358,7 +1358,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Übersicht
     </span>
   </a>
   
@@ -1367,7 +1367,7 @@
         <li class="md-nav__item">
   <a href="#equal" class="md-nav__link">
     <span class="md-ellipsis">
-      Equal (==, ===)
+      Gleich (==, ===)
     </span>
   </a>
   
@@ -1376,7 +1376,7 @@
         <li class="md-nav__item">
   <a href="#not-equal" class="md-nav__link">
     <span class="md-ellipsis">
-      Not equal (!=, !==, &lt;&gt;)
+      Ungleich (!=, !==, &lt;&gt;)
     </span>
   </a>
   
@@ -1385,7 +1385,7 @@
         <li class="md-nav__item">
   <a href="#greater-than-less-than" class="md-nav__link">
     <span class="md-ellipsis">
-      Greater than, less than (&gt;, &lt;, &gt;=, &lt;=)
+      Größer als, kleiner als (&gt;, &lt;, &gt;=, &lt;=)
     </span>
   </a>
   
@@ -1421,7 +1421,7 @@
         <li class="md-nav__item">
   <a href="#database-support" class="md-nav__link">
     <span class="md-ellipsis">
-      Database support
+      Datenbankunterstützung
     </span>
   </a>
   
@@ -2085,7 +2085,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2339,7 +2339,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -3023,7 +3023,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Übersicht
     </span>
   </a>
   
@@ -3032,7 +3032,7 @@
         <li class="md-nav__item">
   <a href="#equal" class="md-nav__link">
     <span class="md-ellipsis">
-      Equal (==, ===)
+      Gleich (==, ===)
     </span>
   </a>
   
@@ -3041,7 +3041,7 @@
         <li class="md-nav__item">
   <a href="#not-equal" class="md-nav__link">
     <span class="md-ellipsis">
-      Not equal (!=, !==, &lt;&gt;)
+      Ungleich (!=, !==, &lt;&gt;)
     </span>
   </a>
   
@@ -3050,7 +3050,7 @@
         <li class="md-nav__item">
   <a href="#greater-than-less-than" class="md-nav__link">
     <span class="md-ellipsis">
-      Greater than, less than (&gt;, &lt;, &gt;=, &lt;=)
+      Größer als, kleiner als (&gt;, &lt;, &gt;=, &lt;=)
     </span>
   </a>
   
@@ -3086,7 +3086,7 @@
         <li class="md-nav__item">
   <a href="#database-support" class="md-nav__link">
     <span class="md-ellipsis">
-      Database support
+      Datenbankunterstützung
     </span>
   </a>
   
@@ -3108,61 +3108,61 @@
 
 
 
-<h1 id="comparison-operators-and-functions">Comparison Operators and Functions<a class="headerlink" href="#comparison-operators-and-functions" title="Permanent link">&para;</a></h1>
-<p>Comparison operators and functions compare two or more values and return a boolean. They are mostly used in the predicate of <code>filter</code> (the <code>WHERE</code> clause of the generated SQL), but they can be used in any expression of a query.</p>
+<h1 id="comparison-operators-and-functions">Vergleichsoperatoren und -funktionen<a class="headerlink" href="#comparison-operators-and-functions" title="Permanent link">&para;</a></h1>
+<p>Vergleichsoperatoren und -funktionen vergleichen zwei oder mehr Werte und geben einen booleschen Wert zurück. Sie werden meist im Prädikat von <code>filter</code> verwendet (der <code>WHERE</code>-Klausel des erzeugten SQL), können aber in jedem Ausdruck einer Abfrage eingesetzt werden.</p>
 <div class="admonition note">
-<p class="admonition-title">About the examples</p>
-<p>The examples run against the <code>Countries</code> entity of the countries sample schema. Each one shows the query, the result it returned on the test database and the SQL sentence that λORM generated for MySQL. Other engines receive their own translation; to see the sentence generated for your data source, use <a href="../../Metadata/"><code>orm.plan</code></a>.</p>
+<p class="admonition-title">Zu den Beispielen</p>
+<p>Die Beispiele laufen gegen die Entität <code>Countries</code> des Beispielschemas für Länder. Jedes zeigt die Abfrage, das Ergebnis, das sie auf der Testdatenbank geliefert hat, und die SQL-Anweisung, die λORM für MySQL erzeugt hat. Andere Datenbank-Engines erhalten ihre eigene Übersetzung; um die für Ihre Datenquelle erzeugte Anweisung zu sehen, verwenden Sie <a href="../../Metadata/"><code>orm.plan</code></a>.</p>
 </div>
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<h2 id="summary">Übersicht<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Operator / function</th>
-<th>Description</th>
+<th>Operator / Funktion</th>
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>==</code>, <code>===</code></td>
-<td>Equal to</td>
+<td>Gleich</td>
 </tr>
 <tr>
 <td><code>!=</code>, <code>!==</code>, <code>&lt;&gt;</code></td>
-<td>Not equal to</td>
+<td>Ungleich</td>
 </tr>
 <tr>
 <td><code>&gt;</code></td>
-<td>Greater than</td>
+<td>Größer als</td>
 </tr>
 <tr>
 <td><code>&lt;</code></td>
-<td>Less than</td>
+<td>Kleiner als</td>
 </tr>
 <tr>
 <td><code>&gt;=</code></td>
-<td>Greater than or equal to</td>
+<td>Größer oder gleich</td>
 </tr>
 <tr>
 <td><code>&lt;=</code></td>
-<td>Less than or equal to</td>
+<td>Kleiner oder gleich</td>
 </tr>
 <tr>
 <td><code>between</code></td>
-<td>Checks whether a value is within a range</td>
+<td>Prüft, ob ein Wert innerhalb eines Bereichs liegt</td>
 </tr>
 <tr>
 <td><code>in</code></td>
-<td>Checks whether a value is in a list of values</td>
+<td>Prüft, ob ein Wert in einer Liste von Werten enthalten ist</td>
 </tr>
 <tr>
 <td><code>includes</code></td>
-<td>Checks whether a list contains a value</td>
+<td>Prüft, ob eine Liste einen Wert enthält</td>
 </tr>
 </tbody>
 </table>
-<h2 id="equal">Equal (<code>==</code>, <code>===</code>)<a class="headerlink" href="#equal" title="Permanent link">&para;</a></h2>
-<p>Returns <code>true</code> when both operands are equal. <code>==</code> and <code>===</code> are equivalent: both are translated to <code>=</code> in SQL.</p>
+<h2 id="equal">Gleich (<code>==</code>, <code>===</code>)<a class="headerlink" href="#equal" title="Permanent link">&para;</a></h2>
+<p>Gibt <code>true</code> zurück, wenn beide Operanden gleich sind. <code>==</code> und <code>===</code> sind gleichwertig: Beide werden in SQL in <code>=</code> übersetzt.</p>
 <p><strong>Syntax:</strong></p>
 <ul>
 <li><code>a == b</code></li>
@@ -3170,42 +3170,42 @@
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"name":"Brazil"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"name":"Brazil"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"name":"Brazil"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"name":"Brazil"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
-<h2 id="not-equal">Not equal (<code>!=</code>, <code>!==</code>, <code>&lt;&gt;</code>)<a class="headerlink" href="#not-equal" title="Permanent link">&para;</a></h2>
-<p>Returns <code>true</code> when the operands are different. The three forms are equivalent and are translated to <code>&lt;&gt;</code> in SQL.</p>
+<h2 id="not-equal">Ungleich (<code>!=</code>, <code>!==</code>, <code>&lt;&gt;</code>)<a class="headerlink" href="#not-equal" title="Permanent link">&para;</a></h2>
+<p>Gibt <code>true</code> zurück, wenn sich die Operanden unterscheiden. Die drei Formen sind gleichwertig und werden in SQL in <code>&lt;&gt;</code> übersetzt.</p>
 <p><strong>Syntax:</strong></p>
 <ul>
 <li><code>a != b</code></li>
 <li><code>a !== b</code></li>
 <li><code>a &lt;&gt; b</code></li>
 </ul>
-<p>See the <a href="../Logical/">Logical</a> page for an example that uses <code>!=</code>.</p>
-<h2 id="greater-than-less-than">Greater than, less than (<code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>)<a class="headerlink" href="#greater-than-less-than" title="Permanent link">&para;</a></h2>
-<p>Compare two values of the same type (numbers, strings or dates).</p>
+<p>Ein Beispiel mit <code>!=</code> finden Sie auf der Seite <a href="../Logical/">Logisch</a>.</p>
+<h2 id="greater-than-less-than">Größer als, kleiner als (<code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>)<a class="headerlink" href="#greater-than-less-than" title="Permanent link">&para;</a></h2>
+<p>Vergleichen zwei Werte desselben Typs (Zahlen, Zeichenketten oder Datumswerte).</p>
 <ul>
-<li><code>a &gt; b</code>: <code>a</code> is greater than <code>b</code>.</li>
-<li><code>a &lt; b</code>: <code>a</code> is less than <code>b</code>.</li>
-<li><code>a &gt;= b</code>: <code>a</code> is greater than or equal to <code>b</code>.</li>
-<li><code>a &lt;= b</code>: <code>a</code> is less than or equal to <code>b</code>.</li>
+<li><code>a &gt; b</code>: <code>a</code> ist größer als <code>b</code>.</li>
+<li><code>a &lt; b</code>: <code>a</code> ist kleiner als <code>b</code>.</li>
+<li><code>a &gt;= b</code>: <code>a</code> ist größer oder gleich <code>b</code>.</li>
+<li><code>a &lt;= b</code>: <code>a</code> ist kleiner oder gleich <code>b</code>.</li>
 </ul>
-<p>Name of the first country (ordered by name) whose latitude is between -11 and -9 (exclusive) and whose longitude is -55:</p>
+<p>Name des ersten Landes (nach Name sortiert), dessen Breitengrad zwischen -11 und -9 (ausschließlich) liegt und dessen Längengrad -55 ist:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">latitude</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">-</span><span class="mf">9</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">latitude</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">-</span><span class="mf">11</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">longitude</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mf">55</span><span class="w"> </span><span class="p">).</span><span class="nx">first</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"name":"Brazil"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"name":"Brazil"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">latitude</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">-</span><span class="mi">9</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">latitude</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">-</span><span class="mi">11</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">longitude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">55</span><span class="p">))</span>
@@ -3213,12 +3213,12 @@
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">LIMIT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
 </code></pre></div>
 <h2 id="between">between<a class="headerlink" href="#between" title="Permanent link">&para;</a></h2>
-<p>Returns <code>true</code> when <code>value</code> is within the range <code>from</code> to <code>to</code>. In SQL it is translated to <code>value BETWEEN from AND to</code>, which includes both limits.</p>
-<p><strong>Signature:</strong> <code>between(value: T, from: T, to: T): boolean</code></p>
+<p>Gibt <code>true</code> zurück, wenn <code>value</code> im Bereich von <code>from</code> bis <code>to</code> liegt. In SQL wird es in <code>value BETWEEN from AND to</code> übersetzt, das beide Grenzen einschließt.</p>
+<p><strong>Signatur:</strong> <code>between(value: T, from: T, to: T): boolean</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">between</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">latitude</span><span class="p">,</span><span class="o">-</span><span class="mf">11</span><span class="p">,</span><span class="o">-</span><span class="mf">9</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">longitude</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mf">55</span><span class="w"> </span><span class="p">).</span><span class="nx">first</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"name":"Brazil"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"name":"Brazil"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">latitude</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="o">-</span><span class="mi">11</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="o">-</span><span class="mi">9</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">longitude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">55</span><span class="p">)</span>
@@ -3226,26 +3226,26 @@
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">LIMIT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
 </code></pre></div>
 <h2 id="in">in<a class="headerlink" href="#in" title="Permanent link">&para;</a></h2>
-<p>Returns <code>true</code> when <code>value</code> is equal to one of the values of <code>list</code>. It replaces several conditions joined with <code>||</code>, and is translated to <code>value IN (...)</code> in SQL.</p>
-<p><strong>Signature:</strong> <code>in(value: T, list: T[]): boolean</code></p>
+<p>Gibt <code>true</code> zurück, wenn <code>value</code> einem der Werte von <code>list</code> entspricht. Es ersetzt mehrere mit <code>||</code> verknüpfte Bedingungen und wird in SQL in <code>value IN (...)</code> übersetzt.</p>
+<p><strong>Signatur:</strong> <code>in(value: T, list: T[]): boolean</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">in</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="p">,[</span><span class="s2">"BRA"</span><span class="p">,</span><span class="s2">"ARG"</span><span class="p">])).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"name":"Argentina"},{"name":"Brazil"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"name":"Argentina"},{"name":"Brazil"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">'BRA'</span><span class="p">,</span><span class="w"> </span><span class="s1">'ARG'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="includes">includes<a class="headerlink" href="#includes" title="Permanent link">&para;</a></h2>
-<p>Returns <code>true</code> when <code>list</code> contains <code>value</code>. It is the same check as <code>in</code>, with the arguments in the opposite order: the list comes first. <code>contains</code> is an alias of <code>includes</code>.</p>
-<p><strong>Signature:</strong> <code>includes(list: T[], value: T): boolean</code></p>
-<p>For example, <code>includes(["BRA","ARG"], p.iso3)</code> generates the same <code>WHERE c.iso3 IN ('BRA', 'ARG')</code> condition as the <code>in</code> example above on MySQL, MariaDB, PostgreSQL, Oracle and SQLite.</p>
-<h2 id="database-support">Database support<a class="headerlink" href="#database-support" title="Permanent link">&para;</a></h2>
+<p>Gibt <code>true</code> zurück, wenn <code>list</code> den Wert <code>value</code> enthält. Es ist dieselbe Prüfung wie <code>in</code>, mit den Argumenten in umgekehrter Reihenfolge: Die Liste steht an erster Stelle. <code>contains</code> ist ein Alias von <code>includes</code>.</p>
+<p><strong>Signatur:</strong> <code>includes(list: T[], value: T): boolean</code></p>
+<p>Beispielsweise erzeugt <code>includes(["BRA","ARG"], p.iso3)</code> auf MySQL, MariaDB, PostgreSQL, Oracle und SQLite dieselbe Bedingung <code>WHERE c.iso3 IN ('BRA', 'ARG')</code> wie das obige Beispiel mit <code>in</code>.</p>
+<h2 id="database-support">Datenbankunterstützung<a class="headerlink" href="#database-support" title="Permanent link">&para;</a></h2>
 <div class="admonition warning">
-<p class="admonition-title">Engine differences</p>
+<p class="admonition-title">Unterschiede zwischen Datenbank-Engines</p>
 <ul>
-<li><strong>MongoDB</strong>: <code>between</code> is translated to <code>{"$gte": from, "$lt": to}</code>, so the upper limit is <strong>excluded</strong>, unlike SQL <code>BETWEEN</code>. <code>includes</code> cannot currently be translated to a MongoDB query; use <code>in</code> instead.</li>
-<li><strong>SQL Server</strong>: <code>includes</code> is translated to a <code>LIKE</code> (text search) instead of <code>IN</code>; use <code>in</code> to check a value against a list.</li>
+<li><strong>MongoDB</strong>: <code>between</code> wird in <code>{"$gte": from, "$lt": to}</code> übersetzt, sodass die Obergrenze – anders als bei SQL <code>BETWEEN</code> – <strong>ausgeschlossen</strong> ist. <code>includes</code> kann derzeit nicht in eine MongoDB-Abfrage übersetzt werden; verwenden Sie stattdessen <code>in</code>.</li>
+<li><strong>SQL Server</strong>: <code>includes</code> wird in ein <code>LIKE</code> (Textsuche) statt in <code>IN</code> übersetzt; verwenden Sie <code>in</code>, um einen Wert gegen eine Liste zu prüfen.</li>
 </ul>
 </div>
 
@@ -3283,7 +3283,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Fußzeile" >
         
           
-          <a href="../OperatorsAndFunctions/" class="md-footer__link md-footer__link--prev" aria-label="Zurück: Operators and Functions">
+          <a href="../OperatorsAndFunctions/" class="md-footer__link md-footer__link--prev" aria-label="Zurück: Operatoren und Funktionen">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3293,7 +3293,7 @@
                 Zurück
               </span>
               <div class="md-ellipsis">
-                Operators and Functions
+                Operatoren und Funktionen
               </div>
             </div>
           </a>

@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1593,7 +1593,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1732,7 +1732,7 @@
         <li class="md-nav__item">
   <a href="#define-a-composite-entity" class="md-nav__link">
     <span class="md-ellipsis">
-      Define a composite entity
+      Definir una entidad compuesta
     </span>
   </a>
   
@@ -2023,7 +2023,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2277,7 +2277,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2961,7 +2961,7 @@
         <li class="md-nav__item">
   <a href="#define-a-composite-entity" class="md-nav__link">
     <span class="md-ellipsis">
-      Define a composite entity
+      Definir una entidad compuesta
     </span>
   </a>
   
@@ -2983,16 +2983,16 @@
 
 
 
-<h1 id="composite-entity">Composite Entity<a class="headerlink" href="#composite-entity" title="Permanent link">&para;</a></h1>
-<p>This page explains composite entities: entities whose records are part of the records of another entity, as the lines of an order are part of the order.</p>
-<p>When a relation is <strong>composite</strong>, its records are treated as part of a document:</p>
+<h1 id="composite-entity">Entidad compuesta<a class="headerlink" href="#composite-entity" title="Permanent link">&para;</a></h1>
+<p>Esta página explica las entidades compuestas: entidades cuyos registros forman parte de los registros de otra entidad, igual que las líneas de un pedido forman parte del pedido.</p>
+<p>Cuando una relación es <strong>compuesta</strong>, sus registros se tratan como parte de un documento:</p>
 <ul>
-<li>In non-relational databases (MongoDB), the records of the relation are stored inside the document of the parent, in the same collection.</li>
-<li>In relational databases, the records are stored in their own table, but queries, import and export treat them as an object that contains the records of the relation.</li>
+<li>En las bases de datos no relacionales (MongoDB), los registros de la relación se guardan dentro del documento del padre, en la misma colección.</li>
+<li>En las bases de datos relacionales, los registros se guardan en su propia tabla, pero las consultas, la importación y la exportación los tratan como un objeto que contiene los registros de la relación.</li>
 </ul>
-<h2 id="define-a-composite-entity">Define a composite entity<a class="headerlink" href="#define-a-composite-entity" title="Permanent link">&para;</a></h2>
-<p>An entity is composite when its name starts with the name of its parent followed by a period, for example <strong>Devices.Components</strong>.
-When the composite entity defines a relation to its parent with <strong>target</strong>, the inverse relation created in the parent (<code>components</code> in the example) is composite.</p>
+<h2 id="define-a-composite-entity">Definir una entidad compuesta<a class="headerlink" href="#define-a-composite-entity" title="Permanent link">&para;</a></h2>
+<p>Una entidad es compuesta cuando su nombre empieza por el nombre de su padre seguido de un punto, por ejemplo <strong>Devices.Components</strong>.
+Cuando la entidad compuesta define una relación con su padre mediante <strong>target</strong>, la relación inversa que se crea en el padre (<code>components</code> en el ejemplo) es compuesta.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nn">...</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">domain</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
@@ -3037,8 +3037,8 @@ When the composite entity defines a relation to its parent with <strong>target</
 <a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="w">          </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">components</span>
 <a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
 </code></pre></div>
-<p>A relation can also be declared composite with <code>composite: true</code> (see <a href="../SchemaDefinition/#relation">Relation</a>).</p>
-<p>See a complete example, with the same entity stored in MongoDB and in PostgreSQL, in <a href="../SchemaExample-Composite/">Composite example</a>.</p>
+<p>Una relación también se puede declarar compuesta con <code>composite: true</code> (ver <a href="../SchemaDefinition/#relation">Relación</a>).</p>
+<p>Hay un ejemplo completo, con la misma entidad guardada en MongoDB y en PostgreSQL, en <a href="../SchemaExample-Composite/">Ejemplo de entidad compuesta</a>.</p>
 
 
 

@@ -1288,7 +1288,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1427,7 +1427,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Übersicht
     </span>
   </a>
   
@@ -1562,7 +1562,7 @@
         <li class="md-nav__item">
   <a href="#database-support" class="md-nav__link">
     <span class="md-ellipsis">
-      Database support
+      Datenbankunterstützung
     </span>
   </a>
   
@@ -2157,7 +2157,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2411,7 +2411,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -3095,7 +3095,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Übersicht
     </span>
   </a>
   
@@ -3230,7 +3230,7 @@
         <li class="md-nav__item">
   <a href="#database-support" class="md-nav__link">
     <span class="md-ellipsis">
-      Database support
+      Datenbankunterstützung
     </span>
   </a>
   
@@ -3252,242 +3252,242 @@
 
 
 
-<h1 id="string-functions">String Functions<a class="headerlink" href="#string-functions" title="Permanent link">&para;</a></h1>
-<p>String functions transform text values: change the case, pad, trim, replace or extract part of a string, and convert values to strings.</p>
+<h1 id="string-functions">Zeichenkettenfunktionen<a class="headerlink" href="#string-functions" title="Permanent link">&para;</a></h1>
+<p>Zeichenkettenfunktionen wandeln Textwerte um: Sie ändern die Groß-/Kleinschreibung, füllen auf, entfernen Leerzeichen, ersetzen oder extrahieren einen Teil einer Zeichenkette und konvertieren Werte in Zeichenketten.</p>
 <div class="admonition note">
-<p class="admonition-title">About the examples</p>
-<p>The examples run against the <code>Countries</code> entity of the countries sample schema. Each one shows the query, the result it returned on the test database and the SQL sentence that λORM generated for MySQL. Other engines receive their own translation; to see the sentence generated for your data source, use <a href="../../Metadata/"><code>orm.plan</code></a>.</p>
+<p class="admonition-title">Zu den Beispielen</p>
+<p>Die Beispiele laufen gegen die Entität <code>Countries</code> des Beispielschemas für Länder. Jedes zeigt die Abfrage, das Ergebnis, das sie auf der Testdatenbank geliefert hat, und die SQL-Anweisung, die λORM für MySQL erzeugt hat. Andere Datenbank-Engines erhalten ihre eigene Übersetzung; um die für Ihre Datenquelle erzeugte Anweisung zu sehen, verwenden Sie <a href="../../Metadata/"><code>orm.plan</code></a>.</p>
 </div>
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<h2 id="summary">Übersicht<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Function</th>
-<th>Description</th>
+<th>Funktion</th>
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>chr</code></td>
-<td>Character for an ASCII code</td>
+<td>Zeichen zu einem ASCII-Code</td>
 </tr>
 <tr>
 <td><code>concat</code></td>
-<td>Concatenates strings</td>
+<td>Verkettet Zeichenketten</td>
 </tr>
 <tr>
 <td><code>lower</code></td>
-<td>Converts to lowercase</td>
+<td>Wandelt in Kleinbuchstaben um</td>
 </tr>
 <tr>
 <td><code>upper</code></td>
-<td>Converts to uppercase</td>
+<td>Wandelt in Großbuchstaben um</td>
 </tr>
 <tr>
 <td><code>lpad</code></td>
-<td>Pads the left side of a string</td>
+<td>Füllt eine Zeichenkette links auf</td>
 </tr>
 <tr>
 <td><code>rpad</code></td>
-<td>Pads the right side of a string</td>
+<td>Füllt eine Zeichenkette rechts auf</td>
 </tr>
 <tr>
 <td><code>ltrim</code></td>
-<td>Removes leading spaces</td>
+<td>Entfernt führende Leerzeichen</td>
 </tr>
 <tr>
 <td><code>rtrim</code></td>
-<td>Removes trailing spaces</td>
+<td>Entfernt nachgestellte Leerzeichen</td>
 </tr>
 <tr>
 <td><code>trim</code></td>
-<td>Removes leading and trailing spaces</td>
+<td>Entfernt führende und nachgestellte Leerzeichen</td>
 </tr>
 <tr>
 <td><code>replace</code></td>
-<td>Replaces every occurrence of a value</td>
+<td>Ersetzt jedes Vorkommen eines Werts</td>
 </tr>
 <tr>
 <td><code>mask</code></td>
-<td>Hides the middle of a string</td>
+<td>Verbirgt den mittleren Teil einer Zeichenkette</td>
 </tr>
 <tr>
 <td><code>substr</code>, <code>substring</code></td>
-<td>Extracts part of a string</td>
+<td>Extrahiert einen Teil einer Zeichenkette</td>
 </tr>
 <tr>
 <td><code>strCount</code></td>
-<td>Counts the occurrences of a value</td>
+<td>Zählt die Vorkommen eines Werts</td>
 </tr>
 <tr>
 <td><code>toString</code></td>
-<td>Converts a value to a string</td>
+<td>Konvertiert einen Wert in eine Zeichenkette</td>
 </tr>
 </tbody>
 </table>
 <h2 id="chr">chr<a class="headerlink" href="#chr" title="Permanent link">&para;</a></h2>
-<p>Returns the character whose ASCII code is <code>ascii</code>.</p>
-<p><strong>Signature:</strong> <code>chr(ascii: number): string</code></p>
+<p>Gibt das Zeichen zurück, dessen ASCII-Code <code>ascii</code> ist.</p>
+<p><strong>Signatur:</strong> <code>chr(ascii: number): string</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">chr</span><span class="p">(</span><span class="mf">68</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"D"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"D"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="nb">CHAR</span><span class="p">(</span><span class="mi">68</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">ASCII</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <h2 id="concat">concat<a class="headerlink" href="#concat" title="Permanent link">&para;</a></h2>
-<p>Concatenates all its arguments into one string.</p>
-<p><strong>Signature:</strong> <code>concat(...values: any): string</code></p>
-<p>Region and subregion of Brazil, separated by a space:</p>
+<p>Verkettet alle Argumente zu einer Zeichenkette.</p>
+<p><strong>Signatur:</strong> <code>concat(...values: any): string</code></p>
+<p>Region und Subregion von Brasilien, durch ein Leerzeichen getrennt:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">concat</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">region</span><span class="p">,</span><span class="s2">" "</span><span class="p">,</span><span class="nx">p</span><span class="p">.</span><span class="nx">subregion</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"Americas South America"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"Americas South America"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">region</span><span class="p">,</span><span class="s1">' '</span><span class="p">),</span><span class="k">c</span><span class="p">.</span><span class="n">subregion</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <h2 id="lower">lower<a class="headerlink" href="#lower" title="Permanent link">&para;</a></h2>
-<p>Converts <code>value</code> to lowercase.</p>
-<p><strong>Signature:</strong> <code>lower(value: string): string</code></p>
+<p>Wandelt <code>value</code> in Kleinbuchstaben um.</p>
+<p><strong>Signatur:</strong> <code>lower(value: string): string</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">lower</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">subregion</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"south america"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"south america"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">LOWER</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">subregion</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <h2 id="upper">upper<a class="headerlink" href="#upper" title="Permanent link">&para;</a></h2>
-<p>Converts <code>value</code> to uppercase.</p>
-<p><strong>Signature:</strong> <code>upper(value: string): string</code></p>
+<p>Wandelt <code>value</code> in Großbuchstaben um.</p>
+<p><strong>Signatur:</strong> <code>upper(value: string): string</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">upper</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">subregion</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"SOUTH AMERICA"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"SOUTH AMERICA"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">UPPER</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">subregion</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <h2 id="lpad">lpad<a class="headerlink" href="#lpad" title="Permanent link">&para;</a></h2>
-<p>Pads the left side of <code>value</code> with <code>pad</code> until it is <code>len</code> characters long.</p>
-<p><strong>Signature:</strong> <code>lpad(value: string, len: number, pad: string): string</code></p>
+<p>Füllt <code>value</code> links mit <code>pad</code> auf, bis es <code>len</code> Zeichen lang ist.</p>
+<p><strong>Signatur:</strong> <code>lpad(value: string, len: number, pad: string): string</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">lpad</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">region</span><span class="p">,</span><span class="mf">12</span><span class="p">,</span><span class="s2">"_"</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"____Americas"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"____Americas"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">LPAD</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">region</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="s1">'_'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <h2 id="rpad">rpad<a class="headerlink" href="#rpad" title="Permanent link">&para;</a></h2>
-<p>Pads the right side of <code>value</code> with <code>pad</code> until it is <code>len</code> characters long.</p>
-<p><strong>Signature:</strong> <code>rpad(value: string, len: number, pad: string): string</code></p>
+<p>Füllt <code>value</code> rechts mit <code>pad</code> auf, bis es <code>len</code> Zeichen lang ist.</p>
+<p><strong>Signatur:</strong> <code>rpad(value: string, len: number, pad: string): string</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">rpad</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">region</span><span class="p">,</span><span class="mf">12</span><span class="p">,</span><span class="s2">"_"</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"Americas____"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"Americas____"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">RPAD</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">region</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="s1">'_'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <h2 id="ltrim">ltrim<a class="headerlink" href="#ltrim" title="Permanent link">&para;</a></h2>
-<p>Removes the leading spaces of <code>value</code>.</p>
-<p><strong>Signature:</strong> <code>ltrim(value: string): string</code></p>
+<p>Entfernt die führenden Leerzeichen von <code>value</code>.</p>
+<p><strong>Signatur:</strong> <code>ltrim(value: string): string</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">ltrim</span><span class="p">(</span><span class="s2">"  a  "</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"a  "}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"a  "}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">LTRIM</span><span class="p">(</span><span class="s1">' a '</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <h2 id="rtrim">rtrim<a class="headerlink" href="#rtrim" title="Permanent link">&para;</a></h2>
-<p>Removes the trailing spaces of <code>value</code>.</p>
-<p><strong>Signature:</strong> <code>rtrim(value: string): string</code></p>
+<p>Entfernt die nachgestellten Leerzeichen von <code>value</code>.</p>
+<p><strong>Signatur:</strong> <code>rtrim(value: string): string</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">rtrim</span><span class="p">(</span><span class="s2">"  a  "</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"  a"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"  a"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">RTRIM</span><span class="p">(</span><span class="s1">' a '</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <h2 id="trim">trim<a class="headerlink" href="#trim" title="Permanent link">&para;</a></h2>
-<p>Removes the leading and trailing spaces of <code>value</code>. It is translated to <code>TRIM(value)</code> in SQL.</p>
-<p><strong>Signature:</strong> <code>trim(value: string): string</code></p>
+<p>Entfernt die führenden und nachgestellten Leerzeichen von <code>value</code>. In SQL wird es in <code>TRIM(value)</code> übersetzt.</p>
+<p><strong>Signatur:</strong> <code>trim(value: string): string</code></p>
 <h2 id="replace">replace<a class="headerlink" href="#replace" title="Permanent link">&para;</a></h2>
-<p>Returns <code>value</code> with every occurrence of <code>source</code> replaced by <code>target</code>.</p>
-<p><strong>Signature:</strong> <code>replace(value: string, source: string, target: string): string</code></p>
+<p>Gibt <code>value</code> zurück, wobei jedes Vorkommen von <code>source</code> durch <code>target</code> ersetzt ist.</p>
+<p><strong>Signatur:</strong> <code>replace(value: string, source: string, target: string): string</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">replace</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">region</span><span class="p">,</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"*"</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"Americ*s"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"Americ*s"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">REPLACE</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">region</span><span class="p">,</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'*'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <h2 id="mask">mask<a class="headerlink" href="#mask" title="Permanent link">&para;</a></h2>
-<p>Masks a sensitive value: keeps its first three and last three characters and replaces the rest with <code>***</code>.</p>
-<p><strong>Signature:</strong> <code>mask(value: string): string</code></p>
+<p>Maskiert einen sensiblen Wert: Die ersten drei und die letzten drei Zeichen bleiben erhalten, der Rest wird durch <code>***</code> ersetzt.</p>
+<p><strong>Signatur:</strong> <code>mask(value: string): string</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">mask</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">subregion</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"Sou***ica"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"Sou***ica"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">Concat</span><span class="p">(</span><span class="k">LEFT</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">subregion</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="s1">'***'</span><span class="p">,</span><span class="k">RIGHT</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">subregion</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <h2 id="substr-substring">substr, substring<a class="headerlink" href="#substr-substring" title="Permanent link">&para;</a></h2>
-<p>Returns the part of <code>value</code> that starts at position <code>from</code> (the first character is position 1 in SQL) and is <code>count</code> characters long. <code>substr</code> and <code>substring</code> are equivalent.</p>
-<p><strong>Signature:</strong></p>
+<p>Gibt den Teil von <code>value</code> zurück, der an Position <code>from</code> beginnt (das erste Zeichen hat in SQL die Position 1) und <code>count</code> Zeichen lang ist. <code>substr</code> und <code>substring</code> sind gleichwertig.</p>
+<p><strong>Signatur:</strong></p>
 <ul>
 <li><code>substr(value: string, from: number, count: number): string</code></li>
 <li><code>substring(value: string, from: number, count: number): string</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">substr</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">subregion</span><span class="p">,</span><span class="mf">1</span><span class="p">,</span><span class="mf">3</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"Sou"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"Sou"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">SUBSTR</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">subregion</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">substring</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">subregion</span><span class="p">,</span><span class="mf">1</span><span class="p">,</span><span class="mf">3</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"Sou"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"Sou"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">SUBSTR</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">subregion</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <h2 id="strcount">strCount<a class="headerlink" href="#strcount" title="Permanent link">&para;</a></h2>
-<p>Returns the number of times <code>value</code> appears in <code>source</code>. The search is case-sensitive.</p>
-<p><strong>Signature:</strong> <code>strCount(source: string, value: string): number</code></p>
+<p>Gibt zurück, wie oft <code>value</code> in <code>source</code> vorkommt. Bei der Suche wird zwischen Groß- und Kleinschreibung unterschieden.</p>
+<p><strong>Signatur:</strong> <code>strCount(source: string, value: string): number</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">strCount</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">subregion</span><span class="p">,</span><span class="s2">"a"</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":1}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":1}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="p">(</span><span class="k">LENGTH</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">subregion</span><span class="p">)</span><span class="o">-</span><span class="k">LENGTH</span><span class="p">(</span><span class="k">REPLACE</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">subregion</span><span class="p">,</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">''</span><span class="p">)))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
 <h2 id="tostring">toString<a class="headerlink" href="#tostring" title="Permanent link">&para;</a></h2>
-<p>Converts <code>value</code> to a string.</p>
-<p><strong>Signature:</strong> <code>toString(value: any): string</code></p>
+<p>Konvertiert <code>value</code> in eine Zeichenkette.</p>
+<p><strong>Signatur:</strong> <code>toString(value: any): string</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BRA"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kt">toString</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">latitude</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":"-10.0000"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Ergebnis:</strong> <code>[{"result":"-10.0000"}]</code></p>
+<p><strong>Erzeugtes SQL (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">CONVERT</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">latitude</span><span class="p">,</span><span class="w"> </span><span class="nb">CHAR</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'BRA'</span>
 </code></pre></div>
-<h2 id="database-support">Database support<a class="headerlink" href="#database-support" title="Permanent link">&para;</a></h2>
+<h2 id="database-support">Datenbankunterstützung<a class="headerlink" href="#database-support" title="Permanent link">&para;</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">MongoDB</p>
-<p>In the current version, <code>chr</code>, <code>lpad</code>, <code>rpad</code>, <code>ltrim</code>, <code>rtrim</code>, <code>trim</code>, <code>replace</code>, <code>mask</code>, <code>substr</code>, <code>substring</code> and <code>strCount</code> cannot be translated to MongoDB queries. <code>concat</code>, <code>lower</code>, <code>upper</code> and <code>toString</code> are supported.</p>
+<p>In der aktuellen Version können <code>chr</code>, <code>lpad</code>, <code>rpad</code>, <code>ltrim</code>, <code>rtrim</code>, <code>trim</code>, <code>replace</code>, <code>mask</code>, <code>substr</code>, <code>substring</code> und <code>strCount</code> nicht in MongoDB-Abfragen übersetzt werden. <code>concat</code>, <code>lower</code>, <code>upper</code> und <code>toString</code> werden unterstützt.</p>
 </div>
 
 

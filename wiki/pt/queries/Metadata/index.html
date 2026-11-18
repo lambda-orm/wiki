@@ -1242,7 +1242,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Exemplo
     </span>
   </a>
   
@@ -1251,17 +1251,17 @@
         <li class="md-nav__item">
   <a href="#results" class="md-nav__link">
     <span class="md-ellipsis">
-      Results
+      Resultados
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Results">
+    <nav class="md-nav" aria-label="Resultados">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     <span class="md-ellipsis">
-      Parameters
+      Parâmetros
     </span>
   </a>
   
@@ -1270,7 +1270,7 @@
           <li class="md-nav__item">
   <a href="#model" class="md-nav__link">
     <span class="md-ellipsis">
-      Model
+      Modelo
     </span>
   </a>
   
@@ -1279,7 +1279,7 @@
           <li class="md-nav__item">
   <a href="#constraints" class="md-nav__link">
     <span class="md-ellipsis">
-      Constraints
+      Restrições
     </span>
   </a>
   
@@ -1288,7 +1288,7 @@
           <li class="md-nav__item">
   <a href="#metadata_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Metadata
+      Metadados
     </span>
   </a>
   
@@ -1297,7 +1297,7 @@
           <li class="md-nav__item">
   <a href="#plan" class="md-nav__link">
     <span class="md-ellipsis">
-      Plan
+      Plano
     </span>
   </a>
   
@@ -1397,7 +1397,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1707,7 +1707,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2080,7 +2080,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2334,7 +2334,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -3018,7 +3018,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Exemplo
     </span>
   </a>
   
@@ -3027,17 +3027,17 @@
         <li class="md-nav__item">
   <a href="#results" class="md-nav__link">
     <span class="md-ellipsis">
-      Results
+      Resultados
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Results">
+    <nav class="md-nav" aria-label="Resultados">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     <span class="md-ellipsis">
-      Parameters
+      Parâmetros
     </span>
   </a>
   
@@ -3046,7 +3046,7 @@
           <li class="md-nav__item">
   <a href="#model" class="md-nav__link">
     <span class="md-ellipsis">
-      Model
+      Modelo
     </span>
   </a>
   
@@ -3055,7 +3055,7 @@
           <li class="md-nav__item">
   <a href="#constraints" class="md-nav__link">
     <span class="md-ellipsis">
-      Constraints
+      Restrições
     </span>
   </a>
   
@@ -3064,7 +3064,7 @@
           <li class="md-nav__item">
   <a href="#metadata_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Metadata
+      Metadados
     </span>
   </a>
   
@@ -3073,7 +3073,7 @@
           <li class="md-nav__item">
   <a href="#plan" class="md-nav__link">
     <span class="md-ellipsis">
-      Plan
+      Plano
     </span>
   </a>
   
@@ -3100,45 +3100,45 @@
 
 
 
-<h1 id="metadata">Metadata<a class="headerlink" href="#metadata" title="Permanent link">&para;</a></h1>
-<p>This page describes the methods that analyse a query without running it: the parameters it needs, the shape of its result, the constraints that apply, its analysed tree and the statements it would execute. Use them to validate a query, to build a form or a type for its data, or to see the SQL that λORM generates.</p>
-<p>These methods do not access the database, so the connections are not needed: you can call <code>orm.init(schema, false)</code> to load the schema without connecting.</p>
+<h1 id="metadata">Metadados<a class="headerlink" href="#metadata" title="Permanent link">&para;</a></h1>
+<p>Esta página descreve os métodos que analisam uma consulta sem executá-la: os parâmetros de que ela precisa, a forma do seu resultado, as restrições que se aplicam, sua árvore analisada e as sentenças que ela executaria. Use-os para validar uma consulta, para construir um formulário ou um tipo para seus dados, ou para ver o SQL que o λORM gera.</p>
+<p>Esses métodos não acessam o banco de dados, por isso as conexões não são necessárias: é possível chamar <code>orm.init(schema, false)</code> para carregar o esquema sem conectar.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Method</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Método</th>
+<th style="text-align: left;">Descrição</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;"><code>orm.parameters(query)</code></td>
-<td style="text-align: left;">The variables the query uses (which go in <code>data</code>), with their types.</td>
+<td style="text-align: left;">As variáveis que a consulta usa (que vão em <code>data</code>), com seus tipos.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>orm.model(query)</code></td>
-<td style="text-align: left;">The properties of the result, with their types.</td>
+<td style="text-align: left;">As propriedades do resultado, com seus tipos.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>orm.constraints(query)</code></td>
-<td style="text-align: left;">The constraints that apply to the entities of the query.</td>
+<td style="text-align: left;">As restrições que se aplicam às entidades da consulta.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>orm.metadata(query)</code></td>
-<td style="text-align: left;">The analysed tree of the query: each statement with its entity, columns, parameters and constraints.</td>
+<td style="text-align: left;">A árvore analisada da consulta: cada sentença com sua entidade, colunas, parâmetros e restrições.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>orm.plan(query, options?)</code></td>
-<td style="text-align: left;">How the query is executed: the dialect, the source and the statement of each part. <code>options.stage</code> selects the stage.</td>
+<td style="text-align: left;">Como a consulta é executada: o dialeto, a fonte e a sentença de cada parte. <code>options.stage</code> seleciona o stage.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>orm.normalize(query)</code></td>
-<td style="text-align: left;">The query in its complete form, for example with the properties of <code>map</code> made explicit.</td>
+<td style="text-align: left;">A consulta em sua forma completa, por exemplo com as propriedades de <code>map</code> explicitadas.</td>
 </tr>
 </tbody>
 </table>
-<p>The query can be a lambda function or a string. The same information is available from the <a href="../../cli/">CLI</a> (<code>lambdaorm parameters</code>, <code>model</code>, <code>constraints</code>, <code>metadata</code>, <code>plan</code>) and from the <a href="../../data-gateway/Rest/">Data Gateway</a> (<code>POST /parameters</code>, <code>/model</code>, <code>/constraints</code>, <code>/metadata</code>, <code>/plan</code>).</p>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<p>A consulta pode ser uma função lambda ou uma string. As mesmas informações estão disponíveis na <a href="../../cli/">CLI</a> (<code>lambdaorm parameters</code>, <code>model</code>, <code>constraints</code>, <code>metadata</code>, <code>plan</code>) e no <a href="../../data-gateway/Rest/">Data Gateway</a> (<code>POST /parameters</code>, <code>/model</code>, <code>/constraints</code>, <code>/metadata</code>, <code>/plan</code>).</p>
+<h2 id="example">Exemplo<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Orders</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./domain/model'</span><span class="w"> </span><span class="c1">// model generated by `lambdaorm build`</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -3163,10 +3163,10 @@
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="p">})()</span>
 </code></pre></div>
-<h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
-<p>The results include <code>LambdaOrmParentId</code>, the internal key that λORM uses to link the details to their order (see <a href="../Include/">Include</a>).</p>
-<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
-<p>The query needs <code>id</code>, an integer:</p>
+<h2 id="results">Resultados<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
+<p>Os resultados incluem <code>LambdaOrmParentId</code>, a chave interna que o λORM usa para vincular os detalhes ao seu pedido (veja <a href="../Include/">Include</a>).</p>
+<h3 id="parameters">Parâmetros<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
+<p>A consulta precisa de <code>id</code>, um inteiro:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">[</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="w"> </span><span class="p">},</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="p">{</span>
@@ -3178,8 +3178,8 @@
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">]</span>
 </code></pre></div>
-<h3 id="model">Model<a class="headerlink" href="#model" title="Permanent link">&para;</a></h3>
-<p>Each order of the result has <code>name</code>, <code>customer</code> and the array <code>details</code>:</p>
+<h3 id="model">Modelo<a class="headerlink" href="#model" title="Permanent link">&para;</a></h3>
+<p>Cada pedido do resultado tem <code>name</code>, <code>customer</code> e o array <code>details</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">[</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dateTime"</span><span class="w"> </span><span class="p">},</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
@@ -3197,7 +3197,7 @@
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="p">]</span>
 </code></pre></div>
-<h3 id="constraints">Constraints<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h3>
+<h3 id="constraints">Restrições<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"entity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Orders"</span><span class="p">,</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">"constraints"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
@@ -3206,8 +3206,8 @@
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="p">]</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">}</span>
 </code></pre></div>
-<h3 id="metadata_1">Metadata<a class="headerlink" href="#metadata_1" title="Permanent link">&para;</a></h3>
-<p>One statement for the orders and, as its child, one for the details (<code>pos</code> fields omitted):</p>
+<h3 id="metadata_1">Metadados<a class="headerlink" href="#metadata_1" title="Permanent link">&para;</a></h3>
+<p>Uma sentença para os pedidos e, como sua filha, uma para os detalhes (campos <code>pos</code> omitidos):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"classtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sentence"</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select"</span><span class="p">,</span>
@@ -3249,7 +3249,7 @@
 <a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="w">  </span><span class="p">]</span>
 <a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="p">}</span>
 </code></pre></div>
-<h3 id="plan">Plan<a class="headerlink" href="#plan" title="Permanent link">&para;</a></h3>
+<h3 id="plan">Plano<a class="headerlink" href="#plan" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"entity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Orders"</span><span class="p">,</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">"dialect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MySQL"</span><span class="p">,</span>
@@ -3317,13 +3317,13 @@
         
         
           
-          <a href="../operatorsAndFunctions/OperatorsAndFunctions/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Operators and Functions">
+          <a href="../operatorsAndFunctions/OperatorsAndFunctions/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Operadores e funções">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Operators and Functions
+                Operadores e funções
               </div>
             </div>
             <div class="md-footer__button md-icon">

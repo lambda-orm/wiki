@@ -1242,7 +1242,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -1251,17 +1251,17 @@
         <li class="md-nav__item">
   <a href="#results" class="md-nav__link">
     <span class="md-ellipsis">
-      Results
+      Ergebnisse
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Results">
+    <nav class="md-nav" aria-label="Ergebnisse">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     <span class="md-ellipsis">
-      Parameters
+      Parameter
     </span>
   </a>
   
@@ -1270,7 +1270,7 @@
           <li class="md-nav__item">
   <a href="#model" class="md-nav__link">
     <span class="md-ellipsis">
-      Model
+      Modell
     </span>
   </a>
   
@@ -1288,7 +1288,7 @@
           <li class="md-nav__item">
   <a href="#metadata_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Metadata
+      Metadaten
     </span>
   </a>
   
@@ -1397,7 +1397,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -2080,7 +2080,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2334,7 +2334,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -3018,7 +3018,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -3027,17 +3027,17 @@
         <li class="md-nav__item">
   <a href="#results" class="md-nav__link">
     <span class="md-ellipsis">
-      Results
+      Ergebnisse
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Results">
+    <nav class="md-nav" aria-label="Ergebnisse">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     <span class="md-ellipsis">
-      Parameters
+      Parameter
     </span>
   </a>
   
@@ -3046,7 +3046,7 @@
           <li class="md-nav__item">
   <a href="#model" class="md-nav__link">
     <span class="md-ellipsis">
-      Model
+      Modell
     </span>
   </a>
   
@@ -3064,7 +3064,7 @@
           <li class="md-nav__item">
   <a href="#metadata_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Metadata
+      Metadaten
     </span>
   </a>
   
@@ -3100,45 +3100,45 @@
 
 
 
-<h1 id="metadata">Metadata<a class="headerlink" href="#metadata" title="Permanent link">&para;</a></h1>
-<p>This page describes the methods that analyse a query without running it: the parameters it needs, the shape of its result, the constraints that apply, its analysed tree and the statements it would execute. Use them to validate a query, to build a form or a type for its data, or to see the SQL that λORM generates.</p>
-<p>These methods do not access the database, so the connections are not needed: you can call <code>orm.init(schema, false)</code> to load the schema without connecting.</p>
+<h1 id="metadata">Metadaten<a class="headerlink" href="#metadata" title="Permanent link">&para;</a></h1>
+<p>Diese Seite beschreibt die Methoden, die eine Abfrage analysieren, ohne sie auszuführen: die benötigten Parameter, die Struktur ihres Ergebnisses, die geltenden Constraints, ihren analysierten Baum und die Anweisungen, die sie ausführen würde. Verwenden Sie sie, um eine Abfrage zu validieren, ein Formular oder einen Typ für ihre Daten zu erstellen oder das von λORM erzeugte SQL einzusehen.</p>
+<p>Diese Methoden greifen nicht auf die Datenbank zu, daher werden keine Verbindungen benötigt: Sie können <code>orm.init(schema, false)</code> aufrufen, um das Schema ohne Verbindungsaufbau zu laden.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Method</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Methode</th>
+<th style="text-align: left;">Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;"><code>orm.parameters(query)</code></td>
-<td style="text-align: left;">The variables the query uses (which go in <code>data</code>), with their types.</td>
+<td style="text-align: left;">Die Variablen, die die Abfrage verwendet (sie gehören in <code>data</code>), mit ihren Typen.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>orm.model(query)</code></td>
-<td style="text-align: left;">The properties of the result, with their types.</td>
+<td style="text-align: left;">Die Eigenschaften des Ergebnisses mit ihren Typen.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>orm.constraints(query)</code></td>
-<td style="text-align: left;">The constraints that apply to the entities of the query.</td>
+<td style="text-align: left;">Die Constraints, die für die Entitäten der Abfrage gelten.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>orm.metadata(query)</code></td>
-<td style="text-align: left;">The analysed tree of the query: each statement with its entity, columns, parameters and constraints.</td>
+<td style="text-align: left;">Der analysierte Baum der Abfrage: jede Anweisung mit ihrer Entität, ihren Spalten, Parametern und Constraints.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>orm.plan(query, options?)</code></td>
-<td style="text-align: left;">How the query is executed: the dialect, the source and the statement of each part. <code>options.stage</code> selects the stage.</td>
+<td style="text-align: left;">Wie die Abfrage ausgeführt wird: Dialekt, Quelle und Anweisung jedes Teils. <code>options.stage</code> wählt den Stage aus.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>orm.normalize(query)</code></td>
-<td style="text-align: left;">The query in its complete form, for example with the properties of <code>map</code> made explicit.</td>
+<td style="text-align: left;">Die Abfrage in ihrer vollständigen Form, zum Beispiel mit explizit ausgeschriebenen Eigenschaften von <code>map</code>.</td>
 </tr>
 </tbody>
 </table>
-<p>The query can be a lambda function or a string. The same information is available from the <a href="../../cli/">CLI</a> (<code>lambdaorm parameters</code>, <code>model</code>, <code>constraints</code>, <code>metadata</code>, <code>plan</code>) and from the <a href="../../data-gateway/Rest/">Data Gateway</a> (<code>POST /parameters</code>, <code>/model</code>, <code>/constraints</code>, <code>/metadata</code>, <code>/plan</code>).</p>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<p>Die Abfrage kann eine Lambda-Funktion oder eine Zeichenkette sein. Dieselben Informationen stehen über die <a href="../../cli/">CLI</a> (<code>lambdaorm parameters</code>, <code>model</code>, <code>constraints</code>, <code>metadata</code>, <code>plan</code>) und über das <a href="../../data-gateway/Rest/">Data Gateway</a> (<code>POST /parameters</code>, <code>/model</code>, <code>/constraints</code>, <code>/metadata</code>, <code>/plan</code>) zur Verfügung.</p>
+<h2 id="example">Beispiel<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Orders</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./domain/model'</span><span class="w"> </span><span class="c1">// model generated by `lambdaorm build`</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -3163,10 +3163,10 @@
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="p">})()</span>
 </code></pre></div>
-<h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
-<p>The results include <code>LambdaOrmParentId</code>, the internal key that λORM uses to link the details to their order (see <a href="../Include/">Include</a>).</p>
-<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
-<p>The query needs <code>id</code>, an integer:</p>
+<h2 id="results">Ergebnisse<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
+<p>Die Ergebnisse enthalten <code>LambdaOrmParentId</code>, den internen Schlüssel, mit dem λORM die Positionen ihrer Bestellung zuordnet (siehe <a href="../Include/">Include</a>).</p>
+<h3 id="parameters">Parameter<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
+<p>Die Abfrage benötigt <code>id</code>, eine Ganzzahl:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">[</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="w"> </span><span class="p">},</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="p">{</span>
@@ -3178,8 +3178,8 @@
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">]</span>
 </code></pre></div>
-<h3 id="model">Model<a class="headerlink" href="#model" title="Permanent link">&para;</a></h3>
-<p>Each order of the result has <code>name</code>, <code>customer</code> and the array <code>details</code>:</p>
+<h3 id="model">Modell<a class="headerlink" href="#model" title="Permanent link">&para;</a></h3>
+<p>Jede Bestellung im Ergebnis hat <code>name</code>, <code>customer</code> und das Array <code>details</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">[</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dateTime"</span><span class="w"> </span><span class="p">},</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
@@ -3206,8 +3206,8 @@
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="p">]</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">}</span>
 </code></pre></div>
-<h3 id="metadata_1">Metadata<a class="headerlink" href="#metadata_1" title="Permanent link">&para;</a></h3>
-<p>One statement for the orders and, as its child, one for the details (<code>pos</code> fields omitted):</p>
+<h3 id="metadata_1">Metadaten<a class="headerlink" href="#metadata_1" title="Permanent link">&para;</a></h3>
+<p>Eine Anweisung für die Bestellungen und, als deren Kind, eine für die Positionen (Felder <code>pos</code> ausgelassen):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"classtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sentence"</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select"</span><span class="p">,</span>
@@ -3317,13 +3317,13 @@
         
         
           
-          <a href="../operatorsAndFunctions/OperatorsAndFunctions/" class="md-footer__link md-footer__link--next" aria-label="Weiter: Operators and Functions">
+          <a href="../operatorsAndFunctions/OperatorsAndFunctions/" class="md-footer__link md-footer__link--next" aria-label="Weiter: Operatoren und Funktionen">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Weiter
               </span>
               <div class="md-ellipsis">
-                Operators and Functions
+                Operatoren und Funktionen
               </div>
             </div>
             <div class="md-footer__button md-icon">

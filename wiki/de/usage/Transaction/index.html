@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1961,7 +1961,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2220,7 +2220,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2313,7 +2313,7 @@
         <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     <span class="md-ellipsis">
-      Usage
+      Verwendung
     </span>
   </a>
   
@@ -2322,7 +2322,7 @@
         <li class="md-nav__item">
   <a href="#behavior" class="md-nav__link">
     <span class="md-ellipsis">
-      Behavior
+      Verhalten
     </span>
   </a>
   
@@ -2331,7 +2331,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -2973,7 +2973,7 @@
         <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     <span class="md-ellipsis">
-      Usage
+      Verwendung
     </span>
   </a>
   
@@ -2982,7 +2982,7 @@
         <li class="md-nav__item">
   <a href="#behavior" class="md-nav__link">
     <span class="md-ellipsis">
-      Behavior
+      Verhalten
     </span>
   </a>
   
@@ -2991,7 +2991,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -3013,17 +3013,17 @@
 
 
 
-<h1 id="transaction">Transaction<a class="headerlink" href="#transaction" title="Permanent link">&para;</a></h1>
-<p>A transaction groups several executions so that they are all committed together or all rolled back. In λORM a
-transaction is opened with <code>orm.transaction(options, callback)</code>.</p>
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><code>orm.transaction</code> receives:</p>
+<h1 id="transaction">Transaktion<a class="headerlink" href="#transaction" title="Permanent link">&para;</a></h1>
+<p>Eine Transaktion fasst mehrere Ausführungen zusammen, sodass sie entweder alle gemeinsam bestätigt (Commit) oder alle zurückgerollt werden. In λORM wird eine
+Transaktion mit <code>orm.transaction(options, callback)</code> geöffnet.</p>
+<h2 id="usage">Verwendung<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><code>orm.transaction</code> erhält:</p>
 <ul>
-<li><code>options</code>: the query options, for example the stage (<code>{ stage: 'default' }</code>);</li>
-<li><code>callback</code>: an async function that receives a transaction object (named <code>tr</code> in the examples) and executes the
-  queries with <code>tr.execute(query, data, options)</code>.</li>
+<li><code>options</code>: die Abfrageoptionen, zum Beispiel den Stage (<code>{ stage: 'default' }</code>);</li>
+<li><code>callback</code>: eine asynchrone Funktion, die ein Transaktionsobjekt erhält (in den Beispielen <code>tr</code> genannt) und die
+  Abfragen mit <code>tr.execute(query, data, options)</code> ausführt.</li>
 </ul>
-<p>When the callback ends, λORM commits; if it throws, λORM rolls back.</p>
+<p>Wenn der Callback endet, führt λORM den Commit aus; wirft er einen Fehler, führt λORM einen Rollback aus.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">transaction</span><span class="p">({</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'default'</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="nx">tr</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">tr</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="s1">'Quotes.insert()'</span><span class="p">,</span><span class="w"> </span><span class="nx">quote</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="c1">// orm.execute inside the callback also joins the transaction</span>
@@ -3032,28 +3032,28 @@ transaction is opened with <code>orm.transaction(options, callback)</code>.</p>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">tr</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="s1">'QuoteSummaries.insert()'</span><span class="p">,</span><span class="w"> </span><span class="nx">summary</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">stage</span><span class="o">:</span><span class="w"> </span><span class="s1">'insights'</span><span class="w"> </span><span class="p">})</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">})</span>
 </code></pre></div>
-<h2 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">&para;</a></h2>
+<h2 id="behavior">Verhalten<a class="headerlink" href="#behavior" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The promise resolves after the commit and <strong>rejects with the callback's error after the rollback</strong>. If the rollback
-  itself fails, the callback's error is still the one reported.</li>
-<li><strong>Everything executed inside the callback joins the transaction</strong>: <code>tr.execute</code>, <code>orm.execute</code>, repositories, and the
-  <code>orm.execute</code> of a listener or of an expression. They run on the transaction's connections (one per source), so a
-  rollback undoes them in every source.</li>
-<li>A nested <code>orm.transaction</code> joins the outer one: there is a single commit, done by the outer transaction.</li>
-<li>An execution without a stage runs on the transaction's stage. <strong>An execution with another stage joins the
-  transaction too</strong> (since @lambdaorm/lib 3.3.0): every stage shares the transaction's connections, and they commit or
-  roll back together.</li>
-<li>A finished transaction rejects later executions.</li>
+<li>Das Promise wird nach dem Commit erfüllt und <strong>nach dem Rollback mit dem Fehler des Callbacks abgelehnt</strong>. Schlägt der Rollback
+  selbst fehl, wird weiterhin der Fehler des Callbacks gemeldet.</li>
+<li><strong>Alles, was innerhalb des Callbacks ausgeführt wird, nimmt an der Transaktion teil</strong>: <code>tr.execute</code>, <code>orm.execute</code>, Repositories und das
+  <code>orm.execute</code> eines Listeners oder eines Ausdrucks. Sie laufen auf den Verbindungen der Transaktion (eine pro Quelle), sodass ein
+  Rollback sie in jeder Quelle rückgängig macht.</li>
+<li>Eine verschachtelte <code>orm.transaction</code> nimmt an der äußeren teil: Es gibt einen einzigen Commit, der von der äußeren Transaktion ausgeführt wird.</li>
+<li>Eine Ausführung ohne Stage läuft auf dem Stage der Transaktion. <strong>Auch eine Ausführung mit einem anderen Stage nimmt an der
+  Transaktion teil</strong> (seit @lambdaorm/lib 3.3.0): Alle Stages teilen sich die Verbindungen der Transaktion und werden gemeinsam bestätigt oder
+  zurückgerollt.</li>
+<li>Eine abgeschlossene Transaktion lehnt spätere Ausführungen ab.</li>
 </ul>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>There is no two-phase commit: with several databases, the commit is done source by source. If a later commit
-fails, the earlier ones are kept.</p>
+<p class="admonition-title">Warnung</p>
+<p>Es gibt keinen Zwei-Phasen-Commit: Bei mehreren Datenbanken erfolgt der Commit Quelle für Quelle. Schlägt ein späterer Commit
+fehl, bleiben die früheren erhalten.</p>
 </div>
-<p>To run several queries in one transaction from a single call — also over the <a href="../../data-gateway/">Data Gateway</a>
-or the CLI — see <a href="../Script/">Script</a>.</p>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
-<p>The order and its details are inserted, read, updated and deleted in the same transaction:</p>
+<p>Um mehrere Abfragen mit einem einzigen Aufruf in einer Transaktion auszuführen — auch über das <a href="../../data-gateway/">Data Gateway</a>
+oder die CLI —, siehe <a href="../Script/">Skript</a>.</p>
+<h2 id="example">Beispiel<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<p>Die Bestellung und ihre Positionen werden in derselben Transaktion eingefügt, gelesen, aktualisiert und gelöscht:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Orders</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./northwind/domain/model'</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>

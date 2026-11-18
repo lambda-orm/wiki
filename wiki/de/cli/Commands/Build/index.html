@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1961,7 +1961,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2215,7 +2215,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2556,7 +2556,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Optionen
     </span>
   </a>
   
@@ -2565,7 +2565,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -2969,7 +2969,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Optionen
     </span>
   </a>
   
@@ -2978,7 +2978,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -3001,68 +3001,68 @@
 
 
 <h1 id="build">Build<a class="headerlink" href="#build" title="Permanent link">&para;</a></h1>
-<p>Generates the source code of the domain for the development language: the model (<code>model.ts</code>, with the entities and
-enumerations) and one repository per entity (<code>repository&lt;Entity&gt;.ts</code>). See <a href="../../../usage/Repository/">Repositories</a>.</p>
-<p>A repository file is generated only if it does not exist yet, so custom code added to it is kept; the model is
-regenerated every time.</p>
-<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<p>Erzeugt den Quellcode der Domäne für die Entwicklungssprache: das Modell (<code>model.ts</code>, mit den Entitäten und
+Enumerationen) und ein Repository pro Entität (<code>repository&lt;Entity&gt;.ts</code>). Siehe <a href="../../../usage/Repository/">Repositories</a>.</p>
+<p>Eine Repository-Datei wird nur erzeugt, wenn sie noch nicht existiert, sodass darin hinzugefügter eigener Code erhalten bleibt; das Modell wird
+jedes Mal neu erzeugt.</p>
+<h2 id="options">Optionen<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th style="text-align: left;">Option</th>
-<th style="text-align: left;">Short</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Kurz</th>
+<th style="text-align: left;">Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">workspace</td>
 <td style="text-align: left;"><code>-w</code></td>
-<td style="text-align: left;">Project path.</td>
+<td style="text-align: left;">Projektpfad.</td>
 </tr>
 <tr>
 <td style="text-align: left;">language</td>
 <td style="text-align: left;"><code>-l</code></td>
-<td style="text-align: left;">Development language: <code>node</code> (default, uses <code>@lambdaorm/lib</code>) or <code>client-node</code> (uses <code>@lambdaorm/client</code>; the domain is read from the Data Gateway at <code>infrastructure.service.url</code> of the schema, as written by <a href="../Init/"><code>init -u</code></a>).</td>
+<td style="text-align: left;">Entwicklungssprache: <code>node</code> (Standard, verwendet <code>@lambdaorm/lib</code>) oder <code>client-node</code> (verwendet <code>@lambdaorm/client</code>; die Domäne wird vom Data Gateway unter <code>infrastructure.service.url</code> des Schemas gelesen, wie von <a href="../Init/"><code>init -u</code></a> geschrieben).</td>
 </tr>
 <tr>
 <td style="text-align: left;">model</td>
 <td style="text-align: left;"><code>-m</code></td>
-<td style="text-align: left;">Builds the model.</td>
+<td style="text-align: left;">Erzeugt das Modell.</td>
 </tr>
 <tr>
 <td style="text-align: left;">repositories</td>
 <td style="text-align: left;"><code>-r</code></td>
-<td style="text-align: left;">Builds the repositories.</td>
+<td style="text-align: left;">Erzeugt die Repositories.</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;"><code>-a</code></td>
-<td style="text-align: left;">Builds the model and the repositories (the default when none of <code>-m</code>, <code>-r</code>, <code>-a</code> is given).</td>
+<td style="text-align: left;">Erzeugt das Modell und die Repositories (Standard, wenn weder <code>-m</code>, <code>-r</code> noch <code>-a</code> angegeben ist).</td>
 </tr>
 <tr>
 <td style="text-align: left;">src-path</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">Relative path of the source code in the workspace (<code>--src-path</code>).</td>
+<td style="text-align: left;">Relativer Pfad des Quellcodes im Workspace (<code>--src-path</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">data-path</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">Relative path of the data folder in the workspace (<code>--data-path</code>).</td>
+<td style="text-align: left;">Relativer Pfad des Datenordners im Workspace (<code>--data-path</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">domain-path</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">Relative path of the domain in the source code path (<code>--domain-path</code>).</td>
+<td style="text-align: left;">Relativer Pfad der Domäne im Quellcodepfad (<code>--domain-path</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">url</td>
 <td style="text-align: left;"><code>-u</code></td>
-<td style="text-align: left;">URL of the schema on a Data Gateway.</td>
+<td style="text-align: left;">URL des Schemas auf einem Data Gateway.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<h2 id="example">Beispiel<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lambdaorm<span class="w"> </span>build<span class="w"> </span>-w<span class="w"> </span>lab/countries
 </code></pre></div>
 

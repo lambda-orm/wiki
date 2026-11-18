@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1961,7 +1961,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2215,7 +2215,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2625,7 +2625,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Optionen
     </span>
   </a>
   
@@ -2634,7 +2634,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -2969,7 +2969,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Optionen
     </span>
   </a>
   
@@ -2978,7 +2978,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -3001,50 +3001,50 @@
 
 
 <h1 id="drop">Drop<a class="headerlink" href="#drop" title="Permanent link">&para;</a></h1>
-<p>Removes all the database objects of a stage, but not the database itself. With <code>-o</code>, it prints the statements instead of executing them.</p>
-<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<p>Entfernt alle Datenbankobjekte eines Stages, nicht jedoch die Datenbank selbst. Mit <code>-o</code> werden die Anweisungen ausgegeben, statt sie auszuführen.</p>
+<h2 id="options">Optionen<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th style="text-align: left;">Option</th>
-<th style="text-align: left;">Short</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Kurz</th>
+<th style="text-align: left;">Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">workspace</td>
 <td style="text-align: left;"><code>-w</code></td>
-<td style="text-align: left;">Project path (default: the current directory).</td>
+<td style="text-align: left;">Projektpfad (Standard: das aktuelle Verzeichnis).</td>
 </tr>
 <tr>
 <td style="text-align: left;">stage</td>
 <td style="text-align: left;"><code>-s</code></td>
-<td style="text-align: left;">Name of the stage (default: the first stage of the schema).</td>
+<td style="text-align: left;">Name des Stages (Standard: der erste Stage des Schemas).</td>
 </tr>
 <tr>
 <td style="text-align: left;">envfile</td>
 <td style="text-align: left;"><code>-e</code></td>
-<td style="text-align: left;">Reads a file of environment variables.</td>
+<td style="text-align: left;">Liest eine Datei mit Umgebungsvariablen.</td>
 </tr>
 <tr>
 <td style="text-align: left;">output</td>
 <td style="text-align: left;"><code>-o</code></td>
-<td style="text-align: left;">Generates the statements but does not apply them.</td>
+<td style="text-align: left;">Erzeugt die Anweisungen, wendet sie aber nicht an.</td>
 </tr>
 <tr>
 <td style="text-align: left;">force</td>
 <td style="text-align: left;"><code>-f</code></td>
-<td style="text-align: left;">If a statement fails, continue with the next statements.</td>
+<td style="text-align: left;">Schlägt eine Anweisung fehl, wird mit den nächsten Anweisungen fortgefahren.</td>
 </tr>
 <tr>
 <td style="text-align: left;">url</td>
 <td style="text-align: left;"><code>-u</code></td>
-<td style="text-align: left;">URL of the schema on a <a href="../../../data-gateway/">Data Gateway</a>, to run the command there.</td>
+<td style="text-align: left;">URL des Schemas auf einem <a href="../../../data-gateway/">Data Gateway</a>, um den Befehl dort auszuführen.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<h2 id="example">Beispiel<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lambdaorm<span class="w"> </span>drop<span class="w"> </span>-w<span class="w"> </span>lab/countries<span class="w"> </span>-e<span class="w"> </span>lab/countries/.env
 </code></pre></div>
 

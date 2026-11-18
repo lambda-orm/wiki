@@ -1058,7 +1058,7 @@
         <li class="md-nav__item">
   <a href="#all-the-properties-of-an-entity" class="md-nav__link">
     <span class="md-ellipsis">
-      All the properties of an entity
+      Todas las propiedades de una entidad
     </span>
   </a>
   
@@ -1067,7 +1067,7 @@
         <li class="md-nav__item">
   <a href="#one-property" class="md-nav__link">
     <span class="md-ellipsis">
-      One property
+      Una propiedad
     </span>
   </a>
   
@@ -1103,7 +1103,7 @@
         <li class="md-nav__item">
   <a href="#pagination" class="md-nav__link">
     <span class="md-ellipsis">
-      Pagination
+      Paginación
     </span>
   </a>
   
@@ -1112,11 +1112,11 @@
         <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     <span class="md-ellipsis">
-      Usage
+      Uso
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Usage">
+    <nav class="md-nav" aria-label="Uso">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1424,7 +1424,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1734,7 +1734,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2107,7 +2107,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2361,7 +2361,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -3045,7 +3045,7 @@
         <li class="md-nav__item">
   <a href="#all-the-properties-of-an-entity" class="md-nav__link">
     <span class="md-ellipsis">
-      All the properties of an entity
+      Todas las propiedades de una entidad
     </span>
   </a>
   
@@ -3054,7 +3054,7 @@
         <li class="md-nav__item">
   <a href="#one-property" class="md-nav__link">
     <span class="md-ellipsis">
-      One property
+      Una propiedad
     </span>
   </a>
   
@@ -3090,7 +3090,7 @@
         <li class="md-nav__item">
   <a href="#pagination" class="md-nav__link">
     <span class="md-ellipsis">
-      Pagination
+      Paginación
     </span>
   </a>
   
@@ -3099,11 +3099,11 @@
         <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     <span class="md-ellipsis">
-      Usage
+      Uso
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Usage">
+    <nav class="md-nav" aria-label="Uso">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3155,14 +3155,14 @@
 
 
 <h1 id="select">Select<a class="headerlink" href="#select" title="Permanent link">&para;</a></h1>
-<p>This page shows how to read records: all the properties of an entity or only some of them, the first or last record, distinct values and pagination. The SQL shown is the one generated for MySQL.</p>
-<p>Every query is based on the schema, from which λORM knows the properties of each entity, its primary key, indexes, relations and constraints. That is why, to read all the properties of an entity, you do not need to list them.</p>
-<h2 id="all-the-properties-of-an-entity">All the properties of an entity<a class="headerlink" href="#all-the-properties-of-an-entity" title="Permanent link">&para;</a></h2>
-<p>Reads all the properties of all the products.</p>
+<p>Esta página muestra cómo leer registros: todas las propiedades de una entidad o solo algunas, el primer o el último registro, valores distintos y paginación. El SQL que se muestra es el generado para MySQL.</p>
+<p>Toda consulta se basa en el esquema, del que λORM conoce las propiedades de cada entidad, su clave primaria, índices, relaciones y restricciones. Por eso, para leer todas las propiedades de una entidad, no hace falta enumerarlas.</p>
+<h2 id="all-the-properties-of-an-entity">Todas las propiedades de una entidad<a class="headerlink" href="#all-the-properties-of-an-entity" title="Permanent link">&para;</a></h2>
+<p>Lee todas las propiedades de todos los productos.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">Products</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL resultante:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">ProductName</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span><span class="p">,</span>
@@ -3176,20 +3176,20 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">Discontinued</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">discontinued</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Products</span><span class="w"> </span><span class="n">p</span>
 </code></pre></div>
-<h2 id="one-property">One property<a class="headerlink" href="#one-property" title="Permanent link">&para;</a></h2>
-<p>Reads only the name of each product.</p>
+<h2 id="one-property">Una propiedad<a class="headerlink" href="#one-property" title="Permanent link">&para;</a></h2>
+<p>Lee solo el nombre de cada producto.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">Products</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL resultante:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">ProductName</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Products</span><span class="w"> </span><span class="n">p</span>
 </code></pre></div>
 <h2 id="first">First<a class="headerlink" href="#first" title="Permanent link">&para;</a></h2>
-<p>Reads the first product, ordered by its primary key.</p>
+<p>Lee el primer producto, ordenado por su clave primaria.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">Products</span><span class="p">.</span><span class="nx">first</span><span class="p">()</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL resultante:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">SELECT</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">ProductName</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span><span class="p">,</span>
@@ -3205,13 +3205,13 @@
 <a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="k">asc</span>
 <a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="k">LIMIT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
 </code></pre></div>
-<p><code>first</code> can also receive the properties to return, as <code>map</code> does: <code>Products.first(p =&gt; ({ name: p.name, price: p.price }))</code>. In that case the records are ordered by the first property returned.</p>
+<p><code>first</code> también puede recibir las propiedades a devolver, como hace <code>map</code>: <code>Products.first(p =&gt; ({ name: p.name, price: p.price }))</code>. En ese caso los registros se ordenan por la primera propiedad devuelta.</p>
 <h2 id="last">Last<a class="headerlink" href="#last" title="Permanent link">&para;</a></h2>
-<p>Reads the last product, ordered by its primary key.</p>
+<p>Lee el último producto, ordenado por su clave primaria.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">Products</span><span class="p">.</span><span class="nx">last</span><span class="p">()</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL resultante:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">SELECT</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">ProductName</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span><span class="p">,</span>
@@ -3228,20 +3228,20 @@
 <a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="k">LIMIT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
 </code></pre></div>
 <h2 id="distinct">Distinct<a class="headerlink" href="#distinct" title="Permanent link">&para;</a></h2>
-<p>Reads the distinct combinations of quantity per unit and category name, sorted by category. The category name comes from the <code>category</code> relation, so λORM adds the join (see <a href="../Join/">Join</a>).</p>
+<p>Lee las combinaciones distintas de cantidad por unidad y nombre de categoría, ordenadas por categoría. El nombre de la categoría viene de la relación <code>category</code>, por lo que λORM añade el join (ver <a href="../Join/">Join</a>).</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">Products</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">distinct</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">quantity</span><span class="o">:</span><span class="w"> </span><span class="kt">p.quantity</span><span class="p">,</span><span class="w"> </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">p.category.name</span><span class="w"> </span><span class="p">}))</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">category</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL resultante:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">QuantityPerUnit</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">quantity</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">CategoryName</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">category</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Products</span><span class="w"> </span><span class="n">p</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">Categories</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">CategoryID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">CategoryID</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="k">asc</span>
 </code></pre></div>
-<h2 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h2>
-<p>Reads the name and category of the products with a price greater than 10, sorted by category, and returns the first page of 10 records.</p>
+<h2 id="pagination">Paginación<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h2>
+<p>Lee el nombre y la categoría de los productos con un precio mayor que 10, ordenados por categoría, y devuelve la primera página de 10 registros.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nx">Products</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">price</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span>
@@ -3249,7 +3249,7 @@
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">category</span><span class="p">)</span>
 <a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="p">.</span><span class="nx">page</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL resultante:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">ProductName</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">CategoryName</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">category</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Products</span><span class="w"> </span><span class="n">p</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">Categories</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">CategoryID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">CategoryID</span>
@@ -3257,24 +3257,24 @@
 <a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="k">asc</span>
 <a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="k">LIMIT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span>
 </code></pre></div>
-<p><code>page(page, records)</code> receives the page number (starting at 1) and the number of records per page. How the page is expressed depends on the dialect: <code>LIMIT</code> on MySQL, <code>OFFSET … FETCH NEXT … ROWS ONLY</code> on Oracle, and so on.</p>
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p>The same query, with the minimum price as a parameter (<code>maxPrice</code>), run in three ways.</p>
+<p><code>page(page, records)</code> recibe el número de página (empezando en 1) y el número de registros por página. Cómo se expresa la página depende del dialecto: <code>LIMIT</code> en MySQL, <code>OFFSET … FETCH NEXT … ROWS ONLY</code> en Oracle, etc.</p>
+<h2 id="usage">Uso<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p>La misma consulta, con el precio mínimo como parámetro (<code>minPrice</code>), ejecutada de tres formas.</p>
 <h3 id="node">Node<a class="headerlink" href="#node" title="Permanent link">&para;</a></h3>
-<p>With the library <a href="../../usage/Usage/"><code>@lambdaorm/lib</code></a>:</p>
+<p>Con la librería <a href="../../usage/Usage/"><code>@lambdaorm/lib</code></a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Products</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./domain/model'</span><span class="w"> </span><span class="c1">// model generated by `lambdaorm build`</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="s1">'./lambdaORM.yaml'</span><span class="p">)</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">        </span><span class="c1">// products with a price greater than maxPrice, with their category, first page of 10</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">maxPrice</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">Products</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">            </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">price</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">maxPrice</span><span class="p">)</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">        </span><span class="c1">// products with a price greater than minPrice, with their category, first page of 10</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">minPrice</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">Products</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">            </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">price</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">minPrice</span><span class="p">)</span>
 <a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">            </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">p.name</span><span class="p">,</span><span class="w"> </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">p.category.name</span><span class="w"> </span><span class="p">}))</span>
 <a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">            </span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">category</span><span class="p">)</span>
 <a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">            </span><span class="p">.</span><span class="nx">page</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span>
-<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">maxPrice</span><span class="o">:</span><span class="w"> </span><span class="kt">10</span><span class="w"> </span><span class="p">})</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">minPrice</span><span class="o">:</span><span class="w"> </span><span class="kt">10</span><span class="w"> </span><span class="p">})</span>
 <a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">))</span>
 <a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">stack</span><span class="p">)</span>
@@ -3285,13 +3285,13 @@
 <a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="p">})()</span>
 </code></pre></div>
 <h3 id="cli">CLI<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h3>
-<p>With the <a href="../../cli/">CLI</a> <code>@lambdaorm/cli</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>lambdaorm<span class="w"> </span>execute<span class="w"> </span>-q<span class="w"> </span><span class="s2">"Products.filter(p=&gt;p.price&gt;maxPrice).map(p=&gt;({name:p.name,category:p.category.name})).sort(p=&gt;p.category).page(1,10)"</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"{\"maxPrice\":10}"</span>
+<p>Con la <a href="../../cli/">CLI</a> <code>@lambdaorm/cli</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>lambdaorm<span class="w"> </span>execute<span class="w"> </span>-q<span class="w"> </span><span class="s2">"Products.filter(p=&gt;p.price&gt;minPrice).map(p=&gt;({name:p.name,category:p.category.name})).sort(p=&gt;p.category).page(1,10)"</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"{\"minPrice\":10}"</span>
 </code></pre></div>
 <h3 id="data-gateway">Data Gateway<a class="headerlink" href="#data-gateway" title="Permanent link">&para;</a></h3>
-<p>Through the <a href="../../data-gateway/Rest/">REST API</a> of the <a href="../../data-gateway/">Data Gateway</a>:</p>
+<p>A través de la <a href="../../data-gateway/Rest/">API REST</a> del <a href="../../data-gateway/">Data Gateway</a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"http://localhost:8080/execute?format=beautiful"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-Api-Key: </span><span class="nv">$KEY</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"query": "Products.filter(p=&gt;p.price&gt;maxPrice).map(p=&gt;({name:p.name,category:p.category.name})).sort(p=&gt;p.category).page(1,10)", "data": {"maxPrice": 10}}'</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"query": "Products.filter(p=&gt;p.price&gt;minPrice).map(p=&gt;({name:p.name,category:p.category.name})).sort(p=&gt;p.category).page(1,10)", "data": {"minPrice": 10}}'</span>
 </code></pre></div>
 
 

@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1593,7 +1593,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1974,7 +1974,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2288,7 +2288,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -3004,48 +3004,48 @@
 
 
 <h1 id="introspect">Introspect<a class="headerlink" href="#introspect" title="Permanent link">&para;</a></h1>
-<p>This page explains introspect, which updates the schema from the structure of a JSON data file and then pushes the changes to the sources (databases): the CLI command <code>lambdaorm introspect</code> and the <code>orm.stage.introspect()</code> method.</p>
+<p>Esta página explica introspect, que actualiza el esquema a partir de la estructura de un archivo de datos JSON y luego aplica los cambios a las fuentes (bases de datos): el comando de la CLI <code>lambdaorm introspect</code> y el método <code>orm.stage.introspect()</code>.</p>
 <p>Introspect:</p>
 <ol>
-<li>Deduces the entities, properties and relations from the data and adds them to the schema file.</li>
-<li>Runs a <a href="../SchemaSynchronization-Push/">push</a>, so the databases of the stage get the new tables and columns.</li>
+<li>Deduce las entidades, propiedades y relaciones a partir de los datos y las añade al archivo del esquema.</li>
+<li>Ejecuta un <a href="../SchemaSynchronization-Push/">push</a>, de modo que las bases de datos del stage reciben las nuevas tablas y columnas.</li>
 </ol>
-<p>The data is not imported; to import it too, use <a href="../SchemaSynchronization-Incorporate/">incorporate</a>.</p>
+<p>Los datos no se importan; para importarlos también, se usa <a href="../SchemaSynchronization-Incorporate/">incorporate</a>.</p>
 <h2 id="cli">CLI<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lambdaorm<span class="w"> </span>introspect<span class="w"> </span>-d<span class="w"> </span>countries.json<span class="w"> </span>-n<span class="w"> </span>countries
 </code></pre></div>
 <table>
 <thead>
 <tr>
-<th>Option</th>
-<th>Description</th>
+<th>Opción</th>
+<th>Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>-d</code>, <code>--data</code></td>
-<td>JSON data file (or the data as inline JSON). Required.</td>
+<td>Archivo de datos JSON (o los datos como JSON en línea). Obligatorio.</td>
 </tr>
 <tr>
 <td><code>-n</code>, <code>--name</code></td>
-<td>Name of the root entity (default: the name of the file).</td>
+<td>Nombre de la entidad raíz (por defecto: el nombre del archivo).</td>
 </tr>
 <tr>
 <td><code>-w</code>, <code>--workspace</code></td>
-<td>Folder of the project (default: the current folder).</td>
+<td>Carpeta del proyecto (por defecto: la carpeta actual).</td>
 </tr>
 <tr>
 <td><code>-s</code>, <code>--stage</code></td>
-<td>Name of the stage (default: the first stage).</td>
+<td>Nombre del stage (por defecto: el primer stage).</td>
 </tr>
 <tr>
 <td><code>-e</code>, <code>--envfile</code></td>
-<td>File of environment variables to read.</td>
+<td>Archivo de variables de entorno que se lee.</td>
 </tr>
 </tbody>
 </table>
-<p>This command updates <code>lambdaORM.yaml</code> with the structure of the data in <code>countries.json</code>, with <code>Countries</code> as the root entity, and pushes the changes.
-Like push, it writes the model of the stage and the DDL applied to each source in the <code>orm_state</code> folder:</p>
+<p>Este comando actualiza <code>lambdaORM.yaml</code> con la estructura de los datos de <code>countries.json</code>, con <code>Countries</code> como entidad raíz, y aplica los cambios.
+Igual que push, escribe en la carpeta <code>orm_state</code> el modelo del stage y el DDL aplicado a cada fuente:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>├──<span class="w"> </span>countries.json
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├──<span class="w"> </span>lambdaORM.yaml
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>└──<span class="w"> </span>orm_state
@@ -3053,7 +3053,7 @@ Like push, it writes the model of the stage and the DDL applied to each source i
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span>└──<span class="w"> </span>&lt;source&gt;
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span>└──<span class="w"> </span>V&lt;yyMMddHHmmss&gt;__push.sql
 </code></pre></div>
-<p>DDL applied (MySQL):</p>
+<p>DDL aplicado (MySQL):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">CountriesLanguages</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w">  </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span><span class="n">languageCode</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="n">countryName</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">CountriesLanguages_PK</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">CountriesLanguages</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">CountriesLanguages_UK</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">countryName</span><span class="p">,</span><span class="n">languageCode</span><span class="p">);</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Languages</span><span class="w"> </span><span class="p">(</span><span class="n">code</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">Languages_PK</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">code</span><span class="p">));</span>
@@ -3069,9 +3069,9 @@ Like push, it writes the model of the stage and the DDL applied to each source i
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Timezones</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">Timezones_countries_FK</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">countryName</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">Countries_region_FK</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">regionCode</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Regions</span><span class="w"> </span><span class="p">(</span><span class="n">code</span><span class="p">);</span>
 </code></pre></div>
-<p>See the <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/12-introspect">CLI lab</a>.</p>
+<p>Ver el <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/12-introspect">laboratorio de la CLI</a>.</p>
 <h2 id="node">Node<a class="headerlink" href="#node" title="Permanent link">&para;</a></h2>
-<p><code>orm.stage.introspect(data, name, options)</code> receives the data, the name of the root entity and, optionally, the query options (for example the stage):</p>
+<p><code>orm.stage.introspect(data, name, options)</code> recibe los datos, el nombre de la entidad raíz y, opcionalmente, las opciones de la consulta (por ejemplo el stage):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">workspace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">()</span>
@@ -3087,13 +3087,13 @@ Like push, it writes the model of the stage and the DDL applied to each source i
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="p">})()</span>
 </code></pre></div>
-<p>As a result:</p>
+<p>Como resultado:</p>
 <ul>
-<li>The <code>lambdaORM.yaml</code> file is updated with the structure deduced from the data.</li>
-<li>The databases of the stage are updated with the new schema.</li>
-<li>The model of the stage and the applied DDL are written in the <code>orm_state</code> folder.</li>
+<li>El archivo <code>lambdaORM.yaml</code> se actualiza con la estructura deducida de los datos.</li>
+<li>Las bases de datos del stage se actualizan con el nuevo esquema.</li>
+<li>El modelo del stage y el DDL aplicado se escriben en la carpeta <code>orm_state</code>.</li>
 </ul>
-<p>See the <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/12-introspect">Node lab</a>.</p>
+<p>Ver el <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/12-introspect">laboratorio de Node</a>.</p>
 
 
 

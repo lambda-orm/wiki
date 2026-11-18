@@ -798,7 +798,7 @@
         <li class="md-nav__item">
   <a href="#methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Methods
+      Métodos
     </span>
   </a>
   
@@ -807,7 +807,7 @@
         <li class="md-nav__item">
   <a href="#notifications" class="md-nav__link">
     <span class="md-ellipsis">
-      Notifications
+      Notificações
     </span>
   </a>
   
@@ -1343,7 +1343,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1653,7 +1653,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2026,7 +2026,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2280,7 +2280,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2964,7 +2964,7 @@
         <li class="md-nav__item">
   <a href="#methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Methods
+      Métodos
     </span>
   </a>
   
@@ -2973,7 +2973,7 @@
         <li class="md-nav__item">
   <a href="#notifications" class="md-nav__link">
     <span class="md-ellipsis">
-      Notifications
+      Notificações
     </span>
   </a>
   
@@ -2995,31 +2995,31 @@
 
 
 
-<h1 id="websocket-api">WebSocket API<a class="headerlink" href="#websocket-api" title="Permanent link">&para;</a></h1>
-<p>The <code>webSocket</code> transport offers the operations of the REST API over <strong>one persistent JSON-RPC 2.0 connection</strong>, plus
-<strong>notifications</strong> that REST cannot give: the end of a queued execution and the changes of state of the schema.</p>
+<h1 id="websocket-api">API WebSocket<a class="headerlink" href="#websocket-api" title="Permanent link">&para;</a></h1>
+<p>O transporte <code>webSocket</code> oferece as operações da API REST sobre <strong>uma única conexão JSON-RPC 2.0 persistente</strong>, além de
+<strong>notificações</strong> que o REST não pode oferecer: o fim de uma execução enfileirada e as mudanças de estado do esquema.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">transports</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">webSocket</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8083</span>
 </code></pre></div>
-<p>The connection is opened against the schema's route, <code>ws://localhost:8083/iot/v1</code> (<code>ws://localhost:8083/</code> for a single
-schema at the root), and is authenticated in the upgrade with the same headers as REST. A connection to the root of a
-gateway with several schemas has only <code>general.*</code> and <code>gateway.schemas</code>.</p>
+<p>A conexão é aberta na rota do esquema, <code>ws://localhost:8083/iot/v1</code> (<code>ws://localhost:8083/</code> para um único
+esquema na raiz), e é autenticada no upgrade com os mesmos headers do REST. Uma conexão à raiz de um
+gateway com vários esquemas tem apenas <code>general.*</code> e <code>gateway.schemas</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">→</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"query.execute"</span><span class="p">,</span><span class="w"> </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Products.filter(p =&gt; p.price &gt; minPrice)"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"minPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">←</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thüringer Rostbratwurst"</span><span class="p">,</span><span class="w"> </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">123.79</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="err">→</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"query.script"</span><span class="p">,</span><span class="w"> </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"script"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 + 1"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="err">←</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">-32000</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"the credential \"reader\" does not have the \"script\" permission"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ForbiddenError"</span><span class="p">,</span><span class="w"> </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
-<p>The <code>params</code> are the body (or the route parameters) of the equivalent REST method. An error carries in <code>data</code> the
-<code>name</code> and the HTTP <code>status</code> that REST would have answered.</p>
-<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<p>Os <code>params</code> são o corpo (ou os parâmetros de rota) do método REST equivalente. Um erro traz em <code>data</code> o
+<code>name</code> e o <code>status</code> HTTP que o REST teria respondido.</p>
+<h2 id="methods">Métodos<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Method</th>
+<th>Método</th>
 <th>Params</th>
-<th>REST equivalent</th>
+<th>Equivalente REST</th>
 </tr>
 </thead>
 <tbody>
@@ -3040,7 +3040,7 @@ gateway with several schemas has only <code>general.*</code> and <code>gateway.s
 </tr>
 <tr>
 <td><code>gateway.schemas</code></td>
-<td>— (only at the root)</td>
+<td>— (apenas na raiz)</td>
 <td><code>GET /schemas</code></td>
 </tr>
 <tr>
@@ -3150,31 +3150,31 @@ gateway with several schemas has only <code>general.*</code> and <code>gateway.s
 </tr>
 </tbody>
 </table>
-<p>The <a href="../Security/#permissions">permissions</a> are the same as in REST.</p>
-<h2 id="notifications">Notifications<a class="headerlink" href="#notifications" title="Permanent link">&para;</a></h2>
-<p>Messages from the server without an <code>id</code>:</p>
+<p>As <a href="../Security/#permissions">permissões</a> são as mesmas do REST.</p>
+<h2 id="notifications">Notificações<a class="headerlink" href="#notifications" title="Permanent link">&para;</a></h2>
+<p>Mensagens do servidor sem <code>id</code>:</p>
 <table>
 <thead>
 <tr>
-<th>Notification</th>
-<th>When</th>
+<th>Notificação</th>
+<th>Quando</th>
 <th>Params</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>queue.completed</code></td>
-<td>an execution queued with <code>query.executeQueued</code> and <code>notify: true</code> on this connection ended</td>
-<td><code>queueId</code>, <code>ok: true</code>, <code>rows</code> (sent to the topic)</td>
+<td>uma execução enfileirada com <code>query.executeQueued</code> e <code>notify: true</code> nesta conexão terminou</td>
+<td><code>queueId</code>, <code>ok: true</code>, <code>rows</code> (enviadas ao tópico)</td>
 </tr>
 <tr>
 <td><code>queue.failed</code></td>
-<td>that execution failed</td>
+<td>essa execução falhou</td>
 <td><code>queueId</code>, <code>ok: false</code>, <code>error</code></td>
 </tr>
 <tr>
 <td><code>schema.statusChanged</code></td>
-<td>the schema of the connection went to <code>error</code> / <code>restarting</code>, or back to <code>ready</code></td>
+<td>o esquema da conexão passou para <code>error</code> / <code>restarting</code>, ou voltou para <code>ready</code></td>
 <td><code>path</code>, <code>status</code>, <code>reason</code></td>
 </tr>
 </tbody>
@@ -3183,10 +3183,10 @@ gateway with several schemas has only <code>general.*</code> and <code>gateway.s
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">←</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"queueId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"q-123"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">←</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"queue.completed"</span><span class="p">,</span><span class="w"> </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"queueId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"q-123"</span><span class="p">,</span><span class="w"> </span><span class="nt">"ok"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nt">"rows"</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
-<p>If the schema stops being <code>ready</code>, the requests answer an error with <code>status: 503</code>; the connection stays open and works
-again when the schema recovers.</p>
-<p>The AsyncAPI document of the transport is at <code>GET /asyncapi</code> (and <code>/asyncapi.json</code>). From Node, the
-<a href="../Clients/">client</a> uses this transport with a <code>ws://</code> URL.</p>
+<p>Se o esquema deixar de estar <code>ready</code>, as requisições respondem com um erro com <code>status: 503</code>; a conexão permanece aberta e volta a
+funcionar quando o esquema se recupera.</p>
+<p>O documento AsyncAPI do transporte está em <code>GET /asyncapi</code> (e <code>/asyncapi.json</code>). A partir do Node, o
+<a href="../Clients/">cliente</a> usa este transporte com uma URL <code>ws://</code>.</p>
 
 
 

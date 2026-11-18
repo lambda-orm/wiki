@@ -24,7 +24,7 @@
     
     
       
-        <title>Synchronization - λORM</title>
+        <title>Synchronisierung - λORM</title>
       
     
     
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Synchronization
+              Synchronisierung
             
           </span>
         </div>
@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1983,7 +1983,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -1996,7 +1996,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2315,7 +2315,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -3057,68 +3057,68 @@
 
 
 
-<h1 id="synchronization">Synchronization<a class="headerlink" href="#synchronization" title="Permanent link">&para;</a></h1>
-<p>This page summarizes the commands that keep the schema and the databases of a stage in step.</p>
-<p>Synchronization works in both directions: from the schema to the sources (databases), and from the sources to the schema file.
-Each operation is available as a command of the CLI (<a href="https://www.npmjs.com/package/@lambdaorm/cli">@lambdaorm/cli</a>) and as a method of <code>orm.stage</code> in <a href="https://www.npmjs.com/package/@lambdaorm/lib">@lambdaorm/lib</a>.</p>
+<h1 id="synchronization">Synchronisierung<a class="headerlink" href="#synchronization" title="Permanent link">&para;</a></h1>
+<p>Diese Seite fasst die Befehle zusammen, die das Schema und die Datenbanken eines Stages synchron halten.</p>
+<p>Die Synchronisierung funktioniert in beide Richtungen: vom Schema zu den Quellen (Datenbanken) und von den Quellen zur Schema-Datei.
+Jede Operation ist als Befehl der CLI (<a href="https://www.npmjs.com/package/@lambdaorm/cli">@lambdaorm/cli</a>) und als Methode von <code>orm.stage</code> in <a href="https://www.npmjs.com/package/@lambdaorm/lib">@lambdaorm/lib</a> verfügbar.</p>
 <table>
 <thead>
 <tr>
 <th>Operation</th>
-<th>Direction</th>
-<th style="text-align: center;">Changes the schema</th>
-<th style="text-align: center;">Changes the databases</th>
+<th>Richtung</th>
+<th style="text-align: center;">Ändert das Schema</th>
+<th style="text-align: center;">Ändert die Datenbanken</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>push</td>
-<td>schema → databases</td>
-<td style="text-align: center;">no</td>
-<td style="text-align: center;">yes</td>
+<td>Schema → Datenbanken</td>
+<td style="text-align: center;">nein</td>
+<td style="text-align: center;">ja</td>
 </tr>
 <tr>
 <td>pull</td>
-<td>databases → schema</td>
-<td style="text-align: center;">yes</td>
-<td style="text-align: center;">no</td>
+<td>Datenbanken → Schema</td>
+<td style="text-align: center;">ja</td>
+<td style="text-align: center;">nein</td>
 </tr>
 <tr>
 <td>fetch</td>
-<td>compares both</td>
-<td style="text-align: center;">no</td>
-<td style="text-align: center;">no</td>
+<td>vergleicht beide</td>
+<td style="text-align: center;">nein</td>
+<td style="text-align: center;">nein</td>
 </tr>
 <tr>
 <td>introspect</td>
-<td>data file → schema → databases</td>
-<td style="text-align: center;">yes</td>
-<td style="text-align: center;">yes</td>
+<td>Datendatei → Schema → Datenbanken</td>
+<td style="text-align: center;">ja</td>
+<td style="text-align: center;">ja</td>
 </tr>
 <tr>
 <td>incorporate</td>
-<td>data file → schema → databases, then imports the data</td>
-<td style="text-align: center;">yes</td>
-<td style="text-align: center;">yes</td>
+<td>Datendatei → Schema → Datenbanken, anschließend Import der Daten</td>
+<td style="text-align: center;">ja</td>
+<td style="text-align: center;">ja</td>
 </tr>
 </tbody>
 </table>
 <h2 id="push">Push<a class="headerlink" href="#push" title="Permanent link">&para;</a></h2>
-<p>Push updates the sources (databases) with the schema, with the command <code>lambdaorm push</code>.</p>
-<p>Push compares the model with the databases themselves: it creates missing tables, adds and alters columns, renames the columns declared with <code>previousMapping</code>, and never drops what exists only in the database. <code>lambdaorm push -o &lt;dir&gt;</code> writes the DDL as one script per source (<code>&lt;stage&gt;.&lt;source&gt;.sql</code>) without applying it.</p>
-<p><a href="../SchemaSynchronization-Push/">More information</a></p>
+<p>Push aktualisiert die Quellen (Datenbanken) anhand des Schemas, mit dem Befehl <code>lambdaorm push</code>.</p>
+<p>Push vergleicht das Modell mit den Datenbanken selbst: Es erstellt fehlende Tabellen, fügt Spalten hinzu und ändert sie, benennt die mit <code>previousMapping</code> deklarierten Spalten um und löscht niemals etwas, das nur in der Datenbank existiert. <code>lambdaorm push -o &lt;dir&gt;</code> schreibt die DDL als ein Skript pro Quelle (<code>&lt;stage&gt;.&lt;source&gt;.sql</code>), ohne sie anzuwenden.</p>
+<p><a href="../SchemaSynchronization-Push/">Weitere Informationen</a></p>
 <h2 id="pull">Pull<a class="headerlink" href="#pull" title="Permanent link">&para;</a></h2>
-<p>Pull updates the schema with the structure of the sources (databases), with the command <code>lambdaorm pull</code>. What was written by hand in the schema (relations, listeners, stages) is kept.</p>
-<p><a href="../SchemaSynchronization-Pull/">More information</a></p>
+<p>Pull aktualisiert das Schema mit der Struktur der Quellen (Datenbanken), mit dem Befehl <code>lambdaorm pull</code>. Was im Schema von Hand geschrieben wurde (Beziehungen, Listener, Stages), bleibt erhalten.</p>
+<p><a href="../SchemaSynchronization-Pull/">Weitere Informationen</a></p>
 <h2 id="fetch">Fetch<a class="headerlink" href="#fetch" title="Permanent link">&para;</a></h2>
-<p>Fetch shows the differences between the sources and the schema, without applying any change, with the command <code>lambdaorm fetch</code>. The result is empty when the databases are in step with the model, and the command exits with code 1 when there are differences (useful in CI).</p>
-<p><a href="../SchemaSynchronization-Fetch/">More information</a></p>
+<p>Fetch zeigt die Unterschiede zwischen den Quellen und dem Schema an, ohne Änderungen anzuwenden, mit dem Befehl <code>lambdaorm fetch</code>. Das Ergebnis ist leer, wenn die Datenbanken mit dem Modell übereinstimmen, und der Befehl endet mit dem Code 1, wenn es Unterschiede gibt (nützlich in CI).</p>
+<p><a href="../SchemaSynchronization-Fetch/">Weitere Informationen</a></p>
 <h2 id="introspect">Introspect<a class="headerlink" href="#introspect" title="Permanent link">&para;</a></h2>
-<p>Introspect updates the schema from the structure of a JSON data file and then pushes the changes to the sources (databases), with the command <code>lambdaorm introspect</code>.</p>
-<p><a href="../SchemaSynchronization-Introspect/">More information</a></p>
+<p>Introspect aktualisiert das Schema anhand der Struktur einer JSON-Datendatei und überträgt die Änderungen anschließend auf die Quellen (Datenbanken), mit dem Befehl <code>lambdaorm introspect</code>.</p>
+<p><a href="../SchemaSynchronization-Introspect/">Weitere Informationen</a></p>
 <h2 id="incorporate">Incorporate<a class="headerlink" href="#incorporate" title="Permanent link">&para;</a></h2>
-<p>Incorporate does the same as introspect and then imports the data of the file into the sources (databases), with the command <code>lambdaorm incorporate</code>.</p>
-<p><a href="../SchemaSynchronization-Incorporate/">More information</a></p>
+<p>Incorporate tut dasselbe wie introspect und importiert anschließend die Daten der Datei in die Quellen (Datenbanken), mit dem Befehl <code>lambdaorm incorporate</code>.</p>
+<p><a href="../SchemaSynchronization-Incorporate/">Weitere Informationen</a></p>
 
 
 

@@ -1361,7 +1361,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1671,7 +1671,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2044,7 +2044,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2298,7 +2298,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -3031,57 +3031,57 @@
 
 
 
-<h1 id="transports">Transports<a class="headerlink" href="#transports" title="Permanent link">&para;</a></h1>
-<p>The gateway has four transports. Each one listens on its own port, only when the port is configured
-(<a href="../Configuration/#transports-and-ports">Configuration</a>), and each one reaches every schema by its route.</p>
+<h1 id="transports">Transportes<a class="headerlink" href="#transports" title="Permanent link">&para;</a></h1>
+<p>El gateway tiene cuatro transportes. Cada uno escucha en su propio puerto, solo cuando el puerto está configurado
+(<a href="../Configuration/#transports-and-ports">Configuración</a>), y cada uno llega a todos los esquemas por su ruta.</p>
 <table>
 <thead>
 <tr>
-<th>Transport</th>
-<th>What it is</th>
-<th>Routes of the schema <code>iot/v1</code></th>
-<th>Routes of the gateway</th>
+<th>Transporte</th>
+<th>Qué es</th>
+<th>Rutas del esquema <code>iot/v1</code></th>
+<th>Rutas del gateway</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><a href="../Rest/"><code>http</code></a></td>
-<td>REST API, OpenAPI 3</td>
+<td>API REST, OpenAPI 3</td>
 <td><code>POST /iot/v1/execute</code>, <code>GET /iot/v1/entities</code>, …</td>
 <td><code>/ping</code>, <code>/health</code>, <code>/metrics</code>, <code>/version</code>, <code>/schemas</code>, <code>/doc</code>, <code>/api-docs</code>, <code>/ui</code></td>
 </tr>
 <tr>
 <td><a href="../Mcp/"><code>mcpHttp</code></a></td>
-<td>MCP for AI agents</td>
+<td>MCP para agentes de IA</td>
 <td><code>POST/GET/DELETE /iot/v1/mcp</code> (Streamable HTTP); <code>GET /iot/v1/sse</code> + <code>POST /iot/v1/messages?sessionId=</code> (HTTP+SSE)</td>
 <td><code>GET /status</code></td>
 </tr>
 <tr>
 <td><a href="../Mcp/#mcpwebsocket"><code>mcpWebSocket</code></a></td>
-<td>MCP over WebSocket</td>
-<td>upgrade at <code>/iot/v1/mcp</code></td>
+<td>MCP sobre WebSocket</td>
+<td>upgrade en <code>/iot/v1/mcp</code></td>
 <td><code>GET /status</code>, <code>/asyncapi</code></td>
 </tr>
 <tr>
 <td><a href="../WebSocket/"><code>webSocket</code></a></td>
-<td>JSON-RPC API with notifications</td>
-<td>connection to <code>ws://host:port/iot/v1</code></td>
-<td>connection to the root: <code>general.*</code> and <code>gateway.schemas</code>; <code>/asyncapi</code></td>
+<td>API JSON-RPC con notificaciones</td>
+<td>conexión a <code>ws://host:port/iot/v1</code></td>
+<td>conexión a la raíz: <code>general.*</code> y <code>gateway.schemas</code>; <code>/asyncapi</code></td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li><code>{basePath}</code> (<code>transports.&lt;t&gt;.basePath</code>) goes before every route: with <code>basePath: /data-gateway</code>,
-  <code>/data-gateway/iot/v1/execute</code> and <code>/data-gateway/ui/</code>.</li>
-<li>With a single schema at the root, its routes have no prefix (<code>/execute</code>, <code>/mcp</code>, <code>ws://host:port/</code>).</li>
-<li>A schema that is not exposed on a transport (<code>schemas[].transports</code>) answers <code>404</code> there. A schema that is not
-  <code>ready</code> answers <code>503</code> with the reason.</li>
-<li>Each transport authenticates every request (or the WebSocket upgrade) with the effective authentication of the
-  schema (<a href="../Security/">Security</a>).</li>
+<li><code>{basePath}</code> (<code>transports.&lt;t&gt;.basePath</code>) va antes de cada ruta: con <code>basePath: /data-gateway</code>,
+  <code>/data-gateway/iot/v1/execute</code> y <code>/data-gateway/ui/</code>.</li>
+<li>Con un único esquema en la raíz, sus rutas no tienen prefijo (<code>/execute</code>, <code>/mcp</code>, <code>ws://host:port/</code>).</li>
+<li>Un esquema que no está expuesto en un transporte (<code>schemas[].transports</code>) responde <code>404</code> en él. Un esquema que no está
+  <code>ready</code> responde <code>503</code> con el motivo.</li>
+<li>Cada transporte autentica cada petición (o el upgrade de WebSocket) con la autenticación efectiva del
+  esquema (<a href="../Security/">Seguridad</a>).</li>
 </ul>
 <h2 id="http">http<a class="headerlink" href="#http" title="Permanent link">&para;</a></h2>
-<p>The REST API: every operation of λORM on a schema (queries, scripts, the schema, stages), plus the routes of the
-gateway. JSON in and out. Methods and examples in <a href="../Rest/">REST API</a>.</p>
+<p>La API REST: todas las operaciones de λORM sobre un esquema (consultas, scripts, el esquema, stages), más las rutas del
+gateway. JSON de entrada y de salida. Métodos y ejemplos en <a href="../Rest/">API REST</a>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">transports</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">http</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
@@ -3090,14 +3090,14 @@ gateway. JSON in and out. Methods and examples in <a href="../Rest/">REST API</a
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">ui</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> enabled</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w">        </span><span class="c1"># the web UI at /ui</span>
 </code></pre></div>
 <ul>
-<li><code>GET /doc</code> (and <code>/api-docs</code>) serves Swagger UI with the OpenAPI document. Its <strong>Authorize</strong> button asks for the
-  credential as the schemas are configured: an API key in its header, a bearer token or a user and password.</li>
-<li><code>/ping</code>, <code>/health</code> and <code>/metrics</code> need no credential (Kubernetes probes, Prometheus).</li>
-<li>The rate limit (<code>rateLimit</code>) applies to this transport only.</li>
+<li><code>GET /doc</code> (y <code>/api-docs</code>) sirve Swagger UI con el documento OpenAPI. Su botón <strong>Authorize</strong> pide la
+  credencial según cómo estén configurados los esquemas: una API key en su header, un bearer token o un usuario y una contraseña.</li>
+<li><code>/ping</code>, <code>/health</code> y <code>/metrics</code> no necesitan credencial (probes de Kubernetes, Prometheus).</li>
+<li>El límite de tasa (<code>rateLimit</code>) se aplica solo a este transporte.</li>
 </ul>
 <h2 id="mcphttp">mcpHttp<a class="headerlink" href="#mcphttp" title="Permanent link">&para;</a></h2>
-<p><a href="https://modelcontextprotocol.io">Model Context Protocol</a> for AI agents: a server per schema, with a tool per
-operation. See <a href="../Mcp/">MCP</a>.</p>
+<p><a href="https://modelcontextprotocol.io">Model Context Protocol</a> para agentes de IA: un servidor por esquema, con una herramienta por
+operación. Véase <a href="../Mcp/">MCP</a>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">transports</span><span class="p">:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">mcpHttp</span><span class="p">:</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8081</span>
@@ -3107,46 +3107,46 @@ operation. See <a href="../Mcp/">MCP</a>.</p>
 <table>
 <thead>
 <tr>
-<th>Route</th>
-<th>Protocol</th>
-<th>Clients</th>
+<th>Ruta</th>
+<th>Protocolo</th>
+<th>Clientes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>POST/GET/DELETE {basePath}/{schema}/mcp</code></td>
 <td>Streamable HTTP</td>
-<td>Claude Code (<code>--transport http</code>), current clients</td>
+<td>Claude Code (<code>--transport http</code>), clientes actuales</td>
 </tr>
 <tr>
 <td><code>GET {basePath}/{schema}/sse</code> + <code>POST {basePath}/{schema}/messages?sessionId=&lt;id&gt;</code></td>
-<td>HTTP+SSE (deprecated), with <code>legacySse: true</code></td>
-<td>older clients</td>
+<td>HTTP+SSE (obsoleto), con <code>legacySse: true</code></td>
+<td>clientes antiguos</td>
 </tr>
 <tr>
 <td><code>GET {basePath}/status</code></td>
-<td>the state, the schemas and the open SSE sessions</td>
-<td>operations</td>
+<td>el estado, los esquemas y las sesiones SSE abiertas</td>
+<td>operaciones</td>
 </tr>
 </tbody>
 </table>
-<p>The credential goes in every request (Streamable HTTP) or in the <code>GET</code> and every <code>POST</code> (SSE). HTTP+SSE keeps a
-session in memory: with several replicas it needs session affinity.</p>
+<p>La credencial va en cada petición (Streamable HTTP) o en el <code>GET</code> y en cada <code>POST</code> (SSE). HTTP+SSE mantiene una
+sesión en memoria: con varias réplicas necesita afinidad de sesión.</p>
 <h2 id="mcpwebsocket">mcpWebSocket<a class="headerlink" href="#mcpwebsocket" title="Permanent link">&para;</a></h2>
-<p>The same MCP servers over WebSocket. <strong>It is not a standard MCP transport</strong>: it is offered for clients and gateways
-that support it on their own; most clients use <code>mcpHttp</code>.</p>
+<p>Los mismos servidores MCP sobre WebSocket. <strong>No es un transporte MCP estándar</strong>: se ofrece para clientes y gateways
+que lo soportan por su cuenta; la mayoría de los clientes usan <code>mcpHttp</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">transports</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">mcpWebSocket</span><span class="p">:</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8082</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">maxConnections</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
 </code></pre></div>
-<p>The connection is an upgrade at <code>{basePath}/{schema}/mcp</code>, authenticated in the handshake (without a credential it
-answers <code>401</code> and closes). The messages are JSON-RPC 2.0 with the MCP methods (<code>initialize</code>, <code>ping</code>, <code>tools/list</code>,
-<code>tools/call</code>, <code>resources/*</code>, …). <code>GET {basePath}/status</code> and <code>GET {basePath}/asyncapi</code> (the AsyncAPI document) are
-plain HTTP.</p>
+<p>La conexión es un upgrade en <code>{basePath}/{schema}/mcp</code>, autenticado en el handshake (sin credencial
+responde <code>401</code> y cierra). Los mensajes son JSON-RPC 2.0 con los métodos de MCP (<code>initialize</code>, <code>ping</code>, <code>tools/list</code>,
+<code>tools/call</code>, <code>resources/*</code>, …). <code>GET {basePath}/status</code> y <code>GET {basePath}/asyncapi</code> (el documento AsyncAPI) son
+HTTP simple.</p>
 <h2 id="websocket">webSocket<a class="headerlink" href="#websocket" title="Permanent link">&para;</a></h2>
-<p>A JSON-RPC 2.0 API over one persistent connection, with the same operations as REST, plus <strong>notifications</strong> that REST
-cannot give: the end of a queued execution and the changes of state of the schema. See <a href="../WebSocket/">WebSocket API</a>.</p>
+<p>Una API JSON-RPC 2.0 sobre una única conexión persistente, con las mismas operaciones que REST, más <strong>notificaciones</strong> que REST
+no puede dar: el fin de una ejecución encolada y los cambios de estado del esquema. Véase <a href="../WebSocket/">API WebSocket</a>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">transports</span><span class="p">:</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">webSocket</span><span class="p">:</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8083</span>

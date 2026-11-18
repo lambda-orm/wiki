@@ -821,7 +821,7 @@
         <li class="md-nav__item">
   <a href="#authentication" class="md-nav__link">
     <span class="md-ellipsis">
-      Authentication
+      Authentifizierung
     </span>
   </a>
   
@@ -830,7 +830,7 @@
         <li class="md-nav__item">
   <a href="#permissions" class="md-nav__link">
     <span class="md-ellipsis">
-      Permissions
+      Berechtigungen
     </span>
   </a>
   
@@ -857,7 +857,7 @@
         <li class="md-nav__item">
   <a href="#errors" class="md-nav__link">
     <span class="md-ellipsis">
-      Errors
+      Fehler
     </span>
   </a>
   
@@ -1370,7 +1370,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -2053,7 +2053,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2307,7 +2307,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2991,7 +2991,7 @@
         <li class="md-nav__item">
   <a href="#authentication" class="md-nav__link">
     <span class="md-ellipsis">
-      Authentication
+      Authentifizierung
     </span>
   </a>
   
@@ -3000,7 +3000,7 @@
         <li class="md-nav__item">
   <a href="#permissions" class="md-nav__link">
     <span class="md-ellipsis">
-      Permissions
+      Berechtigungen
     </span>
   </a>
   
@@ -3027,7 +3027,7 @@
         <li class="md-nav__item">
   <a href="#errors" class="md-nav__link">
     <span class="md-ellipsis">
-      Errors
+      Fehler
     </span>
   </a>
   
@@ -3049,26 +3049,26 @@
 
 
 
-<h1 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h1>
-<h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
-<p>The <code>authentication</code> block has three levels: global, per transport (<code>transports.&lt;t&gt;.authentication</code>) and per schema
-(<code>orm.schemas[].authentication</code>). The most specific replaces the others (schema → transport → global). It is applied
-by the edge worker before anything reaches the schema.</p>
+<h1 id="security">Sicherheit<a class="headerlink" href="#security" title="Permanent link">&para;</a></h1>
+<h2 id="authentication">Authentifizierung<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
+<p>Der Block <code>authentication</code> hat drei Ebenen: global, pro Transport (<code>transports.&lt;t&gt;.authentication</code>) und pro Schema
+(<code>orm.schemas[].authentication</code>). Die spezifischste ersetzt die anderen (Schema → Transport → global). Sie wird vom
+Edge-Worker angewendet, bevor irgendetwas das Schema erreicht.</p>
 <table>
 <thead>
 <tr>
 <th><code>adapter</code></th>
-<th>One credential (every permission)</th>
-<th>Several credentials with permissions</th>
-<th>The client sends</th>
+<th>Ein einzelner Zugang (alle Berechtigungen)</th>
+<th>Mehrere Zugangsdaten mit Berechtigungen</th>
+<th>Der Client sendet</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>none</code> (default)</td>
+<td><code>none</code> (Standard)</td>
 <td>—</td>
 <td>—</td>
-<td>nothing: an anonymous credential with every permission</td>
+<td>nichts: anonyme Zugangsdaten mit allen Berechtigungen</td>
 </tr>
 <tr>
 <td><code>local</code>, <code>type: bearer</code></td>
@@ -3078,7 +3078,7 @@ by the edge worker before anything reaches the schema.</p>
 </tr>
 <tr>
 <td><code>local</code>, <code>type: apikey</code></td>
-<td><code>value</code> (and <code>header</code>, default <code>X-Api-Key</code>)</td>
+<td><code>value</code> (und <code>header</code>, Standard <code>X-Api-Key</code>)</td>
 <td><code>keys: [{ name, value, permissions }]</code></td>
 <td><code>&lt;header&gt;: &lt;key&gt;</code></td>
 </tr>
@@ -3098,78 +3098,78 @@ by the edge worker before anything reaches the schema.</p>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">backend</span><span class="p p-Indicator">,</span><span class="nt"> value</span><span class="p">:</span><span class="w"> </span><span class="nv">$BACKEND_TOKEN</span><span class="p p-Indicator">,</span><span class="nt"> permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">read</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">write</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">script</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">queue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">stageImport</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"> </span><span class="p p-Indicator">}</span>
 </code></pre></div>
 <ul>
-<li>A <code>local</code> credential without its secret (or whose <code>$VAR</code> is not defined) stops the start. Open access is only
-  <code>adapter: none</code>, written on purpose.</li>
-<li>Secrets are compared in constant time. The secret never travels to the schema workers: only the name and the
-  permissions of the credential.</li>
-<li>Without a credential (or with a wrong one) the answer is <code>401</code>; the WebSocket upgrades are refused.</li>
-<li><code>/ping</code>, <code>/health</code>, <code>/metrics</code>, <code>/version</code>, <code>/schemas</code>, <code>/doc</code> and the UI's files need no credential.</li>
+<li><code>local</code>-Zugangsdaten ohne ihr Secret (oder deren <code>$VAR</code> nicht definiert ist) verhindern den Start. Offener Zugriff ist
+  nur <code>adapter: none</code>, bewusst so geschrieben.</li>
+<li>Secrets werden in konstanter Zeit verglichen. Das Secret gelangt nie zu den Workern der Schemas: nur der Name und die
+  Berechtigungen der Zugangsdaten.</li>
+<li>Ohne Zugangsdaten (oder mit falschen) lautet die Antwort <code>401</code>; WebSocket-Upgrades werden abgelehnt.</li>
+<li><code>/ping</code>, <code>/health</code>, <code>/metrics</code>, <code>/version</code>, <code>/schemas</code>, <code>/doc</code> und die Dateien der UI benötigen keine Zugangsdaten.</li>
 </ul>
-<h2 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h2>
+<h2 id="permissions">Berechtigungen<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Permission</th>
-<th>Allows</th>
+<th>Berechtigung</th>
+<th>Erlaubt</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>read</code></td>
-<td>the schema, the domain, plan, metadata, model, parameters, constraints, stage exists and export, and <code>execute</code> <strong>only when every sentence is a <code>select</code></strong></td>
+<td>das Schema, die Domäne, plan, metadata, model, parameters, constraints, stage exists und export sowie <code>execute</code> <strong>nur, wenn jede Anweisung ein <code>select</code> ist</strong></td>
 </tr>
 <tr>
 <td><code>write</code></td>
-<td><code>execute</code> that writes (<code>insert</code>, <code>update</code>, <code>delete</code>, <code>upsert</code>, <code>merge</code>, <code>bulk*</code>, …)</td>
+<td><code>execute</code>, das schreibt (<code>insert</code>, <code>update</code>, <code>delete</code>, <code>upsert</code>, <code>merge</code>, <code>bulk*</code>, …)</td>
 </tr>
 <tr>
 <td><code>script</code></td>
-<td>scripts (<code>POST /script</code>, <code>orm_execute_script</code>, <code>query.script</code>): a script can do anything inside, so it is a permission of its own</td>
+<td>Skripte (<code>POST /script</code>, <code>orm_execute_script</code>, <code>query.script</code>): Ein Skript kann intern alles tun, daher ist es eine eigene Berechtigung</td>
 </tr>
 <tr>
 <td><code>queue</code></td>
-<td><code>execute-queued</code> (and <code>write</code> if the query writes)</td>
+<td><code>execute-queued</code> (und <code>write</code>, wenn die Abfrage schreibt)</td>
 </tr>
 <tr>
 <td><code>stageImport</code></td>
-<td>importing a stage</td>
+<td>das Importieren eines Stages</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>Authorization happens in the schema's worker, before running anything, the same for REST, MCP and WebSocket.</li>
-<li>To know whether a query writes, the gateway analyses it (its <code>metadata</code>): with only <code>read</code>, a query with any
-  sentence that is not a <code>select</code>, also inside an <code>include</code>, is refused.</li>
-<li>Without the permission: <code>403</code> in REST, <code>status: 403</code> in WebSocket, <code>isError: true</code> in MCP, with the message
+<li>Die Autorisierung erfolgt im Worker des Schemas, bevor irgendetwas ausgeführt wird, gleich für REST, MCP und WebSocket.</li>
+<li>Um zu wissen, ob eine Abfrage schreibt, analysiert das Gateway sie (ihre <code>metadata</code>): Mit nur <code>read</code> wird eine Abfrage
+  mit irgendeiner Anweisung, die kein <code>select</code> ist, auch innerhalb eines <code>include</code>, abgelehnt.</li>
+<li>Ohne die Berechtigung: <code>403</code> in REST, <code>status: 403</code> in WebSocket, <code>isError: true</code> in MCP, mit der Meldung
   <code>the credential "reader" does not have the "write" permission</code>.</li>
-<li><code>GET /whoami</code> answers the name and permissions of the credential, never its secret.</li>
+<li><code>GET /whoami</code> liefert den Namen und die Berechtigungen der Zugangsdaten, nie deren Secret.</li>
 </ul>
 <h2 id="audit">Audit<a class="headerlink" href="#audit" title="Permanent link">&para;</a></h2>
-<p>Every operation that changes data, or may, leaves an audit entry: a JSON line with <code>"type": "audit"</code> on the standard
-output, so the log collector (Loki, ELK, CloudWatch, …) can keep it apart.</p>
+<p>Jede Operation, die Daten ändert oder ändern kann, hinterlässt einen Audit-Eintrag: eine JSON-Zeile mit
+<code>"type": "audit"</code> auf der Standardausgabe, damit der Log-Collector (Loki, ELK, CloudWatch, …) sie getrennt ablegen kann.</p>
 <table>
 <thead>
 <tr>
 <th>Operation</th>
-<th>Audited</th>
+<th>Protokolliert</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>execute</code></td>
-<td>when some sentence is not a <code>select</code></td>
+<td>wenn irgendeine Anweisung kein <code>select</code> ist</td>
 </tr>
 <tr>
-<td>script</td>
-<td>always</td>
+<td>Skript</td>
+<td>immer</td>
 </tr>
 <tr>
-<td>execute queued</td>
-<td>always (when queued)</td>
+<td>Ausführung in der Warteschlange</td>
+<td>immer (beim Einreihen)</td>
 </tr>
 <tr>
-<td>stage import</td>
-<td>always</td>
+<td>Stage-Import</td>
+<td>immer</td>
 </tr>
 </tbody>
 </table>
@@ -3178,59 +3178,60 @@ output, so the log collector (Loki, ELK, CloudWatch, …) can keep it apart.</p>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Devices.insert()"</span><span class="p">,</span><span class="w"> </span><span class="nt">"rows"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"durationMs"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>It is written after running, also when it fails (<code>"result": "error"</code> with the message).</li>
-<li>It has the credential's name, never its secret. The parameters (<code>data</code>) are added only with
-  <code>audit.includeData: true</code>, because they can have personal data. <code>audit.enabled: false</code> turns it off.</li>
+<li>Er wird nach der Ausführung geschrieben, auch wenn sie fehlschlägt (<code>"result": "error"</code> mit der Meldung).</li>
+<li>Er enthält den Namen der Zugangsdaten, nie deren Secret. Die Parameter (<code>data</code>) werden nur mit
+  <code>audit.includeData: true</code> hinzugefügt, da sie personenbezogene Daten enthalten können. <code>audit.enabled: false</code>
+  deaktiviert ihn.</li>
 </ul>
 <h2 id="limits">Limits<a class="headerlink" href="#limits" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Limit</th>
-<th>Key</th>
-<th>When it is reached</th>
+<th>Schlüssel</th>
+<th>Wenn es erreicht wird</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Requests per window (<code>http</code> only)</td>
-<td><code>rateLimit.windowMs</code>, <code>rateLimit.max</code> (<code>0</code> = off)</td>
+<td>Anfragen pro Zeitfenster (nur <code>http</code>)</td>
+<td><code>rateLimit.windowMs</code>, <code>rateLimit.max</code> (<code>0</code> = aus)</td>
 <td><code>429</code></td>
 </tr>
 <tr>
-<td>Simultaneous operations per schema</td>
+<td>Gleichzeitige Operationen pro Schema</td>
 <td><code>server.maxConcurrent</code></td>
-<td><code>429</code> with <code>Retry-After</code> (MCP: <code>isError</code>; WebSocket: <code>status: 429</code>)</td>
+<td><code>429</code> mit <code>Retry-After</code> (MCP: <code>isError</code>; WebSocket: <code>status: 429</code>)</td>
 </tr>
 <tr>
-<td>Time of an operation</td>
+<td>Dauer einer Operation</td>
 <td><code>server.timeout</code></td>
-<td>error, the operation is abandoned</td>
+<td>Fehler, die Operation wird abgebrochen</td>
 </tr>
 <tr>
-<td>Size of a body</td>
+<td>Größe eines Bodys</td>
 <td><code>server.requestBodySize</code></td>
 <td><code>413</code></td>
 </tr>
 <tr>
-<td>Size of an answer</td>
+<td>Größe einer Antwort</td>
 <td><code>server.maxResponseBytes</code></td>
-<td><code>413</code>: use <code>.page(1, n)</code> or aggregate in the query</td>
+<td><code>413</code>: Verwenden Sie <code>.page(1, n)</code> oder aggregieren Sie in der Abfrage</td>
 </tr>
 <tr>
-<td>Scripts</td>
+<td>Skripte</td>
 <td><code>scripts.maxLength</code>, <code>timeoutMs</code>, <code>maxIterations</code></td>
-<td><code>413</code> (length) or an error of the script</td>
+<td><code>413</code> (Länge) oder ein Fehler des Skripts</td>
 </tr>
 <tr>
-<td>Rows of a result for MCP</td>
+<td>Zeilen eines Ergebnisses für MCP</td>
 <td><code>mcp.maxRows</code></td>
-<td>cut, with a hint (<a href="../Mcp/#results-and-errors">MCP</a>)</td>
+<td>abgeschnitten, mit einem Hinweis (<a href="../Mcp/#results-and-errors">MCP</a>)</td>
 </tr>
 </tbody>
 </table>
-<h2 id="errors">Errors<a class="headerlink" href="#errors" title="Permanent link">&para;</a></h2>
-<p>A failed request answers a status a client can map and a JSON body:</p>
+<h2 id="errors">Fehler<a class="headerlink" href="#errors" title="Permanent link">&para;</a></h2>
+<p>Eine fehlgeschlagene Anfrage liefert einen Status, den ein Client zuordnen kann, und einen JSON-Body:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ExecutionError"</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23505"</span><span class="p">,</span>
@@ -3240,22 +3241,22 @@ output, so the log collector (Loki, ELK, CloudWatch, …) can keep it apart.</p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Meaning</th>
+<th>Feld</th>
+<th>Bedeutung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>error</code></td>
-<td>the name of the error: <code>ExecutionError</code>, <code>ValidationError</code>, <code>ForbiddenError</code>, <code>ScriptDisabledError</code>, …</td>
+<td>der Name des Fehlers: <code>ExecutionError</code>, <code>ValidationError</code>, <code>ForbiddenError</code>, <code>ScriptDisabledError</code>, …</td>
 </tr>
 <tr>
 <td><code>code</code></td>
-<td>the database's error code when there is one (Postgres SQLSTATE such as <code>23505</code>, MySQL <code>ER_DUP_ENTRY</code>)</td>
+<td>der Fehlercode der Datenbank, falls vorhanden (Postgres-SQLSTATE wie <code>23505</code>, MySQL <code>ER_DUP_ENTRY</code>)</td>
 </tr>
 <tr>
 <td><code>message</code></td>
-<td>the message</td>
+<td>die Meldung</td>
 </tr>
 </tbody>
 </table>
@@ -3263,49 +3264,49 @@ output, so the log collector (Loki, ELK, CloudWatch, …) can keep it apart.</p>
 <thead>
 <tr>
 <th>Status</th>
-<th>Cause</th>
+<th>Ursache</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>400</code></td>
-<td>an invalid query or model (<code>ValidationError</code>, <code>SchemaError</code>, <code>SintaxisError</code>, <code>LanguageError</code>), a not null or check violation, invalid data (Postgres <code>22xxx</code>)</td>
+<td>eine ungültige Abfrage oder ein ungültiges Modell (<code>ValidationError</code>, <code>SchemaError</code>, <code>SintaxisError</code>, <code>LanguageError</code>), eine Verletzung von NOT NULL oder CHECK, ungültige Daten (Postgres <code>22xxx</code>)</td>
 </tr>
 <tr>
 <td><code>401</code></td>
-<td>no credential, or a wrong one</td>
+<td>keine oder falsche Zugangsdaten</td>
 </tr>
 <tr>
 <td><code>403</code></td>
-<td>the credential lacks the permission; scripts disabled</td>
+<td>den Zugangsdaten fehlt die Berechtigung; Skripte deaktiviert</td>
 </tr>
 <tr>
 <td><code>404</code></td>
-<td>a schema not exposed on that transport, an unknown route</td>
+<td>ein auf diesem Transport nicht bereitgestelltes Schema, eine unbekannte Route</td>
 </tr>
 <tr>
 <td><code>409</code></td>
-<td>a unique or foreign key violation (Postgres <code>23505</code>, <code>23503</code>; MySQL <code>ER_DUP_ENTRY</code>, <code>ER_NO_REFERENCED_ROW_2</code>, <code>ER_ROW_IS_REFERENCED_2</code>)</td>
+<td>eine Verletzung eines eindeutigen Schlüssels oder Fremdschlüssels (Postgres <code>23505</code>, <code>23503</code>; MySQL <code>ER_DUP_ENTRY</code>, <code>ER_NO_REFERENCED_ROW_2</code>, <code>ER_ROW_IS_REFERENCED_2</code>)</td>
 </tr>
 <tr>
 <td><code>413</code></td>
-<td>a body, an answer or a script too large</td>
+<td>ein zu großer Body, eine zu große Antwort oder ein zu großes Skript</td>
 </tr>
 <tr>
 <td><code>429</code></td>
-<td>rate limit, or too many simultaneous operations on the schema</td>
+<td>Rate Limit oder zu viele gleichzeitige Operationen auf dem Schema</td>
 </tr>
 <tr>
 <td><code>503</code></td>
-<td>the schema is not <code>ready</code> (starting, in error, restarting)</td>
+<td>das Schema ist nicht <code>ready</code> (startet, im Fehlerzustand, startet neu)</td>
 </tr>
 <tr>
 <td><em>n</em></td>
-<td>a script ran <code>throw { status: n, message }</code> (400–599)</td>
+<td>ein Skript hat <code>throw { status: n, message }</code> ausgeführt (400–599)</td>
 </tr>
 <tr>
 <td><code>500</code></td>
-<td>anything else</td>
+<td>alles andere</td>
 </tr>
 </tbody>
 </table>

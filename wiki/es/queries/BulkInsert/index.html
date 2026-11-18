@@ -1173,7 +1173,7 @@
         <li class="md-nav__item">
   <a href="#bulk-insert-into-one-entity" class="md-nav__link">
     <span class="md-ellipsis">
-      Bulk insert into one entity
+      Inserción masiva en una entidad
     </span>
   </a>
   
@@ -1182,7 +1182,7 @@
         <li class="md-nav__item">
   <a href="#bulk-insert-with-a-related-entity" class="md-nav__link">
     <span class="md-ellipsis">
-      Bulk insert with a related entity
+      Inserción masiva con una entidad relacionada
     </span>
   </a>
   
@@ -1191,7 +1191,7 @@
         <li class="md-nav__item">
   <a href="#code-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Code example
+      Ejemplo de código
     </span>
   </a>
   
@@ -1355,7 +1355,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1665,7 +1665,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2038,7 +2038,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2292,7 +2292,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2976,7 +2976,7 @@
         <li class="md-nav__item">
   <a href="#bulk-insert-into-one-entity" class="md-nav__link">
     <span class="md-ellipsis">
-      Bulk insert into one entity
+      Inserción masiva en una entidad
     </span>
   </a>
   
@@ -2985,7 +2985,7 @@
         <li class="md-nav__item">
   <a href="#bulk-insert-with-a-related-entity" class="md-nav__link">
     <span class="md-ellipsis">
-      Bulk insert with a related entity
+      Inserción masiva con una entidad relacionada
     </span>
   </a>
   
@@ -2994,7 +2994,7 @@
         <li class="md-nav__item">
   <a href="#code-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Code example
+      Ejemplo de código
     </span>
   </a>
   
@@ -3016,31 +3016,31 @@
 
 
 
-<h1 id="bulk-insert">Bulk Insert<a class="headerlink" href="#bulk-insert" title="Permanent link">&para;</a></h1>
-<p>This page shows how to insert many records at once with <code>bulkInsert</code>. Use it instead of <a href="../Insert/">Insert</a> when you have a list of records to load, such as an import or a large dataset. The SQL shown is the one generated for MySQL.</p>
-<p><code>bulkInsert</code> receives an array of records and inserts them in chunks, with one statement per chunk instead of one statement per record. The size of the chunks depends on the connection, and you can lower it with the <code>chunkSize</code> option of <code>orm.execute</code>. This reduces the round trips between the application and the database, which makes inserting large volumes of data much faster and lightens the load on the database server.</p>
-<h2 id="bulk-insert-into-one-entity">Bulk insert into one entity<a class="headerlink" href="#bulk-insert-into-one-entity" title="Permanent link">&para;</a></h2>
-<p>Inserts a list of categories.</p>
+<h1 id="bulk-insert">Inserción masiva<a class="headerlink" href="#bulk-insert" title="Permanent link">&para;</a></h1>
+<p>Esta página muestra cómo insertar muchos registros a la vez con <code>bulkInsert</code>. Se usa en lugar de <a href="../Insert/">Insert</a> cuando hay que cargar una lista de registros, por ejemplo en una importación o con un conjunto de datos grande. El SQL que se muestra es el generado para MySQL.</p>
+<p><code>bulkInsert</code> recibe un array de registros y los inserta por lotes, con una sentencia por lote en lugar de una sentencia por registro. El tamaño de los lotes depende de la conexión y se puede reducir con la opción <code>chunkSize</code> de <code>orm.execute</code>. Así se reducen los viajes de ida y vuelta entre la aplicación y la base de datos, lo que hace mucho más rápida la inserción de grandes volúmenes de datos y alivia la carga del servidor de base de datos.</p>
+<h2 id="bulk-insert-into-one-entity">Inserción masiva en una entidad<a class="headerlink" href="#bulk-insert-into-one-entity" title="Permanent link">&para;</a></h2>
+<p>Inserta una lista de categorías.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">Categories</span><span class="p">.</span><span class="nx">bulkInsert</span><span class="p">()</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL resultante:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Categories</span><span class="p">(</span><span class="n">CategoryName</span><span class="p">,</span><span class="n">Description</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="o">?</span>
 </code></pre></div>
-<h2 id="bulk-insert-with-a-related-entity">Bulk insert with a related entity<a class="headerlink" href="#bulk-insert-with-a-related-entity" title="Permanent link">&para;</a></h2>
-<p>Inserts a list of orders, each one with its details.</p>
+<h2 id="bulk-insert-with-a-related-entity">Inserción masiva con una entidad relacionada<a class="headerlink" href="#bulk-insert-with-a-related-entity" title="Permanent link">&para;</a></h2>
+<p>Inserta una lista de pedidos, cada uno con sus detalles.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">Orders</span><span class="p">.</span><span class="nx">bulkInsert</span><span class="p">().</span><span class="nx">include</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">details</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL resultante:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">-- the orders</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Orders</span><span class="p">(</span><span class="n">CustomerID</span><span class="p">,</span><span class="n">EmployeeID</span><span class="p">,</span><span class="n">OrderDate</span><span class="p">,</span><span class="n">RequiredDate</span><span class="p">,</span><span class="n">ShippedDate</span><span class="p">,</span><span class="n">ShipVia</span><span class="p">,</span><span class="n">Freight</span><span class="p">,</span><span class="n">ShipName</span><span class="p">,</span><span class="n">ShipAddress</span><span class="p">,</span><span class="n">ShipCity</span><span class="p">,</span><span class="n">ShipRegion</span><span class="p">,</span><span class="n">ShipPostalCode</span><span class="p">,</span><span class="n">ShipCountry</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="o">?</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1">-- the details of all the orders</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">`</span><span class="k">Order</span><span class="w"> </span><span class="n">Details</span><span class="o">`</span><span class="p">(</span><span class="n">OrderID</span><span class="p">,</span><span class="n">ProductID</span><span class="p">,</span><span class="n">UnitPrice</span><span class="p">,</span><span class="n">Quantity</span><span class="p">,</span><span class="n">Discount</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="o">?</span>
 </code></pre></div>
-<h2 id="code-example">Code example<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h2>
-<p>Inserts two categories and prints the ids of the records inserted.</p>
+<h2 id="code-example">Ejemplo de código<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h2>
+<p>Inserta dos categorías e imprime los ids de los registros insertados.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Categories</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./domain/model'</span><span class="w"> </span><span class="c1">// model generated by `lambdaorm build`</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>

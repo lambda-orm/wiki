@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1686,17 +1686,17 @@
         <li class="md-nav__item">
   <a href="#general-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      General functions
+      Allgemeine Funktionen
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="General functions">
+    <nav class="md-nav" aria-label="Allgemeine Funktionen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -1710,17 +1710,17 @@
         <li class="md-nav__item">
   <a href="#orm-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Orm functions
+      Orm-Funktionen
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Orm functions">
+    <nav class="md-nav" aria-label="Orm-Funktionen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#example_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -2062,7 +2062,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2316,7 +2316,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -3000,17 +3000,17 @@
         <li class="md-nav__item">
   <a href="#general-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      General functions
+      Allgemeine Funktionen
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="General functions">
+    <nav class="md-nav" aria-label="Allgemeine Funktionen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -3024,17 +3024,17 @@
         <li class="md-nav__item">
   <a href="#orm-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Orm functions
+      Orm-Funktionen
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Orm functions">
+    <nav class="md-nav" aria-label="Orm-Funktionen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#example_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -3061,39 +3061,39 @@
 
 
 
-<h1 id="expressions-on-schema">Expressions on Schema<a class="headerlink" href="#expressions-on-schema" title="Permanent link">&para;</a></h1>
-<p>This page lists the functions that λORM adds to the expressions used in the schema (defaults, read and write values, constraints, conditions, tasks and listeners).</p>
-<p>All these expressions are evaluated by the expression engine <a href="https://www.npmjs.com/package/3xpr">3xpr</a>.
-Besides the operators and functions of 3xpr, λORM adds the following functions.</p>
-<h2 id="general-functions">General functions<a class="headerlink" href="#general-functions" title="Permanent link">&para;</a></h2>
+<h1 id="expressions-on-schema">Ausdrücke im Schema<a class="headerlink" href="#expressions-on-schema" title="Permanent link">&para;</a></h1>
+<p>Diese Seite listet die Funktionen auf, die λORM den im Schema verwendeten Ausdrücken hinzufügt (Standardwerte, Lese- und Schreibwerte, Constraints, Bedingungen, Tasks und Listener).</p>
+<p>Alle diese Ausdrücke werden von der Expression-Engine <a href="https://www.npmjs.com/package/3xpr">3xpr</a> ausgewertet.
+Zusätzlich zu den Operatoren und Funktionen von 3xpr fügt λORM die folgenden Funktionen hinzu.</p>
+<h2 id="general-functions">Allgemeine Funktionen<a class="headerlink" href="#general-functions" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Function</th>
-<th>Description</th>
+<th>Funktion</th>
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>toBase64(value:string):string</td>
-<td>Encodes a string to base64.</td>
+<td>Kodiert einen String in Base64.</td>
 </tr>
 <tr>
 <td>getBase64(value:string):string</td>
-<td>Decodes a base64 string.</td>
+<td>Dekodiert einen Base64-String.</td>
 </tr>
 <tr>
 <td>encrypt(value:string,key:string):string</td>
-<td>Encrypts a string with a key.</td>
+<td>Verschlüsselt einen String mit einem Schlüssel.</td>
 </tr>
 <tr>
 <td>decrypt(value:string,key:string):string</td>
-<td>Decrypts a string with a key.</td>
+<td>Entschlüsselt einen String mit einem Schlüssel.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
-<p>In this example <strong>encrypt</strong> stores the email encrypted in the database, and <strong>decrypt</strong> returns it decrypted in the results.</p>
+<h3 id="example">Beispiel<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
+<p>In diesem Beispiel speichert <strong>encrypt</strong> die E-Mail-Adresse verschlüsselt in der Datenbank, und <strong>decrypt</strong> gibt sie in den Ergebnissen entschlüsselt zurück.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">domain</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
@@ -3116,45 +3116,45 @@ Besides the operators and functions of 3xpr, λORM adds the following functions.
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">          </span><span class="nt">readValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decrypt(email,"${USERS_SECRET_KEY}")</span>
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
 </code></pre></div>
-<h2 id="orm-functions">Orm functions<a class="headerlink" href="#orm-functions" title="Permanent link">&para;</a></h2>
-<p>These functions call the methods of the <code>Orm</code> class, so an expression can run or inspect another query.</p>
+<h2 id="orm-functions">Orm-Funktionen<a class="headerlink" href="#orm-functions" title="Permanent link">&para;</a></h2>
+<p>Diese Funktionen rufen die Methoden der Klasse <code>Orm</code> auf, sodass ein Ausdruck eine andere Abfrage ausführen oder untersuchen kann.</p>
 <table>
 <thead>
 <tr>
-<th>Function</th>
-<th>Description</th>
+<th>Funktion</th>
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>orm.execute(query:string,data:any,options:any):any</td>
-<td>Executes a query and returns the result.</td>
+<td>Führt eine Abfrage aus und gibt das Ergebnis zurück.</td>
 </tr>
 <tr>
 <td>orm.plan(query:string,options:any):any</td>
-<td>Returns the execution plan of a query.</td>
+<td>Gibt den Ausführungsplan einer Abfrage zurück.</td>
 </tr>
 <tr>
 <td>orm.metadata(query:string):any</td>
-<td>Returns the metadata of a query.</td>
+<td>Gibt die Metadaten einer Abfrage zurück.</td>
 </tr>
 <tr>
 <td>orm.model(query:string):any</td>
-<td>Returns the model of a query.</td>
+<td>Gibt das Modell einer Abfrage zurück.</td>
 </tr>
 <tr>
 <td>orm.parameters(query:string):any</td>
-<td>Returns the parameters of a query.</td>
+<td>Gibt die Parameter einer Abfrage zurück.</td>
 </tr>
 <tr>
 <td>orm.constraints(query:string):any</td>
-<td>Returns the constraints of a query.</td>
+<td>Gibt die Constraints einer Abfrage zurück.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h3>
-<p>In this example a listener uses <strong>orm.execute</strong> to run, on the <code>insights</code> stage, the same query that was just executed on the <code>default</code> or <code>cqrs</code> stage.
-This is a way to implement the CQRS pattern. See <a href="../SchemaExample-Listener/">Listener</a>.</p>
+<h3 id="example_1">Beispiel<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h3>
+<p>In diesem Beispiel verwendet ein Listener <strong>orm.execute</strong>, um auf dem Stage <code>insights</code> dieselbe Abfrage auszuführen, die gerade auf dem Stage <code>default</code> oder <code>cqrs</code> ausgeführt wurde.
+Auf diese Weise lässt sich das CQRS-Muster umsetzen. Siehe <a href="../SchemaExample-Listener/">Listener</a>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">application</span><span class="p">:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">syncInsights</span>
@@ -3162,7 +3162,7 @@ This is a way to implement the CQRS pattern. See <a href="../SchemaExample-Liste
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">options.stage.in("default","cqrs")</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="nt">after</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">orm.execute(query,data,{stage:"insights"})</span>
 </code></pre></div>
-<p>See the <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/08-northwind-cqrs">CLI - northwind CQRS lab</a>.</p>
+<p>Siehe das <a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/08-northwind-cqrs">CLI-Lab „northwind CQRS“</a>.</p>
 
 
 

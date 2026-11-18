@@ -1219,7 +1219,7 @@
         <li class="md-nav__item">
   <a href="#delete-with-a-filter" class="md-nav__link">
     <span class="md-ellipsis">
-      Delete with a filter
+      Löschen mit einem Filter
     </span>
   </a>
   
@@ -1228,7 +1228,7 @@
         <li class="md-nav__item">
   <a href="#delete-by-primary-key" class="md-nav__link">
     <span class="md-ellipsis">
-      Delete by primary key
+      Löschen über den Primärschlüssel
     </span>
   </a>
   
@@ -1237,7 +1237,7 @@
         <li class="md-nav__item">
   <a href="#delete-all-the-records" class="md-nav__link">
     <span class="md-ellipsis">
-      Delete all the records
+      Alle Datensätze löschen
     </span>
   </a>
   
@@ -1246,7 +1246,7 @@
         <li class="md-nav__item">
   <a href="#delete-an-entity-and-its-related-entities" class="md-nav__link">
     <span class="md-ellipsis">
-      Delete an entity and its related entities
+      Eine Entität und ihre verbundenen Entitäten löschen
     </span>
   </a>
   
@@ -1255,7 +1255,7 @@
         <li class="md-nav__item">
   <a href="#code-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Code example
+      Codebeispiel
     </span>
   </a>
   
@@ -1373,7 +1373,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -2056,7 +2056,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2310,7 +2310,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2994,7 +2994,7 @@
         <li class="md-nav__item">
   <a href="#delete-with-a-filter" class="md-nav__link">
     <span class="md-ellipsis">
-      Delete with a filter
+      Löschen mit einem Filter
     </span>
   </a>
   
@@ -3003,7 +3003,7 @@
         <li class="md-nav__item">
   <a href="#delete-by-primary-key" class="md-nav__link">
     <span class="md-ellipsis">
-      Delete by primary key
+      Löschen über den Primärschlüssel
     </span>
   </a>
   
@@ -3012,7 +3012,7 @@
         <li class="md-nav__item">
   <a href="#delete-all-the-records" class="md-nav__link">
     <span class="md-ellipsis">
-      Delete all the records
+      Alle Datensätze löschen
     </span>
   </a>
   
@@ -3021,7 +3021,7 @@
         <li class="md-nav__item">
   <a href="#delete-an-entity-and-its-related-entities" class="md-nav__link">
     <span class="md-ellipsis">
-      Delete an entity and its related entities
+      Eine Entität und ihre verbundenen Entitäten löschen
     </span>
   </a>
   
@@ -3030,7 +3030,7 @@
         <li class="md-nav__item">
   <a href="#code-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Code example
+      Codebeispiel
     </span>
   </a>
   
@@ -3052,49 +3052,49 @@
 
 
 
-<h1 id="delete">Delete<a class="headerlink" href="#delete" title="Permanent link">&para;</a></h1>
-<p>This page shows how to delete records: with a filter, by primary key, all the records of an entity, and together with related entities. The SQL shown is the one generated for MySQL.</p>
-<p><code>delete</code> returns the <strong>number of affected rows</strong>: <code>0</code> means that no row matched the filter.</p>
+<h1 id="delete">Löschen<a class="headerlink" href="#delete" title="Permanent link">&para;</a></h1>
+<p>Diese Seite zeigt, wie Sie Datensätze löschen: mit einem Filter, über den Primärschlüssel, alle Datensätze einer Entität und zusammen mit verbundenen Entitäten. Das gezeigte SQL ist das für MySQL erzeugte.</p>
+<p><code>delete</code> gibt die <strong>Anzahl der betroffenen Zeilen</strong> zurück: <code>0</code> bedeutet, dass keine Zeile dem Filter entsprach.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="s1">'Categories.delete().filter(p =&gt; p.id == id)'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">9</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="c1">// 1</span>
 </code></pre></div>
-<h2 id="delete-with-a-filter">Delete with a filter<a class="headerlink" href="#delete-with-a-filter" title="Permanent link">&para;</a></h2>
-<p>Deletes the details of an order.</p>
+<h2 id="delete-with-a-filter">Löschen mit einem Filter<a class="headerlink" href="#delete-with-a-filter" title="Permanent link">&para;</a></h2>
+<p>Löscht die Positionen einer Bestellung.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">Orders</span><span class="p">.</span><span class="nx">details</span><span class="p">.</span><span class="ow">delete</span><span class="p">().</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">orderId</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">id</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL-Ergebnis:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="k">Order</span><span class="w"> </span><span class="n">Details</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">OrderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span>
 </code></pre></div>
-<h2 id="delete-by-primary-key">Delete by primary key<a class="headerlink" href="#delete-by-primary-key" title="Permanent link">&para;</a></h2>
-<p>When <code>delete()</code> has no filter, it filters by the primary key, whose value is taken from the data passed. The primary key of the order details is made of <code>orderId</code> and <code>productId</code>:</p>
+<h2 id="delete-by-primary-key">Löschen über den Primärschlüssel<a class="headerlink" href="#delete-by-primary-key" title="Permanent link">&para;</a></h2>
+<p>Hat <code>delete()</code> keinen Filter, filtert es nach dem Primärschlüssel, dessen Wert aus den übergebenen Daten genommen wird. Der Primärschlüssel der Bestellpositionen besteht aus <code>orderId</code> und <code>productId</code>:</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">Orders</span><span class="p">.</span><span class="nx">details</span><span class="p">.</span><span class="ow">delete</span><span class="p">()</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL-Ergebnis:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="k">Order</span><span class="w"> </span><span class="n">Details</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="n">OrderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="delete-all-the-records">Delete all the records<a class="headerlink" href="#delete-all-the-records" title="Permanent link">&para;</a></h2>
-<p>To delete all the records of an entity, use <code>deleteAll</code> instead of <code>delete</code>. This prevents deleting all the records by mistake.</p>
+<h2 id="delete-all-the-records">Alle Datensätze löschen<a class="headerlink" href="#delete-all-the-records" title="Permanent link">&para;</a></h2>
+<p>Um alle Datensätze einer Entität zu löschen, verwenden Sie <code>deleteAll</code> statt <code>delete</code>. So wird verhindert, dass versehentlich alle Datensätze gelöscht werden.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nx">Orders</span><span class="p">.</span><span class="nx">details</span><span class="p">.</span><span class="nx">deleteAll</span><span class="p">()</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL-Ergebnis:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="k">Order</span><span class="w"> </span><span class="n">Details</span><span class="o">`</span>
 </code></pre></div>
-<h2 id="delete-an-entity-and-its-related-entities">Delete an entity and its related entities<a class="headerlink" href="#delete-an-entity-and-its-related-entities" title="Permanent link">&para;</a></h2>
-<p>Deletes an order and its details. The order is filtered by its primary key, and each detail sent by its own primary key. The details are deleted first, and then the order.</p>
+<h2 id="delete-an-entity-and-its-related-entities">Eine Entität und ihre verbundenen Entitäten löschen<a class="headerlink" href="#delete-an-entity-and-its-related-entities" title="Permanent link">&para;</a></h2>
+<p>Löscht eine Bestellung und ihre Positionen. Die Bestellung wird über ihren Primärschlüssel gefiltert, jede übermittelte Position über ihren eigenen Primärschlüssel. Zuerst werden die Positionen gelöscht, danach die Bestellung.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nx">Orders</span><span class="p">.</span><span class="ow">delete</span><span class="p">().</span><span class="nx">include</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">details</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>SQL-Ergebnis:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">-- the order</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">DELETE</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Orders</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">OrderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1">-- each detail sent</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">DELETE</span><span class="w"> </span><span class="n">o1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="k">Order</span><span class="w"> </span><span class="n">Details</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">o1</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">o1</span><span class="p">.</span><span class="n">OrderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">o1</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="code-example">Code example<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h2>
-<p>Deletes an order with its details and prints the number of orders deleted.</p>
+<h2 id="code-example">Codebeispiel<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h2>
+<p>Löscht eine Bestellung mit ihren Positionen und gibt die Anzahl der gelöschten Bestellungen aus.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Orders</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./domain/model'</span><span class="w"> </span><span class="c1">// model generated by `lambdaorm build`</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>

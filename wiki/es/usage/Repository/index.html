@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1588,7 +1588,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1961,7 +1961,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2220,7 +2220,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2290,7 +2290,7 @@
         <li class="md-nav__item">
   <a href="#generating-repositories" class="md-nav__link">
     <span class="md-ellipsis">
-      Generating repositories
+      Generar los repositorios
     </span>
   </a>
   
@@ -2299,7 +2299,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Ejemplo
     </span>
   </a>
   
@@ -2308,7 +2308,7 @@
         <li class="md-nav__item">
   <a href="#methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Methods
+      Métodos
     </span>
   </a>
   
@@ -2973,7 +2973,7 @@
         <li class="md-nav__item">
   <a href="#generating-repositories" class="md-nav__link">
     <span class="md-ellipsis">
-      Generating repositories
+      Generar los repositorios
     </span>
   </a>
   
@@ -2982,7 +2982,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Ejemplo
     </span>
   </a>
   
@@ -2991,7 +2991,7 @@
         <li class="md-nav__item">
   <a href="#methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Methods
+      Métodos
     </span>
   </a>
   
@@ -3013,14 +3013,14 @@
 
 
 
-<h1 id="repositories">Repositories<a class="headerlink" href="#repositories" title="Permanent link">&para;</a></h1>
-<p>A repository is associated with an entity and has methods to query and modify it, without writing the whole query.</p>
-<h2 id="generating-repositories">Generating repositories<a class="headerlink" href="#generating-repositories" title="Permanent link">&para;</a></h2>
-<p>The <a href="../../cli/Commands/Build/"><code>lambdaorm build</code></a> command generates the model (<code>model.ts</code>) and one repository per
-entity (<code>repository&lt;Entity&gt;.ts</code>) in the domain path of the project:</p>
+<h1 id="repositories">Repositorios<a class="headerlink" href="#repositories" title="Permanent link">&para;</a></h1>
+<p>Un repositorio está asociado a una entidad y tiene métodos para consultarla y modificarla, sin escribir la consulta completa.</p>
+<h2 id="generating-repositories">Generar los repositorios<a class="headerlink" href="#generating-repositories" title="Permanent link">&para;</a></h2>
+<p>El comando <a href="../../cli/Commands/Build/"><code>lambdaorm build</code></a> genera el modelo (<code>model.ts</code>) y un repositorio por
+entidad (<code>repository&lt;Entity&gt;.ts</code>) en la ruta del dominio del proyecto:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lambdaorm<span class="w"> </span>build<span class="w"> </span>-w<span class="w"> </span>lab/northwind<span class="w"> </span>-r
 </code></pre></div>
-<p>A repository file is generated only if it does not exist yet, so it is safe to add custom methods to it.</p>
+<p>Un archivo de repositorio solo se genera si todavía no existe, por lo que se le pueden añadir métodos propios sin riesgo.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Repository</span><span class="p">,</span><span class="w"> </span><span class="nx">IOrm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Product</span><span class="p">,</span><span class="w"> </span><span class="nx">QryProduct</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./model'</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
@@ -3031,8 +3031,8 @@ entity (<code>repository&lt;Entity&gt;.ts</code>) in the domain path of the proj
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="c1">// Add your code here</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">}</span>
 </code></pre></div>
-<p>The constructor receives the stage (optional: the default stage when omitted) and, optionally, the <code>orm</code> instance.</p>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<p>El constructor recibe el stage (opcional: si se omite, se usa el stage por defecto) y, opcionalmente, la instancia de <code>orm</code>.</p>
+<h2 id="example">Ejemplo<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ProductRepository</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./northwind/domain/repositoryProduct'</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
@@ -3050,78 +3050,78 @@ entity (<code>repository&lt;Entity&gt;.ts</code>) in the domain path of the proj
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">end</span><span class="p">()</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="p">})()</span>
 </code></pre></div>
-<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h2 id="methods">Métodos<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Method</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Método</th>
+<th style="text-align: left;">Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;"><code>insert(entity, include?)</code></td>
-<td style="text-align: left;">Inserts a record (and, with <code>include</code>, its related records).</td>
+<td style="text-align: left;">Inserta un registro (y, con <code>include</code>, sus registros relacionados).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>bulkInsert(entities, include?)</code></td>
-<td style="text-align: left;">Inserts several records.</td>
+<td style="text-align: left;">Inserta varios registros.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>update(entity, include?)</code></td>
-<td style="text-align: left;">Updates a record.</td>
+<td style="text-align: left;">Actualiza un registro.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>updateAll(data, map, filter?, include?)</code></td>
-<td style="text-align: left;">Updates all the records that match the filter (or all the records of the entity).</td>
+<td style="text-align: left;">Actualiza todos los registros que cumplen el filtro (o todos los registros de la entidad).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>upsert(entity, include?)</code></td>
-<td style="text-align: left;">Inserts a record, or updates it if one with the same primary key exists (<a href="../../queries/Insert/#upsert">upsert</a>).</td>
+<td style="text-align: left;">Inserta un registro, o lo actualiza si ya existe uno con la misma clave primaria (<a href="../../queries/Insert/#upsert">upsert</a>).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>bulkMerge(entities, include?)</code></td>
-<td style="text-align: left;">Inserts or updates several records.</td>
+<td style="text-align: left;">Inserta o actualiza varios registros.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>delete(entity, include?)</code></td>
-<td style="text-align: left;">Deletes a record.</td>
+<td style="text-align: left;">Elimina un registro.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>bulkDelete(entities, include?)</code></td>
-<td style="text-align: left;">Deletes several records.</td>
+<td style="text-align: left;">Elimina varios registros.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>deleteAll(data, filter?, include?)</code></td>
-<td style="text-align: left;">Deletes all the records that match the filter (or all the records of the entity).</td>
+<td style="text-align: left;">Elimina todos los registros que cumplen el filtro (o todos los registros de la entidad).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>list(data, filter?, include?)</code></td>
-<td style="text-align: left;">Returns the records that match the filter.</td>
+<td style="text-align: left;">Devuelve los registros que cumplen el filtro.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>distinct(data, filter?, include?)</code></td>
-<td style="text-align: left;">Returns the distinct records that match the filter.</td>
+<td style="text-align: left;">Devuelve los registros distintos que cumplen el filtro.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>first(data, filter?, include?)</code></td>
-<td style="text-align: left;">Returns the first record, or <code>null</code>.</td>
+<td style="text-align: left;">Devuelve el primer registro, o <code>null</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>last(data, filter?, include?)</code></td>
-<td style="text-align: left;">Returns the last record, or <code>null</code>.</td>
+<td style="text-align: left;">Devuelve el último registro, o <code>null</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>query()</code></td>
-<td style="text-align: left;">Starts a custom query on the entity (<code>filter</code>, <code>include</code>, <code>having</code>, <code>map</code>, <code>sort</code>, <code>page</code>, …), run with <code>execute(data)</code>.</td>
+<td style="text-align: left;">Inicia una consulta personalizada sobre la entidad (<code>filter</code>, <code>include</code>, <code>having</code>, <code>map</code>, <code>sort</code>, <code>page</code>, …), que se ejecuta con <code>execute(data)</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>execute(query, data?)</code></td>
-<td style="text-align: left;">Runs a query string appended to the entity, for example <code>.filter(p =&gt; p.id == id)</code>.</td>
+<td style="text-align: left;">Ejecuta una cadena de consulta añadida a la entidad, por ejemplo <code>.filter(p =&gt; p.id == id)</code>.</td>
 </tr>
 </tbody>
 </table>
-<p><code>data</code> holds the values of the parameters used by <code>filter</code> and <code>map</code>.</p>
+<p><code>data</code> contiene los valores de los parámetros que usan <code>filter</code> y <code>map</code>.</p>
 
 
 
@@ -3157,7 +3157,7 @@ entity (<code>repository&lt;Entity&gt;.ts</code>) in the domain path of the proj
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../Usage/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Usage">
+          <a href="../Usage/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Uso">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3167,7 +3167,7 @@ entity (<code>repository&lt;Entity&gt;.ts</code>) in the domain path of the proj
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Usage
+                Uso
               </div>
             </div>
           </a>

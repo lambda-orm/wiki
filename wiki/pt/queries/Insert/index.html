@@ -1150,7 +1150,7 @@
         <li class="md-nav__item">
   <a href="#insert-all-the-properties" class="md-nav__link">
     <span class="md-ellipsis">
-      Insert all the properties
+      Inserir todas as propriedades
     </span>
   </a>
   
@@ -1159,7 +1159,7 @@
         <li class="md-nav__item">
   <a href="#insert-some-properties" class="md-nav__link">
     <span class="md-ellipsis">
-      Insert some properties
+      Inserir algumas propriedades
     </span>
   </a>
   
@@ -1168,7 +1168,7 @@
         <li class="md-nav__item">
   <a href="#insert-with-include" class="md-nav__link">
     <span class="md-ellipsis">
-      Insert with include
+      Inserir com include
     </span>
   </a>
   
@@ -1186,7 +1186,7 @@
         <li class="md-nav__item">
   <a href="#code-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Code example
+      Exemplo de código
     </span>
   </a>
   
@@ -1373,7 +1373,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1683,7 +1683,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2056,7 +2056,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2310,7 +2310,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2994,7 +2994,7 @@
         <li class="md-nav__item">
   <a href="#insert-all-the-properties" class="md-nav__link">
     <span class="md-ellipsis">
-      Insert all the properties
+      Inserir todas as propriedades
     </span>
   </a>
   
@@ -3003,7 +3003,7 @@
         <li class="md-nav__item">
   <a href="#insert-some-properties" class="md-nav__link">
     <span class="md-ellipsis">
-      Insert some properties
+      Inserir algumas propriedades
     </span>
   </a>
   
@@ -3012,7 +3012,7 @@
         <li class="md-nav__item">
   <a href="#insert-with-include" class="md-nav__link">
     <span class="md-ellipsis">
-      Insert with include
+      Inserir com include
     </span>
   </a>
   
@@ -3030,7 +3030,7 @@
         <li class="md-nav__item">
   <a href="#code-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Code example
+      Exemplo de código
     </span>
   </a>
   
@@ -3053,31 +3053,31 @@
 
 
 <h1 id="insert">Insert<a class="headerlink" href="#insert" title="Permanent link">&para;</a></h1>
-<p>This page shows how to insert records: with all the properties of the entity or only some of them, together with related entities (<code>include</code>), and how to insert or update in one step (<code>upsert</code>). To insert many records at once, see <a href="../BulkInsert/">Bulk Insert</a>. The SQL shown is the one generated for MySQL, unless stated otherwise.</p>
-<p>A query is based on both the expression and the schema. If you do not specify the properties to insert, all the properties of the entity are inserted. How each property is stored in each source (table and column names) is resolved by the mapping of that source in the schema.</p>
-<h2 id="insert-all-the-properties">Insert all the properties<a class="headerlink" href="#insert-all-the-properties" title="Permanent link">&para;</a></h2>
-<p>When the properties are not specified, the data passed must be an object with the properties of the entity.</p>
+<p>Esta página mostra como inserir registros: com todas as propriedades da entidade ou apenas algumas, junto com entidades relacionadas (<code>include</code>), e como inserir ou atualizar em um único passo (<code>upsert</code>). Para inserir muitos registros de uma só vez, veja <a href="../BulkInsert/">Inserção em massa</a>. O SQL mostrado é o gerado para MySQL, salvo indicação em contrário.</p>
+<p>Uma consulta se baseia tanto na expressão quanto no esquema. Se as propriedades a inserir não forem especificadas, todas as propriedades da entidade são inseridas. A forma como cada propriedade é armazenada em cada fonte (nomes de tabelas e colunas) é resolvida pelo mapeamento dessa fonte no esquema.</p>
+<h2 id="insert-all-the-properties">Inserir todas as propriedades<a class="headerlink" href="#insert-all-the-properties" title="Permanent link">&para;</a></h2>
+<p>Quando as propriedades não são especificadas, os dados passados devem ser um objeto com as propriedades da entidade.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">Categories</span><span class="p">.</span><span class="nx">insert</span><span class="p">()</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>Resultado SQL:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Categories</span><span class="p">(</span><span class="n">CategoryName</span><span class="p">,</span><span class="n">Description</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">)</span>
 </code></pre></div>
-<p>The primary key <code>id</code> is not inserted because it is auto-increment: the database generates it.</p>
-<h2 id="insert-some-properties">Insert some properties<a class="headerlink" href="#insert-some-properties" title="Permanent link">&para;</a></h2>
-<p>Only the properties specified are inserted. Here, <code>name</code> is a variable of the data passed to the query.</p>
+<p>A chave primária <code>id</code> não é inserida porque é autoincremental: o banco de dados a gera.</p>
+<h2 id="insert-some-properties">Inserir algumas propriedades<a class="headerlink" href="#insert-some-properties" title="Permanent link">&para;</a></h2>
+<p>Apenas as propriedades especificadas são inseridas. Aqui, <code>name</code> é uma variável dos dados passados para a consulta.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">Categories</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">name</span><span class="w"> </span><span class="p">})</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>Resultado SQL:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Categories</span><span class="p">(</span><span class="n">CategoryName</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="o">?</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="insert-with-include">Insert with include<a class="headerlink" href="#insert-with-include" title="Permanent link">&para;</a></h2>
-<p>To insert an object together with its related objects, include the relation. This example inserts an order and its details; the key of the new order is assigned to each detail.</p>
+<h2 id="insert-with-include">Inserir com include<a class="headerlink" href="#insert-with-include" title="Permanent link">&para;</a></h2>
+<p>Para inserir um objeto junto com seus objetos relacionados, inclua a relação. Este exemplo insere um pedido e seus detalhes; a chave do novo pedido é atribuída a cada detalhe.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">Orders</span><span class="p">.</span><span class="nx">insert</span><span class="p">().</span><span class="nx">include</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">details</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>Resultado SQL:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">-- the order</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Orders</span><span class="p">(</span><span class="n">CustomerID</span><span class="p">,</span><span class="n">EmployeeID</span><span class="p">,</span><span class="n">OrderDate</span><span class="p">,</span><span class="n">RequiredDate</span><span class="p">,</span><span class="n">ShippedDate</span><span class="p">,</span><span class="n">ShipVia</span><span class="p">,</span><span class="n">Freight</span><span class="p">,</span><span class="n">ShipName</span><span class="p">,</span><span class="n">ShipAddress</span><span class="p">,</span><span class="n">ShipCity</span><span class="p">,</span><span class="n">ShipRegion</span><span class="p">,</span><span class="n">ShipPostalCode</span><span class="p">,</span><span class="n">ShipCountry</span><span class="p">)</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">VALUES</span><span class="p">(</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">)</span>
@@ -3087,7 +3087,7 @@
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">VALUES</span><span class="p">(</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="upsert">Upsert<a class="headerlink" href="#upsert" title="Permanent link">&para;</a></h2>
-<p><code>upsert()</code> inserts the record or, if a record with the same primary key already exists, updates it. It is written like an insert: <code>upsert()</code> with all the properties, or with the properties specified. The entity needs a primary key, and the data must include it (so an auto-increment key is of little use here).</p>
+<p><code>upsert()</code> insere o registro ou, se já existir um registro com a mesma chave primária, o atualiza. Ele é escrito como um insert: <code>upsert()</code> com todas as propriedades, ou com as propriedades especificadas. A entidade precisa de uma chave primária, e os dados devem incluí-la (por isso uma chave autoincremental tem pouca utilidade aqui).</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// inserts the country, or updates it when one with the same iso3 exists</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">upsert</span><span class="p">()</span>
@@ -3095,7 +3095,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="s1">'Countries.upsert()'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">iso3</span><span class="o">:</span><span class="w"> </span><span class="s1">'ARG'</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'Argentine'</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="c1">// inserted</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="s1">'Countries.upsert()'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">iso3</span><span class="o">:</span><span class="w"> </span><span class="s1">'ARG'</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'Argentina'</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="c1">// updated: the same row</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>Resultado SQL:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">-- MySQL / MariaDB</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Countries</span><span class="p">(</span><span class="n">iso3</span><span class="p">,</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="o">?</span><span class="p">,</span><span class="o">?</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">DUPLICATE</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
@@ -3117,15 +3117,15 @@
 <a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="k">WHEN</span><span class="w"> </span><span class="n">MATCHED</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">:</span><span class="n">name</span>
 <a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="k">WHEN</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="n">MATCHED</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="p">(</span><span class="n">iso3</span><span class="p">,</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(:</span><span class="n">iso3</span><span class="p">,:</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>
-<p>Upsert is supported on PostgreSQL, MySQL, MariaDB, SQL Server and Oracle (these two with <code>MERGE</code>, from <code>@lambdaorm/lib</code> 3.5.0).</p>
+<p>O upsert é suportado em PostgreSQL, MySQL, MariaDB, SQL Server e Oracle (estes dois com <code>MERGE</code>, a partir de <code>@lambdaorm/lib</code> 3.5.0).</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>On MongoDB, upsert fails with a "not supported yet" error. SQLite (SQL.js) does not support it either.</p>
+<p class="admonition-title">Aviso</p>
+<p>No MongoDB, o upsert falha com um erro "not supported yet". O SQLite (SQL.js) também não o suporta.</p>
 </div>
-<p>When the key is generated (auto-increment) and not sent, the upsert inserts. On SQL Server the identity column is never inserted (the database generates it) and <code>OUTPUT INSERTED</code> returns it; Oracle's <code>MERGE</code> cannot return values, so it returns the key that was sent.</p>
-<p>Upsert is also what an <a href="../Update/#update-an-aggregate-composite-relation">update with include</a> of a composite relation uses to save the children.</p>
-<h2 id="code-example">Code example<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h2>
-<p>Inserts an order with two details and prints the id of the new order.</p>
+<p>Quando a chave é gerada (autoincremental) e não é enviada, o upsert insere. No SQL Server a coluna identity nunca é inserida (o banco de dados a gera) e <code>OUTPUT INSERTED</code> a retorna; o <code>MERGE</code> do Oracle não pode retornar valores, por isso retorna a chave que foi enviada.</p>
+<p>O upsert também é o que um <a href="../Update/#update-an-aggregate-composite-relation">update com include</a> de uma relação composta usa para salvar os filhos.</p>
+<h2 id="code-example">Exemplo de código<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h2>
+<p>Insere um pedido com dois detalhes e imprime o id do novo pedido.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Orders</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./domain/model'</span><span class="w"> </span><span class="c1">// model generated by `lambdaorm build`</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>

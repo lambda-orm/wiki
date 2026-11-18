@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1588,7 +1588,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1961,7 +1961,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2215,7 +2215,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2556,7 +2556,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Opções
     </span>
   </a>
   
@@ -2565,7 +2565,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Exemplo
     </span>
   </a>
   
@@ -2969,7 +2969,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Opções
     </span>
   </a>
   
@@ -2978,7 +2978,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Exemplo
     </span>
   </a>
   
@@ -3001,68 +3001,68 @@
 
 
 <h1 id="build">Build<a class="headerlink" href="#build" title="Permanent link">&para;</a></h1>
-<p>Generates the source code of the domain for the development language: the model (<code>model.ts</code>, with the entities and
-enumerations) and one repository per entity (<code>repository&lt;Entity&gt;.ts</code>). See <a href="../../../usage/Repository/">Repositories</a>.</p>
-<p>A repository file is generated only if it does not exist yet, so custom code added to it is kept; the model is
-regenerated every time.</p>
-<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<p>Gera o código-fonte do domínio para a linguagem de desenvolvimento: o modelo (<code>model.ts</code>, com as entidades e as
+enumerações) e um repositório por entidade (<code>repository&lt;Entity&gt;.ts</code>). Veja <a href="../../../usage/Repository/">Repositórios</a>.</p>
+<p>Um arquivo de repositório só é gerado se ainda não existir, de modo que o código personalizado adicionado a ele é
+mantido; o modelo é regenerado todas as vezes.</p>
+<h2 id="options">Opções<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Option</th>
-<th style="text-align: left;">Short</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Opção</th>
+<th style="text-align: left;">Abreviação</th>
+<th style="text-align: left;">Descrição</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">workspace</td>
 <td style="text-align: left;"><code>-w</code></td>
-<td style="text-align: left;">Project path.</td>
+<td style="text-align: left;">Caminho do projeto.</td>
 </tr>
 <tr>
 <td style="text-align: left;">language</td>
 <td style="text-align: left;"><code>-l</code></td>
-<td style="text-align: left;">Development language: <code>node</code> (default, uses <code>@lambdaorm/lib</code>) or <code>client-node</code> (uses <code>@lambdaorm/client</code>; the domain is read from the Data Gateway at <code>infrastructure.service.url</code> of the schema, as written by <a href="../Init/"><code>init -u</code></a>).</td>
+<td style="text-align: left;">Linguagem de desenvolvimento: <code>node</code> (padrão, usa <code>@lambdaorm/lib</code>) ou <code>client-node</code> (usa <code>@lambdaorm/client</code>; o domínio é lido do Data Gateway em <code>infrastructure.service.url</code> do esquema, conforme escrito por <a href="../Init/"><code>init -u</code></a>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">model</td>
 <td style="text-align: left;"><code>-m</code></td>
-<td style="text-align: left;">Builds the model.</td>
+<td style="text-align: left;">Gera o modelo.</td>
 </tr>
 <tr>
 <td style="text-align: left;">repositories</td>
 <td style="text-align: left;"><code>-r</code></td>
-<td style="text-align: left;">Builds the repositories.</td>
+<td style="text-align: left;">Gera os repositórios.</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;"><code>-a</code></td>
-<td style="text-align: left;">Builds the model and the repositories (the default when none of <code>-m</code>, <code>-r</code>, <code>-a</code> is given).</td>
+<td style="text-align: left;">Gera o modelo e os repositórios (o padrão quando nenhuma das opções <code>-m</code>, <code>-r</code>, <code>-a</code> é informada).</td>
 </tr>
 <tr>
 <td style="text-align: left;">src-path</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">Relative path of the source code in the workspace (<code>--src-path</code>).</td>
+<td style="text-align: left;">Caminho relativo do código-fonte no workspace (<code>--src-path</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">data-path</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">Relative path of the data folder in the workspace (<code>--data-path</code>).</td>
+<td style="text-align: left;">Caminho relativo da pasta de dados no workspace (<code>--data-path</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">domain-path</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">Relative path of the domain in the source code path (<code>--domain-path</code>).</td>
+<td style="text-align: left;">Caminho relativo do domínio dentro do caminho do código-fonte (<code>--domain-path</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">url</td>
 <td style="text-align: left;"><code>-u</code></td>
-<td style="text-align: left;">URL of the schema on a Data Gateway.</td>
+<td style="text-align: left;">URL do esquema em um Data Gateway.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<h2 id="example">Exemplo<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lambdaorm<span class="w"> </span>build<span class="w"> </span>-w<span class="w"> </span>lab/countries
 </code></pre></div>
 

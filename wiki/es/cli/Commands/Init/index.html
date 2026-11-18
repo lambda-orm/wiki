@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1588,7 +1588,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1961,7 +1961,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2215,7 +2215,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2533,7 +2533,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Opciones
     </span>
   </a>
   
@@ -2542,7 +2542,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Ejemplo
     </span>
   </a>
   
@@ -2969,7 +2969,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Opciones
     </span>
   </a>
   
@@ -2978,7 +2978,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Ejemplo
     </span>
   </a>
   
@@ -3001,51 +3001,51 @@
 
 
 <h1 id="init">Init<a class="headerlink" href="#init" title="Permanent link">&para;</a></h1>
-<p>Generates the structure of a λORM project: the workspace folder and its schema file (<code>lambdaORM.yaml</code>), with a source,
-a mapping and a stage.</p>
-<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<p>Genera la estructura de un proyecto λORM: la carpeta del workspace y su archivo de esquema (<code>lambdaORM.yaml</code>), con una
+fuente, un mapping y un stage.</p>
+<h2 id="options">Opciones<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Option</th>
-<th style="text-align: left;">Short</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Opción</th>
+<th style="text-align: left;">Corta</th>
+<th style="text-align: left;">Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">workspace</td>
 <td style="text-align: left;"><code>-w</code></td>
-<td style="text-align: left;">Project path (default: <code>my-project</code>).</td>
+<td style="text-align: left;">Ruta del proyecto (por defecto: <code>my-project</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">source</td>
 <td style="text-align: left;"><code>-s</code></td>
-<td style="text-align: left;">Name of the data source.</td>
+<td style="text-align: left;">Nombre de la fuente de datos.</td>
 </tr>
 <tr>
 <td style="text-align: left;">dialect</td>
 <td style="text-align: left;"><code>-d</code></td>
-<td style="text-align: left;">Database engine of the project (<code>MySQL</code>, <code>MariaDB</code>, <code>PostgreSQL</code>, <code>SqlServer</code>, <code>Oracle</code>, <code>MongoDB</code>, <code>SQLjs</code>). Default: <code>MySQL</code>.</td>
+<td style="text-align: left;">Motor de base de datos del proyecto (<code>MySQL</code>, <code>MariaDB</code>, <code>PostgreSQL</code>, <code>SqlServer</code>, <code>Oracle</code>, <code>MongoDB</code>, <code>SQLjs</code>). Por defecto: <code>MySQL</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">connection</td>
 <td style="text-align: left;"><code>-c</code></td>
-<td style="text-align: left;">Connection string of the database.</td>
+<td style="text-align: left;">Cadena de conexión de la base de datos.</td>
 </tr>
 <tr>
 <td style="text-align: left;">data-path</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">Relative path of the data folder in the workspace (<code>--data-path</code>).</td>
+<td style="text-align: left;">Ruta relativa de la carpeta de datos en el workspace (<code>--data-path</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">url</td>
 <td style="text-align: left;"><code>-u</code></td>
-<td style="text-align: left;">URL of a schema on a Data Gateway: the project is created with the domain of that schema, to be used with the <a href="../../../data-gateway/Clients/">Node.js client</a>.</td>
+<td style="text-align: left;">URL de un esquema en un Data Gateway: el proyecto se crea con el dominio de ese esquema, para usarlo con el <a href="../../../data-gateway/Clients/">cliente de Node.js</a>.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<h2 id="example">Ejemplo<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lambdaorm<span class="w"> </span>init<span class="w"> </span>-w<span class="w"> </span>lab/countries<span class="w"> </span>-d<span class="w"> </span>PostgreSQL
 </code></pre></div>
 
@@ -3083,7 +3083,7 @@ a mapping and a stage.</p>
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../../" class="md-footer__link md-footer__link--prev" aria-label="Anterior: λORM CLI">
+          <a href="../../" class="md-footer__link md-footer__link--prev" aria-label="Anterior: CLI de λORM">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3093,7 +3093,7 @@ a mapping and a stage.</p>
                 Anterior
               </span>
               <div class="md-ellipsis">
-                λORM CLI
+                CLI de λORM
               </div>
             </div>
           </a>

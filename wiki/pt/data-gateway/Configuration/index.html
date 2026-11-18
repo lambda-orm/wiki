@@ -706,7 +706,7 @@
         <li class="md-nav__item">
   <a href="#transports-and-ports" class="md-nav__link">
     <span class="md-ellipsis">
-      Transports and ports
+      Transportes e portas
     </span>
   </a>
   
@@ -715,7 +715,7 @@
         <li class="md-nav__item">
   <a href="#schemas" class="md-nav__link">
     <span class="md-ellipsis">
-      Schemas
+      Esquemas
     </span>
   </a>
   
@@ -724,7 +724,7 @@
         <li class="md-nav__item">
   <a href="#environment-of-each-schema" class="md-nav__link">
     <span class="md-ellipsis">
-      Environment of each schema
+      Ambiente de cada esquema
     </span>
   </a>
   
@@ -742,7 +742,7 @@
         <li class="md-nav__item">
   <a href="#complete-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Complete example
+      Exemplo completo
     </span>
   </a>
   
@@ -751,7 +751,7 @@
         <li class="md-nav__item">
   <a href="#reference" class="md-nav__link">
     <span class="md-ellipsis">
-      Reference
+      Referência
     </span>
   </a>
   
@@ -1379,7 +1379,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1689,7 +1689,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2062,7 +2062,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2316,7 +2316,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -3000,7 +3000,7 @@
         <li class="md-nav__item">
   <a href="#transports-and-ports" class="md-nav__link">
     <span class="md-ellipsis">
-      Transports and ports
+      Transportes e portas
     </span>
   </a>
   
@@ -3009,7 +3009,7 @@
         <li class="md-nav__item">
   <a href="#schemas" class="md-nav__link">
     <span class="md-ellipsis">
-      Schemas
+      Esquemas
     </span>
   </a>
   
@@ -3018,7 +3018,7 @@
         <li class="md-nav__item">
   <a href="#environment-of-each-schema" class="md-nav__link">
     <span class="md-ellipsis">
-      Environment of each schema
+      Ambiente de cada esquema
     </span>
   </a>
   
@@ -3036,7 +3036,7 @@
         <li class="md-nav__item">
   <a href="#complete-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Complete example
+      Exemplo completo
     </span>
   </a>
   
@@ -3045,7 +3045,7 @@
         <li class="md-nav__item">
   <a href="#reference" class="md-nav__link">
     <span class="md-ellipsis">
-      Reference
+      Referência
     </span>
   </a>
   
@@ -3067,57 +3067,57 @@
 
 
 
-<h1 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h1>
-<p>Everything is configured in <strong>one YAML file</strong>, mounted in the container, never baked into the image:</p>
+<h1 id="configuration">Configuração<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h1>
+<p>Tudo é configurado em <strong>um único arquivo YAML</strong>, montado no contêiner, nunca embutido na imagem:</p>
 <ul>
-<li>Path: <code>DATA_GATEWAY_CONFIG_PATH</code> (default <code>/config/data-gateway.config.yaml</code>). It is <strong>mandatory</strong>: without it the
-  gateway logs the error and exits with code 1. An invalid key or value also stops the start, with the list of
-  problems.</li>
-<li><code>$VAR</code> and <code>${VAR}</code> are replaced by environment variables anywhere in the file, also inside a text
-  (<code>"${HOST}:${PORT}"</code>). A variable that is not defined counts as <strong>not set</strong>: a transport whose <code>port: $VAR</code> is not
-  defined is not exposed; a credential whose secret is not defined stops the start.</li>
-<li>The λORM schemas (<code>lambdaORM.yaml</code>, sources, mappings, stages, queue) stay in their workspaces. The gateway's file
-  says where they are, how each one is reached and how it is exposed.</li>
+<li>Caminho: <code>DATA_GATEWAY_CONFIG_PATH</code> (padrão <code>/config/data-gateway.config.yaml</code>). Ele é <strong>obrigatório</strong>: sem ele o
+  gateway registra o erro e encerra com o código 1. Uma chave ou um valor inválido também impede a inicialização, com a lista de
+  problemas.</li>
+<li><code>$VAR</code> e <code>${VAR}</code> são substituídos por variáveis de ambiente em qualquer parte do arquivo, inclusive dentro de um texto
+  (<code>"${HOST}:${PORT}"</code>). Uma variável não definida conta como <strong>não configurada</strong>: um transporte cujo <code>port: $VAR</code> não está
+  definido não é exposto; uma credencial cujo segredo não está definido impede a inicialização.</li>
+<li>Os esquemas do λORM (<code>lambdaORM.yaml</code>, fontes, mapeamentos, stages, fila) permanecem em seus workspaces. O arquivo do gateway
+  diz onde eles estão, como cada um é acessado e como é exposto.</li>
 </ul>
-<h2 id="transports-and-ports">Transports and ports<a class="headerlink" href="#transports-and-ports" title="Permanent link">&para;</a></h2>
-<p>A transport is exposed <strong>only when it has a port</strong>. There are no default ports, neither in the code nor in the image:</p>
+<h2 id="transports-and-ports">Transportes e portas<a class="headerlink" href="#transports-and-ports" title="Permanent link">&para;</a></h2>
+<p>Um transporte é exposto <strong>apenas quando tem uma porta</strong>. Não há portas padrão, nem no código nem na imagem:</p>
 <table>
 <thead>
 <tr>
 <th><code>transports.&lt;name&gt;</code></th>
-<th>Result</th>
+<th>Resultado</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>missing</td>
-<td>not exposed</td>
+<td>ausente</td>
+<td>não exposto</td>
 </tr>
 <tr>
-<td>present without <code>port</code>, or <code>port: $VAR</code> with the variable not defined</td>
-<td>not exposed (logged: <code>mcpHttp not exposed: no port configured</code>)</td>
+<td>presente sem <code>port</code>, ou <code>port: $VAR</code> com a variável não definida</td>
+<td>não exposto (registrado no log: <code>mcpHttp not exposed: no port configured</code>)</td>
 </tr>
 <tr>
-<td><code>port</code> that is not an integer 1–65535</td>
-<td>configuration error: the gateway doesn't start</td>
+<td><code>port</code> que não é um inteiro de 1 a 65535</td>
+<td>erro de configuração: o gateway não inicia</td>
 </tr>
 <tr>
-<td>two transports on the same <code>host:port</code></td>
-<td>configuration error</td>
+<td>dois transportes no mesmo <code>host:port</code></td>
+<td>erro de configuração</td>
 </tr>
 <tr>
-<td>no transport exposed at all</td>
-<td>configuration error</td>
+<td>nenhum transporte exposto</td>
+<td>erro de configuração</td>
 </tr>
 </tbody>
 </table>
-<p>So the same file can expose MCP only where <code>DATA_GATEWAY_MCP_PORT</code> is defined. The transports are described in
-<a href="../Transports/">Transports</a>.</p>
-<h2 id="schemas">Schemas<a class="headerlink" href="#schemas" title="Permanent link">&para;</a></h2>
-<p>A <strong>schema</strong> is a λORM workspace (a folder with <code>lambdaORM.yaml</code>) served at a <strong>route</strong> (<code>iot/v1</code>). They are declared
-in two ways, which can be combined.</p>
-<p><strong>Discovered (<code>orm.workspacePath</code>).</strong> The folder is walked at start: every folder with a <code>lambdaORM.yaml</code> is a schema
-and its relative path is its route. Below a schema the walk stops (a workspace has folders of its own).</p>
+<p>Assim, o mesmo arquivo pode expor o MCP apenas onde <code>DATA_GATEWAY_MCP_PORT</code> estiver definida. Os transportes são descritos em
+<a href="../Transports/">Transportes</a>.</p>
+<h2 id="schemas">Esquemas<a class="headerlink" href="#schemas" title="Permanent link">&para;</a></h2>
+<p>Um <strong>esquema</strong> é um workspace do λORM (uma pasta com <code>lambdaORM.yaml</code>) servido em uma <strong>rota</strong> (<code>iot/v1</code>). Eles são declarados
+de duas formas, que podem ser combinadas.</p>
+<p><strong>Descobertos (<code>orm.workspacePath</code>).</strong> A pasta é percorrida na inicialização: toda pasta com um <code>lambdaORM.yaml</code> é um esquema
+e seu caminho relativo é sua rota. Abaixo de um esquema o percurso para (um workspace tem pastas próprias).</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/workspace                          (orm.workspacePath)
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── iot/
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│   ├── v1/lambdaORM.yaml    →  schema "iot/v1"       →  /iot/v1/...
@@ -3125,101 +3125,101 @@ and its relative path is its route. Below a schema the walk stops (a workspace h
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>└── accounts/
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    └── v1/lambdaORM.yaml    →  schema "accounts/v1"  →  /accounts/v1/...
 </code></pre></div>
-<p><strong>Declared (<code>orm.schemas[]</code> with <code>workspace</code>).</strong> The route doesn't depend on where the folder is: one volume per
-schema, or an instance that serves only some schemas.</p>
+<p><strong>Declarados (<code>orm.schemas[]</code> com <code>workspace</code>).</strong> A rota não depende de onde a pasta está: um volume por
+esquema, ou uma instância que serve apenas alguns esquemas.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">orm</span><span class="p">:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">workspacePath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/workspace</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">schemas</span><span class="p">:</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">accounts/v1</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">workspace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/mnt/accounts</span><span class="w">          </span><span class="c1"># a folder with lambdaORM.yaml, or the file itself</span>
 </code></pre></div>
-<p><strong>Adjusted.</strong> An entry of <code>orm.schemas[]</code> without <code>workspace</code> adjusts a discovered schema (its <code>path</code> must match one).
-What a schema can adjust:</p>
+<p><strong>Ajustados.</strong> Uma entrada de <code>orm.schemas[]</code> sem <code>workspace</code> ajusta um esquema descoberto (seu <code>path</code> deve corresponder a um deles).
+O que um esquema pode ajustar:</p>
 <table>
 <thead>
 <tr>
-<th>Key of a schema</th>
-<th>Effect</th>
-<th>If not set</th>
+<th>Chave de um esquema</th>
+<th>Efeito</th>
+<th>Se não for configurada</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>transports</code></td>
-<td>the transports that expose it; on the others its routes don't exist (<code>404</code>)</td>
-<td>every exposed transport</td>
+<td>os transportes que o expõem; nos demais suas rotas não existem (<code>404</code>)</td>
+<td>todos os transportes expostos</td>
 </tr>
 <tr>
 <td><code>authentication</code></td>
-<td>replaces the authentication (and its permissions) for this schema, on all its transports</td>
-<td>the transport's, else the global one</td>
+<td>substitui a autenticação (e suas permissões) para este esquema, em todos os seus transportes</td>
+<td>a do transporte, senão a global</td>
 </tr>
 <tr>
 <td><code>env</code></td>
-<td>variables its worker receives (below)</td>
-<td>its <code>.env</code> and the base variables</td>
+<td>variáveis que seu worker recebe (abaixo)</td>
+<td>seu <code>.env</code> e as variáveis base</td>
 </tr>
 <tr>
 <td><code>scripts</code></td>
-<td><code>enabled</code> and the limits of scripts</td>
+<td><code>enabled</code> e os limites dos scripts</td>
 <td><code>scripts</code></td>
 </tr>
 <tr>
 <td><code>mcp.maxRows</code>, <code>mcp.tools</code></td>
-<td>row limit and tools of its MCP server</td>
+<td>limite de linhas e ferramentas de seu servidor MCP</td>
 <td><code>mcp</code></td>
 </tr>
 <tr>
 <td><code>server.timeout</code>, <code>server.maxConcurrent</code>, <code>server.maxResponseBytes</code></td>
-<td>timeout, simultaneous operations and response size</td>
+<td>timeout, operações simultâneas e tamanho da resposta</td>
 <td><code>server</code></td>
 </tr>
 <tr>
 <td><code>runtime.mode</code>, <code>runtime.maxMemoryMb</code>, <code>runtime.checkConnections</code></td>
-<td><code>thread</code> / <code>process</code>, memory of its worker, whether its connections are checked at start</td>
+<td><code>thread</code> / <code>process</code>, memória de seu worker, se suas conexões são verificadas na inicialização</td>
 <td><code>runtime</code></td>
 </tr>
 </tbody>
 </table>
-<p>The most specific always wins and <strong>replaces</strong> the others: schema → transport → global.</p>
-<p><strong>Rules:</strong></p>
+<p>O mais específico sempre prevalece e <strong>substitui</strong> os demais: esquema → transporte → global.</p>
+<p><strong>Regras:</strong></p>
 <ul>
-<li>At least one of <code>orm.workspacePath</code> or a <code>orm.schemas[]</code> with <code>workspace</code>, and at least one schema.</li>
-<li>Two schemas with the same route, or a route that is the prefix of another (<code>iot</code> and <code>iot/v1</code>), are an error.</li>
-<li>Each segment of a route: <code>[a-zA-Z0-9_.-]</code>, and none of the reserved names: <code>health</code>, <code>ping</code>, <code>metrics</code>, <code>version</code>,
+<li>Pelo menos um entre <code>orm.workspacePath</code> ou um <code>orm.schemas[]</code> com <code>workspace</code>, e pelo menos um esquema.</li>
+<li>Dois esquemas com a mesma rota, ou uma rota que é prefixo de outra (<code>iot</code> e <code>iot/v1</code>), são um erro.</li>
+<li>Cada segmento de uma rota: <code>[a-zA-Z0-9_.-]</code>, e nenhum dos nomes reservados: <code>health</code>, <code>ping</code>, <code>metrics</code>, <code>version</code>,
   <code>schemas</code>, <code>mcp</code>, <code>sse</code>, <code>messages</code>, <code>status</code>, <code>doc</code>, <code>api-docs</code>, <code>swagger</code>, <code>asyncapi</code>, <code>ui</code>, <code>whoami</code>, <code>typings</code>.</li>
-<li><strong>A schema at the root:</strong> if <code>workspacePath</code> itself has a <code>lambdaORM.yaml</code> (or a declared schema uses <code>path: ""</code>),
-  it is served at the root (<code>/execute</code>). Only when it is the only schema.</li>
-<li>No hot reload: a new schema is taken when the gateway restarts.</li>
-<li>Each schema uses the <code>infrastructure.queue</code> (Kafka) of its own <code>lambdaORM.yaml</code>, if it has one.</li>
+<li><strong>Um esquema na raiz:</strong> se o próprio <code>workspacePath</code> tem um <code>lambdaORM.yaml</code> (ou um esquema declarado usa <code>path: ""</code>),
+  ele é servido na raiz (<code>/execute</code>). Somente quando é o único esquema.</li>
+<li>Sem hot reload: um novo esquema é carregado quando o gateway reinicia.</li>
+<li>Cada esquema usa a <code>infrastructure.queue</code> (Kafka) de seu próprio <code>lambdaORM.yaml</code>, se tiver uma.</li>
 </ul>
-<h2 id="environment-of-each-schema">Environment of each schema<a class="headerlink" href="#environment-of-each-schema" title="Permanent link">&para;</a></h2>
-<p>λORM replaces the <code>$VAR</code> of a <code>lambdaORM.yaml</code> with the environment. So that a schema cannot read another one's
-credentials nor the gateway's secrets, <strong>each schema worker receives only its own variables</strong>, from highest to
-lowest priority:</p>
+<h2 id="environment-of-each-schema">Ambiente de cada esquema<a class="headerlink" href="#environment-of-each-schema" title="Permanent link">&para;</a></h2>
+<p>O λORM substitui as <code>$VAR</code> de um <code>lambdaORM.yaml</code> pelo ambiente. Para que um esquema não possa ler as credenciais de outro
+nem os segredos do gateway, <strong>cada worker de esquema recebe apenas suas próprias variáveis</strong>, da maior para a
+menor prioridade:</p>
 <table>
 <thead>
 <tr>
-<th>Source</th>
-<th>Example</th>
+<th>Fonte</th>
+<th>Exemplo</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>schemas[].env</code> in the gateway's file (the values can use the gateway's variables)</td>
+<td><code>schemas[].env</code> no arquivo do gateway (os valores podem usar as variáveis do gateway)</td>
 <td><code>DB_CONNECTION: $IOT_V1_DB</code></td>
 </tr>
 <tr>
-<td>a <code>.env</code> file in the schema's workspace (optional)</td>
+<td>um arquivo <code>.env</code> no workspace do esquema (opcional)</td>
 <td><code>/workspace/iot/v1/.env</code></td>
 </tr>
 <tr>
-<td>the base variables: <code>PATH</code>, <code>HOME</code>, <code>TZ</code>, <code>LANG</code>, <code>NODE_*</code>, <code>LD_LIBRARY_PATH</code>, <code>ORACLE_*</code>, and <code>runtime.env.passthrough</code></td>
+<td>as variáveis base: <code>PATH</code>, <code>HOME</code>, <code>TZ</code>, <code>LANG</code>, <code>NODE_*</code>, <code>LD_LIBRARY_PATH</code>, <code>ORACLE_*</code> e <code>runtime.env.passthrough</code></td>
 <td><code>TZ=UTC</code></td>
 </tr>
 </tbody>
 </table>
-<p>Every <code>lambdaORM.yaml</code> can use the same names, and the gateway maps each one to its real secret:</p>
+<p>Todos os <code>lambdaORM.yaml</code> podem usar os mesmos nomes, e o gateway mapeia cada um para seu segredo real:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">orm</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">workspacePath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/workspace</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">schemas</span><span class="p">:</span>
@@ -3232,8 +3232,8 @@ lowest priority:</p>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">isolate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                           </span><span class="c1"># false: every schema gets the whole environment (local development)</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nt">passthrough</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">KAFKA_BROKER</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w">           </span><span class="c1"># variables every schema receives</span>
 </code></pre></div>
-<p>A variable used in <code>schemas[].env</code> that is not defined stays undefined: that schema fails to connect and is shown in
-<code>error</code> with the reason; the others start.</p>
+<p>Uma variável usada em <code>schemas[].env</code> que não está definida fica indefinida: esse esquema não consegue se conectar e é exibido em
+<code>error</code> com o motivo; os demais iniciam.</p>
 <h2 id="runtime">Runtime<a class="headerlink" href="#runtime" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">runtime</span><span class="p">:</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">schemas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thread</span><span class="w">           </span><span class="c1"># thread | process: one worker per schema (runtime.mode adjusts one schema)</span>
@@ -3248,64 +3248,64 @@ lowest priority:</p>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nt">maxDelayMs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300000</span><span class="w">      </span><span class="c1"># the wait grows up to this</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> isolate</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="p p-Indicator">,</span><span class="nt"> passthrough</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"> </span><span class="p p-Indicator">}</span>
 </code></pre></div>
-<p>What each mode isolates:</p>
+<p>O que cada modo isola:</p>
 <table>
 <thead>
 <tr>
 <th></th>
 <th><code>thread</code></th>
 <th><code>process</code></th>
-<th>another instance</th>
+<th>outra instância</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>CPU and event loop</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
+<td>CPU e event loop</td>
+<td>sim</td>
+<td>sim</td>
+<td>sim</td>
 </tr>
 <tr>
-<td>JavaScript heap (<code>maxMemoryMb</code>)</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
+<td>Heap de JavaScript (<code>maxMemoryMb</code>)</td>
+<td>sim</td>
+<td>sim</td>
+<td>sim</td>
 </tr>
 <tr>
-<td>A hung worker (heartbeat)</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
+<td>Um worker travado (heartbeat)</td>
+<td>sim</td>
+<td>sim</td>
+<td>sim</td>
 </tr>
 <tr>
-<td>Environment variables</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
+<td>Variáveis de ambiente</td>
+<td>sim</td>
+<td>sim</td>
+<td>sim</td>
 </tr>
 <tr>
-<td>libuv thread pool (DNS, <code>fs</code>, native drivers)</td>
-<td>shared (<code>threadpoolSize</code>)</td>
-<td>yes</td>
-<td>yes</td>
+<td>Thread pool do libuv (DNS, <code>fs</code>, drivers nativos)</td>
+<td>compartilhado (<code>threadpoolSize</code>)</td>
+<td>sim</td>
+<td>sim</td>
 </tr>
 <tr>
-<td>Native memory, container OOM</td>
-<td>no</td>
-<td>same container</td>
-<td>yes</td>
+<td>Memória nativa, OOM do contêiner</td>
+<td>não</td>
+<td>mesmo contêiner</td>
+<td>sim</td>
 </tr>
 <tr>
-<td>A crash of native code</td>
-<td>no: the whole process</td>
-<td>yes</td>
-<td>yes</td>
+<td>Uma falha de código nativo</td>
+<td>não: o processo inteiro</td>
+<td>sim</td>
+<td>sim</td>
 </tr>
 </tbody>
 </table>
-<p><code>thread</code> suits development and small schemas; <code>runtime.mode: process</code> a critical schema in production (Oracle in thick
-mode uses native code); a separate instance, schemas of different teams or customers.</p>
-<h2 id="complete-example">Complete example<a class="headerlink" href="#complete-example" title="Permanent link">&para;</a></h2>
+<p><code>thread</code> é adequado para desenvolvimento e esquemas pequenos; <code>runtime.mode: process</code>, para um esquema crítico em produção (o Oracle em modo thick
+usa código nativo); uma instância separada, para esquemas de equipes ou clientes diferentes.</p>
+<h2 id="complete-example">Exemplo completo<a class="headerlink" href="#complete-example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># data-gateway.config.yaml</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">orm</span><span class="p">:</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">workspacePath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/workspace</span>
@@ -3371,25 +3371,25 @@ mode uses native code); a separate instance, schemas of different teams or custo
 <a id="__codelineno-4-63" name="__codelineno-4-63" href="#__codelineno-4-63"></a><span class="w">  </span><span class="nt">webSocket</span><span class="p">:</span>
 <a id="__codelineno-4-64" name="__codelineno-4-64" href="#__codelineno-4-64"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$DATA_GATEWAY_WS_PORT</span>
 </code></pre></div>
-<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<h2 id="reference">Referência<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Key</th>
-<th>Default</th>
-<th>Notes</th>
+<th>Chave</th>
+<th>Padrão</th>
+<th>Notas</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>orm.workspacePath</code></td>
 <td>—</td>
-<td>the folder where schemas are discovered</td>
+<td>a pasta onde os esquemas são descobertos</td>
 </tr>
 <tr>
 <td><code>orm.schemas[]</code></td>
 <td><code>[]</code></td>
-<td><code>path</code> (mandatory), <code>workspace</code> (defines a schema) and adjustments</td>
+<td><code>path</code> (obrigatório), <code>workspace</code> (define um esquema) e ajustes</td>
 </tr>
 <tr>
 <td><code>runtime.schemas</code></td>
@@ -3399,17 +3399,17 @@ mode uses native code); a separate instance, schemas of different teams or custo
 <tr>
 <td><code>runtime.maxMemoryMb</code></td>
 <td><code>512</code></td>
-<td>per worker</td>
+<td>por worker</td>
 </tr>
 <tr>
 <td><code>runtime.checkConnections</code></td>
 <td><code>true</code></td>
-<td>a database down leaves the schema in <code>error</code>, retried, instead of failing in the first query</td>
+<td>um banco de dados fora do ar deixa o esquema em <code>error</code>, tentado novamente, em vez de falhar na primeira consulta</td>
 </tr>
 <tr>
 <td><code>runtime.threadpoolSize</code></td>
 <td><code>auto</code></td>
-<td><code>max(4, 2 × schemas in thread mode)</code>, at most 64</td>
+<td><code>max(4, 2 × schemas in thread mode)</code>, no máximo 64</td>
 </tr>
 <tr>
 <td><code>runtime.heartbeat.intervalMs</code> / <code>timeoutMs</code></td>
@@ -3419,7 +3419,7 @@ mode uses native code); a separate instance, schemas of different teams or custo
 <tr>
 <td><code>runtime.restart.initialDelayMs</code> / <code>maxDelayMs</code></td>
 <td><code>1000</code> / <code>300000</code></td>
-<td>growing wait between restarts</td>
+<td>espera crescente entre reinícios</td>
 </tr>
 <tr>
 <td><code>runtime.env.isolate</code> / <code>passthrough</code></td>
@@ -3429,12 +3429,12 @@ mode uses native code); a separate instance, schemas of different teams or custo
 <tr>
 <td><code>server.timeout</code></td>
 <td><code>120000</code></td>
-<td>per HTTP request, WebSocket message and MCP tool call</td>
+<td>por requisição HTTP, mensagem WebSocket e chamada de ferramenta MCP</td>
 </tr>
 <tr>
 <td><code>server.maxConcurrent</code></td>
 <td><code>64</code></td>
-<td>simultaneous operations per schema; above it <code>429</code>; <code>0</code> = no limit</td>
+<td>operações simultâneas por esquema; acima disso, <code>429</code>; <code>0</code> = sem limite</td>
 </tr>
 <tr>
 <td><code>server.requestBodySize</code></td>
@@ -3444,12 +3444,12 @@ mode uses native code); a separate instance, schemas of different teams or custo
 <tr>
 <td><code>server.maxResponseBytes</code></td>
 <td><code>256MB</code></td>
-<td>above it, <code>413</code>; <code>0</code> = no limit</td>
+<td>acima disso, <code>413</code>; <code>0</code> = sem limite</td>
 </tr>
 <tr>
 <td><code>logger.adapter</code> / <code>logger.level</code></td>
 <td><code>console</code> / <code>info</code></td>
-<td><code>console</code> or <code>winston</code>; <code>error</code>, <code>warn</code>, <code>info</code>, <code>debug</code></td>
+<td><code>console</code> ou <code>winston</code>; <code>error</code>, <code>warn</code>, <code>info</code>, <code>debug</code></td>
 </tr>
 <tr>
 <td><code>metrics.enabled</code></td>
@@ -3459,62 +3459,62 @@ mode uses native code); a separate instance, schemas of different teams or custo
 <tr>
 <td><code>audit.enabled</code></td>
 <td><code>true</code></td>
-<td>the audit of writes (<a href="../Security/#audit">Security</a>)</td>
+<td>a auditoria das escritas (<a href="../Security/#audit">Segurança</a>)</td>
 </tr>
 <tr>
 <td><code>audit.includeData</code></td>
 <td><code>false</code></td>
-<td><code>true</code> adds the parameters (<code>data</code>), which can have personal data</td>
+<td><code>true</code> adiciona os parâmetros (<code>data</code>), que podem conter dados pessoais</td>
 </tr>
 <tr>
 <td><code>authentication</code></td>
 <td><code>{ adapter: none }</code></td>
-<td><a href="../Security/">Security</a></td>
+<td><a href="../Security/">Segurança</a></td>
 </tr>
 <tr>
 <td><code>transports.&lt;t&gt;.authentication</code></td>
 <td><code>authentication</code></td>
-<td>replaces the global one for that transport</td>
+<td>substitui a global para esse transporte</td>
 </tr>
 <tr>
 <td><code>rateLimit.windowMs</code> / <code>rateLimit.max</code></td>
 <td><code>30000</code> / <code>30</code></td>
-<td><code>http</code> only; <code>max: 0</code> turns it off</td>
+<td>apenas <code>http</code>; <code>max: 0</code> o desativa</td>
 </tr>
 <tr>
 <td><code>scripts.enabled</code></td>
 <td><code>false</code></td>
-<td><code>POST /script</code> and its tool and method</td>
+<td><code>POST /script</code> e sua ferramenta e seu método</td>
 </tr>
 <tr>
 <td><code>scripts.maxLength</code> / <code>timeoutMs</code> / <code>maxIterations</code></td>
 <td><code>20000</code> / <code>30000</code> / <code>100000</code></td>
-<td>a request can ask for less, never more</td>
+<td>uma requisição pode pedir menos, nunca mais</td>
 </tr>
 <tr>
 <td><code>mcp.name</code></td>
 <td><code>data-gateway</code></td>
-<td>the name of the MCP servers; each one adds its route</td>
+<td>o nome dos servidores MCP; cada um adiciona sua rota</td>
 </tr>
 <tr>
 <td><code>mcp.tools.include</code> / <code>exclude</code></td>
 <td><code>[]</code> / <code>[]</code></td>
-<td>names of <a href="../Mcp/#tools">tools</a></td>
+<td>nomes de <a href="../Mcp/#tools">ferramentas</a></td>
 </tr>
 <tr>
 <td><code>mcp.pageSize</code></td>
 <td><code>50</code></td>
-<td>page of <code>tools/list</code> and <code>resources/list</code></td>
+<td>página de <code>tools/list</code> e <code>resources/list</code></td>
 </tr>
 <tr>
 <td><code>mcp.maxRows</code></td>
 <td><code>500</code></td>
-<td>rows of <code>orm_execute</code> / <code>orm_execute_script</code>; <code>0</code> = no limit</td>
+<td>linhas de <code>orm_execute</code> / <code>orm_execute_script</code>; <code>0</code> = sem limite</td>
 </tr>
 <tr>
 <td><code>transports.&lt;t&gt;.port</code></td>
-<td><strong>none</strong></td>
-<td>without a port, the transport is not exposed</td>
+<td><strong>nenhum</strong></td>
+<td>sem porta, o transporte não é exposto</td>
 </tr>
 <tr>
 <td><code>transports.&lt;t&gt;.host</code></td>
@@ -3524,37 +3524,37 @@ mode uses native code); a separate instance, schemas of different teams or custo
 <tr>
 <td><code>transports.&lt;t&gt;.basePath</code></td>
 <td><code>''</code></td>
-<td>a prefix before the schema's route (<code>/data-gateway</code>), behind an ingress with a path</td>
+<td>um prefixo antes da rota do esquema (<code>/data-gateway</code>), atrás de um ingress com um caminho</td>
 </tr>
 <tr>
 <td><code>transports.&lt;t&gt;.maxConnections</code></td>
 <td><code>100</code></td>
-<td><code>webSocket</code>, <code>mcpWebSocket</code> and the SSE of <code>mcpHttp</code></td>
+<td><code>webSocket</code>, <code>mcpWebSocket</code> e o SSE de <code>mcpHttp</code></td>
 </tr>
 <tr>
 <td><code>transports.http.swagger.enabled</code></td>
 <td><code>true</code></td>
-<td><code>/doc</code> and <code>/api-docs</code></td>
+<td><code>/doc</code> e <code>/api-docs</code></td>
 </tr>
 <tr>
 <td><code>transports.http.ui.enabled</code></td>
 <td><code>false</code></td>
-<td>the <a href="../Ui/">UI</a> at <code>/ui</code></td>
+<td>a <a href="../Ui/">UI</a> em <code>/ui</code></td>
 </tr>
 <tr>
 <td><code>transports.mcpHttp.legacySse</code></td>
 <td><code>true</code></td>
-<td>besides Streamable HTTP, the older HTTP+SSE for older clients</td>
+<td>além do Streamable HTTP, o antigo HTTP+SSE para clientes antigos</td>
 </tr>
 <tr>
 <td><code>transports.mcpHttp.stateful</code></td>
 <td><code>false</code></td>
-<td>stateless Streamable HTTP: any replica answers any request</td>
+<td>Streamable HTTP sem estado: qualquer réplica responde a qualquer requisição</td>
 </tr>
 <tr>
 <td><code>transports.&lt;ws&gt;.asyncapi.enabled</code></td>
 <td><code>true</code></td>
-<td><code>GET /asyncapi</code> and <code>/asyncapi.json</code> of <code>webSocket</code> and <code>mcpWebSocket</code></td>
+<td><code>GET /asyncapi</code> e <code>/asyncapi.json</code> de <code>webSocket</code> e <code>mcpWebSocket</code></td>
 </tr>
 </tbody>
 </table>

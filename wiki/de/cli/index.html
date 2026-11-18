@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1961,7 +1961,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2215,7 +2215,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2916,7 +2916,7 @@
         <li class="md-nav__item">
   <a href="#commands" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      Befehle
     </span>
   </a>
   
@@ -2925,7 +2925,7 @@
         <li class="md-nav__item">
   <a href="#common-options" class="md-nav__link">
     <span class="md-ellipsis">
-      Common options
+      Gemeinsame Optionen
     </span>
   </a>
   
@@ -2934,7 +2934,7 @@
         <li class="md-nav__item">
   <a href="#exit-code-and-data-gateway" class="md-nav__link">
     <span class="md-ellipsis">
-      Exit code and Data Gateway
+      Exit-Code und Data Gateway
     </span>
   </a>
   
@@ -2943,7 +2943,7 @@
         <li class="md-nav__item">
   <a href="#more" class="md-nav__link">
     <span class="md-ellipsis">
-      More
+      Mehr
     </span>
   </a>
   
@@ -2966,158 +2966,158 @@
 
 
 <h1 id="orm-cli">λORM CLI<a class="headerlink" href="#orm-cli" title="Permanent link">&para;</a></h1>
-<p>The λORM CLI (<a href="https://www.npmjs.com/package/@lambdaorm/cli"><code>@lambdaorm/cli</code></a>) is a command line application to use
-<a href="https://www.npmjs.com/package/@lambdaorm/lib">λORM</a>: it creates projects, synchronizes the databases with the schema,
-imports and exports data, and runs queries and scripts. Its commands run locally with a workspace (<code>-w</code>), and most of
-them can also run on a <a href="../data-gateway/">Data Gateway</a> (<code>-u &lt;url&gt;</code>).</p>
+<p>Die λORM CLI (<a href="https://www.npmjs.com/package/@lambdaorm/cli"><code>@lambdaorm/cli</code></a>) ist eine Kommandozeilenanwendung zur Verwendung von
+<a href="https://www.npmjs.com/package/@lambdaorm/lib">λORM</a>: Sie erstellt Projekte, synchronisiert die Datenbanken mit dem Schema,
+importiert und exportiert Daten und führt Abfragen und Skripte aus. Ihre Befehle laufen lokal mit einem Workspace (<code>-w</code>), und die meisten
+von ihnen können auch auf einem <a href="../data-gateway/">Data Gateway</a> ausgeführt werden (<code>-u &lt;url&gt;</code>).</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<p>Install the package globally; it adds the <code>lambdaorm</code> command:</p>
+<p>Installieren Sie das Paket global; es stellt den Befehl <code>lambdaorm</code> bereit:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>npm<span class="w"> </span>i<span class="w"> </span>-g<span class="w"> </span>@lambdaorm/cli
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>lambdaorm<span class="w"> </span>--version
 </code></pre></div>
-<p>It requires Node.js 20 or later. The Docker image of the Data Gateway
-(<a href="https://hub.docker.com/r/flaviorita/data-gateway">flaviorita/data-gateway</a>) already includes the CLI.</p>
+<p>Es erfordert Node.js 20 oder höher. Das Docker-Image des Data Gateway
+(<a href="https://hub.docker.com/r/flaviorita/data-gateway">flaviorita/data-gateway</a>) enthält die CLI bereits.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The unscoped <code>lambdaorm-cli</code> package is the old one and is no longer maintained.</p>
+<p class="admonition-title">Hinweis</p>
+<p>Das Paket <code>lambdaorm-cli</code> ohne Scope ist das alte Paket und wird nicht mehr gepflegt.</p>
 </div>
-<h2 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
+<h2 id="commands">Befehle<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Command</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Befehl</th>
+<th style="text-align: left;">Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;"><a href="Version/">version</a></td>
-<td style="text-align: left;">Prints the CLI version and the <code>@lambdaorm/lib</code> version the project uses.</td>
+<td style="text-align: left;">Gibt die Version der CLI und die vom Projekt verwendete Version von <code>@lambdaorm/lib</code> aus.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Init/">init</a></td>
-<td style="text-align: left;">Generates the structure of a λORM project.</td>
+<td style="text-align: left;">Erzeugt die Struktur eines λORM-Projekts.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Build/">build</a></td>
-<td style="text-align: left;">Generates the model and the repositories for the language.</td>
+<td style="text-align: left;">Erzeugt das Modell und die Repositories für die Sprache.</td>
 </tr>
 <tr>
 <td style="text-align: left;">schema</td>
-<td style="text-align: left;">Returns information about the schema.</td>
+<td style="text-align: left;">Gibt Informationen über das Schema zurück.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Push/">push</a></td>
-<td style="text-align: left;">Synchronizes the databases with the model (<code>-o</code> writes the scripts instead).</td>
+<td style="text-align: left;">Synchronisiert die Datenbanken mit dem Modell (<code>-o</code> schreibt stattdessen die Skripte).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="../schema/SchemaSynchronization-Pull/">pull</a></td>
-<td style="text-align: left;">Updates the schema with the structure of the databases of a stage.</td>
+<td style="text-align: left;">Aktualisiert das Schema mit der Struktur der Datenbanken eines Stages.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Fetch/">fetch</a></td>
-<td style="text-align: left;">Shows the differences between the databases and the model; exits with code 1 when there are any.</td>
+<td style="text-align: left;">Zeigt die Unterschiede zwischen den Datenbanken und dem Modell; endet mit Exit-Code 1, wenn es welche gibt.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="../schema/SchemaSynchronization-Introspect/">introspect</a></td>
-<td style="text-align: left;">Reads and analyzes a data file and updates the schema.</td>
+<td style="text-align: left;">Liest und analysiert eine Datendatei und aktualisiert das Schema.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="../schema/SchemaSynchronization-Incorporate/">incorporate</a></td>
-<td style="text-align: left;">Updates the schema from a data file, pushes the changes to the databases and imports the data.</td>
+<td style="text-align: left;">Aktualisiert das Schema anhand einer Datendatei, überträgt die Änderungen in die Datenbanken und importiert die Daten.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Drop/">drop</a></td>
-<td style="text-align: left;">Removes all the database objects, but not the database itself.</td>
+<td style="text-align: left;">Entfernt alle Datenbankobjekte, nicht jedoch die Datenbank selbst.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Import/">import</a></td>
-<td style="text-align: left;">Imports data from a file into the databases.</td>
+<td style="text-align: left;">Importiert Daten aus einer Datei in die Datenbanken.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Export/">export</a></td>
-<td style="text-align: left;">Exports data from the databases.</td>
+<td style="text-align: left;">Exportiert Daten aus den Datenbanken.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Execute/">execute</a></td>
-<td style="text-align: left;">Executes a query.</td>
+<td style="text-align: left;">Führt eine Abfrage aus.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Script/">script</a></td>
-<td style="text-align: left;">Runs a script: several queries in one transaction.</td>
+<td style="text-align: left;">Führt ein Skript aus: mehrere Abfragen in einer Transaktion.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Plan/">plan</a></td>
-<td style="text-align: left;">Returns the execution plan of a query.</td>
+<td style="text-align: left;">Gibt den Ausführungsplan einer Abfrage zurück.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Metadata/">metadata</a></td>
-<td style="text-align: left;">Returns the metadata of a query.</td>
+<td style="text-align: left;">Gibt die Metadaten einer Abfrage zurück.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Parameters/">parameters</a></td>
-<td style="text-align: left;">Returns the parameters of a query.</td>
+<td style="text-align: left;">Gibt die Parameter einer Abfrage zurück.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Model/">model</a></td>
-<td style="text-align: left;">Returns the model of the result of a query.</td>
+<td style="text-align: left;">Gibt das Modell des Ergebnisses einer Abfrage zurück.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a href="Commands/Constraints/">constraints</a></td>
-<td style="text-align: left;">Returns the constraints of a query.</td>
+<td style="text-align: left;">Gibt die Constraints einer Abfrage zurück.</td>
 </tr>
 </tbody>
 </table>
-<p><code>lambdaorm &lt;command&gt; -h</code> lists the options of a command; <code>lambdaorm -h</code> lists the commands.</p>
-<p>The <code>sync</code> command no longer exists: it was replaced by <a href="Commands/Push/">push</a>.</p>
-<h2 id="common-options">Common options<a class="headerlink" href="#common-options" title="Permanent link">&para;</a></h2>
+<p><code>lambdaorm &lt;command&gt; -h</code> listet die Optionen eines Befehls auf; <code>lambdaorm -h</code> listet die Befehle auf.</p>
+<p>Den Befehl <code>sync</code> gibt es nicht mehr: Er wurde durch <a href="Commands/Push/">push</a> ersetzt.</p>
+<h2 id="common-options">Gemeinsame Optionen<a class="headerlink" href="#common-options" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th style="text-align: left;">Option</th>
-<th style="text-align: left;">Short</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Kurz</th>
+<th style="text-align: left;">Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">workspace</td>
 <td style="text-align: left;"><code>-w</code></td>
-<td style="text-align: left;">Path of the project (the folder with <code>lambdaORM.yaml</code>). Default: the current directory.</td>
+<td style="text-align: left;">Pfad des Projekts (der Ordner mit <code>lambdaORM.yaml</code>). Standard: das aktuelle Verzeichnis.</td>
 </tr>
 <tr>
 <td style="text-align: left;">stage</td>
 <td style="text-align: left;"><code>-s</code></td>
-<td style="text-align: left;">Name of the stage. Default: the first stage of the schema.</td>
+<td style="text-align: left;">Name des Stages. Standard: der erste Stage des Schemas.</td>
 </tr>
 <tr>
 <td style="text-align: left;">envfile</td>
 <td style="text-align: left;"><code>-e</code></td>
-<td style="text-align: left;">Reads a file of environment variables (for example the connection strings).</td>
+<td style="text-align: left;">Liest eine Datei mit Umgebungsvariablen (zum Beispiel die Verbindungszeichenfolgen).</td>
 </tr>
 <tr>
 <td style="text-align: left;">output</td>
 <td style="text-align: left;"><code>-o</code></td>
-<td style="text-align: left;">Output format of the result: <code>json</code>, <code>beautiful</code>, <code>light</code> or <code>yaml</code>.</td>
+<td style="text-align: left;">Ausgabeformat des Ergebnisses: <code>json</code>, <code>beautiful</code>, <code>light</code> oder <code>yaml</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">url</td>
 <td style="text-align: left;"><code>-u</code></td>
-<td style="text-align: left;">URL of the schema on a Data Gateway, to run the command there instead of locally.</td>
+<td style="text-align: left;">URL des Schemas auf einem Data Gateway, um den Befehl dort statt lokal auszuführen.</td>
 </tr>
 </tbody>
 </table>
-<p>Each command page lists the options that command accepts.</p>
-<h2 id="exit-code-and-data-gateway">Exit code and Data Gateway<a class="headerlink" href="#exit-code-and-data-gateway" title="Permanent link">&para;</a></h2>
-<p>Every command exits with code 1 when it fails (from @lambdaorm/cli 1.6.3).</p>
-<p>Commands run on a Data Gateway with <code>-u</code> and the URL of the schema, for example <code>http://gateway:8080/iot/v1</code>. When the
-<code>SERVICE_TOKEN</code> environment variable is set, it is sent as <code>Authorization: Bearer &lt;token&gt;</code> (for a gateway with
-<a href="../data-gateway/Security/#authentication">bearer authentication</a>). See also <a href="../data-gateway/Clients/#cli">Clients</a>.</p>
-<h2 id="more">More<a class="headerlink" href="#more" title="Permanent link">&para;</a></h2>
+<p>Jede Befehlsseite listet die Optionen auf, die der jeweilige Befehl akzeptiert.</p>
+<h2 id="exit-code-and-data-gateway">Exit-Code und Data Gateway<a class="headerlink" href="#exit-code-and-data-gateway" title="Permanent link">&para;</a></h2>
+<p>Jeder Befehl endet mit Exit-Code 1, wenn er fehlschlägt (ab @lambdaorm/cli 1.6.3).</p>
+<p>Befehle laufen auf einem Data Gateway mit <code>-u</code> und der URL des Schemas, zum Beispiel <code>http://gateway:8080/iot/v1</code>. Ist die
+Umgebungsvariable <code>SERVICE_TOKEN</code> gesetzt, wird sie als <code>Authorization: Bearer &lt;token&gt;</code> gesendet (für ein Gateway mit
+<a href="../data-gateway/Security/#authentication">Bearer-Authentifizierung</a>). Siehe auch <a href="../data-gateway/Clients/#cli">Clients</a>.</p>
+<h2 id="more">Mehr<a class="headerlink" href="#more" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="source/">Source code reference</a></li>
-<li><a href="CHANGELOG/">Change log</a></li>
-<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli">CLI labs</a></li>
+<li><a href="source/">Referenz des Quellcodes</a></li>
+<li><a href="CHANGELOG/">Änderungsprotokoll</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli">CLI-Labs</a></li>
 </ul>
 
 

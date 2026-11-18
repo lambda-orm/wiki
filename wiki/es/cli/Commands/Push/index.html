@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1588,7 +1588,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1961,7 +1961,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2215,7 +2215,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2602,7 +2602,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Opciones
     </span>
   </a>
   
@@ -2611,7 +2611,7 @@
         <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
-      Examples
+      Ejemplos
     </span>
   </a>
   
@@ -2620,7 +2620,7 @@
         <li class="md-nav__item">
   <a href="#renaming-a-column" class="md-nav__link">
     <span class="md-ellipsis">
-      Renaming a column
+      Renombrar una columna
     </span>
   </a>
   
@@ -2978,7 +2978,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Opciones
     </span>
   </a>
   
@@ -2987,7 +2987,7 @@
         <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
-      Examples
+      Ejemplos
     </span>
   </a>
   
@@ -2996,7 +2996,7 @@
         <li class="md-nav__item">
   <a href="#renaming-a-column" class="md-nav__link">
     <span class="md-ellipsis">
-      Renaming a column
+      Renombrar una columna
     </span>
   </a>
   
@@ -3019,61 +3019,62 @@
 
 
 <h1 id="push">Push<a class="headerlink" href="#push" title="Permanent link">&para;</a></h1>
-<p>Synchronizes the databases of a stage with the model. It compares the model with the <strong>databases</strong> (what
-<a href="../Fetch/">fetch</a> reads), not with the <code>orm_state</code> file: new tables are created with keys, foreign keys and indexes;
-in existing tables, missing columns are added and columns with another type, length or nullability are altered. It
-<strong>never drops</strong> what exists only in the database (<code>fetch</code> reports it). <code>orm_state</code> is still written as a record.</p>
-<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<p>Sincroniza las bases de datos de un stage con el modelo. Compara el modelo con las <strong>bases de datos</strong> (lo que lee
+<a href="../Fetch/">fetch</a>), no con el archivo <code>orm_state</code>: las tablas nuevas se crean con sus claves, claves foráneas e índices;
+en las tablas existentes, se añaden las columnas que faltan y se modifican las columnas con otro tipo, longitud o
+nulabilidad. <strong>Nunca elimina</strong> lo que solo existe en la base de datos (<code>fetch</code> lo informa). <code>orm_state</code> se sigue
+escribiendo como registro.</p>
+<h2 id="options">Opciones<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Option</th>
-<th style="text-align: left;">Short</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Opción</th>
+<th style="text-align: left;">Corta</th>
+<th style="text-align: left;">Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">workspace</td>
 <td style="text-align: left;"><code>-w</code></td>
-<td style="text-align: left;">Project path (default: the current directory).</td>
+<td style="text-align: left;">Ruta del proyecto (por defecto: el directorio actual).</td>
 </tr>
 <tr>
 <td style="text-align: left;">stage</td>
 <td style="text-align: left;"><code>-s</code></td>
-<td style="text-align: left;">Name of the stage (default: the first stage of the schema).</td>
+<td style="text-align: left;">Nombre del stage (por defecto: el primer stage del esquema).</td>
 </tr>
 <tr>
 <td style="text-align: left;">envfile</td>
 <td style="text-align: left;"><code>-e</code></td>
-<td style="text-align: left;">Reads a file of environment variables.</td>
+<td style="text-align: left;">Lee un archivo de variables de entorno.</td>
 </tr>
 <tr>
 <td style="text-align: left;">output</td>
 <td style="text-align: left;"><code>-o</code></td>
-<td style="text-align: left;">Generates the statements but does not apply them. Without a value, prints them per source; with a folder, writes one script per source that changes, <code>&lt;stage&gt;.&lt;source&gt;.sql</code>.</td>
+<td style="text-align: left;">Genera las sentencias pero no las aplica. Sin valor, las imprime por fuente; con una carpeta, escribe un script por cada fuente que cambia, <code>&lt;stage&gt;.&lt;source&gt;.sql</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">force</td>
 <td style="text-align: left;"><code>-f</code></td>
-<td style="text-align: left;">If a statement fails, continue with the next statements.</td>
+<td style="text-align: left;">Si una sentencia falla, continúa con las siguientes.</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code>push</code> runs only locally: it has no <code>-u</code> option.</p>
+<p class="admonition-title">Nota</p>
+<p><code>push</code> solo se ejecuta localmente: no tiene la opción <code>-u</code>.</p>
 </div>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<p>Apply the changes:</p>
+<h2 id="examples">Ejemplos<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<p>Aplicar los cambios:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lambdaorm<span class="w"> </span>push<span class="w"> </span>-w<span class="w"> </span>lab/countries<span class="w"> </span>-e<span class="w"> </span>lab/countries/.env
 </code></pre></div>
-<p>Write the scripts instead (for example, to keep them as versioned migrations):</p>
+<p>Escribir los scripts en su lugar (por ejemplo, para conservarlos como migraciones versionadas):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>lambdaorm<span class="w"> </span>push<span class="w"> </span>-w<span class="w"> </span>lab/countries<span class="w"> </span>-e<span class="w"> </span>lab/countries/.env<span class="w"> </span>-s<span class="w"> </span>default<span class="w"> </span>-o<span class="w"> </span>migrations
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/home/user/lab/countries/migrations/default.default.sql
 </code></pre></div>
-<p>Print the statements, per source, without applying them:</p>
+<p>Imprimir las sentencias, por fuente, sin aplicarlas:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>lambdaorm<span class="w"> </span>push<span class="w"> </span>-w<span class="w"> </span>lab/countries<span class="w"> </span>-e<span class="w"> </span>lab/countries/.env<span class="w"> </span>-o
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">[</span>
@@ -3085,10 +3086,10 @@ in existing tables, missing columns are added and columns with another type, len
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">]</span>
 </code></pre></div>
-<h2 id="renaming-a-column">Renaming a column<a class="headerlink" href="#renaming-a-column" title="Permanent link">&para;</a></h2>
-<p>To rename a column, set <code>previousMapping</code> in the mapping of the property
-(<code>{ name: icon, mapping: icon_name, previousMapping: icon }</code>) and remove it once the change is applied. Renaming tables
-is not supported.</p>
+<h2 id="renaming-a-column">Renombrar una columna<a class="headerlink" href="#renaming-a-column" title="Permanent link">&para;</a></h2>
+<p>Para renombrar una columna, se indica <code>previousMapping</code> en el mapping de la propiedad
+(<code>{ name: icon, mapping: icon_name, previousMapping: icon }</code>) y se quita una vez aplicado el cambio. No se admite
+renombrar tablas.</p>
 
 
 

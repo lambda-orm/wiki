@@ -1281,7 +1281,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1591,7 +1591,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1964,7 +1964,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2218,7 +2218,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2902,7 +2902,7 @@
         <li class="md-nav__item">
   <a href="#how-to-use-it" class="md-nav__link">
     <span class="md-ellipsis">
-      How to use it
+      Cómo usarlo
     </span>
   </a>
   
@@ -2911,11 +2911,11 @@
         <li class="md-nav__item">
   <a href="#query-language" class="md-nav__link">
     <span class="md-ellipsis">
-      Query language
+      Lenguaje de consultas
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Query language">
+    <nav class="md-nav" aria-label="Lenguaje de consultas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2935,17 +2935,17 @@
         <li class="md-nav__item">
   <a href="#schema" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema
+      Esquema
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Schema">
+    <nav class="md-nav" aria-label="Esquema">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#synchronization" class="md-nav__link">
     <span class="md-ellipsis">
-      Synchronization
+      Sincronización
     </span>
   </a>
   
@@ -2959,7 +2959,7 @@
         <li class="md-nav__item">
   <a href="#transactions-and-scripts" class="md-nav__link">
     <span class="md-ellipsis">
-      Transactions and scripts
+      Transacciones y scripts
     </span>
   </a>
   
@@ -2977,7 +2977,7 @@
         <li class="md-nav__item">
   <a href="#related-projects" class="md-nav__link">
     <span class="md-ellipsis">
-      Related projects
+      Proyectos relacionados
     </span>
   </a>
   
@@ -3000,52 +3000,52 @@
 
 
 <h1 id="orm">λORM<a class="headerlink" href="#orm" title="Permanent link">&para;</a></h1>
-<p><a href="https://www.npmjs.com/package/@lambdaorm/lib"><img alt="npm version" src="https://img.shields.io/npm/v/@lambdaorm/lib.svg" /></a>
-<a href="https://www.npmjs.com/package/@lambdaorm/lib"><img alt="language typescript" src="https://img.shields.io/badge/language-typescript-blue" /></a>
-<a href="https://opensource.org/licenses/MIT"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
-<a href="https://github.com/lambda-orm/wiki/discussions"><img alt="Join the community on GitHub Discussions" src="https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue.svg" /></a>
+<p><a href="https://www.npmjs.com/package/@lambdaorm/lib"><img alt="versión de npm" src="https://img.shields.io/npm/v/@lambdaorm/lib.svg" /></a>
+<a href="https://www.npmjs.com/package/@lambdaorm/lib"><img alt="lenguaje typescript" src="https://img.shields.io/badge/language-typescript-blue" /></a>
+<a href="https://opensource.org/licenses/MIT"><img alt="Licencia: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
+<a href="https://github.com/lambda-orm/wiki/discussions"><img alt="Únete a la comunidad en GitHub Discussions" src="https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue.svg" /></a>
 <a href="https://join.slack.com/t/nuevoespaciod-xo58767/shared_invite/zt-29ix7pc2r-Wd_ZBWnWRDv_5DM4NPtVhQ"><img alt="Slack" src="https://img.shields.io/badge/chat-on%20slack-orange" /></a>
 <a href="https://app.gitter.im/#/room/#lambdaorm-how-to-contribute:gitter.im"><img alt="Gitter" src="https://badges.gitter.im/lambdaorm/community.svg" /></a>
 <a href="https://discord.com/invite/yXT6XBX2"><img alt="Discord" src="https://img.shields.io/badge/chat-on%20discord-orange" /></a></p>
-<p>λORM (LambdaORM) is a TypeScript ORM that runs <strong>distributed queries</strong> across different database engines: MySQL,
-MariaDB, PostgreSQL, SQL Server, Oracle, MongoDB and SQLite.</p>
-<p>Queries are written as <strong>lambda expressions</strong> over a <strong>domain model</strong> that is independent of the infrastructure. A
-single query can read or write entities stored in different databases — for example, some in MySQL, others in
-PostgreSQL and others in MongoDB — and λORM splits it into one sentence per source and joins the results.</p>
-<p>The same domain can have several <strong>stages</strong> (infrastructure scenarios). In one stage the data may be spread across SQL
-Server, MongoDB and Oracle; in another, everything may live in a single PostgreSQL database. This makes it possible to
-implement patterns such as <a href="https://microservices.io/patterns/data/cqrs.html">CQRS</a> through configuration, without
-changing the code.</p>
-<p>See the <a href="Features/">features</a> for a complete list.</p>
-<h2 id="how-to-use-it">How to use it<a class="headerlink" href="#how-to-use-it" title="Permanent link">&para;</a></h2>
+<p>λORM (LambdaORM) es un ORM de TypeScript que ejecuta <strong>consultas distribuidas</strong> sobre distintos motores de base de datos: MySQL,
+MariaDB, PostgreSQL, SQL Server, Oracle, MongoDB y SQLite.</p>
+<p>Las consultas se escriben como <strong>expresiones lambda</strong> sobre un <strong>modelo de dominio</strong> independiente de la infraestructura. Una
+sola consulta puede leer o escribir entidades almacenadas en distintas bases de datos —por ejemplo, unas en MySQL, otras en
+PostgreSQL y otras en MongoDB— y λORM la divide en una sentencia por fuente y une los resultados.</p>
+<p>Un mismo dominio puede tener varios <strong>stages</strong> (escenarios de infraestructura). En un stage los datos pueden estar repartidos entre SQL
+Server, MongoDB y Oracle; en otro, todo puede residir en una única base de datos PostgreSQL. Esto permite
+implementar patrones como <a href="https://microservices.io/patterns/data/cqrs.html">CQRS</a> mediante configuración, sin
+cambiar el código.</p>
+<p>Consulta las <a href="Features/">características</a> para ver la lista completa.</p>
+<h2 id="how-to-use-it">Cómo usarlo<a class="headerlink" href="#how-to-use-it" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Way</th>
-<th>Package</th>
-<th>When to use it</th>
+<th>Forma</th>
+<th>Paquete</th>
+<th>Cuándo usarla</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Node.js library</td>
+<td>Librería de Node.js</td>
 <td><a href="https://www.npmjs.com/package/@lambdaorm/lib"><code>@lambdaorm/lib</code></a></td>
-<td>Run queries from a Node.js / TypeScript application. See <a href="usage/Usage/">Usage</a>.</td>
+<td>Ejecutar consultas desde una aplicación Node.js / TypeScript. Véase <a href="usage/Usage/">Uso</a>.</td>
 </tr>
 <tr>
-<td>Command line</td>
-<td><a href="https://www.npmjs.com/package/@lambdaorm/cli"><code>@lambdaorm/cli</code></a> (command <code>lambdaorm</code>)</td>
-<td>Create a project, synchronize the databases, import and export data, and run queries from a terminal or CI. See <a href="cli/">CLI</a>.</td>
+<td>Línea de comandos</td>
+<td><a href="https://www.npmjs.com/package/@lambdaorm/cli"><code>@lambdaorm/cli</code></a> (comando <code>lambdaorm</code>)</td>
+<td>Crear un proyecto, sincronizar las bases de datos, importar y exportar datos y ejecutar consultas desde una terminal o desde CI. Véase <a href="cli/">CLI</a>.</td>
 </tr>
 <tr>
 <td>Data Gateway</td>
-<td>Docker image <a href="https://hub.docker.com/r/flaviorita/data-gateway"><code>flaviorita/data-gateway</code></a></td>
-<td>Expose λORM schemas over the network: a REST API, MCP for AI agents, a WebSocket API and a web UI. See <a href="data-gateway/">Data Gateway</a>.</td>
+<td>Imagen Docker <a href="https://hub.docker.com/r/flaviorita/data-gateway"><code>flaviorita/data-gateway</code></a></td>
+<td>Exponer esquemas de λORM a través de la red: una API REST, MCP para agentes de IA, una API WebSocket y una UI web. Véase <a href="data-gateway/">Data Gateway</a>.</td>
 </tr>
 <tr>
-<td>Node.js client</td>
+<td>Cliente de Node.js</td>
 <td><a href="https://www.npmjs.com/package/@lambdaorm/client"><code>@lambdaorm/client</code></a></td>
-<td>Run the same queries from Node.js against a Data Gateway. See <a href="data-gateway/Clients/">Clients</a>.</td>
+<td>Ejecutar las mismas consultas desde Node.js contra un Data Gateway. Véase <a href="data-gateway/Clients/">Clientes</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -3053,13 +3053,13 @@ changing the code.</p>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@lambdaorm/cli<span class="w">   </span><span class="c1"># the lambdaorm command</span>
 </code></pre></div>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The unscoped packages <code>lambdaorm</code>, <code>lambdaorm-cli</code> and <code>lambdaorm-client-node</code> are no longer maintained: use the
-<code>@lambdaorm/*</code> packages.</p>
+<p class="admonition-title">Nota</p>
+<p>Los paquetes sin scope <code>lambdaorm</code>, <code>lambdaorm-cli</code> y <code>lambdaorm-client-node</code> ya no se mantienen: hay que usar los
+paquetes <code>@lambdaorm/*</code>.</p>
 </div>
-<h2 id="query-language">Query language<a class="headerlink" href="#query-language" title="Permanent link">&para;</a></h2>
-<p>The following query returns the highest price of each product category, considering only the products that match the
-filter and the categories whose highest price is above 50:</p>
+<h2 id="query-language">Lenguaje de consultas<a class="headerlink" href="#query-language" title="Permanent link">&para;</a></h2>
+<p>La siguiente consulta devuelve el precio más alto de cada categoría de productos, considerando solo los productos que cumplen el
+filtro y las categorías cuyo precio más alto supera 50:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Products</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./northwind/domain/model'</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
@@ -3074,31 +3074,31 @@ filter and the categories whose highest price is above 50:</p>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">country</span><span class="o">:</span><span class="w"> </span><span class="s1">'ARG'</span><span class="w"> </span><span class="p">})</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">end</span><span class="p">()</span>
 </code></pre></div>
-<p>In this query:</p>
+<p>En esta consulta:</p>
 <ul>
-<li><code>filter</code> keeps the products whose price is greater than 5 and whose supplier is in the given country, as well as
-  those with fewer than 3 units in stock.</li>
-<li><code>map</code> returns the category name and the highest price. Grouping is implicit: the products are grouped by category
-  because <code>max</code> is an aggregate function.</li>
-<li><code>having</code> keeps only the categories whose highest price is greater than 50.</li>
-<li><code>sort</code> orders the result by the highest price, in descending order.</li>
-<li><code>supplier</code> and <code>category</code> are relations: the joins are implicit.</li>
+<li><code>filter</code> conserva los productos cuyo precio es mayor que 5 y cuyo proveedor está en el país indicado, así como
+  los que tienen menos de 3 unidades en stock.</li>
+<li><code>map</code> devuelve el nombre de la categoría y el precio más alto. La agrupación es implícita: los productos se agrupan por categoría
+  porque <code>max</code> es una función de agregación.</li>
+<li><code>having</code> conserva solo las categorías cuyo precio más alto es mayor que 50.</li>
+<li><code>sort</code> ordena el resultado por el precio más alto, en orden descendente.</li>
+<li><code>supplier</code> y <code>category</code> son relaciones: los joins son implícitos.</li>
 </ul>
-<p><strong>See also:</strong> <a href="queries/Query-Language/">query language</a> |
+<p><strong>Véase también:</strong> <a href="queries/Query-Language/">lenguaje de consultas</a> |
 <a href="queries/Select/">select</a> |
 <a href="queries/Join/">join</a> |
-<a href="queries/Grouping/">grouping</a> |
+<a href="queries/Grouping/">agrupación</a> |
 <a href="queries/Include/">include</a> |
 <a href="queries/Insert/">insert</a> |
-<a href="queries/BulkInsert/">bulk insert</a> |
+<a href="queries/BulkInsert/">inserción masiva</a> |
 <a href="queries/Update/">update</a> |
 <a href="queries/Delete/">delete</a> |
-<a href="queries/Metadata/">metadata</a> |
-<a href="usage/Repository/">repository</a> |
-<a href="usage/Usage/">usage</a></p>
+<a href="queries/Metadata/">metadatos</a> |
+<a href="usage/Repository/">repositorio</a> |
+<a href="usage/Usage/">uso</a></p>
 <h3 id="include">Include<a class="headerlink" href="#include" title="Permanent link">&para;</a></h3>
-<p><code>include</code> returns an entity together with its relations in the same query, even when they are stored in different
-databases. In this example the query is written as a string, an alternative to the lambda expression:</p>
+<p><code>include</code> devuelve una entidad junto con sus relaciones en la misma consulta, incluso cuando están almacenadas en distintas
+bases de datos. En este ejemplo la consulta se escribe como una cadena, una alternativa a la expresión lambda:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
@@ -3123,7 +3123,7 @@ databases. In this example the query is written as a string, an alternative to t
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="p">})()</span>
 </code></pre></div>
-<p><strong>Result:</strong></p>
+<p><strong>Resultado:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">[</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">102</span><span class="p">,</span>
@@ -3158,45 +3158,45 @@ databases. In this example the query is written as a string, an alternative to t
 <a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="p">]</span>
 </code></pre></div>
-<p><strong>More information:</strong> <a href="queries/Include/">include</a></p>
-<h2 id="schema">Schema<a class="headerlink" href="#schema" title="Permanent link">&para;</a></h2>
-<p>The schema defines entities, enumerations, indexes, unique keys, default values, constraints, mappings, sources,
-stages, listeners and more. It is written in YAML or JSON. Conditions and actions use the same
-<a href="https://www.npmjs.com/package/3xpr">expression language</a> as queries.</p>
-<p><strong>See also:</strong> <a href="schema/Schema/">schema</a> |
-<a href="schema/SchemaDefinition/">definition</a> |
-<a href="schema/Schema-Use/">use</a> |
-<a href="schema/SchemaDefinition-Expressions/">expressions</a> |
-<a href="schema/SchemaDefinition-EnvironmentVariables/">environment variables</a> |
-<a href="schema/SchemaDefinition-Composite/">composite</a> |
+<p><strong>Más información:</strong> <a href="queries/Include/">include</a></p>
+<h2 id="schema">Esquema<a class="headerlink" href="#schema" title="Permanent link">&para;</a></h2>
+<p>El esquema define entidades, enumeraciones, índices, claves únicas, valores por defecto, restricciones, mappings, fuentes,
+stages, listeners y más. Se escribe en YAML o JSON. Las condiciones y acciones usan el mismo
+<a href="https://www.npmjs.com/package/3xpr">lenguaje de expresiones</a> que las consultas.</p>
+<p><strong>Véase también:</strong> <a href="schema/Schema/">esquema</a> |
+<a href="schema/SchemaDefinition/">definición</a> |
+<a href="schema/Schema-Use/">uso</a> |
+<a href="schema/SchemaDefinition-Expressions/">expresiones</a> |
+<a href="schema/SchemaDefinition-EnvironmentVariables/">variables de entorno</a> |
+<a href="schema/SchemaDefinition-Composite/">composición</a> |
 <a href="schema/SchemaExample-Listener/">listeners</a> |
-<a href="schema/SchemaExample-MultiplesStages/">multiple stages</a> |
-<a href="schema/SchemaExample-StageMultiplesSources/">multiple sources</a> |
-<a href="schema/Engines/">engines</a></p>
-<h3 id="synchronization">Synchronization<a class="headerlink" href="#synchronization" title="Permanent link">&para;</a></h3>
-<p>λORM keeps the databases and the schema in step, in both directions:
-<a href="schema/SchemaSynchronization/">synchronization</a> |
+<a href="schema/SchemaExample-MultiplesStages/">múltiples stages</a> |
+<a href="schema/SchemaExample-StageMultiplesSources/">múltiples fuentes</a> |
+<a href="schema/Engines/">motores de base de datos</a></p>
+<h3 id="synchronization">Sincronización<a class="headerlink" href="#synchronization" title="Permanent link">&para;</a></h3>
+<p>λORM mantiene las bases de datos y el esquema sincronizados, en ambas direcciones:
+<a href="schema/SchemaSynchronization/">sincronización</a> |
 <a href="schema/SchemaSynchronization-Push/">push</a> |
 <a href="schema/SchemaSynchronization-Pull/">pull</a> |
 <a href="schema/SchemaSynchronization-Fetch/">fetch</a> |
 <a href="schema/SchemaSynchronization-Introspect/">introspect</a> |
 <a href="schema/SchemaSynchronization-Incorporate/">incorporate</a></p>
-<h2 id="transactions-and-scripts">Transactions and scripts<a class="headerlink" href="#transactions-and-scripts" title="Permanent link">&para;</a></h2>
+<h2 id="transactions-and-scripts">Transacciones y scripts<a class="headerlink" href="#transactions-and-scripts" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="usage/Transaction/">Transactions</a>: <code>orm.transaction</code> runs several queries in one transaction, also across sources
-  and stages.</li>
-<li><a href="usage/Script/">Scripts</a>: a whole use case (variables, conditions, loops and several queries) in one transaction
-  and in a single call — from Node.js, the CLI or the Data Gateway.</li>
+<li><a href="usage/Transaction/">Transacciones</a>: <code>orm.transaction</code> ejecuta varias consultas en una sola transacción, también entre fuentes
+  y stages.</li>
+<li><a href="usage/Script/">Scripts</a>: un caso de uso completo (variables, condiciones, bucles y varias consultas) en una sola transacción
+  y en una única llamada, desde Node.js, la CLI o el Data Gateway.</li>
 </ul>
 <h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
-<p>Complete examples are available in the <a href="labs/">λORM labs</a>.</p>
-<h2 id="related-projects">Related projects<a class="headerlink" href="#related-projects" title="Permanent link">&para;</a></h2>
+<p>Hay ejemplos completos disponibles en los <a href="labs/">labs de λORM</a>.</p>
+<h2 id="related-projects">Proyectos relacionados<a class="headerlink" href="#related-projects" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://www.npmjs.com/package/@lambdaorm/cli">λORM CLI</a>: command line interface for λORM.</li>
-<li><a href="data-gateway/">Data Gateway</a>: λORM schemas over REST, MCP and WebSocket, with a web UI.</li>
-<li><a href="https://www.npmjs.com/package/@lambdaorm/client">λORM client</a>: Node.js client for the Data Gateway.</li>
-<li><a href="https://www.npmjs.com/package/3xpr">3xpr</a>: extensible expression engine that evaluates mathematical and logical
-  expressions; λORM queries and scripts are built on it.</li>
+<li><a href="https://www.npmjs.com/package/@lambdaorm/cli">λORM CLI</a>: interfaz de línea de comandos de λORM.</li>
+<li><a href="data-gateway/">Data Gateway</a>: esquemas de λORM sobre REST, MCP y WebSocket, con una UI web.</li>
+<li><a href="https://www.npmjs.com/package/@lambdaorm/client">Cliente de λORM</a>: cliente de Node.js para el Data Gateway.</li>
+<li><a href="https://www.npmjs.com/package/3xpr">3xpr</a>: motor de expresiones extensible que evalúa expresiones matemáticas y
+  lógicas; las consultas y los scripts de λORM se basan en él.</li>
 </ul>
 
 

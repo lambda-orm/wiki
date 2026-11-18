@@ -1104,7 +1104,7 @@
         <li class="md-nav__item">
   <a href="#aggregate-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Aggregate functions
+      Funções de agregação
     </span>
   </a>
   
@@ -1113,7 +1113,7 @@
         <li class="md-nav__item">
   <a href="#sum-with-filter-and-sort" class="md-nav__link">
     <span class="md-ellipsis">
-      Sum with filter and sort
+      Soma com filtro e ordenação
     </span>
   </a>
   
@@ -1122,7 +1122,7 @@
         <li class="md-nav__item">
   <a href="#grouping-and-having" class="md-nav__link">
     <span class="md-ellipsis">
-      Grouping and having
+      Agrupamento e having
     </span>
   </a>
   
@@ -1131,7 +1131,7 @@
         <li class="md-nav__item">
   <a href="#code-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Code example
+      Exemplo de código
     </span>
   </a>
   
@@ -1364,7 +1364,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1674,7 +1674,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2047,7 +2047,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2301,7 +2301,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2985,7 +2985,7 @@
         <li class="md-nav__item">
   <a href="#aggregate-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Aggregate functions
+      Funções de agregação
     </span>
   </a>
   
@@ -2994,7 +2994,7 @@
         <li class="md-nav__item">
   <a href="#sum-with-filter-and-sort" class="md-nav__link">
     <span class="md-ellipsis">
-      Sum with filter and sort
+      Soma com filtro e ordenação
     </span>
   </a>
   
@@ -3003,7 +3003,7 @@
         <li class="md-nav__item">
   <a href="#grouping-and-having" class="md-nav__link">
     <span class="md-ellipsis">
-      Grouping and having
+      Agrupamento e having
     </span>
   </a>
   
@@ -3012,7 +3012,7 @@
         <li class="md-nav__item">
   <a href="#code-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Code example
+      Exemplo de código
     </span>
   </a>
   
@@ -3034,57 +3034,57 @@
 
 
 
-<h1 id="grouping">Grouping<a class="headerlink" href="#grouping" title="Permanent link">&para;</a></h1>
-<p>This page shows how to group records and compute aggregates (sums, counts, maximums…), and how to filter the groups with <code>having</code>. The SQL shown is the one generated for MySQL.</p>
-<p>You do not declare the grouping: λORM deduces it when the query uses an aggregate function. The records are grouped by the properties returned that are not inside an aggregate function.</p>
-<h2 id="aggregate-functions">Aggregate functions<a class="headerlink" href="#aggregate-functions" title="Permanent link">&para;</a></h2>
+<h1 id="grouping">Agrupamento<a class="headerlink" href="#grouping" title="Permanent link">&para;</a></h1>
+<p>Esta página mostra como agrupar registros e calcular agregados (somas, contagens, máximos…), e como filtrar os grupos com <code>having</code>. O SQL mostrado é o gerado para MySQL.</p>
+<p>O agrupamento não é declarado: o λORM o deduz quando a consulta usa uma função de agregação. Os registros são agrupados pelas propriedades retornadas que não estão dentro de uma função de agregação.</p>
+<h2 id="aggregate-functions">Funções de agregação<a class="headerlink" href="#aggregate-functions" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Function</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Função</th>
+<th style="text-align: left;">Descrição</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">avg</td>
-<td style="text-align: left;">Calculates the average of the values in a group.</td>
+<td style="text-align: left;">Calcula a média dos valores de um grupo.</td>
 </tr>
 <tr>
 <td style="text-align: left;">count</td>
-<td style="text-align: left;">Counts the records in a group.</td>
+<td style="text-align: left;">Conta os registros de um grupo.</td>
 </tr>
 <tr>
 <td style="text-align: left;">first</td>
-<td style="text-align: left;">Returns the first value in a group.</td>
+<td style="text-align: left;">Retorna o primeiro valor de um grupo.</td>
 </tr>
 <tr>
 <td style="text-align: left;">last</td>
-<td style="text-align: left;">Returns the last value in a group.</td>
+<td style="text-align: left;">Retorna o último valor de um grupo.</td>
 </tr>
 <tr>
 <td style="text-align: left;">max</td>
-<td style="text-align: left;">Calculates the maximum.</td>
+<td style="text-align: left;">Calcula o máximo.</td>
 </tr>
 <tr>
 <td style="text-align: left;">min</td>
-<td style="text-align: left;">Calculates the minimum.</td>
+<td style="text-align: left;">Calcula o mínimo.</td>
 </tr>
 <tr>
 <td style="text-align: left;">sum</td>
-<td style="text-align: left;">Calculates the sum.</td>
+<td style="text-align: left;">Calcula a soma.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="sum-with-filter-and-sort">Sum with filter and sort<a class="headerlink" href="#sum-with-filter-and-sort" title="Permanent link">&para;</a></h2>
-<p>Reads, for the orders of a customer, the order date and the total (sum of quantity × unit price), sorted by total in descending order. The records are grouped by <code>order</code>, the only property returned that is not an aggregate.</p>
+<h2 id="sum-with-filter-and-sort">Soma com filtro e ordenação<a class="headerlink" href="#sum-with-filter-and-sort" title="Permanent link">&para;</a></h2>
+<p>Lê, para os pedidos de um cliente, a data do pedido e o total (soma de quantidade × preço unitário), ordenados pelo total em ordem decrescente. Os registros são agrupados por <code>order</code>, a única propriedade retornada que não é um agregado.</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">Orders</span><span class="p">.</span><span class="nx">details</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">customer</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">customerName</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">order</span><span class="o">:</span><span class="w"> </span><span class="kt">p.order.orderDate</span><span class="p">,</span><span class="w"> </span><span class="nx">total</span><span class="o">:</span><span class="w"> </span><span class="kt">sum</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">quantity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">unitPrice</span><span class="p">)</span><span class="w"> </span><span class="p">}))</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">desc</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">total</span><span class="p">))</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>Resultado SQL:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">o1</span><span class="p">.</span><span class="n">OrderDate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="k">order</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="k">SUM</span><span class="p">((</span><span class="n">o</span><span class="p">.</span><span class="n">Quantity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">UnitPrice</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="k">Order</span><span class="w"> </span><span class="n">Details</span><span class="o">`</span><span class="w"> </span><span class="n">o</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">Orders</span><span class="w"> </span><span class="n">o1</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">o1</span><span class="p">.</span><span class="n">OrderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">OrderID</span>
@@ -3093,9 +3093,9 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">o1</span><span class="p">.</span><span class="n">OrderDate</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="k">desc</span>
 </code></pre></div>
-<h2 id="grouping-and-having">Grouping and having<a class="headerlink" href="#grouping-and-having" title="Permanent link">&para;</a></h2>
-<p>Reads the highest price of each category, considering the products with a price greater than 5 whose supplier is from a given country, or with fewer than 3 units in stock. Only the categories whose highest price is greater than 50 are returned, sorted by that price in descending order.</p>
-<p><code>filter</code> is applied to the records before grouping (WHERE); <code>having</code> is applied to the groups (HAVING).</p>
+<h2 id="grouping-and-having">Agrupamento e having<a class="headerlink" href="#grouping-and-having" title="Permanent link">&para;</a></h2>
+<p>Lê o preço mais alto de cada categoria, considerando os produtos com preço maior que 5 cujo fornecedor é de um determinado país, ou com menos de 3 unidades em estoque. Só são retornadas as categorias cujo preço mais alto é maior que 50, ordenadas por esse preço em ordem decrescente.</p>
+<p><code>filter</code> é aplicado aos registros antes do agrupamento (WHERE); <code>having</code> é aplicado aos grupos (HAVING).</p>
 <p><strong>Lambda:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">Products</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">price</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">5</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">supplier</span><span class="p">.</span><span class="nx">country</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">country</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">inStock</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">3</span><span class="p">))</span>
@@ -3103,7 +3103,7 @@
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">p.category.name</span><span class="p">,</span><span class="w"> </span><span class="nx">largestPrice</span><span class="o">:</span><span class="w"> </span><span class="kt">max</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">price</span><span class="p">)</span><span class="w"> </span><span class="p">}))</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">desc</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">largestPrice</span><span class="p">))</span>
 </code></pre></div>
-<p><strong>SQL Result:</strong></p>
+<p><strong>Resultado SQL:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">CategoryName</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">category</span><span class="p">,</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">UnitPrice</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">largestPrice</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Products</span><span class="w"> </span><span class="n">p</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">Suppliers</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">SupplierID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">SupplierID</span>
@@ -3113,7 +3113,7 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">HAVING</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">UnitPrice</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">50</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">largestPrice</span><span class="w"> </span><span class="k">desc</span>
 </code></pre></div>
-<h2 id="code-example">Code example<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h2>
+<h2 id="code-example">Exemplo de código<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Products</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./domain/model'</span><span class="w"> </span><span class="c1">// model generated by `lambdaorm build`</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>

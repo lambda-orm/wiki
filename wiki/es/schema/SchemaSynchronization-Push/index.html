@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1593,7 +1593,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1974,7 +1974,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2044,7 +2044,7 @@
         <li class="md-nav__item">
   <a href="#how-push-works" class="md-nav__link">
     <span class="md-ellipsis">
-      How push works
+      Cómo funciona push
     </span>
   </a>
   
@@ -2063,7 +2063,7 @@
           <li class="md-nav__item">
   <a href="#generate-the-ddl-without-applying-it" class="md-nav__link">
     <span class="md-ellipsis">
-      Generate the DDL without applying it
+      Generar el DDL sin aplicarlo
     </span>
   </a>
   
@@ -2072,7 +2072,7 @@
           <li class="md-nav__item">
   <a href="#files-in-orm_state" class="md-nav__link">
     <span class="md-ellipsis">
-      Files in orm_state
+      Archivos en orm_state
     </span>
   </a>
   
@@ -2321,7 +2321,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -3005,7 +3005,7 @@
         <li class="md-nav__item">
   <a href="#how-push-works" class="md-nav__link">
     <span class="md-ellipsis">
-      How push works
+      Cómo funciona push
     </span>
   </a>
   
@@ -3024,7 +3024,7 @@
           <li class="md-nav__item">
   <a href="#generate-the-ddl-without-applying-it" class="md-nav__link">
     <span class="md-ellipsis">
-      Generate the DDL without applying it
+      Generar el DDL sin aplicarlo
     </span>
   </a>
   
@@ -3033,7 +3033,7 @@
           <li class="md-nav__item">
   <a href="#files-in-orm_state" class="md-nav__link">
     <span class="md-ellipsis">
-      Files in orm_state
+      Archivos en orm_state
     </span>
   </a>
   
@@ -3070,70 +3070,70 @@
 
 
 <h1 id="push">Push<a class="headerlink" href="#push" title="Permanent link">&para;</a></h1>
-<p>This page explains push, which updates the sources (databases) of a stage with the schema: how it works, the CLI command <code>lambdaorm push</code> and the <code>orm.stage.push()</code> method.</p>
-<h2 id="how-push-works">How push works<a class="headerlink" href="#how-push-works" title="Permanent link">&para;</a></h2>
-<p>Push reads the databases of the stage (as <a href="../SchemaSynchronization-Fetch/">fetch</a> does) and generates the DDL that takes them to the model:</p>
+<p>Esta página explica push, que actualiza las fuentes (bases de datos) de un stage con el esquema: cómo funciona, el comando de la CLI <code>lambdaorm push</code> y el método <code>orm.stage.push()</code>.</p>
+<h2 id="how-push-works">Cómo funciona push<a class="headerlink" href="#how-push-works" title="Permanent link">&para;</a></h2>
+<p>Push lee las bases de datos del stage (como hace <a href="../SchemaSynchronization-Fetch/">fetch</a>) y genera el DDL que las lleva al modelo:</p>
 <ul>
-<li>Tables that do not exist are created with their primary key, unique key, foreign keys and indexes.</li>
-<li>In existing tables, missing columns are added (<code>ALTER TABLE … ADD</code>) and columns with another type, length or nullability are altered.</li>
-<li>A column declared with <code>previousMapping</code> in its property mapping is renamed (<code>ALTER TABLE … RENAME COLUMN</code>, SqlServer <code>sp_rename</code>) instead of being added. See <a href="../SchemaDefinition/#rename-a-column-with-previousmapping">Rename a column</a>.</li>
-<li><strong>Push never drops</strong> anything that exists only in the database (tables, columns). <code>fetch</code> reports it, so it can be removed by hand if needed.</li>
-<li>The column types follow the property types and the <code>dbType</code> of the property mapping. See <a href="../SchemaDefinition/#property-types">Property types</a>.</li>
-<li>Each entity goes to the source chosen by the stage rules; a source without condition only gets the entities no other source took.</li>
+<li>Las tablas que no existen se crean con su clave primaria, clave única, claves foráneas e índices.</li>
+<li>En las tablas existentes, se añaden las columnas que faltan (<code>ALTER TABLE … ADD</code>) y se modifican las columnas con otro tipo, longitud o nulabilidad.</li>
+<li>Una columna declarada con <code>previousMapping</code> en el mapping de su propiedad se renombra (<code>ALTER TABLE … RENAME COLUMN</code>, en SqlServer <code>sp_rename</code>) en lugar de añadirse. Ver <a href="../SchemaDefinition/#rename-a-column-with-previousmapping">Renombrar una columna</a>.</li>
+<li><strong>Push nunca elimina</strong> nada que solo exista en la base de datos (tablas, columnas). <code>fetch</code> lo informa, para poder eliminarlo a mano si hace falta.</li>
+<li>Los tipos de columna siguen los tipos de propiedad y el <code>dbType</code> del mapping de la propiedad. Ver <a href="../SchemaDefinition/#property-types">Tipos de propiedad</a>.</li>
+<li>Cada entidad va a la fuente que eligen las reglas del stage; una fuente sin condición solo recibe las entidades que no tomó ninguna otra fuente.</li>
 </ul>
-<p>Since the comparison is made against the databases, push works the same on any host or CI job: it does not need the <code>orm_state</code> folder of a previous push.
-The <code>orm_state</code> folder is still written, as a record of what was applied.</p>
-<p>Renaming a table is not supported.</p>
+<p>Como la comparación se hace contra las bases de datos, push funciona igual en cualquier host o job de CI: no necesita la carpeta <code>orm_state</code> de un push anterior.
+La carpeta <code>orm_state</code> se sigue escribiendo, como registro de lo que se aplicó.</p>
+<p>No se admite renombrar una tabla.</p>
 <h2 id="cli">CLI<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h2>
-<p>Apply the changes:</p>
+<p>Aplicar los cambios:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lambdaorm<span class="w"> </span>push
 </code></pre></div>
 <table>
 <thead>
 <tr>
-<th>Option</th>
-<th>Description</th>
+<th>Opción</th>
+<th>Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>-w</code>, <code>--workspace</code></td>
-<td>Folder of the project (default: the current folder).</td>
+<td>Carpeta del proyecto (por defecto: la carpeta actual).</td>
 </tr>
 <tr>
 <td><code>-s</code>, <code>--stage</code></td>
-<td>Name of the stage (default: the first stage).</td>
+<td>Nombre del stage (por defecto: el primer stage).</td>
 </tr>
 <tr>
 <td><code>-e</code>, <code>--envfile</code></td>
-<td>File of environment variables to read.</td>
+<td>Archivo de variables de entorno que se lee.</td>
 </tr>
 <tr>
 <td><code>-o</code>, <code>--output</code></td>
-<td>Generate the DDL without applying it (see below).</td>
+<td>Genera el DDL sin aplicarlo (ver más abajo).</td>
 </tr>
 <tr>
 <td><code>-f</code>, <code>--force</code></td>
-<td>When a sentence fails, continue with the next ones.</td>
+<td>Cuando una sentencia falla, continúa con las siguientes.</td>
 </tr>
 </tbody>
 </table>
-<p>Example of the generated DDL on an empty database:</p>
+<p>Ejemplo del DDL generado sobre una base de datos vacía:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="n">iso3</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">Countries_PK</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">iso3</span><span class="p">));</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">Countries_UK</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">States</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="n">countryCode</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">States_PK</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">States</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">States_UK</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">countryCode</span><span class="p">,</span><span class="n">name</span><span class="p">);</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">States</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">States_country_FK</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">countryCode</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="p">(</span><span class="n">iso3</span><span class="p">);</span>
 </code></pre></div>
-<p>After adding a property <code>phone</code> to <code>Customers</code> and renaming the column <code>icon</code> to <code>icon_name</code> (with <code>previousMapping: icon</code>), a push generates only those changes:</p>
+<p>Tras añadir una propiedad <code>phone</code> a <code>Customers</code> y renombrar la columna <code>icon</code> a <code>icon_name</code> (con <code>previousMapping: icon</code>), un push genera solo esos cambios:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">phone</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">categories</span><span class="w"> </span><span class="k">RENAME</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">icon</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">icon_name</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="generate-the-ddl-without-applying-it">Generate the DDL without applying it<a class="headerlink" href="#generate-the-ddl-without-applying-it" title="Permanent link">&para;</a></h3>
-<p>With <code>-o</code>, push generates the DDL but does not apply it.</p>
+<h3 id="generate-the-ddl-without-applying-it">Generar el DDL sin aplicarlo<a class="headerlink" href="#generate-the-ddl-without-applying-it" title="Permanent link">&para;</a></h3>
+<p>Con <code>-o</code>, push genera el DDL pero no lo aplica.</p>
 <ul>
-<li><code>-o</code> alone prints the sentences of each source.</li>
-<li><code>-o &lt;dir&gt;</code> writes one script per source that changes, named <code>&lt;stage&gt;.&lt;source&gt;.sql</code>. Sources without changes get no file, and a database in step with the model gives no files at all.</li>
+<li><code>-o</code> solo imprime las sentencias de cada fuente.</li>
+<li><code>-o &lt;dir&gt;</code> escribe un script por cada fuente que cambia, con el nombre <code>&lt;stage&gt;.&lt;source&gt;.sql</code>. Las fuentes sin cambios no generan archivo, y una base de datos sincronizada con el modelo no genera ningún archivo.</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>lambdaorm<span class="w"> </span>push<span class="w"> </span>-s<span class="w"> </span>default<span class="w"> </span>-o<span class="w"> </span>migrations
 </code></pre></div>
@@ -3141,28 +3141,28 @@ The <code>orm_state</code> folder is still written, as a record of what was appl
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├──<span class="w"> </span>default.catalog.sql
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>└──<span class="w"> </span>default.accounts.sql
 </code></pre></div>
-<p>The names are deterministic, so the scripts can be renamed into versioned migrations and applied by your own deploy process.</p>
-<h3 id="files-in-orm_state">Files in orm_state<a class="headerlink" href="#files-in-orm_state" title="Permanent link">&para;</a></h3>
-<p>When push applies the changes, it records them in the <code>orm_state</code> folder:</p>
+<p>Los nombres son deterministas, así que los scripts se pueden renombrar como migraciones versionadas y aplicarse con un proceso de despliegue propio.</p>
+<h3 id="files-in-orm_state">Archivos en orm_state<a class="headerlink" href="#files-in-orm_state" title="Permanent link">&para;</a></h3>
+<p>Cuando push aplica los cambios, los registra en la carpeta <code>orm_state</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>├──<span class="w"> </span>orm_state
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>│<span class="w">   </span>├──<span class="w"> </span>default-model.json
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>│<span class="w">   </span>└──<span class="w"> </span>main
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>│<span class="w">       </span>└──<span class="w"> </span>V231122154351__push.sql
 </code></pre></div>
 <ul>
-<li><code>&lt;stage&gt;-model.json</code>: the model of the stage at the last push.</li>
-<li><code>&lt;source&gt;/V&lt;yyMMddHHmmss&gt;__push.sql</code>: the sentences executed on that source.</li>
+<li><code>&lt;stage&gt;-model.json</code>: el modelo del stage en el último push.</li>
+<li><code>&lt;source&gt;/V&lt;yyMMddHHmmss&gt;__push.sql</code>: las sentencias ejecutadas en esa fuente.</li>
 </ul>
-<p>Labs:</p>
+<p>Laboratorios:</p>
 <ul>
 <li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/01-simple">Simple</a></li>
-<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/03-two-stages">Two stages</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/03-two-stages">Dos stages</a></li>
 <li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/05-northwind">Northwind</a></li>
-<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources">Northwind multiple datasources</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources">Northwind con varias fuentes de datos</a></li>
 <li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/08-northwind-cqrs">Northwind CQRS</a></li>
 </ul>
 <h2 id="node">Node<a class="headerlink" href="#node" title="Permanent link">&para;</a></h2>
-<p><code>orm.stage.push()</code> returns an action that can give the sentences without applying them, or apply them:</p>
+<p><code>orm.stage.push()</code> devuelve una acción que puede dar las sentencias sin aplicarlas, o aplicarlas:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Orm</span><span class="p">()</span>
@@ -3214,7 +3214,7 @@ The <code>orm_state</code> folder is still written, as a record of what was appl
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../SchemaSynchronization/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Synchronization">
+          <a href="../SchemaSynchronization/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Sincronización">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3224,7 +3224,7 @@ The <code>orm_state</code> folder is still written, as a record of what was appl
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Synchronization
+                Sincronización
               </div>
             </div>
           </a>

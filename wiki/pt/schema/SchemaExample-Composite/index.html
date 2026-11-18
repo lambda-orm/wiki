@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1593,7 +1593,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1930,7 +1930,7 @@
         <li class="md-nav__item">
   <a href="#composite-entity" class="md-nav__link">
     <span class="md-ellipsis">
-      Composite entity
+      Entidade composta
     </span>
   </a>
   
@@ -1939,17 +1939,17 @@
         <li class="md-nav__item">
   <a href="#composite-entity-in-different-sources" class="md-nav__link">
     <span class="md-ellipsis">
-      Composite entity in different sources
+      Entidade composta em fontes diferentes
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Composite entity in different sources">
+    <nav class="md-nav" aria-label="Entidade composta em fontes diferentes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#orders-in-mongodb" class="md-nav__link">
     <span class="md-ellipsis">
-      Orders in MongoDB
+      Pedidos no MongoDB
     </span>
   </a>
   
@@ -1958,7 +1958,7 @@
           <li class="md-nav__item">
   <a href="#orders-in-postgresql" class="md-nav__link">
     <span class="md-ellipsis">
-      Orders in PostgreSQL
+      Pedidos no PostgreSQL
     </span>
   </a>
   
@@ -1972,17 +1972,17 @@
         <li class="md-nav__item">
   <a href="#queries" class="md-nav__link">
     <span class="md-ellipsis">
-      Queries
+      Consultas
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Queries">
+    <nav class="md-nav" aria-label="Consultas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#query-on-default-stage" class="md-nav__link">
     <span class="md-ellipsis">
-      Query on default stage
+      Consulta no stage default
     </span>
   </a>
   
@@ -1991,7 +1991,7 @@
           <li class="md-nav__item">
   <a href="#same-query-on-insights-stage" class="md-nav__link">
     <span class="md-ellipsis">
-      Same query on insights stage
+      Mesma consulta no stage insights
     </span>
   </a>
   
@@ -2005,7 +2005,7 @@
         <li class="md-nav__item">
   <a href="#labs" class="md-nav__link">
     <span class="md-ellipsis">
-      Labs
+      Laboratórios
     </span>
   </a>
   
@@ -2100,7 +2100,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2354,7 +2354,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -3038,7 +3038,7 @@
         <li class="md-nav__item">
   <a href="#composite-entity" class="md-nav__link">
     <span class="md-ellipsis">
-      Composite entity
+      Entidade composta
     </span>
   </a>
   
@@ -3047,17 +3047,17 @@
         <li class="md-nav__item">
   <a href="#composite-entity-in-different-sources" class="md-nav__link">
     <span class="md-ellipsis">
-      Composite entity in different sources
+      Entidade composta em fontes diferentes
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Composite entity in different sources">
+    <nav class="md-nav" aria-label="Entidade composta em fontes diferentes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#orders-in-mongodb" class="md-nav__link">
     <span class="md-ellipsis">
-      Orders in MongoDB
+      Pedidos no MongoDB
     </span>
   </a>
   
@@ -3066,7 +3066,7 @@
           <li class="md-nav__item">
   <a href="#orders-in-postgresql" class="md-nav__link">
     <span class="md-ellipsis">
-      Orders in PostgreSQL
+      Pedidos no PostgreSQL
     </span>
   </a>
   
@@ -3080,17 +3080,17 @@
         <li class="md-nav__item">
   <a href="#queries" class="md-nav__link">
     <span class="md-ellipsis">
-      Queries
+      Consultas
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Queries">
+    <nav class="md-nav" aria-label="Consultas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#query-on-default-stage" class="md-nav__link">
     <span class="md-ellipsis">
-      Query on default stage
+      Consulta no stage default
     </span>
   </a>
   
@@ -3099,7 +3099,7 @@
           <li class="md-nav__item">
   <a href="#same-query-on-insights-stage" class="md-nav__link">
     <span class="md-ellipsis">
-      Same query on insights stage
+      Mesma consulta no stage insights
     </span>
   </a>
   
@@ -3113,7 +3113,7 @@
         <li class="md-nav__item">
   <a href="#labs" class="md-nav__link">
     <span class="md-ellipsis">
-      Labs
+      Laboratórios
     </span>
   </a>
   
@@ -3135,14 +3135,14 @@
 
 
 
-<h1 id="composite-example">Composite Example<a class="headerlink" href="#composite-example" title="Permanent link">&para;</a></h1>
-<p>This page shows a composite entity, <code>Orders.details</code>, stored in MongoDB on one stage and in PostgreSQL on another, and how the same query returns the same result on both.</p>
-<p>A period in the name of an entity defines a <a href="../SchemaDefinition-Composite/">composite entity</a>: <code>Orders.details</code> is a composite entity of <code>Orders</code>.</p>
-<p>If the source is NoSQL, the details are stored inside the order, in a single collection; if the source is relational, they are stored in separate tables.
-In the domain they are treated the same way whatever the type of source, so the model does not depend on the persistence technology.</p>
-<h2 id="composite-entity">Composite entity<a class="headerlink" href="#composite-entity" title="Permanent link">&para;</a></h2>
-<p>In this example <code>Orders.details</code> is a composite entity of <code>Orders</code>. Its relation <code>order</code>, with <code>target: details</code>, creates the composite relation <code>details</code> in <code>Orders</code>.</p>
-<p><strong>Part of the schema where the composite entity is defined:</strong></p>
+<h1 id="composite-example">Exemplo de entidade composta<a class="headerlink" href="#composite-example" title="Permanent link">&para;</a></h1>
+<p>Esta página mostra uma entidade composta, <code>Orders.details</code>, armazenada no MongoDB em um stage e no PostgreSQL em outro, e como a mesma consulta retorna o mesmo resultado em ambos.</p>
+<p>Um ponto no nome de uma entidade define uma <a href="../SchemaDefinition-Composite/">entidade composta</a>: <code>Orders.details</code> é uma entidade composta de <code>Orders</code>.</p>
+<p>Se a fonte for NoSQL, os detalhes são armazenados dentro do pedido, em uma única coleção; se a fonte for relacional, eles são armazenados em tabelas separadas.
+No domínio, eles são tratados da mesma forma, qualquer que seja o tipo de fonte, de modo que o modelo não depende da tecnologia de persistência.</p>
+<h2 id="composite-entity">Entidade composta<a class="headerlink" href="#composite-entity" title="Permanent link">&para;</a></h2>
+<p>Neste exemplo, <code>Orders.details</code> é uma entidade composta de <code>Orders</code>. Sua relação <code>order</code>, com <code>target: details</code>, cria a relação composta <code>details</code> em <code>Orders</code>.</p>
+<p><strong>Parte do esquema onde a entidade composta é definida:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">domain</span><span class="p">:</span><span class="w">  </span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nn">...</span><span class="w">  </span>
@@ -3182,7 +3182,7 @@ In the domain they are treated the same way whatever the type of source, so the 
 <a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">details</span>
 <a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="nn">...</span>
 </code></pre></div>
-<p><strong>Complete schema:</strong></p>
+<p><strong>Esquema completo:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">domain</span><span class="p">:</span><span class="w">  </span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Address</span>
@@ -3388,19 +3388,19 @@ In the domain they are treated the same way whatever the type of source, so the 
 <a id="__codelineno-1-203" name="__codelineno-1-203" href="#__codelineno-1-203"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ordering</span>
 <a id="__codelineno-1-204" name="__codelineno-1-204" href="#__codelineno-1-204"></a><span class="w">      </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">entity.in(["Orders","Orders.details"])</span><span class="w">   </span>
 </code></pre></div>
-<p><strong>Environment variables:</strong></p>
+<p><strong>Variáveis de ambiente:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">CNN_MYSQL</span><span class="o">={</span><span class="s2">"host"</span>:<span class="s2">"localhost"</span>,<span class="s2">"port"</span>:3306,<span class="s2">"user"</span>:<span class="s2">"test"</span>,<span class="s2">"password"</span>:<span class="s2">"test"</span>,<span class="s2">"database"</span>:<span class="s2">"test"</span><span class="o">}</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">CNN_POSTGRES</span><span class="o">={</span><span class="s2">"host"</span>:<span class="s2">"localhost"</span>,<span class="s2">"port"</span>:5433,<span class="s2">"user"</span>:<span class="s2">"test"</span>,<span class="s2">"password"</span>:<span class="s2">"test"</span>,<span class="s2">"database"</span>:<span class="s2">"test"</span><span class="o">}</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nv">CNN_MONGODB</span><span class="o">={</span><span class="s2">"url"</span>:<span class="s2">"mongodb://test:test@localhost:27017"</span>,<span class="s2">"database"</span>:<span class="s2">"test"</span><span class="o">}</span>
 </code></pre></div>
-<p><strong>Lab:</strong></p>
+<p><strong>Laboratório:</strong></p>
 <ul>
-<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources">CLI - northwind multiples datasources</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources">CLI - northwind com múltiplas fontes</a></li>
 </ul>
-<h2 id="composite-entity-in-different-sources">Composite entity in different sources<a class="headerlink" href="#composite-entity-in-different-sources" title="Permanent link">&para;</a></h2>
-<p>This example shows how a composite entity is stored in different sources.
-On the <code>default</code> stage, <code>Orders</code> and <code>Orders.details</code> are stored in MongoDB; on the <code>insights</code> stage, they are stored in PostgreSQL.</p>
-<p><strong>Part of the schema where the stages are configured:</strong></p>
+<h2 id="composite-entity-in-different-sources">Entidade composta em fontes diferentes<a class="headerlink" href="#composite-entity-in-different-sources" title="Permanent link">&para;</a></h2>
+<p>Este exemplo mostra como uma entidade composta é armazenada em fontes diferentes.
+No stage <code>default</code>, <code>Orders</code> e <code>Orders.details</code> são armazenadas no MongoDB; no stage <code>insights</code>, são armazenadas no PostgreSQL.</p>
+<p><strong>Parte do esquema onde os stages são configurados:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nn">...</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">stages</span><span class="p">:</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
@@ -3416,7 +3416,7 @@ On the <code>default</code> stage, <code>Orders</code> and <code>Orders.details<
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Insights</span>
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="nn">...</span>
 </code></pre></div>
-<p><strong>Complete schema:</strong></p>
+<p><strong>Esquema completo:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">domain</span><span class="p">:</span><span class="w">  </span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">enums</span><span class="p">:</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
@@ -3630,20 +3630,20 @@ On the <code>default</code> stage, <code>Orders</code> and <code>Orders.details<
 <a id="__codelineno-4-211" name="__codelineno-4-211" href="#__codelineno-4-211"></a><span class="w">    </span><span class="nt">sources</span><span class="p">:</span>
 <a id="__codelineno-4-212" name="__codelineno-4-212" href="#__codelineno-4-212"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Insights</span>
 </code></pre></div>
-<h3 id="orders-in-mongodb">Orders in MongoDB<a class="headerlink" href="#orders-in-mongodb" title="Permanent link">&para;</a></h3>
-<p>In MongoDB the details are stored inside each document of the <code>Orders</code> collection:</p>
-<p><img alt="OrderCompositeInMongo" src="../../../schema/images/OrderCompositeInMongo.png" /></p>
-<h3 id="orders-in-postgresql">Orders in PostgreSQL<a class="headerlink" href="#orders-in-postgresql" title="Permanent link">&para;</a></h3>
-<p>In PostgreSQL the orders are stored in the <code>Orders</code> table:</p>
-<p><img alt="OrderCompositeInPostgres" src="../../../schema/images/OrderCompositeInPostgres.png" /></p>
-<p>and the details in the <code>Order Details</code> table:</p>
-<p><img alt="OrderDetailsCompositeInPostgres" src="../../../schema/images/OrderDetailCompositeInPostgres.png" /></p>
-<h2 id="queries">Queries<a class="headerlink" href="#queries" title="Permanent link">&para;</a></h2>
-<p>The same query, executed on each stage, returns the same orders with their details (only the format of the dates depends on the engine).</p>
-<h3 id="query-on-default-stage">Query on default stage<a class="headerlink" href="#query-on-default-stage" title="Permanent link">&para;</a></h3>
+<h3 id="orders-in-mongodb">Pedidos no MongoDB<a class="headerlink" href="#orders-in-mongodb" title="Permanent link">&para;</a></h3>
+<p>No MongoDB, os detalhes são armazenados dentro de cada documento da coleção <code>Orders</code>:</p>
+<p><img alt="Pedido composto no MongoDB" src="../../../schema/images/OrderCompositeInMongo.png" /></p>
+<h3 id="orders-in-postgresql">Pedidos no PostgreSQL<a class="headerlink" href="#orders-in-postgresql" title="Permanent link">&para;</a></h3>
+<p>No PostgreSQL, os pedidos são armazenados na tabela <code>Orders</code>:</p>
+<p><img alt="Pedido composto no PostgreSQL" src="../../../schema/images/OrderCompositeInPostgres.png" /></p>
+<p>e os detalhes na tabela <code>Order Details</code>:</p>
+<p><img alt="Detalhes do pedido composto no PostgreSQL" src="../../../schema/images/OrderDetailCompositeInPostgres.png" /></p>
+<h2 id="queries">Consultas<a class="headerlink" href="#queries" title="Permanent link">&para;</a></h2>
+<p>A mesma consulta, executada em cada stage, retorna os mesmos pedidos com seus detalhes (apenas o formato das datas depende do mecanismo de banco de dados).</p>
+<h3 id="query-on-default-stage">Consulta no stage default<a class="headerlink" href="#query-on-default-stage" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>lambdaorm<span class="w"> </span>execute<span class="w"> </span>-e<span class="w"> </span><span class="s2">".env"</span><span class="w"> </span>-s<span class="w"> </span>default<span class="w"> </span>-q<span class="w"> </span><span class="s2">"Orders.filter(p =&gt; p.customerId == customerId).include(p =&gt; [p.customer.map(p =&gt; p.name), p.details.include(p =&gt; p.product.include(p =&gt; p.category.map(p =&gt; p.name)).map(p =&gt; p.name)).map(p =&gt; [p.quantity, p.unitPrice])]).sort(p=&gt; p.id).page(1,1)"</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"{\"customerId\": \"HANAR\"}"</span>
 </code></pre></div>
-<p>Result:</p>
+<p>Resultado:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">[</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="p">{</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -3698,10 +3698,10 @@ On the <code>default</code> stage, <code>Orders</code> and <code>Orders.details<
 <a id="__codelineno-6-52" name="__codelineno-6-52" href="#__codelineno-6-52"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-6-53" name="__codelineno-6-53" href="#__codelineno-6-53"></a><span class="p">]</span>
 </code></pre></div>
-<h3 id="same-query-on-insights-stage">Same query on insights stage<a class="headerlink" href="#same-query-on-insights-stage" title="Permanent link">&para;</a></h3>
+<h3 id="same-query-on-insights-stage">Mesma consulta no stage insights<a class="headerlink" href="#same-query-on-insights-stage" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>lambdaorm<span class="w"> </span>execute<span class="w"> </span>-e<span class="w"> </span><span class="s2">".env"</span><span class="w"> </span>-s<span class="w"> </span>insights<span class="w"> </span>-q<span class="w"> </span><span class="s2">"Orders.filter(p =&gt; p.customerId == customerId).include(p =&gt; [p.customer.map(p =&gt; p.name), p.details.include(p =&gt; p.product.include(p =&gt; p.category.map(p =&gt; p.name)).map(p =&gt; p.name)).map(p =&gt; [p.quantity, p.unitPrice])]).sort(p=&gt; p.id).page(1,1)"</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"{\"customerId\": \"HANAR\"}"</span>
 </code></pre></div>
-<p>Result:</p>
+<p>Resultado:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">[</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="p">{</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -3756,11 +3756,11 @@ On the <code>default</code> stage, <code>Orders</code> and <code>Orders.details<
 <a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-8-53" name="__codelineno-8-53" href="#__codelineno-8-53"></a><span class="p">]</span>
 </code></pre></div>
-<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h2 id="labs">Laboratórios<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/05-northwind">CLI - northwind</a></li>
-<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources">CLI - northwind multiples datasources</a></li>
-<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/07-northwind-multiples-stages">CLI - northwind multiples stages</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources">CLI - northwind com múltiplas fontes</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/07-northwind-multiples-stages">CLI - northwind com múltiplos stages</a></li>
 </ul>
 
 
@@ -3814,13 +3814,13 @@ On the <code>default</code> stage, <code>Orders</code> and <code>Orders.details<
         
         
           
-          <a href="../SchemaSynchronization/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Synchronization">
+          <a href="../SchemaSynchronization/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Sincronização">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Synchronization
+                Sincronização
               </div>
             </div>
             <div class="md-footer__button md-icon">

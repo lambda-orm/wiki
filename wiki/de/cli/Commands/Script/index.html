@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1961,7 +1961,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2215,7 +2215,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2740,7 +2740,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Optionen
     </span>
   </a>
   
@@ -2749,11 +2749,11 @@
         <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
-      Examples
+      Beispiele
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Examples">
+    <nav class="md-nav" aria-label="Beispiele">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2768,7 +2768,7 @@
           <li class="md-nav__item">
   <a href="#from-a-file" class="md-nav__link">
     <span class="md-ellipsis">
-      From a file
+      Aus einer Datei
     </span>
   </a>
   
@@ -2777,7 +2777,7 @@
           <li class="md-nav__item">
   <a href="#on-a-data-gateway" class="md-nav__link">
     <span class="md-ellipsis">
-      On a Data Gateway
+      Auf einem Data Gateway
     </span>
   </a>
   
@@ -2791,7 +2791,7 @@
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
     <span class="md-ellipsis">
-      Notes
+      Hinweise
     </span>
   </a>
   
@@ -3011,7 +3011,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Optionen
     </span>
   </a>
   
@@ -3020,11 +3020,11 @@
         <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
-      Examples
+      Beispiele
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Examples">
+    <nav class="md-nav" aria-label="Beispiele">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3039,7 +3039,7 @@
           <li class="md-nav__item">
   <a href="#from-a-file" class="md-nav__link">
     <span class="md-ellipsis">
-      From a file
+      Aus einer Datei
     </span>
   </a>
   
@@ -3048,7 +3048,7 @@
           <li class="md-nav__item">
   <a href="#on-a-data-gateway" class="md-nav__link">
     <span class="md-ellipsis">
-      On a Data Gateway
+      Auf einem Data Gateway
     </span>
   </a>
   
@@ -3062,7 +3062,7 @@
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
     <span class="md-ellipsis">
-      Notes
+      Hinweise
     </span>
   </a>
   
@@ -3085,72 +3085,72 @@
 
 
 <h1 id="script">Script<a class="headerlink" href="#script" title="Permanent link">&para;</a></h1>
-<p>Runs a <a href="../../../usage/Script/">script</a>: several queries in <strong>one transaction</strong>. The script is written in
-<a href="https://www.npmjs.com/package/3xpr">3xpr</a>, and all its <code>orm.execute(query, data, options)</code> calls run in the same
-transaction, also across sources. The transaction is committed when the script ends and rolled back on any error (a
-failed query or a <code>throw</code>). The result is the value of the last statement (or of <code>return</code>).</p>
-<p>It runs locally with the workspace (<code>-w</code>) or on a <a href="../../../data-gateway/">Data Gateway</a> (<code>-u</code>, through
-<a href="../../../data-gateway/Rest/#script"><code>POST /script</code></a>); the gateway must have <code>scripts.enabled</code> and the credential must have
-the <code>script</code> permission.</p>
-<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<p>Führt ein <a href="../../../usage/Script/">Skript</a> aus: mehrere Abfragen in <strong>einer Transaktion</strong>. Das Skript ist in
+<a href="https://www.npmjs.com/package/3xpr">3xpr</a> geschrieben, und alle seine Aufrufe von <code>orm.execute(query, data, options)</code> laufen in derselben
+Transaktion, auch über Quellen hinweg. Die Transaktion wird bestätigt (Commit), wenn das Skript endet, und bei jedem Fehler zurückgerollt (eine
+fehlgeschlagene Abfrage oder ein <code>throw</code>). Das Ergebnis ist der Wert der letzten Anweisung (oder von <code>return</code>).</p>
+<p>Es läuft lokal mit dem Workspace (<code>-w</code>) oder auf einem <a href="../../../data-gateway/">Data Gateway</a> (<code>-u</code>, über
+<a href="../../../data-gateway/Rest/#script"><code>POST /script</code></a>); das Gateway muss <code>scripts.enabled</code> haben, und die Zugangsdaten müssen
+die Berechtigung <code>script</code> besitzen.</p>
+<h2 id="options">Optionen<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th style="text-align: left;">Option</th>
-<th style="text-align: left;">Short</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Kurz</th>
+<th style="text-align: left;">Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">workspace</td>
 <td style="text-align: left;"><code>-w</code></td>
-<td style="text-align: left;">Project path (default: the current directory).</td>
+<td style="text-align: left;">Projektpfad (Standard: das aktuelle Verzeichnis).</td>
 </tr>
 <tr>
 <td style="text-align: left;">stage</td>
 <td style="text-align: left;"><code>-s</code></td>
-<td style="text-align: left;">Name of the stage (default: the first stage of the schema).</td>
+<td style="text-align: left;">Name des Stages (Standard: der erste Stage des Schemas).</td>
 </tr>
 <tr>
 <td style="text-align: left;">script</td>
 <td style="text-align: left;"><code>-x</code></td>
-<td style="text-align: left;">Script (3xpr statements calling <code>orm.execute(query, data, options)</code>).</td>
+<td style="text-align: left;">Skript (3xpr-Anweisungen, die <code>orm.execute(query, data, options)</code> aufrufen).</td>
 </tr>
 <tr>
 <td style="text-align: left;">file</td>
 <td style="text-align: left;"><code>-f</code></td>
-<td style="text-align: left;">File with the script (instead of <code>-x</code>).</td>
+<td style="text-align: left;">Datei mit dem Skript (anstelle von <code>-x</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">data</td>
 <td style="text-align: left;"><code>-d</code></td>
-<td style="text-align: left;">Variables of the script: JSON, or the path of a JSON file.</td>
+<td style="text-align: left;">Variablen des Skripts: JSON oder der Pfad einer JSON-Datei.</td>
 </tr>
 <tr>
 <td style="text-align: left;">envfile</td>
 <td style="text-align: left;"><code>-e</code></td>
-<td style="text-align: left;">Reads a file of environment variables.</td>
+<td style="text-align: left;">Liest eine Datei mit Umgebungsvariablen.</td>
 </tr>
 <tr>
 <td style="text-align: left;">output</td>
 <td style="text-align: left;"><code>-o</code></td>
-<td style="text-align: left;">Output format: <code>json</code>, <code>beautiful</code>, <code>light</code> or <code>yaml</code>.</td>
+<td style="text-align: left;">Ausgabeformat: <code>json</code>, <code>beautiful</code>, <code>light</code> oder <code>yaml</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">url</td>
 <td style="text-align: left;"><code>-u</code></td>
-<td style="text-align: left;">URL of the schema on a Data Gateway (<code>POST /script</code>).</td>
+<td style="text-align: left;">URL des Schemas auf einem Data Gateway (<code>POST /script</code>).</td>
 </tr>
 </tbody>
 </table>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h2 id="examples">Beispiele<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="inline">Inline<a class="headerlink" href="#inline" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lambdaorm<span class="w"> </span>script<span class="w"> </span>-w<span class="w"> </span>lab/northwind<span class="w"> </span>-e<span class="w"> </span>lab/northwind/.env<span class="w"> </span>-o<span class="w"> </span>beautiful<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>-x<span class="w"> </span><span class="s1">'orm.execute("Orders.update(p =&gt; ({ freight: freight })).filter(p =&gt; p.id == id)", { id: id, freight: freight }); orm.execute("Orders.filter(p =&gt; p.id == id)", { id: id })'</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"id": 10248, "freight": 40}'</span>
 </code></pre></div>
-<h3 id="from-a-file">From a file<a class="headerlink" href="#from-a-file" title="Permanent link">&para;</a></h3>
+<h3 id="from-a-file">Aus einer Datei<a class="headerlink" href="#from-a-file" title="Permanent link">&para;</a></h3>
 <p><code>create-quote.3xpr</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>account = orm.execute("Accounts.filter(p =&gt; p.id == accountId)", { accountId: accountId });
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>if (account.length() == 0) { throw { status: 404, message: "account not found" }; }
@@ -3163,21 +3163,21 @@ the <code>script</code> permission.</p>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>lambdaorm<span class="w"> </span>script<span class="w"> </span>-w<span class="w"> </span>.<span class="w"> </span>-f<span class="w"> </span>create-quote.3xpr<span class="w"> </span>-d<span class="w"> </span>quote.json
 </code></pre></div>
-<p><code>orm.execute(…, { stage: "insights" })</code> runs on another stage and joins the same transaction (since <code>@lambdaorm/lib</code>
+<p><code>orm.execute(…, { stage: "insights" })</code> läuft auf einem anderen Stage und nimmt an derselben Transaktion teil (seit <code>@lambdaorm/lib</code>
 3.3.0).</p>
-<h3 id="on-a-data-gateway">On a Data Gateway<a class="headerlink" href="#on-a-data-gateway" title="Permanent link">&para;</a></h3>
-<p>The URL includes the route of the schema (here <code>crm</code>):</p>
+<h3 id="on-a-data-gateway">Auf einem Data Gateway<a class="headerlink" href="#on-a-data-gateway" title="Permanent link">&para;</a></h3>
+<p>Die URL enthält die Route des Schemas (hier <code>crm</code>):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>lambdaorm<span class="w"> </span>script<span class="w"> </span>-u<span class="w"> </span>http://localhost:8080/crm<span class="w"> </span>-f<span class="w"> </span>create-quote.3xpr<span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"quoteId": 10, "accountId": 1, "lines": []}'</span>
 </code></pre></div>
-<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<h2 id="notes">Hinweise<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Language: variables, <code>if</code> / <code>else</code>, <code>for</code>, <code>for … in</code>, <code>while</code>, <code>switch</code>, <code>try</code> / <code>catch</code>, <code>throw</code>, <code>return</code>; there
-  is no <code>? :</code> operator, no <code>++</code> / <code>--</code> (use <code>i += 1</code>) and no user-defined functions. See <a href="../../../usage/Script/#the-language">Script</a>.</li>
-<li>The script works on a copy of the data and cannot read environment variables (<code>$VAR</code> fails).</li>
-<li>Errors are printed as <code>error: …</code>, and nothing the script wrote is kept.</li>
-<li>With <code>-u</code>, a Data Gateway with bearer authentication needs the token in the <code>SERVICE_TOKEN</code> environment variable of
-  the CLI (sent as <code>Authorization: Bearer</code>; since @lambdaorm/cli 1.6.3).</li>
-<li>The command exits with code 1 when the script fails (since @lambdaorm/cli 1.6.3).</li>
+<li>Sprache: Variablen, <code>if</code> / <code>else</code>, <code>for</code>, <code>for … in</code>, <code>while</code>, <code>switch</code>, <code>try</code> / <code>catch</code>, <code>throw</code>, <code>return</code>; es gibt
+  keinen Operator <code>? :</code>, kein <code>++</code> / <code>--</code> (verwenden Sie <code>i += 1</code>) und keine benutzerdefinierten Funktionen. Siehe <a href="../../../usage/Script/#the-language">Skript</a>.</li>
+<li>Das Skript arbeitet auf einer Kopie der Daten und kann keine Umgebungsvariablen lesen (<code>$VAR</code> schlägt fehl).</li>
+<li>Fehler werden als <code>error: …</code> ausgegeben, und nichts, was das Skript geschrieben hat, bleibt erhalten.</li>
+<li>Mit <code>-u</code> benötigt ein Data Gateway mit Bearer-Authentifizierung das Token in der Umgebungsvariablen <code>SERVICE_TOKEN</code> der
+  CLI (gesendet als <code>Authorization: Bearer</code>; seit @lambdaorm/cli 1.6.3).</li>
+<li>Der Befehl endet mit Exit-Code 1, wenn das Skript fehlschlägt (seit @lambdaorm/cli 1.6.3).</li>
 </ul>
 
 

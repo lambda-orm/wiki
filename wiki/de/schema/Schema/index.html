@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1640,7 +1640,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -1649,7 +1649,7 @@
         <li class="md-nav__item">
   <a href="#in-this-section" class="md-nav__link">
     <span class="md-ellipsis">
-      In this section
+      In diesem Abschnitt
     </span>
   </a>
   
@@ -2032,7 +2032,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2286,7 +2286,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2970,7 +2970,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -2979,7 +2979,7 @@
         <li class="md-nav__item">
   <a href="#in-this-section" class="md-nav__link">
     <span class="md-ellipsis">
-      In this section
+      In diesem Abschnitt
     </span>
   </a>
   
@@ -3002,30 +3002,30 @@
 
 
 <h1 id="schema">Schema<a class="headerlink" href="#schema" title="Permanent link">&para;</a></h1>
-<p>This section explains the schema of λORM: what it contains, how it is defined and used, and how it is synchronized with the databases.</p>
-<p>The schema holds all the configuration the ORM needs. It separates the business model (<strong>domain</strong>) from the persistence of the data (<strong>infrastructure</strong>):</p>
+<p>Dieser Abschnitt erklärt das Schema von λORM: was es enthält, wie es definiert und verwendet wird und wie es mit den Datenbanken synchronisiert wird.</p>
+<p>Das Schema enthält die gesamte Konfiguration, die das ORM benötigt. Es trennt das Geschäftsmodell (<strong>Domäne</strong>) von der Persistenz der Daten (<strong>Infrastruktur</strong>):</p>
 <ul>
-<li>In the domain, the entities and enums that represent the business model are completely clean, without any attribute that couples them to persistence.</li>
-<li>All queries are written against the business model, so they are decoupled from the physical model of the data.</li>
-<li>In the infrastructure, everything needed to store and read the data in the different sources (databases) is defined.</li>
+<li>In der Domäne sind die Entitäten und Enums, die das Geschäftsmodell abbilden, vollständig sauber, ohne irgendein Attribut, das sie an die Persistenz koppelt.</li>
+<li>Alle Abfragen werden gegen das Geschäftsmodell geschrieben und sind daher vom physischen Datenmodell entkoppelt.</li>
+<li>In der Infrastruktur wird alles definiert, was nötig ist, um die Daten in den verschiedenen Quellen (Datenbanken) zu speichern und zu lesen.</li>
 </ul>
-<p>The schema can be written in a YAML or JSON file (usually <code>lambdaORM.yaml</code>), or passed as an object when the ORM is initialized.</p>
-<p>All the expressions used to define conditions and actions are evaluated by the expression engine <a href="https://www.npmjs.com/package/3xpr">3xpr</a>.</p>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
-<p>This example shows a stage that uses two sources: source 1 is MySQL and holds the <code>Countries</code> table, and source 2 is PostgreSQL and holds the <code>States</code> table.</p>
-<p>For the <code>Countries</code> entity, the names of the table and its columns are the same as the names of the entity and its properties, so no mapping needs to be written.
-For the <code>States</code> entity, the names of the table and its columns are different, so the mapping defines them.</p>
-<p><img alt="diagram" src="../../../schema/images/schema5.svg" /></p>
-<h2 id="in-this-section">In this section<a class="headerlink" href="#in-this-section" title="Permanent link">&para;</a></h2>
+<p>Das Schema kann in einer YAML- oder JSON-Datei (üblicherweise <code>lambdaORM.yaml</code>) geschrieben oder bei der Initialisierung des ORM als Objekt übergeben werden.</p>
+<p>Alle Ausdrücke, mit denen Bedingungen und Aktionen definiert werden, werden von der Expression-Engine <a href="https://www.npmjs.com/package/3xpr">3xpr</a> ausgewertet.</p>
+<h2 id="example">Beispiel<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<p>Dieses Beispiel zeigt einen Stage, der zwei Quellen verwendet: Quelle 1 ist MySQL und enthält die Tabelle <code>Countries</code>, Quelle 2 ist PostgreSQL und enthält die Tabelle <code>States</code>.</p>
+<p>Bei der Entität <code>Countries</code> sind die Namen der Tabelle und ihrer Spalten identisch mit den Namen der Entität und ihrer Eigenschaften, daher muss kein Mapping geschrieben werden.
+Bei der Entität <code>States</code> unterscheiden sich die Namen der Tabelle und ihrer Spalten, daher werden sie im Mapping definiert.</p>
+<p><img alt="Diagramm" src="../../../schema/images/schema5.svg" /></p>
+<h2 id="in-this-section">In diesem Abschnitt<a class="headerlink" href="#in-this-section" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../SchemaDefinition/">Definition</a>: every key of the schema.</li>
-<li><a href="../SchemaDefinition-Expressions/">Expressions</a>, <a href="../SchemaDefinition-EnvironmentVariables/">Environment variables</a> and <a href="../SchemaDefinition-Composite/">Composite entities</a>.</li>
-<li><a href="../Schema-Use/">Schema Use</a>: how to load the schema and generate the model.</li>
-<li>Examples: <a href="../SchemaExample-Basic/">Basic</a>, <a href="../SchemaExample-Extend/">Extend</a>, <a href="../SchemaExample-MultiplesStages/">Multiple stages</a>, <a href="../SchemaExample-StageMultiplesSources/">Stage with multiple sources</a>, <a href="../SchemaExample-Composite/">Composite</a> and <a href="../SchemaExample-Listener/">Listener</a>.</li>
-<li><a href="../SchemaSynchronization/">Synchronization</a>: push, pull, fetch, introspect and incorporate.</li>
-<li><a href="../Engines/">Engines</a>: differences between database engines.</li>
+<li><a href="../SchemaDefinition/">Definition</a>: jeder Schlüssel des Schemas.</li>
+<li><a href="../SchemaDefinition-Expressions/">Ausdrücke</a>, <a href="../SchemaDefinition-EnvironmentVariables/">Umgebungsvariablen</a> und <a href="../SchemaDefinition-Composite/">Komposit-Entitäten</a>.</li>
+<li><a href="../Schema-Use/">Verwendung des Schemas</a>: wie das Schema geladen und das Modell generiert wird.</li>
+<li>Beispiele: <a href="../SchemaExample-Basic/">Einfach</a>, <a href="../SchemaExample-Extend/">Erweitern</a>, <a href="../SchemaExample-MultiplesStages/">Mehrere Stages</a>, <a href="../SchemaExample-StageMultiplesSources/">Stage mit mehreren Quellen</a>, <a href="../SchemaExample-Composite/">Komposit</a> und <a href="../SchemaExample-Listener/">Listener</a>.</li>
+<li><a href="../SchemaSynchronization/">Synchronisierung</a>: push, pull, fetch, introspect und incorporate.</li>
+<li><a href="../Engines/">Datenbank-Engines</a>: Unterschiede zwischen den Datenbank-Engines.</li>
 </ul>
-<p>The <a href="../../data-gateway/">Data Gateway</a> publishes a schema over the network; its own settings are in a separate <a href="../../data-gateway/Configuration/">configuration file</a>.</p>
+<p>Das <a href="../../data-gateway/">Data Gateway</a> stellt ein Schema über das Netzwerk bereit; seine eigenen Einstellungen befinden sich in einer separaten <a href="../../data-gateway/Configuration/">Konfigurationsdatei</a>.</p>
 
 
 

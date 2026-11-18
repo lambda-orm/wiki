@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1593,7 +1593,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1709,17 +1709,17 @@
         <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
-      Examples
+      Ejemplos
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Examples">
+    <nav class="md-nav" aria-label="Ejemplos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#connection-to-the-database" class="md-nav__link">
     <span class="md-ellipsis">
-      Connection to the database
+      Conexión a la base de datos
     </span>
   </a>
   
@@ -1728,7 +1728,7 @@
           <li class="md-nav__item">
   <a href="#key-of-the-encryption-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Key of the encryption functions
+      Clave de las funciones de cifrado
     </span>
   </a>
   
@@ -2047,7 +2047,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2301,7 +2301,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2985,17 +2985,17 @@
         <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
-      Examples
+      Ejemplos
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Examples">
+    <nav class="md-nav" aria-label="Ejemplos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#connection-to-the-database" class="md-nav__link">
     <span class="md-ellipsis">
-      Connection to the database
+      Conexión a la base de datos
     </span>
   </a>
   
@@ -3004,7 +3004,7 @@
           <li class="md-nav__item">
   <a href="#key-of-the-encryption-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Key of the encryption functions
+      Clave de las funciones de cifrado
     </span>
   </a>
   
@@ -3031,13 +3031,13 @@
 
 
 
-<h1 id="environment-variables-on-schema">Environment Variables on Schema<a class="headerlink" href="#environment-variables-on-schema" title="Permanent link">&para;</a></h1>
-<p>This page shows how to use environment variables in the schema, to keep connections and secrets out of the schema file.</p>
-<p>Any value of the schema can be taken from an environment variable, with the notation <code>$VARIABLE</code> or <code>${VARIABLE}</code>.
-The variables are replaced when the schema is loaded. With the CLI, the <code>-e</code> option reads them from a file (for example <code>-e .env</code>).</p>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<h3 id="connection-to-the-database">Connection to the database<a class="headerlink" href="#connection-to-the-database" title="Permanent link">&para;</a></h3>
-<p>The connection of each source is read from an environment variable:</p>
+<h1 id="environment-variables-on-schema">Variables de entorno en el esquema<a class="headerlink" href="#environment-variables-on-schema" title="Permanent link">&para;</a></h1>
+<p>Esta página muestra cómo usar variables de entorno en el esquema, para mantener las conexiones y los secretos fuera del archivo del esquema.</p>
+<p>Cualquier valor del esquema se puede tomar de una variable de entorno, con la notación <code>$VARIABLE</code> o <code>${VARIABLE}</code>.
+Las variables se reemplazan al cargar el esquema. Con la CLI, la opción <code>-e</code> las lee de un archivo (por ejemplo <code>-e .env</code>).</p>
+<h2 id="examples">Ejemplos<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="connection-to-the-database">Conexión a la base de datos<a class="headerlink" href="#connection-to-the-database" title="Permanent link">&para;</a></h3>
+<p>La conexión de cada fuente se lee de una variable de entorno:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">infrastructure</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">sources</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">source1</span>
@@ -3049,12 +3049,12 @@ The variables are replaced when the schema is loaded. With the CLI, the <code>-e
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="nt">mapping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mapping2</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">      </span><span class="nt">connection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$CNN_POSTGRES</span>
 </code></pre></div>
-<p>The variable holds the connection as JSON:</p>
+<p>La variable contiene la conexión en formato JSON:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">CNN_MYSQL</span><span class="o">={</span><span class="s2">"host"</span>:<span class="s2">"localhost"</span>,<span class="s2">"port"</span>:3306,<span class="s2">"user"</span>:<span class="s2">"test"</span>,<span class="s2">"password"</span>:<span class="s2">"test"</span>,<span class="s2">"database"</span>:<span class="s2">"test"</span><span class="o">}</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">CNN_POSTGRES</span><span class="o">={</span><span class="s2">"host"</span>:<span class="s2">"localhost"</span>,<span class="s2">"port"</span>:5433,<span class="s2">"user"</span>:<span class="s2">"test"</span>,<span class="s2">"password"</span>:<span class="s2">"test"</span>,<span class="s2">"database"</span>:<span class="s2">"test"</span><span class="o">}</span>
 </code></pre></div>
-<h3 id="key-of-the-encryption-functions">Key of the encryption functions<a class="headerlink" href="#key-of-the-encryption-functions" title="Permanent link">&para;</a></h3>
-<p>The key used by <code>encrypt</code> and <code>decrypt</code> is read from an environment variable, inside an expression:</p>
+<h3 id="key-of-the-encryption-functions">Clave de las funciones de cifrado<a class="headerlink" href="#key-of-the-encryption-functions" title="Permanent link">&para;</a></h3>
+<p>La clave que usan <code>encrypt</code> y <code>decrypt</code> se lee de una variable de entorno, dentro de una expresión:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">domain</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>

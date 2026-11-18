@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1593,7 +1593,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1861,7 +1861,7 @@
         <li class="md-nav__item">
   <a href="#extend-entity" class="md-nav__link">
     <span class="md-ellipsis">
-      Extend Entity
+      Estender uma entidade
     </span>
   </a>
   
@@ -1870,7 +1870,7 @@
         <li class="md-nav__item">
   <a href="#extend-mappings" class="md-nav__link">
     <span class="md-ellipsis">
-      Extend mappings
+      Estender mapeamentos
     </span>
   </a>
   
@@ -1879,7 +1879,7 @@
         <li class="md-nav__item">
   <a href="#labs" class="md-nav__link">
     <span class="md-ellipsis">
-      Labs
+      Laboratórios
     </span>
   </a>
   
@@ -2043,7 +2043,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2297,7 +2297,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2981,7 +2981,7 @@
         <li class="md-nav__item">
   <a href="#extend-entity" class="md-nav__link">
     <span class="md-ellipsis">
-      Extend Entity
+      Estender uma entidade
     </span>
   </a>
   
@@ -2990,7 +2990,7 @@
         <li class="md-nav__item">
   <a href="#extend-mappings" class="md-nav__link">
     <span class="md-ellipsis">
-      Extend mappings
+      Estender mapeamentos
     </span>
   </a>
   
@@ -2999,7 +2999,7 @@
         <li class="md-nav__item">
   <a href="#labs" class="md-nav__link">
     <span class="md-ellipsis">
-      Labs
+      Laboratórios
     </span>
   </a>
   
@@ -3022,12 +3022,12 @@
 
 
 <h1 id="extend">Extend<a class="headerlink" href="#extend" title="Permanent link">&para;</a></h1>
-<p>This page shows how to reuse definitions with the <code>extends</code> key.</p>
-<p>With <code>extends</code>, an element of the schema inherits the definition of another one. Enums, entities, mappings and entity mappings can be extended.</p>
-<h2 id="extend-entity">Extend Entity<a class="headerlink" href="#extend-entity" title="Permanent link">&para;</a></h2>
-<p>In this schema, the entities <code>Countries</code> and <code>States</code> extend the abstract entity <code>Positions</code>, so both get the properties <code>latitude</code> and <code>longitude</code>.
-An entity does not need to be abstract to be extended; an abstract entity is only a base and has no table.</p>
-<p><img alt="schema" src="../../../schema/images/schema2.svg" /></p>
+<p>Esta página mostra como reutilizar definições com a chave <code>extends</code>.</p>
+<p>Com <code>extends</code>, um elemento do esquema herda a definição de outro. Enums, entidades, mapeamentos e mapeamentos de entidade podem ser estendidos.</p>
+<h2 id="extend-entity">Estender uma entidade<a class="headerlink" href="#extend-entity" title="Permanent link">&para;</a></h2>
+<p>Neste esquema, as entidades <code>Countries</code> e <code>States</code> estendem a entidade abstrata <code>Positions</code>, então ambas recebem as propriedades <code>latitude</code> e <code>longitude</code>.
+Uma entidade não precisa ser abstrata para ser estendida; uma entidade abstrata é apenas uma base e não tem tabela.</p>
+<p><img alt="esquema" src="../../../schema/images/schema2.svg" /></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">domain</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Positions</span>
@@ -3083,11 +3083,11 @@ An entity does not need to be abstract to be extended; an abstract entity is onl
 <a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
 <a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="w">        </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
 </code></pre></div>
-<h2 id="extend-mappings">Extend mappings<a class="headerlink" href="#extend-mappings" title="Permanent link">&para;</a></h2>
-<p>Mappings and entity mappings are extended in the same way. See <a href="../SchemaDefinition/#abstract-and-extends-in-entity-mapping">Abstract and extends in Entity Mapping</a>, and the mapping <code>mongoDb</code>, which extends the mapping <code>default</code>, in the <a href="../SchemaExample-Listener/#listener-example">Listener example</a>.</p>
-<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h2 id="extend-mappings">Estender mapeamentos<a class="headerlink" href="#extend-mappings" title="Permanent link">&para;</a></h2>
+<p>Mapeamentos e mapeamentos de entidade são estendidos da mesma forma. Veja <a href="../SchemaDefinition/#abstract-and-extends-in-entity-mapping">Abstract e extends no mapeamento de entidade</a>, e o mapeamento <code>mongoDb</code>, que estende o mapeamento <code>default</code>, no <a href="../SchemaExample-Listener/#listener-example">exemplo de Listener</a>.</p>
+<h2 id="labs">Laboratórios<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/02-extend-model">CLI - extend model</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/02-extend-model">CLI - estender o modelo</a></li>
 </ul>
 
 

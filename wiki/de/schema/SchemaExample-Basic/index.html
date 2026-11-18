@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1838,7 +1838,7 @@
         <li class="md-nav__item">
   <a href="#schema-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Example
+      Schema-Beispiel
     </span>
   </a>
   
@@ -2034,7 +2034,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2288,7 +2288,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2972,7 +2972,7 @@
         <li class="md-nav__item">
   <a href="#schema-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Example
+      Schema-Beispiel
     </span>
   </a>
   
@@ -3003,25 +3003,25 @@
 
 
 
-<h1 id="basic-schema-example">Basic Schema Example<a class="headerlink" href="#basic-schema-example" title="Permanent link">&para;</a></h1>
-<p>This page shows a basic schema: two related entities stored in one MySQL database.</p>
-<p>A basic schema defines the entities, the mapping and the sources:</p>
+<h1 id="basic-schema-example">Einfaches Schema-Beispiel<a class="headerlink" href="#basic-schema-example" title="Permanent link">&para;</a></h1>
+<p>Diese Seite zeigt ein einfaches Schema: zwei miteinander in Beziehung stehende Entitäten, die in einer MySQL-Datenbank gespeichert werden.</p>
+<p>Ein einfaches Schema definiert die Entitäten, das Mapping und die Quellen:</p>
 <ul>
-<li>The <strong>entities</strong> define the properties, relations and keys.</li>
-<li>The <strong>mapping</strong> defines how the entities are mapped to the tables of the database.</li>
-<li>The <strong>sources</strong> define the dialect and the connection of each database.</li>
+<li>Die <strong>Entitäten</strong> definieren die Eigenschaften, Beziehungen und Schlüssel.</li>
+<li>Das <strong>Mapping</strong> definiert, wie die Entitäten auf die Tabellen der Datenbank abgebildet werden.</li>
+<li>Die <strong>Quellen</strong> definieren den Dialekt und die Verbindung jeder Datenbank.</li>
 </ul>
-<p>Many keys can be omitted, because they have a default value. For example:</p>
+<p>Viele Schlüssel können weggelassen werden, da sie einen Standardwert haben. Zum Beispiel:</p>
 <ul>
-<li>A property without <code>type</code> is a string.</li>
-<li>A property without <code>required</code> is not required (unless it is part of the primary or unique key).</li>
-<li>A string property without <code>length</code> is <code>TEXT</code> on PostgreSQL and <code>VARCHAR(80)</code> on the other engines.</li>
-<li>Without mapping information, the tables and columns have the same names as the entities and properties.</li>
+<li>Eine Eigenschaft ohne <code>type</code> ist ein String.</li>
+<li>Eine Eigenschaft ohne <code>required</code> ist nicht erforderlich (es sei denn, sie ist Teil des Primär- oder Unique Keys).</li>
+<li>Eine String-Eigenschaft ohne <code>length</code> ist <code>TEXT</code> auf PostgreSQL und <code>VARCHAR(80)</code> auf den anderen Datenbank-Engines.</li>
+<li>Ohne Mapping-Angaben haben die Tabellen und Spalten dieselben Namen wie die Entitäten und Eigenschaften.</li>
 </ul>
-<h2 id="schema-example">Schema Example<a class="headerlink" href="#schema-example" title="Permanent link">&para;</a></h2>
-<p>In this schema, <code>Countries</code> has many <code>States</code>: the relation <code>states</code> of <code>Countries</code> returns the list of its states, and the relation <code>country</code> of <code>States</code> returns its country.
-The mapping <code>test</code> is empty, so the tables and columns have the same names as the entities and properties.</p>
-<p><img alt="schema" src="../../../schema/images/schema.svg" /></p>
+<h2 id="schema-example">Schema-Beispiel<a class="headerlink" href="#schema-example" title="Permanent link">&para;</a></h2>
+<p>In diesem Schema hat <code>Countries</code> viele <code>States</code>: Die Beziehung <code>states</code> von <code>Countries</code> gibt die Liste seiner Bundesstaaten zurück, und die Beziehung <code>country</code> von <code>States</code> gibt das zugehörige Land zurück.
+Das Mapping <code>test</code> ist leer, daher haben die Tabellen und Spalten dieselben Namen wie die Entitäten und Eigenschaften.</p>
+<p><img alt="Schema" src="../../../schema/images/schema.svg" /></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">domain</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Countries</span>
@@ -3077,7 +3077,7 @@ The mapping <code>test</code> is empty, so the tables and columns have the same 
 </code></pre></div>
 <h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/01-simple">CLI - simple</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/01-simple">CLI – simple</a></li>
 </ul>
 
 

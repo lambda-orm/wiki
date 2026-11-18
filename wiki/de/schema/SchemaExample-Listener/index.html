@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1755,7 +1755,7 @@
         <li class="md-nav__item">
   <a href="#how-listeners-run" class="md-nav__link">
     <span class="md-ellipsis">
-      How listeners run
+      Wie Listener ausgeführt werden
     </span>
   </a>
   
@@ -1764,7 +1764,7 @@
         <li class="md-nav__item">
   <a href="#arguments" class="md-nav__link">
     <span class="md-ellipsis">
-      Arguments
+      Argumente
     </span>
   </a>
   
@@ -1773,7 +1773,7 @@
         <li class="md-nav__item">
   <a href="#listener-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Listener Example
+      Listener-Beispiel
     </span>
   </a>
   
@@ -2050,7 +2050,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2304,7 +2304,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2988,7 +2988,7 @@
         <li class="md-nav__item">
   <a href="#how-listeners-run" class="md-nav__link">
     <span class="md-ellipsis">
-      How listeners run
+      Wie Listener ausgeführt werden
     </span>
   </a>
   
@@ -2997,7 +2997,7 @@
         <li class="md-nav__item">
   <a href="#arguments" class="md-nav__link">
     <span class="md-ellipsis">
-      Arguments
+      Argumente
     </span>
   </a>
   
@@ -3006,7 +3006,7 @@
         <li class="md-nav__item">
   <a href="#listener-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Listener Example
+      Listener-Beispiel
     </span>
   </a>
   
@@ -3037,27 +3037,27 @@
 
 
 
-<h1 id="listener-on-schema">Listener on Schema<a class="headerlink" href="#listener-on-schema" title="Permanent link">&para;</a></h1>
-<p>This page explains listeners: expressions that λORM runs before or after a query, or when it fails. They are defined in <code>application.listeners</code> (see <a href="../SchemaDefinition/#listener">Listener</a>).</p>
+<h1 id="listener-on-schema">Listener im Schema<a class="headerlink" href="#listener-on-schema" title="Permanent link">&para;</a></h1>
+<p>Diese Seite erklärt Listener: Ausdrücke, die λORM vor oder nach einer Abfrage oder bei deren Fehlschlag ausführt. Sie werden in <code>application.listeners</code> definiert (siehe <a href="../SchemaDefinition/#listener">Listener</a>).</p>
 <ul>
-<li><strong>on</strong>: the categories of query that trigger the listener: <code>select</code>, <code>insert</code>, <code>upsert</code>, <code>update</code> and <code>delete</code>. A bulk insert belongs to the <code>insert</code> category, and a merge to the <code>upsert</code> category.</li>
-<li><strong>condition</strong>: an expression that decides whether the listener runs.</li>
-<li><strong>before</strong>, <strong>after</strong> and <strong>error</strong>: the expressions to run before the query, after it, or when it fails.</li>
-<li><strong>transactional</strong>: whether the listener runs inside the query's transaction (default <code>true</code>).</li>
+<li><strong>on</strong>: die Abfragekategorien, die den Listener auslösen: <code>select</code>, <code>insert</code>, <code>upsert</code>, <code>update</code> und <code>delete</code>. Ein Bulk-Insert gehört zur Kategorie <code>insert</code>, ein Merge zur Kategorie <code>upsert</code>.</li>
+<li><strong>condition</strong>: ein Ausdruck, der entscheidet, ob der Listener ausgeführt wird.</li>
+<li><strong>before</strong>, <strong>after</strong> und <strong>error</strong>: die Ausdrücke, die vor der Abfrage, danach oder bei ihrem Fehlschlag ausgeführt werden.</li>
+<li><strong>transactional</strong>: ob der Listener innerhalb der Transaktion der Abfrage ausgeführt wird (Standard <code>true</code>).</li>
 </ul>
-<h2 id="how-listeners-run">How listeners run<a class="headerlink" href="#how-listeners-run" title="Permanent link">&para;</a></h2>
+<h2 id="how-listeners-run">Wie Listener ausgeführt werden<a class="headerlink" href="#how-listeners-run" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>before</code>, <code>after</code> and <code>error</code> run one after the other and <strong>are awaited</strong>: <code>orm.execute</code> returns when they have
-  finished. An error in <code>before</code> prevents the sentence; an error in <code>after</code> fails it (the <code>error</code> listeners run first).</li>
-<li>They run <strong>in the sentence's transaction</strong>: the <code>orm.execute</code> calls of a listener use the same connections, and a
-  rollback undoes what they wrote. A sentence with listeners that runs on its own opens a transaction for the sentence
-  and its listeners, so both are all or nothing.</li>
-<li>A listener's <code>orm.execute</code> can name <strong>another stage</strong> (<code>{ stage: "insights" }</code>): it joins the same transaction
-  (since @lambdaorm/lib 3.3.0).</li>
-<li><code>transactional: false</code> runs a listener outside the transaction: what it writes is kept even if the transaction
-  rolls back (for example, an audit log).</li>
+<li><code>before</code>, <code>after</code> und <code>error</code> werden nacheinander ausgeführt und <strong>es wird auf sie gewartet</strong>: <code>orm.execute</code> kehrt zurück, wenn sie
+  abgeschlossen sind. Ein Fehler in <code>before</code> verhindert die Anweisung; ein Fehler in <code>after</code> lässt sie fehlschlagen (zuvor werden die <code>error</code>-Listener ausgeführt).</li>
+<li>Sie laufen <strong>in der Transaktion der Anweisung</strong>: Die <code>orm.execute</code>-Aufrufe eines Listeners verwenden dieselben Verbindungen, und ein
+  Rollback macht rückgängig, was sie geschrieben haben. Eine Anweisung mit Listenern, die für sich allein ausgeführt wird, öffnet eine Transaktion für die Anweisung
+  und ihre Listener, sodass beide nach dem Alles-oder-nichts-Prinzip ausgeführt werden.</li>
+<li>Das <code>orm.execute</code> eines Listeners kann <strong>einen anderen Stage</strong> angeben (<code>{ stage: "insights" }</code>): Es tritt derselben Transaktion bei
+  (ab @lambdaorm/lib 3.3.0).</li>
+<li><code>transactional: false</code> führt einen Listener außerhalb der Transaktion aus: Was er schreibt, bleibt erhalten, auch wenn die Transaktion
+  zurückgerollt wird (zum Beispiel ein Audit-Log).</li>
 </ul>
-<p>In this example, <code>touchInstallation</code> updates the installation of each inserted file in the same transaction, and <code>audit</code> writes an audit log that is kept even if the transaction rolls back:</p>
+<p>In diesem Beispiel aktualisiert <code>touchInstallation</code> die Installation jeder eingefügten Datei in derselben Transaktion, und <code>audit</code> schreibt ein Audit-Log, das erhalten bleibt, auch wenn die Transaktion zurückgerollt wird:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">application</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">touchInstallation</span>
@@ -3071,71 +3071,71 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">      </span><span class="nt">transactional</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="nt">after</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">orm.execute("AuditLogs.insert()", { entity</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">entity, action</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action })</span>
 </code></pre></div>
-<h2 id="arguments">Arguments<a class="headerlink" href="#arguments" title="Permanent link">&para;</a></h2>
-<p>The arguments available in <code>condition</code>, <code>before</code>, <code>after</code> and <code>error</code>:</p>
+<h2 id="arguments">Argumente<a class="headerlink" href="#arguments" title="Permanent link">&para;</a></h2>
+<p>Die in <code>condition</code>, <code>before</code>, <code>after</code> und <code>error</code> verfügbaren Argumente:</p>
 <table>
 <thead>
 <tr>
 <th>Parameter</th>
-<th>Description</th>
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>query</td>
-<td>The query expression that was executed</td>
+<td>Der ausgeführte Abfrageausdruck</td>
 </tr>
 <tr>
 <td>data</td>
-<td>The data that was sent when the expression was executed</td>
+<td>Die beim Ausführen des Ausdrucks übergebenen Daten</td>
 </tr>
 <tr>
 <td>options</td>
-<td>The options that were sent when the expression was executed</td>
+<td>Die beim Ausführen des Ausdrucks übergebenen Optionen</td>
 </tr>
 <tr>
 <td>result</td>
-<td>It is only available in the after event and contains the result of the expression execution</td>
+<td>Nur im after-Ereignis verfügbar; enthält das Ergebnis der Ausführung des Ausdrucks</td>
 </tr>
 <tr>
 <td>action</td>
-<td>The action that was executed (select, insert, bulkInsert, update, upsert, merge, bulkMerge, delete, bulkDelete)</td>
+<td>Die ausgeführte Aktion (select, insert, bulkInsert, update, upsert, merge, bulkMerge, delete, bulkDelete)</td>
 </tr>
 <tr>
 <td>type</td>
-<td>The type of sentence that was executed (dql, dml)</td>
+<td>Der Typ der ausgeführten Anweisung (dql, dml)</td>
 </tr>
 <tr>
 <td>category</td>
-<td>The category of the sentence that was executed (select, insert, update, delete, upsert)</td>
+<td>Die Kategorie der ausgeführten Anweisung (select, insert, update, delete, upsert)</td>
 </tr>
 <tr>
 <td>sentence</td>
-<td>The sentence that was executed</td>
+<td>Die ausgeführte Anweisung</td>
 </tr>
 <tr>
 <td>dialect</td>
-<td>The dialect of the source where the sentence was executed</td>
+<td>Der Dialekt der Quelle, auf der die Anweisung ausgeführt wurde</td>
 </tr>
 <tr>
 <td>source</td>
-<td>The source where the sentence was executed</td>
+<td>Die Quelle, auf der die Anweisung ausgeführt wurde</td>
 </tr>
 <tr>
 <td>entity</td>
-<td>The entity that was affected by the sentence</td>
+<td>Die von der Anweisung betroffene Entität</td>
 </tr>
 <tr>
 <td>error</td>
-<td>It is only available in the error event and contains the error that occurred</td>
+<td>Nur im error-Ereignis verfügbar; enthält den aufgetretenen Fehler</td>
 </tr>
 </tbody>
 </table>
-<h2 id="listener-example">Listener Example<a class="headerlink" href="#listener-example" title="Permanent link">&para;</a></h2>
-<p>This example declares a listener that copies the data to the <code>insights</code> stage (CQRS pattern).
-When records are inserted, updated or deleted on the <code>default</code> or <code>cqrs</code> stage, the listener runs.
-Its <code>after</code> expression executes the same query, with the same data, on the <code>insights</code> stage, in the same transaction as the original query: if the write in <code>insights</code> fails, the original one is rolled back too.</p>
-<p><strong>Part of the schema where the listener is defined:</strong></p>
+<h2 id="listener-example">Listener-Beispiel<a class="headerlink" href="#listener-example" title="Permanent link">&para;</a></h2>
+<p>Dieses Beispiel deklariert einen Listener, der die Daten auf den Stage <code>insights</code> kopiert (CQRS-Muster).
+Wenn auf dem Stage <code>default</code> oder <code>cqrs</code> Datensätze eingefügt, aktualisiert oder gelöscht werden, wird der Listener ausgeführt.
+Sein <code>after</code>-Ausdruck führt dieselbe Abfrage mit denselben Daten auf dem Stage <code>insights</code> aus, in derselben Transaktion wie die ursprüngliche Abfrage: Schlägt das Schreiben in <code>insights</code> fehl, wird auch das ursprüngliche zurückgerollt.</p>
+<p><strong>Teil des Schemas, in dem der Listener definiert ist:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nn">...</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">application</span><span class="p">:</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span>
@@ -3144,8 +3144,8 @@ Its <code>after</code> expression executes the same query, with the same data, o
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">options.stage.in("default","cqrs")</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="nt">after</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">orm.execute(query,data,{stage:"insights"})</span><span class="w"> </span>
 </code></pre></div>
-<p><strong>Complete schema:</strong></p>
-<p>The <code>default</code> stage spreads the entities over MySQL, PostgreSQL and MongoDB, the <code>insights</code> stage stores everything in another PostgreSQL database, and the <code>cqrs</code> stage reads from <code>insights</code> and writes to the sources of <code>default</code>.</p>
+<p><strong>Vollständiges Schema:</strong></p>
+<p>Der Stage <code>default</code> verteilt die Entitäten auf MySQL, PostgreSQL und MongoDB, der Stage <code>insights</code> speichert alles in einer anderen PostgreSQL-Datenbank, und der Stage <code>cqrs</code> liest aus <code>insights</code> und schreibt in die Quellen von <code>default</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">domain</span><span class="p">:</span><span class="w">  </span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">enums</span><span class="p">:</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
@@ -3377,7 +3377,7 @@ Its <code>after</code> expression executes the same query, with the same data, o
 </code></pre></div>
 <h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/08-northwind-cqrs">CLI - northwind cqrs</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/08-northwind-cqrs">CLI – northwind cqrs</a></li>
 </ul>
 
 

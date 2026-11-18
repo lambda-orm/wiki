@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1884,7 +1884,7 @@
         <li class="md-nav__item">
   <a href="#schema-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Example
+      Schema-Beispiel
     </span>
   </a>
   
@@ -2034,7 +2034,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2288,7 +2288,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2972,7 +2972,7 @@
         <li class="md-nav__item">
   <a href="#schema-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Example
+      Schema-Beispiel
     </span>
   </a>
   
@@ -3003,19 +3003,19 @@
 
 
 
-<h1 id="multiple-stages">Multiple Stages<a class="headerlink" href="#multiple-stages" title="Permanent link">&para;</a></h1>
-<p>This page shows a schema with two stages: the same model stored in two different databases.</p>
-<p>A stage is a usage scenario. Several stages can be defined for different reasons, for example:</p>
+<h1 id="multiple-stages">Mehrere Stages<a class="headerlink" href="#multiple-stages" title="Permanent link">&para;</a></h1>
+<p>Diese Seite zeigt ein Schema mit zwei Stages: dasselbe Modell, gespeichert in zwei verschiedenen Datenbanken.</p>
+<p>Ein Stage ist ein Nutzungsszenario. Mehrere Stages können aus verschiedenen Gründen definiert werden, zum Beispiel:</p>
 <ul>
-<li>To run the same business model on Oracle and on SQL Server and compare their performance.</li>
-<li>To use one stage as the origin and another as the destination of a data migration.</li>
-<li>To use one stage for reads and another for writes.</li>
-<li>To use one stage for the development environment and another for the QA environment.</li>
+<li>Um dasselbe Geschäftsmodell auf Oracle und auf SQL Server auszuführen und ihre Performance zu vergleichen.</li>
+<li>Um einen Stage als Ursprung und einen anderen als Ziel einer Datenmigration zu verwenden.</li>
+<li>Um einen Stage für Lesevorgänge und einen anderen für Schreibvorgänge zu verwenden.</li>
+<li>Um einen Stage für die Entwicklungsumgebung und einen anderen für die QA-Umgebung zu verwenden.</li>
 </ul>
-<h2 id="schema-example">Schema Example<a class="headerlink" href="#schema-example" title="Permanent link">&para;</a></h2>
-<p>In this schema, <code>stage1</code> uses a MySQL database with the default names (<code>mapping1</code> is empty), and <code>stage2</code> uses a PostgreSQL database whose tables and columns have other names (<code>mapping2</code>).
-The same query gives the same result on both stages.</p>
-<p><img alt="schema" src="../../../schema/images/schema3.svg" /></p>
+<h2 id="schema-example">Schema-Beispiel<a class="headerlink" href="#schema-example" title="Permanent link">&para;</a></h2>
+<p>In diesem Schema verwendet <code>stage1</code> eine MySQL-Datenbank mit den Standardnamen (<code>mapping1</code> ist leer), und <code>stage2</code> verwendet eine PostgreSQL-Datenbank, deren Tabellen und Spalten andere Namen haben (<code>mapping2</code>).
+Dieselbe Abfrage liefert auf beiden Stages dasselbe Ergebnis.</p>
+<p><img alt="Schema" src="../../../schema/images/schema3.svg" /></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">domain</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Countries</span>
@@ -3089,13 +3089,13 @@ The same query gives the same result on both stages.</p>
 <a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a><span class="w">      </span><span class="nt">sources</span><span class="p">:</span>
 <a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">source2</span>
 </code></pre></div>
-<p><strong>Environment variables:</strong></p>
+<p><strong>Umgebungsvariablen:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">CNN_MYSQL</span><span class="o">={</span><span class="s2">"host"</span>:<span class="s2">"localhost"</span>,<span class="s2">"port"</span>:3306,<span class="s2">"user"</span>:<span class="s2">"test"</span>,<span class="s2">"password"</span>:<span class="s2">"test"</span>,<span class="s2">"database"</span>:<span class="s2">"test"</span><span class="o">}</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">CNN_POSTGRES</span><span class="o">={</span><span class="s2">"host"</span>:<span class="s2">"0.0.0.0"</span>,<span class="s2">"port"</span>:5433,<span class="s2">"user"</span>:<span class="s2">"test"</span>,<span class="s2">"password"</span>:<span class="s2">"test"</span>,<span class="s2">"database"</span>:<span class="s2">"test"</span><span class="o">}</span>
 </code></pre></div>
 <h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/03-two-stages">CLI - two stages</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/03-two-stages">CLI – two stages</a></li>
 </ul>
 
 

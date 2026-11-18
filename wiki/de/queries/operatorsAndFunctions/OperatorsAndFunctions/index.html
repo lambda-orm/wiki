@@ -24,7 +24,7 @@
     
     
       
-        <title>Operators and Functions - λORM</title>
+        <title>Operatoren und Funktionen - λORM</title>
       
     
     
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Operators and Functions
+              Operatoren und Funktionen
             
           </span>
         </div>
@@ -1297,7 +1297,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1310,7 +1310,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1335,7 +1335,7 @@
         <li class="md-nav__item">
   <a href="#scalar-operators-and-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Scalar operators and functions
+      Skalare Operatoren und Funktionen
     </span>
   </a>
   
@@ -1344,7 +1344,7 @@
         <li class="md-nav__item">
   <a href="#aggregation-and-sorting" class="md-nav__link">
     <span class="md-ellipsis">
-      Aggregation and sorting
+      Aggregation und Sortierung
     </span>
   </a>
   
@@ -2031,7 +2031,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2285,7 +2285,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2969,7 +2969,7 @@
         <li class="md-nav__item">
   <a href="#scalar-operators-and-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Scalar operators and functions
+      Skalare Operatoren und Funktionen
     </span>
   </a>
   
@@ -2978,7 +2978,7 @@
         <li class="md-nav__item">
   <a href="#aggregation-and-sorting" class="md-nav__link">
     <span class="md-ellipsis">
-      Aggregation and sorting
+      Aggregation und Sortierung
     </span>
   </a>
   
@@ -3000,70 +3000,70 @@
 
 
 
-<h1 id="operators-and-functions">Operators and Functions<a class="headerlink" href="#operators-and-functions" title="Permanent link">&para;</a></h1>
-<p>λORM queries are lambda expressions, and inside them you can use the operators and functions listed in this reference. λORM translates each one into the language of the database engine of the data source: SQL for MySQL, MariaDB, PostgreSQL, SQL Server, Oracle and SQLite, and aggregation pipelines for MongoDB. See <a href="../../Query-Language/">Query Language</a> for an introduction to queries.</p>
-<p>Each page describes the operators and functions of one category, with their signature, an example query, its result and the SQL generated for it. Not every function can be translated to every engine; each page ends with a <em>Database support</em> section that lists the differences.</p>
-<h2 id="scalar-operators-and-functions">Scalar operators and functions<a class="headerlink" href="#scalar-operators-and-functions" title="Permanent link">&para;</a></h2>
+<h1 id="operators-and-functions">Operatoren und Funktionen<a class="headerlink" href="#operators-and-functions" title="Permanent link">&para;</a></h1>
+<p>λORM-Abfragen sind Lambda-Ausdrücke, in denen Sie die in dieser Referenz aufgeführten Operatoren und Funktionen verwenden können. λORM übersetzt jeden davon in die Sprache der Datenbank-Engine der Datenquelle: SQL für MySQL, MariaDB, PostgreSQL, SQL Server, Oracle und SQLite sowie Aggregation-Pipelines für MongoDB. Eine Einführung in Abfragen finden Sie unter <a href="../../Query-Language/">Abfragesprache</a>.</p>
+<p>Jede Seite beschreibt die Operatoren und Funktionen einer Kategorie mit ihrer Signatur, einer Beispielabfrage, deren Ergebnis und dem dafür erzeugten SQL. Nicht jede Funktion lässt sich in jede Datenbank-Engine übersetzen; jede Seite endet mit einem Abschnitt <em>Datenbankunterstützung</em>, der die Unterschiede auflistet.</p>
+<h2 id="scalar-operators-and-functions">Skalare Operatoren und Funktionen<a class="headerlink" href="#scalar-operators-and-functions" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Page</th>
-<th>Contents</th>
+<th>Seite</th>
+<th>Inhalt</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Comparison/">Comparison</a></td>
+<td><a href="../Comparison/">Vergleich</a></td>
 <td><code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>between</code>, <code>in</code>, <code>includes</code></td>
 </tr>
 <tr>
-<td><a href="../Logical/">Logical</a></td>
+<td><a href="../Logical/">Logisch</a></td>
 <td><code>!</code>, <code>&amp;&amp;</code>, <code>||</code></td>
 </tr>
 <tr>
-<td><a href="../Numeric/">Numeric</a></td>
-<td>Arithmetic operators and mathematical functions (<code>abs</code>, <code>round</code>, <code>log</code>, <code>sin</code>, ...)</td>
+<td><a href="../Numeric/">Numerisch</a></td>
+<td>Arithmetische Operatoren und mathematische Funktionen (<code>abs</code>, <code>round</code>, <code>log</code>, <code>sin</code>, ...)</td>
 </tr>
 <tr>
-<td><a href="../String/">String</a></td>
-<td>Text functions (<code>concat</code>, <code>lower</code>, <code>upper</code>, <code>replace</code>, <code>substring</code>, ...)</td>
+<td><a href="../String/">Zeichenketten</a></td>
+<td>Textfunktionen (<code>concat</code>, <code>lower</code>, <code>upper</code>, <code>replace</code>, <code>substring</code>, ...)</td>
 </tr>
 <tr>
-<td><a href="../Datetime/">Date and time</a></td>
-<td>Current date, conversions, date parts, intervals and date differences</td>
+<td><a href="../Datetime/">Datum und Uhrzeit</a></td>
+<td>Aktuelles Datum, Konvertierungen, Datumsbestandteile, Intervalle und Datumsdifferenzen</td>
 </tr>
 <tr>
 <td><a href="../Nullable/">Nullable</a></td>
 <td><code>nvl</code>, <code>nvl2</code>, <code>isNull</code>, <code>isNotNull</code></td>
 </tr>
 <tr>
-<td><a href="../Bitwise/">Bitwise</a></td>
+<td><a href="../Bitwise/">Bitweise</a></td>
 <td><code>~</code>, <code>&amp;</code>, <code>|</code>, <code>^</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="aggregation-and-sorting">Aggregation and sorting<a class="headerlink" href="#aggregation-and-sorting" title="Permanent link">&para;</a></h2>
+<h2 id="aggregation-and-sorting">Aggregation und Sortierung<a class="headerlink" href="#aggregation-and-sorting" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Page</th>
-<th>Contents</th>
+<th>Seite</th>
+<th>Inhalt</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Group/">Group</a></td>
-<td>Aggregate functions: <code>count</code>, <code>sum</code>, <code>avg</code>, <code>min</code>, <code>max</code>, <code>first</code>, <code>last</code></td>
+<td><a href="../Group/">Gruppe</a></td>
+<td>Aggregatfunktionen: <code>count</code>, <code>sum</code>, <code>avg</code>, <code>min</code>, <code>max</code>, <code>first</code>, <code>last</code></td>
 </tr>
 <tr>
-<td><a href="../Sort/">Sort</a></td>
-<td><code>asc</code> and <code>desc</code>, used in <code>sort</code></td>
+<td><a href="../Sort/">Sortierung</a></td>
+<td><code>asc</code> und <code>desc</code>, verwendet in <code>sort</code></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>To check how a query is translated for a given data source without running it, use <a href="../../Metadata/"><code>orm.plan</code></a>.</p>
+<p class="admonition-title">Tipp</p>
+<p>Um zu prüfen, wie eine Abfrage für eine bestimmte Datenquelle übersetzt wird, ohne sie auszuführen, verwenden Sie <a href="../../Metadata/"><code>orm.plan</code></a>.</p>
 </div>
 
 

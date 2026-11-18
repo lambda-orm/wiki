@@ -1035,7 +1035,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Ejemplo
     </span>
   </a>
   
@@ -1044,7 +1044,7 @@
         <li class="md-nav__item">
   <a href="#advantages" class="md-nav__link">
     <span class="md-ellipsis">
-      Advantages
+      Ventajas
     </span>
   </a>
   
@@ -1053,7 +1053,7 @@
         <li class="md-nav__item">
   <a href="#query-methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Query methods
+      Métodos de consulta
     </span>
   </a>
   
@@ -1062,7 +1062,7 @@
         <li class="md-nav__item">
   <a href="#operators" class="md-nav__link">
     <span class="md-ellipsis">
-      Operators
+      Operadores
     </span>
   </a>
   
@@ -1071,7 +1071,7 @@
         <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Functions
+      Funciones
     </span>
   </a>
   
@@ -1373,7 +1373,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1683,7 +1683,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2056,7 +2056,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2310,7 +2310,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2994,7 +2994,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Ejemplo
     </span>
   </a>
   
@@ -3003,7 +3003,7 @@
         <li class="md-nav__item">
   <a href="#advantages" class="md-nav__link">
     <span class="md-ellipsis">
-      Advantages
+      Ventajas
     </span>
   </a>
   
@@ -3012,7 +3012,7 @@
         <li class="md-nav__item">
   <a href="#query-methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Query methods
+      Métodos de consulta
     </span>
   </a>
   
@@ -3021,7 +3021,7 @@
         <li class="md-nav__item">
   <a href="#operators" class="md-nav__link">
     <span class="md-ellipsis">
-      Operators
+      Operadores
     </span>
   </a>
   
@@ -3030,7 +3030,7 @@
         <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Functions
+      Funciones
     </span>
   </a>
   
@@ -3052,18 +3052,18 @@
 
 
 
-<h1 id="lambda-expressions">Lambda expressions<a class="headerlink" href="#lambda-expressions" title="Permanent link">&para;</a></h1>
-<p>This page summarizes the building blocks of a λORM query: the methods you chain on an entity, and the operators and functions you can use inside the lambdas. Use it as a quick reference; each method links to the page with its examples.</p>
-<p>Queries are <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">lambda expressions</a> written in the programming language itself. They refer to the entities and properties of the domain, so they are independent of the database language and of how the data is stored.</p>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
-<p>The following query reads the products whose name starts with "A", with the name of their category, sorted by category (ascending) and product (descending), and returns the first page of 10 records:</p>
+<h1 id="lambda-expressions">Expresiones lambda<a class="headerlink" href="#lambda-expressions" title="Permanent link">&para;</a></h1>
+<p>Esta página resume las piezas de una consulta de λORM: los métodos que se encadenan sobre una entidad y los operadores y funciones que se pueden usar dentro de las lambdas. Sirve como referencia rápida; cada método enlaza con la página de sus ejemplos.</p>
+<p>Las consultas son <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">expresiones lambda</a> escritas en el propio lenguaje de programación. Hacen referencia a las entidades y propiedades del dominio, por lo que son independientes del lenguaje de la base de datos y de cómo se almacenan los datos.</p>
+<h2 id="example">Ejemplo<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<p>La siguiente consulta lee los productos cuyo nombre empieza por "A", con el nombre de su categoría, ordenados por categoría (ascendente) y producto (descendente), y devuelve la primera página de 10 registros:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">Products</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">upper</span><span class="p">(</span><span class="nx">substr</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"A"</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">p.category.name</span><span class="p">,</span><span class="w"> </span><span class="nx">product</span><span class="o">:</span><span class="w"> </span><span class="kt">p.name</span><span class="w"> </span><span class="p">}))</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="nx">p</span><span class="p">.</span><span class="nx">category</span><span class="p">,</span><span class="w"> </span><span class="nx">desc</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">product</span><span class="p">)])</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="p">.</span><span class="nx">page</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span>
 </code></pre></div>
-<p>On Oracle, λORM translates it into:</p>
+<p>En Oracle, λORM la traduce a:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">CategoryName</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">"category"</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">ProductName</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">"product"</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Products</span><span class="w"> </span><span class="n">p</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">Categories</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">CategoryID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">CategoryID</span>
@@ -3071,158 +3071,158 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="ss">"category"</span><span class="w"> </span><span class="k">asc</span><span class="p">,</span><span class="w"> </span><span class="ss">"product"</span><span class="w"> </span><span class="k">desc</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">OFFSET</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">ROWS</span><span class="w"> </span><span class="k">FETCH</span><span class="w"> </span><span class="k">NEXT</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">ROWS</span><span class="w"> </span><span class="k">ONLY</span>
 </code></pre></div>
-<p>The same query runs on any other engine: on MySQL, for example, the pagination becomes <code>LIMIT 0,10</code>.</p>
-<h2 id="advantages">Advantages<a class="headerlink" href="#advantages" title="Permanent link">&para;</a></h2>
+<p>La misma consulta se ejecuta en cualquier otro motor de base de datos: en MySQL, por ejemplo, la paginación se convierte en <code>LIMIT 0,10</code>.</p>
+<h2 id="advantages">Ventajas<a class="headerlink" href="#advantages" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Queries are written in the same programming language as the application.</li>
-<li>There is no new language to learn.</li>
-<li>Expressions are easy to write and to read.</li>
-<li>The IDE's IntelliSense helps you write the expressions.</li>
-<li>Syntax errors are caught while you write.</li>
+<li>Las consultas se escriben en el mismo lenguaje de programación que la aplicación.</li>
+<li>No hay que aprender un lenguaje nuevo.</li>
+<li>Las expresiones son fáciles de escribir y de leer.</li>
+<li>El IntelliSense del IDE ayuda a escribir las expresiones.</li>
+<li>Los errores de sintaxis se detectan mientras se escribe.</li>
 </ul>
-<h2 id="query-methods">Query methods<a class="headerlink" href="#query-methods" title="Permanent link">&para;</a></h2>
+<h2 id="query-methods">Métodos de consulta<a class="headerlink" href="#query-methods" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Method</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">SQL equivalent</th>
-<th style="text-align: left;">Examples</th>
+<th style="text-align: left;">Método</th>
+<th style="text-align: left;">Descripción</th>
+<th style="text-align: left;">Equivalente SQL</th>
+<th style="text-align: left;">Ejemplos</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">filter</td>
-<td style="text-align: left;">Filters the records.</td>
+<td style="text-align: left;">Filtra los registros.</td>
 <td style="text-align: left;">WHERE</td>
 <td style="text-align: left;"><a href="../Select/">Select</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">having</td>
-<td style="text-align: left;">Filters the groups.</td>
+<td style="text-align: left;">Filtra los grupos.</td>
 <td style="text-align: left;">HAVING</td>
-<td style="text-align: left;"><a href="../Grouping/">Grouping</a></td>
+<td style="text-align: left;"><a href="../Grouping/">Agrupación</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">map</td>
-<td style="text-align: left;">Specifies the properties to return.</td>
+<td style="text-align: left;">Indica las propiedades a devolver.</td>
 <td style="text-align: left;">SELECT</td>
 <td style="text-align: left;"><a href="../Select/">Select</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">distinct</td>
-<td style="text-align: left;">Specifies the properties to return, removing duplicate records.</td>
+<td style="text-align: left;">Indica las propiedades a devolver, eliminando los registros duplicados.</td>
 <td style="text-align: left;">SELECT DISTINCT</td>
 <td style="text-align: left;"><a href="../Select/">Select</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">first</td>
-<td style="text-align: left;">Returns the first record.</td>
+<td style="text-align: left;">Devuelve el primer registro.</td>
 <td style="text-align: left;">SELECT + ORDER BY + LIMIT</td>
 <td style="text-align: left;"><a href="../Select/">Select</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">last</td>
-<td style="text-align: left;">Returns the last record.</td>
+<td style="text-align: left;">Devuelve el último registro.</td>
 <td style="text-align: left;">SELECT + ORDER BY DESC + LIMIT</td>
 <td style="text-align: left;"><a href="../Select/">Select</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">sort</td>
-<td style="text-align: left;">Specifies the order of the records.</td>
+<td style="text-align: left;">Indica el orden de los registros.</td>
 <td style="text-align: left;">ORDER BY</td>
 <td style="text-align: left;"><a href="../Select/">Select</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">page</td>
-<td style="text-align: left;">Paginates the records.</td>
-<td style="text-align: left;">LIMIT / OFFSET (depends on the dialect)</td>
+<td style="text-align: left;">Pagina los registros.</td>
+<td style="text-align: left;">LIMIT / OFFSET (depende del dialecto)</td>
 <td style="text-align: left;"><a href="../Select/">Select</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">include</td>
-<td style="text-align: left;">Loads the records of related entities.</td>
+<td style="text-align: left;">Carga los registros de entidades relacionadas.</td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"><a href="../Include/">Include</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">insert</td>
-<td style="text-align: left;">Inserts a record.</td>
+<td style="text-align: left;">Inserta un registro.</td>
 <td style="text-align: left;">INSERT</td>
 <td style="text-align: left;"><a href="../Insert/">Insert</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">upsert</td>
-<td style="text-align: left;">Inserts a record, or updates it if one with the same primary key exists.</td>
+<td style="text-align: left;">Inserta un registro, o lo actualiza si ya existe uno con la misma clave primaria.</td>
 <td style="text-align: left;">INSERT … ON CONFLICT / MERGE</td>
 <td style="text-align: left;"><a href="../Insert/#upsert">Insert</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">bulkInsert</td>
-<td style="text-align: left;">Inserts many records at once.</td>
+<td style="text-align: left;">Inserta muchos registros a la vez.</td>
 <td style="text-align: left;">INSERT</td>
-<td style="text-align: left;"><a href="../BulkInsert/">Bulk Insert</a></td>
+<td style="text-align: left;"><a href="../BulkInsert/">Inserción masiva</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">update</td>
-<td style="text-align: left;">Updates records; it always has a filter.</td>
-<td style="text-align: left;">UPDATE with WHERE</td>
+<td style="text-align: left;">Actualiza registros; siempre tiene un filtro.</td>
+<td style="text-align: left;">UPDATE con WHERE</td>
 <td style="text-align: left;"><a href="../Update/">Update</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">updateAll</td>
-<td style="text-align: left;">Updates all the records of an entity.</td>
-<td style="text-align: left;">UPDATE without WHERE</td>
+<td style="text-align: left;">Actualiza todos los registros de una entidad.</td>
+<td style="text-align: left;">UPDATE sin WHERE</td>
 <td style="text-align: left;"><a href="../Update/">Update</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">delete</td>
-<td style="text-align: left;">Deletes records; it always has a filter.</td>
-<td style="text-align: left;">DELETE with WHERE</td>
+<td style="text-align: left;">Elimina registros; siempre tiene un filtro.</td>
+<td style="text-align: left;">DELETE con WHERE</td>
 <td style="text-align: left;"><a href="../Delete/">Delete</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">deleteAll</td>
-<td style="text-align: left;">Deletes all the records of an entity.</td>
-<td style="text-align: left;">DELETE without WHERE</td>
+<td style="text-align: left;">Elimina todos los registros de una entidad.</td>
+<td style="text-align: left;">DELETE sin WHERE</td>
 <td style="text-align: left;"><a href="../Delete/">Delete</a></td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>There is no method for joins: an INNER JOIN is deduced when the query navigates a relation, as in <code>p.category.name</code> (see <a href="../Join/">Join</a>).</li>
-<li>There is no method for GROUP BY: it is deduced when an aggregate function is used (see <a href="../Grouping/">Grouping</a>).</li>
+<li>No hay un método para los joins: se deduce un INNER JOIN cuando la consulta navega por una relación, como en <code>p.category.name</code> (ver <a href="../Join/">Join</a>).</li>
+<li>No hay un método para GROUP BY: se deduce cuando se usa una función de agregación (ver <a href="../Grouping/">Agrupación</a>).</li>
 </ul>
-<h2 id="operators">Operators<a class="headerlink" href="#operators" title="Permanent link">&para;</a></h2>
-<p>The operators are the same as in JavaScript.</p>
+<h2 id="operators">Operadores<a class="headerlink" href="#operators" title="Permanent link">&para;</a></h2>
+<p>Los operadores son los mismos que en JavaScript.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Category</th>
-<th style="text-align: left;">Operators</th>
-<th style="text-align: left;">More info</th>
+<th style="text-align: left;">Categoría</th>
+<th style="text-align: left;">Operadores</th>
+<th style="text-align: left;">Más información</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">Arithmetic</td>
+<td style="text-align: left;">Aritméticos</td>
 <td style="text-align: left;"><code>-</code>, <code>+</code>, <code>*</code>, <code>/</code>, <code>**</code>, <code>//</code>, <code>%</code></td>
-<td style="text-align: left;"><a href="../operatorsAndFunctions/Numeric/">Numeric</a></td>
+<td style="text-align: left;"><a href="../operatorsAndFunctions/Numeric/">Numéricos</a></td>
 </tr>
 <tr>
-<td style="text-align: left;">Bitwise</td>
+<td style="text-align: left;">A nivel de bits</td>
 <td style="text-align: left;"><code>~</code>, <code>&amp;</code>, <code>\|</code>, <code>^</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code></td>
-<td style="text-align: left;"><a href="../operatorsAndFunctions/Bitwise/">Bitwise</a></td>
+<td style="text-align: left;"><a href="../operatorsAndFunctions/Bitwise/">A nivel de bits</a></td>
 </tr>
 <tr>
-<td style="text-align: left;">Comparison</td>
+<td style="text-align: left;">Comparación</td>
 <td style="text-align: left;"><code>==</code>, <code>===</code>, <code>!=</code>, <code>!==</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></td>
-<td style="text-align: left;"><a href="../operatorsAndFunctions/Comparison/">Comparison</a></td>
+<td style="text-align: left;"><a href="../operatorsAndFunctions/Comparison/">Comparación</a></td>
 </tr>
 <tr>
-<td style="text-align: left;">Logical</td>
+<td style="text-align: left;">Lógicos</td>
 <td style="text-align: left;"><code>!</code>, <code>&amp;&amp;</code>, <code>\|\|</code></td>
-<td style="text-align: left;"><a href="../operatorsAndFunctions/Logical/">Logical</a></td>
+<td style="text-align: left;"><a href="../operatorsAndFunctions/Logical/">Lógicos</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">Array</td>
@@ -3231,69 +3231,69 @@
 </tr>
 </tbody>
 </table>
-<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
+<h2 id="functions">Funciones<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Category</th>
-<th style="text-align: left;">Functions</th>
-<th style="text-align: left;">More info</th>
+<th style="text-align: left;">Categoría</th>
+<th style="text-align: left;">Funciones</th>
+<th style="text-align: left;">Más información</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">Numeric</td>
+<td style="text-align: left;">Numéricas</td>
 <td style="text-align: left;">abs, ceil, cos, exp, ln, log, remainder, round, sign, sin, tan, trunc…</td>
-<td style="text-align: left;"><a href="../operatorsAndFunctions/Numeric/">Numeric</a></td>
+<td style="text-align: left;"><a href="../operatorsAndFunctions/Numeric/">Numéricos</a></td>
 </tr>
 <tr>
-<td style="text-align: left;">String</td>
+<td style="text-align: left;">Cadenas</td>
 <td style="text-align: left;">chr, lower, lpad, ltrim, replace, rpad, rtrim, substr, trim, upper, concat…</td>
-<td style="text-align: left;"><a href="../operatorsAndFunctions/String/">String</a></td>
+<td style="text-align: left;"><a href="../operatorsAndFunctions/String/">Cadenas</a></td>
 </tr>
 <tr>
-<td style="text-align: left;">Datetime</td>
+<td style="text-align: left;">Fecha y hora</td>
 <td style="text-align: left;">curTime, today, now, time, date, dateTime, year, month, day, weekday, hours…</td>
-<td style="text-align: left;"><a href="../operatorsAndFunctions/Datetime/">Datetime</a></td>
+<td style="text-align: left;"><a href="../operatorsAndFunctions/Datetime/">Fecha y hora</a></td>
 </tr>
 <tr>
-<td style="text-align: left;">Convert</td>
+<td style="text-align: left;">Conversión</td>
 <td style="text-align: left;">toString, toJson, toNumber</td>
-<td style="text-align: left;"><a href="../operatorsAndFunctions/String/">String</a></td>
+<td style="text-align: left;"><a href="../operatorsAndFunctions/String/">Cadenas</a></td>
 </tr>
 <tr>
-<td style="text-align: left;">Nullable</td>
+<td style="text-align: left;">Nulos</td>
 <td style="text-align: left;">nvl, nvl2, isNull, isNotNull</td>
-<td style="text-align: left;"><a href="../operatorsAndFunctions/Nullable/">Nullable</a></td>
+<td style="text-align: left;"><a href="../operatorsAndFunctions/Nullable/">Nulos</a></td>
 </tr>
 <tr>
-<td style="text-align: left;">General</td>
+<td style="text-align: left;">Generales</td>
 <td style="text-align: left;">as, distinct</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr>
-<td style="text-align: left;">Sort</td>
+<td style="text-align: left;">Ordenación</td>
 <td style="text-align: left;">asc, desc</td>
-<td style="text-align: left;"><a href="../operatorsAndFunctions/Sort/">Sort</a></td>
+<td style="text-align: left;"><a href="../operatorsAndFunctions/Sort/">Ordenación</a></td>
 </tr>
 <tr>
-<td style="text-align: left;">Condition</td>
+<td style="text-align: left;">Condición</td>
 <td style="text-align: left;">between, includes</td>
-<td style="text-align: left;"><a href="../operatorsAndFunctions/Comparison/">Comparison</a></td>
+<td style="text-align: left;"><a href="../operatorsAndFunctions/Comparison/">Comparación</a></td>
 </tr>
 <tr>
-<td style="text-align: left;">Group</td>
+<td style="text-align: left;">Agrupación</td>
 <td style="text-align: left;">avg, count, first, last, max, min, sum</td>
-<td style="text-align: left;"><a href="../operatorsAndFunctions/Group/">Group</a></td>
+<td style="text-align: left;"><a href="../operatorsAndFunctions/Group/">Agrupación</a></td>
 </tr>
 <tr>
-<td style="text-align: left;">Metadata</td>
+<td style="text-align: left;">Metadatos</td>
 <td style="text-align: left;">user, source</td>
 <td style="text-align: left;"></td>
 </tr>
 </tbody>
 </table>
-<p>See <a href="../operatorsAndFunctions/OperatorsAndFunctions/">Operators &amp; Functions</a> for the full reference.</p>
+<p>Consultar <a href="../operatorsAndFunctions/OperatorsAndFunctions/">Operadores y funciones</a> para la referencia completa.</p>
 
 
 

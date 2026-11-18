@@ -1288,7 +1288,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1473,7 +1473,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Resumo
     </span>
   </a>
   
@@ -1518,7 +1518,7 @@
         <li class="md-nav__item">
   <a href="#database-support" class="md-nav__link">
     <span class="md-ellipsis">
-      Database support
+      Suporte nos bancos de dados
     </span>
   </a>
   
@@ -1694,7 +1694,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2067,7 +2067,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2321,7 +2321,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -3005,7 +3005,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Resumo
     </span>
   </a>
   
@@ -3050,7 +3050,7 @@
         <li class="md-nav__item">
   <a href="#database-support" class="md-nav__link">
     <span class="md-ellipsis">
-      Database support
+      Suporte nos bancos de dados
     </span>
   </a>
   
@@ -3072,99 +3072,99 @@
 
 
 
-<h1 id="nullable-functions">Nullable Functions<a class="headerlink" href="#nullable-functions" title="Permanent link">&para;</a></h1>
-<p>Nullable functions check whether a value is null, or replace null values with another value.</p>
+<h1 id="nullable-functions">Funções para nulos<a class="headerlink" href="#nullable-functions" title="Permanent link">&para;</a></h1>
+<p>As funções para nulos verificam se um valor é nulo ou substituem valores nulos por outro valor.</p>
 <div class="admonition note">
-<p class="admonition-title">About the examples</p>
-<p>The examples run against the <code>Countries</code> and <code>States</code> entities of the countries sample schema. Each one shows the query, the result it returned on the test database and the SQL sentence that λORM generated. In the test schema, <code>Countries</code> is stored in MySQL and <code>States</code> in PostgreSQL (mapped to the <code>TBL_STATES</code> table), so the SQL of each example is shown in the dialect of its data source. To see the sentence generated for your data source, use <a href="../../Metadata/"><code>orm.plan</code></a>.</p>
+<p class="admonition-title">Sobre os exemplos</p>
+<p>Os exemplos são executados sobre as entidades <code>Countries</code> e <code>States</code> do esquema de exemplo de países. Cada um mostra a consulta, o resultado que ela retornou no banco de dados de teste e a sentença SQL que o λORM gerou. No esquema de teste, <code>Countries</code> é armazenada em MySQL e <code>States</code> em PostgreSQL (mapeada para a tabela <code>TBL_STATES</code>), por isso o SQL de cada exemplo é mostrado no dialeto da sua fonte de dados. Para ver a sentença gerada para a sua fonte de dados, use <a href="../../Metadata/"><code>orm.plan</code></a>.</p>
 </div>
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<h2 id="summary">Resumo<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Function</th>
-<th>Description</th>
+<th>Função</th>
+<th>Descrição</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>nvl</code></td>
-<td>Returns a default value when the value is null</td>
+<td>Retorna um valor padrão quando o valor é nulo</td>
 </tr>
 <tr>
 <td><code>nvl2</code></td>
-<td>Returns one value when the value is not null and another when it is null</td>
+<td>Retorna um valor quando o valor não é nulo e outro quando é nulo</td>
 </tr>
 <tr>
 <td><code>isNull</code></td>
-<td>Checks whether a value is null</td>
+<td>Verifica se um valor é nulo</td>
 </tr>
 <tr>
 <td><code>isNotNull</code></td>
-<td>Checks whether a value is not null</td>
+<td>Verifica se um valor não é nulo</td>
 </tr>
 </tbody>
 </table>
 <h2 id="nvl">nvl<a class="headerlink" href="#nvl" title="Permanent link">&para;</a></h2>
-<p>Returns <code>value</code> when it is not null; otherwise returns <code>default</code>.</p>
-<p><strong>Signature:</strong> <code>nvl(value: T, default: T): T</code></p>
-<p>Number of states whose latitude is null (null is replaced with -100, so the condition matches it):</p>
+<p>Retorna <code>value</code> quando não é nulo; caso contrário, retorna <code>default</code>.</p>
+<p><strong>Assinatura:</strong> <code>nvl(value: T, default: T): T</code></p>
+<p>Número de estados cuja latitude é nula (o nulo é substituído por -100, então a condição o atende):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">States</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">nvl</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">latitude</span><span class="p">,</span><span class="o">-</span><span class="mf">100</span><span class="p">)</span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mf">100</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">count</span><span class="p">(</span><span class="mf">1</span><span class="p">))</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"count":68}]</code></p>
-<p><strong>Generated SQL (PostgreSQL):</strong></p>
+<p><strong>Resultado:</strong> <code>[{"count":68}]</code></p>
+<p><strong>SQL gerado (PostgreSQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">TBL_STATES</span><span class="w"> </span><span class="n">s</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">LATITUDE</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">LATITUDE</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="o">-</span><span class="mi">100</span><span class="w"> </span><span class="k">END</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">100</span>
 </code></pre></div>
-<p>Native name of the country with ISO 3 code "CIV", or "???" when it is null:</p>
+<p>Nome nativo do país com código ISO 3 "CIV", ou "???" quando é nulo:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"CIV"</span><span class="w"> </span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">native</span><span class="o">:</span><span class="w"> </span><span class="kt">nvl</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="kr">native</span><span class="p">,</span><span class="s2">"???"</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"native":"???"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Resultado:</strong> <code>[{"native":"???"}]</code></p>
+<p><strong>SQL gerado (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">IFNULL</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">native</span><span class="p">,</span><span class="s1">'???'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">native</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'CIV'</span>
 </code></pre></div>
 <h2 id="nvl2">nvl2<a class="headerlink" href="#nvl2" title="Permanent link">&para;</a></h2>
-<p>Returns <code>a</code> when <code>value</code> is not null, and <code>b</code> when it is null.</p>
-<p><strong>Signature:</strong> <code>nvl2(value: any, a: T, b: T): T</code></p>
+<p>Retorna <code>a</code> quando <code>value</code> não é nulo, e <code>b</code> quando é nulo.</p>
+<p><strong>Assinatura:</strong> <code>nvl2(value: any, a: T, b: T): T</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">iso3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"CIV"</span><span class="w"> </span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">native</span><span class="o">:</span><span class="w"> </span><span class="kt">nvl2</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="kr">native</span><span class="p">,</span><span class="s2">"is not null"</span><span class="p">,</span><span class="s2">"is null"</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"native":"is null"}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Resultado:</strong> <code>[{"native":"is null"}]</code></p>
+<p><strong>SQL gerado (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="p">(</span><span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">native</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">'is not null'</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">'is null'</span><span class="w"> </span><span class="k">END</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">native</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'CIV'</span>
 </code></pre></div>
 <h2 id="isnull">isNull<a class="headerlink" href="#isnull" title="Permanent link">&para;</a></h2>
-<p>Returns <code>true</code> when <code>value</code> is null.</p>
-<p><strong>Signature:</strong> <code>isNull(value: any): boolean</code></p>
-<p>Number of states whose latitude is null:</p>
+<p>Retorna <code>true</code> quando <code>value</code> é nulo.</p>
+<p><strong>Assinatura:</strong> <code>isNull(value: any): boolean</code></p>
+<p>Número de estados cuja latitude é nula:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">States</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">isNull</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">latitude</span><span class="p">)).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">count</span><span class="p">(</span><span class="mf">1</span><span class="p">))</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"count":68}]</code></p>
-<p><strong>Generated SQL (PostgreSQL):</strong></p>
+<p><strong>Resultado:</strong> <code>[{"count":68}]</code></p>
+<p><strong>SQL gerado (PostgreSQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">TBL_STATES</span><span class="w"> </span><span class="n">s</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">LATITUDE</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="isnotnull">isNotNull<a class="headerlink" href="#isnotnull" title="Permanent link">&para;</a></h2>
-<p>Returns <code>true</code> when <code>value</code> is not null.</p>
-<p><strong>Signature:</strong> <code>isNotNull(value: any): boolean</code></p>
-<p>Number of states whose latitude is not null:</p>
+<p>Retorna <code>true</code> quando <code>value</code> não é nulo.</p>
+<p><strong>Assinatura:</strong> <code>isNotNull(value: any): boolean</code></p>
+<p>Número de estados cuja latitude não é nula:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">States</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">isNotNull</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">latitude</span><span class="p">)).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">count</span><span class="p">(</span><span class="mf">1</span><span class="p">))</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"count":4813}]</code></p>
-<p><strong>Generated SQL (PostgreSQL):</strong></p>
+<p><strong>Resultado:</strong> <code>[{"count":4813}]</code></p>
+<p><strong>SQL gerado (PostgreSQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">TBL_STATES</span><span class="w"> </span><span class="n">s</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">LATITUDE</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="database-support">Database support<a class="headerlink" href="#database-support" title="Permanent link">&para;</a></h2>
+<h2 id="database-support">Suporte nos bancos de dados<a class="headerlink" href="#database-support" title="Permanent link">&para;</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">MongoDB</p>
-<p>In the current version, <code>nvl</code>, <code>nvl2</code>, <code>isNull</code> and <code>isNotNull</code> cannot be translated to MongoDB queries.</p>
+<p>Na versão atual, <code>nvl</code>, <code>nvl2</code>, <code>isNull</code> e <code>isNotNull</code> não podem ser traduzidas para consultas MongoDB.</p>
 </div>
 
 

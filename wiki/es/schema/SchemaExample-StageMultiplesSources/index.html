@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1593,7 +1593,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1907,7 +1907,7 @@
         <li class="md-nav__item">
   <a href="#multiple-sources-sharing-the-mapping" class="md-nav__link">
     <span class="md-ellipsis">
-      Multiple sources sharing the mapping
+      Varias fuentes que comparten el mapping
     </span>
   </a>
   
@@ -1916,7 +1916,7 @@
         <li class="md-nav__item">
   <a href="#multiple-sources-with-different-mappings" class="md-nav__link">
     <span class="md-ellipsis">
-      Multiple sources with different mappings
+      Varias fuentes con distintos mappings
     </span>
   </a>
   
@@ -1925,7 +1925,7 @@
         <li class="md-nav__item">
   <a href="#labs" class="md-nav__link">
     <span class="md-ellipsis">
-      Labs
+      Laboratorios
     </span>
   </a>
   
@@ -2043,7 +2043,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2297,7 +2297,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2981,7 +2981,7 @@
         <li class="md-nav__item">
   <a href="#multiple-sources-sharing-the-mapping" class="md-nav__link">
     <span class="md-ellipsis">
-      Multiple sources sharing the mapping
+      Varias fuentes que comparten el mapping
     </span>
   </a>
   
@@ -2990,7 +2990,7 @@
         <li class="md-nav__item">
   <a href="#multiple-sources-with-different-mappings" class="md-nav__link">
     <span class="md-ellipsis">
-      Multiple sources with different mappings
+      Varias fuentes con distintos mappings
     </span>
   </a>
   
@@ -2999,7 +2999,7 @@
         <li class="md-nav__item">
   <a href="#labs" class="md-nav__link">
     <span class="md-ellipsis">
-      Labs
+      Laboratorios
     </span>
   </a>
   
@@ -3021,17 +3021,17 @@
 
 
 
-<h1 id="stage-with-multiple-sources">Stage with Multiple Sources<a class="headerlink" href="#stage-with-multiple-sources" title="Permanent link">&para;</a></h1>
-<p>This page shows a stage whose entities are stored in different databases, first with the same mapping and then with a different mapping for each source.</p>
+<h1 id="stage-with-multiple-sources">Stage con varias fuentes<a class="headerlink" href="#stage-with-multiple-sources" title="Permanent link">&para;</a></h1>
+<p>Esta página muestra un stage cuyas entidades se guardan en distintas bases de datos, primero con el mismo mapping y después con un mapping distinto para cada fuente.</p>
 <ul>
-<li>When the entities are in different databases, the stage says which source each entity uses.</li>
-<li>This is done with the <strong>condition</strong> of each source rule: an expression evaluated for each entity; when it is true, that source is used.</li>
-<li>The conditions are evaluated in the order of the stage, so when an entity meets the conditions of two sources, the first one is used. A source without condition takes the entities that no previous source took.</li>
+<li>Cuando las entidades están en distintas bases de datos, el stage indica qué fuente usa cada entidad.</li>
+<li>Esto se hace con la <strong>condition</strong> de cada regla de fuente: una expresión que se evalúa para cada entidad; cuando es verdadera, se usa esa fuente.</li>
+<li>Las condiciones se evalúan en el orden del stage, así que cuando una entidad cumple las condiciones de dos fuentes, se usa la primera. Una fuente sin condición toma las entidades que no tomó ninguna fuente anterior.</li>
 </ul>
-<h2 id="multiple-sources-sharing-the-mapping">Multiple sources sharing the mapping<a class="headerlink" href="#multiple-sources-sharing-the-mapping" title="Permanent link">&para;</a></h2>
-<p>In this schema, <code>States</code> is stored in a PostgreSQL database (<code>dataSource2</code>) and every other entity in a MySQL database (<code>dataSource1</code>).
-Both sources use the same mapping (the default one, since none is defined), so the tables and columns have the same names as the entities and properties.</p>
-<p><img alt="schema" src="../../../schema/images/schema4.svg" /></p>
+<h2 id="multiple-sources-sharing-the-mapping">Varias fuentes que comparten el mapping<a class="headerlink" href="#multiple-sources-sharing-the-mapping" title="Permanent link">&para;</a></h2>
+<p>En este esquema, <code>States</code> se guarda en una base de datos PostgreSQL (<code>dataSource2</code>) y todas las demás entidades en una base de datos MySQL (<code>dataSource1</code>).
+Ambas fuentes usan el mismo mapping (el mapping por defecto, ya que no se define ninguno), así que las tablas y las columnas tienen los mismos nombres que las entidades y las propiedades.</p>
+<p><img alt="esquema" src="../../../schema/images/schema4.svg" /></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">domain</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Countries</span>
@@ -3092,11 +3092,11 @@ Both sources use the same mapping (the default one, since none is defined), so t
 <a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a><span class="w">          </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">entity == "States"</span>
 <a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dataSource1</span>
 </code></pre></div>
-<h2 id="multiple-sources-with-different-mappings">Multiple sources with different mappings<a class="headerlink" href="#multiple-sources-with-different-mappings" title="Permanent link">&para;</a></h2>
-<p>In this schema, <code>dataSource1</code> is a MySQL database that holds the <code>Countries</code> table, and <code>dataSource2</code> is a PostgreSQL database that holds the <code>States</code> table.</p>
-<p>For <code>Countries</code>, the names of the table and its columns are the same as the names of the entity and its properties, so its mapping (<code>mapping1</code>) is empty.
-For <code>States</code>, the names of the table and its columns are different, so <code>mapping2</code> defines them.</p>
-<p><img alt="schema" src="../../../schema/images/schema5.svg" /></p>
+<h2 id="multiple-sources-with-different-mappings">Varias fuentes con distintos mappings<a class="headerlink" href="#multiple-sources-with-different-mappings" title="Permanent link">&para;</a></h2>
+<p>En este esquema, <code>dataSource1</code> es una base de datos MySQL que contiene la tabla <code>Countries</code>, y <code>dataSource2</code> es una base de datos PostgreSQL que contiene la tabla <code>States</code>.</p>
+<p>Para <code>Countries</code>, los nombres de la tabla y de sus columnas son los mismos que los de la entidad y sus propiedades, así que su mapping (<code>mapping1</code>) está vacío.
+Para <code>States</code>, los nombres de la tabla y de sus columnas son distintos, así que <code>mapping2</code> los define.</p>
+<p><img alt="esquema" src="../../../schema/images/schema5.svg" /></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">domain</span><span class="p">:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Positions</span>
@@ -3177,11 +3177,11 @@ For <code>States</code>, the names of the table and its columns are different, s
 <a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a><span class="w">          </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">entity == "States"</span>
 <a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dataSource1</span>
 </code></pre></div>
-<p><strong>Environment variables:</strong></p>
+<p><strong>Variables de entorno:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">CNN_MYSQL</span><span class="o">={</span><span class="s2">"host"</span>:<span class="s2">"localhost"</span>,<span class="s2">"port"</span>:3306,<span class="s2">"user"</span>:<span class="s2">"test"</span>,<span class="s2">"password"</span>:<span class="s2">"test"</span>,<span class="s2">"database"</span>:<span class="s2">"test"</span><span class="o">}</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">CNN_POSTGRES</span><span class="o">={</span><span class="s2">"host"</span>:<span class="s2">"localhost"</span>,<span class="s2">"port"</span>:5433,<span class="s2">"user"</span>:<span class="s2">"test"</span>,<span class="s2">"password"</span>:<span class="s2">"test"</span>,<span class="s2">"database"</span>:<span class="s2">"test"</span><span class="o">}</span>
 </code></pre></div>
-<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h2 id="labs">Laboratorios<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/04-two-datasource-same-query">CLI - two datasource same query</a></li>
 </ul>

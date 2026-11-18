@@ -1288,7 +1288,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1519,7 +1519,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Resumo
     </span>
   </a>
   
@@ -1712,7 +1712,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2085,7 +2085,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2339,7 +2339,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -3023,7 +3023,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Resumo
     </span>
   </a>
   
@@ -3108,67 +3108,67 @@
 
 
 
-<h1 id="aggregate-functions">Aggregate Functions<a class="headerlink" href="#aggregate-functions" title="Permanent link">&para;</a></h1>
-<p>Aggregate (group) functions calculate a single value from a set of rows. When a query's <code>map</code> mixes aggregate functions with other fields, λORM groups the rows by those other fields (<code>GROUP BY</code> in SQL). See <a href="../../Grouping/">Grouping</a> for more examples, including <code>having</code>.</p>
+<h1 id="aggregate-functions">Funções de agregação<a class="headerlink" href="#aggregate-functions" title="Permanent link">&para;</a></h1>
+<p>As funções de agregação (de grupo) calculam um único valor a partir de um conjunto de linhas. Quando o <code>map</code> de uma consulta mistura funções de agregação com outros campos, o λORM agrupa as linhas por esses outros campos (<code>GROUP BY</code> em SQL). Veja <a href="../../Grouping/">Agrupamento</a> para mais exemplos, incluindo <code>having</code>.</p>
 <div class="admonition note">
-<p class="admonition-title">About the examples</p>
-<p>The examples run against the <code>Countries</code> entity of the countries sample schema. Each one shows the query, the result it returned on the test database and the SQL sentence that λORM generated for MySQL. Other engines receive their own translation; to see the sentence generated for your data source, use <a href="../../Metadata/"><code>orm.plan</code></a>.</p>
+<p class="admonition-title">Sobre os exemplos</p>
+<p>Os exemplos são executados sobre a entidade <code>Countries</code> do esquema de exemplo de países. Cada um mostra a consulta, o resultado que ela retornou no banco de dados de teste e a sentença SQL que o λORM gerou para MySQL. Os demais mecanismos de banco de dados recebem sua própria tradução; para ver a sentença gerada para a sua fonte de dados, use <a href="../../Metadata/"><code>orm.plan</code></a>.</p>
 </div>
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<h2 id="summary">Resumo<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Function</th>
-<th>Description</th>
+<th>Função</th>
+<th>Descrição</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>avg</code></td>
-<td>Average of the values</td>
+<td>Média dos valores</td>
 </tr>
 <tr>
 <td><code>count</code></td>
-<td>Number of rows</td>
+<td>Número de linhas</td>
 </tr>
 <tr>
 <td><code>first</code></td>
-<td>First value of the set</td>
+<td>Primeiro valor do conjunto</td>
 </tr>
 <tr>
 <td><code>last</code></td>
-<td>Last value of the set</td>
+<td>Último valor do conjunto</td>
 </tr>
 <tr>
 <td><code>max</code></td>
-<td>Maximum value</td>
+<td>Valor máximo</td>
 </tr>
 <tr>
 <td><code>min</code></td>
-<td>Minimum value</td>
+<td>Valor mínimo</td>
 </tr>
 <tr>
 <td><code>sum</code></td>
-<td>Sum of the values</td>
+<td>Soma dos valores</td>
 </tr>
 </tbody>
 </table>
 <h2 id="count">count<a class="headerlink" href="#count" title="Permanent link">&para;</a></h2>
-<p>Returns the number of rows in the set. <code>count(1)</code> counts all the rows.</p>
-<p><strong>Signature:</strong> <code>count(value: any): integer</code></p>
-<p>Number of countries in the Americas region:</p>
+<p>Retorna o número de linhas do conjunto. <code>count(1)</code> conta todas as linhas.</p>
+<p><strong>Assinatura:</strong> <code>count(value: any): integer</code></p>
+<p>Número de países da região Americas:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">region</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Americas"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">result</span><span class="o">:</span><span class="kt">count</span><span class="p">(</span><span class="mf">1</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong> <code>[{"result":57}]</code></p>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>Resultado:</strong> <code>[{"result":57}]</code></p>
+<p><strong>SQL gerado (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">result</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Americas'</span>
 </code></pre></div>
-<p>Number of countries in each region:</p>
+<p>Número de países de cada região:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">region</span><span class="o">:</span><span class="kt">p.region</span><span class="p">,</span><span class="nx">countries</span><span class="o">:</span><span class="kt">count</span><span class="p">(</span><span class="mf">1</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong></p>
+<p><strong>Resultado:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">[{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"countries"</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Africa"</span><span class="p">,</span><span class="nt">"countries"</span><span class="p">:</span><span class="mi">60</span><span class="p">}</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Americas"</span><span class="p">,</span><span class="nt">"countries"</span><span class="p">:</span><span class="mi">57</span><span class="p">}</span>
@@ -3178,18 +3178,18 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Polar"</span><span class="p">,</span><span class="nt">"countries"</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">]</span>
 </code></pre></div>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>SQL gerado (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">countries</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span>
 </code></pre></div>
 <h2 id="max">max<a class="headerlink" href="#max" title="Permanent link">&para;</a></h2>
-<p>Returns the maximum value of the set.</p>
-<p><strong>Signature:</strong> <code>max(value: T): T</code></p>
-<p>Maximum latitude of the countries of each region:</p>
+<p>Retorna o valor máximo do conjunto.</p>
+<p><strong>Assinatura:</strong> <code>max(value: T): T</code></p>
+<p>Latitude máxima dos países de cada região:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">region</span><span class="o">:</span><span class="kt">p.region</span><span class="p">,</span><span class="nx">max</span><span class="o">:</span><span class="kt">max</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">latitude</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong></p>
+<p><strong>Resultado:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">[{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"max"</span><span class="p">:</span><span class="mf">-53.1</span><span class="p">}</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Africa"</span><span class="p">,</span><span class="nt">"max"</span><span class="p">:</span><span class="mi">34</span><span class="p">}</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Americas"</span><span class="p">,</span><span class="nt">"max"</span><span class="p">:</span><span class="mi">72</span><span class="p">}</span>
@@ -3199,18 +3199,18 @@
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Polar"</span><span class="p">,</span><span class="nt">"max"</span><span class="p">:</span><span class="mf">-74.65</span><span class="p">}</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">]</span>
 </code></pre></div>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>SQL gerado (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">latitude</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">max</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span>
 </code></pre></div>
 <h2 id="min">min<a class="headerlink" href="#min" title="Permanent link">&para;</a></h2>
-<p>Returns the minimum value of the set.</p>
-<p><strong>Signature:</strong> <code>min(value: T): T</code></p>
-<p>Minimum latitude of the countries of each region:</p>
+<p>Retorna o valor mínimo do conjunto.</p>
+<p><strong>Assinatura:</strong> <code>min(value: T): T</code></p>
+<p>Latitude mínima dos países de cada região:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">region</span><span class="o">:</span><span class="kt">p.region</span><span class="p">,</span><span class="nx">min</span><span class="o">:</span><span class="kt">min</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">latitude</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong></p>
+<p><strong>Resultado:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">[{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"min"</span><span class="p">:</span><span class="mf">-54.4333</span><span class="p">}</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Africa"</span><span class="p">,</span><span class="nt">"min"</span><span class="p">:</span><span class="mf">-49.25</span><span class="p">}</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Americas"</span><span class="p">,</span><span class="nt">"min"</span><span class="p">:</span><span class="mf">-54.5</span><span class="p">}</span>
@@ -3220,18 +3220,18 @@
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Polar"</span><span class="p">,</span><span class="nt">"min"</span><span class="p">:</span><span class="mf">-74.65</span><span class="p">}</span>
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="p">]</span>
 </code></pre></div>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>SQL gerado (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="k">MIN</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">latitude</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">min</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span>
 </code></pre></div>
 <h2 id="avg">avg<a class="headerlink" href="#avg" title="Permanent link">&para;</a></h2>
-<p>Returns the average of the values of the set.</p>
-<p><strong>Signature:</strong> <code>avg(value: number): number</code></p>
-<p>Average latitude of the countries of each region:</p>
+<p>Retorna a média dos valores do conjunto.</p>
+<p><strong>Assinatura:</strong> <code>avg(value: number): number</code></p>
+<p>Latitude média dos países de cada região:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nx">Countries</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">region</span><span class="o">:</span><span class="kt">p.region</span><span class="p">,</span><span class="nx">avg</span><span class="o">:</span><span class="kt">avg</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">latitude</span><span class="p">)})</span>
 </code></pre></div>
-<p><strong>Result:</strong></p>
+<p><strong>Resultado:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">[{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"avg"</span><span class="p">:</span><span class="mf">-53.76665</span><span class="p">}</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Africa"</span><span class="p">,</span><span class="nt">"avg"</span><span class="p">:</span><span class="mf">1.283335</span><span class="p">}</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Americas"</span><span class="p">,</span><span class="nt">"avg"</span><span class="p">:</span><span class="mf">10.42610526</span><span class="p">}</span>
@@ -3241,24 +3241,24 @@
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">,{</span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"Polar"</span><span class="p">,</span><span class="nt">"avg"</span><span class="p">:</span><span class="mf">-74.65</span><span class="p">}</span>
 <a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="p">]</span>
 </code></pre></div>
-<p><strong>Generated SQL (MySQL):</strong></p>
+<p><strong>SQL gerado (MySQL):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">latitude</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">avg</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">region</span>
 </code></pre></div>
 <h2 id="sum">sum<a class="headerlink" href="#sum" title="Permanent link">&para;</a></h2>
-<p>Returns the sum of the values of the set. It is translated to <code>SUM(...)</code> in SQL.</p>
-<p><strong>Signature:</strong> <code>sum(value: number): number</code></p>
+<p>Retorna a soma dos valores do conjunto. É traduzida para <code>SUM(...)</code> em SQL.</p>
+<p><strong>Assinatura:</strong> <code>sum(value: number): number</code></p>
 <h2 id="first">first<a class="headerlink" href="#first" title="Permanent link">&para;</a></h2>
-<p>Returns the first value of the set.</p>
-<p><strong>Signature:</strong> <code>first(value: T): T</code></p>
+<p>Retorna o primeiro valor do conjunto.</p>
+<p><strong>Assinatura:</strong> <code>first(value: T): T</code></p>
 <h2 id="last">last<a class="headerlink" href="#last" title="Permanent link">&para;</a></h2>
-<p>Returns the last value of the set.</p>
-<p><strong>Signature:</strong> <code>last(value: T): T</code></p>
+<p>Retorna o último valor do conjunto.</p>
+<p><strong>Assinatura:</strong> <code>last(value: T): T</code></p>
 <div class="admonition warning">
-<p class="admonition-title">first and last on SQL databases</p>
-<p>On SQL databases, <code>first</code> and <code>last</code> used as aggregates are translated to <code>FIRST(...)</code> and <code>LAST(...)</code>; check that your database engine supports these aggregate functions. On MongoDB they are translated to <code>$first</code> and <code>$last</code>.</p>
-<p>Do not confuse them with the <code>first</code> and <code>last</code> query methods (for example <code>Countries.first(p=&gt; p.name)</code>), which return the first or last row of a query; see <a href="../../Select/">Select</a>.</p>
+<p class="admonition-title">first e last em bancos de dados SQL</p>
+<p>Em bancos de dados SQL, <code>first</code> e <code>last</code> usados como agregados são traduzidos para <code>FIRST(...)</code> e <code>LAST(...)</code>; verifique se o seu mecanismo de banco de dados suporta essas funções de agregação. No MongoDB eles são traduzidos para <code>$first</code> e <code>$last</code>.</p>
+<p>Não os confunda com os métodos de consulta <code>first</code> e <code>last</code> (por exemplo <code>Countries.first(p=&gt; p.name)</code>), que retornam a primeira ou a última linha de uma consulta; veja <a href="../../Select/">Select</a>.</p>
 </div>
 
 

@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1593,7 +1593,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1838,7 +1838,7 @@
         <li class="md-nav__item">
   <a href="#schema-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Example
+      Exemplo de esquema
     </span>
   </a>
   
@@ -1847,7 +1847,7 @@
         <li class="md-nav__item">
   <a href="#labs" class="md-nav__link">
     <span class="md-ellipsis">
-      Labs
+      Laboratórios
     </span>
   </a>
   
@@ -2034,7 +2034,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2288,7 +2288,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2972,7 +2972,7 @@
         <li class="md-nav__item">
   <a href="#schema-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Example
+      Exemplo de esquema
     </span>
   </a>
   
@@ -2981,7 +2981,7 @@
         <li class="md-nav__item">
   <a href="#labs" class="md-nav__link">
     <span class="md-ellipsis">
-      Labs
+      Laboratórios
     </span>
   </a>
   
@@ -3003,25 +3003,25 @@
 
 
 
-<h1 id="basic-schema-example">Basic Schema Example<a class="headerlink" href="#basic-schema-example" title="Permanent link">&para;</a></h1>
-<p>This page shows a basic schema: two related entities stored in one MySQL database.</p>
-<p>A basic schema defines the entities, the mapping and the sources:</p>
+<h1 id="basic-schema-example">Exemplo de esquema básico<a class="headerlink" href="#basic-schema-example" title="Permanent link">&para;</a></h1>
+<p>Esta página mostra um esquema básico: duas entidades relacionadas armazenadas em um único banco de dados MySQL.</p>
+<p>Um esquema básico define as entidades, o mapeamento e as fontes:</p>
 <ul>
-<li>The <strong>entities</strong> define the properties, relations and keys.</li>
-<li>The <strong>mapping</strong> defines how the entities are mapped to the tables of the database.</li>
-<li>The <strong>sources</strong> define the dialect and the connection of each database.</li>
+<li>As <strong>entidades</strong> definem as propriedades, as relações e as chaves.</li>
+<li>O <strong>mapeamento</strong> define como as entidades são mapeadas para as tabelas do banco de dados.</li>
+<li>As <strong>fontes</strong> definem o dialeto e a conexão de cada banco de dados.</li>
 </ul>
-<p>Many keys can be omitted, because they have a default value. For example:</p>
+<p>Muitas chaves podem ser omitidas, porque têm um valor padrão. Por exemplo:</p>
 <ul>
-<li>A property without <code>type</code> is a string.</li>
-<li>A property without <code>required</code> is not required (unless it is part of the primary or unique key).</li>
-<li>A string property without <code>length</code> is <code>TEXT</code> on PostgreSQL and <code>VARCHAR(80)</code> on the other engines.</li>
-<li>Without mapping information, the tables and columns have the same names as the entities and properties.</li>
+<li>Uma propriedade sem <code>type</code> é uma string.</li>
+<li>Uma propriedade sem <code>required</code> não é obrigatória (a menos que faça parte da chave primária ou única).</li>
+<li>Uma propriedade string sem <code>length</code> é <code>TEXT</code> no PostgreSQL e <code>VARCHAR(80)</code> nos demais mecanismos de banco de dados.</li>
+<li>Sem informações de mapeamento, as tabelas e colunas têm os mesmos nomes que as entidades e propriedades.</li>
 </ul>
-<h2 id="schema-example">Schema Example<a class="headerlink" href="#schema-example" title="Permanent link">&para;</a></h2>
-<p>In this schema, <code>Countries</code> has many <code>States</code>: the relation <code>states</code> of <code>Countries</code> returns the list of its states, and the relation <code>country</code> of <code>States</code> returns its country.
-The mapping <code>test</code> is empty, so the tables and columns have the same names as the entities and properties.</p>
-<p><img alt="schema" src="../../../schema/images/schema.svg" /></p>
+<h2 id="schema-example">Exemplo de esquema<a class="headerlink" href="#schema-example" title="Permanent link">&para;</a></h2>
+<p>Neste esquema, <code>Countries</code> tem muitos <code>States</code>: a relação <code>states</code> de <code>Countries</code> retorna a lista de seus estados, e a relação <code>country</code> de <code>States</code> retorna seu país.
+O mapeamento <code>test</code> está vazio, então as tabelas e colunas têm os mesmos nomes que as entidades e propriedades.</p>
+<p><img alt="esquema" src="../../../schema/images/schema.svg" /></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">domain</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Countries</span>
@@ -3075,9 +3075,9 @@ The mapping <code>test</code> is empty, so the tables and columns have the same 
 <a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="w">      </span><span class="nt">sources</span><span class="p">:</span>
 <a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
 </code></pre></div>
-<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h2 id="labs">Laboratórios<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/01-simple">CLI - simple</a></li>
+<li><a href="https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/01-simple">CLI - simples</a></li>
 </ul>
 
 

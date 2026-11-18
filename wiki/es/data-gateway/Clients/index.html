@@ -885,7 +885,7 @@
         <li class="md-nav__item">
   <a href="#other-languages" class="md-nav__link">
     <span class="md-ellipsis">
-      Other languages
+      Otros lenguajes
     </span>
   </a>
   
@@ -894,7 +894,7 @@
         <li class="md-nav__item">
   <a href="#ai-agents" class="md-nav__link">
     <span class="md-ellipsis">
-      AI agents
+      Agentes de IA
     </span>
   </a>
   
@@ -1370,7 +1370,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1680,7 +1680,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2053,7 +2053,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2307,7 +2307,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -3009,7 +3009,7 @@
         <li class="md-nav__item">
   <a href="#other-languages" class="md-nav__link">
     <span class="md-ellipsis">
-      Other languages
+      Otros lenguajes
     </span>
   </a>
   
@@ -3018,7 +3018,7 @@
         <li class="md-nav__item">
   <a href="#ai-agents" class="md-nav__link">
     <span class="md-ellipsis">
-      AI agents
+      Agentes de IA
     </span>
   </a>
   
@@ -3049,11 +3049,11 @@
 
 
 
-<h1 id="clients">Clients<a class="headerlink" href="#clients" title="Permanent link">&para;</a></h1>
+<h1 id="clients">Clientes<a class="headerlink" href="#clients" title="Permanent link">&para;</a></h1>
 <h2 id="node-lambdaormclient">Node: @lambdaorm/client<a class="headerlink" href="#node-lambdaormclient" title="Permanent link">&para;</a></h2>
-<p><a href="https://www.npmjs.com/package/@lambdaorm/client"><code>@lambdaorm/client</code></a> has the same interface as the library
-(<code>orm.execute</code>, <code>orm.plan</code>, <code>orm.executeScript</code>, …) and runs it on a Data Gateway. The URL includes the schema's
-route; <code>http(s)://</code> uses the REST API and <code>ws(s)://</code> the <a href="../WebSocket/">WebSocket API</a>.</p>
+<p><a href="https://www.npmjs.com/package/@lambdaorm/client"><code>@lambdaorm/client</code></a> tiene la misma interfaz que la librería
+(<code>orm.execute</code>, <code>orm.plan</code>, <code>orm.executeScript</code>, …) y la ejecuta en un Data Gateway. La URL incluye la ruta del
+esquema; <code>http(s)://</code> usa la API REST y <code>ws(s)://</code> la <a href="../WebSocket/">API WebSocket</a>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>npm<span class="w"> </span>install<span class="w"> </span>@lambdaorm/client
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/client'</span>
@@ -3065,7 +3065,7 @@ route; <code>http(s)://</code> uses the REST API and <code>ws(s)://</code> the <
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">// a bearer token: sent as Authorization: Bearer &lt;token&gt;</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="s1">'http://gateway:8080/iot/v1'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">token</span><span class="o">:</span><span class="w"> </span><span class="kt">process.env.IOT_TOKEN</span><span class="w"> </span><span class="p">})</span>
 </code></pre></div>
-<p>Over WebSocket, every operation uses one persistent connection, and <code>orm.on</code> receives the <a href="../WebSocket/#notifications">notifications</a>
+<p>Sobre WebSocket, todas las operaciones usan una única conexión persistente, y <code>orm.on</code> recibe las <a href="../WebSocket/#notifications">notificaciones</a>
 (<code>queue.completed</code>, <code>queue.failed</code>, <code>schema.statusChanged</code>):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="s1">'ws://gateway:8083/iot/v1'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s1">'X-Api-Key'</span><span class="o">:</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">IOT_KEY</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">})</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">stop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'schema.statusChanged'</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">path</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">reason</span><span class="p">))</span>
@@ -3074,24 +3074,24 @@ route; <code>http(s)://</code> uses the REST API and <code>ws(s)://</code> the <
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nx">stop</span><span class="p">()</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">end</span><span class="p">()</span><span class="w">     </span><span class="c1">// closes the connection</span>
 </code></pre></div>
-<p>With a single schema at the root, the URL is the gateway's: <code>http://gateway:8080</code>.</p>
+<p>Con un único esquema en la raíz, la URL es la del gateway: <code>http://gateway:8080</code>.</p>
 <h2 id="cli">CLI<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h2>
-<p>The <a href="../../cli/">CLI</a> runs its commands locally with a workspace (<code>-w</code>) or on a Data Gateway with <code>-u</code> and the
-schema's URL. With bearer authentication, the token is taken from the <code>SERVICE_TOKEN</code> environment variable:</p>
+<p>La <a href="../../cli/">CLI</a> ejecuta sus comandos localmente con un workspace (<code>-w</code>) o en un Data Gateway con <code>-u</code> y la
+URL del esquema. Con autenticación bearer, el token se toma de la variable de entorno <code>SERVICE_TOKEN</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SERVICE_TOKEN</span><span class="o">=</span>…
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>lambdaorm<span class="w"> </span>execute<span class="w"> </span>-q<span class="w"> </span><span class="s2">"Devices.filter(p =&gt; p.status == 'active')"</span><span class="w"> </span>-u<span class="w"> </span>http://gateway:8080/iot/v1
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>lambdaorm<span class="w"> </span>script<span class="w"> </span>-x<span class="w"> </span><span class="s2">"orm.execute(\"Devices.map(p =&gt; count(1))\")"</span><span class="w"> </span>-u<span class="w"> </span>http://gateway:8080/iot/v1
 </code></pre></div>
-<h2 id="other-languages">Other languages<a class="headerlink" href="#other-languages" title="Permanent link">&para;</a></h2>
-<p>The OpenAPI 3 document of the REST API is served by the gateway (<code>/doc</code>, <code>/api-docs</code>): a client for any language can
-be generated from it with <a href="https://openapi-generator.tech">OpenAPI Generator</a>.</p>
-<h2 id="ai-agents">AI agents<a class="headerlink" href="#ai-agents" title="Permanent link">&para;</a></h2>
-<p>Through <a href="../Mcp/">MCP</a>:</p>
+<h2 id="other-languages">Otros lenguajes<a class="headerlink" href="#other-languages" title="Permanent link">&para;</a></h2>
+<p>El gateway sirve el documento OpenAPI 3 de la API REST (<code>/doc</code>, <code>/api-docs</code>): a partir de él se puede generar un
+cliente para cualquier lenguaje con <a href="https://openapi-generator.tech">OpenAPI Generator</a>.</p>
+<h2 id="ai-agents">Agentes de IA<a class="headerlink" href="#ai-agents" title="Permanent link">&para;</a></h2>
+<p>A través de <a href="../Mcp/">MCP</a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>--transport<span class="w"> </span>http<span class="w"> </span>iot-v1<span class="w"> </span>http://gateway:8081/iot/v1/mcp<span class="w"> </span>--header<span class="w"> </span><span class="s2">"X-Api-Key: </span><span class="nv">$KEY</span><span class="s2">"</span>
 </code></pre></div>
 <h2 id="web">Web<a class="headerlink" href="#web" title="Permanent link">&para;</a></h2>
-<p>The <a href="../Ui/">UI</a> of the gateway, and <a href="../Ui/#in-your-own-application"><code>@lambdaorm/ui</code></a> to put it in an application of
-your own.</p>
+<p>La <a href="../Ui/">UI</a> del gateway, y <a href="../Ui/#in-your-own-application"><code>@lambdaorm/ui</code></a> para incluirla en una aplicación
+propia.</p>
 
 
 

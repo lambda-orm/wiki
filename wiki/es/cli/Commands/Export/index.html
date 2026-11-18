@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores y funciones
     
   </span>
   
@@ -1588,7 +1588,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1961,7 +1961,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronización
     
   </span>
   
@@ -2215,7 +2215,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2694,7 +2694,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Opciones
     </span>
   </a>
   
@@ -2703,7 +2703,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Ejemplo
     </span>
   </a>
   
@@ -2969,7 +2969,7 @@
         <li class="md-nav__item">
   <a href="#options" class="md-nav__link">
     <span class="md-ellipsis">
-      Options
+      Opciones
     </span>
   </a>
   
@@ -2978,7 +2978,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Ejemplo
     </span>
   </a>
   
@@ -3001,50 +3001,50 @@
 
 
 <h1 id="export">Export<a class="headerlink" href="#export" title="Permanent link">&para;</a></h1>
-<p>Exports the data of the databases of a stage to a JSON file, <code>&lt;stage&gt;-export.json</code>, in the target folder. The file can be loaded with <a href="../Import/">import</a>.</p>
-<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<p>Exporta los datos de las bases de datos de un stage a un archivo JSON, <code>&lt;stage&gt;-export.json</code>, en la carpeta de destino. El archivo se puede cargar con <a href="../Import/">import</a>.</p>
+<h2 id="options">Opciones<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Option</th>
-<th style="text-align: left;">Short</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Opción</th>
+<th style="text-align: left;">Corta</th>
+<th style="text-align: left;">Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">workspace</td>
 <td style="text-align: left;"><code>-w</code></td>
-<td style="text-align: left;">Project path (default: the current directory).</td>
+<td style="text-align: left;">Ruta del proyecto (por defecto: el directorio actual).</td>
 </tr>
 <tr>
 <td style="text-align: left;">stage</td>
 <td style="text-align: left;"><code>-s</code></td>
-<td style="text-align: left;">Name of the stage (default: the first stage of the schema).</td>
+<td style="text-align: left;">Nombre del stage (por defecto: el primer stage del esquema).</td>
 </tr>
 <tr>
 <td style="text-align: left;">envfile</td>
 <td style="text-align: left;"><code>-e</code></td>
-<td style="text-align: left;">Reads a file of environment variables.</td>
+<td style="text-align: left;">Lee un archivo de variables de entorno.</td>
 </tr>
 <tr>
 <td style="text-align: left;">target</td>
 <td style="text-align: left;"><code>-t</code></td>
-<td style="text-align: left;">Folder where the export file is written (default: the current directory).</td>
+<td style="text-align: left;">Carpeta donde se escribe el archivo de exportación (por defecto: el directorio actual).</td>
 </tr>
 <tr>
 <td style="text-align: left;">force</td>
 <td style="text-align: left;"><code>-f</code></td>
-<td style="text-align: left;">If a statement fails, continue with the next statements.</td>
+<td style="text-align: left;">Si una sentencia falla, continúa con las siguientes.</td>
 </tr>
 <tr>
 <td style="text-align: left;">url</td>
 <td style="text-align: left;"><code>-u</code></td>
-<td style="text-align: left;">URL of the schema on a <a href="../../../data-gateway/">Data Gateway</a>, to run the command there.</td>
+<td style="text-align: left;">URL del esquema en un <a href="../../../data-gateway/">Data Gateway</a>, para ejecutar el comando allí.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<h2 id="example">Ejemplo<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lambdaorm<span class="w"> </span><span class="nb">export</span><span class="w"> </span>-w<span class="w"> </span>lab/countries<span class="w"> </span>-e<span class="w"> </span>lab/countries/.env<span class="w"> </span>-t<span class="w"> </span>./lab/countries/data
 </code></pre></div>
 

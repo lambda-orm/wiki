@@ -1283,7 +1283,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1966,7 +1966,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2220,7 +2220,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2904,7 +2904,7 @@
         <li class="md-nav__item">
   <a href="#objective" class="md-nav__link">
     <span class="md-ellipsis">
-      Objective
+      Zielsetzung
     </span>
   </a>
   
@@ -2913,7 +2913,7 @@
         <li class="md-nav__item">
   <a href="#scope" class="md-nav__link">
     <span class="md-ellipsis">
-      Scope
+      Umfang
     </span>
   </a>
   
@@ -2922,17 +2922,17 @@
         <li class="md-nav__item">
   <a href="#description" class="md-nav__link">
     <span class="md-ellipsis">
-      Description
+      Beschreibung
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Description">
+    <nav class="md-nav" aria-label="Beschreibung">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#concepts" class="md-nav__link">
     <span class="md-ellipsis">
-      Concepts
+      Konzepte
     </span>
   </a>
   
@@ -2941,7 +2941,7 @@
           <li class="md-nav__item">
   <a href="#a-request-step-by-step" class="md-nav__link">
     <span class="md-ellipsis">
-      A request, step by step
+      Eine Anfrage Schritt für Schritt
     </span>
   </a>
   
@@ -2955,7 +2955,7 @@
         <li class="md-nav__item">
   <a href="#in-this-section" class="md-nav__link">
     <span class="md-ellipsis">
-      In this section
+      In diesem Abschnitt
     </span>
   </a>
   
@@ -2979,116 +2979,120 @@
 
 <h1 id="data-gateway">Data Gateway<a class="headerlink" href="#data-gateway" title="Permanent link">&para;</a></h1>
 <p><img alt="Data Gateway" src="../../data-gateway/images/overview.svg" /></p>
-<h2 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
-<p>Give applications, AI agents and people <strong>governed access to the data of λORM schemas over the network</strong>, by
-configuration, without writing a backend for it.</p>
-<p>A λORM schema already describes a domain (its entities, relations and rules) and where its data lives (one or many
-databases of different engines). The Data Gateway publishes that schema so that:</p>
+<h2 id="objective">Zielsetzung<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
+<p>Anwendungen, KI-Agenten und Personen <strong>kontrollierten Zugriff auf die Daten von λORM-Schemas über das Netzwerk</strong> geben –
+per Konfiguration, ohne dafür ein Backend schreiben zu müssen.</p>
+<p>Ein λORM-Schema beschreibt bereits eine Domäne (ihre Entitäten, Beziehungen und Regeln) und wo ihre Daten liegen (eine
+oder mehrere Datenbanken unterschiedlicher Datenbank-Engines). Das Data Gateway veröffentlicht dieses Schema, sodass:</p>
 <ul>
-<li>an <strong>application</strong> queries and writes it through a REST API (or a WebSocket connection), with the same lambda
-  queries it would use in Node;</li>
-<li>an <strong>AI agent</strong> explores the domain and queries it through MCP, knowing the entities and the language;</li>
-<li>a <strong>person</strong> explores the schemas, reads each entity as a form, tries queries and draws diagrams in a web UI;</li>
+<li>eine <strong>Anwendung</strong> es über eine REST API (oder eine WebSocket-Verbindung) abfragt und beschreibt, mit denselben
+  Lambda-Abfragen, die sie in Node verwenden würde;</li>
+<li>ein <strong>KI-Agent</strong> die Domäne über MCP erkundet und abfragt und dabei die Entitäten und die Sprache kennt;</li>
+<li>eine <strong>Person</strong> in einer Web-UI die Schemas erkundet, jede Entität als Formular liest, Abfragen ausprobiert und
+  Diagramme zeichnet;</li>
 </ul>
-<p>and so that <strong>who can do what</strong> is decided in one place, the same for all of them: each credential has permissions,
-and every change is audited.</p>
-<h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
-<p><strong>What it does:</strong></p>
+<p>und sodass <strong>wer was tun darf</strong> an einer einzigen Stelle festgelegt wird, für alle gleich: Alle Zugangsdaten haben
+Berechtigungen, und jede Änderung wird protokolliert.</p>
+<h2 id="scope">Umfang<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
+<p><strong>Was es tut:</strong></p>
 <ul>
-<li>Serves <strong>one or several λORM schemas</strong> per instance, each at a route (<code>/iot/v1</code>, <code>/iot/v2</code>, <code>/accounts</code>).</li>
-<li>Exposes them by four <strong>transports</strong>, each one only when it has a port: REST (<code>http</code>), MCP (<code>mcpHttp</code>,
-  <code>mcpWebSocket</code>) and a JSON-RPC API over WebSocket (<code>webSocket</code>).</li>
-<li>Every operation of λORM: queries (<code>execute</code>, <code>plan</code>, <code>metadata</code>, <code>model</code>, <code>parameters</code>, <code>constraints</code>), scripts
-  (several queries in one transaction), queued executions (Kafka), the schema and its model, and stages (export,
-  import).</li>
-<li><strong>Authentication</strong> (API key, bearer token, basic) and <strong>permissions</strong> per credential (<code>read</code>, <code>write</code>, <code>script</code>,
-  <code>queue</code>, <code>stageImport</code>), globally, per transport or per schema.</li>
-<li><strong>Isolation</strong>: each schema runs in its own worker, with its own environment and connections; one that fails doesn't
-  affect the others.</li>
-<li><strong>Audit</strong> of writes, <strong>metrics</strong> (Prometheus), <strong>health</strong> (Kubernetes probes), limits (rate, concurrency, sizes,
-  time).</li>
-<li>A <strong>web UI</strong>: explorer, entity forms, query tabs with autocompletion, saved queries and diagrams of the domain.</li>
+<li>Stellt pro Instanz <strong>ein oder mehrere λORM-Schemas</strong> bereit, jedes unter einer Route (<code>/iot/v1</code>, <code>/iot/v2</code>, <code>/accounts</code>).</li>
+<li>Stellt sie über vier <strong>Transporte</strong> bereit, jeden nur, wenn er einen Port hat: REST (<code>http</code>), MCP (<code>mcpHttp</code>,
+  <code>mcpWebSocket</code>) und eine JSON-RPC-API über WebSocket (<code>webSocket</code>).</li>
+<li>Alle Operationen von λORM: Abfragen (<code>execute</code>, <code>plan</code>, <code>metadata</code>, <code>model</code>, <code>parameters</code>, <code>constraints</code>), Skripte
+  (mehrere Abfragen in einer Transaktion), Ausführungen in einer Warteschlange (Kafka), das Schema und sein Modell sowie
+  Stages (Export, Import).</li>
+<li><strong>Authentifizierung</strong> (API-Key, Bearer-Token, Basic) und <strong>Berechtigungen</strong> pro Zugangsdaten (<code>read</code>, <code>write</code>, <code>script</code>,
+  <code>queue</code>, <code>stageImport</code>), global, pro Transport oder pro Schema.</li>
+<li><strong>Isolation</strong>: Jedes Schema läuft in einem eigenen Worker, mit eigener Umgebung und eigenen Verbindungen; fällt eines
+  aus, sind die anderen nicht betroffen.</li>
+<li><strong>Audit</strong> von Schreibvorgängen, <strong>Metriken</strong> (Prometheus), <strong>Health</strong> (Kubernetes-Probes), Limits (Rate, Nebenläufigkeit,
+  Größen, Zeit).</li>
+<li>Eine <strong>Web-UI</strong>: Explorer, Entitätsformulare, Abfrage-Tabs mit Autovervollständigung, gespeicherte Abfragen und
+  Diagramme der Domäne.</li>
 </ul>
-<p><strong>What it doesn't do:</strong></p>
+<p><strong>Was es nicht tut:</strong></p>
 <ul>
-<li>It doesn't define the domain nor migrate the databases: that is the <a href="../schema/SchemaDefinition/">schema</a> and the
-  <a href="../cli/">CLI</a> (<code>push</code>, <code>pull</code>, …).</li>
-<li>It doesn't accept SQL: only λORM queries, translated for each source.</li>
-<li>No users nor roles of its own beyond the credentials of its configuration (no login against an identity provider
-  yet).</li>
-<li>The UI keeps what is saved in each browser; there is no shared storage of saved queries on the server.</li>
+<li>Es definiert weder die Domäne noch migriert es die Datenbanken: Das übernehmen das <a href="../schema/SchemaDefinition/">Schema</a>
+  und die <a href="../cli/">CLI</a> (<code>push</code>, <code>pull</code>, …).</li>
+<li>Es akzeptiert kein SQL: nur λORM-Abfragen, die für jede Quelle übersetzt werden.</li>
+<li>Keine eigenen Benutzer oder Rollen über die Zugangsdaten seiner Konfiguration hinaus (noch keine Anmeldung bei einem
+  Identity Provider).</li>
+<li>Die UI speichert das Gespeicherte in jedem Browser; es gibt keinen gemeinsamen Speicher für gespeicherte Abfragen auf
+  dem Server.</li>
 </ul>
-<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
-<p>The Data Gateway is a Node application published as the Docker image
-<a href="https://hub.docker.com/r/flaviorita/data-gateway"><code>flaviorita/data-gateway</code></a>. It reads <strong>one configuration file</strong>
-(<code>data-gateway.config.yaml</code>) that says where the schemas are, how they are exposed and who can use them; the schemas
-themselves stay in their λORM workspaces (<code>lambdaORM.yaml</code>).</p>
-<p><img alt="Architecture" src="../../data-gateway/images/architecture.svg" /></p>
-<p>Inside, a <strong>supervisor</strong> starts and watches the workers. The <strong>edge worker</strong> listens on the ports of the transports,
-authenticates each request and sends it, by a direct channel, to the <strong>worker of the schema</strong>, which checks the
-permissions, runs the operation with λORM against its databases and audits it. A heavy query in one schema doesn't
-slow down another; a schema whose database is down answers <code>503</code> and is retried, while the others keep working.</p>
-<h3 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h3>
+<h2 id="description">Beschreibung<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
+<p>Das Data Gateway ist eine Node-Anwendung, die als Docker-Image
+<a href="https://hub.docker.com/r/flaviorita/data-gateway"><code>flaviorita/data-gateway</code></a> veröffentlicht wird. Sie liest <strong>eine
+Konfigurationsdatei</strong> (<code>data-gateway.config.yaml</code>), die angibt, wo sich die Schemas befinden, wie sie bereitgestellt
+werden und wer sie verwenden darf; die Schemas selbst bleiben in ihren λORM-Workspaces (<code>lambdaORM.yaml</code>).</p>
+<p><img alt="Architektur" src="../../data-gateway/images/architecture.svg" /></p>
+<p>Intern startet und überwacht ein <strong>Supervisor</strong> die Worker. Der <strong>Edge-Worker</strong> lauscht auf den Ports der Transporte,
+authentifiziert jede Anfrage und sendet sie über einen direkten Kanal an den <strong>Worker des Schemas</strong>, der die
+Berechtigungen prüft, die Operation mit λORM gegen seine Datenbanken ausführt und sie protokolliert. Eine aufwendige
+Abfrage in einem Schema bremst kein anderes aus; ein Schema, dessen Datenbank nicht erreichbar ist, antwortet mit <code>503</code>
+und wird erneut versucht, während die anderen weiterarbeiten.</p>
+<h3 id="concepts">Konzepte<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Concept</th>
-<th>What it is</th>
+<th>Konzept</th>
+<th>Was es ist</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Schema</strong></td>
-<td>a λORM workspace (a folder with <code>lambdaORM.yaml</code>): domain, sources, mappings, stages; served at a route</td>
+<td>ein λORM-Workspace (ein Ordner mit <code>lambdaORM.yaml</code>): Domäne, Quellen, Mappings, Stages; unter einer Route bereitgestellt</td>
 </tr>
 <tr>
 <td><strong>Route</strong></td>
-<td>where a schema is reached: <code>/iot/v1/execute</code>, <code>/iot/v1/mcp</code>, <code>ws://host/iot/v1</code>; a single schema can be at the root</td>
+<td>wo ein Schema erreichbar ist: <code>/iot/v1/execute</code>, <code>/iot/v1/mcp</code>, <code>ws://host/iot/v1</code>; ein einzelnes Schema kann an der Wurzel liegen</td>
 </tr>
 <tr>
 <td><strong>Transport</strong></td>
-<td>a way in, on its own port: <code>http</code>, <code>mcpHttp</code>, <code>mcpWebSocket</code>, <code>webSocket</code></td>
+<td>ein Zugang, auf einem eigenen Port: <code>http</code>, <code>mcpHttp</code>, <code>mcpWebSocket</code>, <code>webSocket</code></td>
 </tr>
 <tr>
-<td><strong>Credential</strong></td>
-<td>a key, token or user with a <strong>name</strong> and <strong>permissions</strong>; sent by the client in each request</td>
+<td><strong>Zugangsdaten</strong></td>
+<td>ein Key, Token oder Benutzer mit einem <strong>Namen</strong> und <strong>Berechtigungen</strong>; vom Client mit jeder Anfrage gesendet</td>
 </tr>
 <tr>
-<td><strong>Permission</strong></td>
-<td><code>read</code>, <code>write</code>, <code>script</code>, <code>queue</code>, <code>stageImport</code>: what the credential can do, on every transport</td>
+<td><strong>Berechtigung</strong></td>
+<td><code>read</code>, <code>write</code>, <code>script</code>, <code>queue</code>, <code>stageImport</code>: was die Zugangsdaten tun dürfen, auf jedem Transport</td>
 </tr>
 <tr>
 <td><strong>Stage</strong></td>
-<td>a λORM scenario of a schema (which sources hold which entities); chosen with <code>options.stage</code></td>
+<td>ein λORM-Szenario eines Schemas (welche Quellen welche Entitäten enthalten); ausgewählt mit <code>options.stage</code></td>
 </tr>
 <tr>
 <td><strong>Worker</strong></td>
-<td>where a schema runs: a thread or a process of its own</td>
+<td>wo ein Schema läuft: ein eigener Thread oder Prozess</td>
 </tr>
 </tbody>
 </table>
-<h3 id="a-request-step-by-step">A request, step by step<a class="headerlink" href="#a-request-step-by-step" title="Permanent link">&para;</a></h3>
+<h3 id="a-request-step-by-step">Eine Anfrage Schritt für Schritt<a class="headerlink" href="#a-request-step-by-step" title="Permanent link">&para;</a></h3>
 <ol>
-<li>A client sends <code>POST /iot/v1/execute</code> with <code>X-Api-Key: …</code> and <code>{ "query": "Orders.filter(…)", "data": {…} }</code>.</li>
-<li>The <code>http</code> transport finds the credential (<code>agent</code>, permissions <code>[read]</code>) and the schema <code>iot/v1</code>.</li>
-<li>The schema's worker analyses the query: it only selects, so <code>read</code> is enough.</li>
-<li>λORM translates it for each source of the stage, runs it and joins the results.</li>
-<li>The answer goes back as JSON. Had it written data, the credential would have needed <code>write</code>, and the operation
-   would have left an audit line.</li>
+<li>Ein Client sendet <code>POST /iot/v1/execute</code> mit <code>X-Api-Key: …</code> und <code>{ "query": "Orders.filter(…)", "data": {…} }</code>.</li>
+<li>Der Transport <code>http</code> findet die Zugangsdaten (<code>agent</code>, Berechtigungen <code>[read]</code>) und das Schema <code>iot/v1</code>.</li>
+<li>Der Worker des Schemas analysiert die Abfrage: Sie liest nur, also genügt <code>read</code>.</li>
+<li>λORM übersetzt sie für jede Quelle des Stages, führt sie aus und führt die Ergebnisse zusammen.</li>
+<li>Die Antwort wird als JSON zurückgegeben. Hätte sie Daten geschrieben, hätten die Zugangsdaten <code>write</code> benötigt, und
+   die Operation hätte eine Audit-Zeile hinterlassen.</li>
 </ol>
-<h2 id="in-this-section">In this section<a class="headerlink" href="#in-this-section" title="Permanent link">&para;</a></h2>
+<h2 id="in-this-section">In diesem Abschnitt<a class="headerlink" href="#in-this-section" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="GettingStarted/">Getting started</a>: step by step, from an empty folder to the REST API, the UI, MCP and WebSocket.</li>
-<li><a href="Configuration/">Configuration</a>: the configuration file, schemas, environment, runtime and every key.</li>
-<li><a href="Transports/">Transports</a>: the four transports, their routes and options.</li>
-<li><a href="Rest/">REST API</a>: every method of the <code>http</code> transport, with examples.</li>
-<li><a href="Mcp/">MCP</a>: the tools, resources and transports for AI agents.</li>
-<li><a href="WebSocket/">WebSocket API</a>: the JSON-RPC methods and the notifications.</li>
-<li><a href="Security/">Security</a>: authentication, permissions, audit, limits and errors.</li>
-<li><a href="Ui/">UI</a>: the web interface: explorer, entity forms, queries, saved queries and diagrams.</li>
-<li><a href="Clients/">Clients</a>: <code>@lambdaorm/client</code>, the CLI and the OpenAPI document.</li>
-<li><a href="Operations/">Operations</a>: Docker, Kubernetes, health, metrics and logs.</li>
-<li><a href="CHANGELOG/">Change log</a></li>
+<li><a href="GettingStarted/">Erste Schritte</a>: Schritt für Schritt von einem leeren Ordner zur REST API, zur UI, zu MCP und WebSocket.</li>
+<li><a href="Configuration/">Konfiguration</a>: die Konfigurationsdatei, Schemas, Umgebung, Laufzeit und jeder Schlüssel.</li>
+<li><a href="Transports/">Transporte</a>: die vier Transporte, ihre Routen und Optionen.</li>
+<li><a href="Rest/">REST API</a>: jede Methode des Transports <code>http</code>, mit Beispielen.</li>
+<li><a href="Mcp/">MCP</a>: die Tools, Ressourcen und Transporte für KI-Agenten.</li>
+<li><a href="WebSocket/">WebSocket API</a>: die JSON-RPC-Methoden und die Benachrichtigungen.</li>
+<li><a href="Security/">Sicherheit</a>: Authentifizierung, Berechtigungen, Audit, Limits und Fehler.</li>
+<li><a href="Ui/">UI</a>: die Weboberfläche: Explorer, Entitätsformulare, Abfragen, gespeicherte Abfragen und Diagramme.</li>
+<li><a href="Clients/">Clients</a>: <code>@lambdaorm/client</code>, die CLI und das OpenAPI-Dokument.</li>
+<li><a href="Operations/">Betrieb</a>: Docker, Kubernetes, Health, Metriken und Logs.</li>
+<li><a href="CHANGELOG/">Änderungsprotokoll</a></li>
 </ul>
 
 

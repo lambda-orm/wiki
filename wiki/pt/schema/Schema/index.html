@@ -24,7 +24,7 @@
     
     
       
-        <title>Schema - λORM</title>
+        <title>Esquema - λORM</title>
       
     
     
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Schema
+              Esquema
             
           </span>
         </div>
@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1602,7 +1602,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1615,7 +1615,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1640,7 +1640,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Exemplo
     </span>
   </a>
   
@@ -1649,7 +1649,7 @@
         <li class="md-nav__item">
   <a href="#in-this-section" class="md-nav__link">
     <span class="md-ellipsis">
-      In this section
+      Nesta seção
     </span>
   </a>
   
@@ -2032,7 +2032,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2286,7 +2286,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2970,7 +2970,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Exemplo
     </span>
   </a>
   
@@ -2979,7 +2979,7 @@
         <li class="md-nav__item">
   <a href="#in-this-section" class="md-nav__link">
     <span class="md-ellipsis">
-      In this section
+      Nesta seção
     </span>
   </a>
   
@@ -3001,31 +3001,31 @@
 
 
 
-<h1 id="schema">Schema<a class="headerlink" href="#schema" title="Permanent link">&para;</a></h1>
-<p>This section explains the schema of λORM: what it contains, how it is defined and used, and how it is synchronized with the databases.</p>
-<p>The schema holds all the configuration the ORM needs. It separates the business model (<strong>domain</strong>) from the persistence of the data (<strong>infrastructure</strong>):</p>
+<h1 id="schema">Esquema<a class="headerlink" href="#schema" title="Permanent link">&para;</a></h1>
+<p>Esta seção explica o esquema do λORM: o que ele contém, como é definido e usado, e como é sincronizado com os bancos de dados.</p>
+<p>O esquema contém toda a configuração de que o ORM precisa. Ele separa o modelo de negócio (<strong>domain</strong>) da persistência dos dados (<strong>infrastructure</strong>):</p>
 <ul>
-<li>In the domain, the entities and enums that represent the business model are completely clean, without any attribute that couples them to persistence.</li>
-<li>All queries are written against the business model, so they are decoupled from the physical model of the data.</li>
-<li>In the infrastructure, everything needed to store and read the data in the different sources (databases) is defined.</li>
+<li>No domínio, as entidades e os enums que representam o modelo de negócio são completamente limpos, sem nenhum atributo que os acople à persistência.</li>
+<li>Todas as consultas são escritas sobre o modelo de negócio, de modo que ficam desacopladas do modelo físico dos dados.</li>
+<li>Na infraestrutura, define-se tudo o que é necessário para armazenar e ler os dados nas diferentes fontes (bancos de dados).</li>
 </ul>
-<p>The schema can be written in a YAML or JSON file (usually <code>lambdaORM.yaml</code>), or passed as an object when the ORM is initialized.</p>
-<p>All the expressions used to define conditions and actions are evaluated by the expression engine <a href="https://www.npmjs.com/package/3xpr">3xpr</a>.</p>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
-<p>This example shows a stage that uses two sources: source 1 is MySQL and holds the <code>Countries</code> table, and source 2 is PostgreSQL and holds the <code>States</code> table.</p>
-<p>For the <code>Countries</code> entity, the names of the table and its columns are the same as the names of the entity and its properties, so no mapping needs to be written.
-For the <code>States</code> entity, the names of the table and its columns are different, so the mapping defines them.</p>
-<p><img alt="diagram" src="../../../schema/images/schema5.svg" /></p>
-<h2 id="in-this-section">In this section<a class="headerlink" href="#in-this-section" title="Permanent link">&para;</a></h2>
+<p>O esquema pode ser escrito em um arquivo YAML ou JSON (normalmente <code>lambdaORM.yaml</code>), ou passado como um objeto quando o ORM é inicializado.</p>
+<p>Todas as expressões usadas para definir condições e ações são avaliadas pelo mecanismo de expressões <a href="https://www.npmjs.com/package/3xpr">3xpr</a>.</p>
+<h2 id="example">Exemplo<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<p>Este exemplo mostra um stage que usa duas fontes: a fonte 1 é MySQL e contém a tabela <code>Countries</code>, e a fonte 2 é PostgreSQL e contém a tabela <code>States</code>.</p>
+<p>Para a entidade <code>Countries</code>, os nomes da tabela e de suas colunas são os mesmos que os nomes da entidade e de suas propriedades, portanto nenhum mapeamento precisa ser escrito.
+Para a entidade <code>States</code>, os nomes da tabela e de suas colunas são diferentes, então o mapeamento os define.</p>
+<p><img alt="diagrama" src="../../../schema/images/schema5.svg" /></p>
+<h2 id="in-this-section">Nesta seção<a class="headerlink" href="#in-this-section" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../SchemaDefinition/">Definition</a>: every key of the schema.</li>
-<li><a href="../SchemaDefinition-Expressions/">Expressions</a>, <a href="../SchemaDefinition-EnvironmentVariables/">Environment variables</a> and <a href="../SchemaDefinition-Composite/">Composite entities</a>.</li>
-<li><a href="../Schema-Use/">Schema Use</a>: how to load the schema and generate the model.</li>
-<li>Examples: <a href="../SchemaExample-Basic/">Basic</a>, <a href="../SchemaExample-Extend/">Extend</a>, <a href="../SchemaExample-MultiplesStages/">Multiple stages</a>, <a href="../SchemaExample-StageMultiplesSources/">Stage with multiple sources</a>, <a href="../SchemaExample-Composite/">Composite</a> and <a href="../SchemaExample-Listener/">Listener</a>.</li>
-<li><a href="../SchemaSynchronization/">Synchronization</a>: push, pull, fetch, introspect and incorporate.</li>
-<li><a href="../Engines/">Engines</a>: differences between database engines.</li>
+<li><a href="../SchemaDefinition/">Definição</a>: todas as chaves do esquema.</li>
+<li><a href="../SchemaDefinition-Expressions/">Expressões</a>, <a href="../SchemaDefinition-EnvironmentVariables/">Variáveis de ambiente</a> e <a href="../SchemaDefinition-Composite/">Entidades compostas</a>.</li>
+<li><a href="../Schema-Use/">Uso do esquema</a>: como carregar o esquema e gerar o modelo.</li>
+<li>Exemplos: <a href="../SchemaExample-Basic/">Básico</a>, <a href="../SchemaExample-Extend/">Extend</a>, <a href="../SchemaExample-MultiplesStages/">Múltiplos stages</a>, <a href="../SchemaExample-StageMultiplesSources/">Stage com múltiplas fontes</a>, <a href="../SchemaExample-Composite/">Composto</a> e <a href="../SchemaExample-Listener/">Listener</a>.</li>
+<li><a href="../SchemaSynchronization/">Sincronização</a>: push, pull, fetch, introspect e incorporate.</li>
+<li><a href="../Engines/">Mecanismos de banco de dados</a>: diferenças entre os mecanismos de banco de dados.</li>
 </ul>
-<p>The <a href="../../data-gateway/">Data Gateway</a> publishes a schema over the network; its own settings are in a separate <a href="../../data-gateway/Configuration/">configuration file</a>.</p>
+<p>O <a href="../../data-gateway/">Data Gateway</a> publica um esquema pela rede; suas próprias configurações estão em um <a href="../../data-gateway/Configuration/">arquivo de configuração</a> separado.</p>
 
 
 

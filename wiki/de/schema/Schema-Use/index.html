@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -1972,7 +1972,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2165,7 +2165,7 @@
         <li class="md-nav__item">
   <a href="#simple-configuration-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Simple configuration example
+      Einfaches Konfigurationsbeispiel
     </span>
   </a>
   
@@ -2174,7 +2174,7 @@
         <li class="md-nav__item">
   <a href="#build-source-code" class="md-nav__link">
     <span class="md-ellipsis">
-      Build source code
+      Quellcode generieren
     </span>
   </a>
   
@@ -2183,7 +2183,7 @@
         <li class="md-nav__item">
   <a href="#set-schema" class="md-nav__link">
     <span class="md-ellipsis">
-      Set schema
+      Schema festlegen
     </span>
   </a>
   
@@ -2295,7 +2295,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -2979,7 +2979,7 @@
         <li class="md-nav__item">
   <a href="#simple-configuration-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Simple configuration example
+      Einfaches Konfigurationsbeispiel
     </span>
   </a>
   
@@ -2988,7 +2988,7 @@
         <li class="md-nav__item">
   <a href="#build-source-code" class="md-nav__link">
     <span class="md-ellipsis">
-      Build source code
+      Quellcode generieren
     </span>
   </a>
   
@@ -2997,7 +2997,7 @@
         <li class="md-nav__item">
   <a href="#set-schema" class="md-nav__link">
     <span class="md-ellipsis">
-      Set schema
+      Schema festlegen
     </span>
   </a>
   
@@ -3019,11 +3019,11 @@
 
 
 
-<h1 id="schema-use">Schema Use<a class="headerlink" href="#schema-use" title="Permanent link">&para;</a></h1>
-<p>This page shows how to write a simple schema in YAML or JSON, how to generate the model and repositories from it with the CLI, and how to load it in an application.</p>
-<h2 id="simple-configuration-example">Simple configuration example<a class="headerlink" href="#simple-configuration-example" title="Permanent link">&para;</a></h2>
-<p>The same schema, with one entity mapped to the table <code>TBL_COUNTRIES</code> of a MySQL database, written in YAML and in JSON.</p>
-<p><strong>Configuration in YAML:</strong></p>
+<h1 id="schema-use">Verwendung des Schemas<a class="headerlink" href="#schema-use" title="Permanent link">&para;</a></h1>
+<p>Diese Seite zeigt, wie Sie ein einfaches Schema in YAML oder JSON schreiben, wie Sie daraus mit der CLI das Modell und die Repositories generieren und wie Sie es in einer Anwendung laden.</p>
+<h2 id="simple-configuration-example">Einfaches Konfigurationsbeispiel<a class="headerlink" href="#simple-configuration-example" title="Permanent link">&para;</a></h2>
+<p>Dasselbe Schema, mit einer Entität, die auf die Tabelle <code>TBL_COUNTRIES</code> einer MySQL-Datenbank abgebildet wird, in YAML und in JSON geschrieben.</p>
+<p><strong>Konfiguration in YAML:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">domain</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Countries</span>
@@ -3052,7 +3052,7 @@
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">      </span><span class="nt">mapping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mapping1</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">      </span><span class="nt">connection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${CNN_MYSQL}</span>
 </code></pre></div>
-<p><strong>Configuration in JSON:</strong></p>
+<p><strong>Konfiguration in JSON:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"domain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -3094,13 +3094,13 @@
 <a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="p">}</span>
 </code></pre></div>
-<h2 id="build-source-code">Build source code<a class="headerlink" href="#build-source-code" title="Permanent link">&para;</a></h2>
-<p>When the schema is created or changed, the model and the repositories are generated with the <code>build</code> command of the CLI (<a href="https://www.npmjs.com/package/@lambdaorm/cli">@lambdaorm/cli</a>):</p>
+<h2 id="build-source-code">Quellcode generieren<a class="headerlink" href="#build-source-code" title="Permanent link">&para;</a></h2>
+<p>Wenn das Schema erstellt oder geändert wird, werden das Modell und die Repositories mit dem Befehl <code>build</code> der CLI (<a href="https://www.npmjs.com/package/@lambdaorm/cli">@lambdaorm/cli</a>) generiert:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>lambdaorm<span class="w"> </span>build<span class="w"> </span>-l<span class="w"> </span>node
 </code></pre></div>
-<p><code>-m</code> generates only the model and <code>-r</code> only the repositories; by default both are generated.
-The files are written in the <code>domain</code> folder inside the <code>src</code> folder (see <a href="../SchemaDefinition/#paths">Paths</a>). See also <a href="../../cli/Commands/Build/">Build</a>.</p>
-<p>The model file, <code>model.ts</code>, has a class, a query interface and a queryable for each entity:</p>
+<p><code>-m</code> generiert nur das Modell und <code>-r</code> nur die Repositories; standardmäßig wird beides generiert.
+Die Dateien werden in den Ordner <code>domain</code> innerhalb des Ordners <code>src</code> geschrieben (siehe <a href="../SchemaDefinition/#paths">Pfade</a>). Siehe auch <a href="../../cli/Commands/Build/">Build</a>.</p>
+<p>Die Modelldatei <code>model.ts</code> enthält für jede Entität eine Klasse, eine Abfrage-Schnittstelle und ein Queryable:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Country</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nx">iso3?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nx">name?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span>
@@ -3111,7 +3111,7 @@ The files are written in the <code>domain</code> folder inside the <code>src</co
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="k">export</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nx">Countries</span><span class="o">:</span><span class="w"> </span><span class="kt">Queryable</span><span class="o">&lt;</span><span class="nx">QryCountry</span><span class="o">&gt;</span>
 </code></pre></div>
-<p>A repository file is generated for each entity, for example <code>repositoryCountry.ts</code>. It is created only once, so you can add your own code to it:</p>
+<p>Für jede Entität wird eine Repository-Datei generiert, zum Beispiel <code>repositoryCountry.ts</code>. Sie wird nur einmal erstellt, sodass Sie ihr eigenen Code hinzufügen können:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Repository</span><span class="p">,</span><span class="w"> </span><span class="nx">IOrm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Country</span><span class="p">,</span><span class="w"> </span><span class="nx">QryCountry</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./model'</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">CountryRepository</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Repository</span><span class="o">&lt;</span><span class="nx">Country</span><span class="p">,</span><span class="w"> </span><span class="nx">QryCountry</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
@@ -3121,14 +3121,14 @@ The files are written in the <code>domain</code> folder inside the <code>src</co
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="c1">// Add your code here</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
 </code></pre></div>
-<h2 id="set-schema">Set schema<a class="headerlink" href="#set-schema" title="Permanent link">&para;</a></h2>
-<p><code>orm.init()</code> initializes the ORM with the schema. The schema can be given in three ways:</p>
+<h2 id="set-schema">Schema festlegen<a class="headerlink" href="#set-schema" title="Permanent link">&para;</a></h2>
+<p><code>orm.init()</code> initialisiert das ORM mit dem Schema. Das Schema kann auf drei Arten übergeben werden:</p>
 <ul>
-<li>Without arguments: the schema file is looked for in the current folder. A <code>.yaml</code>, <code>.yml</code> or <code>.json</code> file whose name contains <code>lambdaorm</code> (for example <code>lambdaORM.yaml</code>) is used; if there is none, one whose name contains <code>orm</code>, <code>schema</code> or <code>lambda</code>.</li>
-<li>With the path of the schema file, including its extension (<code>.yaml</code>, <code>.yml</code> or <code>.json</code>), which tells how to read it. A folder can also be given.</li>
-<li>With the schema as an object.</li>
+<li>Ohne Argumente: Die Schema-Datei wird im aktuellen Ordner gesucht. Verwendet wird eine Datei <code>.yaml</code>, <code>.yml</code> oder <code>.json</code>, deren Name <code>lambdaorm</code> enthält (zum Beispiel <code>lambdaORM.yaml</code>); gibt es keine, eine, deren Name <code>orm</code>, <code>schema</code> oder <code>lambda</code> enthält.</li>
+<li>Mit dem Pfad der Schema-Datei einschließlich ihrer Erweiterung (<code>.yaml</code>, <code>.yml</code> oder <code>.json</code>), die angibt, wie sie zu lesen ist. Es kann auch ein Ordner angegeben werden.</li>
+<li>Mit dem Schema als Objekt.</li>
 </ul>
-<p>In this example the path of the schema file is given, and a query is executed:</p>
+<p>In diesem Beispiel wird der Pfad der Schema-Datei angegeben und eine Abfrage ausgeführt:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">orm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@lambdaorm/lib'</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">orm</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="s1">'/home/my/app1/lambdaORM.yaml'</span><span class="p">)</span>

@@ -1278,7 +1278,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1593,7 +1593,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -1972,7 +1972,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2188,7 +2188,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Resumo
     </span>
   </a>
   
@@ -2197,7 +2197,7 @@
         <li class="md-nav__item">
   <a href="#types" class="md-nav__link">
     <span class="md-ellipsis">
-      Types
+      Tipos
     </span>
   </a>
   
@@ -2206,7 +2206,7 @@
         <li class="md-nav__item">
   <a href="#writes" class="md-nav__link">
     <span class="md-ellipsis">
-      Writes
+      Gravações
     </span>
   </a>
   
@@ -2215,7 +2215,7 @@
         <li class="md-nav__item">
   <a href="#stage-commands" class="md-nav__link">
     <span class="md-ellipsis">
-      Stage commands
+      Comandos de stage
     </span>
   </a>
   
@@ -2224,7 +2224,7 @@
         <li class="md-nav__item">
   <a href="#transactions" class="md-nav__link">
     <span class="md-ellipsis">
-      Transactions
+      Transações
     </span>
   </a>
   
@@ -2313,7 +2313,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -2997,7 +2997,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Resumo
     </span>
   </a>
   
@@ -3006,7 +3006,7 @@
         <li class="md-nav__item">
   <a href="#types" class="md-nav__link">
     <span class="md-ellipsis">
-      Types
+      Tipos
     </span>
   </a>
   
@@ -3015,7 +3015,7 @@
         <li class="md-nav__item">
   <a href="#writes" class="md-nav__link">
     <span class="md-ellipsis">
-      Writes
+      Gravações
     </span>
   </a>
   
@@ -3024,7 +3024,7 @@
         <li class="md-nav__item">
   <a href="#stage-commands" class="md-nav__link">
     <span class="md-ellipsis">
-      Stage commands
+      Comandos de stage
     </span>
   </a>
   
@@ -3033,7 +3033,7 @@
         <li class="md-nav__item">
   <a href="#transactions" class="md-nav__link">
     <span class="md-ellipsis">
-      Transactions
+      Transações
     </span>
   </a>
   
@@ -3055,12 +3055,12 @@
 
 
 
-<h1 id="engines">Engines<a class="headerlink" href="#engines" title="Permanent link">&para;</a></h1>
-<p>This page lists the differences between the database engines supported by λORM.</p>
-<p>λORM runs the same queries and stage commands on PostgreSQL, MySQL, MariaDB, SQL Server, Oracle, MongoDB and SQLite (dialect <code>SQLjs</code>).
-The same model gives the same results on every engine, except for the differences below.
-These differences are checked by the <a href="https://github.com/lambda-orm/core/tree/main/packages/lib/src/dev/labs/engines">engines lab</a>, which runs the same tests on PostgreSQL 17, MySQL 8.4, MariaDB 11.4, SQL Server 2022, Oracle 23 Free and MongoDB 7.</p>
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<h1 id="engines">Mecanismos de banco de dados<a class="headerlink" href="#engines" title="Permanent link">&para;</a></h1>
+<p>Esta página lista as diferenças entre os mecanismos de banco de dados suportados pelo λORM.</p>
+<p>O λORM executa as mesmas consultas e os mesmos comandos de stage no PostgreSQL, MySQL, MariaDB, SQL Server, Oracle, MongoDB e SQLite (dialeto <code>SQLjs</code>).
+O mesmo modelo produz os mesmos resultados em todos os mecanismos, exceto pelas diferenças abaixo.
+Essas diferenças são verificadas pelo <a href="https://github.com/lambda-orm/core/tree/main/packages/lib/src/dev/labs/engines">laboratório de mecanismos</a>, que executa os mesmos testes no PostgreSQL 17, MySQL 8.4, MariaDB 11.4, SQL Server 2022, Oracle 23 Free e MongoDB 7.</p>
+<h2 id="summary">Resumo<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3074,7 +3074,7 @@ These differences are checked by the <a href="https://github.com/lambda-orm/core
 </thead>
 <tbody>
 <tr>
-<td>string without <code>length</code></td>
+<td>string sem <code>length</code></td>
 <td><code>TEXT</code></td>
 <td><code>VARCHAR(80)</code></td>
 <td><code>VARCHAR(80)</code></td>
@@ -3087,10 +3087,10 @@ These differences are checked by the <a href="https://github.com/lambda-orm/core
 <td><code>JSON</code></td>
 <td><code>NVARCHAR(MAX)</code></td>
 <td><code>CLOB</code></td>
-<td>native</td>
+<td>nativo</td>
 </tr>
 <tr>
-<td><code>''</code> (empty string)</td>
+<td><code>''</code> (string vazia)</td>
 <td><code>''</code></td>
 <td><code>''</code></td>
 <td><code>''</code></td>
@@ -3099,38 +3099,38 @@ These differences are checked by the <a href="https://github.com/lambda-orm/core
 </tr>
 <tr>
 <td><code>upsert()</code></td>
-<td>yes</td>
-<td>yes</td>
-<td>yes (<code>MERGE</code>)</td>
-<td>yes (<code>MERGE</code>)</td>
-<td>not yet (clear error)</td>
+<td>sim</td>
+<td>sim</td>
+<td>sim (<code>MERGE</code>)</td>
+<td>sim (<code>MERGE</code>)</td>
+<td>ainda não (erro claro)</td>
 </tr>
 <tr>
-<td><code>update().include()</code> of a composite relation</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes (children are embedded)</td>
+<td><code>update().include()</code> de uma relação composta</td>
+<td>sim</td>
+<td>sim</td>
+<td>sim</td>
+<td>sim</td>
+<td>sim (os filhos são incorporados)</td>
 </tr>
 <tr>
-<td>composite children</td>
-<td>own table</td>
-<td>own table</td>
-<td>own table</td>
-<td>own table</td>
-<td>embedded in the parent's document</td>
+<td>filhos compostos</td>
+<td>tabela própria</td>
+<td>tabela própria</td>
+<td>tabela própria</td>
+<td>tabela própria</td>
+<td>incorporados no documento do pai</td>
 </tr>
 <tr>
-<td>push / fetch of columns</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
-<td>schemaless: only whether the collection exists</td>
+<td>push / fetch de colunas</td>
+<td>sim</td>
+<td>sim</td>
+<td>sim</td>
+<td>sim</td>
+<td>sem esquema: apenas se a coleção existe</td>
 </tr>
 <tr>
-<td>column rename (<code>previousMapping</code>)</td>
+<td>renomear coluna (<code>previousMapping</code>)</td>
 <td><code>RENAME COLUMN</code></td>
 <td><code>RENAME COLUMN</code></td>
 <td><code>sp_rename</code></td>
@@ -3139,30 +3139,30 @@ These differences are checked by the <a href="https://github.com/lambda-orm/core
 </tr>
 </tbody>
 </table>
-<h2 id="types">Types<a class="headerlink" href="#types" title="Permanent link">&para;</a></h2>
+<h2 id="types">Tipos<a class="headerlink" href="#types" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>String without length</strong>: unbounded (<code>TEXT</code>) only on PostgreSQL; on the other engines it is <code>VARCHAR(80)</code>. Set <code>length</code> for longer values, or <code>dbType</code> in the property mapping.</li>
-<li><strong>json</strong>: objects and lists are written and read as such on every engine; the column type changes (see the table).</li>
-<li><strong>dateTime</strong>: PostgreSQL writes it with milliseconds and offset, so a <code>timestamptz(3)</code> column (<code>dbType</code>) keeps the exact instant. On the other engines the precision depends on the column type (<code>DATETIME</code> keeps at least the seconds).</li>
-<li><strong>Empty string</strong>: <code>''</code>, <code>0</code> and <code>false</code> are values, never NULL. Oracle is the exception: it has no empty string and stores <code>''</code> as NULL, so a value written as <code>''</code> comes back as <code>null</code> and a filter <code>p.email == ""</code> finds nothing.</li>
+<li><strong>String sem comprimento</strong>: ilimitada (<code>TEXT</code>) apenas no PostgreSQL; nos demais mecanismos é <code>VARCHAR(80)</code>. Defina <code>length</code> para valores mais longos, ou <code>dbType</code> no mapeamento da propriedade.</li>
+<li><strong>json</strong>: objetos e listas são gravados e lidos como tais em todos os mecanismos; o que muda é o tipo da coluna (veja a tabela).</li>
+<li><strong>dateTime</strong>: o PostgreSQL o grava com milissegundos e deslocamento, de modo que uma coluna <code>timestamptz(3)</code> (<code>dbType</code>) preserva o instante exato. Nos demais mecanismos, a precisão depende do tipo da coluna (<code>DATETIME</code> preserva pelo menos os segundos).</li>
+<li><strong>String vazia</strong>: <code>''</code>, <code>0</code> e <code>false</code> são valores, nunca NULL. O Oracle é a exceção: ele não tem string vazia e armazena <code>''</code> como NULL, então um valor gravado como <code>''</code> volta como <code>null</code> e um filtro <code>p.email == ""</code> não encontra nada.</li>
 </ul>
-<p>See <a href="../SchemaDefinition/#property-types">Property types</a>.</p>
-<h2 id="writes">Writes<a class="headerlink" href="#writes" title="Permanent link">&para;</a></h2>
+<p>Veja <a href="../SchemaDefinition/#property-types">Tipos de propriedade</a>.</p>
+<h2 id="writes">Gravações<a class="headerlink" href="#writes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>update</code> and <code>delete</code> return the number of affected rows on every engine.</li>
-<li><a href="../../queries/Insert/#upsert"><code>upsert()</code></a> uses <code>ON CONFLICT … DO UPDATE</code> on PostgreSQL, <code>ON DUPLICATE KEY UPDATE</code> on MySQL and MariaDB, and <code>MERGE</code> on SQL Server and Oracle (from @lambdaorm/lib 3.5.0). On MongoDB it fails with a "not supported yet" error.</li>
-<li><a href="../../queries/Update/#update-an-aggregate-composite-relation"><code>update().include()</code> of a composite relation</a> inserts, updates and deletes the children with upsert, so it has the same support. On MongoDB the composite children are embedded in the parent's document, so the update replaces them there.</li>
+<li><code>update</code> e <code>delete</code> retornam o número de linhas afetadas em todos os mecanismos.</li>
+<li><a href="../../queries/Insert/#upsert"><code>upsert()</code></a> usa <code>ON CONFLICT … DO UPDATE</code> no PostgreSQL, <code>ON DUPLICATE KEY UPDATE</code> no MySQL e no MariaDB, e <code>MERGE</code> no SQL Server e no Oracle (a partir do @lambdaorm/lib 3.5.0). No MongoDB, falha com um erro "not supported yet".</li>
+<li><a href="../../queries/Update/#update-an-aggregate-composite-relation"><code>update().include()</code> de uma relação composta</a> insere, atualiza e exclui os filhos com upsert, portanto tem o mesmo suporte. No MongoDB, os filhos compostos são incorporados no documento do pai, então a atualização os substitui ali.</li>
 </ul>
-<h2 id="stage-commands">Stage commands<a class="headerlink" href="#stage-commands" title="Permanent link">&para;</a></h2>
+<h2 id="stage-commands">Comandos de stage<a class="headerlink" href="#stage-commands" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>push</code> and <code>fetch</code> compare tables and columns on every SQL engine.</li>
-<li>MongoDB is schemaless: <code>fetch</code> only says whether each collection exists, and its fields are whatever its documents have.</li>
+<li><code>push</code> e <code>fetch</code> comparam tabelas e colunas em todos os mecanismos SQL.</li>
+<li>O MongoDB não tem esquema: <code>fetch</code> apenas informa se cada coleção existe, e seus campos são os que seus documentos tiverem.</li>
 </ul>
-<p>See <a href="../SchemaSynchronization-Push/">Push</a> and <a href="../SchemaSynchronization-Fetch/">Fetch</a>.</p>
-<h2 id="transactions">Transactions<a class="headerlink" href="#transactions" title="Permanent link">&para;</a></h2>
+<p>Veja <a href="../SchemaSynchronization-Push/">Push</a> e <a href="../SchemaSynchronization-Fetch/">Fetch</a>.</p>
+<h2 id="transactions">Transações<a class="headerlink" href="#transactions" title="Permanent link">&para;</a></h2>
 <ul>
-<li>On every SQL engine a transaction uses one connection per source and commits or rolls back source by source (there is no two-phase commit).</li>
-<li>MongoDB transactions need a replica set.</li>
+<li>Em todos os mecanismos SQL, uma transação usa uma conexão por fonte e faz commit ou rollback fonte por fonte (não há commit em duas fases).</li>
+<li>As transações do MongoDB exigem um replica set.</li>
 </ul>
 
 
@@ -3216,13 +3216,13 @@ These differences are checked by the <a href="https://github.com/lambda-orm/core
         
         
           
-          <a href="../../usage/Usage/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Usage">
+          <a href="../../usage/Usage/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Uso">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Usage
+                Uso
               </div>
             </div>
             <div class="md-footer__button md-icon">

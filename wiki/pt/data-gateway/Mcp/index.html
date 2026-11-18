@@ -775,7 +775,7 @@
         <li class="md-nav__item">
   <a href="#tools" class="md-nav__link">
     <span class="md-ellipsis">
-      Tools
+      Ferramentas
     </span>
   </a>
   
@@ -784,7 +784,7 @@
         <li class="md-nav__item">
   <a href="#results-and-errors" class="md-nav__link">
     <span class="md-ellipsis">
-      Results and errors
+      Resultados e erros
     </span>
   </a>
   
@@ -793,7 +793,7 @@
         <li class="md-nav__item">
   <a href="#resources" class="md-nav__link">
     <span class="md-ellipsis">
-      Resources
+      Recursos
     </span>
   </a>
   
@@ -802,7 +802,7 @@
         <li class="md-nav__item">
   <a href="#what-an-agent-can-do" class="md-nav__link">
     <span class="md-ellipsis">
-      What an agent can do
+      O que um agente pode fazer
     </span>
   </a>
   
@@ -811,11 +811,11 @@
         <li class="md-nav__item">
   <a href="#transports" class="md-nav__link">
     <span class="md-ellipsis">
-      Transports
+      Transportes
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Transports">
+    <nav class="md-nav" aria-label="Transportes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1394,7 +1394,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operadores e funções
     
   </span>
   
@@ -1704,7 +1704,7 @@
   
   
   <span class="md-ellipsis">
-    Schema
+    Esquema
     
   </span>
   
@@ -2077,7 +2077,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Sincronização
     
   </span>
   
@@ -2331,7 +2331,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Uso
     
   </span>
   
@@ -3015,7 +3015,7 @@
         <li class="md-nav__item">
   <a href="#tools" class="md-nav__link">
     <span class="md-ellipsis">
-      Tools
+      Ferramentas
     </span>
   </a>
   
@@ -3024,7 +3024,7 @@
         <li class="md-nav__item">
   <a href="#results-and-errors" class="md-nav__link">
     <span class="md-ellipsis">
-      Results and errors
+      Resultados e erros
     </span>
   </a>
   
@@ -3033,7 +3033,7 @@
         <li class="md-nav__item">
   <a href="#resources" class="md-nav__link">
     <span class="md-ellipsis">
-      Resources
+      Recursos
     </span>
   </a>
   
@@ -3042,7 +3042,7 @@
         <li class="md-nav__item">
   <a href="#what-an-agent-can-do" class="md-nav__link">
     <span class="md-ellipsis">
-      What an agent can do
+      O que um agente pode fazer
     </span>
   </a>
   
@@ -3051,11 +3051,11 @@
         <li class="md-nav__item">
   <a href="#transports" class="md-nav__link">
     <span class="md-ellipsis">
-      Transports
+      Transportes
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Transports">
+    <nav class="md-nav" aria-label="Transportes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3098,25 +3098,25 @@
 
 
 <h1 id="mcp">MCP<a class="headerlink" href="#mcp" title="Permanent link">&para;</a></h1>
-<p>The gateway is a <a href="https://modelcontextprotocol.io">Model Context Protocol</a> server, so AI agents (Claude Code and any
-MCP client) can explore the domain and query the data with λORM's language. There is <strong>one MCP server per schema</strong>
-(<code>/iot/v1/mcp</code>): its tools describe that schema's domain, and each version is registered as a separate server in the
-client (<code>iot-v1</code>, <code>iot-v2</code>).</p>
+<p>O gateway é um servidor <a href="https://modelcontextprotocol.io">Model Context Protocol</a>, de modo que agentes de IA (Claude Code e qualquer
+cliente MCP) podem explorar o domínio e consultar os dados com a linguagem do λORM. Há <strong>um servidor MCP por esquema</strong>
+(<code>/iot/v1/mcp</code>): suas ferramentas descrevem o domínio desse esquema, e cada versão é registrada como um servidor separado no
+cliente (<code>iot-v1</code>, <code>iot-v2</code>).</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>--transport<span class="w"> </span>http<span class="w"> </span>iot-v1<span class="w"> </span>http://localhost:8081/iot/v1/mcp<span class="w"> </span>--header<span class="w"> </span><span class="s2">"X-Api-Key: </span><span class="nv">$KEY</span><span class="s2">"</span>
 </code></pre></div>
-<p>With a single schema at the root: <code>http://localhost:8081/mcp</code>.</p>
-<h2 id="tools">Tools<a class="headerlink" href="#tools" title="Permanent link">&para;</a></h2>
-<p>One tool per operation of the schema, <strong>writes included</strong>: an agent can do what an application does, <strong>if its
-credential allows it</strong>. The descriptions and input schemas are generated when the schema starts and carry its domain
-(entities, properties, relations, enums), so the model knows what to query without a previous call.</p>
+<p>Com um único esquema na raiz: <code>http://localhost:8081/mcp</code>.</p>
+<h2 id="tools">Ferramentas<a class="headerlink" href="#tools" title="Permanent link">&para;</a></h2>
+<p>Uma ferramenta por operação do esquema, <strong>escritas incluídas</strong>: um agente pode fazer o que uma aplicação faz, <strong>se sua
+credencial permitir</strong>. As descrições e os esquemas de entrada são gerados quando o esquema inicia e trazem seu domínio
+(entidades, propriedades, relações, enums), de modo que o modelo sabe o que consultar sem uma chamada prévia.</p>
 <table>
 <thead>
 <tr>
-<th>Tool</th>
-<th>Arguments</th>
-<th>REST equivalent</th>
-<th>Permission</th>
-<th>Hint</th>
+<th>Ferramenta</th>
+<th>Argumentos</th>
+<th>Equivalente REST</th>
+<th>Permissão</th>
+<th>Dica</th>
 </tr>
 </thead>
 <tbody>
@@ -3124,240 +3124,240 @@ credential allows it</strong>. The descriptions and input schemas are generated 
 <td><code>orm_execute</code></td>
 <td><code>query</code>, <code>data?</code>, <code>options?</code></td>
 <td><code>POST /execute</code></td>
-<td><code>read</code> (selects) or <code>write</code></td>
-<td>read only with <code>read</code>; destructive with <code>write</code></td>
+<td><code>read</code> (selects) ou <code>write</code></td>
+<td>somente leitura com <code>read</code>; destrutiva com <code>write</code></td>
 </tr>
 <tr>
 <td><code>orm_execute_script</code></td>
 <td><code>script</code>, <code>data?</code>, <code>options?</code></td>
 <td><code>POST /script</code></td>
 <td><code>script</code></td>
-<td>destructive</td>
+<td>destrutiva</td>
 </tr>
 <tr>
 <td><code>orm_execute_queued</code></td>
 <td><code>topic</code>, <code>query</code>, <code>data?</code>, <code>chunk?</code>, <code>options?</code></td>
 <td><code>POST /execute-queued</code></td>
 <td><code>queue</code></td>
-<td>destructive</td>
+<td>destrutiva</td>
 </tr>
 <tr>
 <td><code>orm_plan</code></td>
 <td><code>query</code>, <code>options?</code></td>
 <td><code>POST /plan</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>orm_metadata</code></td>
 <td><code>query</code></td>
 <td><code>POST /metadata</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>orm_model</code></td>
 <td><code>query</code></td>
 <td><code>POST /model</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>orm_parameters</code></td>
 <td><code>query</code></td>
 <td><code>POST /parameters</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>orm_constraints</code></td>
 <td><code>query</code></td>
 <td><code>POST /constraints</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>schema_get</code></td>
 <td>—</td>
 <td><code>GET /schema</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>schema_version</code></td>
 <td>—</td>
 <td><code>GET /schema/version</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>schema_domain</code></td>
 <td>—</td>
 <td><code>GET /domain</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>schema_entities</code></td>
 <td><code>entity?</code></td>
 <td><code>GET /entities[/{entity}]</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>schema_enums</code></td>
 <td><code>enum?</code></td>
 <td><code>GET /enums[/{enum}]</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>schema_sources</code></td>
 <td><code>source?</code></td>
 <td><code>GET /sources[/{source}]</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>schema_mappings</code></td>
 <td><code>mapping?</code>, <code>entity?</code></td>
 <td><code>GET /mappings…</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>schema_views</code></td>
 <td>—</td>
 <td><code>GET /views</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>schema_stages</code></td>
 <td><code>stage?</code></td>
 <td><code>GET /stages[/{stage}]</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>stage_exists</code></td>
 <td><code>stage</code></td>
 <td><code>GET /stages/{stage}/exists</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>stage_export</code></td>
 <td><code>stage</code></td>
 <td><code>GET /stages/{stage}/export</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>stage_import</code></td>
 <td><code>stage</code>, <code>data</code></td>
 <td><code>POST /stages/{stage}/import</code></td>
 <td><code>stageImport</code></td>
-<td>destructive</td>
+<td>destrutiva</td>
 </tr>
 <tr>
 <td><code>gateway_version</code></td>
 <td>—</td>
 <td><code>GET /version</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 <tr>
 <td><code>gateway_health</code></td>
 <td>—</td>
 <td><code>GET /health</code></td>
 <td><code>read</code></td>
-<td>read only</td>
+<td>somente leitura</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li><strong><code>tools/list</code> shows a credential only the tools it can use.</strong> Without <code>script</code>, <code>orm_execute_script</code> doesn't
-  appear; with only <code>read</code>, <code>orm_execute</code> is described as "read-only queries with this credential".</li>
-<li>The hints (<code>readOnlyHint</code>, <code>destructiveHint</code>) don't block anything: they tell the client which tools change data,
-  so it can ask for confirmation. What blocks is the <a href="../Security/#permissions">permissions</a>.</li>
-<li>The same rules as REST: <code>orm_execute_script</code> fails if scripts are disabled; <code>orm_execute_queued</code>, if the schema has
-  no queue.</li>
-<li><code>mcp.tools.include</code> / <code>exclude</code> (global or per schema) restrict the list further, for example
+<li><strong><code>tools/list</code> mostra a uma credencial apenas as ferramentas que ela pode usar.</strong> Sem <code>script</code>, <code>orm_execute_script</code> não
+  aparece; com apenas <code>read</code>, <code>orm_execute</code> é descrita como "consultas somente leitura com esta credencial".</li>
+<li>As dicas (<code>readOnlyHint</code>, <code>destructiveHint</code>) não bloqueiam nada: elas informam ao cliente quais ferramentas alteram dados,
+  para que ele possa pedir confirmação. O que bloqueia são as <a href="../Security/#permissions">permissões</a>.</li>
+<li>As mesmas regras do REST: <code>orm_execute_script</code> falha se os scripts estiverem desabilitados; <code>orm_execute_queued</code>, se o esquema não tiver
+  fila.</li>
+<li><code>mcp.tools.include</code> / <code>exclude</code> (global ou por esquema) restringem ainda mais a lista, por exemplo
   <code>exclude: [ orm_execute_script, stage_import ]</code>.</li>
 </ul>
-<h2 id="results-and-errors">Results and errors<a class="headerlink" href="#results-and-errors" title="Permanent link">&para;</a></h2>
+<h2 id="results-and-errors">Resultados e erros<a class="headerlink" href="#results-and-errors" title="Permanent link">&para;</a></h2>
 <ul>
-<li>A result is <code>{ content: [{ type: "text", text: &lt;JSON&gt; }] }</code>, with <code>structuredContent</code> too when it is small.</li>
-<li><strong>Row limit (<code>mcp.maxRows</code>, default 500).</strong> When <code>orm_execute</code> or <code>orm_execute_script</code> answer a longer list, it is
-  cut and the model is told how to ask for less:</li>
+<li>Um resultado é <code>{ content: [{ type: "text", text: &lt;JSON&gt; }] }</code>, também com <code>structuredContent</code> quando é pequeno.</li>
+<li><strong>Limite de linhas (<code>mcp.maxRows</code>, padrão 500).</strong> Quando <code>orm_execute</code> ou <code>orm_execute_script</code> respondem com uma lista maior, ela é
+  cortada e o modelo é informado sobre como pedir menos:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"…500 rows…"</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="nt">"truncated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nt">"returned"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">18234</span><span class="p">,</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"hint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The result was cut to 500 rows. Use .page(1, 500) (or a smaller page), aggregate with map/count, or filter the query more."</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
-<p>It applies only to MCP and after the query ran: it protects the model's context. The database is protected by
-  <code>server.maxResponseBytes</code> and <code>server.timeout</code>.
-- An error of λORM (syntax, an unknown entity, a constraint, a disabled script) or a missing permission answers
-  <code>isError: true</code> with the message, so the model can read it and correct the query.</p>
-<h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
+<p>Ele se aplica apenas ao MCP e depois que a consulta foi executada: protege o contexto do modelo. O banco de dados é protegido por
+  <code>server.maxResponseBytes</code> e <code>server.timeout</code>.
+- Um erro do λORM (sintaxe, uma entidade desconhecida, uma restrição, um script desabilitado) ou uma permissão ausente responde
+  <code>isError: true</code> com a mensagem, para que o modelo possa lê-la e corrigir a consulta.</p>
+<h2 id="resources">Recursos<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>URI</th>
-<th>Content</th>
+<th>Conteúdo</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>lambdaorm://guide/expressions</code></td>
-<td>a short guide of the query language (Markdown), to give the model context</td>
+<td>um guia curto da linguagem de consulta (Markdown), para dar contexto ao modelo</td>
 </tr>
 <tr>
 <td><code>lambdaorm://schema/domain</code></td>
-<td>the whole domain of the schema, JSON</td>
+<td>o domínio inteiro do esquema, em JSON</td>
 </tr>
 <tr>
 <td><code>lambdaorm://entities/{entity}</code></td>
-<td>one entity (template)</td>
+<td>uma entidade (template)</td>
 </tr>
 </tbody>
 </table>
-<h2 id="what-an-agent-can-do">What an agent can do<a class="headerlink" href="#what-an-agent-can-do" title="Permanent link">&para;</a></h2>
-<p>There is no read-only mode of the transport: what an agent can do is decided by <strong>its credential's permissions</strong>. An
-agent that only queries gets a credential with <code>[ read ]</code>: it can run selects but not write, run scripts, queue or
-import, by any transport. Besides: <code>schemas[].transports</code> to keep a schema out of MCP, <code>mcp.tools.exclude</code>, the hints,
-and the permissions of the database user (the guarantee underneath). Every write an agent makes is
-<a href="../Security/#audit">audited</a> with the name of its credential and <code>"transport": "mcpHttp"</code>.</p>
-<h2 id="transports">Transports<a class="headerlink" href="#transports" title="Permanent link">&para;</a></h2>
+<h2 id="what-an-agent-can-do">O que um agente pode fazer<a class="headerlink" href="#what-an-agent-can-do" title="Permanent link">&para;</a></h2>
+<p>Não existe um modo somente leitura do transporte: o que um agente pode fazer é decidido pelas <strong>permissões de sua credencial</strong>. Um
+agente que apenas consulta recebe uma credencial com <code>[ read ]</code>: pode executar selects, mas não gravar, executar scripts, enfileirar nem
+importar, por nenhum transporte. Além disso: <code>schemas[].transports</code> para deixar um esquema fora do MCP, <code>mcp.tools.exclude</code>, as dicas
+e as permissões do usuário do banco de dados (a garantia de base). Toda escrita feita por um agente é
+<a href="../Security/#audit">auditada</a> com o nome de sua credencial e <code>"transport": "mcpHttp"</code>.</p>
+<h2 id="transports">Transportes<a class="headerlink" href="#transports" title="Permanent link">&para;</a></h2>
 <h3 id="mcphttp">mcpHttp<a class="headerlink" href="#mcphttp" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Route</th>
-<th>Protocol</th>
+<th>Rota</th>
+<th>Protocolo</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>POST/GET/DELETE {basePath}/{schema}/mcp</code></td>
-<td>Streamable HTTP: Claude Code <code>--transport http</code> and current clients</td>
+<td>Streamable HTTP: Claude Code <code>--transport http</code> e clientes atuais</td>
 </tr>
 <tr>
 <td><code>GET {basePath}/{schema}/sse</code> + <code>POST {basePath}/{schema}/messages?sessionId=&lt;id&gt;</code></td>
-<td>HTTP+SSE (deprecated), with <code>legacySse: true</code></td>
+<td>HTTP+SSE (obsoleto), com <code>legacySse: true</code></td>
 </tr>
 <tr>
 <td><code>GET {basePath}/status</code></td>
-<td>the state of the transport, the schemas and the open SSE sessions</td>
+<td>o estado do transporte, dos esquemas e das sessões SSE abertas</td>
 </tr>
 </tbody>
 </table>
-<p>Streamable HTTP is stateless by default (<code>stateful: false</code>): each <code>POST</code> stands alone and any replica answers it. The
-credential goes in every request.</p>
+<p>O Streamable HTTP é sem estado por padrão (<code>stateful: false</code>): cada <code>POST</code> é independente e qualquer réplica o responde. A
+credencial vai em cada requisição.</p>
 <h3 id="mcpwebsocket">mcpWebSocket<a class="headerlink" href="#mcpwebsocket" title="Permanent link">&para;</a></h3>
-<p>An upgrade at <code>{basePath}/{schema}/mcp</code>, authenticated in the handshake; JSON-RPC 2.0 messages with the MCP methods
-(<code>initialize</code>, <code>ping</code>, <code>tools/list</code>, <code>tools/call</code>, <code>resources/list</code>, <code>resources/read</code>, …). It is not a standard MCP
-transport: it is offered for clients and gateways that support it on their own. Its AsyncAPI document is at
+<p>Um upgrade em <code>{basePath}/{schema}/mcp</code>, autenticado no handshake; mensagens JSON-RPC 2.0 com os métodos do MCP
+(<code>initialize</code>, <code>ping</code>, <code>tools/list</code>, <code>tools/call</code>, <code>resources/list</code>, <code>resources/read</code>, …). Não é um transporte MCP
+padrão: é oferecido para clientes e gateways que o suportam por conta própria. Seu documento AsyncAPI está em
 <code>GET {basePath}/asyncapi</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="err">→</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tools/call"</span><span class="p">,</span><span class="w"> </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orm_execute"</span><span class="p">,</span><span class="w"> </span><span class="nt">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Products.filter(p =&gt; p.price &gt; 50).map(p =&gt; p.name)"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">←</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w"> </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[\"Côte de Blaye\", \"Thüringer Rostbratwurst\"]"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>

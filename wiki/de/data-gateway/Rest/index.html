@@ -752,7 +752,7 @@
         <li class="md-nav__item">
   <a href="#routes" class="md-nav__link">
     <span class="md-ellipsis">
-      Routes
+      Routen
     </span>
   </a>
   
@@ -761,7 +761,7 @@
         <li class="md-nav__item">
   <a href="#gateway-methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Gateway methods
+      Methoden des Gateways
     </span>
   </a>
   
@@ -770,7 +770,7 @@
         <li class="md-nav__item">
   <a href="#state-of-a-schema" class="md-nav__link">
     <span class="md-ellipsis">
-      State of a schema
+      Zustand eines Schemas
     </span>
   </a>
   
@@ -779,11 +779,11 @@
         <li class="md-nav__item">
   <a href="#query-methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Query methods
+      Abfragemethoden
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Query methods">
+    <nav class="md-nav" aria-label="Abfragemethoden">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -866,7 +866,7 @@
         <li class="md-nav__item">
   <a href="#schema-methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema methods
+      Schema-Methoden
     </span>
   </a>
   
@@ -875,7 +875,7 @@
         <li class="md-nav__item">
   <a href="#stage-methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Stage methods
+      Stage-Methoden
     </span>
   </a>
   
@@ -884,7 +884,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Zusammenfassung
     </span>
   </a>
   
@@ -1466,7 +1466,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -2149,7 +2149,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2403,7 +2403,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -3087,7 +3087,7 @@
         <li class="md-nav__item">
   <a href="#routes" class="md-nav__link">
     <span class="md-ellipsis">
-      Routes
+      Routen
     </span>
   </a>
   
@@ -3096,7 +3096,7 @@
         <li class="md-nav__item">
   <a href="#gateway-methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Gateway methods
+      Methoden des Gateways
     </span>
   </a>
   
@@ -3105,7 +3105,7 @@
         <li class="md-nav__item">
   <a href="#state-of-a-schema" class="md-nav__link">
     <span class="md-ellipsis">
-      State of a schema
+      Zustand eines Schemas
     </span>
   </a>
   
@@ -3114,11 +3114,11 @@
         <li class="md-nav__item">
   <a href="#query-methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Query methods
+      Abfragemethoden
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Query methods">
+    <nav class="md-nav" aria-label="Abfragemethoden">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3201,7 +3201,7 @@
         <li class="md-nav__item">
   <a href="#schema-methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema methods
+      Schema-Methoden
     </span>
   </a>
   
@@ -3210,7 +3210,7 @@
         <li class="md-nav__item">
   <a href="#stage-methods" class="md-nav__link">
     <span class="md-ellipsis">
-      Stage methods
+      Stage-Methoden
     </span>
   </a>
   
@@ -3219,7 +3219,7 @@
         <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      Summary
+      Zusammenfassung
     </span>
   </a>
   
@@ -3242,16 +3242,18 @@
 
 
 <h1 id="rest-api">REST API<a class="headerlink" href="#rest-api" title="Permanent link">&para;</a></h1>
-<p>The <code>http</code> transport (<a href="../Transports/#http">Transports</a>) exposes every operation of λORM on a schema as REST, with JSON
-in and out. The OpenAPI 3 document is served by the gateway at <code>/doc</code> (Swagger UI) and <code>/api-docs</code>.</p>
-<h2 id="routes">Routes<a class="headerlink" href="#routes" title="Permanent link">&para;</a></h2>
-<p>The examples use a gateway at <code>http://localhost:8080</code> with an API key. Each schema's methods are under its route:</p>
+<p>Der Transport <code>http</code> (<a href="../Transports/#http">Transporte</a>) stellt alle Operationen von λORM auf einem Schema als REST
+bereit, mit JSON als Ein- und Ausgabe. Das OpenAPI-3-Dokument wird vom Gateway unter <code>/doc</code> (Swagger UI) und
+<code>/api-docs</code> bereitgestellt.</p>
+<h2 id="routes">Routen<a class="headerlink" href="#routes" title="Permanent link">&para;</a></h2>
+<p>Die Beispiele verwenden ein Gateway unter <code>http://localhost:8080</code> mit einem API-Key. Die Methoden jedes Schemas liegen
+unter seiner Route:</p>
 <table>
 <thead>
 <tr>
 <th>Gateway</th>
 <th>Schema <code>iot/v1</code></th>
-<th>Only schema at the root</th>
+<th>Einziges Schema an der Wurzel</th>
 </tr>
 </thead>
 <tbody>
@@ -3262,24 +3264,25 @@ in and out. The OpenAPI 3 document is served by the gateway at <code>/doc</code>
 </tr>
 </tbody>
 </table>
-<p>With <code>transports.http.basePath: /data-gateway</code>, every route is under it: <code>/data-gateway/iot/v1/execute</code>.</p>
+<p>Mit <code>transports.http.basePath: /data-gateway</code> liegt jede Route darunter: <code>/data-gateway/iot/v1/execute</code>.</p>
 <ul>
-<li>Every request needs the credential, except <code>/ping</code>, <code>/health</code> and <code>/metrics</code> (at the root and under each schema),
-  <code>/schemas</code>, <code>/version</code>, <code>/doc</code> and the UI. How it is sent depends on the <a href="../Security/">authentication</a>:
-  <code>X-Api-Key: &lt;key&gt;</code>, <code>Authorization: Bearer &lt;token&gt;</code> or <code>Authorization: Basic &lt;base64&gt;</code>.</li>
-<li><code>?format=beautiful</code> indents the JSON of the answer.</li>
-<li><code>data</code> (the parameters of a query) and <code>options</code> (for example <code>{ "stage": "default" }</code>) are JSON objects; JSON text
-  (<code>"data": "{\"id\": 10}"</code>) is also accepted.</li>
-<li>An error answers a status and <code>{ "error", "code"?, "message" }</code> (<a href="../Security/#errors">Errors</a>).</li>
+<li>Jede Anfrage benötigt die Zugangsdaten, außer <code>/ping</code>, <code>/health</code> und <code>/metrics</code> (an der Wurzel und unter jedem
+  Schema), <code>/schemas</code>, <code>/version</code>, <code>/doc</code> und die UI. Wie sie gesendet werden, hängt von der
+  <a href="../Security/">Authentifizierung</a> ab: <code>X-Api-Key: &lt;key&gt;</code>, <code>Authorization: Bearer &lt;token&gt;</code> oder
+  <code>Authorization: Basic &lt;base64&gt;</code>.</li>
+<li><code>?format=beautiful</code> rückt das JSON der Antwort ein.</li>
+<li><code>data</code> (die Parameter einer Abfrage) und <code>options</code> (zum Beispiel <code>{ "stage": "default" }</code>) sind JSON-Objekte; JSON-Text
+  (<code>"data": "{\"id\": 10}"</code>) wird ebenfalls akzeptiert.</li>
+<li>Ein Fehler liefert einen Status und <code>{ "error", "code"?, "message" }</code> (<a href="../Security/#errors">Fehler</a>).</li>
 </ul>
-<h2 id="gateway-methods">Gateway methods<a class="headerlink" href="#gateway-methods" title="Permanent link">&para;</a></h2>
+<h2 id="gateway-methods">Methoden des Gateways<a class="headerlink" href="#gateway-methods" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Method</th>
+<th>Methode</th>
 <th>Route</th>
-<th>Answers</th>
-<th>Credential</th>
+<th>Antwortet</th>
+<th>Zugangsdaten</th>
 </tr>
 </thead>
 <tbody>
@@ -3287,37 +3290,37 @@ in and out. The OpenAPI 3 document is served by the gateway at <code>/doc</code>
 <td><code>GET</code></td>
 <td><code>/ping</code></td>
 <td><code>{ "message": "pong", "time" }</code></td>
-<td>no</td>
+<td>nein</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/health</code></td>
-<td><code>200</code> while some schema is <code>ready</code>, <code>503</code> if none</td>
-<td>no</td>
+<td><code>200</code>, solange irgendein Schema <code>ready</code> ist, <code>503</code>, wenn keines</td>
+<td>nein</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/metrics</code></td>
-<td>the metrics of every worker, Prometheus text</td>
-<td>no</td>
+<td>die Metriken aller Worker, Prometheus-Text</td>
+<td>nein</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/version</code></td>
-<td>the version of the gateway</td>
-<td>no</td>
+<td>die Version des Gateways</td>
+<td>nein</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/schemas</code></td>
-<td>each schema with its state</td>
-<td>no</td>
+<td>jedes Schema mit seinem Zustand</td>
+<td>nein</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/whoami</code></td>
-<td>the name and permissions of the credential</td>
-<td>yes</td>
+<td>der Name und die Berechtigungen der Zugangsdaten</td>
+<td>ja</td>
 </tr>
 </tbody>
 </table>
@@ -3328,42 +3331,42 @@ in and out. The OpenAPI 3 document is served by the gateway at <code>/doc</code>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"iot/v2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w"> </span><span class="nt">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"connect ECONNREFUSED 10.0.0.5:5432"</span><span class="p">,</span><span class="w"> </span><span class="nt">"since"</span><span class="p">:</span><span class="w"> </span><span class="s2">"…"</span><span class="p">,</span><span class="w"> </span><span class="nt">"restarts"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">}</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">]</span>
 </code></pre></div>
-<p>The states are <code>starting</code>, <code>ready</code>, <code>error</code> and <code>restarting</code>.</p>
-<h2 id="state-of-a-schema">State of a schema<a class="headerlink" href="#state-of-a-schema" title="Permanent link">&para;</a></h2>
-<p>Under each schema's route (<code>/iot/v1/…</code>), these answer only about that schema:</p>
+<p>Die Zustände sind <code>starting</code>, <code>ready</code>, <code>error</code> und <code>restarting</code>.</p>
+<h2 id="state-of-a-schema">Zustand eines Schemas<a class="headerlink" href="#state-of-a-schema" title="Permanent link">&para;</a></h2>
+<p>Unter der Route jedes Schemas (<code>/iot/v1/…</code>) antworten diese nur zu diesem Schema:</p>
 <table>
 <thead>
 <tr>
-<th>Method</th>
+<th>Methode</th>
 <th>Route</th>
-<th>Answers</th>
+<th>Antwortet</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/ping</code></td>
-<td><code>200</code> if the schema is <code>ready</code>, <code>503</code> if not</td>
+<td><code>200</code>, wenn das Schema <code>ready</code> ist, sonst <code>503</code></td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/health</code></td>
-<td>the state of the schema; <code>503</code> if it is not <code>ready</code></td>
+<td>der Zustand des Schemas; <code>503</code>, wenn es nicht <code>ready</code> ist</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/metrics</code></td>
-<td>the metrics of that schema</td>
+<td>die Metriken dieses Schemas</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/version</code></td>
-<td>the versions of the gateway and the schema</td>
+<td>die Versionen des Gateways und des Schemas</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/whoami</code></td>
-<td>the name and permissions of the credential with the authentication of that schema, and whether it has scripts enabled</td>
+<td>der Name und die Berechtigungen der Zugangsdaten mit der Authentifizierung dieses Schemas und ob Skripte aktiviert sind</td>
 </tr>
 </tbody>
 </table>
@@ -3371,10 +3374,10 @@ in and out. The OpenAPI 3 document is served by the gateway at <code>/doc</code>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reader"</span><span class="p">,</span><span class="w"> </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"read"</span><span class="p">],</span><span class="w"> </span><span class="nt">"schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"iot/v1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
-<p>The secret of the credential is never answered.</p>
-<h2 id="query-methods">Query methods<a class="headerlink" href="#query-methods" title="Permanent link">&para;</a></h2>
+<p>Das Secret der Zugangsdaten wird nie zurückgegeben.</p>
+<h2 id="query-methods">Abfragemethoden<a class="headerlink" href="#query-methods" title="Permanent link">&para;</a></h2>
 <h3 id="execute">execute<a class="headerlink" href="#execute" title="Permanent link">&para;</a></h3>
-<p><code>POST /{schema}/execute</code> runs a query. The body is <code>{ query, data?, options? }</code>.</p>
+<p><code>POST /{schema}/execute</code> führt eine Abfrage aus. Der Body ist <code>{ query, data?, options? }</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"http://localhost:8080/execute?format=beautiful"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-Api-Key: </span><span class="nv">$KEY</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"query": "Orders.filter(p =&gt; p.customerId == customerId).include(p =&gt; p.details)", "data": {"customerId": "CENTC"}}'</span>
 </code></pre></div>
@@ -3391,10 +3394,10 @@ in and out. The OpenAPI 3 document is served by the gateway at <code>/doc</code>
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p">]</span>
 </code></pre></div>
 <ul>
-<li>A select answers the rows; <code>update</code> and <code>delete</code> answer the number of affected rows (<code>0</code> when nothing matched);
-  <code>insert</code> answers the inserted data.</li>
-<li>With only the <code>read</code> permission, a query that writes (<code>insert</code>, <code>update</code>, <code>delete</code>, <code>upsert</code>, <code>merge</code>, <code>bulk*</code>) is
-  refused with <code>403</code> before reaching the database.</li>
+<li>Ein Select liefert die Zeilen; <code>update</code> und <code>delete</code> liefern die Anzahl der betroffenen Zeilen (<code>0</code>, wenn nichts
+  zutraf); <code>insert</code> liefert die eingefügten Daten.</li>
+<li>Mit nur der Berechtigung <code>read</code> wird eine schreibende Abfrage (<code>insert</code>, <code>update</code>, <code>delete</code>, <code>upsert</code>, <code>merge</code>,
+  <code>bulk*</code>) mit <code>403</code> abgelehnt, bevor sie die Datenbank erreicht.</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/execute<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-Api-Key: </span><span class="nv">$KEY</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"query": "Orders.update(p =&gt; ({ freight: freight })).filter(p =&gt; p.id == id)", "data": {"id": 10248, "freight": 40}}'</span>
@@ -3402,8 +3405,8 @@ in and out. The OpenAPI 3 document is served by the gateway at <code>/doc</code>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="mi">1</span>
 </code></pre></div>
 <h3 id="plan">plan<a class="headerlink" href="#plan" title="Permanent link">&para;</a></h3>
-<p><code>POST /{schema}/plan</code> answers how the query is executed: the dialect, the source and the sentence of each part, without
-running it. Body <code>{ query, options? }</code>.</p>
+<p><code>POST /{schema}/plan</code> liefert, wie die Abfrage ausgeführt wird: den Dialekt, die Quelle und die Anweisung jedes Teils,
+ohne sie auszuführen. Body <code>{ query, options? }</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/plan<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-Api-Key: </span><span class="nv">$KEY</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"query": "Orders.filter(p =&gt; p.customerId == customerId).include(p =&gt; p.details)"}'</span>
 </code></pre></div>
@@ -3423,7 +3426,7 @@ running it. Body <code>{ query, options? }</code>.</p>
 <a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="model">model<a class="headerlink" href="#model" title="Permanent link">&para;</a></h3>
-<p><code>POST /{schema}/model</code> answers the shape of the result: its properties and their types.</p>
+<p><code>POST /{schema}/model</code> liefert die Struktur des Ergebnisses: seine Eigenschaften und deren Typen.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">[</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="w"> </span><span class="p">},</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customerId"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
@@ -3437,38 +3440,38 @@ running it. Body <code>{ query, options? }</code>.</p>
 <a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="p">]</span>
 </code></pre></div>
 <h3 id="parameters">parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
-<p><code>POST /{schema}/parameters</code> answers the variables the query uses, which go in <code>data</code>.</p>
+<p><code>POST /{schema}/parameters</code> liefert die Variablen, die die Abfrage verwendet und die in <code>data</code> übergeben werden.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customerId"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span>
 </code></pre></div>
 <h3 id="constraints">constraints<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h3>
-<p><code>POST /{schema}/constraints</code> answers the constraints that apply to the entities of the query.</p>
+<p><code>POST /{schema}/constraints</code> liefert die Constraints, die für die Entitäten der Abfrage gelten.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">"entity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Orders"</span><span class="p">,</span><span class="w"> </span><span class="nt">"constraints"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"entity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Orders.details"</span><span class="p">,</span><span class="w"> </span><span class="nt">"constraints"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 <h3 id="metadata">metadata<a class="headerlink" href="#metadata" title="Permanent link">&para;</a></h3>
-<p><code>POST /{schema}/metadata</code> answers the analysed tree of the query: each sentence with its action (<code>select</code>, <code>insert</code>,
-…), entity, columns, parameters and constraints.</p>
+<p><code>POST /{schema}/metadata</code> liefert den analysierten Baum der Abfrage: jede Anweisung mit ihrer Aktion (<code>select</code>,
+<code>insert</code>, …), Entität, Spalten, Parametern und Constraints.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">"classtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sentence"</span><span class="p">,</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select"</span><span class="p">,</span><span class="w"> </span><span class="nt">"entity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Orders"</span><span class="p">,</span><span class="w"> </span><span class="nt">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customerId"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"any"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="nt">"constraints"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 <h3 id="script">script<a class="headerlink" href="#script" title="Permanent link">&para;</a></h3>
-<p><code>POST /{schema}/script</code> runs a <a href="../../usage/Script/">script</a>: several queries and logic in one transaction. Body
-<code>{ script, data?, options? }</code>. It needs <code>scripts.enabled</code> (otherwise <code>403</code>) and the <code>script</code> permission; the limits of
-<code>scripts</code> apply (<code>maxLength</code>, <code>timeoutMs</code>, <code>maxIterations</code>).</p>
+<p><code>POST /{schema}/script</code> führt ein <a href="../../usage/Script/">Skript</a> aus: mehrere Abfragen und Logik in einer Transaktion.
+Body <code>{ script, data?, options? }</code>. Es benötigt <code>scripts.enabled</code> (sonst <code>403</code>) und die Berechtigung <code>script</code>; es gelten
+die Limits von <code>scripts</code> (<code>maxLength</code>, <code>timeoutMs</code>, <code>maxIterations</code>).</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/script<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-Api-Key: </span><span class="nv">$KEY</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="s1">  "script": "order = orm.execute(\"Orders.filter(p =&gt; p.id == id)\", { id: id }); if (order.length() == 0) { throw { status: 404, message: \"order not found\" }; } order[0]",</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="s1">  "data": { "id": 10248 }</span>
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="s1">}'</span>
 </code></pre></div>
-<p>A script can choose the status of the answer with <code>throw { status, message }</code>.</p>
+<p>Ein Skript kann den Status der Antwort mit <code>throw { status, message }</code> bestimmen.</p>
 <h3 id="execute-queued">execute-queued<a class="headerlink" href="#execute-queued" title="Permanent link">&para;</a></h3>
-<p><code>POST /{schema}/execute-queued</code> runs a query in the background and sends its result to a Kafka topic, in chunks. It
-answers at once <code>{ "queueId": "…" }</code>; the messages carry the keys <code>&lt;queueId&gt;-&lt;chunk&gt;</code>. Body
-<code>{ topic, query, data?, chunk?, options? }</code>. It needs the <code>queue</code> permission (and <code>write</code> if the query writes) and an
-<code>infrastructure.queue</code> in the schema's <code>lambdaORM.yaml</code>.</p>
+<p><code>POST /{schema}/execute-queued</code> führt eine Abfrage im Hintergrund aus und sendet ihr Ergebnis in Blöcken an ein
+Kafka-Topic. Es antwortet sofort mit <code>{ "queueId": "…" }</code>; die Nachrichten tragen die Schlüssel <code>&lt;queueId&gt;-&lt;chunk&gt;</code>. Body
+<code>{ topic, query, data?, chunk?, options? }</code>. Es benötigt die Berechtigung <code>queue</code> (und <code>write</code>, wenn die Abfrage
+schreibt) sowie eine <code>infrastructure.queue</code> in der <code>lambdaORM.yaml</code> des Schemas.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/execute-queued<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-Api-Key: </span><span class="nv">$KEY</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"query": "Countries.map(p =&gt; [p.iso3, p.name])", "topic": "countries", "chunk": 1000}'</span>
 </code></pre></div>
-<p>The queue of a schema is configured in its <code>lambdaORM.yaml</code> (<code>config</code> is the <a href="https://kafka.js.org/docs/configuration">kafkajs</a>
-configuration), where consumers can also be declared:</p>
+<p>Die Warteschlange eines Schemas wird in seiner <code>lambdaORM.yaml</code> konfiguriert (<code>config</code> ist die
+<a href="https://kafka.js.org/docs/configuration">kafkajs</a>-Konfiguration), wo auch Consumer deklariert werden können:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">infrastructure</span><span class="p">:</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="nt">queue</span><span class="p">:</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$QUEUE_CONFIG</span>
@@ -3478,98 +3481,98 @@ configuration), where consumers can also be declared:</p>
 <a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">        </span><span class="nt">subscribe</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> topic</span><span class="p">:</span><span class="w"> </span><span class="nv">insights-sync</span><span class="p p-Indicator">,</span><span class="nt"> fromBeginning</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
 <a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">        </span><span class="nt">execute</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">orm.execute(message.query, message.data, { stage</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"insights"</span><span class="w"> </span><span class="err">}</span><span class="l l-Scalar l-Scalar-Plain">)</span>
 </code></pre></div>
-<p>Over the <a href="../WebSocket/">WebSocket API</a>, <code>query.executeQueued</code> with <code>notify: true</code> also tells the connection when the
-execution ends.</p>
-<h2 id="schema-methods">Schema methods<a class="headerlink" href="#schema-methods" title="Permanent link">&para;</a></h2>
-<p>The model of the schema. They need <code>read</code>. The connections of the sources are never answered.</p>
+<p>Über die <a href="../WebSocket/">WebSocket API</a> teilt <code>query.executeQueued</code> mit <code>notify: true</code> der Verbindung zusätzlich mit,
+wann die Ausführung endet.</p>
+<h2 id="schema-methods">Schema-Methoden<a class="headerlink" href="#schema-methods" title="Permanent link">&para;</a></h2>
+<p>Das Modell des Schemas. Sie benötigen <code>read</code>. Die Verbindungen der Quellen werden nie zurückgegeben.</p>
 <table>
 <thead>
 <tr>
-<th>Method</th>
+<th>Methode</th>
 <th>Route</th>
-<th>Answers</th>
+<th>Antwortet</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/schema</code></td>
-<td>the version and the domain of the schema</td>
+<td>die Version und die Domäne des Schemas</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/schema/version</code></td>
-<td>the version of the schema</td>
+<td>die Version des Schemas</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/domain</code></td>
-<td>the domain: entities (properties, relations, keys, indexes, constraints) and enums</td>
+<td>die Domäne: Entitäten (Eigenschaften, Beziehungen, Schlüssel, Indizes, Constraints) und Enums</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/entities</code></td>
-<td>the entities</td>
+<td>die Entitäten</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/entities/{entity}</code></td>
-<td>one entity</td>
+<td>eine Entität</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/enums</code></td>
-<td>the enums</td>
+<td>die Enums</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/enums/{enum}</code></td>
-<td>one enum</td>
+<td>ein Enum</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/sources</code></td>
-<td>the sources, with their name and dialect</td>
+<td>die Quellen, mit Name und Dialekt</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/sources/{source}</code></td>
-<td>one source</td>
+<td>eine Quelle</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/mappings</code></td>
-<td>the mappings (entities to tables and columns)</td>
+<td>die Mappings (Entitäten auf Tabellen und Spalten)</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/mappings/{mapping}</code></td>
-<td>one mapping</td>
+<td>ein Mapping</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/mappings/{mapping}/{entity}</code></td>
-<td>the mapping of one entity</td>
+<td>das Mapping einer Entität</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/views</code></td>
-<td>the views</td>
+<td>die Views</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/stages</code></td>
-<td>the stages, with their sources</td>
+<td>die Stages, mit ihren Quellen</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/stages/{stage}</code></td>
-<td>one stage</td>
+<td>ein Stage</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/typings</code></td>
-<td>the domain as TypeScript declarations (<code>text/plain</code>), for an editor's autocompletion</td>
+<td>die Domäne als TypeScript-Deklarationen (<code>text/plain</code>), für die Autovervollständigung eines Editors</td>
 </tr>
 </tbody>
 </table>
@@ -3591,33 +3594,33 @@ execution ends.</p>
 <a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="w">  </span><span class="nt">"relations"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="p">}</span>
 </code></pre></div>
-<h2 id="stage-methods">Stage methods<a class="headerlink" href="#stage-methods" title="Permanent link">&para;</a></h2>
+<h2 id="stage-methods">Stage-Methoden<a class="headerlink" href="#stage-methods" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Method</th>
+<th>Methode</th>
 <th>Route</th>
-<th>Answers</th>
-<th>Permission</th>
+<th>Antwortet</th>
+<th>Berechtigung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/stages/{stage}/exists</code></td>
-<td><code>{ "exists": true }</code> when the stage was created and its state file exists</td>
+<td><code>{ "exists": true }</code>, wenn der Stage erstellt wurde und ihre Zustandsdatei existiert</td>
 <td><code>read</code></td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/{schema}/stages/{stage}/export</code></td>
-<td>the rows of every entity of the stage</td>
+<td>die Zeilen aller Entitäten des Stages</td>
 <td><code>read</code></td>
 </tr>
 <tr>
 <td><code>POST</code></td>
 <td><code>/{schema}/stages/{stage}/import</code></td>
-<td>imports rows (the body is an export) into the entities of the stage</td>
+<td>importiert Zeilen (der Body ist ein Export) in die Entitäten des Stages</td>
 <td><code>stageImport</code></td>
 </tr>
 </tbody>
@@ -3625,15 +3628,15 @@ execution ends.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>curl<span class="w"> </span>http://localhost:8080/stages/default/export<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-Api-Key: </span><span class="nv">$KEY</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="w"> </span>data.json
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/stages/default/import<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-Api-Key: </span><span class="nv">$BACKEND_KEY</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span>-d<span class="w"> </span>@data.json
 </code></pre></div>
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<h2 id="summary">Zusammenfassung<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Operation</th>
 <th>REST</th>
-<th><a href="../Mcp/#tools">MCP tool</a></th>
-<th><a href="../WebSocket/#methods">WebSocket method</a></th>
-<th>Permission</th>
+<th><a href="../Mcp/#tools">MCP-Tool</a></th>
+<th><a href="../WebSocket/#methods">WebSocket-Methode</a></th>
+<th>Berechtigung</th>
 </tr>
 </thead>
 <tbody>
@@ -3642,17 +3645,17 @@ execution ends.</p>
 <td><code>POST /execute</code></td>
 <td><code>orm_execute</code></td>
 <td><code>query.execute</code></td>
-<td><code>read</code> (selects) / <code>write</code></td>
+<td><code>read</code> (Selects) / <code>write</code></td>
 </tr>
 <tr>
-<td>script</td>
+<td>Skript</td>
 <td><code>POST /script</code></td>
 <td><code>orm_execute_script</code></td>
 <td><code>query.script</code></td>
 <td><code>script</code></td>
 </tr>
 <tr>
-<td>execute queued</td>
+<td>Ausführung in der Warteschlange</td>
 <td><code>POST /execute-queued</code></td>
 <td><code>orm_execute_queued</code></td>
 <td><code>query.executeQueued</code></td>
@@ -3694,105 +3697,105 @@ execution ends.</p>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>schema</td>
+<td>Schema</td>
 <td><code>GET /schema</code></td>
 <td><code>schema_get</code></td>
 <td><code>schema.schema</code></td>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>schema version</td>
+<td>Schema-Version</td>
 <td><code>GET /schema/version</code></td>
 <td><code>schema_version</code></td>
 <td><code>schema.version</code></td>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>domain</td>
+<td>Domäne</td>
 <td><code>GET /domain</code></td>
 <td><code>schema_domain</code></td>
 <td><code>schema.domain</code></td>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>entities</td>
+<td>Entitäten</td>
 <td><code>GET /entities[/{entity}]</code></td>
 <td><code>schema_entities</code></td>
 <td><code>schema.entities</code>, <code>schema.entity</code></td>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>enums</td>
+<td>Enums</td>
 <td><code>GET /enums[/{enum}]</code></td>
 <td><code>schema_enums</code></td>
 <td><code>schema.enums</code>, <code>schema.enum</code></td>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>sources</td>
+<td>Quellen</td>
 <td><code>GET /sources[/{source}]</code></td>
 <td><code>schema_sources</code></td>
 <td><code>schema.sources</code>, <code>schema.source</code></td>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>mappings</td>
+<td>Mappings</td>
 <td><code>GET /mappings[/{mapping}[/{entity}]]</code></td>
 <td><code>schema_mappings</code></td>
 <td><code>schema.mappings</code>, <code>schema.mapping</code>, <code>schema.entityMapping</code></td>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>views</td>
+<td>Views</td>
 <td><code>GET /views</code></td>
 <td><code>schema_views</code></td>
 <td><code>schema.views</code></td>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>stages</td>
+<td>Stages</td>
 <td><code>GET /stages[/{stage}]</code></td>
 <td><code>schema_stages</code></td>
 <td><code>schema.stages</code>, <code>schema.stage</code></td>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>typings</td>
+<td>Typings</td>
 <td><code>GET /typings</code></td>
 <td>—</td>
 <td><code>schema.typings</code></td>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>stage exists</td>
+<td>Stage existiert</td>
 <td><code>GET /stages/{stage}/exists</code></td>
 <td><code>stage_exists</code></td>
 <td><code>stage.exists</code></td>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>stage export</td>
+<td>Stage-Export</td>
 <td><code>GET /stages/{stage}/export</code></td>
 <td><code>stage_export</code></td>
 <td><code>stage.export</code></td>
 <td><code>read</code></td>
 </tr>
 <tr>
-<td>stage import</td>
+<td>Stage-Import</td>
 <td><code>POST /stages/{stage}/import</code></td>
 <td><code>stage_import</code></td>
 <td><code>stage.import</code></td>
 <td><code>stageImport</code></td>
 </tr>
 <tr>
-<td>version</td>
+<td>Version</td>
 <td><code>GET /version</code></td>
 <td><code>gateway_version</code></td>
 <td><code>general.version</code></td>
 <td>—</td>
 </tr>
 <tr>
-<td>health</td>
+<td>Health</td>
 <td><code>GET /health</code></td>
 <td><code>gateway_health</code></td>
 <td><code>general.health</code></td>

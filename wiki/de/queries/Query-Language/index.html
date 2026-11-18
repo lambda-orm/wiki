@@ -1012,11 +1012,11 @@
         <li class="md-nav__item">
   <a href="#query-types" class="md-nav__link">
     <span class="md-ellipsis">
-      Query types
+      Abfragetypen
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Query types">
+    <nav class="md-nav" aria-label="Abfragetypen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1054,7 +1054,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -1063,7 +1063,7 @@
         <li class="md-nav__item">
   <a href="#advantages" class="md-nav__link">
     <span class="md-ellipsis">
-      Advantages
+      Vorteile
     </span>
   </a>
   
@@ -1388,7 +1388,7 @@
   
   
   <span class="md-ellipsis">
-    Operators and Functions
+    Operatoren und Funktionen
     
   </span>
   
@@ -2071,7 +2071,7 @@
   
   
   <span class="md-ellipsis">
-    Synchronization
+    Synchronisierung
     
   </span>
   
@@ -2325,7 +2325,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Verwendung
     
   </span>
   
@@ -3009,11 +3009,11 @@
         <li class="md-nav__item">
   <a href="#query-types" class="md-nav__link">
     <span class="md-ellipsis">
-      Query types
+      Abfragetypen
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Query types">
+    <nav class="md-nav" aria-label="Abfragetypen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3051,7 +3051,7 @@
         <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Beispiel
     </span>
   </a>
   
@@ -3060,7 +3060,7 @@
         <li class="md-nav__item">
   <a href="#advantages" class="md-nav__link">
     <span class="md-ellipsis">
-      Advantages
+      Vorteile
     </span>
   </a>
   
@@ -3082,33 +3082,33 @@
 
 
 
-<h1 id="query-language">Query Language<a class="headerlink" href="#query-language" title="Permanent link">&para;</a></h1>
-<p>This page introduces the λORM query language: what a query looks like, the kinds of queries there are and where each one is documented.</p>
-<p>λORM queries are written as <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">JavaScript lambda expressions</a> over the entities of the domain. You can write them as TypeScript/JavaScript code, navigating the entities of the model, or send them as a string (for example from the <a href="../../cli/">CLI</a> or to the <a href="../../data-gateway/">Data Gateway</a>).</p>
-<p>λORM translates each query into the language of the database engine of each source (SQL for MySQL, MariaDB, PostgreSQL, SQL Server, Oracle and SQLite, or MongoDB queries).</p>
-<h2 id="query-types">Query types<a class="headerlink" href="#query-types" title="Permanent link">&para;</a></h2>
+<h1 id="query-language">Abfragesprache<a class="headerlink" href="#query-language" title="Permanent link">&para;</a></h1>
+<p>Diese Seite stellt die Abfragesprache von λORM vor: wie eine Abfrage aussieht, welche Arten von Abfragen es gibt und wo jede davon dokumentiert ist.</p>
+<p>λORM-Abfragen werden als <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">JavaScript-Lambda-Ausdrücke</a> über die Entitäten der Domäne geschrieben. Sie können sie als TypeScript-/JavaScript-Code schreiben und dabei durch die Entitäten des Modells navigieren, oder sie als Zeichenkette senden (zum Beispiel aus der <a href="../../cli/">CLI</a> oder an das <a href="../../data-gateway/">Data Gateway</a>).</p>
+<p>λORM übersetzt jede Abfrage in die Sprache der Datenbank-Engine jeder Quelle (SQL für MySQL, MariaDB, PostgreSQL, SQL Server, Oracle und SQLite oder MongoDB-Abfragen).</p>
+<h2 id="query-types">Abfragetypen<a class="headerlink" href="#query-types" title="Permanent link">&para;</a></h2>
 <h3 id="dql">DQL<a class="headerlink" href="#dql" title="Permanent link">&para;</a></h3>
-<p>DQL (Data Query Language) queries retrieve data. They can be as simple as reading all the records of an entity, or they can filter, sort, group and paginate the records, compute values from them and load related entities.</p>
-<p><strong>See:</strong> <a href="../Select/">Select</a>, <a href="../Join/">Join</a>, <a href="../Grouping/">Grouping</a>, <a href="../Include/">Include</a></p>
+<p>DQL-Abfragen (Data Query Language) rufen Daten ab. Sie können so einfach sein wie das Lesen aller Datensätze einer Entität, oder sie können die Datensätze filtern, sortieren, gruppieren und paginieren, Werte daraus berechnen und verbundene Entitäten laden.</p>
+<p><strong>Siehe:</strong> <a href="../Select/">Select</a>, <a href="../Join/">Join</a>, <a href="../Grouping/">Grouping</a>, <a href="../Include/">Include</a></p>
 <h3 id="dml">DML<a class="headerlink" href="#dml" title="Permanent link">&para;</a></h3>
-<p>DML (Data Manipulation Language) queries change data. They include the following operations:</p>
+<p>DML-Abfragen (Data Manipulation Language) ändern Daten. Sie umfassen die folgenden Operationen:</p>
 <ul>
-<li><strong>insert</strong>: adds new records to an entity (also <code>bulkInsert</code> and <code>upsert</code>).</li>
-<li><strong>update</strong>: modifies existing records.</li>
-<li><strong>delete</strong>: removes records.</li>
+<li><strong>insert</strong>: fügt einer Entität neue Datensätze hinzu (auch <code>bulkInsert</code> und <code>upsert</code>).</li>
+<li><strong>update</strong>: ändert vorhandene Datensätze.</li>
+<li><strong>delete</strong>: entfernt Datensätze.</li>
 </ul>
-<p><strong>See:</strong> <a href="../Insert/">Insert</a>, <a href="../BulkInsert/">Bulk Insert</a>, <a href="../Update/">Update</a>, <a href="../Delete/">Delete</a></p>
+<p><strong>Siehe:</strong> <a href="../Insert/">Insert</a>, <a href="../BulkInsert/">Bulk Insert</a>, <a href="../Update/">Update</a>, <a href="../Delete/">Delete</a></p>
 <h3 id="ddl">DDL<a class="headerlink" href="#ddl" title="Permanent link">&para;</a></h3>
-<p>DDL (Data Definition Language) statements create, modify and drop database structures and related objects:</p>
+<p>DDL-Anweisungen (Data Definition Language) erstellen, ändern und löschen Datenbankstrukturen und zugehörige Objekte:</p>
 <ul>
-<li><strong>CREATE</strong>: creates new objects in the database, such as tables and indexes.</li>
-<li><strong>ALTER</strong>: modifies the structure of existing objects, for example adding, changing or removing the columns of a table.</li>
-<li><strong>DROP</strong>: deletes objects from the database.</li>
+<li><strong>CREATE</strong>: erstellt neue Objekte in der Datenbank, etwa Tabellen und Indizes.</li>
+<li><strong>ALTER</strong>: ändert die Struktur vorhandener Objekte, zum Beispiel durch Hinzufügen, Ändern oder Entfernen der Spalten einer Tabelle.</li>
+<li><strong>DROP</strong>: löscht Objekte aus der Datenbank.</li>
 </ul>
-<p>You do not write DDL queries: λORM generates and runs them when you use the schema synchronization commands.</p>
-<p><strong>See:</strong> <a href="../../schema/SchemaSynchronization-Push/">Push</a>, <a href="../../schema/SchemaSynchronization-Pull/">Pull</a>, <a href="../../schema/SchemaSynchronization-Fetch/">Fetch</a>, <a href="../../schema/SchemaSynchronization-Introspect/">Introspect</a>, <a href="../../schema/SchemaSynchronization-Incorporate/">Incorporate</a></p>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
-<p>The following query reads the countries of a region, with their states whose name starts with "F". It returns the name, subregion and position of each country, 3 countries per page:</p>
+<p>DDL-Abfragen schreiben Sie nicht selbst: λORM erzeugt und führt sie aus, wenn Sie die Befehle zur Schemasynchronisierung verwenden.</p>
+<p><strong>Siehe:</strong> <a href="../../schema/SchemaSynchronization-Push/">Push</a>, <a href="../../schema/SchemaSynchronization-Pull/">Pull</a>, <a href="../../schema/SchemaSynchronization-Fetch/">Fetch</a>, <a href="../../schema/SchemaSynchronization-Introspect/">Introspect</a>, <a href="../../schema/SchemaSynchronization-Incorporate/">Incorporate</a></p>
+<h2 id="example">Beispiel<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<p>Die folgende Abfrage liest die Länder einer Region mit ihren Bundesstaaten, deren Name mit „F“ beginnt. Sie gibt Name, Subregion und Position jedes Landes zurück, 3 Länder pro Seite:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">Countries</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">region</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">region</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">subregion</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">latitude</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">longitude</span><span class="p">])</span><span class="w"> </span><span class="c1">// properties of the country</span>
@@ -3117,7 +3117,7 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="p">)</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p">.</span><span class="nx">page</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// first page, 3 countries per page</span>
 </code></pre></div>
-<p>In this schema, <code>Countries</code> is in a MySQL source and <code>States</code> in a PostgreSQL source (see <a href="../../schema/SchemaExample-StageMultiplesSources/">Stage with multiple sources</a>). λORM runs one statement per source:</p>
+<p>In diesem Schema befindet sich <code>Countries</code> in einer MySQL-Quelle und <code>States</code> in einer PostgreSQL-Quelle (siehe <a href="../../schema/SchemaExample-StageMultiplesSources/">Stage mit mehreren Quellen</a>). λORM führt eine Anweisung pro Quelle aus:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">-- MySQL: the countries of the region, first page of 3 records</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">subregion</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">subregion</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">latitude</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">latitude</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">longitude</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">iso3</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="n">__iso3</span><span class="o">`</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Countries</span><span class="w"> </span><span class="k">c</span>
@@ -3131,14 +3131,14 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">SUBSTR</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">NAME</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'F'</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">COUNTRY_CODE</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="o">?</span><span class="p">)</span>
 </code></pre></div>
-<p>The states are then attached to their country in memory, so each country of the result has a <code>states</code> array.</p>
-<h2 id="advantages">Advantages<a class="headerlink" href="#advantages" title="Permanent link">&para;</a></h2>
+<p>Anschließend werden die Bundesstaaten im Speicher ihrem Land zugeordnet, sodass jedes Land im Ergebnis ein Array <code>states</code> hat.</p>
+<h2 id="advantages">Vorteile<a class="headerlink" href="#advantages" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Queries are written in the same programming language as the application.</li>
-<li>There is no new language to learn.</li>
-<li>Queries are easy to write and to read.</li>
-<li>The IDE's IntelliSense helps you write the expressions.</li>
-<li>Syntax errors are caught while you write.</li>
+<li>Abfragen werden in derselben Programmiersprache wie die Anwendung geschrieben.</li>
+<li>Es muss keine neue Sprache gelernt werden.</li>
+<li>Abfragen sind leicht zu schreiben und zu lesen.</li>
+<li>IntelliSense der IDE hilft beim Schreiben der Ausdrücke.</li>
+<li>Syntaxfehler werden bereits beim Schreiben erkannt.</li>
 </ul>
 
 
