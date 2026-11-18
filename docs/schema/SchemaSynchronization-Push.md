@@ -1,6 +1,6 @@
 # Push
 
-The push is the process of updating the sources (Databases) with the schema defined in the configuration file. The push process is done by the command `lambdaorm push`.
+This page explains push, which updates the sources (databases) of a stage with the schema: how it works, the CLI command `lambdaorm push` and the `orm.stage.push()` method.
 
 ## How push works
 
@@ -25,6 +25,14 @@ Apply the changes:
 ```sh
 lambdaorm push
 ```
+
+| Option | Description |
+|--------|-------------|
+| `-w`, `--workspace` | Folder of the project (default: the current folder). |
+| `-s`, `--stage` | Name of the stage (default: the first stage). |
+| `-e`, `--envfile` | File of environment variables to read. |
+| `-o`, `--output` | Generate the DDL without applying it (see below). |
+| `-f`, `--force` | When a sentence fails, continue with the next ones. |
 
 Example of the generated DDL on an empty database:
 
@@ -76,17 +84,19 @@ When push applies the changes, it records them in the `orm_state` folder:
 - `<stage>-model.json`: the model of the stage at the last push.
 - `<source>/V<yyMMddHHmmss>__push.sql`: the sentences executed on that source.
 
-View labs:
+Labs:
 
 - [Simple](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/01-simple)
-- [Two stages](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/01-simple)
+- [Two stages](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/03-two-stages)
 - [Northwind](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/05-northwind)
 - [Northwind multiple datasources](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources)
 - [Northwind CQRS](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/08-northwind-cqrs)
 
 ## Node
 
-```Typescript
+`orm.stage.push()` returns an action that can give the sentences without applying them, or apply them:
+
+```typescript
 import { Orm } from '@lambdaorm/lib'
 (async () => {
 	const orm = new Orm()

@@ -1,15 +1,19 @@
 # Environment Variables on Schema
 
-En toda las propiedades de un esquema se puede utilizar variables de entorno. \
-Para ellos se debe utilizar la notación `$` or `${}`.
+This page shows how to use environment variables in the schema, to keep connections and secrets out of the schema file.
 
-## Ejemplos de uso
+Any value of the schema can be taken from an environment variable, with the notation `$VARIABLE` or `${VARIABLE}`.
+The variables are replaced when the schema is loaded. With the CLI, the `-e` option reads them from a file (for example `-e .env`).
 
-**Use environment variables to set the connection to the database:**
+## Examples
+
+### Connection to the database
+
+The connection of each source is read from an environment variable:
 
 ```yaml
-...
- sources:
+infrastructure:
+  sources:
     - name: source1
       dialect: MySQL
       mapping: mapping1
@@ -18,17 +22,24 @@ Para ellos se debe utilizar la notación `$` or `${}`.
       dialect: PostgreSQL
       mapping: mapping2
       connection: $CNN_POSTGRES
-...
 ```
 
-**Use environment variables to obtain the KEY for encryption functions:**
+The variable holds the connection as JSON:
+
+```sh
+CNN_MYSQL={"host":"localhost","port":3306,"user":"test","password":"test","database":"test"}
+CNN_POSTGRES={"host":"localhost","port":5433,"user":"test","password":"test","database":"test"}
+```
+
+### Key of the encryption functions
+
+The key used by `encrypt` and `decrypt` is read from an environment variable, inside an expression:
 
 ```yaml
 domain:
   entities:
     ...
     - name: Users
-      view: true
       extends: Basics
       primaryKey: ["username"]
       uniqueKey: ["email"]
@@ -40,13 +51,10 @@ domain:
           required: true
         - name: lastname
           required: true
-        - name: fullmane
-          view: true
-          readExp: concat(lastname,", ",firstname)
         - name: email
           required: true
           length: 255
           writeValue: encrypt(lower(email),"${USERS_SECRET_KEY}")
           readValue: decrypt(email,"${USERS_SECRET_KEY}")
-    ...      
+    ...
 ```

@@ -2,20 +2,21 @@
 
 Synchronizes the databases of a stage with the model. It compares the model with the **databases** (what
 [fetch](Fetch.md) reads), not with the `orm_state` file: new tables are created with keys, foreign keys and indexes;
-in existing tables missing columns are added and columns with another type, length or nullability are altered. It
+in existing tables, missing columns are added and columns with another type, length or nullability are altered. It
 **never drops** what exists only in the database (`fetch` reports it). `orm_state` is still written as a record.
 
-## Params
+## Options
 
-| parameter | short | describe |
-|-----------|-------|----------|
-| workspace | -w | Project path. |
-| stage | -s | Name of stage. |
-| envfile | -e | Read in a file of environment variables. |
-| output | -o | Generates the queries but does not apply them. Alone: prints them per source. With a folder: writes one script per source that changes, `<stage>.<source>.sql`. |
-| force | -f | If there is an error in a statement, continue executing the next statements. |
+| Option | Short | Description |
+| :-- | :-- | :-- |
+| workspace | `-w` | Project path (default: the current directory). |
+| stage | `-s` | Name of the stage (default: the first stage of the schema). |
+| envfile | `-e` | Reads a file of environment variables. |
+| output | `-o` | Generates the statements but does not apply them. Without a value, prints them per source; with a folder, writes one script per source that changes, `<stage>.<source>.sql`. |
+| force | `-f` | If a statement fails, continue with the next statements. |
 
-`push` runs locally only (no `-u`).
+!!! note
+    `push` runs only locally: it has no `-u` option.
 
 ## Examples
 
@@ -25,17 +26,17 @@ Apply the changes:
 lambdaorm push -w lab/countries -e lab/countries/.env
 ```
 
-Write the scripts instead (e.g. to save them as versioned migrations):
+Write the scripts instead (for example, to keep them as versioned migrations):
 
 ```sh
 lambdaorm push -w lab/countries -e lab/countries/.env -s default -o migrations
 ```
 
-```sh
+```text
 /home/user/lab/countries/migrations/default.default.sql
 ```
 
-Print them:
+Print the statements, per source, without applying them:
 
 ```sh
 lambdaorm push -w lab/countries -e lab/countries/.env -o
@@ -52,5 +53,8 @@ lambdaorm push -w lab/countries -e lab/countries/.env -o
 ]
 ```
 
-To rename a column, set `previousMapping` in the property mapping (`{ name: icon, mapping: icon_name, previousMapping: icon }`);
-remove it once applied. Table renames are not supported.
+## Renaming a column
+
+To rename a column, set `previousMapping` in the mapping of the property
+(`{ name: icon, mapping: icon_name, previousMapping: icon }`) and remove it once the change is applied. Renaming tables
+is not supported.

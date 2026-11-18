@@ -1,90 +1,117 @@
 # λORM
 
-[![CLI](https://img.shields.io/badge/Api-CLI-blue.svg)](https://lambda-orm.github.io/wiki/cli)
-[![Api REST](https://img.shields.io/badge/Api-REST-blue.svg)](https://lambda-orm.github.io/wiki/api)
+[![npm version](https://img.shields.io/npm/v/@lambdaorm/lib.svg)](https://www.npmjs.com/package/@lambdaorm/lib)
+[![language typescript](https://img.shields.io/badge/language-typescript-blue)](https://www.npmjs.com/package/@lambdaorm/lib)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Join the community on GitHub Discussions](https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue.svg)](https://github.com/lambda-orm/wiki/discussions)
 [![Slack](https://img.shields.io/badge/chat-on%20slack-orange)](https://join.slack.com/t/nuevoespaciod-xo58767/shared_invite/zt-29ix7pc2r-Wd_ZBWnWRDv_5DM4NPtVhQ)
 [![Gitter](https://badges.gitter.im/lambdaorm/community.svg)](https://app.gitter.im/#/room/#lambdaorm-how-to-contribute:gitter.im)
 [![Discord](https://img.shields.io/badge/chat-on%20discord-orange)](https://discord.com/invite/yXT6XBX2)
-[![language typescript](https://img.shields.io/badge/language-typescript-blue)](https://www.npmjs.com/package/lambdaorm)
-[![npm version](https://img.shields.io/badge/npm-10.2.5-green)](https://www.npmjs.com/package/lambdaorm)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
+λORM (LambdaORM) is a TypeScript ORM that runs **distributed queries** across different database engines: MySQL,
+MariaDB, PostgreSQL, SQL Server, Oracle, MongoDB and SQLite.
 
-λORM is an ORM that allows us to perform distributed queries on different database engines.
+Queries are written as **lambda expressions** over a **domain model** that is independent of the infrastructure. A
+single query can read or write entities stored in different databases — for example, some in MySQL, others in
+PostgreSQL and others in MongoDB — and λORM splits it into one sentence per source and joins the results.
 
-In λORM, queries are defined using lambda expressions based on a domain model which abstracts us from the infrastructure. For example, in a query you can obtain or modify records from different entities, where some persist in MySQL, others in Postgres, and others in Mongo.
+The same domain can have several **stages** (infrastructure scenarios). In one stage the data may be spread across SQL
+Server, MongoDB and Oracle; in another, everything may live in a single PostgreSQL database. This makes it possible to
+implement patterns such as [CQRS](https://microservices.io/patterns/data/cqrs.html) through configuration, without
+changing the code.
 
-λORM allows you to define different scenarios for the same domain. For example, in one scenario, the infrastructure may consist of distributed instances across SQL Server, MongoDB, and Oracle, while in another scenario it may be a single Postgres instance. This allows the [CQRS](https://microservices.io/patterns/data/cqrs.html) pattern to be implemented through configuration, without needing to write a single line of code.
+See the [features](Features.md) for a complete list.
 
-In addition to being used as a Node.js library, it can be consumed from a command line interface (CLI), or through the [Data Gateway](data-gateway/index.md): a REST API, MCP for AI agents, a WebSocket API and a web UI, with the clients for Node and other languages.
+## How to use it
 
-## Query Language
+| Way | Package | When to use it |
+| --- | --- | --- |
+| Node.js library | [`@lambdaorm/lib`](https://www.npmjs.com/package/@lambdaorm/lib) | Run queries from a Node.js / TypeScript application. See [Usage](usage/Usage.md). |
+| Command line | [`@lambdaorm/cli`](https://www.npmjs.com/package/@lambdaorm/cli) (command `lambdaorm`) | Create a project, synchronize the databases, import and export data, and run queries from a terminal or CI. See [CLI](cli/index.md). |
+| Data Gateway | Docker image [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | Expose λORM schemas over the network: a REST API, MCP for AI agents, a WebSocket API and a web UI. See [Data Gateway](data-gateway/index.md). |
+| Node.js client | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | Run the same queries from Node.js against a Data Gateway. See [Clients](data-gateway/Clients.md). |
 
-Example of a query where orders and their details associated with a customer are obtained:
-
-```Typescript
-const query = (country: string) => Products
-    .map(p => ({ category: p.category.name, largestPrice: max(p.price) }))    
-    .filter(p => (p.price > 5 && p.supplier.country == country) || (p.inStock < 3))    
-    .having(p => max(p.price) > 50)
-    .sort(p => desc(p.largestPrice));
-// Run the query passing the value of the country parameter
-const result = await orm.execute(query, { country: 'ARG' });
+```sh
+npm install @lambdaorm/lib      # the library
+npm install -g @lambdaorm/cli   # the lambdaorm command
 ```
 
-In this example:
+!!! note
+    The unscoped packages `lambdaorm`, `lambdaorm-cli` and `lambdaorm-client-node` are no longer maintained: use the
+    `@lambdaorm/*` packages.
 
-- Define a query that returns a list of product categories along with the maximum price of each category.
-- Filter products based on price and supplier's country or stock availability
-- Group products by category and calculate the maximum price
-- Map each product to an object with category name and maximum price
-- Sort the products by largest price in descending order
+## Query language
 
-**view:** [queries](https://lambda-orm.github.io/wiki/queries/Query-Language/index.html) |
-[select](https://lambda-orm.github.io/wiki/queries/dql/Select/index.html) |
-[join](https://lambda-orm.github.io/wiki/queries/dql/Join/index.html) |
-[grouping](https://lambda-orm.github.io/wiki/queries/dql/Grouping/index.html) |
-[include](https://lambda-orm.github.io/wiki/queries/dql/Include/index.html) |
-[insert](https://lambda-orm.github.io/wiki/queries/dml/Insert/index.html) |
-[bulkInsert](https://lambda-orm.github.io/wiki/queries/dmlBulkInsert/index.html) |
-[update](https://lambda-orm.github.io/wiki/queries/dml/Update/index.html) |
-[delete](https://lambda-orm.github.io/wiki/queries/dml/Delete/index.html) |
-[repository](https://lambda-orm.github.io/wiki/Repository/index.html) |
-[usage](https://lambda-orm.github.io/wiki/Usage/index.html) |
-[metadata](https://lambda-orm.github.io/wiki/queries/Metadata/index.html)
+The following query returns the highest price of each product category, considering only the products that match the
+filter and the categories whose highest price is above 50:
+
+```typescript
+import { orm } from '@lambdaorm/lib'
+import { Products } from './northwind/domain/model'
+
+const query = (country: string) => Products
+  .filter(p => (p.price > 5 && p.supplier.country == country) || (p.inStock < 3))
+  .having(p => max(p.price) > 50)
+  .map(p => ({ category: p.category.name, largestPrice: max(p.price) }))
+  .sort(p => desc(p.largestPrice))
+
+await orm.init('./lambdaORM.yaml')
+// run the query, passing the value of the country parameter
+const result = await orm.execute(query, { country: 'ARG' })
+await orm.end()
+```
+
+In this query:
+
+- `filter` keeps the products whose price is greater than 5 and whose supplier is in the given country, as well as
+  those with fewer than 3 units in stock.
+- `map` returns the category name and the highest price. Grouping is implicit: the products are grouped by category
+  because `max` is an aggregate function.
+- `having` keeps only the categories whose highest price is greater than 50.
+- `sort` orders the result by the highest price, in descending order.
+- `supplier` and `category` are relations: the joins are implicit.
+
+**See also:** [query language](queries/Query-Language.md) |
+[select](queries/Select.md) |
+[join](queries/Join.md) |
+[grouping](queries/Grouping.md) |
+[include](queries/Include.md) |
+[insert](queries/Insert.md) |
+[bulk insert](queries/BulkInsert.md) |
+[update](queries/Update.md) |
+[delete](queries/Delete.md) |
+[metadata](queries/Metadata.md) |
+[repository](usage/Repository.md) |
+[usage](usage/Usage.md)
 
 ### Include
 
-The include allows us to obtain the entity data and its relationships in the same query. These data may be in different databases. \
-In this example the query is expressed as a text string. (Which is another alternative to the lambda expression)
+`include` returns an entity together with its relations in the same query, even when they are stored in different
+databases. In this example the query is written as a string, an alternative to the lambda expression:
 
-```Typescript
-import { orm } from '../../lib'
+```typescript
+import { orm } from '@lambdaorm/lib'
+
 (async () => {
   try {
     await orm.init('./config/northwind.yaml')
     const query = `Orders
-	.filter(p => p.id === id)
-	.include(p => 
-	  [ p.customer.map(p => p.name), 
-	    p.details
-             .include(p => 
-                 p.product
-  	          .include(p => p.category.map(p => p.name))
-		  .map(p => p.name))
-	     .map(p => [p.quantity, p.unitPrice])
-	   ]
-         )`
-	const params = { id: 102 }
-	const result = await orm.execute(query, params, { stage: 'PostgreSQL' })
-	console.log(JSON.stringify(result, null, 2))
-   } catch (error:any) {
-	console.error(error.message)
-   } finally {
-       await orm.end()
-   }
+      .filter(p => p.id === id)
+      .include(p => [
+        p.customer.map(p => p.name),
+        p.details
+          .include(p => p.product
+            .include(p => p.category.map(p => p.name))
+            .map(p => p.name))
+          .map(p => [p.quantity, p.unitPrice])
+      ])`
+    const result = await orm.execute(query, { id: 102 }, { stage: 'PostgreSQL' })
+    console.log(JSON.stringify(result, null, 2))
+  } catch (error: any) {
+    console.error(error.message)
+  } finally {
+    await orm.end()
+  }
 })()
 ```
 
@@ -126,34 +153,50 @@ import { orm } from '../../lib'
 ]
 ```
 
-**more info:** [include](https://lambda-orm.github.io/wiki/Include)
+**More information:** [include](queries/Include.md)
 
-## Schema Configuration
+## Schema
 
-Through the schema, you can define entities, enumerations, indexes, unique keys, default values, constraints, mapping, sources, stages, listeners, etc. The schema can be defined in a JSON or YAML format. Conditions or actions are performed using the same [expression language](https://www.npmjs.com/package/3xpr) that is used to define queries.
+The schema defines entities, enumerations, indexes, unique keys, default values, constraints, mappings, sources,
+stages, listeners and more. It is written in YAML or JSON. Conditions and actions use the same
+[expression language](https://www.npmjs.com/package/3xpr) as queries.
 
-**view:**  [schema](https://lambda-orm.github.io/wiki/schema/Schema/index.html) |
-[definition](https://lambda-orm.github.io/wiki/schema/Definition/SchemaDefinition/index.html) |
-[use](https://lambda-orm.github.io/wiki/schema/Schema-Us/index.html) |
-[expressions](https://lambda-orm.github.io/wiki/schema/Definition/SchemaDefinition-Expressions/index.html) |
-[environment Variables](https://lambda-orm.github.io/wiki/schema/Definition/SchemaDefinition-EnvironmentVariables/index.html) |
-[composite](https://lambda-orm.github.io/wiki/schema/Definition/SchemaDefinition-Composite/index.html) |
-[listener](https://lambda-orm.github.io/wiki/schema/Examples/SchemaExample-Listener/index.html) |
-[multiple stages](https://lambda-orm.github.io/wiki/schema/Examples/SchemaExample-MultiplesStages/index.html) |
-[multiple sources](https://lambda-orm.github.io/wiki/schema/Examples/SchemaExample-StageMultiplesSources/index.html) |
-[push](https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Push/index.html) |
-[pull](https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Pull/index.html) |
-[fetch](https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Fetch/index.html) |
-[introspect](https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Introspect/index.html) |
-[incorporate](https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Incorporate/index.html)
+**See also:** [schema](schema/Schema.md) |
+[definition](schema/SchemaDefinition.md) |
+[use](schema/Schema-Use.md) |
+[expressions](schema/SchemaDefinition-Expressions.md) |
+[environment variables](schema/SchemaDefinition-EnvironmentVariables.md) |
+[composite](schema/SchemaDefinition-Composite.md) |
+[listeners](schema/SchemaExample-Listener.md) |
+[multiple stages](schema/SchemaExample-MultiplesStages.md) |
+[multiple sources](schema/SchemaExample-StageMultiplesSources.md) |
+[engines](schema/Engines.md)
 
-## All Labs
+### Synchronization
 
-You can access various labs at [lambdaorm labs](https://github.com/lambda-orm/lambdaorm-labs)
+λORM keeps the databases and the schema in step, in both directions:
+[synchronization](schema/SchemaSynchronization.md) |
+[push](schema/SchemaSynchronization-Push.md) |
+[pull](schema/SchemaSynchronization-Pull.md) |
+[fetch](schema/SchemaSynchronization-Fetch.md) |
+[introspect](schema/SchemaSynchronization-Introspect.md) |
+[incorporate](schema/SchemaSynchronization-Incorporate.md)
+
+## Transactions and scripts
+
+- [Transactions](usage/Transaction.md): `orm.transaction` runs several queries in one transaction, also across sources
+  and stages.
+- [Scripts](usage/Script.md): a whole use case (variables, conditions, loops and several queries) in one transaction
+  and in a single call — from Node.js, the CLI or the Data Gateway.
+
+## Labs
+
+Complete examples are available in the [λORM labs](labs/index.md).
 
 ## Related projects
 
-- [λORM CLI](https://www.npmjs.com/package/@lambdaorm/cli): Command line interface for λORM
-- [Data Gateway](https://lambda-orm.github.io/wiki/data-gateway/): λORM schemas over REST, MCP and WebSocket, with a web UI
-- [Client](https://www.npmjs.com/package/@lambdaorm/client): Node client for the Data Gateway
-- [3xpr](https://www.npmjs.com/package/3xpr): Extensible expression engine, which allows evaluating mathematical and logical expressions.
+- [λORM CLI](https://www.npmjs.com/package/@lambdaorm/cli): command line interface for λORM.
+- [Data Gateway](data-gateway/index.md): λORM schemas over REST, MCP and WebSocket, with a web UI.
+- [λORM client](https://www.npmjs.com/package/@lambdaorm/client): Node.js client for the Data Gateway.
+- [3xpr](https://www.npmjs.com/package/3xpr): extensible expression engine that evaluates mathematical and logical
+  expressions; λORM queries and scripts are built on it.

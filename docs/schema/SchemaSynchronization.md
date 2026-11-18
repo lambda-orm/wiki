@@ -1,35 +1,46 @@
 # Synchronization
 
-The synchronization is the process of updating the schema defined in yaml/json configuration file with structure in sources (Databases). The synchronization is a process that can be done in both directions, from the schema configuration to the sources (Databases) and from the source to the schema file configuration.
+This page summarizes the commands that keep the schema and the databases of a stage in step.
+
+Synchronization works in both directions: from the schema to the sources (databases), and from the sources to the schema file.
+Each operation is available as a command of the CLI ([@lambdaorm/cli](https://www.npmjs.com/package/@lambdaorm/cli)) and as a method of `orm.stage` in [@lambdaorm/lib](https://www.npmjs.com/package/@lambdaorm/lib).
+
+| Operation   | Direction                    | Changes the schema | Changes the databases |
+|-------------|------------------------------|:------------------:|:---------------------:|
+| push        | schema → databases           | no                 | yes                   |
+| pull        | databases → schema           | yes                | no                    |
+| fetch       | compares both                | no                 | no                    |
+| introspect  | data file → schema → databases | yes              | yes                   |
+| incorporate | data file → schema → databases, then imports the data | yes | yes      |
 
 ## Push
 
-The push is the process of updating the sources (Databases) with the schema defined in the configuration file. The push process is done by the command `lambdaorm push`.
+Push updates the sources (databases) with the schema, with the command `lambdaorm push`.
 
 Push compares the model with the databases themselves: it creates missing tables, adds and alters columns, renames the columns declared with `previousMapping`, and never drops what exists only in the database. `lambdaorm push -o <dir>` writes the DDL as one script per source (`<stage>.<source>.sql`) without applying it.
 
-[more info](https://lambda-orm.github.io/wiki/SchemaSynchronization-Push)
+[More information](SchemaSynchronization-Push.md)
 
 ## Pull
 
-The pull is the process of updating the schema defined in the configuration file with the structure in the sources (Databases). The pull process is done by the command `lambdaorm pull`. What was written by hand in the schema (relations, listeners, stages) is kept.
+Pull updates the schema with the structure of the sources (databases), with the command `lambdaorm pull`. What was written by hand in the schema (relations, listeners, stages) is kept.
 
-[more info](https://lambda-orm.github.io/wiki/SchemaSynchronization-Pull)
+[More information](SchemaSynchronization-Pull.md)
 
 ## Fetch
 
-The fetch is the process that shows the differences between the sources and the schema, without applying changes. It is done by the command `lambdaorm fetch`. The result is empty when the databases are in step with the model, and the command exits with code 1 when there are differences (useful in CI).
+Fetch shows the differences between the sources and the schema, without applying any change, with the command `lambdaorm fetch`. The result is empty when the databases are in step with the model, and the command exits with code 1 when there are differences (useful in CI).
 
-[more info](https://lambda-orm.github.io/wiki/SchemaSynchronization-Fetch)
+[More information](SchemaSynchronization-Fetch.md)
 
 ## Introspect
 
-Introspection is the process of updating the schema defined in the configuration file by introspecting a data file and then applying the changes to the sources (Databases). The introspection process is performed using the `lambdaorm introspect` command.
+Introspect updates the schema from the structure of a JSON data file and then pushes the changes to the sources (databases), with the command `lambdaorm introspect`.
 
-[more info](https://lambda-orm.github.io/wiki/SchemaSynchronization-Introspect)
+[More information](SchemaSynchronization-Introspect.md)
 
 ## Incorporate
 
-Onboarding is the process of updating the schema defined in the configuration file by introspecting a data file and then applying the changes to the sources (databases) and then importing the data into the sources (Databases). The introspection process is performed using the `lambdaorm incorporate` command.
+Incorporate does the same as introspect and then imports the data of the file into the sources (databases), with the command `lambdaorm incorporate`.
 
-[more info](https://lambda-orm.github.io/wiki/SchemaSynchronization-Incorporate)
+[More information](SchemaSynchronization-Incorporate.md)

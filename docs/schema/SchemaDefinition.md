@@ -1,63 +1,66 @@
 # Definition
 
-The schema includes all the configuration that the ORM needs.
+This page is the reference of the schema file (`lambdaORM.yaml`): its structure and every key of its `domain`, `application` and `infrastructure` sections, with an example for each.
 
-The schema separates the definition of the business model (Domain) from the persistence of the data (Infrastructure).
+The schema holds all the configuration the ORM needs. It separates the business model (**domain**) from the persistence of the data (**infrastructure**):
 
-In the domain, the entities and enumerators that represent the business model are completely clean, without any attributes that couple them to persistence.
+- In the domain, the entities and enums that represent the business model are completely clean, without any attribute that couples them to persistence.
+- All queries are written against the business model, so they are decoupled from the physical model of the data.
+- In the infrastructure, everything needed to store and read the data in the different sources is defined.
 
-All queries are made according to the business model, so all queries are decoupled from the physical model of the data.
+The schema can be written in a YAML or JSON file, or passed as an object when the ORM is initialized (see [Schema Use](Schema-Use.md)).
 
-In the infrastructure, all the necessary configuration is defined to be able to persist and obtain the data from the different sources.
-
-The schema configuration can be done in a yaml, json file or passed as a parameter when initializing the ORM.
-
-All the queries that are used for the definition of conditions and for the execution of actions are based on the expression engine [3xpr](https://www.npmjs.com/package/3xpr)
+All the expressions used to define conditions and actions are evaluated by the expression engine [3xpr](https://www.npmjs.com/package/3xpr) (see [Expressions on Schema](SchemaDefinition-Expressions.md)), and any value can come from an environment variable (see [Environment Variables](SchemaDefinition-EnvironmentVariables.md)).
 
 ## Structure
 
-``` yaml
+```yaml
 domain:
   enums:
-  - name: string
-    values:
-      - name: string
-        value: any
-  entities:	
-  - name: string
-    abstract: boolean
-    extends: string[]
-    view: boolean
-    mapping: string
-    primaryKey: string[]
-    uniqueKey: string[]
-    properties:
-      - name: string		
-        mapping: string
-        type: string | integer | decimal | boolean | dateTime | date | time | json
-        length: number 
-        required: boolean
-        autoIncrement: boolean
-        view: boolean
-        key: string
-        default: expression
-        readExp: expression
-        readValue: expression
-        writeValue: expression      
-    indexes:
-      - name: string
-        fields: string[]
-    relations:    
-      - name: string
-        type: oneToMany | manyToOne | oneToOne  
-        from: string
-        entity: string
-        to: string
-        composite: boolean
-    constraints:
-      - message: string
-        condition: expression
-application:  
+    - name: string
+      extends: string
+      abstract: boolean
+      values:
+        - name: string
+          value: any
+  entities:
+    - name: string
+      abstract: boolean
+      extends: string
+      singular: string
+      view: boolean
+      primaryKey: string[]
+      uniqueKey: string[]
+      required: string[]
+      properties:
+        - name: string
+          type: string | integer | decimal | boolean | dateTime | date | time | json
+          length: number
+          required: boolean
+          autoIncrement: boolean
+          view: boolean
+          enum: string
+          key: string
+          default: expression
+          readExp: expression
+          readValue: expression
+          writeValue: expression
+      indexes:
+        - name: string
+          fields: string[]
+      relations:
+        - name: string
+          type: oneToMany | manyToOne | oneToOne
+          from: string
+          entity: string
+          to: string
+          composite: boolean
+          weak: boolean
+          target: string
+      constraints:
+        - message: string
+          condition: expression
+application:
   start:
     - name: string
       condition: expression
@@ -66,24 +69,24 @@ application:
     - name: string
       condition: expression
       expression: expression
-  errors:
-    - name: string
-      condition: expression
-      expression: expression    
   listeners:
     - name: string
-      on: [select|insert|bulkInsert|update|delete]
+      on: [select | insert | upsert | update | delete]
       condition: expression
-      before:  expression
-      after:  expression
-      error:  expression                    
+      before: expression
+      after: expression
+      error: expression
+      transactional: boolean
 infrastructure:
   mappings:
     - name: string
+      extends: string
       entities:
         - name: string
           mapping: string
           abstract: boolean
+          extends: string
+          sequence: string
           filter: expression
           properties:
             - name: string
@@ -93,9 +96,9 @@ infrastructure:
               previousMapping: string
   sources:
     - name: string
-      dialect: [MySQL|MariaDB|PostgreSQL|Oracle|SqlServer|MongoDB|SQLjs] 
+      dialect: MySQL | MariaDB | PostgreSQL | Oracle | SqlServer | MongoDB | SQLjs
       mapping: string
-      connection: object | EnvironmentVariable
+      connection: object | environment variable
   stages:
     - name: string
       sources:
@@ -109,45 +112,54 @@ infrastructure:
           properties:
             - name: string
               exclude: boolean
-              readExp: expression        
+              readExp: expression
   paths:
     src: string
     state: string
-    domain: string              								  		 
+    domain: string
+  queue:
+    config: object
+    consumers:
+      - name: string
+        config: object
+        subscribe: object
+        execute: expression
 ```
 
-## Main Definition
+## Main sections
 
-| Property 				| Description					 								          |
-|:----------------|:----------------------------------------------|
-| domain		      | definition of the business model              |
-| application		  | implementation of events and listeners        |
-| infrastructure	| concrete implementation of the data model     |
+| Key            | Description                                                         |
+|:---------------|:--------------------------------------------------------------------|
+| domain         | The business model: enums and entities.                             |
+| application    | Tasks run when the ORM starts and ends, and listeners.              |
+| infrastructure | How and where the data is stored: mappings, sources, stages, views. |
 
 ## Domain
 
-| Property 				|      Description					 								  |
-|-----------------|---------------------------------------------|
-| enums 	 				|  definitions of enum  of model						  |
-| entities 				|  definitions of entity of model						  |
+| Key      | Description                    |
+|----------|--------------------------------|
+| enums    | The enums of the model.        |
+| entities | The entities of the model.     |
 
-- In the enums section, enumerations are defined that can then be used as the data type of a property.
-- In the entities section, the entities are defined with their properties, relationships and constraints
+- An **enum** can be used as the type of a property.
+- An **entity** is defined with its properties, relations, keys, indexes and constraints.
 
 ### Enum
 
-They define an enumeration which can then be used as the data type of a property.
+An enum defines a set of values that can then be used as the type of a property.
 
-| Property 				|      Description					 								|	required	|
-|-----------------|-------------------------------------------|:---------:|
-| name 		 				|  name of enum 														| yes				|
-| values 		 			|  values of enum														| yes				|
+| Key      | Description                                                 | Required |
+|----------|-------------------------------------------------------------|:--------:|
+| name     | Name of the enum.                                           | yes      |
+| values   | Values of the enum (`name` and `value`).                    | yes      |
+| extends  | Name of another enum whose values this enum inherits.       |          |
+| abstract | The enum is only used as a base for other enums.            |          |
 
-#### Enum Example
+When a value has no `value`, its `name` is used.
 
-In this example, the **DeviceType** enum is defined, which is used in the **type** property of the **Devices** entity.
+#### Enum example
 
-Example:
+In this example the **DeviceType** enum is defined and used as the type of the **type** property of the **Devices** entity.
 
 ```yaml
 domain:
@@ -177,32 +189,34 @@ domain:
           enum: DeviceType
         - name: name
           length: 32
-          required: true  
-    ...       
+          required: true
+    ...
 ```
 
 ### Entity
 
-The entity is defined with its properties, relationships and constraints
+An entity is defined with its properties, relations and constraints.
 
-| Property 				|      Description					 								|	required	|	default		|
-|-----------------|-------------------------------------------|:---------:|:---------:|
-| name 		 				| name of entity  													| yes				|						|
-| abstract 	 			| if the entity is abstract									| 					|						|
-| extends 	 			| extension  																| 					|						|
-| view 	 			    | if the entity is a view  									| 					|						|
-| primaryKey 			| primary key 															| 					|						|
-| uniqueKey 			| unique key 																| 					|						|
-| properties 			| entity properties 												| yes				|						|
-| indexes 				| indexes 																	| 					|						|
-| relations 			| relations 																| 					|						|
-| constraints 		| constraints 															| 					|						|
+| Key         | Description                                                                                       | Required |
+|-------------|---------------------------------------------------------------------------------------------------|:--------:|
+| name        | Name of the entity. A name with a period (`Orders.details`) defines a [composite entity](SchemaDefinition-Composite.md). | yes |
+| properties  | Properties of the entity.                                                                         | yes      |
+| abstract    | The entity is only used as a base for other entities (no table is created for it).                |          |
+| extends     | Name of the entity whose properties, primary key and relations this entity inherits.             |          |
+| singular    | Singular name, used for the classes generated by `lambdaorm build` (by default it is deduced from the name). |  |
+| view        | The entity is a view: push creates no table for it (see below).                                   |          |
+| primaryKey  | Properties of the primary key.                                                                    |          |
+| uniqueKey   | Properties of the unique key.                                                                     |          |
+| required    | Properties that are required (the same as `required: true` on each of them).                      |          |
+| indexes     | Indexes (`name` and `fields`).                                                                    |          |
+| relations   | Relations with other entities.                                                                    |          |
+| constraints | Constraints validated when a record is written.                                                   |          |
+
+The properties of the primary key and the unique key are required unless they say otherwise.
 
 #### Abstract and extends in Entity
 
-In this example the abstract entity **positions** is defined which extends the entity **Countries**
-
-Example:
+In this example the abstract entity **Positions** is defined, and the entity **Countries** extends it: Countries gets the properties `latitude` and `longitude`.
 
 ```yaml
 domain:
@@ -226,13 +240,12 @@ domain:
           required: true
 ```
 
+An entity does not need to be abstract to be extended. See [Extend](SchemaExample-Extend.md).
+
 #### Set Entity as view
 
-This example defines the **Users** entity as a view. \
-
-Since this entity is managed by an external system and only select queries are allowed.
-
-Example:
+This example defines the **Users** entity as a view, because its table is managed by an external system.
+Push creates no table for a view entity, and the stage commands do not change it.
 
 ```yaml
 domain:
@@ -253,23 +266,24 @@ domain:
     ...
 ```
 
-#### Property
+### Property
 
-| Property 				|      Description					 								|	required	|	default		|
-|-----------------|-------------------------------------------|:---------:|:---------:|
-| name 		 				| name of property  												| yes				|						|
-| type 		 				| type of property (see [Property types](#property-types))	| 				|	 string		|
-| length 		 			| length of a string property								| 					|	see below	|
-| required 		 		| if the field is required									| 					|		false		|
-| autoIncrement		| if the field is self-incrementing					| 					|		false		|
-| view 		 		    | if the field is a view										| 					|						|
-| default 		 		| expression default resolved on server	    | 					|						|
-| readExp 		 		| read expression resolved in source		    | 					|						|
-| readValue 		 	| read expression resolved on server	      | 					|						|
-| writeValue 		 	| write expression resolved in server	      | 					|						|
-| key 		 		    | key to filter or insert										| 					|						|
+| Key           | Description                                                                         | Required | Default    |
+|---------------|-------------------------------------------------------------------------------------|:--------:|:----------:|
+| name          | Name of the property.                                                               | yes      |            |
+| type          | Type of the property (see [Property types](#property-types)).                       |          | string     |
+| length        | Length of a string property.                                                        |          | see below  |
+| required      | The property cannot be null.                                                        |          | false      |
+| autoIncrement | The value is generated by the database.                                             |          | false      |
+| enum          | Name of the enum the value must belong to.                                          |          |            |
+| view          | The property is not stored: its value comes from `readExp`.                         |          | false      |
+| default       | Expression evaluated by λORM to set the value when a record is inserted.            |          |            |
+| readExp       | Read expression, resolved in the source (database).                                 |          |            |
+| readValue     | Expression evaluated by λORM on the value read from the source.                     |          |            |
+| writeValue    | Expression evaluated by λORM on the value before it is written.                     |          |            |
+| key           | Fixed value used to filter reads and updates, and set on insert.                    |          |            |
 
-##### Property types
+#### Property types
 
 | Type      | Value in Node            | Column created by push (by default)                                                        |
 |-----------|--------------------------|--------------------------------------------------------------------------------------------|
@@ -282,12 +296,14 @@ domain:
 | time      | Date                     | `TIME` (Oracle `DATE`)                                                                     |
 | json      | object or list           | `JSONB` (PostgreSQL), `JSON` (MySQL, MariaDB), `NVARCHAR(MAX)` (SqlServer), `CLOB` (Oracle), `TEXT` (others) |
 
-- **json**: objects and lists are written and read as such (no need to call `JSON.stringify` / `JSON.parse`).
+- **json**: objects and lists are written and read as such (there is no need to call `JSON.stringify` or `JSON.parse`).
 - **dateTime**: on PostgreSQL the value is written with milliseconds and its offset, so a `timestamptz` column (see `dbType` in [Property Mapping](#property-mapping)) keeps the exact instant.
-- **string without length**: on PostgreSQL it is unbounded (`TEXT`); on other engines it is `VARCHAR(80)`, so set `length` when a value can be longer.
+- **string without length**: on PostgreSQL it is unbounded (`TEXT`); on the other engines it is `VARCHAR(80)`, so set `length` when a value can be longer.
 - `''`, `0` and `false` are values, never NULL (Oracle is the exception: it stores `''` as NULL).
 
-Example:
+See also [Engines](Engines.md) for the differences between engines.
+
+In this example `name` has no length, `settings` is a JSON object and `createdAt` a date and time:
 
 ```yaml
 domain:
@@ -306,19 +322,16 @@ domain:
           type: dateTime
 ```
 
-##### Set Property as view and readExp
+#### Set Property as view and readExp
 
-A property set to view is a property that will be returned in read queries. \
-The value of this property is defined in **readExp** using the expression language.
-
-Example:
+A view property is not stored in the database (push creates no column for it): its value is computed when reading, with the expression in **readExp**.
+In this example `fullName` is built from `lastname` and `firstname`.
 
 ```yaml
 domain:
   entities:
     ...
     - name: Users
-      view: true
       extends: Basics
       primaryKey: ["username"]
       uniqueKey: ["email"]
@@ -330,21 +343,18 @@ domain:
           required: true
         - name: lastname
           required: true
-        - name: fullmane
+        - name: fullName
           view: true
           readExp: concat(lastname,", ",firstname)
-    ...    
+    ...
 ```
 
-**ReadExp** can be used as a view, in this case the read expression will be applied at the time of reading. \
-But no modification will be applied at the time of writing.
+**readExp** can also be set on a stored property: the expression is applied when reading, and nothing changes when writing.
 
-##### Default value in Property
+#### Default value in Property
 
-When a record is inserted, the expression defined in **default** will be evaluated on the server. \
-This expression will be executed by the expression engine [3xpr](https://www.npmjs.com/package/3xpr)
-
-Example:
+When a record is inserted without a value for the property, the expression in **default** is evaluated by λORM (not by the database) and its result is written.
+In this example the `id` of a group is built from its name.
 
 ```yaml
 domain:
@@ -363,20 +373,16 @@ domain:
           required: true
 ```
 
-##### Read and write value in Property
+#### Read and write value in Property
 
-Both **readValue** and **writeValue** are executed on the server.
-When reading, **readValue** will be applied and in the writing actions, **writeValue** will be executed.
-These expressions will be executed by the expression engine [3xpr](https://www.npmjs.com/package/3xpr)
-
-Example:
+**readValue** and **writeValue** are evaluated by λORM: **writeValue** transforms the value before it is written, and **readValue** transforms the value read from the database.
+In this example the email is stored encrypted and returned decrypted; the key comes from an environment variable.
 
 ```yaml
 domain:
   entities:
     ...
     - name: Users
-      view: true
       extends: Basics
       primaryKey: ["username"]
       uniqueKey: ["email"]
@@ -384,31 +390,20 @@ domain:
         - name: username
           length: 32
           required: true
-        - name: firstname
-          required: true
-        - name: lastname
-          required: true
-        - name: fullmane
-          view: true
-          readExp: concat(lastname,", ",firstname)
         - name: email
           required: true
           length: 255
           writeValue: encrypt(lower(email),"${USERS_SECRET_KEY}")
           readValue: decrypt(email,"${USERS_SECRET_KEY}")
-    ...      
+    ...
 ```
 
-##### Key value in Property
+#### Key value in Property
 
-The key defined in **keyValue** will be used as a filter in the read and update queries. \
-When a record is inserted this key is assigned to the field. \
+The value set in **key** is used as a filter in read, update and delete queries, and it is assigned to the property when a record is inserted.
 
-This behavior is useful when we want to define different entities on the same table or collection. \
-Let's imagine we have a **Locations** table where Countries, States and Cities are stored. \
-but we want to work with the entities separately.
-
-Example:
+This is useful to define several entities on the same table or collection.
+In this example a **Locations** table stores countries, states and cities, and each one is worked with as a separate entity:
 
 ```yaml
 domain:
@@ -416,21 +411,21 @@ domain:
     - name: Locations
       abstract: true
       primaryKey: ["type","code"]
-      uniqueKey: ["type","name"]    
+      uniqueKey: ["type","name"]
       properties:
         - name: code
           required: true
           length: 16
         - name: type
           required: true
-          length: 16 
+          length: 16
         - name: name
           required: true
-    - name: Country
+    - name: Countries
       extends: Locations
       properties:
         - name: type
-          key: 'country'  
+          key: 'country'
     - name: States
       extends: Locations
       properties:
@@ -441,7 +436,7 @@ domain:
       properties:
         - name: type
           key: 'city'
-infrastructure:        
+infrastructure:
   mappings:
     - name: default
       entities:
@@ -455,7 +450,7 @@ infrastructure:
               mapping: TYPE
             - name: name
               mapping: NAME
-        - name: Country
+        - name: Countries
           extends: Locations
         - name: States
           extends: Locations
@@ -463,80 +458,82 @@ infrastructure:
           extends: Locations
 ```
 
-#### Relation
+### Relation
 
-| Property 				|      Description					 								|	required	|	default		|
-|-----------------|-------------------------------------------|:---------:|:---------:|
-| name 		 				| name of property  												| yes				|						|
-| type 		 				| type of relationship  										| 					|	oneToMany	|
-| from 		 				| relationship field 												| 					|						|
-| entity 		 			| entity with which it relates  						| 					|						|
-| to 		 					| field of the entity to which it relates  	| 					|						|
-| composite 		 	| if the relationship is composite 					|						|	  false		|
-| target 		 	    | Name of the relation in the related entity|						|	  		    |
+| Key       | Description                                                                                         | Required | Default   |
+|-----------|-----------------------------------------------------------------------------------------------------|:--------:|:---------:|
+| name      | Name of the relation.                                                                               | yes      |           |
+| from      | Property of this entity.                                                                            | yes      |           |
+| entity    | Related entity.                                                                                     | yes      |           |
+| to        | Property of the related entity.                                                                     | yes      |           |
+| type      | Type of the relation (see below).                                                                   |          | oneToMany |
+| composite | The related records are part of this entity (see [Composite Entity](SchemaDefinition-Composite.md)). |         | false     |
+| weak      | Push creates no foreign key for the relation (for example between entities in different sources).   |          | false     |
+| target    | Name of the inverse relation created in the related entity.                                         |          |           |
 
-##### Target relation
+The type of the relation determines what it returns:
 
-When defining **target** the corresponding relationship will be created in the target entity.
-For example, if in the entity **DeviceStatuses** a relationship with **Devices** is created and in this relationship target = "statuses" is set. \
-A relationship called **statuses** will be created in the entity **Devices** which will be manyToOne. \
-Types of target relation according to the source relation:
+| Type      | Meaning                                                              | Returns         |
+|-----------|----------------------------------------------------------------------|-----------------|
+| oneToMany | Many records of this entity reference one record of `entity`.        | one object      |
+| manyToOne | Many records of `entity` reference this record.                      | a list          |
+| oneToOne  | One record of this entity relates to one record of `entity`.         | one object      |
 
-| source				  |    target     |
-|-----------------|---------------|
-| oneToMany				|    manyToOne  |
-| manyToOne				|    oneToMany  |
-| oneToOne				|    oneToOne   |
+`manyToOne` relations are always weak.
 
-Example:
+#### Target relation
+
+With **target**, the inverse relation is created in the related entity.
+For example, if the entity **DeviceStatuses** has a relation with **Devices** with `target: statuses`, a relation called **statuses** is created in **Devices**.
+The type of the target relation depends on the type of the source relation:
+
+| Source    | Target    |
+|-----------|-----------|
+| oneToMany | manyToOne |
+| oneToOne  | oneToOne  |
 
 ```yaml
 domain:
   entities:
     - name: DeviceStatuses
-        extends: Basics
-        primaryKey: ["id"]
-        indexes:
-          - name: time
-            fields: ["time"]
-        properties:
-          - name: id
-            type: integer
-            required: true
-            autoIncrement: true
-          - name: deviceId
-            length: 32
-            required: true
-          - name: time
-            type: dateTime
-        relations:
-          - name: device
-            from: deviceId
-            entity: Devices
-            to: id
-            target: statuses
+      extends: Basics
+      primaryKey: ["id"]
+      indexes:
+        - name: time
+          fields: ["time"]
+      properties:
+        - name: id
+          type: integer
+          required: true
+          autoIncrement: true
+        - name: deviceId
+          length: 32
+          required: true
+        - name: time
+          type: dateTime
+      relations:
+        - name: device
+          from: deviceId
+          entity: Devices
+          to: id
+          target: statuses
 ```
 
-#### Constraint
+### Constraint
 
-| Property 				|      Description					 								|	required	|
-|-----------------|-------------------------------------------|:---------:|
-| message 		 		| message to display 												| yes				|
-| condition 		 	| boolean expression to evaluate   					| yes				|
+| Key       | Description                         | Required |
+|-----------|-------------------------------------|:--------:|
+| message   | Message returned when it fails.     | yes      |
+| condition | Boolean expression to evaluate.     | yes      |
 
-Constraints are validated on the server using expressions.
-These expressions will be executed by the expression engine [3xpr](https://www.npmjs.com/package/3xpr)
+Constraints are expressions evaluated by λORM when a record is inserted or updated.
+The ORM also creates constraints from other definitions, for example:
 
-All constraints are validated when inserting or updating a record. \
-The ORM will create various constraints based on other definitions, for example:
+- A required property gets a constraint that checks that it is not null.
+- A property whose type is an **enum** gets a constraint that checks that the value belongs to the enum.
 
-- When you define a property as required, a constraint will be created that will validate that this property is not null.
-- When defining that a property is of an **Enum** type, a constraint is created that validates that the value is within this enum.
-
-It is also possible to add a constraint for which the **message** and the **condition** must be defined. \
-The defined message will be sent if the condition is not met.
-
-Example:
+You can add your own constraints with a **message** and a **condition**: when the condition is not met, the write fails with the message.
+In this example the format of the email and the order of two dates are validated:
 
 ```yaml
 domain:
@@ -547,7 +544,6 @@ domain:
         - name: email
           required: true
           length: 255
-          readExp: mask(email)
           writeValue: encrypt(lower(email),"${USERS_SECRET_KEY}")
           readValue: decrypt(email,"${USERS_SECRET_KEY}")
       constraints:
@@ -578,53 +574,81 @@ domain:
 
 ## Application
 
-| Property 	| Description					 								                      |
-|:----------|:----------------------------------------------------------|
-| start		  | commands to execute when starting the application         |
-| end		    | commands to execute when the application is terminated    |
-| errors		| commands to execute when an error occurs                  |
-| listeners	| definition of the listeners and the action to be executed |
+| Key       | Description                                                       |
+|:----------|:------------------------------------------------------------------|
+| start     | Tasks run when the ORM is initialized (`orm.init()`).             |
+| end       | Tasks run when the ORM is closed (`orm.end()`).                   |
+| listeners | Expressions run before or after a query, or when it fails.        |
+
+### Task
+
+Each task of `start` and `end` has:
+
+| Key        | Description                                         | Required |
+|------------|-----------------------------------------------------|:--------:|
+| name       | Name of the task.                                   | yes      |
+| expression | Expression to run.                                  | yes      |
+| condition  | The task only runs when this expression is true.    |          |
+
+### Listener
+
+| Key           | Description                                                                                   | Required | Default |
+|---------------|-----------------------------------------------------------------------------------------------|:--------:|:-------:|
+| name          | Name of the listener.                                                                         | yes      |         |
+| on            | Categories of query that trigger it: `select`, `insert`, `upsert`, `update`, `delete`.        | yes      |         |
+| condition     | The listener only runs when this expression is true.                                          |          |         |
+| before        | Expression run before the query.                                                              |          |         |
+| after         | Expression run after the query.                                                               |          |         |
+| error         | Expression run when the query fails.                                                          |          |         |
+| transactional | `false` runs the listener outside the query's transaction.                                    |          | true    |
+
+See [Listener](SchemaExample-Listener.md) for how listeners run and the arguments they receive.
 
 ## Infrastructure
 
-| Property 				|      Description					 								  |
-|-----------------|---------------------------------------------|
-| mappings			  |  definitions of mappings									  |
-| sources 		    |  definitions of source								      |
-| stages 				  |  definitions of stages 										  |
-| views 				  |  definitions of views					              |
-| paths 				  |  					                                  |
+| Key      | Description                                                                 |
+|----------|-----------------------------------------------------------------------------|
+| mappings | How the entities are mapped to the tables or collections of the databases. |
+| sources  | The databases and their connections.                                        |
+| stages   | Scenarios that decide which source each entity is read from and written to. |
+| views    | Views that restrict or modify the results of the queries.                   |
+| paths    | Folders where generated files and the ORM state are written.                |
+| queue    | Kafka queue, used by the [Data Gateway](../data-gateway/index.md).          |
 
-- In the mappings section, the mapping between the entities in the tables or collections in the databases is defined.
-- In the sources section the databases are defined
-- In the stages section different scenarios are defined in which the rules that associate an entity with a source are determined
-- In the views section, different views are defined that can restrict or modify the results of the queries.
-- In the paths section, the configuration of the routes where configuration files or execution results will be generated is established.
+When some of them are omitted, λORM completes them:
+
+- Without `mappings`, an empty mapping is created (named after the source when there is only one source).
+- A source without `mapping` uses the first mapping.
+- Without `stages`, a stage called `default` with the first source is created.
+- Without `views`, a view called `default` with no restrictions is created.
 
 ### Mapping
 
-The mapping between entities in tables or collections in databases is defined.
+A mapping defines how the entities are stored in the tables or collections of a database.
+Entities and properties that are not listed are mapped to a table or column with the same name.
 
-| Property 				|      Description					 								|	required	|	default		|
-|-----------------|-------------------------------------------|:---------:|:---------:|
-| name 		 				| name of mapping  													| yes				|						|
-| entities 				| list of entity mapping 				    				| yes				|						|
+| Key      | Description                                                | Required |
+|----------|------------------------------------------------------------|:--------:|
+| name     | Name of the mapping.                                       | yes      |
+| entities | Entity mappings.                                           |          |
+| extends  | Name of a mapping whose entity mappings this one inherits. |          |
 
 #### Entity Mapping
 
-| Property 				|      Description					 								|	required	|	default		|
-|-----------------|-------------------------------------------|:---------:|:---------:|
-| name 		 				| name of entity  													| yes				|						|
-| abstract 	 			| if the entity is abstract									| 					|						|
-| extends 	 			| extension  																| 					|						|
-| mapping 				| table name in the database 								| yes				|equal name |
-| filter 	 			  | filter expression									        | 					|						|
-| properties			| list of property mapping  								|   				|						|
+| Key        | Description                                                  | Required | Default         |
+|------------|--------------------------------------------------------------|:--------:|:---------------:|
+| name       | Name of the entity.                                          | yes      |                 |
+| mapping    | Name of the table or collection in the database.             |          | the entity name |
+| abstract   | The entity mapping is only used as a base for others.        |          |                 |
+| extends    | Name of the entity mapping this one inherits from.           |          |                 |
+| sequence   | Name of the sequence used to generate the values.            |          |                 |
+| filter     | Expression that filters the records of the table.            |          |                 |
+| properties | Property mappings.                                           |          |                 |
 
 ##### Abstract and extends in Entity Mapping
 
-Abstract mapping entities are useful for use in extensions. \
-This example defines the abstract mapping entity **Locations** which extends concrete entities.
+Abstract entity mappings are useful as a base for other entity mappings.
+This example defines the abstract entity mapping **Locations**, and the concrete entities extend it, so the three of them are stored in the table `TBL_LOCATIONS`.
 
 ```yaml
 ...
@@ -642,19 +666,19 @@ infrastructure:
               mapping: TYPE
             - name: name
               mapping: NAME
-        - name: Country
+        - name: Countries
           extends: Locations
         - name: States
           extends: Locations
         - name: Cities
           extends: Locations
-...        
+...
 ```
 
 ##### Filter in Entity Mapping
 
-The filter defined in a Mapping entity is used to filter the records.
-This example filters records from the **user_entity** table where users are from a certain **realmId**.
+The filter of an entity mapping is applied to every query of the entity.
+This example reads the users of the **user_entity** table that belong to a given **realmId**.
 
 ```yaml
 ...
@@ -686,18 +710,18 @@ infrastructure:
 
 #### Property Mapping
 
-| Property 				|      Description					 								|	required	|	default		|
-|-----------------|-------------------------------------------|:---------:|:---------:|
-| name 		 				| name of property 													| yes				|						|
-| mapping 				| column name in the database 							| yes				|equal name |
-| readMappingExp	| read expression resolved in source				| 				  |           |
-| dbType      		| column type used by push (DDL), instead of the one deduced from the property type | |    |
-| previousMapping	| previous column name: push renames the column instead of adding a new one |   |        |
+| Key             | Description                                                                         | Required | Default           |
+|-----------------|-------------------------------------------------------------------------------------|:--------:|:-----------------:|
+| name            | Name of the property.                                                               | yes      |                   |
+| mapping         | Name of the column in the database.                                                 |          | the property name |
+| readMappingExp  | Read expression, resolved in the source.                                            |          |                   |
+| dbType          | Column type used by push (DDL), instead of the one deduced from the property type.  |          |                   |
+| previousMapping | Previous name of the column: push renames the column instead of adding a new one.   |          |                   |
 
 ##### Column type in Property Mapping
 
 **dbType** sets the column type used by every DDL that creates or alters the column (`push`, `push -o`).
-It is the way to choose a type the property type alone does not give, for example an instant with milliseconds or a binary JSON on PostgreSQL:
+Use it to choose a type that the property type alone does not give, for example an instant with milliseconds or a binary JSON on PostgreSQL:
 
 ```yaml
 infrastructure:
@@ -737,7 +761,8 @@ Remove **previousMapping** once the rename has been applied in every database. R
 
 ##### Read expression in Property Mapping
 
-The result of the expression defined in **readMappingExp** using the expression language, will be returned in the read queries.
+The expression in **readMappingExp** is resolved in the source, and its result is returned in read queries.
+In this example the column `created_timestamp`, stored in milliseconds, is returned as a date:
 
 ```yaml
 infrastructure:
@@ -761,22 +786,21 @@ infrastructure:
 
 ### Source
 
-Databases are defined with their connection
+A source is a database and its connection.
 
-| Property 				|      Description					 								|	required	|	default		|
-|-----------------|-------------------------------------------|:---------:|:---------:|
-| name 		 				| name of source												    | yes				|						|
-| mapping 				| name of reference to mapping 							|   				|	first 		|
-| dialect 				| dialect of data source				    				| yes				|						|
-| connection 			| string connection 				    				    | yes				|						|
+| Key        | Description                                                              | Required | Default           |
+|------------|--------------------------------------------------------------------------|:--------:|:-----------------:|
+| name       | Name of the source.                                                      | yes      |                   |
+| dialect    | Dialect: `MySQL`, `MariaDB`, `PostgreSQL`, `Oracle`, `SqlServer`, `MongoDB` or `SQLjs`. | yes |       |
+| mapping    | Name of the mapping used by the source.                                  |          | the first mapping |
+| connection | Connection: an object or an environment variable that holds it.          | yes      |                   |
 
 #### Set connection in Source
 
-Although it is possible to define the connection both using environment variables and directly in the configuration. \
-This second option is not recommended due to security and different configurations that may exist by environment. \
-The ability to define the connection by configuration should only be used for a temporary local test.
+The connection can be defined with an environment variable or directly in the schema.
+Writing it in the schema is not recommended, because of security and because the connection usually changes from one environment to another; use it only for a temporary local test.
 
-Using environment variable:
+Using an environment variable:
 
 ```yaml
 ...
@@ -786,10 +810,10 @@ infrastructure:
       dialect: MySQL
       mapping: test
       connection: ${CNN_MYSQL}
-...    
+...
 ```
 
-In configuration:
+In the schema:
 
 ```yaml
 ...
@@ -804,47 +828,45 @@ infrastructure:
         user: test
         password: test
         database: test
-...      
+...
 ```
 
 ### Stage
 
-The stage is defined in which the rules that relate an entity to a source are determined
+A stage is a scenario: its rules decide which source each entity uses.
+A query runs on the stage given in its options; without one, it runs on the first stage.
 
-| Property 					|      Description					 								|	required	|	default		|
-|-------------------|-------------------------------------------|:---------:|:---------:|
-| name 		 					| name of stage															| yes				|						|
-| sources   		    | list of sources rules			    				    | yes				|						|
+| Key     | Description          | Required |
+|---------|----------------------|:--------:|
+| name    | Name of the stage.   | yes      |
+| sources | Source rules.        | yes      |
 
 #### Source Rule
 
-| Property 					|      Description					 								|	required	|	default		|
-|-------------------|-------------------------------------------|:---------:|:---------:|
-| name 		 					| name of source												    | yes				|						|
-| condition     		| boolean expression to evaluate    				|   				|	 true			|
+| Key       | Description                                    | Required | Default |
+|-----------|------------------------------------------------|:--------:|:-------:|
+| name      | Name of the source.                            | yes      |         |
+| condition | Boolean expression that selects the source.    |          | true    |
 
 #### Condition on Source Rule
 
-**condition** defines the rule that determines on which source the queries are executed.
-The context variables are the following:
+**condition** decides on which source a query or a DDL sentence runs.
+The variables available in the expression are:
 
-| Variable|      Description			|	value                                           |
-|---------|-----------------------|-------------------------------------------------|
-| entity  | query entity					| name of entity                                  |
-| action  | query action	    		| select, insert, bulkInsert, update, delete, ddl |
-| read    | it is a read action 	| boolean                                         |
-| write   | it is a write action 	| boolean                                         |
-| dml   	| it is a dml action		| boolean                                         |
-| ddl   	| it is a ddl action		| boolean                                         |
+| Variable | Description                                    | Value                                                                  |
+|----------|------------------------------------------------|------------------------------------------------------------------------|
+| entity   | Entity of the sentence                         | name of the entity                                                     |
+| action   | Action of the sentence                         | `select`, `insert`, `bulkInsert`, `update`, `upsert`, `delete`, `createEntity`, … |
+| category | Category of the sentence                       | `select`, `insert`, `upsert`, `update`, `delete`, `create`, `alter`, `drop`, … |
+| type     | Type of the sentence                           | `dql`, `dml`, `ddl`                                                    |
+| read     | The sentence reads                             | boolean                                                                |
+| write    | The sentence writes                            | boolean                                                                |
+| dml      | The sentence is a query (DQL or DML)           | boolean                                                                |
+| ddl      | The sentence is DDL                            | boolean                                                                |
 
-The **conditions** are validated on the server using expressions. \
-These expressions will be executed by the expression engine [3xpr](https://www.npmjs.com/package/3xpr) \
-In the event that more than one condition is met, the source will be determined according to the order in which it was defined.
+The rules are evaluated in the order they are defined, and the first source whose condition is true is used.
 
-In the following example, all entities except **Users** will use the source **main**. \
-And in the case of the entity **Users** it will use the source **keycloak**.
-
-Example:
+In the following example, the entity **Users** uses the source **keycloak**, and all the other entities use the source **main**.
 
 ```yaml
 ...
@@ -860,8 +882,8 @@ infrastructure:
 
 #### Catch-all source
 
-A source rule without **condition** is a catch-all: as the first matching source wins, it only receives the entities that no previous source took.
-This applies to queries (DML) as well as to push and the other stage commands (DDL), so the catch-all source does not get tables of the entities assigned to other sources.
+A source rule without **condition** is a catch-all: since the first matching source wins, it only receives the entities that no previous source took.
+This applies to queries (DML) as well as to push and the other stage commands (DDL), so the catch-all source does not get the tables of the entities assigned to other sources.
 Put it last.
 
 ```yaml
@@ -876,18 +898,15 @@ infrastructure:
 
 ### View
 
-The view that can restrict or modify the results of the queries is defined.
+A view restricts or modifies the results of the queries.
+A query uses the view given in the `view` option; entities not listed in a view have no restrictions.
 
-| Property 				|      Description					 								|	required	|
-|-----------------|-------------------------------------------|:---------:|
-| name 		 		    | name that identifies a view  							| yes				|
-| entities 		 	  | entity view list   					              |    				|
+| Key      | Description          | Required |
+|----------|----------------------|:--------:|
+| name     | Name of the view.    | yes      |
+| entities | Entity views.        |          |
 
-**Entities** not included in the view will not be subject to any restrictions.
-
-In the following example, the **admin** view can access all entities.
-
-Example:
+In the following example, the **default** view masks `apiKey` and hides `email`, the **collector** view cannot access users and groups, and the **admin** view can access everything.
 
 ```yaml
 infrastructure:
@@ -918,15 +937,15 @@ infrastructure:
 
 #### Entity View
 
-| Property 				|      Description					 								|	required	|
-|-----------------|-------------------------------------------|:---------:|
-| name 		 		    | entity name 							                | yes				|
-| exclude 		 	  | determines whether the entity is excluded |    				|
-| properties	 	  | property view list   					            |    				|
+| Key        | Description                                      | Required |
+|------------|--------------------------------------------------|:--------:|
+| name       | Name of the entity.                              | yes      |
+| exclude    | The entity cannot be accessed with this view.    |          |
+| properties | Property views.                                  |          |
 
-#### Exclude in Entity View
+##### Exclude in Entity View
 
-**Entities** set to **exclude** will not be accessible when using this view.
+An entity with **exclude** cannot be accessed when this view is used.
 
 ```yaml
 infrastructure:
@@ -945,15 +964,15 @@ infrastructure:
 
 #### Property View
 
-| Property 				|      Description					 								  |	required	|
-|-----------------|---------------------------------------------|:---------:|
-| name 		 		    | property name 							                | yes				|
-| exclude 		 	  | determines whether the property is excluded |    				|
-| readExp	 	      | read expression resolved in source   				|    				|
+| Key     | Description                                        | Required |
+|---------|----------------------------------------------------|:--------:|
+| name    | Name of the property.                              | yes      |
+| exclude | The property cannot be accessed with this view.    |          |
+| readExp | Read expression, resolved in the source.           |          |
 
 ##### Exclude in Property View
 
-**Properties** set to **exclude** will not be accessible when using this view.
+A property with **exclude** cannot be accessed when this view is used.
 
 ```yaml
 infrastructure:
@@ -967,14 +986,13 @@ infrastructure:
               readExp: date(created)
             - name: email
               exclude: true
-      ...        
+      ...
 ```
 
 ##### Read expression in Property View
 
-The result of the expression defined in **readExp** using the expression language, will be returned in the read queries.
-
-Example:
+With **readExp**, the result of the expression is returned in read queries instead of the stored value.
+In this example `created` is returned as a date, without the time:
 
 ```yaml
 infrastructure:
@@ -986,26 +1004,48 @@ infrastructure:
           properties:
             - name: created
               readExp: date(created)
-            - name: email
-              exclude: true
-      ...        
+      ...
 ```
 
 ### Paths
 
-In this app section, the configuration of the routes where the configuration files or execution results will be generated is established.
+Folders, relative to the folder of the schema, where generated files and the ORM state are written.
 
-| Property 				|      Description					 								|	required	|	default		|
-|-----------------|-------------------------------------------|:---------:|:---------:|
-| src 		 				|  set path of source code									|   				|		src			|
-| state		 				|  define path of orm state 								|   				| orm_state	|
-| model 		 			|  define path of	model to generate					|   				|		model		|
-
-Example:
+| Key    | Description                                                                         | Default     |
+|--------|-------------------------------------------------------------------------------------|:-----------:|
+| src    | Source code folder.                                                                 | `src`       |
+| domain | Folder, inside `src`, where `lambdaorm build` writes the model and repositories.   | `domain`    |
+| state  | Folder of the ORM state (model of each stage, DDL scripts applied by push).        | `orm_state` |
 
 ```yaml
-app:
-  src: src
-  state: orm_state
-  domain: domain
+infrastructure:
+  paths:
+    src: src
+    domain: domain
+    state: orm_state
+```
+
+### Queue
+
+`infrastructure.queue` configures a Kafka queue. It is not used by `@lambdaorm/lib` itself: it is read by the [Data Gateway](../data-gateway/index.md) for queued executions, and it adds the function `queue.send(topic, messages)` to the expressions.
+
+| Key       | Description                                                                                  |
+|-----------|----------------------------------------------------------------------------------------------|
+| config    | Kafka client configuration ([kafkajs](https://kafka.js.org/docs/configuration)).             |
+| consumers | Consumers: each one has a `name`, a consumer `config`, a `subscribe` (topic) and an `execute` expression run for every message, with the variables `message`, `topic` and `partition`. |
+
+In this example every message of the topic `insights-sync` is executed on the `insights` stage:
+
+```yaml
+infrastructure:
+  queue:
+    config: $QUEUE_CONFIG
+    consumers:
+      - name: syncInsights
+        config:
+          groupId: group1
+        subscribe:
+          topic: insights-sync
+          fromBeginning: true
+        execute: orm.execute(message.query, message.data, {stage:"insights"})
 ```

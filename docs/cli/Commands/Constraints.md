@@ -1,16 +1,16 @@
 # Constraints
 
-Return constraints associated with the query expression.
+Returns the constraints that are checked when a query expression is executed.
 
-## Params
+## Options
 
-| parameter	| short | describe 																																									|
-|-----------|-------|-------------------------------------------------------------------------------------------|
-|workspace	| -w 		| project path.																																							|
-|query			| -q 		| Query expression																																					|
-|envfile		| -e 		| Read in a file of environment variables.																									|
-|output			| -o 		| Generates an output according to the following possible values [json\|beautiful\|light\|yaml]|
-|url					| -u 		| URL of the schema on a Data Gateway	                        |
+| Option | Short | Description |
+| :-- | :-- | :-- |
+| workspace | `-w` | Project path (default: the current directory). |
+| query | `-q` | Query expression. |
+| envfile | `-e` | Reads a file of environment variables. |
+| output | `-o` | Output format: `json`, `beautiful`, `light` or `yaml`. |
+| url | `-u` | URL of the schema on a [Data Gateway](../../data-gateway/index.md), to run the command there. |
 
 ## Example
 

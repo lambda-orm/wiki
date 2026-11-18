@@ -1,0 +1,92 @@
+# Transporte {#transports}
+
+Das Gateway hat vier Transporte. Jeder lauscht auf einem eigenen Port, nur wenn der Port konfiguriert ist
+([Konfiguration](Configuration.md#transports-and-ports)), und jeder erreicht jedes Schema über dessen Route.
+
+| Transport | Was er ist | Routen des Schemas `iot/v1` | Routen des Gateways |
+| --- | --- | --- | --- |
+| [`http`](Rest.md) | REST API, OpenAPI 3 | `POST /iot/v1/execute`, `GET /iot/v1/entities`, … | `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/doc`, `/api-docs`, `/ui` |
+| [`mcpHttp`](Mcp.md) | MCP für KI-Agenten | `POST/GET/DELETE /iot/v1/mcp` (Streamable HTTP); `GET /iot/v1/sse` + `POST /iot/v1/messages?sessionId=` (HTTP+SSE) | `GET /status` |
+| [`mcpWebSocket`](Mcp.md#mcpwebsocket) | MCP über WebSocket | Upgrade unter `/iot/v1/mcp` | `GET /status`, `/asyncapi` |
+| [`webSocket`](WebSocket.md) | JSON-RPC-API mit Benachrichtigungen | Verbindung zu `ws://host:port/iot/v1` | Verbindung zur Wurzel: `general.*` und `gateway.schemas`; `/asyncapi` |
+
+- `{basePath}` (`transports.<t>.basePath`) steht vor jeder Route: mit `basePath: /data-gateway`
+  `/data-gateway/iot/v1/execute` und `/data-gateway/ui/`.
+- Mit einem einzigen Schema an der Wurzel haben seine Routen kein Präfix (`/execute`, `/mcp`, `ws://host:port/`).
+- Ein Schema, das auf einem Transport nicht bereitgestellt wird (`schemas[].transports`), antwortet dort mit `404`. Ein
+  Schema, das nicht `ready` ist, antwortet mit `503` und dem Grund.
+- Jeder Transport authentifiziert jede Anfrage (bzw. das WebSocket-Upgrade) mit der effektiven Authentifizierung des
+  Schemas ([Sicherheit](Security.md)).
+
+## http {#http}
+
+Die REST API: alle Operationen von λORM auf einem Schema (Abfragen, Skripte, das Schema, Stages) sowie die Routen des
+Gateways. JSON als Ein- und Ausgabe. Methoden und Beispiele unter [REST API](Rest.md).
+
+```yaml
+transports:
+  http:
+    port: 8080
+    basePath: /data-gateway   # optional
+    swagger: { enabled: true }   # /doc and /api-docs (Swagger UI, OpenAPI 3)
+    ui: { enabled: true }        # the web UI at /ui
+```
+
+- `GET /doc` (und `/api-docs`) stellt Swagger UI mit dem OpenAPI-Dokument bereit. Die Schaltfläche **Authorize** fragt
+  die Zugangsdaten so ab, wie die Schemas konfiguriert sind: einen API-Key in seinem Header, ein Bearer-Token oder
+  Benutzer und Passwort.
+- `/ping`, `/health` und `/metrics` benötigen keine Zugangsdaten (Kubernetes-Probes, Prometheus).
+- Das Rate Limit (`rateLimit`) gilt nur für diesen Transport.
+
+## mcpHttp {#mcphttp}
+
+[Model Context Protocol](https://modelcontextprotocol.io) für KI-Agenten: ein Server pro Schema, mit einem Tool pro
+Operation. Siehe [MCP](Mcp.md).
+
+```yaml
+transports:
+  mcpHttp:
+    port: 8081
+    legacySse: true    # also the older HTTP+SSE transport, for older clients
+    stateful: false    # stateless: any replica answers any request, no session affinity needed
+```
+
+| Route | Protokoll | Clients |
+| --- | --- | --- |
+| `POST/GET/DELETE {basePath}/{schema}/mcp` | Streamable HTTP | Claude Code (`--transport http`), aktuelle Clients |
+| `GET {basePath}/{schema}/sse` + `POST {basePath}/{schema}/messages?sessionId=<id>` | HTTP+SSE (veraltet), mit `legacySse: true` | ältere Clients |
+| `GET {basePath}/status` | der Zustand, die Schemas und die offenen SSE-Sitzungen | Betrieb |
+
+Die Zugangsdaten werden mit jeder Anfrage gesendet (Streamable HTTP) bzw. im `GET` und in jedem `POST` (SSE). HTTP+SSE
+hält eine Sitzung im Speicher: Bei mehreren Replikas ist Session-Affinität erforderlich.
+
+## mcpWebSocket {#mcpwebsocket}
+
+Dieselben MCP-Server über WebSocket. **Es ist kein Standard-MCP-Transport**: Er wird für Clients und Gateways angeboten,
+die ihn von sich aus unterstützen; die meisten Clients verwenden `mcpHttp`.
+
+```yaml
+transports:
+  mcpWebSocket:
+    port: 8082
+    maxConnections: 100
+```
+
+Die Verbindung ist ein Upgrade unter `{basePath}/{schema}/mcp`, authentifiziert im Handshake (ohne Zugangsdaten
+antwortet er mit `401` und schließt). Die Nachrichten sind JSON-RPC 2.0 mit den MCP-Methoden (`initialize`, `ping`,
+`tools/list`, `tools/call`, `resources/*`, …). `GET {basePath}/status` und `GET {basePath}/asyncapi` (das
+AsyncAPI-Dokument) sind reines HTTP.
+
+## webSocket {#websocket}
+
+Eine JSON-RPC-2.0-API über eine einzige dauerhafte Verbindung, mit denselben Operationen wie REST, dazu
+**Benachrichtigungen**, die REST nicht bieten kann: das Ende einer Ausführung in der Warteschlange und die
+Zustandsänderungen des Schemas. Siehe [WebSocket API](WebSocket.md).
+
+```yaml
+transports:
+  webSocket:
+    port: 8083
+    maxConnections: 100
+    asyncapi: { enabled: true }   # GET /asyncapi, /asyncapi.json
+```

@@ -1,27 +1,233 @@
-site_name: λORM Wiki
+site_name: λORM
+site_description: λORM — an ORM of lambda queries over several databases, and the Data Gateway that publishes its schemas
 docs_dir: docs
 site_dir: wiki
 site_url: https://lambda-orm.github.io/wiki/
 use_directory_urls: true
+
 theme:
-  name: readthedocs
-  # code as in VS Code / Monaco (dark): assets/wiki-v2.css sets the font, assets/wiki-v2.js colours the scripts inside `…`
-  hljs_style: vs2015
+  name: material
+  language: en
+  icon:
+    logo: material/lambda
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle: { icon: material/brightness-auto, name: Switch to light mode }
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle: { icon: material/brightness-7, name: Switch to dark mode }
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle: { icon: material/brightness-4, name: Switch to system preference }
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - navigation.tracking
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
 extra_css:
-  # a new name when they change: a browser never mixes a cached old one with the new pages
-  - assets/wiki-v2.css
-extra_javascript:
-  - assets/wiki-v2.js
+  # a new name when it changes: a browser never mixes a cached old one with the new pages
+  - assets/lambdaorm-v1.css
+
+plugins:
+  - search
+  - i18n:
+      # a translation is next to its page: GettingStarted.md, GettingStarted.de.md, GettingStarted.es.md, GettingStarted.pt.md
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: de
+          name: Deutsch
+          build: true
+          site_description: λORM — ein ORM für Lambda-Abfragen über mehrere Datenbanken und das Data Gateway, das seine Schemas veröffentlicht
+          nav_translations:
+            Home: Start
+            Features: Funktionen
+            Overview: Überblick
+            Getting started: Erste Schritte
+            Configuration: Konfiguration
+            Transports: Transporte
+            Security: Sicherheit
+            Clients: Clients
+            Operations: Betrieb
+            Change log: Änderungsprotokoll
+            Queries: Abfragen
+            Query Language: Abfragesprache
+            Expression: Ausdruck
+            Grouping: Gruppierung
+            Metadata: Metadaten
+            Operators & Functions: Operatoren und Funktionen
+            Comparison: Vergleich
+            Logical: Logisch
+            Numeric: Numerisch
+            String: Zeichenketten
+            Date and time: Datum und Uhrzeit
+            Nullable: Nullwerte
+            Bitwise: Bitweise
+            Group: Aggregation
+            Sort: Sortierung
+            Schema: Schema
+            Definition: Definition
+            Expressions: Ausdrücke
+            Environment Variables: Umgebungsvariablen
+            Composite: Zusammengesetzt
+            Listeners: Listener
+            Examples: Beispiele
+            Basic: Grundlagen
+            Extend Entity: Entität erweitern
+            Multiple Stages: Mehrere Stages
+            Stage with Multiple Sources: Stage mit mehreren Quellen
+            Entity Composite: Zusammengesetzte Entität
+            Synchronization: Synchronisierung
+            Use: Verwendung
+            Engines: Datenbanken
+            Usage: Verwendung
+            Repository: Repository
+            Transaction: Transaktion
+            Script: Skript
+            Commands: Befehle
+            Version: Version
+        - locale: es
+          name: Español
+          build: true
+          site_description: λORM — un ORM de consultas lambda sobre varias bases de datos, y el Data Gateway que publica sus esquemas
+          nav_translations:
+            Home: Inicio
+            Features: Características
+            Overview: Introducción
+            Getting started: Primeros pasos
+            Configuration: Configuración
+            Transports: Transportes
+            Security: Seguridad
+            Clients: Clientes
+            Operations: Operación
+            Change log: Cambios
+            Queries: Consultas
+            Query Language: Lenguaje de consultas
+            Expression: Expresión
+            Grouping: Agrupamiento
+            Metadata: Metadatos
+            Operators & Functions: Operadores y funciones
+            Comparison: Comparación
+            Logical: Lógicos
+            Numeric: Numéricos
+            String: Texto
+            Date and time: Fecha y hora
+            Nullable: Nulos
+            Bitwise: A nivel de bits
+            Group: Agregación
+            Sort: Ordenamiento
+            Schema: Esquema
+            Definition: Definición
+            Expressions: Expresiones
+            Environment Variables: Variables de entorno
+            Composite: Compuestos
+            Listeners: Listeners
+            Examples: Ejemplos
+            Basic: Básico
+            Extend Entity: Extender una entidad
+            Multiple Stages: Varios stages
+            Stage with Multiple Sources: Stage con varias fuentes
+            Entity Composite: Entidad compuesta
+            Synchronization: Sincronización
+            Use: Uso
+            Engines: Motores
+            Usage: Uso
+            Repository: Repositorio
+            Transaction: Transacción
+            Script: Script
+            Commands: Comandos
+            Version: Versión
+        - locale: pt
+          name: Português
+          build: true
+          site_description: λORM — um ORM de consultas lambda sobre vários bancos de dados, e o Data Gateway que publica seus esquemas
+          nav_translations:
+            Home: Início
+            Features: Recursos
+            Overview: Visão geral
+            Getting started: Primeiros passos
+            Configuration: Configuração
+            Transports: Transportes
+            Security: Segurança
+            Clients: Clientes
+            Operations: Operação
+            Change log: Alterações
+            Queries: Consultas
+            Query Language: Linguagem de consultas
+            Expression: Expressão
+            Grouping: Agrupamento
+            Metadata: Metadados
+            Operators & Functions: Operadores e funções
+            Comparison: Comparação
+            Logical: Lógicos
+            Numeric: Numéricos
+            String: Texto
+            Date and time: Data e hora
+            Nullable: Nulos
+            Bitwise: Bit a bit
+            Group: Agregação
+            Sort: Ordenação
+            Schema: Esquema
+            Definition: Definição
+            Expressions: Expressões
+            Environment Variables: Variáveis de ambiente
+            Composite: Compostos
+            Listeners: Listeners
+            Examples: Exemplos
+            Basic: Básico
+            Extend Entity: Estender uma entidade
+            Multiple Stages: Vários stages
+            Stage with Multiple Sources: Stage com várias fontes
+            Entity Composite: Entidade composta
+            Synchronization: Sincronização
+            Use: Uso
+            Engines: Bancos de dados
+            Usage: Uso
+            Repository: Repositório
+            Transaction: Transação
+            Script: Script
+            Commands: Comandos
+            Version: Versão
+
 markdown_extensions:
   - toc:
-      permalink: false
-      toc_depth: 2
+      permalink: true
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - def_list
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true
 
 nav:
-  - Home: index.html
-  - Features: Features
-  - Cli: cli
-  - Labs: labs
+  - Home:
+      - index.md
+      - Features: Features.md
+      - Labs: labs/index.md
   - Data Gateway:
       - Overview: data-gateway/index.md
       - Getting started: data-gateway/GettingStarted.md
@@ -36,38 +242,73 @@ nav:
       - Operations: data-gateway/Operations.md
       - Change log: data-gateway/CHANGELOG.md
   - Queries:
-      - Query Language: queries/Query-Language
-      - Expression: queries/Expression
-      - Select: queries/Select
-      - Join: queries/Join
-      - Grouping: queries/Grouping
-      - Include: queries/Include
-      - Insert: queries/Insert
-      - Bulk Insert: queries/BulkInsert
-      - Update: queries/Update
-      - Delete: queries/Delete
-      - Operators & Functions: queries/operatorsAndFunctions/OperatorsAndFunctions   
+      - Query Language: queries/Query-Language.md
+      - Expression: queries/Expression.md
+      - Select: queries/Select.md
+      - Join: queries/Join.md
+      - Grouping: queries/Grouping.md
+      - Include: queries/Include.md
+      - Insert: queries/Insert.md
+      - Bulk Insert: queries/BulkInsert.md
+      - Update: queries/Update.md
+      - Delete: queries/Delete.md
+      - Metadata: queries/Metadata.md
+      - Operators & Functions:
+          - queries/operatorsAndFunctions/OperatorsAndFunctions.md
+          - Comparison: queries/operatorsAndFunctions/Comparison.md
+          - Logical: queries/operatorsAndFunctions/Logical.md
+          - Numeric: queries/operatorsAndFunctions/Numeric.md
+          - String: queries/operatorsAndFunctions/String.md
+          - Date and time: queries/operatorsAndFunctions/Datetime.md
+          - Nullable: queries/operatorsAndFunctions/Nullable.md
+          - Bitwise: queries/operatorsAndFunctions/Bitwise.md
+          - Group: queries/operatorsAndFunctions/Group.md
+          - Sort: queries/operatorsAndFunctions/Sort.md
   - Schema:
-      - Definition: schema/SchemaDefinition
-      - Expressions: schema/SchemaDefinition-Expressions
-      - Environment Variables: schema/SchemaDefinition-EnvironmentVariables
-      - Composite: schema/SchemaDefinition-Composite
-      - Listeners: schema/SchemaExample-Listener
-      - Basic:  schema/SchemaExample-Basic
-      - Extend Entity:  schema/SchemaExample-Extend
-      - Multiples Stages:  schema/SchemaExample-MultiplesStages
-      - Stage with Multiples Sources:  schema/SchemaExample-StageMultiplesSources
-      - Entity Composite:  schema/SchemaExample-Composite
-      - Push: schema/SchemaSynchronization-Push
-      - Pull: schema/SchemaSynchronization-Pull
-      - Fetch: schema/SchemaSynchronization-Fetch
-      - Introspect: schema/SchemaSynchronization-Introspect
-      - Incorporate: schema/SchemaSynchronization-Incorporate
-      - Use: schema/Schema-Use
-      - Engines: schema/Engines
-  - Usage:     
-    - Repository: usage/Repository
-    - Transaction: usage/Transaction
-    - Script: usage/Script
-    - Usage: usage/Usage
-    - Change log: usage/CHANGELOG
+      - schema/Schema.md
+      - Definition: schema/SchemaDefinition.md
+      - Expressions: schema/SchemaDefinition-Expressions.md
+      - Environment Variables: schema/SchemaDefinition-EnvironmentVariables.md
+      - Composite: schema/SchemaDefinition-Composite.md
+      - Listeners: schema/SchemaExample-Listener.md
+      - Examples:
+          - Basic: schema/SchemaExample-Basic.md
+          - Extend Entity: schema/SchemaExample-Extend.md
+          - Multiple Stages: schema/SchemaExample-MultiplesStages.md
+          - Stage with Multiple Sources: schema/SchemaExample-StageMultiplesSources.md
+          - Entity Composite: schema/SchemaExample-Composite.md
+      - Synchronization:
+          - schema/SchemaSynchronization.md
+          - Push: schema/SchemaSynchronization-Push.md
+          - Pull: schema/SchemaSynchronization-Pull.md
+          - Fetch: schema/SchemaSynchronization-Fetch.md
+          - Introspect: schema/SchemaSynchronization-Introspect.md
+          - Incorporate: schema/SchemaSynchronization-Incorporate.md
+      - Use: schema/Schema-Use.md
+      - Engines: schema/Engines.md
+  - Usage:
+      - usage/Usage.md
+      - Repository: usage/Repository.md
+      - Transaction: usage/Transaction.md
+      - Script: usage/Script.md
+      - Change log: usage/CHANGELOG.md
+  - CLI:
+      - cli/index.md
+      - Commands:
+          - Init: cli/Commands/Init.md
+          - Build: cli/Commands/Build.md
+          - Sync: cli/Commands/Sync.md
+          - Push: cli/Commands/Push.md
+          - Drop: cli/Commands/Drop.md
+          - Fetch: cli/Commands/Fetch.md
+          - Import: cli/Commands/Import.md
+          - Export: cli/Commands/Export.md
+          - Execute: cli/Commands/Execute.md
+          - Script: cli/Commands/Script.md
+          - Plan: cli/Commands/Plan.md
+          - Metadata: cli/Commands/Metadata.md
+          - Model: cli/Commands/Model.md
+          - Parameters: cli/Commands/Parameters.md
+          - Constraints: cli/Commands/Constraints.md
+      - Version: cli/Version.md
+      - Change log: cli/CHANGELOG.md

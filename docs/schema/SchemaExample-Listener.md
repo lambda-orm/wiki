@@ -1,9 +1,11 @@
 # Listener on Schema
 
-Listeners allow us to execute actions when an event occurs in the ORM.
-Events are set in the "on" property: select, insert, bulkInsert, update, upsert and delete.
-The "condition" property allows you to define an expression that is evaluated to determine if the listener is executed.
-The expressions to be executed are defined in the "before", "after" and "error" properties.
+This page explains listeners: expressions that λORM runs before or after a query, or when it fails. They are defined in `application.listeners` (see [Listener](SchemaDefinition.md#listener)).
+
+- **on**: the categories of query that trigger the listener: `select`, `insert`, `upsert`, `update` and `delete`. A bulk insert belongs to the `insert` category, and a merge to the `upsert` category.
+- **condition**: an expression that decides whether the listener runs.
+- **before**, **after** and **error**: the expressions to run before the query, after it, or when it fails.
+- **transactional**: whether the listener runs inside the query's transaction (default `true`).
 
 ## How listeners run
 
@@ -15,7 +17,9 @@ The expressions to be executed are defined in the "before", "after" and "error" 
 - A listener's `orm.execute` can name **another stage** (`{ stage: "insights" }`): it joins the same transaction
   (since @lambdaorm/lib 3.3.0).
 - `transactional: false` runs a listener outside the transaction: what it writes is kept even if the transaction
-  rolls back (e.g. an audit log).
+  rolls back (for example, an audit log).
+
+In this example, `touchInstallation` updates the installation of each inserted file in the same transaction, and `audit` writes an audit log that is kept even if the transaction rolls back:
 
 ```yaml
 application:
@@ -42,8 +46,8 @@ The arguments available in `condition`, `before`, `after` and `error`:
 | data        | The data that was sent when the expression was executed                                                         |
 | options     | The options that were sent when the expression was executed                                                     |
 | result      | It is only available in the after event and contains the result of the expression execution                     |
-| action      | The action that was executed (select, insert, update, delete, upsert, merge, bulkInsert, bulkUpdate, bulkMerge) |
-| type        | The type of sentence that was executed (dql, ddl, dml)                                                          |
+| action      | The action that was executed (select, insert, bulkInsert, update, upsert, merge, bulkMerge, delete, bulkDelete) |
+| type        | The type of sentence that was executed (dql, dml)                                                               |
 | category    | The category of the sentence that was executed (select, insert, update, delete, upsert)                         |
 | sentence    | The sentence that was executed                                                                                  |
 | dialect     | The dialect of the source where the sentence was executed                                                       |
@@ -53,9 +57,9 @@ The arguments available in `condition`, `before`, `after` and `error`:
 
 ## Listener Example
 
-In this example we see how a Listener is declared to synchronize data in Insights.
-When a record is inserted, updated or deleted in the default or cqrs stages, the listener is executed.
-In this case, the expression is defined in the after property, which executes the same expression with the same data but in the stage insights, in the same transaction as the sentence: if the write in insights fails, the original one is rolled back too.
+This example declares a listener that copies the data to the `insights` stage (CQRS pattern).
+When records are inserted, updated or deleted on the `default` or `cqrs` stage, the listener runs.
+Its `after` expression executes the same query, with the same data, on the `insights` stage, in the same transaction as the original query: if the write in `insights` fails, the original one is rolled back too.
 
 **Part of the schema where the listener is defined:**
 
@@ -64,12 +68,14 @@ In this case, the expression is defined in the after property, which executes th
 application:
   listeners:
     - name: syncInsights
-      on: [insert, bulkInsert, update, delete]
+      on: [insert, update, delete]
       condition: options.stage.in("default","cqrs")
       after: orm.execute(query,data,{stage:"insights"}) 
 ```
 
-**Schema Complete:**
+**Complete schema:**
+
+The `default` stage spreads the entities over MySQL, PostgreSQL and MongoDB, the `insights` stage stores everything in another PostgreSQL database, and the `cqrs` stage reads from `insights` and writes to the sources of `default`.
 
 ```yaml
 domain:  
@@ -297,11 +303,11 @@ infrastructure:
 application:
   listeners:
     - name: syncInsights
-      on: [insert, bulkInsert, update, delete ]
+      on: [insert, update, delete]
       condition: options.stage.in("default","cqrs")
       after: orm.execute(query,data,{stage:"insights"}) 
 ```
 
-## Laboratories
+## Labs
 
-[CLI - northwind cqrs](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/08-northwind-cqrs)
+- [CLI - northwind cqrs](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/08-northwind-cqrs)

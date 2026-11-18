@@ -1,20 +1,20 @@
-# Multiples Stages
+# Multiple Stages
 
-The scheme allows you to define different usage scenarios.
-These usage scenarios can be used for different reasons, for example:
+This page shows a schema with two stages: the same model stored in two different databases.
 
-- You can create a scenario to work with an Oracle Base and another with SqlServer with the same definition of the business model to perform performance tests.
-- You can configure one stage as a source and another as a destination to perform data migrations.
-- You can define one stage for read operations and another for write operations.
-- You can define one stage for the development environment and another for the qa environment.
+A stage is a usage scenario. Several stages can be defined for different reasons, for example:
+
+- To run the same business model on Oracle and on SQL Server and compare their performance.
+- To use one stage as the origin and another as the destination of a data migration.
+- To use one stage for reads and another for writes.
+- To use one stage for the development environment and another for the QA environment.
 
 ## Schema Example
 
-In this scheme we can see how to extend the schema.
+In this schema, `stage1` uses a MySQL database with the default names (`mapping1` is empty), and `stage2` uses a PostgreSQL database whose tables and columns have other names (`mapping2`).
+The same query gives the same result on both stages.
 
-![schema](../images/schema3.svg)
-
-We use the extends attribute in the definition of the schema to extend it.
+![schema](images/schema3.svg)
 
 ```yaml
 domain:
@@ -91,13 +91,13 @@ infrastructure:
         - name: source2
 ```
 
-**Environment Variables:**
+**Environment variables:**
 
 ```sh
 CNN_MYSQL={"host":"localhost","port":3306,"user":"test","password":"test","database":"test"}
 CNN_POSTGRES={"host":"0.0.0.0","port":5433,"user":"test","password":"test","database":"test"}
 ```
 
-## Laboratories
+## Labs
 
 - [CLI - two stages](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/03-two-stages)

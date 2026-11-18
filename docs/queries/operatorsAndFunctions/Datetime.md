@@ -1,849 +1,711 @@
-|Function    			|Description                                   	|
-|-----------------|-----------------------------------------------|
-|curTime					|Get the current time														|
-|today						|Get the current date														|
-|now							|Get the current dateTime												|
-|dateToString			|Convert date to string with ISO 8601 format		|
-|time							|Convert string to time													|
-|date							|Convert string to date													|
-|dateTime					|Convert string to dateTime											|
-|year							|Get year from date															|
-|month						|Get month from date														|
-|day							|Get day of month from date											|
-|weekday					|Get date of week from date											|
-|hour							|Get hour from date															|
-|minute						|Get minute from date														|
-|second						|Get second from date														|
-|millisecond			|Get millisecond from date											|
-|addYear					|Add years to a date														|
-|addMonth					|Add months to a date														|
-|addDay						|Add days to a date															|
-|addHour					|Add hours to a date														|
-|addMinute				|Add minutes to a date													|
-|addSecond				|Add seconds to a date													|
-|addMillisecond		|Add milliseconds to a date											|
-|addTime					|Add time to a date															|
-|subtractTime			|subtract time to a date												|
-|dayDiff					|difference between two dates in days						|
-|hourDiff					|difference between two dates in hours					|
-|secondDiff				|difference between two dates in seconds				|
-|millisecondDiff	|difference between two dates in milliseconds		|
-|dayToDate				|days to  Date																	|
-|hourToDate				|hours to  Date																	|
-|secondToDate			|seconds to  Date																|
-|millisecondToDate|milliseconds to Date														|
-
-## Examples
-
-| Example                                   																																					| Result 																	|
-|---------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:today()})																											|[{"result":"2022-08-14T22:00:00.000Z"}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:now()})																												|[{"result":"2022-08-15T09:54:22.000Z"}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:curTime()})																										|[{"result":"11:54:22"}]									|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:time("2021-09-06T14:39:11.444Z")})															|[{"result":"00:20:21"}]									|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:date("2021-09-06T14:39:11.444Z")})															|[{"result":"2021-09-05T22:00:00.000Z"}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:dateTime("2021-09-06T14:39:11.444Z")})													|[{"result":"2021-09-06T12:39:11.000Z"}]	|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:dateToString(dateTime("2021-09-06T14:39:11.444Z"))})						|[{"result":"2021-09-06T14:39:11Z"}]			|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:year("2021-09-06T14:39:11.444Z")})															|[{"result":2021}]												|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:month("2021-09-06T14:39:11.444Z")})														|[{"result":9}]														|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:day("2021-09-06T14:39:11.444Z")})															|[{"result":6}]														|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:weekday("2021-09-06T14:39:11.444Z")})													|[{"result":2}]														|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:hour("2021-09-06T14:39:11.444Z")})															|[{"result":0}]														|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:minute("2021-09-06T14:39:11.444Z")})														|[{"result":20}]													|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:second("2021-09-06T14:39:11.444Z")})														|[{"result":21}]													|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:millisecond("2021-09-06T14:39:11.444Z")})											|[{"result":0}]														|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addYear("2021-09-06T14:39:11.444Z",2)})												|[{"result":"2023-09-06 14:39:11.444000"}]|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addMonth("2021-09-06T14:39:11.444Z",2)})												|[{"result":"2021-11-06 14:39:11.444000"}]|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addDay("2021-09-06T14:39:11.444Z",2)})													|[{"result":"2021-09-08 14:39:11.444000"}]|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addHour("2021-09-06T14:39:11.444Z",2)})												|[{"result":"2021-09-06 16:39:11.444000"}]|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addMinute("2021-09-06T14:39:11.444Z",2)})											|[{"result":"2021-09-06 14:41:11.444000"}]|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addSecond("2021-09-06T14:39:11.444Z",2)})											|[{"result":"2021-09-06 14:39:13.444000"}]|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addMillisecond("2021-09-06T14:39:11.444Z",2)})									|[{"result":"2021-09-06 14:39:11.446000"}]|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addTime("2021-09-06T14:39:11.444Z","08:22:12")})								|[{"result":"08:42:33"}]									|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:subtractTime("2021-09-06T14:39:11.444Z","08:22:12")})					|[{"result":"-08:01:51"}]									|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:dayDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})					|[{"result":4}]														|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:hourDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})				|[{"result":98}]													|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:secondDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})			|[{"result":353341}]											|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:millisecondDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})	|[{"result":353341000}]										|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:dayToDate(2000)})																							|[{"result":"1975-06-24T00:00:00Z"}]			|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:hourToDate(2000)})																							|[{"result":"1970-03-25T08:00:00Z"}]			|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:secondToDate(2000)})																						|[{"result":"1970-01-01T00:33:20Z"}]			|
-|Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:millisecondToDate(2000)})																			|[{"result":"1970-01-01T00:00:02Z"}]			|
-
-## Sentences
-
-**Lambda:**
-
-Query to select the current date from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:today()})
-```
-
-**SQL Result:**
-
-```sql
-SELECT CURDATE() AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the current dateTime from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:now()})
-```
-
-**SQL Result:**
-
-```sql
-SELECT NOW() AS result 
-FROM Countries c 
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the current time from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:curTime()})
-```
-
-**SQL Result:**
-
-```sql
-SELECT CURTIME() AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the time from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:time("2021-09-06T14:39:11.444Z")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT CONVERT('2021-09-06T14:39:11.444Z', TIME) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the date from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:date("2021-09-06T14:39:11.444Z")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT CONVERT('2021-09-06T14:39:11.444Z', DATE) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the dateTime from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:dateTime("2021-09-06T14:39:11.444Z")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT CONVERT('2021-09-06T14:39:11.444Z', DATETIME) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the date as string from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:dateToString(dateTime("2021-09-06T14:39:11.444Z"))})
-```
-
-**SQL Result:**
-
-```sql
-SELECT DATE_FORMAT(CONVERT('2021-09-06T14:39:11.444Z', DATETIME), '%Y-%m-%dT%TZ') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the year from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:year("2021-09-06T14:39:11.444Z")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT EXTRACT(YEAR 
-FROM '2021-09-06T14:39:11.444Z') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the month from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:month("2021-09-06T14:39:11.444Z")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT EXTRACT(MONTH FROM '2021-09-06T14:39:11.444Z') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the day from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:day("2021-09-06T14:39:11.444Z")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT DAYOFMONTH('2021-09-06T14:39:11.444Z') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the date of week from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:weekday("2021-09-06T14:39:11.444Z")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT DAYOFWEEK('2021-09-06T14:39:11.444Z') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the hour from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:hour("2021-09-06T14:39:11.444Z")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT EXTRACT(HOUR FROM '2021-09-06T14:39:11.444Z') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the minute from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:minute("2021-09-06T14:39:11.444Z")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT EXTRACT(MINUTE FROM '2021-09-06T14:39:11.444Z') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the second from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:second("2021-09-06T14:39:11.444Z")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT EXTRACT(SECOND FROM '2021-09-06T14:39:11.444Z') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to select the millisecond from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:millisecond("2021-09-06T14:39:11.444Z")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT ROUND(EXTRACT(MICROSECOND FROM '2021-09-06T14:39:11.444Z')/1000,0) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to add years to a date from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addYear("2021-09-06T14:39:11.444Z",2)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT DATE_ADD('2021-09-06T14:39:11.444Z', INTERVAL 2 YEAR) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to add months to a date from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addMonth("2021-09-06T14:39:11.444Z",2)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT DATE_ADD('2021-09-06T14:39:11.444Z', INTERVAL 2 MONTH) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to add days to a date from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addDay("2021-09-06T14:39:11.444Z",2)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT DATE_ADD('2021-09-06T14:39:11.444Z', INTERVAL 2 DAY) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to add hours to a date from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addHour("2021-09-06T14:39:11.444Z",2)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT '2021-09-06T14:39:11.444Z' + interval '2' HOUR AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to add minutes to a date from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addMinute("2021-09-06T14:39:11.444Z",2)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT '2021-09-06T14:39:11.444Z' + interval '2' MINUTE AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to add seconds to a date from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addSecond("2021-09-06T14:39:11.444Z",2)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT '2021-09-06T14:39:11.444Z' + interval '2' SECOND AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to add milliseconds to a date from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addMillisecond("2021-09-06T14:39:11.444Z",2)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT DATE_ADD('2021-09-06T14:39:11.444Z', INTERVAL (2 * 1000) MICROSECOND) AS result 
-FROM Countries c 
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to add time to a date from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addTime("2021-09-06T14:39:11.444Z","08:22:12")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT ADDTIME('2021-09-06T14:39:11.444Z','08:22:12') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to subtract time to a date from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:subtractTime("2021-09-06T14:39:11.444Z","08:22:12")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT SUBTIME('2021-09-06T14:39:11.444Z','08:22:12') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to get the difference between two dates in days from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:dayDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT DATEDIFF('2021-09-06T14:39:11','2021-09-02T12:30:10') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to get the difference between two dates in hours from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:hourDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT TIMESTAMPDIFF(HOUR, '2021-09-02T12:30:10','2021-09-06T14:39:11') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to get the difference between two dates in seconds from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:secondDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT TIMESTAMPDIFF(SECOND, '2021-09-02T12:30:10','2021-09-06T14:39:11') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:millisecondDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})
-```
-
-**SQL Result:**
-
-```sql
-SELECT ROUND(TIMESTAMPDIFF(MICROSECOND, '2021-09-02T12:30:10','2021-09-06T14:39:11')/1000,0) AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to get the date from days from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:dayToDate(2000)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT DATE_FORMAT(FROM_UNIXTIME(2000*24*3600), '%Y-%m-%dT%TZ') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to get the date from hours from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:hourToDate(2000)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT DATE_FORMAT(FROM_UNIXTIME(2000*3600), '%Y-%m-%dT%TZ') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to get the date from seconds from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:secondToDate(2000)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT DATE_FORMAT(FROM_UNIXTIME(2000), '%Y-%m-%dT%TZ') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-**Lambda:**
-
-Query to get the date from milliseconds from the Countries entity where the iso3 is equal to "BRA".
-
-```js
-Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:millisecondToDate(2000)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT DATE_FORMAT(FROM_UNIXTIME(2000/1000), '%Y-%m-%dT%TZ') AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-```
-
-## Definition
-
-### curTime
-
-- description: Get the current time
-- deterministic: true
-- return: Date
-
-### today
-
-- description: Get the current date
-- deterministic: true
-- return: Date
+# Date and Time Functions
+
+Date and time functions get the current date and time, convert strings to dates, extract parts of a date, add intervals to a date and calculate the difference between two dates.
+
+!!! note "About the examples"
+    The examples run against the `Countries` entity of the countries sample schema. Each one shows the query, the result it returned on the test database and the SQL sentence that λORM generated for MySQL. Other engines receive their own translation; to see the sentence generated for your data source, use [`orm.plan`](../Metadata.md).
+
+!!! note "Results depend on the engine and the time zone"
+    Date and time values are calculated by the database. The results below were obtained on MySQL in a session that was not in UTC, so some values (for example those of `date`, `time` or `hour`) are shifted by the time zone. Expect different values on other engines or time zones.
+
+## Summary
+
+| Function | Description |
+|---|---|
+| `now` | Current date and time |
+| `today` | Current date |
+| `curTime` | Current time |
+| `dateTime` | Converts a string to a date and time |
+| `date` | Converts a string to a date |
+| `time` | Converts a string to a time |
+| `dateToString` | Converts a date to an ISO 8601 string |
+| `year` | Year of a date |
+| `month` | Month of a date |
+| `day` | Day of the month of a date |
+| `weekday` | Day of the week of a date |
+| `hour` | Hour of a date |
+| `minute` | Minute of a date |
+| `second` | Second of a date |
+| `millisecond` | Millisecond of a date |
+| `addYear` | Adds years to a date |
+| `addMonth` | Adds months to a date |
+| `addDay` | Adds days to a date |
+| `addHour` | Adds hours to a date |
+| `addMinute` | Adds minutes to a date |
+| `addSecond` | Adds seconds to a date |
+| `addMillisecond` | Adds milliseconds to a date |
+| `addTime` | Adds a time to a date |
+| `subtractTime` | Subtracts a time from a date |
+| `dayDiff` | Difference between two dates in days |
+| `hourDiff` | Difference between two dates in hours |
+| `secondDiff` | Difference between two dates in seconds |
+| `millisecondDiff` | Difference between two dates in milliseconds |
+| `dayToDate` | Date for a number of days since 1970-01-01 |
+| `hourToDate` | Date for a number of hours since 1970-01-01 |
+| `secondToDate` | Date for a number of seconds since 1970-01-01 |
+| `millisecondToDate` | Date for a number of milliseconds since 1970-01-01 |
+
+## Current date and time
 
 ### now
 
-- description: Get the current dateTime
-- deterministic: true
-- return: Date
+Returns the current date and time.
 
-### dateToString
+**Signature:** `now(): dateTime`
 
-- description: Convert date to string with ISO 8601 format
-- deterministic: true
-- return: string
-- params:
-	- value: Date
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:now()})
+```
 
-### time
+**Result:** `[{"result":"2022-08-15T09:54:22.000Z"}]`
 
-- description: Convert string to time
-- deterministic: true
-- return: Date
-- params:
-	- value: string
+**Generated SQL (MySQL):**
 
-### date
+```sql
+SELECT NOW() AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
-- description: Convert string to date
-- deterministic: true
-- return: Date
-- params:
-	- value: string
+### today
+
+Returns the current date.
+
+**Signature:** `today(): date`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:today()})
+```
+
+**Result:** `[{"result":"2022-08-14T22:00:00.000Z"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT CURDATE() AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+### curTime
+
+Returns the current time.
+
+**Signature:** `curTime(): time`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:curTime()})
+```
+
+**Result:** `[{"result":"11:54:22"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT CURTIME() AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+## Conversions
 
 ### dateTime
 
-- description: Convert string to dateTime
-- deterministic: true
-- return: Date
-- params:
-	- value: string
+Converts `value` to a date and time.
+
+**Signature:** `dateTime(value: string): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:dateTime("2021-09-06T14:39:11.444Z")})
+```
+
+**Result:** `[{"result":"2021-09-06T12:39:11.000Z"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT CONVERT('2021-09-06T14:39:11.444Z', DATETIME) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+### date
+
+Converts `value` to a date (without the time).
+
+**Signature:** `date(value: string): date`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:date("2021-09-06T14:39:11.444Z")})
+```
+
+**Result:** `[{"result":"2021-09-05T22:00:00.000Z"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT CONVERT('2021-09-06T14:39:11.444Z', DATE) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+### time
+
+Converts `value` to a time (without the date).
+
+**Signature:** `time(value: string): time`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:time("2021-09-06T14:39:11.444Z")})
+```
+
+**Result:** `[{"result":"00:20:21"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT CONVERT('2021-09-06T14:39:11.444Z', TIME) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+### dateToString
+
+Converts `date` to a string in ISO 8601 format.
+
+**Signature:** `dateToString(date: dateTime): string`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:dateToString(dateTime("2021-09-06T14:39:11.444Z"))})
+```
+
+**Result:** `[{"result":"2021-09-06T14:39:11Z"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT DATE_FORMAT(CONVERT('2021-09-06T14:39:11.444Z', DATETIME), '%Y-%m-%dT%TZ') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+## Date parts
+
+These functions return a part of a date as an integer.
 
 ### year
 
-- description: Get year from date
-- deterministic: true
-- return: number
-- params:
-	- value: Date
+Returns the year of `value`.
+
+**Signature:** `year(value: dateTime): integer`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:year("2021-09-06T14:39:11.444Z")})
+```
+
+**Result:** `[{"result":2021}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT EXTRACT(YEAR FROM '2021-09-06T14:39:11.444Z') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### month
 
-- description: Get month from date
-- deterministic: true
-- return: number
-- params:
-	- value: Date
+Returns the month of `value` (1 to 12).
+
+**Signature:** `month(value: dateTime): integer`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:month("2021-09-06T14:39:11.444Z")})
+```
+
+**Result:** `[{"result":9}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT EXTRACT(MONTH FROM '2021-09-06T14:39:11.444Z') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### day
 
-- description: Get day of month from date
-- deterministic: true
-- return: number
-- params:
-	- value: Date
+Returns the day of the month of `value`.
+
+**Signature:** `day(value: dateTime): integer`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:day("2021-09-06T14:39:11.444Z")})
+```
+
+**Result:** `[{"result":6}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT DAYOFMONTH('2021-09-06T14:39:11.444Z') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### weekday
 
-- description: get date of week from date
-- deterministic: true
-- return: number
-- params:
-	- value: Date
+Returns the day of the week of `value`. The numbering depends on the engine: on MySQL, MariaDB and SQLite (`DAYOFWEEK`) 1 is Sunday and 7 is Saturday, so the example (a Monday) returns 2; on PostgreSQL (`extract(dow ...)`) 0 is Sunday.
+
+**Signature:** `weekday(value: dateTime): integer`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:weekday("2021-09-06T14:39:11.444Z")})
+```
+
+**Result:** `[{"result":2}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT DAYOFWEEK('2021-09-06T14:39:11.444Z') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### hour
 
-- description: get hour from date
-- deterministic: true
-- return: number
-- params:
-	- value: Date
+Returns the hour of `value`.
+
+**Signature:** `hour(value: dateTime): integer`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:hour("2021-09-06T14:39:11.444Z")})
+```
+
+**Result:** `[{"result":0}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT EXTRACT(HOUR FROM '2021-09-06T14:39:11.444Z') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### minute
 
-- description: Get minute from date
-- deterministic: true
-- return: number
-- params:
-	- value: Date
+Returns the minute of `value`.
+
+**Signature:** `minute(value: dateTime): integer`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:minute("2021-09-06T14:39:11.444Z")})
+```
+
+**Result:** `[{"result":20}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT EXTRACT(MINUTE FROM '2021-09-06T14:39:11.444Z') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### second
 
-- description: Get second from date
-- deterministic: true
-- return: number
-- params:
-	- value: Date
+Returns the second of `value`.
+
+**Signature:** `second(value: dateTime): integer`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:second("2021-09-06T14:39:11.444Z")})
+```
+
+**Result:** `[{"result":21}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT EXTRACT(SECOND FROM '2021-09-06T14:39:11.444Z') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### millisecond
 
-- description: Get millisecond from date
-- deterministic: true
-- return: number
-- params:
-	- value: Date
+Returns the millisecond of `value`.
+
+**Signature:** `millisecond(value: dateTime): integer`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:millisecond("2021-09-06T14:39:11.444Z")})
+```
+
+**Result:** `[{"result":0}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT ROUND(EXTRACT(MICROSECOND FROM '2021-09-06T14:39:11.444Z')/1000,0) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+## Adding intervals
+
+These functions add `value` units to `date` and return the new date. Use a negative `value` to subtract.
 
 ### addYear
 
-- description: Add years to a date
-- deterministic: true
-- return: Date
-- params:
-	- date: Date
-	- value: number
+Adds `value` years to `date`.
+
+**Signature:** `addYear(date: dateTime, value: number): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addYear("2021-09-06T14:39:11.444Z",2)})
+```
+
+**Result:** `[{"result":"2023-09-06 14:39:11.444000"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT DATE_ADD('2021-09-06T14:39:11.444Z', INTERVAL 2 YEAR) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### addMonth
 
-- description: Add months to a date
-- deterministic: true
-- return: Date
-- params:
-	- date: Date
-	- value: number
+Adds `value` months to `date`.
+
+**Signature:** `addMonth(date: dateTime, value: number): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addMonth("2021-09-06T14:39:11.444Z",2)})
+```
+
+**Result:** `[{"result":"2021-11-06 14:39:11.444000"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT DATE_ADD('2021-09-06T14:39:11.444Z', INTERVAL 2 MONTH) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### addDay
 
-- description: Add days to a date
-- deterministic: true
-- return: Date
-- params:
-	- date: Date
-	- value: number
+Adds `value` days to `date`.
+
+**Signature:** `addDay(date: dateTime, value: number): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addDay("2021-09-06T14:39:11.444Z",2)})
+```
+
+**Result:** `[{"result":"2021-09-08 14:39:11.444000"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT DATE_ADD('2021-09-06T14:39:11.444Z', INTERVAL 2 DAY) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### addHour
 
-- description: Add hours to a date
-- deterministic: true
-- return: Date
-- params:
-	- date: Date
-	- value: number
+Adds `value` hours to `date`.
+
+**Signature:** `addHour(date: dateTime, value: number): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addHour("2021-09-06T14:39:11.444Z",2)})
+```
+
+**Result:** `[{"result":"2021-09-06 16:39:11.444000"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT '2021-09-06T14:39:11.444Z' + interval '2' HOUR AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### addMinute
 
-- description: Add minutes to a date
-- deterministic: true
-- return: Date
-- params:
-	- date: Date
-	- value: number
+Adds `value` minutes to `date`.
+
+**Signature:** `addMinute(date: dateTime, value: number): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addMinute("2021-09-06T14:39:11.444Z",2)})
+```
+
+**Result:** `[{"result":"2021-09-06 14:41:11.444000"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT '2021-09-06T14:39:11.444Z' + interval '2' MINUTE AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### addSecond
 
-- description: Add seconds to a date
-- deterministic: true
-- return: Date
-- params:
-	- date: Date
-	- value: number
+Adds `value` seconds to `date`.
+
+**Signature:** `addSecond(date: dateTime, value: number): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addSecond("2021-09-06T14:39:11.444Z",2)})
+```
+
+**Result:** `[{"result":"2021-09-06 14:39:13.444000"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT '2021-09-06T14:39:11.444Z' + interval '2' SECOND AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### addMillisecond
 
-- description: Add milliseconds to a date
-- deterministic: true
-- return: Date
-- params:
-	- date: Date
-	- value: number
+Adds `value` milliseconds to `date`.
+
+**Signature:** `addMillisecond(date: dateTime, value: number): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addMillisecond("2021-09-06T14:39:11.444Z",2)})
+```
+
+**Result:** `[{"result":"2021-09-06 14:39:11.446000"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT DATE_ADD('2021-09-06T14:39:11.444Z', INTERVAL (2 * 1000) MICROSECOND) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### addTime
 
-- description: Add time to a date
-- deterministic: true
-- return: Date
-- params:
-	- date: Date
-	- time: Date
+Adds `time` to `date`.
+
+**Signature:** `addTime(date: dateTime, time: time): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:addTime("2021-09-06T14:39:11.444Z","08:22:12")})
+```
+
+**Result:** `[{"result":"08:42:33"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT ADDTIME('2021-09-06T14:39:11.444Z','08:22:12') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### subtractTime
 
-- description: subtract time to a date
-- deterministic: true
-- return: Date
-- params:
-	- date: Date
-	- time: Date
+Subtracts `time` from `date`.
+
+**Signature:** `subtractTime(date: dateTime, time: time): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:subtractTime("2021-09-06T14:39:11.444Z","08:22:12")})
+```
+
+**Result:** `[{"result":"-08:01:51"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT SUBTIME('2021-09-06T14:39:11.444Z','08:22:12') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+## Differences between dates
+
+These functions return `date1 - date2` in the given unit, as an integer.
 
 ### dayDiff
 
-- description: difference between two dates in days
-- deterministic: true
-- return: Date
-- params:
-	- date: Date
-	- date2: Date
+Returns the difference between `date1` and `date2` in days.
+
+**Signature:** `dayDiff(date1: dateTime, date2: dateTime): integer`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:dayDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})
+```
+
+**Result:** `[{"result":4}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT DATEDIFF('2021-09-06T14:39:11','2021-09-02T12:30:10') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### hourDiff
 
-- description: difference between two dates in hours
-- deterministic: true
-- return: Date
-- params:
-	- time: Date
-	- time2: Date
+Returns the difference between `date1` and `date2` in hours.
+
+**Signature:** `hourDiff(date1: dateTime, date2: dateTime): integer`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:hourDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})
+```
+
+**Result:** `[{"result":98}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT TIMESTAMPDIFF(HOUR, '2021-09-02T12:30:10','2021-09-06T14:39:11') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### secondDiff
 
-- description: difference between two dates in seconds
-- deterministic: true
-- return: Date
-- params:
-	- time: Date
-	- time2: Date
+Returns the difference between `date1` and `date2` in seconds.
+
+**Signature:** `secondDiff(date1: dateTime, date2: dateTime): integer`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:secondDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})
+```
+
+**Result:** `[{"result":353341}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT TIMESTAMPDIFF(SECOND, '2021-09-02T12:30:10','2021-09-06T14:39:11') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### millisecondDiff
 
-- description: difference between two dates in milliseconds
-- deterministic: true
-- return: Date
-- params:
-	- time: Date
-	- time2: Date
+Returns the difference between `date1` and `date2` in milliseconds.
+
+**Signature:** `millisecondDiff(date1: dateTime, date2: dateTime): integer`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:millisecondDiff("2021-09-06T14:39:11","2021-09-02T12:30:10")})
+```
+
+**Result:** `[{"result":353341000}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT ROUND(TIMESTAMPDIFF(MICROSECOND, '2021-09-02T12:30:10','2021-09-06T14:39:11')/1000,0) AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+## Numbers to dates
+
+These functions convert a number of time units elapsed since 1970-01-01T00:00:00Z (the Unix epoch) to a date.
 
 ### dayToDate
 
-- description: days to  Date
-- deterministic: true
-- return: Date
-- params:
-	- value: number
+Returns the date that is `value` days after the Unix epoch.
+
+**Signature:** `dayToDate(value: number): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:dayToDate(2000)})
+```
+
+**Result:** `[{"result":"1975-06-24T00:00:00Z"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT DATE_FORMAT(FROM_UNIXTIME(2000*24*3600), '%Y-%m-%dT%TZ') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### hourToDate
 
-- description: hours to  Date
-- deterministic: true
-- return: Date
-- params:
-	- value: number
+Returns the date that is `value` hours after the Unix epoch.
+
+**Signature:** `hourToDate(value: number): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:hourToDate(2000)})
+```
+
+**Result:** `[{"result":"1970-03-25T08:00:00Z"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT DATE_FORMAT(FROM_UNIXTIME(2000*3600), '%Y-%m-%dT%TZ') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### secondToDate
 
-- description: seconds to  Date
-- deterministic: true
-- return: Date
-- params:
-	- value: number
+Returns the date that is `value` seconds after the Unix epoch.
+
+**Signature:** `secondToDate(value: number): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:secondToDate(2000)})
+```
+
+**Result:** `[{"result":"1970-01-01T00:33:20Z"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT DATE_FORMAT(FROM_UNIXTIME(2000), '%Y-%m-%dT%TZ') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
 
 ### millisecondToDate
 
-- description: milliseconds to Date
-- deterministic: true
-- return: Date
-- params:
-	- value: number
+Returns the date that is `value` milliseconds after the Unix epoch.
+
+**Signature:** `millisecondToDate(value: number): dateTime`
+
+```typescript
+Countries.filter(p=> p.iso3 == "BRA").map(p=> {result:millisecondToDate(2000)})
+```
+
+**Result:** `[{"result":"1970-01-01T00:00:02Z"}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT DATE_FORMAT(FROM_UNIXTIME(2000/1000), '%Y-%m-%dT%TZ') AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+```
+
+## Database support
+
+!!! warning "MongoDB"
+    In the current version, only `now`, `today`, `date`, `year`, `month`, `day` and `weekday` can be translated to MongoDB queries. The other date and time functions on this page are not available on MongoDB.

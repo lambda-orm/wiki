@@ -1,17 +1,17 @@
+# Stage with Multiple Sources
 
-# Stage related multiples Sources
+This page shows a stage whose entities are stored in different databases, first with the same mapping and then with a different mapping for each source.
 
-- When the entities are in different databases, the data source for each entity must be specified in the stage configuration.
-- This is done through the "condition" property, which is an expression that is evaluated for each entity and if true, the specified data source is used.
-- Source conditions are evaluated in the order they are found in the stage, so if an entity meets the two-source condition, the data source from the first source that meets the condition will be used.
+- When the entities are in different databases, the stage says which source each entity uses.
+- This is done with the **condition** of each source rule: an expression evaluated for each entity; when it is true, that source is used.
+- The conditions are evaluated in the order of the stage, so when an entity meets the conditions of two sources, the first one is used. A source without condition takes the entities that no previous source took.
 
-## Stage related to multiple Sources sharing the mapping
+## Multiple sources sharing the mapping
 
-This schema has two entities that are in different databases.
+In this schema, `States` is stored in a PostgreSQL database (`dataSource2`) and every other entity in a MySQL database (`dataSource1`).
+Both sources use the same mapping (the default one, since none is defined), so the tables and columns have the same names as the entities and properties.
 
-![schema](../images/schema4.svg)
-
-The database attribute is used in the entity to be able to specify that an entity is in a database other than the default of the schema.
+![schema](images/schema4.svg)
 
 ```yaml
 domain:
@@ -75,23 +75,14 @@ infrastructure:
         - name: dataSource1
 ```
 
-**Environment Variables:**
+## Multiple sources with different mappings
 
-```sh
-CNN_MYSQL={"host":"localhost","port":3306,"user":"test","password":"test","database":"test"}
-CNN_POSTGRES={"host":"0.0.0.0","port":5433,"user":"test","password":"test","database":"test"}
-```
+In this schema, `dataSource1` is a MySQL database that holds the `Countries` table, and `dataSource2` is a PostgreSQL database that holds the `States` table.
 
-## Stage related to multiple datasources with different mapping
+For `Countries`, the names of the table and its columns are the same as the names of the entity and its properties, so its mapping (`mapping1`) is empty.
+For `States`, the names of the table and its columns are different, so `mapping2` defines them.
 
-This example poses a stage where two sources are accessed.
-Data source 1 is mysql and contains the Countries table and source 2 is Postgres contains the States table.
-
-In the case of the Countries entity, both the name of the table and the fields coincide with the name of the entity and the name of the properties, so the mapping is transparent.
-
-But in the case of the States entity, the name of the table and its fields differ, so the mapping defines the mapping.
-
-![schema](../images/schema5.svg)
+![schema](images/schema5.svg)
 
 ```yaml
 domain:
@@ -175,6 +166,13 @@ infrastructure:
         - name: dataSource1
 ```
 
-## Laboratories
+**Environment variables:**
+
+```sh
+CNN_MYSQL={"host":"localhost","port":3306,"user":"test","password":"test","database":"test"}
+CNN_POSTGRES={"host":"localhost","port":5433,"user":"test","password":"test","database":"test"}
+```
+
+## Labs
 
 - [CLI - two datasource same query](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/04-two-datasource-same-query)

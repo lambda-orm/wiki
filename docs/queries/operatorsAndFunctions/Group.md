@@ -1,26 +1,51 @@
-|Function   |Description                                   										|
-|-----------|-----------------------------------------------------------------|
-|avg				|Calculates the average of the specified columns in a set of rows	|
-|count			|Calculating the number of rows in a set.													|
-|first			|Returns the first value of the selected column										|
-|last				|Returns the last value of the selected column.										|
-|max				|Calculating the maximum.																					|
-|min				|Calculating the minimum.																					|
-|sum				|Calculating the sum.																							|
+# Aggregate Functions
 
-## Examples
+Aggregate (group) functions calculate a single value from a set of rows. When a query's `map` mixes aggregate functions with other fields, λORM groups the rows by those other fields (`GROUP BY` in SQL). See [Grouping](../Grouping.md) for more examples, including `having`.
 
-```js
+!!! note "About the examples"
+    The examples run against the `Countries` entity of the countries sample schema. Each one shows the query, the result it returned on the test database and the SQL sentence that λORM generated for MySQL. Other engines receive their own translation; to see the sentence generated for your data source, use [`orm.plan`](../Metadata.md).
+
+## Summary
+
+| Function | Description |
+|---|---|
+| `avg` | Average of the values |
+| `count` | Number of rows |
+| `first` | First value of the set |
+| `last` | Last value of the set |
+| `max` | Maximum value |
+| `min` | Minimum value |
+| `sum` | Sum of the values |
+
+## count
+
+Returns the number of rows in the set. `count(1)` counts all the rows.
+
+**Signature:** `count(value: any): integer`
+
+Number of countries in the Americas region:
+
+```typescript
 Countries.filter(p=> p.region == "Americas").map(p=> {result:count(1)})
 ```
 
-```json
-[{"result":57}]
+**Result:** `[{"result":57}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT COUNT(1) AS result
+FROM Countries c
+WHERE c.region = 'Americas'
 ```
 
-```js
-Countries.map(p=> {region:p.region,countries:count(1)})|
+Number of countries in each region:
+
+```typescript
+Countries.map(p=> {region:p.region,countries:count(1)})
 ```
+
+**Result:**
 
 ```json
 [{"region":"","countries":2}
@@ -33,9 +58,27 @@ Countries.map(p=> {region:p.region,countries:count(1)})|
 ]
 ```
 
-```js
+**Generated SQL (MySQL):**
+
+```sql
+SELECT c.region AS region, COUNT(1) AS countries
+FROM Countries c
+GROUP BY c.region
+```
+
+## max
+
+Returns the maximum value of the set.
+
+**Signature:** `max(value: T): T`
+
+Maximum latitude of the countries of each region:
+
+```typescript
 Countries.map(p=> {region:p.region,max:max(p.latitude)})
 ```
+
+**Result:**
 
 ```json
 [{"region":"","max":-53.1}
@@ -46,12 +89,29 @@ Countries.map(p=> {region:p.region,max:max(p.latitude)})
 ,{"region":"Oceania","max":15.2}
 ,{"region":"Polar","max":-74.65}
 ]
-
 ```
 
-```js
+**Generated SQL (MySQL):**
+
+```sql
+SELECT c.region AS region, MAX(c.latitude) AS max
+FROM Countries c
+GROUP BY c.region
+```
+
+## min
+
+Returns the minimum value of the set.
+
+**Signature:** `min(value: T): T`
+
+Minimum latitude of the countries of each region:
+
+```typescript
 Countries.map(p=> {region:p.region,min:min(p.latitude)})
 ```
+
+**Result:**
 
 ```json
 [{"region":"","min":-54.4333}
@@ -64,9 +124,27 @@ Countries.map(p=> {region:p.region,min:min(p.latitude)})
 ]
 ```
 
-```js
+**Generated SQL (MySQL):**
+
+```sql
+SELECT c.region AS region, MIN(c.latitude) AS min
+FROM Countries c
+GROUP BY c.region
+```
+
+## avg
+
+Returns the average of the values of the set.
+
+**Signature:** `avg(value: number): number`
+
+Average latitude of the countries of each region:
+
+```typescript
 Countries.map(p=> {region:p.region,avg:avg(p.latitude)})
 ```
+
+**Result:**
 
 ```json
 [{"region":"","avg":-53.76665}
@@ -79,142 +157,33 @@ Countries.map(p=> {region:p.region,avg:avg(p.latitude)})
 ]
 ```
 
-## Sentences
-
-**Lambda:**
-
-Query to get the count of countries in the Americas region
-
-```js
-Countries.filter(p=> p.region == "Americas").map(p=> {result:count(1)})
-```
-
-**SQL Result:**
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT COUNT(1) AS result 
-FROM Countries c  
-WHERE c.region = 'Americas' 
+SELECT c.region AS region, AVG(c.latitude) AS avg
+FROM Countries c
+GROUP BY c.region
 ```
 
-**Lambda:**
+## sum
 
-Query to get the count of countries in each region
+Returns the sum of the values of the set. It is translated to `SUM(...)` in SQL.
 
-```js
-Countries.map(p=> {region:p.region,countries:count(1)})
-```
+**Signature:** `sum(value: number): number`
 
-**SQL Result:**
+## first
 
-```sql
-SELECT c.region AS region, COUNT(1) AS countries 
-FROM Countries c  
-GROUP BY c.region 
-```
+Returns the first value of the set.
 
-**Lambda:**
+**Signature:** `first(value: T): T`
 
-Query to get the maximum latitude of countries in each region
+## last
 
-```js
-Countries.map(p=> {region:p.region,max:max(p.latitude)})
-```
+Returns the last value of the set.
 
-**SQL Result:**
+**Signature:** `last(value: T): T`
 
-```sql
-SELECT c.region AS region, MAX(c.latitude) AS max 
-FROM Countries c  
-GROUP BY c.region 
-```
+!!! warning "first and last on SQL databases"
+    On SQL databases, `first` and `last` used as aggregates are translated to `FIRST(...)` and `LAST(...)`; check that your database engine supports these aggregate functions. On MongoDB they are translated to `$first` and `$last`.
 
-**Lambda:**
-
-Query to get the minimum latitude of countries in each region
-
-```js
-Countries.map(p=> {region:p.region,min:min(p.latitude)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT c.region AS region, MIN(c.latitude) AS min 
-FROM Countries c  
-GROUP BY c.region 
-```
-
-**Lambda:**
-
-Query to get the average latitude of countries in each region
-
-```js
-Countries.map(p=> {region:p.region,avg:avg(p.latitude)})
-```
-
-**SQL Result:**
-
-```sql
-SELECT c.region AS region, AVG(c.latitude) AS avg 
-FROM Countries c  
-GROUP BY c.region 
-```
-
-## Definition
-
-### avg
-
-- description: Calculates the average of the specified columns in a set of rows
-- deterministic: true
-- return: number
-- params:
-	- value: number
-
-### count
-
-- description: Calculating the number of rows in a set.
-- deterministic: true
-- return: number
-- params:
-	- value: any
-
-### first
-
-- description: Returns the first value of the selected column
-- deterministic: true
-- return: T
-- params:
-	- value: T
-
-### last
-
-- description: Returns the last value of the selected column.
-- deterministic: true
-- return: T
-- params:
-	- value: T
-
-### max
-
-- description: Calculating the maximum.
-- deterministic: true
-- return: T
-- params:
-	- value: T
-
-### min
-
-- description: Calculating the minimum.
-- deterministic: true
-- return: T
-- params:
-	- value: T
-
-### sum
-
-- description: Calculating the sum.
-- deterministic: true
-- return: number
-- params:
-	- value: number
+    Do not confuse them with the `first` and `last` query methods (for example `Countries.first(p=> p.name)`), which return the first or last row of a query; see [Select](../Select.md).

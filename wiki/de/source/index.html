@@ -1,0 +1,3326 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="λORM — ein ORM für Lambda-Abfragen über mehrere Datenbanken und das Data Gateway, das seine Schemas veröffentlicht">
+      
+      
+      
+        <link rel="canonical" href="https://lambda-orm.github.io/wiki/de/source/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Index - λORM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/lambdaorm-v1.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lambda-orm" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href="../" title="λORM" class="md-header__button md-logo" aria-label="λORM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6 20 4.16-12.09L9.34 6H8V4h2c.42 0 .78.26.93.63L16.66 18H18v2h-2c-.43 0-.79-.27-.93-.64l-3.74-8.71L8.12 20z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            λORM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Index
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Sprache wechseln">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../source/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../es/source/" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../pt/source/" hreflang="pt" class="md-select__link">
+              Português
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Hauptnavigation" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Start
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../data-gateway/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Data Gateway
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../queries/Query-Language/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Abfragen
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../schema/Schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Schema
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../usage/Usage/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Verwendung
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../cli/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  CLI
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../" title="λORM" class="md-nav__button md-logo" aria-label="λORM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6 20 4.16-12.09L9.34 6H8V4h2c.42 0 .78.26.93.63L16.66 18H18v2h-2c-.43 0-.79-.27-.93-.64l-3.74-8.71L8.12 20z"/></svg>
+
+    </a>
+    λORM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Start
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Start
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Funktionen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../labs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Labs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../data-gateway/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Data Gateway
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data Gateway
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/GettingStarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Erste Schritte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Konfiguration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Transports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transporte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    REST API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/WebSocket/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WebSocket API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sicherheit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Clients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clients
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Betrieb
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Änderungsprotokoll
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Abfragen
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Abfragen
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Query-Language/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Abfragesprache
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Expression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ausdruck
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Select/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Select
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Join/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Join
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Grouping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gruppierung
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Include/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Include
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Insert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Insert
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/BulkInsert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bulk Insert
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Update/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Update
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Delete/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Delete
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metadaten
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_12" id="__nav_3_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Operatoren und Funktionen
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_12">
+            <span class="md-nav__icon md-icon"></span>
+            Operatoren und Funktionen
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/OperatorsAndFunctions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operatoren und Funktionen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vergleich
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Logical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Logisch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Numeric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Numerisch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/String/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Zeichenketten
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Datetime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Datum und Uhrzeit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Nullable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nullwerte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Bitwise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bitweise
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aggregation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sortierung
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Schema
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Schema
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/Schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaDefinition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Definition
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaDefinition-Expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ausdrücke
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaDefinition-EnvironmentVariables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Umgebungsvariablen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaDefinition-Composite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Zusammengesetzt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaExample-Listener/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Listener
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Beispiele
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            Beispiele
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaExample-Basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grundlagen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaExample-Extend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Entität erweitern
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaExample-MultiplesStages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mehrere Stages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaExample-StageMultiplesSources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stage mit mehreren Quellen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaExample-Composite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Zusammengesetzte Entität
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Synchronisierung
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            Synchronisierung
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaSynchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Synchronisierung
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaSynchronization-Push/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Push
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaSynchronization-Pull/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pull
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaSynchronization-Fetch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fetch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaSynchronization-Introspect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introspect
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaSynchronization-Incorporate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Incorporate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/Schema-Use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Verwendung
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/Engines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Datenbanken
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Verwendung
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Verwendung
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/Usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Verwendung
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/Repository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Repository
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/Transaction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transaktion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/Script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Skript
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Änderungsprotokoll
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../cli/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    CLI
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            CLI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Befehle
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Befehle
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Init/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Init
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sync
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Push/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Push
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Drop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Drop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Fetch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fetch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Import/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Import
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Export
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Execute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Execute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Skript
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metadaten
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Constraints
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Version/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Version
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Änderungsprotokoll
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enumerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enumerations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interfaces
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Aliases
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><strong>Lambda ORM</strong></p>
+<hr />
+<h1 id="lambda-orm">Lambda ORM<a class="headerlink" href="#lambda-orm" title="Permanent link">&para;</a></h1>
+<h2 id="enumerations">Enumerations<a class="headerlink" href="#enumerations" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="enumerations/Dialect/">Dialect</a></li>
+<li><a href="enumerations/LogLevel/">LogLevel</a></li>
+<li><a href="enumerations/RelationType/">RelationType</a></li>
+<li><a href="enumerations/SentenceAction/">SentenceAction</a></li>
+<li><a href="enumerations/SentenceCategory/">SentenceCategory</a></li>
+<li><a href="enumerations/SentenceType/">SentenceType</a></li>
+</ul>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="classes/AcquireConnection/">AcquireConnection</a></li>
+<li><a href="classes/ActionObserver/">ActionObserver</a></li>
+<li><a href="classes/BulkDelete/">BulkDelete</a></li>
+<li><a href="classes/BulkInsert/">BulkInsert</a></li>
+<li><a href="classes/BulkMerge/">BulkMerge</a></li>
+<li><a href="classes/Clause/">Clause</a></li>
+<li><a href="classes/ConnectionError/">ConnectionError</a></li>
+<li><a href="classes/ConnectionFacade/">ConnectionFacade</a></li>
+<li><a href="classes/ConnectionPoolService/">ConnectionPoolService</a></li>
+<li><a href="classes/Constant/">Constant</a></li>
+<li><a href="classes/CreateEntitiesService/">CreateEntitiesService</a></li>
+<li><a href="classes/CreateSchema/">CreateSchema</a></li>
+<li><a href="classes/CryptoHelper/">CryptoHelper</a></li>
+<li><a href="classes/Data/">Data</a></li>
+<li><a href="classes/DataSourceConfigService/">DataSourceConfigService</a></li>
+<li><a href="classes/DDLBuilderService/">DDLBuilderService</a></li>
+<li><a href="classes/Delete/">Delete</a></li>
+<li><a href="classes/DialectPoolService/">DialectPoolService</a></li>
+<li><a href="classes/DialectServiceImpl/">DialectServiceImpl</a></li>
+<li><a href="classes/DomainConfigService/">DomainConfigService</a></li>
+<li><a href="classes/ExecutionActionObserver/">ExecutionActionObserver</a></li>
+<li><a href="classes/ExecutionError/">ExecutionError</a></li>
+<li><a href="classes/ExecutorImpl/">ExecutorImpl</a></li>
+<li><a href="classes/ExpressionFacade/">ExpressionFacade</a></li>
+<li><a href="classes/Field/">Field</a></li>
+<li><a href="classes/Filter/">Filter</a></li>
+<li><a href="classes/FilterAction/">FilterAction</a></li>
+<li><a href="classes/FilterClauses/">FilterClauses</a></li>
+<li><a href="classes/FilterIncludeClauses/">FilterIncludeClauses</a></li>
+<li><a href="classes/From/">From</a></li>
+<li><a href="classes/GetSchemaSchema/">GetSchemaSchema</a></li>
+<li><a href="classes/GroupBy/">GroupBy</a></li>
+<li><a href="classes/Having/">Having</a></li>
+<li><a href="classes/HavingClauses/">HavingClauses</a></li>
+<li><a href="classes/Include/">Include</a></li>
+<li><a href="classes/IncludeAction/">IncludeAction</a></li>
+<li><a href="classes/IncludeClauses/">IncludeClauses</a></li>
+<li><a href="classes/InitializeSchema/">InitializeSchema</a></li>
+<li><a href="classes/Insert/">Insert</a></li>
+<li><a href="classes/InterpretSchemaDataService/">InterpretSchemaDataService</a></li>
+<li><a href="classes/Join/">Join</a></li>
+<li><a href="classes/LanguageError/">LanguageError</a></li>
+<li><a href="classes/LanguagesService/">LanguagesService</a></li>
+<li><a href="classes/LoadSchema/">LoadSchema</a></li>
+<li><a href="classes/Logger/">Logger</a></li>
+<li><a href="classes/LoggerBuilder/">LoggerBuilder</a></li>
+<li><a href="classes/Map/">Map</a></li>
+<li><a href="classes/Map2Clauses/">Map2Clauses</a></li>
+<li><a href="classes/MapClauses/">MapClauses</a></li>
+<li><a href="classes/MappingConfigService/">MappingConfigService</a></li>
+<li><a href="classes/MappingsConfigService/">MappingsConfigService</a></li>
+<li><a href="classes/MatchSchema/">MatchSchema</a></li>
+<li><a href="classes/MethodNotImplemented/">MethodNotImplemented</a></li>
+<li><a href="classes/ModificableClauses/">ModificableClauses</a></li>
+<li><a href="classes/NotImplemented/">NotImplemented</a></li>
+<li><a href="classes/OperandFacade/">OperandFacade</a></li>
+<li><a href="classes/Orm/">Orm</a></li>
+<li><a href="classes/OrmBaseH3lp/">OrmBaseH3lp</a></li>
+<li><a href="classes/OrmH3lp/">OrmH3lp</a></li>
+<li><a href="classes/OrmOperandHelper/">OrmOperandHelper</a></li>
+<li><a href="classes/Page/">Page</a></li>
+<li><a href="classes/PageClauses/">PageClauses</a></li>
+<li><a href="classes/Query/">Query</a></li>
+<li><a href="classes/Queryable/">Queryable</a></li>
+<li><a href="classes/QueryAction/">QueryAction</a></li>
+<li><a href="classes/QueryActionsImpl/">QueryActionsImpl</a></li>
+<li><a href="classes/QueryExecutorImpl/">QueryExecutorImpl</a></li>
+<li><a href="classes/QueryHelper/">QueryHelper</a></li>
+<li><a href="classes/QueryTransaction/">QueryTransaction</a></li>
+<li><a href="classes/ReleaseConnection/">ReleaseConnection</a></li>
+<li><a href="classes/Repository/">Repository</a></li>
+<li><a href="classes/RouteService/">RouteService</a></li>
+<li><a href="classes/SchemaError/">SchemaError</a></li>
+<li><a href="classes/SchemaExtender/">SchemaExtender</a></li>
+<li><a href="classes/SchemaFacade/">SchemaFacade</a></li>
+<li><a href="classes/SchemaFacadeBuilder/">SchemaFacadeBuilder</a></li>
+<li><a href="classes/SchemaHelper/">SchemaHelper</a></li>
+<li><a href="classes/SchemaService/">SchemaService</a></li>
+<li><a href="classes/SchemaState/">SchemaState</a></li>
+<li><a href="classes/SchemaStateBuilder/">SchemaStateBuilder</a></li>
+<li><a href="classes/Sentence/">Sentence</a></li>
+<li><a href="classes/SentenceFacade/">SentenceFacade</a></li>
+<li><a href="classes/SentenceInclude/">SentenceInclude</a></li>
+<li><a href="classes/SentenceSerializerImp/">SentenceSerializerImp</a></li>
+<li><a href="classes/SintaxisError/">SintaxisError</a></li>
+<li><a href="classes/Sort/">Sort</a></li>
+<li><a href="classes/StageActionDDL/">StageActionDDL</a></li>
+<li><a href="classes/StageActionDML/">StageActionDML</a></li>
+<li><a href="classes/StageConfigService/">StageConfigService</a></li>
+<li><a href="classes/StageDelete/">StageDelete</a></li>
+<li><a href="classes/StageDrop/">StageDrop</a></li>
+<li><a href="classes/StageExport/">StageExport</a></li>
+<li><a href="classes/StageFacade/">StageFacade</a></li>
+<li><a href="classes/StageFetch/">StageFetch</a></li>
+<li><a href="classes/StageImport/">StageImport</a></li>
+<li><a href="classes/StageMappingService/">StageMappingService</a></li>
+<li><a href="classes/StageModelService/">StageModelService</a></li>
+<li><a href="classes/StagePull/">StagePull</a></li>
+<li><a href="classes/StagePush/">StagePush</a></li>
+<li><a href="classes/StageTruncate/">StageTruncate</a></li>
+<li><a href="classes/Transaction/">Transaction</a></li>
+<li><a href="classes/Update/">Update</a></li>
+<li><a href="classes/UpdateSchema/">UpdateSchema</a></li>
+<li><a href="classes/Upsert/">Upsert</a></li>
+<li><a href="classes/UUIDWrapper/">UUIDWrapper</a></li>
+<li><a href="classes/ValidationError/">ValidationError</a></li>
+<li><a href="classes/ViewConfigService/">ViewConfigService</a></li>
+<li><a href="classes/ViewsConfigService/">ViewsConfigService</a></li>
+<li><a href="classes/YamlWrapper/">YamlWrapper</a></li>
+</ul>
+<h2 id="interfaces">Interfaces<a class="headerlink" href="#interfaces" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="interfaces/ActionObserverArgs/">ActionObserverArgs</a></li>
+<li><a href="interfaces/ApplicationSchema/">ApplicationSchema</a></li>
+<li><a href="interfaces/AppPathsConfig/">AppPathsConfig</a></li>
+<li><a href="interfaces/Behavior/">Behavior</a></li>
+<li><a href="interfaces/Connection/">Connection</a></li>
+<li><a href="interfaces/ConnectionConfig/">ConnectionConfig</a></li>
+<li><a href="interfaces/ConnectionPool/">ConnectionPool</a></li>
+<li><a href="interfaces/Constraint/">Constraint</a></li>
+<li><a href="interfaces/DdlBuilder/">DdlBuilder</a></li>
+<li><a href="interfaces/Dependent/">Dependent</a></li>
+<li><a href="interfaces/DialectFormat/">DialectFormat</a></li>
+<li><a href="interfaces/DialectService/">DialectService</a></li>
+<li><a href="interfaces/DmlBuilder/">DmlBuilder</a></li>
+<li><a href="interfaces/DomainSchema/">DomainSchema</a></li>
+<li><a href="interfaces/Entity/">Entity</a></li>
+<li><a href="interfaces/EntityMapping/">EntityMapping</a></li>
+<li><a href="interfaces/EntityView/">EntityView</a></li>
+<li><a href="interfaces/Enum/">Enum</a></li>
+<li><a href="interfaces/EnumValue/">EnumValue</a></li>
+<li><a href="interfaces/ExecuteResult/">ExecuteResult</a></li>
+<li><a href="interfaces/Executor/">Executor</a></li>
+<li><a href="interfaces/FormatMapping/">FormatMapping</a></li>
+<li><a href="interfaces/IFileSchemaService/">IFileSchemaService</a></li>
+<li><a href="interfaces/Index/">Index</a></li>
+<li><a href="interfaces/InfrastructureSchema/">InfrastructureSchema</a></li>
+<li><a href="interfaces/InitializeSchemaArgs/">InitializeSchemaArgs</a></li>
+<li><a href="interfaces/IOrm/">IOrm</a></li>
+<li><a href="interfaces/IQueryBuilder/">IQueryBuilder</a></li>
+<li><a href="interfaces/IRelation/">IRelation</a></li>
+<li><a href="interfaces/IRepository/">IRepository</a></li>
+<li><a href="interfaces/IRouteService/">IRouteService</a></li>
+<li><a href="interfaces/ISentenceBuilder/">ISentenceBuilder</a></li>
+<li><a href="interfaces/ISentenceCompleteBuilder/">ISentenceCompleteBuilder</a></li>
+<li><a href="interfaces/Language/">Language</a></li>
+<li><a href="interfaces/ListenerConfig/">ListenerConfig</a></li>
+<li><a href="interfaces/Mapping/">Mapping</a></li>
+<li><a href="interfaces/MappingConfig/">MappingConfig</a></li>
+<li><a href="interfaces/MatchOptions/">MatchOptions</a></li>
+<li><a href="interfaces/Metadata/">Metadata</a></li>
+<li><a href="interfaces/MetadataConstraint/">MetadataConstraint</a></li>
+<li><a href="interfaces/MetadataModel/">MetadataModel</a></li>
+<li><a href="interfaces/MetadataParameter/">MetadataParameter</a></li>
+<li><a href="interfaces/ModelConfig/">ModelConfig</a></li>
+<li><a href="interfaces/ModifyAllClauses/">ModifyAllClauses</a></li>
+<li><a href="interfaces/ModifyClauses/">ModifyClauses</a></li>
+<li><a href="interfaces/ModifyFilterClauses/">ModifyFilterClauses</a></li>
+<li><a href="interfaces/ModifyIncludeClauses/">ModifyIncludeClauses</a></li>
+<li><a href="interfaces/ObservableExecutor/">ObservableExecutor</a></li>
+<li><a href="interfaces/ObservableExecutorDecorator/">ObservableExecutorDecorator</a></li>
+<li><a href="interfaces/Property/">Property</a></li>
+<li><a href="interfaces/PropertyMapping/">PropertyMapping</a></li>
+<li><a href="interfaces/PropertyView/">PropertyView</a></li>
+<li><a href="interfaces/QueryActions/">QueryActions</a></li>
+<li><a href="interfaces/QueryArgs/">QueryArgs</a></li>
+<li><a href="interfaces/QueryExecutor/">QueryExecutor</a></li>
+<li><a href="interfaces/QueryInternalExecutor/">QueryInternalExecutor</a></li>
+<li><a href="interfaces/QueryOptions/">QueryOptions</a></li>
+<li><a href="interfaces/QueryPlan/">QueryPlan</a></li>
+<li><a href="interfaces/Relation/">Relation</a></li>
+<li><a href="interfaces/RelationIncludeClauses/">RelationIncludeClauses</a></li>
+<li><a href="interfaces/RelationInfo/">RelationInfo</a></li>
+<li><a href="interfaces/RelationMapClauses/">RelationMapClauses</a></li>
+<li><a href="interfaces/Schema/">Schema</a></li>
+<li><a href="interfaces/SchemaData/">SchemaData</a></li>
+<li><a href="interfaces/SchemaEntityData/">SchemaEntityData</a></li>
+<li><a href="interfaces/SchemaInfo/">SchemaInfo</a></li>
+<li><a href="interfaces/ScriptOptions/">ScriptOptions</a></li>
+<li><a href="interfaces/SentenceInfo/">SentenceInfo</a></li>
+<li><a href="interfaces/SentenceSerializer/">SentenceSerializer</a></li>
+<li><a href="interfaces/ServerConfig/">ServerConfig</a></li>
+<li><a href="interfaces/Source/">Source</a></li>
+<li><a href="interfaces/SourceRule/">SourceRule</a></li>
+<li><a href="interfaces/Stage/">Stage</a></li>
+<li><a href="interfaces/StagePullOptions/">StagePullOptions</a></li>
+<li><a href="interfaces/TaskConfig/">TaskConfig</a></li>
+<li><a href="interfaces/View/">View</a></li>
+</ul>
+<h2 id="type-aliases">Type Aliases<a class="headerlink" href="#type-aliases" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="type-aliases/ManyToOne/">ManyToOne</a></li>
+<li><a href="type-aliases/OneToMany/">OneToMany</a></li>
+<li><a href="type-aliases/OneToOne/">OneToOne</a></li>
+</ul>
+<h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="variables/DIALECT_DEFAULT/">DIALECT_DEFAULT</a></li>
+<li><a href="variables/orm/">orm</a></li>
+</ul>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="functions/abs/">abs</a></li>
+<li><a href="functions/acos/">acos</a></li>
+<li><a href="functions/addDay/">addDay</a></li>
+<li><a href="functions/addHours/">addHours</a></li>
+<li><a href="functions/addMinutes/">addMinutes</a></li>
+<li><a href="functions/addMonth/">addMonth</a></li>
+<li><a href="functions/addSeconds/">addSeconds</a></li>
+<li><a href="functions/addTime/">addTime</a></li>
+<li><a href="functions/addYear/">addYear</a></li>
+<li><a href="functions/as/">as</a></li>
+<li><a href="functions/asc/">asc</a></li>
+<li><a href="functions/asin/">asin</a></li>
+<li><a href="functions/atan/">atan</a></li>
+<li><a href="functions/atan2/">atan2</a></li>
+<li><a href="functions/avg/">avg</a></li>
+<li><a href="functions/between/">between</a></li>
+<li><a href="functions/ceil/">ceil</a></li>
+<li><a href="functions/chr/">chr</a></li>
+<li><a href="functions/columnTypeDifference/">columnTypeDifference</a></li>
+<li><a href="functions/concat/">concat</a></li>
+<li><a href="functions/cos/">cos</a></li>
+<li><a href="functions/cosh/">cosh</a></li>
+<li><a href="functions/count/">count</a></li>
+<li><a href="functions/curTime/">curTime</a></li>
+<li><a href="functions/date/">date</a></li>
+<li><a href="functions/dateDiff/">dateDiff</a></li>
+<li><a href="functions/dateTime/">dateTime</a></li>
+<li><a href="functions/day/">day</a></li>
+<li><a href="functions/desc/">desc</a></li>
+<li><a href="functions/distinct/">distinct</a></li>
+<li><a href="functions/exp/">exp</a></li>
+<li><a href="functions/first/">first</a></li>
+<li><a href="functions/floor/">floor</a></li>
+<li><a href="functions/hours/">hours</a></li>
+<li><a href="functions/includes/">includes</a></li>
+<li><a href="functions/isNotNull/">isNotNull</a></li>
+<li><a href="functions/isNull/">isNull</a></li>
+<li><a href="functions/last/">last</a></li>
+<li><a href="functions/like/">like</a></li>
+<li><a href="functions/ln/">ln</a></li>
+<li><a href="functions/log/">log</a></li>
+<li><a href="functions/lower/">lower</a></li>
+<li><a href="functions/lpad/">lpad</a></li>
+<li><a href="functions/ltrim/">ltrim</a></li>
+<li><a href="functions/max/">max</a></li>
+<li><a href="functions/min/">min</a></li>
+<li><a href="functions/minutes/">minutes</a></li>
+<li><a href="functions/month/">month</a></li>
+<li><a href="functions/now/">now</a></li>
+<li><a href="functions/nvl/">nvl</a></li>
+<li><a href="functions/nvl2/">nvl2</a></li>
+<li><a href="functions/remainder/">remainder</a></li>
+<li><a href="functions/replace/">replace</a></li>
+<li><a href="functions/round/">round</a></li>
+<li><a href="functions/rpad/">rpad</a></li>
+<li><a href="functions/rtrim/">rtrim</a></li>
+<li><a href="functions/seconds/">seconds</a></li>
+<li><a href="functions/sign/">sign</a></li>
+<li><a href="functions/sin/">sin</a></li>
+<li><a href="functions/sinh/">sinh</a></li>
+<li><a href="functions/source/">source</a></li>
+<li><a href="functions/startsWith/">startsWith</a></li>
+<li><a href="functions/substr/">substr</a></li>
+<li><a href="functions/substring/">substring</a></li>
+<li><a href="functions/sum/">sum</a></li>
+<li><a href="functions/tan/">tan</a></li>
+<li><a href="functions/tanh/">tanh</a></li>
+<li><a href="functions/time/">time</a></li>
+<li><a href="functions/timeDiff/">timeDiff</a></li>
+<li><a href="functions/toDate/">toDate</a></li>
+<li><a href="functions/toDateTime/">toDateTime</a></li>
+<li><a href="functions/today/">today</a></li>
+<li><a href="functions/toJson/">toJson</a></li>
+<li><a href="functions/toNumber/">toNumber</a></li>
+<li><a href="functions/toString/">toString</a></li>
+<li><a href="functions/toTime/">toTime</a></li>
+<li><a href="functions/trim/">trim</a></li>
+<li><a href="functions/trunc/">trunc</a></li>
+<li><a href="functions/upper/">upper</a></li>
+<li><a href="functions/user/">user</a></li>
+<li><a href="functions/weekday/">weekday</a></li>
+<li><a href="functions/when/">when</a></li>
+<li><a href="functions/year/">year</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Zurück zum Seitenanfang
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

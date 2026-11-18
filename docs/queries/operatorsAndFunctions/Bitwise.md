@@ -1,178 +1,159 @@
-|Operator |Description  |
-|---------|-------------|
-|~				|bitNot				|
-|&				|bitAnd				|
-|\|				|bitOr				|
-|^				|bitXor				|
-|<<				|leftShift		|
-|>>				|rightShift		|
+# Bitwise Operators
 
-## Examples
+Bitwise operators work on the binary representation of integer values.
 
-| Example   																																| Result 													|
-|---------------------------------------------------------------------------|---------------------------------|
-|Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude & 1 })	|[{"result":1}]										|
-|Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude | 1 })	|[{"result":18446744073709552000}]|
-|Countries.filter(p=> p.iso3=="BRA").first(p=> {result: ~ p.longitude })		|[{"result":54}]									|
-|Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude << 1 })	|[{"result":18446744073709552000}]|
-|Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude ^ 1 })	|[{"result":18446744073709552000}]|
-|Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude >> 1 })	|[{"result":9223372036854776000}]	|
+!!! note "About the examples"
+    The examples run against the `Countries` entity of the countries sample schema. Each one shows the query, the result it returned on the test database and the SQL sentence that λORM generated for MySQL. Other engines receive their own translation; to see the sentence generated for your data source, use [`orm.plan`](../Metadata.md).
 
-## Sentences
+!!! note "Results on MySQL"
+    MySQL evaluates bitwise operations as unsigned 64-bit integers. The longitude of Brazil is -55, so several of the results below are very large numbers.
 
-**Lambda:**
+## Summary
 
-Query to select the first record from the Countries entity where the iso3 is equal to "BRA" and the result is the bitwise AND operation between the longitude and 1.
+| Operator | Description |
+|---|---|
+| `~` | Bitwise NOT |
+| `&` | Bitwise AND |
+| `|` | Bitwise OR |
+| `^` | Bitwise XOR (exclusive OR); it is not exponentiation, use `**` for that |
+| `<<` | Left shift |
+| `>>` | Right shift |
 
-```js
-Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude & 1 })
-```
+## Bitwise NOT (`~`)
 
-**SQL Result:**
+Inverts all the bits of `a`. Operands and result are numbers.
 
-```sql
-SELECT c.longitude & 1 AS result 
-FROM Countries c 
-WHERE c.iso3 = 'BRA' 
-ORDER BY result asc 
-LIMIT 0,1 
-```
+**Syntax:** `~a`
 
-**Lambda:**
-
-Query to select the first record from the Countries entity where the iso3 is equal to "BRA" and the result is the bitwise OR operation between the longitude and 1.
-
-```js
-Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude | 1 })
-```
-
-**SQL Result:**
-
-```sql
-SELECT c.longitude | 1 AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-ORDER BY result asc  
-LIMIT 0,1 
-```
-
-**Lambda:**
-
-Query to select the first record from the Countries entity where the iso3 is equal to "BRA" and the result is the bitwise NOT operation of the longitude.
-
-```js
+```typescript
 Countries.filter(p=> p.iso3=="BRA").first(p=> {result: ~ p.longitude })
 ```
 
-**SQL Result:**
+**Result:** `[{"result":54}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT ~ c.longitude AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-ORDER BY result asc  
-LIMIT 0,1 
+SELECT ~ c.longitude AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+ORDER BY result asc
+LIMIT 0,1
 ```
 
-**Lambda:**
+## Bitwise AND (`&`)
 
-Query to select the first record from the Countries entity where the iso3 is equal to "BRA" and the result is the bitwise left shift operation between the longitude and 1.
+Each bit of the result is 1 when the corresponding bits of `a` and `b` are both 1. Operands and result are numbers.
 
-```js
-Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude << 1 })
+**Syntax:** `a & b`
+
+```typescript
+Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude & 1 })
 ```
 
-**SQL Result:**
+**Result:** `[{"result":1}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT c.longitude << 1 AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-ORDER BY result asc  
-LIMIT 0,1 
+SELECT c.longitude & 1 AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+ORDER BY result asc
+LIMIT 0,1
 ```
 
-**Lambda:**
+## Bitwise OR (`|`)
 
-Query to select the first record from the Countries entity where the iso3 is equal to "BRA" and the result is the bitwise XOR operation between the longitude and 1.
+Each bit of the result is 1 when the corresponding bit of `a` or of `b` is 1. Operands and result are numbers.
 
-```js
+**Syntax:** `a | b`
+
+```typescript
+Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude | 1 })
+```
+
+**Result:** `[{"result":18446744073709552000}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT c.longitude | 1 AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+ORDER BY result asc
+LIMIT 0,1
+```
+
+## Bitwise XOR (`^`)
+
+Each bit of the result is 1 when the corresponding bits of `a` and `b` are different. Operands and result are numbers.
+
+**Syntax:** `a ^ b`
+
+```typescript
 Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude ^ 1 })
 ```
 
-**SQL Result:**
+**Result:** `[{"result":18446744073709552000}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT c.longitude ^ 1 AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-ORDER BY result asc  
-LIMIT 0,1 
+SELECT c.longitude ^ 1 AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+ORDER BY result asc
+LIMIT 0,1
 ```
 
-**Lambda:**
+## Left shift (`<<`)
 
-Query to select the first record from the Countries entity where the iso3 is equal to "BRA" and the result is the bitwise right shift operation between the longitude and 1.
+Shifts the bits of `a` to the left by `b` positions. Operands and result are numbers.
 
-```js
+**Syntax:** `a << b`
+
+```typescript
+Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude << 1 })
+```
+
+**Result:** `[{"result":18446744073709552000}]`
+
+**Generated SQL (MySQL):**
+
+```sql
+SELECT c.longitude << 1 AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+ORDER BY result asc
+LIMIT 0,1
+```
+
+## Right shift (`>>`)
+
+Shifts the bits of `a` to the right by `b` positions. Operands and result are numbers.
+
+**Syntax:** `a >> b`
+
+```typescript
 Countries.filter(p=> p.iso3=="BRA").first(p=> {result: p.longitude >> 1 })
 ```
 
-**SQL Result:**
+**Result:** `[{"result":9223372036854776000}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT c.longitude >> 1 AS result 
-FROM Countries c  
-WHERE c.iso3 = 'BRA' 
-ORDER BY result asc  
-LIMIT 0,1 
+SELECT c.longitude >> 1 AS result
+FROM Countries c
+WHERE c.iso3 = 'BRA'
+ORDER BY result asc
+LIMIT 0,1
 ```
 
-## Definition
+## Database support
 
-### Operator ~
-
-- description: bitNot
-- return: boolean
-- params:
-	- value: boolean
-
-### Operator &
-
-- description: bitAnd
-- return: number
-- params:
-	- a: number
-	- b: number
-
-### Operator |
-
-- description: bitOr
-- return: number
-- params:
-	- a: number
-	- b: number
-
-### Operator ^
-
-- description: bitXor
-- return: number
-- params:
-	- a: number
-	- b: number
-
-### Operator <<
-
-- description: leftShift
-- return: number
-- params:
-	- a: number
-	- b: number
-
-### Operator >>
-
-- description: rightShift
-- return: number
-- params:
-	- a: number
-	- b: number
+!!! warning "Engine differences"
+    - **Oracle**: `&`, `|` and `^` are translated to `BITAND`, `BITOR` and `BITXOR`.
+    - **PostgreSQL**: `^` is translated to the `#` operator (XOR).
+    - **MongoDB**: bitwise operators cannot currently be translated to MongoDB queries.

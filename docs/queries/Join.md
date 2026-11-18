@@ -1,34 +1,35 @@
 # Join
 
-Join statements are implicit when they add fields through their relationships.
+This page shows how λORM reads properties of related entities. There is no join method: when a query uses a property through a relation, such as `p.category.name`, λORM adds the join that the relation defines in the schema. The SQL shown is the one generated for MySQL.
 
-## Join simple
+!!! note
+    A join needs both entities in the same source. To read related entities that are in another source, use [Include](Include.md); to filter by a property of a relation in another source, see [Filter by a field of a relation in another source](Include.md#filter-by-a-field-of-a-relation-in-another-source).
 
-Retrieves the product name and its category through a relationship.
+## Simple join
+
+Reads the name of each product and the name of its category, through the `category` relation.
 
 **Lambda:**
 
-``` ts
+```typescript
 Products.map(p => ({ name: p.name, category: p.category.name }))
 ```
 
 **SQL Result:**
 
-``` sql
--- Selects the product name as `name` and the category name as `category`.
--- Performs an inner join between the Products table and the Categories table using CategoryID.
-SELECT p.ProductName AS `name`, c.CategoryName AS `category` 
-FROM Products p 
-INNER JOIN Categories c ON c.CategoryID = p.CategoryID 
+```sql
+SELECT p.ProductName AS name, c.CategoryName AS category
+FROM Products p
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID
 ```
 
 ## Join with distinct and sort
 
-Retrieves distinct values of quantity per unit and category, sorted by category.
+Reads the distinct combinations of quantity per unit and category name, sorted by category.
 
 **Lambda:**
 
-``` ts
+```typescript
 Products
 	.distinct(p => ({ quantity: p.quantity, category: p.category.name }))
 	.sort(p => p.category)
@@ -37,22 +38,19 @@ Products
 **SQL Result:**
 
 ```sql
--- Selects distinct values of quantity per unit as `quantity` and the category name as `category`.
--- Performs an inner join between the Products table and the Categories table using CategoryID.
--- Orders the results by `category`.
-SELECT DISTINCT p.QuantityPerUnit AS `quantity`, c.CategoryName AS `category` 
-FROM Products p 
-INNER JOIN Categories c ON c.CategoryID = p.CategoryID 
-ORDER BY `category` 
+SELECT DISTINCT p.QuantityPerUnit AS quantity, c.CategoryName AS category
+FROM Products p
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID
+ORDER BY category asc
 ```
 
 ## Join with filter
 
-Retrieves the product name and its category, but only for products with a price greater than 10.
+Reads the name and category of the products with a price greater than 10.
 
 **Lambda:**
 
-``` ts
+```typescript
 Products
 	.filter(p => p.price > 10)
 	.map(p => ({ name: p.name, category: p.category.name }))
@@ -60,52 +58,46 @@ Products
 
 **SQL Result:**
 
-``` sql
--- Selects the product name as `name` and the category name as `category`.
--- Performs an inner join between the Products table and the Categories table using CategoryID.
--- Filters products with a price greater than 10.
-SELECT p.ProductName AS `name`, c.CategoryName AS `category` 
-FROM Products p 
-INNER JOIN Categories c ON c.CategoryID = p.CategoryID 
-WHERE p.UnitPrice > 10 
+```sql
+SELECT p.ProductName AS name, c.CategoryName AS category
+FROM Products p
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID
+WHERE p.UnitPrice > 10
 ```
 
 ## Join and pagination
 
-Retrieves the product name and its category for products with a price greater than 10, ordered by category and paginated.
+Reads the name and category of the products with a price greater than 10, sorted by category, and returns the first page of 10 records.
 
 **Lambda:**
 
-``` ts
+```typescript
 Products
 	.filter(p => p.price > 10)
-	.map(p => ({ name: p.name, category: p.category.name}))
+	.map(p => ({ name: p.name, category: p.category.name }))
 	.sort(p => p.category)
 	.page(1, 10)
 ```
 
 **SQL Result:**
 
-``` sql
--- Selects the product name as `name` and the category name as `category`.
--- Performs an inner join between the Products table and the Categories table using CategoryID.
--- Filters products with a price greater than 10.
--- Orders the results by `category` and limits them to 10 results per page, starting from page 1.
-SELECT p.ProductName AS `name`, c.CategoryName AS `category` 
-FROM Products p 
-INNER JOIN Categories c ON c.CategoryID = p.CategoryID 
-WHERE p.UnitPrice > 10 
-ORDER BY `category` LIMIT 0,10 
+```sql
+SELECT p.ProductName AS name, c.CategoryName AS category
+FROM Products p
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID
+WHERE p.UnitPrice > 10
+ORDER BY category asc
+LIMIT 0,10
 ```
 
-## Multiple Join and grouping
+## Multiple joins and grouping
 
-Retrieves the order date and the total for each order for a specific customer, ordered by total in descending order.
+Reads, for the orders of a customer, the order date and the total (sum of quantity × unit price of its details), sorted by total in descending order. The query starts from the order details (`Orders.details`) and goes through two relations: `order`, and from the order, `customer`. Because `sum` is an aggregate function, λORM also groups by the order date (see [Grouping](Grouping.md)).
 
 **Lambda:**
 
-``` ts
-OrderDetails
+```typescript
+Orders.details
 	.filter(p => p.order.customer.name == customerName)
 	.map(p => ({ order: p.order.orderDate, total: sum(p.quantity * p.unitPrice) }))
 	.sort(p => desc(p.total))
@@ -113,36 +105,32 @@ OrderDetails
 
 **SQL Result:**
 
-``` sql
--- Selects the order date as `order` and the sum of quantity times unit price as `total`.
--- Performs inner joins between the Order Details table and the Orders and Customers tables using OrderID and CustomerID respectively.
--- Filters orders associated with the provided customer name.
--- Groups the results by order date.
--- Orders the results by `total` in descending order.
-SELECT o1.OrderDate AS `order`, SUM(o.Quantity * o.UnitPrice) AS `total` 
-FROM `Order Details` o 
-INNER JOIN Orders o1 ON o1.OrderID = o.OrderID 
-INNER JOIN Customers c ON c.CustomerID = o1.CustomerID 
-WHERE c.CompanyName = ? 
-GROUP BY o1.OrderDate 
-ORDER BY `total` desc 
+```sql
+SELECT o1.OrderDate AS `order`, SUM((o.Quantity * o.UnitPrice)) AS total
+FROM `Order Details` o
+INNER JOIN Orders o1 ON o1.OrderID = o.OrderID
+INNER JOIN Customers c ON c.CustomerID = o1.CustomerID
+WHERE c.CompanyName = ?
+GROUP BY o1.OrderDate
+ORDER BY total desc
 ```
 
 ## Code example
 
-```Typescript
-import { orm } from '../../lib'
-import { OrderDetails } from '../northwind/model/__model'
-(async () => {	
-	try {		
-		await orm.init('./config/northwind.yaml')
-		const query = OrderDetails
-					.filter(p => p.order.customer.name == customerName)
-					.map(p => ({ order: p.order.orderDate, total: sum(p.quantity * p.unitPrice) }))
-					.sort(p => desc(p.total))
-		const result = await orm.execute(query, {maxPrice:10}, {stage:'MySQL'})
-		console.log(JSON.stringify(result, null, 2))		
-	} catch (error:any) {
+```typescript
+import { orm } from '@lambdaorm/lib'
+import { Orders } from './domain/model' // model generated by `lambdaorm build`
+
+(async () => {
+	try {
+		await orm.init('./lambdaORM.yaml')
+		const query = (customerName: string) => Orders.details
+			.filter(p => p.order.customer.name == customerName)
+			.map(p => ({ order: p.order.orderDate, total: sum(p.quantity * p.unitPrice) }))
+			.sort(p => desc(p.total))
+		const result = await orm.execute(query, { customerName: 'Vins et alcools Chevalier' }, { stage: 'MySQL' })
+		console.log(JSON.stringify(result, null, 2))
+	} catch (error: any) {
 		console.error(error.stack)
 	} finally {
 		await orm.end()

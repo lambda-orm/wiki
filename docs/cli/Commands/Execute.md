@@ -1,22 +1,24 @@
 # Execute
 
-Execute an query expression.
+Executes a query expression and prints its result.
 
-## Params
+## Options
 
-| parameter	| short | describe 																																									|
-|-----------|-------|-------------------------------------------------------------------------------------------|
-|workspace	| -w 		| project path.																																							|
-|stage			| -s 		| Name of stage																																							|
-|query			| -q 		| Query expression																																					|
-|data				| -d 		| Data (parameters) of the query: JSON, or the path of a JSON file.										|
-|envfile		| -e 		| Read in a file of environment variables.																									|
-|output			| -o 		| Generates an output according to the following possible values [json\|beautiful\|light\|yaml]|
-|url				| -u 		| URL of the schema on a Data Gateway	                          |
+| Option | Short | Description |
+| :-- | :-- | :-- |
+| workspace | `-w` | Project path (default: the current directory). |
+| stage | `-s` | Name of the stage (default: the first stage of the schema). |
+| query | `-q` | Query expression. |
+| data | `-d` | Data (parameters) of the query: JSON, or the path of a JSON file. |
+| envfile | `-e` | Reads a file of environment variables. |
+| output | `-o` | Output format: `json`, `beautiful`, `light` or `yaml`. |
+| url | `-u` | URL of the schema on a [Data Gateway](../../data-gateway/index.md), to run the command there. |
 
 ## Examples
 
-### BulkInsert
+### Bulk insert
+
+Inserts the countries of a JSON file, with their states:
 
 ```sh
 lambdaorm execute -w lab/countries -e lab/countries/.env -q "Countries.bulkInsert().include(p => p.states)" -d ./lab/countries/countries.json
@@ -46,3 +48,11 @@ Result:
   }
 ]
 ```
+
+### On a Data Gateway
+
+```sh
+lambdaorm execute -u http://gateway:8080/iot/v1 -o beautiful -q "Devices.filter(p => p.status == status)" -d '{"status": "active"}'
+```
+
+With bearer authentication, set the token in the `SERVICE_TOKEN` environment variable (see the [CLI](../index.md#exit-code-and-data-gateway)).

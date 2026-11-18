@@ -1,18 +1,15 @@
-# Composite Entity
+# Composite Example
 
-Using the period in the name of an entity we can define a composite entity. \
-For example, if we have an entity Orders and another Orders.details \
-The Orders.details entity is a composite entity of the Orders entity. \
+This page shows a composite entity, `Orders.details`, stored in MongoDB on one stage and in PostgreSQL on another, and how the same query returns the same result on both.
 
-If the datasource is NoSQL, the data will be stored in a single collection but if the datasource is Relational, the data will be stored in separate tables. \
+A period in the name of an entity defines a [composite entity](SchemaDefinition-Composite.md): `Orders.details` is a composite entity of `Orders`.
 
-But on the domain side it will be treated the same regardless of the type of datasource. \
-abstracting from persistence technology.
+If the source is NoSQL, the details are stored inside the order, in a single collection; if the source is relational, they are stored in separate tables.
+In the domain they are treated the same way whatever the type of source, so the model does not depend on the persistence technology.
 
-## Composite Example
+## Composite entity
 
-In this example we can see that we have an entity Orders and another Orders.details \
-The Orders.details entity is a composite entity of the Orders entity. \
+In this example `Orders.details` is a composite entity of `Orders`. Its relation `order`, with `target: details`, creates the composite relation `details` in `Orders`.
 
 **Part of the schema where the composite entity is defined:**
 
@@ -57,7 +54,7 @@ domain:
 ...
 ```
 
-**Schema Complete:**
+**Complete schema:**
 
 ```yaml
 domain:  
@@ -266,7 +263,7 @@ infrastructure:
       condition: entity.in(["Orders","Orders.details"])   
 ```
 
-**Environment Variables:**
+**Environment variables:**
 
 ```sh
 CNN_MYSQL={"host":"localhost","port":3306,"user":"test","password":"test","database":"test"}
@@ -274,15 +271,14 @@ CNN_POSTGRES={"host":"localhost","port":5433,"user":"test","password":"test","da
 CNN_MONGODB={"url":"mongodb://test:test@localhost:27017","database":"test"}
 ```
 
-**Laboratory:**
+**Lab:**
 
-[CLI - northwind multiples datasources](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources)
+- [CLI - northwind multiples datasources](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources)
 
-## Composite example in different datasources
+## Composite entity in different sources
 
-En este ejemple podemos ver como se trata una entidad compuesta en diferentes datasources. \
-En el stage default se utiliza Mongo para almacenar las Orders y Orders.details \
-En el stage insights se utiliza Postgres para almacenar las Orders y Orders.details  
+This example shows how a composite entity is stored in different sources.
+On the `default` stage, `Orders` and `Orders.details` are stored in MongoDB; on the `insights` stage, they are stored in PostgreSQL.
 
 **Part of the schema where the stages are configured:**
 
@@ -303,7 +299,7 @@ En el stage insights se utiliza Postgres para almacenar las Orders y Orders.deta
 ...
 ```
 
-**Schema Complete:**
+**Complete schema:**
 
 ```yaml
 domain:  
@@ -520,30 +516,30 @@ infrastructure:
     - name: Insights
 ```
 
-### Orders Composite in MongoDb
+### Orders in MongoDB
 
-Orders collection:
+In MongoDB the details are stored inside each document of the `Orders` collection:
 
-![OrderCompositeInMongo](../images/OrderCompositeInMongo.png)
+![OrderCompositeInMongo](images/OrderCompositeInMongo.png)
 
-### Orders Composite in Postgres
+### Orders in PostgreSQL
 
-Orders table:
+In PostgreSQL the orders are stored in the `Orders` table:
 
-![OrderCompositeInPostgres](../images/OrderCompositeInPostgres.png)
+![OrderCompositeInPostgres](images/OrderCompositeInPostgres.png)
 
-Orders details table:
+and the details in the `Order Details` table:
 
-![OrderDetailsCompositeInPostgres](../images/OrderDetailCompositeInPostgres.png)
+![OrderDetailsCompositeInPostgres](images/OrderDetailCompositeInPostgres.png)
 
 ## Queries
 
-But if we execute the same query in the different stages we can see that the result is the same
+The same query, executed on each stage, returns the same orders with their details (only the format of the dates depends on the engine).
 
 ### Query on default stage
 
 ```sh
-lambdaorm execute -e ".env" -s default -q "Orders.filter(p => p.customerId == customerId).include(p => [p.customer.map(p => p.name), p.details.include(p => p.product.include(p => p.category.map(p => p.name)).map(p => p.name)).map(p => [p.quantity, p.unitPrice])]).order(p=> p.id).page(1,1)" -d "{\"customerId\": \"HANAR\"}"
+lambdaorm execute -e ".env" -s default -q "Orders.filter(p => p.customerId == customerId).include(p => [p.customer.map(p => p.name), p.details.include(p => p.product.include(p => p.category.map(p => p.name)).map(p => p.name)).map(p => [p.quantity, p.unitPrice])]).sort(p=> p.id).page(1,1)" -d "{\"customerId\": \"HANAR\"}"
 ```
 
 Result:
@@ -607,7 +603,7 @@ Result:
 ### Same query on insights stage
 
 ```sh
-lambdaorm execute -e ".env" -s insights -q "Orders.filter(p => p.customerId == customerId).include(p => [p.customer.map(p => p.name), p.details.include(p => p.product.include(p => p.category.map(p => p.name)).map(p => p.name)).map(p => [p.quantity, p.unitPrice])]).order(p=> p.id).page(1,1)" -d "{\"customerId\": \"HANAR\"}"
+lambdaorm execute -e ".env" -s insights -q "Orders.filter(p => p.customerId == customerId).include(p => [p.customer.map(p => p.name), p.details.include(p => p.product.include(p => p.category.map(p => p.name)).map(p => p.name)).map(p => [p.quantity, p.unitPrice])]).sort(p=> p.id).page(1,1)" -d "{\"customerId\": \"HANAR\"}"
 ```
 
 Result:
@@ -668,7 +664,7 @@ Result:
 ]
 ```
 
-## Laboratories
+## Labs
 
 - [CLI - northwind](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/05-northwind)
 - [CLI - northwind multiples datasources](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources)

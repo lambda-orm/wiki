@@ -1,91 +1,91 @@
 # Lambda expressions
 
-The [lambda expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) are written based on the programming language itself, referring to the business model, completely abstracting from the database language and its structure.
+This page summarizes the building blocks of a λORM query: the methods you chain on an entity, and the operators and functions you can use inside the lambdas. Use it as a quick reference; each method links to the page with its examples.
 
-**Lambda:**
+Queries are [lambda expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) written in the programming language itself. They refer to the entities and properties of the domain, so they are independent of the database language and of how the data is stored.
 
-```Typescript
-// Select states where the first character of the name is 'A'
-States.filter(p => upper(substring(p.name, 0, 1)) == "A")
-// Map each selected state to an object with country and state properties
-.map(p => { country: p.country.name, state: p.name })
-// Sort the results first by country in ascending order and then by state in descending order
-.sort(p => [p.country, desc(p.state)])
-// Paginate the results to show the first page of 10 records
-.page(1, 10)
+## Example
+
+The following query reads the products whose name starts with "A", with the name of their category, sorted by category (ascending) and product (descending), and returns the first page of 10 records:
+
+```typescript
+Products
+	.filter(p => upper(substr(p.name, 1, 1)) == "A")
+	.map(p => ({ category: p.category.name, product: p.name }))
+	.sort(p => [p.category, desc(p.product)])
+	.page(1, 10)
 ```
 
-**SQL Result:**
+On Oracle, λORM translates it into:
 
-``` sql
--- Select the country name and state name
-SELECT c.NAME AS country, s.NAME AS "state" 
--- From the states table with alias 's'
-FROM TBL_STATES s 
--- Inner join with the countries table with alias 'c' on the country ID
-INNER JOIN TBL_COUNTRIES c ON c.ID = o.CountryID 
--- Filter states where the first character of the name is 'A'
-WHERE UPPER(SUBSTR(s.NAME, 0, 1)) = 'A'  
--- Order the results first by country name in ascending order and then by state name in descending order
-ORDER BY country, "state" DESC
--- Apply pagination to skip the first row and fetch the next 10 rows
-OFFSET 1 ROWS FETCH NEXT 10 ROWS ONLY
+```sql
+SELECT c.CategoryName AS "category", p.ProductName AS "product"
+FROM Products p
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID
+WHERE UPPER(SUBSTR(p.ProductName,1,1)) = 'A'
+ORDER BY "category" asc, "product" desc
+OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY
 ```
 
-## Advantage:
+The same query runs on any other engine: on MySQL, for example, the pagination becomes `LIMIT 0,10`.
 
- - Use of the same programming language.
- - It is not necessary to learn a new language.
- - Easy to write and understand expressions.
- - Use of the intellisense offered by the IDE to write the expressions.
- - Avoid syntax errors.
+## Advantages
 
-## Query Expressions:
+- Queries are written in the same programming language as the application.
+- There is no new language to learn.
+- Expressions are easy to write and to read.
+- The IDE's IntelliSense helps you write the expressions.
+- Syntax errors are caught while you write.
 
-|Method    		|Description                                   										| SQL Equivalent								|																																								|
-|:-----------|:-----------------------------------------------------------------|:------------------------------|:-----------------------------------------------------------------------------:|
-|filter			 | To filter the records.																						| WHERE 												|[examples](https://lambda-orm.github.io/wiki/Select)		|
-|having 		 | To filter on groupings.																					|	HAVING 												|[examples](https://lambda-orm.github.io/wiki/Select)		|
-|map				 | To specify the fields to return. 																| SELECT 												|[examples](https://lambda-orm.github.io/wiki/Select)		|
-|distinct		 | to specify the fields to return by sending duplicate records.		|																|[examples](https://lambda-orm.github.io/wiki/Select)		|
-|first			 | returns the first record																					| SELECT + ORDER BY + LIMIT 		|[examples](https://lambda-orm.github.io/wiki/Select)		|
-|last 		 	 | returns the last record																					|	SELECT + ORDER BY DESC + LIMIT|[examples](https://lambda-orm.github.io/wiki/Select)		|
-|sort				 | To specify the order in which the records are returned.					| ORDER BY 											|[examples](https://lambda-orm.github.io/wiki/Select)		|
-|page				 | To paginate.																											| LIMIT  (MySQL)								|[examples](https://lambda-orm.github.io/wiki/Select)		|
-|include		 | To get records of related entities																|																|[examples](https://lambda-orm.github.io/wiki/Include)	|
-|insert			 | To insert records																								| INSERT												|[examples](https://lambda-orm.github.io/wiki/Update)		|
-|update			 | To update records always including a filter											| UPDATE with WHERE							|[examples](https://lambda-orm.github.io/wiki/Update)		|
-|updateAll	 | to be able to update all the records of an entity								| UPDATE without WHERE					|[examples](https://lambda-orm.github.io/wiki/Update)		|
-|delete			 | To delete records always including a filter											| DELETE with WHERE							|[examples](https://lambda-orm.github.io/wiki/Delete)		|
-|deleteAll	 | To be able to delete all records of an entity										| DELETE without WHERE					|[examples](https://lambda-orm.github.io/wiki/Delete)		|
-|bulkInsert	 | to insert records in bulk																				| INSERT												|[examples](https://lambda-orm.github.io/wiki/BulkInsert)|
+## Query methods
 
-- There are no methods for the INNER JOIN clause since it is deduced when navigating through the relations of a property.
-- There are no methods for the GROUP BY clause since this is deduced when grouping methods are used.
+| Method | Description | SQL equivalent | Examples |
+|:--|:--|:--|:--|
+| filter | Filters the records. | WHERE | [Select](Select.md) |
+| having | Filters the groups. | HAVING | [Grouping](Grouping.md) |
+| map | Specifies the properties to return. | SELECT | [Select](Select.md) |
+| distinct | Specifies the properties to return, removing duplicate records. | SELECT DISTINCT | [Select](Select.md) |
+| first | Returns the first record. | SELECT + ORDER BY + LIMIT | [Select](Select.md) |
+| last | Returns the last record. | SELECT + ORDER BY DESC + LIMIT | [Select](Select.md) |
+| sort | Specifies the order of the records. | ORDER BY | [Select](Select.md) |
+| page | Paginates the records. | LIMIT / OFFSET (depends on the dialect) | [Select](Select.md) |
+| include | Loads the records of related entities. | | [Include](Include.md) |
+| insert | Inserts a record. | INSERT | [Insert](Insert.md) |
+| upsert | Inserts a record, or updates it if one with the same primary key exists. | INSERT … ON CONFLICT / MERGE | [Insert](Insert.md#upsert) |
+| bulkInsert | Inserts many records at once. | INSERT | [Bulk Insert](BulkInsert.md) |
+| update | Updates records; it always has a filter. | UPDATE with WHERE | [Update](Update.md) |
+| updateAll | Updates all the records of an entity. | UPDATE without WHERE | [Update](Update.md) |
+| delete | Deletes records; it always has a filter. | DELETE with WHERE | [Delete](Delete.md) |
+| deleteAll | Deletes all the records of an entity. | DELETE without WHERE | [Delete](Delete.md) |
 
-### Operators
+- There is no method for joins: an INNER JOIN is deduced when the query navigates a relation, as in `p.category.name` (see [Join](Join.md)).
+- There is no method for GROUP BY: it is deduced when an aggregate function is used (see [Grouping](Grouping.md)).
 
-The operators used are the same as those of javascript.
+## Operators
 
-|Category    	|Operators                				|																																							|
-|:------------|:-------------------------------:|:---------------------------------------------------------------------------:|
-|Arithmetic 	| -, +, *, /, **, //, % 					| [more info](https://lambda-orm.github.io/wiki/Arithmectic) |
-|Bitwise 			| ~,&,^,<<,>> 										| [more info](https://lambda-orm.github.io/wiki/Bitwise)			|
-|Comparison 	| ==, ===, !=, !==, >, <, >=, <= 	| [more info](https://lambda-orm.github.io/wiki/Comparison)	|
-|Logical 			| !, && 													| [more info](https://lambda-orm.github.io/wiki/Logical) 		|
-|Array 				| [] 															| [more info](https://lambda-orm.github.io/wiki/Array) 			|
+The operators are the same as in JavaScript.
 
-### Functions
+| Category | Operators | More info |
+|:--|:--|:--|
+| Arithmetic | `-`, `+`, `*`, `/`, `**`, `//`, `%` | [Numeric](operatorsAndFunctions/Numeric.md) |
+| Bitwise | `~`, `&`, `\|`, `^`, `<<`, `>>` | [Bitwise](operatorsAndFunctions/Bitwise.md) |
+| Comparison | `==`, `===`, `!=`, `!==`, `>`, `<`, `>=`, `<=` | [Comparison](operatorsAndFunctions/Comparison.md) |
+| Logical | `!`, `&&`, `\|\|` | [Logical](operatorsAndFunctions/Logical.md) |
+| Array | `[]` | |
 
-|Category    	|functions                																						|																																												|
-|:------------|:--------------------------------------------------------------------|--------------------------------------------------------------------------------------:|
-|Numeric			|abs, ceil, cos, exp, ln, log, remainder, round, sign, sin, tan, trunc...				|[more info](https://lambda-orm.github.io/wiki/Numeric)			|
-|String				|chr, lower, lpad, ltrim, replace, rpad, rtrim, substr, trim, upper, concat...	|[more info](https://lambda-orm.github.io/wiki/String)				|
-|Datetime			|curtime, today, now, time, date, dateTime, year, month, day, weekday, hours...	|[more info](https://lambda-orm.github.io/wiki/Datetime)			|
-|Convert			|toString, toJson, toNumber																											|[more info](https://lambda-orm.github.io/wiki/String)				|
-|Nullable			|nvl, nvl2, isNull, isNotNull																										|[more info](https://lambda-orm.github.io/wiki/Nullable)			|
-|General			|as, distinct																																		|[more info](https://lambda-orm.github.io/wiki/General)			|
-|Sort					|asc, desc																																			|[more info](https://lambda-orm.github.io/wiki/Sort)					|
-|Condition		|between, includes																															|[more info](https://lambda-orm.github.io/wiki/Condition)		|
-|Group				|avg, count, first, last, max, min, sum																					|[more info](https://lambda-orm.github.io/wiki/Group)				|
-|Metadata			|user, source																																		|[more info](https://lambda-orm.github.io/wiki/Metadata)			|
+## Functions
+
+| Category | Functions | More info |
+|:--|:--|:--|
+| Numeric | abs, ceil, cos, exp, ln, log, remainder, round, sign, sin, tan, trunc… | [Numeric](operatorsAndFunctions/Numeric.md) |
+| String | chr, lower, lpad, ltrim, replace, rpad, rtrim, substr, trim, upper, concat… | [String](operatorsAndFunctions/String.md) |
+| Datetime | curTime, today, now, time, date, dateTime, year, month, day, weekday, hours… | [Datetime](operatorsAndFunctions/Datetime.md) |
+| Convert | toString, toJson, toNumber | [String](operatorsAndFunctions/String.md) |
+| Nullable | nvl, nvl2, isNull, isNotNull | [Nullable](operatorsAndFunctions/Nullable.md) |
+| General | as, distinct | |
+| Sort | asc, desc | [Sort](operatorsAndFunctions/Sort.md) |
+| Condition | between, includes | [Comparison](operatorsAndFunctions/Comparison.md) |
+| Group | avg, count, first, last, max, min, sum | [Group](operatorsAndFunctions/Group.md) |
+| Metadata | user, source | |
+
+See [Operators & Functions](operatorsAndFunctions/OperatorsAndFunctions.md) for the full reference.

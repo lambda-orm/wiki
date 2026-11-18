@@ -1,17 +1,17 @@
 # Drop
 
-Removes all database objects but not the database.
+Removes all the database objects of a stage, but not the database itself. With `-o`, it prints the statements instead of executing them.
 
-## Params
+## Options
 
-| parameter	| short | describe 																																		|
-|-----------|-------|-----------------------------------------------------------------------------|
-|workspace	| -w 		| project path.																																|
-|stage			| -s 		| Name of stage																																|
-|envfile		| -e 		| Read in a file of environment variables.																		|
-|output			| -o 		| Generates the queries but does not apply																		|
-|force			| -f 		| If there is an error in a statement, continue executing the next statements	|
-|url				| -u 		| URL of the schema on a Data Gateway							|
+| Option | Short | Description |
+| :-- | :-- | :-- |
+| workspace | `-w` | Project path (default: the current directory). |
+| stage | `-s` | Name of the stage (default: the first stage of the schema). |
+| envfile | `-e` | Reads a file of environment variables. |
+| output | `-o` | Generates the statements but does not apply them. |
+| force | `-f` | If a statement fails, continue with the next statements. |
+| url | `-u` | URL of the schema on a [Data Gateway](../../data-gateway/index.md), to run the command there. |
 
 ## Example
 

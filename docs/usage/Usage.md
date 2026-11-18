@@ -1,13 +1,20 @@
-To show different ways of consuming the ORM we will propose different cases with an example domain and we will propose different infrastructures.
-To simplify the schema, we will omit the specification of the properties, keys, indices and relationships of the entities as well as the mapping.
-But you can see the complete schema in the example labs.
+# Usage
 
-## Unique Source
+This page shows different ways of using λORM with the same example domain (Northwind) on different infrastructures:
+a single source, several sources, CQRS with several stages, and a Node.js client connected to a
+[Data Gateway](../data-gateway/index.md).
 
-**Schema:**
+To keep the schemas short, the properties, keys, indexes and relations of the entities, as well as the mappings, are
+omitted. The complete schemas are in the [labs](../labs/index.md).
 
-In the following schema we define 4 entities in the domain: Categories, Customers, Products and Orders, with Orders being an entity composed of Orders and Order Details.
-In infrastructure we define a single scenario that is associated with a single data source called Ordering, which is a MySQL database, which uses the default mapping.
+## Single source
+
+### Schema
+
+The domain has five entities: `Categories`, `Customers`, `Products` and `Orders`, where `Orders` is a composite
+entity made of the orders and their details (`Orders.details`).
+The infrastructure has a single stage with a single source, `Ordering`, a MySQL database that uses the default
+mapping.
 
 ```yaml
 domain:  
@@ -31,37 +38,43 @@ infrastructure:
       - name: Ordering
 ```
 
-**Query:**
+### Query
 
-We will write the query to obtain an Order with its details belonging to a client.
-We will write the query using lambda expression.
+The query gets an order of a customer, with its details. It is written as a lambda expression and run with the
+`@lambdaorm/lib` library.
 
 ```typescript
-import { orm } from 'lambdaorm'
+import { orm } from '@lambdaorm/lib'
 import { Orders } from './northwind/domain/model'
-( async () => {
- try { 
-  // Initialize the ORM by passing the schema file
-  await orm.init('./lambdaORM.yaml')
-  // Query
-  const query = (customerId:string)=> Orders.filter(p =>p.customerId==customerId)
-                   .include(p=>[p.customer.map(p=>p.name),p.details
-                    .include(p=>p.product
-                     .include(p=>p.category.map(p=>p.name))
-                    .map(p=>p.name))
-                   .map(p=>[p.quantity,p.unitPrice])])
-                   .page(1,1)
-  // Execute the query                 
-  const result = await orm.execute(query, {customerId: 'CENTC' })
-  // Print the result
-  console.log(JSON.stringify(result,null,2))
- } catch (error: any) {
-  console.error(error)
- }
+
+(async () => {
+  try {
+    // initialize the ORM with the schema file
+    await orm.init('./lambdaORM.yaml')
+    // query
+    const query = (customerId: string) => Orders
+      .filter(p => p.customerId == customerId)
+      .include(p => [
+        p.customer.map(p => p.name),
+        p.details
+          .include(p => p.product
+            .include(p => p.category.map(p => p.name))
+            .map(p => p.name))
+          .map(p => [p.quantity, p.unitPrice])
+      ])
+      .page(1, 1)
+    // execute the query
+    const result = await orm.execute(query, { customerId: 'CENTC' })
+    console.log(JSON.stringify(result, null, 2))
+  } catch (error: any) {
+    console.error(error)
+  } finally {
+    await orm.end()
+  }
 })()
 ```
 
-**Result:**
+### Result
 
 ```json
 [
@@ -98,15 +111,17 @@ import { Orders } from './northwind/domain/model'
 ]
 ```
 
-## Multiple Sources
+## Multiple sources
 
-**Schema:**
+### Schema
 
-In this case we will define a scenario where the domain entities are persisted in different data sources:
+In this case the entities of the domain are stored in different sources:
 
-- The Categories, Products entities are persisted in the source Catalog, which is a MySQL database that uses the default mapping.
-- The Customers entity is persisted in the Crm source, which is a PostgreSQL database that uses the default mapping.
-- The Orders entity is persisted in the Ordering source, which is a MongoDB database that uses the mongoDb mapping.
+- `Categories` and `Products` are stored in the `Catalog` source, a MySQL database that uses the default mapping.
+- `Customers` is stored in the `Crm` source, a PostgreSQL database that uses the default mapping.
+- `Orders` is stored in the `Ordering` source, a MongoDB database that uses the `mongoDb` mapping.
+
+The `condition` of each source in the stage decides which entities it stores.
 
 ```yaml
 domain:  
@@ -145,15 +160,16 @@ infrastructure:
       condition: entity.in(["Orders","Orders.details"])
 ```
 
-**Query:**
+### Query
 
-This time we will execute the query from the command line interface (CLI) and we will obtain the same result as in the previous case.
+This time the query is run from the [CLI](../cli/Commands/Execute.md). The code does not change with the
+infrastructure, and the result is the same as in the previous case, although the data now comes from three databases.
 
 ```sh
-lambdaorm execute -e ".env" -q "Orders.filter(p => p.customerId == customerId).include(p => [p.customer.map(p => p.name), p.details.include(p => p.product.include(p => p.category.map(p => p.name)).map(p => p.name)).map(p => [p.quantity, p.unitPrice])]).page(1,1)" -d "{\"customerId\": \"HANAR\"}"
+lambdaorm execute -e ".env" -q "Orders.filter(p => p.customerId == customerId).include(p => [p.customer.map(p => p.name), p.details.include(p => p.product.include(p => p.category.map(p => p.name)).map(p => p.name)).map(p => [p.quantity, p.unitPrice])]).page(1,1)" -d "{\"customerId\": \"CENTC\"}"
 ```
 
-**Result:**
+### Result
 
 ```json
 [
@@ -190,19 +206,24 @@ lambdaorm execute -e ".env" -q "Orders.filter(p => p.customerId == customerId).i
 ]
 ```
 
-[view complete laboratory](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources)
+[View the complete lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources)
 
-## [CQRS (Command Query Responsibility Segregation)](https://microservices.io/patterns/data/cqrs.html)
+## CQRS
 
-**Schema:**
+[CQRS (Command Query Responsibility Segregation)](https://microservices.io/patterns/data/cqrs.html) separates the
+model used to write data from the model used to read it. With λORM it is a matter of configuration.
 
-In this case we will define 3 scenarios for the same domain.
+### Schema
 
-- default: where data is read and written to the Catalog, Crm and Ordering sources.
-- insights: where the data from the Insights source is read and written.
-- cqrs: where data is read from the Insights source but persisted in the Catalog, Crm and Ordering sources.
+This schema defines three stages for the same domain:
 
-In order to synchronize the data between the Catalog, Crm and Ordering sources with Insights, we will define a listener that will be executed after each insertion, update or deletion of data in the default and cqrs scenario and will apply the same operation in the insights scenario.
+- `default`: data is read from and written to the `Catalog`, `Crm` and `Ordering` sources.
+- `insights`: data is read from and written to the `Insights` source.
+- `cqrs`: data is read from the `Insights` source but written to the `Catalog`, `Crm` and `Ordering` sources.
+
+To keep `Insights` in step with `Catalog`, `Crm` and `Ordering`, a [listener](../schema/SchemaExample-Listener.md) runs
+after each insert, bulk insert, update or delete on the `default` and `cqrs` stages, and applies the same operation on
+the `insights` stage.
 
 ```yaml
 domain:  
@@ -264,15 +285,16 @@ application:
       after: orm.execute(query,data,{stage:"insights"})        
 ```
 
-**Query:**
+### Query
 
-In this case we will execute the query on a [Data Gateway](../data-gateway/index.md).
+This time the query is run on a [Data Gateway](../data-gateway/index.md) that serves this schema, through its
+[REST API](../data-gateway/Rest.md#execute):
 
 ```sh
-curl -X POST "http://localhost:8080/execute?format=beautiful" -H "X-Api-Key: $KEY" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>[p.details.include(p=>p.product.map(p=>p.name)).map(p=>{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=>p.name)]).order(p=>p.orderDate).page(1,1)", "data": {"customerId": "CENTC"}, "options": {"stage": "default"}}'
+curl -X POST "http://localhost:8080/execute?format=beautiful" -H "X-Api-Key: $KEY" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>[p.details.include(p=>p.product.map(p=>p.name)).map(p=>{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=>p.name)]).sort(p=>p.orderDate).page(1,1)", "data": {"customerId": "CENTC"}, "options": {"stage": "default"}}'
 ```
 
-**Result:**
+### Result
 
 ```json
 [
@@ -301,17 +323,17 @@ curl -X POST "http://localhost:8080/execute?format=beautiful" -H "X-Api-Key: $KE
 ]
 ```
 
-**Read Query Plan on Default Stage:**
+### Query plan on the default stage
 
-When a query is executed in the default stage, data will be obtained from different data sources according to the stage configuration.
+On the `default` stage, the data comes from different sources, according to the configuration of the stage:
 
 ```sh
-curl -X POST "http://localhost:8080/plan?format=beautiful" -H "X-Api-Key: $KEY" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>[p.details.include(p=>p.product.map(p=>p.name)).map(p=>{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=>p.name)]).order(p=>p.orderDate).page(1,1)", "options": {"stage": "default"}}'
+curl -X POST "http://localhost:8080/plan?format=beautiful" -H "X-Api-Key: $KEY" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>[p.details.include(p=>p.product.map(p=>p.name)).map(p=>{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=>p.name)]).sort(p=>p.orderDate).page(1,1)", "options": {"stage": "default"}}'
 ```
 
-**Result:**
+Result:
 
-```sh
+```json
 {
   "entity": "Orders",
   "dialect": "MongoDB",
@@ -341,16 +363,16 @@ curl -X POST "http://localhost:8080/plan?format=beautiful" -H "X-Api-Key: $KEY" 
 }
 ```
 
-**Read Query Plan on CQRS Stage:**
+### Query plan on the cqrs stage
 
-When you run a query on the cqrs stage, you will get data from a single data source according to the stage configuration.
-But if the query is for insert, update or delete, it will be executed in the corresponding data source.
+On the `cqrs` stage, a select reads all the data from a single source, `Insights`, according to the configuration of
+the stage. An insert, update or delete is executed on the corresponding source (`Catalog`, `Crm` or `Ordering`).
 
 ```sh
-curl -X POST "http://localhost:8080/plan?format=beautiful" -H "X-Api-Key: $KEY" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>[p.details.include(p=>p.product.map(p=>p.name)).map(p=>{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=>p.name)]).order(p=>p.orderDate).page(1,1)", "options": {"stage": "cqrs"}}'
+curl -X POST "http://localhost:8080/plan?format=beautiful" -H "X-Api-Key: $KEY" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>[p.details.include(p=>p.product.map(p=>p.name)).map(p=>{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=>p.name)]).sort(p=>p.orderDate).page(1,1)", "options": {"stage": "cqrs"}}'
 ```
 
-**Result:**
+Result:
 
 ```json
 {
@@ -384,11 +406,15 @@ curl -X POST "http://localhost:8080/plan?format=beautiful" -H "X-Api-Key: $KEY" 
 ```
 
 
-## [CQRS (Command Query Responsibility Segregation)](https://microservices.io/patterns/data/cqrs.html) with Kafka
+## CQRS with Kafka
 
-If we use the ORM from a [Data Gateway](../data-gateway/index.md), we can use Kafka to publish the insert, update and delete data events in the default and cqrs scenario. And configure Kafka consumers to update the data in the insights scenario.
+When the schema is served by a [Data Gateway](../data-gateway/index.md), the synchronization can go through Kafka
+instead: the listener publishes the inserts, updates and deletes of the `default` and `cqrs` stages to a topic with
+`queue.send`, and a consumer applies them on the `insights` stage. The queue is configured in
+`infrastructure.queue` (`config` is the [kafkajs](https://kafka.js.org/docs/configuration) configuration); see
+[execute-queued](../data-gateway/Rest.md#execute-queued).
 
-**Schema:**
+### Schema
 
 ```yaml
 ...
@@ -413,12 +439,14 @@ application:
 ```
 
 
-### Node Client
+## Node.js client
 
-**Schema:**
+### Schema
 
-In the case of using a client, the schema only defines the domain and the paths in the infrastructure, since the
-sources and their connections are in the schema served by the [Data Gateway](../data-gateway/index.md).
+With a client, the local schema only defines the domain, the URL of the Data Gateway and the paths where
+`lambdaorm build -l client-node` generates the model; the sources and their connections belong to the schema served
+by the [Data Gateway](../data-gateway/index.md). [`lambdaorm init -u <url>`](../cli/Commands/Init.md) creates this
+schema with the domain read from the gateway.
 
 ```yaml
 domain:  
@@ -429,58 +457,63 @@ domain:
   - name: Orders
   - name: Orders.details
 infrastructure:
-  paths:    
+  service:
+    url: http://localhost:8080
+  paths:
     src: src
-    domain: northwind/domain 
+    domain: northwind/domain
 ```
 
-**Query:**
+### Query
 
-In this case we will use the [Node client](../data-gateway/Clients.md) (`@lambdaorm/client`), which connects to a Data Gateway to execute the query.
-And in this case we will write the query in string format.
+This time the query runs through the [Node.js client](../data-gateway/Clients.md) (`@lambdaorm/client`), which
+connects to a Data Gateway, and it is written as a string. Here the gateway serves a single schema at the root, so the
+URL is the gateway's; otherwise it includes the route of the schema (for example `http://localhost:8080/northwind`).
 
 ```typescript
 import { orm } from '@lambdaorm/client'
 import fs from 'fs'
-import path from'path'
-( async () => {
- try { 
-  await orm.init('http://localhost:8080', { headers: { 'X-Api-Key': process.env.BACKEND_KEY } })
-  // test connection
-  console.log(await orm.general.ping())
-  // Gets the content of the data.json file to insert the data
-  const content = fs.readFileSync(path.join(__dirname,'../data.json'), 'utf-8')
-  const data = JSON.parse(content)
-  // Import data
-  await orm.stage.import('default',data)
-  // query as string
-  const query = `Orders.filter(p =>p.customerId==customerId)
-                   .include(p=>[p.customer.map(p=>p.name),p.details
-                    .include(p=>p.product
-                     .include(p=>p.category.map(p=>p.name))
-                    .map(p=>p.name))
-                   .map(p=>[p.quantity,p.unitPrice])])`
-  // get plan 
-  const plan = await orm.plan(query, { stage: 'default'})
-  console.log(JSON.stringify(plan,null,2))
-  // execute query
-  const result = await orm.execute(query, {customerId: 'CENTC' },{ stage: 'default'})
-  console.log(JSON.stringify(result,null,2))
- } catch (error: any) {
-  console.error(error)
- } finally {
-  await orm.end()
- }
+import path from 'path'
+
+(async () => {
+  try {
+    await orm.init('http://localhost:8080', { headers: { 'X-Api-Key': process.env.BACKEND_KEY } })
+    // test the connection
+    console.log(await orm.general.ping())
+    // import the data of the data.json file
+    const content = fs.readFileSync(path.join(__dirname, '../data.json'), 'utf-8')
+    await orm.stage.import('default', JSON.parse(content))
+    // query as a string
+    const query = `Orders
+      .filter(p => p.customerId == customerId)
+      .include(p => [
+        p.customer.map(p => p.name),
+        p.details
+          .include(p => p.product
+            .include(p => p.category.map(p => p.name))
+            .map(p => p.name))
+          .map(p => [p.quantity, p.unitPrice])
+      ])`
+    // get the execution plan
+    const plan = await orm.plan(query, { stage: 'default' })
+    console.log(JSON.stringify(plan, null, 2))
+    // execute the query
+    const result = await orm.execute(query, { customerId: 'CENTC' }, { stage: 'default' })
+    console.log(JSON.stringify(result, null, 2))
+  } catch (error: any) {
+    console.error(error)
+  } finally {
+    await orm.end()
+  }
 })()
 ```
 
 ## Considerations
 
+- With both `@lambdaorm/lib` and `@lambdaorm/client`, queries can be written as lambda expressions or as strings.
+- Queries are written against the domain model and do not depend on the infrastructure. A project can start with a
+  simple infrastructure and change it later without touching the code.
+- Development, test and production environments can have different infrastructures (stages) with the same code.
 
-Keep in mind that whether we use the `@lambdaorm/lib` or the `@lambdaorm/client` library we can write the queries in lambda or string format.
-
-We could start a development by proposing a simple infrastructure and then make modifications to it and this would not affect our code, since the queries are written based on the domain model and are independent of the infrastructure.
-
-You could also have development, test and production environments with different infrastructure configurations without having to alter the code.
-
-In addition to the examples presented previously, there are many other use cases that can be solved with λORM by configuring the schema and queries language. Therefore, we invite you to explore the different [laboratories](https://github.com/lambda-orm/lambdaorm-labs) and read the [documentation](https://github.com/lambda-orm/wiki/wiki).
+Many other use cases can be solved by configuring the schema and writing queries. Explore the
+[labs](../labs/index.md) and the rest of this documentation.

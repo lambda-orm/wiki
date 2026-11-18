@@ -1,16 +1,16 @@
 # Metadata
 
-Return metadata associated with the query expression.
+Returns the metadata of a query expression: its parsed structure.
 
-## Params
+## Options
 
-| parameter	| short | describe 																																									|
-|-----------|-------|-------------------------------------------------------------------------------------------|
-|workspace	| -w 		| project path.																																							|
-|query			| -q 		| Query expression																																					|
-|envfile		| -e 		| Read in a file of environment variables.																									|
-|output			| -o 		| Generates an output according to the following possible values [json\|beautiful\|light\|yaml]|
-|url				| -u 		| URL of the schema on a Data Gateway	                          |
+| Option | Short | Description |
+| :-- | :-- | :-- |
+| workspace | `-w` | Project path (default: the current directory). |
+| query | `-q` | Query expression. |
+| envfile | `-e` | Reads a file of environment variables. |
+| output | `-o` | Output format: `json`, `beautiful`, `light` or `yaml`. |
+| url | `-u` | URL of the schema on a [Data Gateway](../../data-gateway/index.md), to run the command there. |
 
 ## Example
 

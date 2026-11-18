@@ -1,6 +1,6 @@
 # Pull
 
-The pull is the process of updating the schema defined in the configuration file with the structure in the sources (Databases). The pull process is done by the command `lambdaorm pull`.
+This page explains pull, which updates the schema file with the structure of the sources (databases) of a stage: what it keeps, the CLI command `lambdaorm pull` and the `orm.stage.pull()` method.
 
 ## What pull keeps
 
@@ -17,17 +17,20 @@ Columns named with reserved words (for example `order`) are supported.
 
 ## CLI
 
-The pull command is used to update the schema with respect to the sources (Databases). \
-Once executed, the schema will be synchronized with the database. \
-It also records the pulling scripts in the `orm_state` folder.
-
-Running the pull command:
+The `pull` command updates the schema file (`lambdaORM.yaml` in this example) with the structure of the databases of the stage:
 
 ```sh
 lambdaorm pull
 ```
 
-Once the command is executed, the schema file (lambdaORM.yaml in this case) will be updated with respect to the data source.
+| Option | Description |
+|--------|-------------|
+| `-w`, `--workspace` | Folder of the project (default: the current folder). |
+| `-s`, `--stage` | Name of the stage (default: the first stage). |
+| `-e`, `--envfile` | File of environment variables to read. |
+
+Pull also writes, in the `orm_state` folder, the model of the stage and the DDL of the pulled structure, in one folder per source.
+The DDL is a record: it is not executed.
 
 Files created:
 
@@ -38,7 +41,7 @@ Files created:
 │       └── V240501212640__pull.sql
 ```
 
-Content of the generated file `V240501212640__pull.sql`:
+Content of the generated file `V240501212640__pull.sql` (Northwind on MySQL):
 
 ```sql
 CREATE TABLE Categories (CategoryID INTEGER  AUTO_INCREMENT,CategoryName VARCHAR(15) NOT NULL ,Description TEXT  ,Picture LONGBLOB  ,CONSTRAINT Categories_PK PRIMARY KEY (CategoryID));
@@ -68,23 +71,25 @@ ALTER TABLE Products ADD CONSTRAINT Products_products_FK FOREIGN KEY (SupplierID
 ALTER TABLE Territories ADD CONSTRAINT Territories_territories_FK FOREIGN KEY (RegionID) REFERENCES Region (RegionID);
 ```
 
-[View lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/11-pull)
+See the [CLI lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/11-pull).
 
 ## Node
 
-```Typescript
+`orm.stage.pull()` updates the schema file with the structure of the databases of the stage:
+
+```typescript
 import { Orm } from '@lambdaorm/lib'
 (async () => {
 	const orm = new Orm()
-	try{
+	try {
 		await orm.init('./lambdaORM.yaml')
 		await orm.stage.pull({ stage: 'default' })
-	}catch(e){
+	} catch (e) {
 		console.log(e)
 	} finally {
 		await orm.end()
-	}	
+	}
 })()
 ```
 
-[view lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/11-pull)
+See the [Node lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/11-pull).

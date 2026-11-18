@@ -1,0 +1,6929 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="λORM — um ORM de consultas lambda sobre vários bancos de dados, e o Data Gateway que publica seus esquemas">
+      
+      
+      
+        <link rel="canonical" href="https://lambda-orm.github.io/wiki/pt/function_functions/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Function functions - λORM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/lambdaorm-v1.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#definition" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../" title="λORM" class="md-header__button md-logo" aria-label="λORM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6 20 4.16-12.09L9.34 6H8V4h2c.42 0 .78.26.93.63L16.66 18H18v2h-2c-.43 0-.79-.27-.93-.64l-3.74-8.71L8.12 20z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            λORM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Function functions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Selecione o idioma">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../function_functions/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../de/function_functions/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../es/function_functions/" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="pt" class="md-select__link">
+              Português
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Início
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../data-gateway/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Data Gateway
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../queries/Query-Language/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Consultas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../schema/Schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Esquema
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../usage/Usage/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Uso
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../cli/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  CLI
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../" title="λORM" class="md-nav__button md-logo" aria-label="λORM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6 20 4.16-12.09L9.34 6H8V4h2c.42 0 .78.26.93.63L16.66 18H18v2h-2c-.43 0-.79-.27-.93-.64l-3.74-8.71L8.12 20z"/></svg>
+
+    </a>
+    λORM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Início
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recursos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../labs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Labs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../data-gateway/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Data Gateway
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data Gateway
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/GettingStarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Primeiros passos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuração
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Transports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transportes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    REST API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/WebSocket/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WebSocket API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Segurança
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Clients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clientes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/Operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-gateway/CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alterações
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Consultas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Consultas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Query-Language/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linguagem de consultas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Expression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Expressão
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Select/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Select
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Join/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Join
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Grouping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agrupamento
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Include/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Include
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Insert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Insert
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/BulkInsert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bulk Insert
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Update/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Update
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Delete/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Delete
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/Metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metadados
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_12" id="__nav_3_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Operadores e funções
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_12">
+            <span class="md-nav__icon md-icon"></span>
+            Operadores e funções
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/OperatorsAndFunctions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operadores e funções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comparação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Logical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lógicos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Numeric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Numéricos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/String/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Texto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Datetime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data e hora
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Nullable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nulos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Bitwise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bit a bit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agregação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queries/operatorsAndFunctions/Sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ordenação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Esquema
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Esquema
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/Schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Esquema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaDefinition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Definição
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaDefinition-Expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Expressões
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaDefinition-EnvironmentVariables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Variáveis de ambiente
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaDefinition-Composite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compostos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaExample-Listener/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Listeners
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Exemplos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            Exemplos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaExample-Basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Básico
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaExample-Extend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Estender uma entidade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaExample-MultiplesStages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vários stages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaExample-StageMultiplesSources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stage com várias fontes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaExample-Composite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Entidade composta
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Sincronização
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            Sincronização
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaSynchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sincronização
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaSynchronization-Push/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Push
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaSynchronization-Pull/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pull
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaSynchronization-Fetch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fetch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaSynchronization-Introspect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introspect
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/SchemaSynchronization-Incorporate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Incorporate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/Schema-Use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uso
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema/Engines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bancos de dados
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Uso
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Uso
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/Usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uso
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/Repository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Repositório
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/Transaction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/Script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Script
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alterações
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../cli/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    CLI
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            CLI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Comandos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Comandos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Init/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Init
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sync
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Push/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Push
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Drop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Drop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Fetch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fetch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Import/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Import
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Export
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Execute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Execute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Script
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metadados
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Commands/Constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Constraints
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/Version/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Versão
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alterações
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sleep" class="md-nav__link">
+    <span class="md-ellipsis">
+      sleep
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#console" class="md-nav__link">
+    <span class="md-ellipsis">
+      console
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#between" class="md-nav__link">
+    <span class="md-ellipsis">
+      between
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#includes" class="md-nav__link">
+    <span class="md-ellipsis">
+      includes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#in" class="md-nav__link">
+    <span class="md-ellipsis">
+      in
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#like" class="md-nav__link">
+    <span class="md-ellipsis">
+      like
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isnull" class="md-nav__link">
+    <span class="md-ellipsis">
+      isNull
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isnotnull" class="md-nav__link">
+    <span class="md-ellipsis">
+      isNotNull
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isempty" class="md-nav__link">
+    <span class="md-ellipsis">
+      isEmpty
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isnotempty" class="md-nav__link">
+    <span class="md-ellipsis">
+      isNotEmpty
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isboolean" class="md-nav__link">
+    <span class="md-ellipsis">
+      isBoolean
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isnumber" class="md-nav__link">
+    <span class="md-ellipsis">
+      isNumber
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isinteger" class="md-nav__link">
+    <span class="md-ellipsis">
+      isInteger
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isdecimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      isDecimal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      isString
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isdate" class="md-nav__link">
+    <span class="md-ellipsis">
+      isDate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isdatetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      isDateTime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#istime" class="md-nav__link">
+    <span class="md-ellipsis">
+      isTime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      isObject
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isarray" class="md-nav__link">
+    <span class="md-ellipsis">
+      isArray
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isbooleanformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      isBooleanFormat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isnumberformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      isNumberFormat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isintegerformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      isIntegerFormat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isdecimalformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      isDecimalFormat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isdateformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      isDateFormat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isdatetimeformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      isDateTimeFormat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#istimeformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      isTimeFormat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nvl" class="md-nav__link">
+    <span class="md-ellipsis">
+      nvl
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nvl2" class="md-nav__link">
+    <span class="md-ellipsis">
+      nvl2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abs" class="md-nav__link">
+    <span class="md-ellipsis">
+      abs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acos" class="md-nav__link">
+    <span class="md-ellipsis">
+      acos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asin" class="md-nav__link">
+    <span class="md-ellipsis">
+      asin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atan" class="md-nav__link">
+    <span class="md-ellipsis">
+      atan
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atan2" class="md-nav__link">
+    <span class="md-ellipsis">
+      atan2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ceil" class="md-nav__link">
+    <span class="md-ellipsis">
+      ceil
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cos" class="md-nav__link">
+    <span class="md-ellipsis">
+      cos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cosh" class="md-nav__link">
+    <span class="md-ellipsis">
+      cosh
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exp" class="md-nav__link">
+    <span class="md-ellipsis">
+      exp
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#floor" class="md-nav__link">
+    <span class="md-ellipsis">
+      floor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ln" class="md-nav__link">
+    <span class="md-ellipsis">
+      ln
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log10" class="md-nav__link">
+    <span class="md-ellipsis">
+      log10
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log" class="md-nav__link">
+    <span class="md-ellipsis">
+      log
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remainder" class="md-nav__link">
+    <span class="md-ellipsis">
+      remainder
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#round" class="md-nav__link">
+    <span class="md-ellipsis">
+      round
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sign" class="md-nav__link">
+    <span class="md-ellipsis">
+      sign
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sin" class="md-nav__link">
+    <span class="md-ellipsis">
+      sin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sinh" class="md-nav__link">
+    <span class="md-ellipsis">
+      sinh
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tan" class="md-nav__link">
+    <span class="md-ellipsis">
+      tan
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tanh" class="md-nav__link">
+    <span class="md-ellipsis">
+      tanh
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trunc" class="md-nav__link">
+    <span class="md-ellipsis">
+      trunc
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chr" class="md-nav__link">
+    <span class="md-ellipsis">
+      chr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capitalize" class="md-nav__link">
+    <span class="md-ellipsis">
+      capitalize
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endswith" class="md-nav__link">
+    <span class="md-ellipsis">
+      endsWith
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strcount" class="md-nav__link">
+    <span class="md-ellipsis">
+      strCount
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lower" class="md-nav__link">
+    <span class="md-ellipsis">
+      lower
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lpad" class="md-nav__link">
+    <span class="md-ellipsis">
+      lpad
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ltrim" class="md-nav__link">
+    <span class="md-ellipsis">
+      ltrim
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indexof" class="md-nav__link">
+    <span class="md-ellipsis">
+      indexOf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join" class="md-nav__link">
+    <span class="md-ellipsis">
+      join
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace" class="md-nav__link">
+    <span class="md-ellipsis">
+      replace
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpad" class="md-nav__link">
+    <span class="md-ellipsis">
+      rpad
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rtrim" class="md-nav__link">
+    <span class="md-ellipsis">
+      rtrim
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#substring" class="md-nav__link">
+    <span class="md-ellipsis">
+      substring
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trim" class="md-nav__link">
+    <span class="md-ellipsis">
+      trim
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upper" class="md-nav__link">
+    <span class="md-ellipsis">
+      upper
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concat" class="md-nav__link">
+    <span class="md-ellipsis">
+      concat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test" class="md-nav__link">
+    <span class="md-ellipsis">
+      test
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#title" class="md-nav__link">
+    <span class="md-ellipsis">
+      title
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#match" class="md-nav__link">
+    <span class="md-ellipsis">
+      match
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mask" class="md-nav__link">
+    <span class="md-ellipsis">
+      mask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#split" class="md-nav__link">
+    <span class="md-ellipsis">
+      split
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startwith" class="md-nav__link">
+    <span class="md-ellipsis">
+      startWith
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map" class="md-nav__link">
+    <span class="md-ellipsis">
+      map
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foreach" class="md-nav__link">
+    <span class="md-ellipsis">
+      foreach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reverse" class="md-nav__link">
+    <span class="md-ellipsis">
+      reverse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      sort
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      remove
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push" class="md-nav__link">
+    <span class="md-ellipsis">
+      push
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bulkinsert" class="md-nav__link">
+    <span class="md-ellipsis">
+      bulkInsert
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop" class="md-nav__link">
+    <span class="md-ellipsis">
+      pop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#length" class="md-nav__link">
+    <span class="md-ellipsis">
+      length
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      slice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#page" class="md-nav__link">
+    <span class="md-ellipsis">
+      page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distinct" class="md-nav__link">
+    <span class="md-ellipsis">
+      distinct
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#first" class="md-nav__link">
+    <span class="md-ellipsis">
+      first
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#last" class="md-nav__link">
+    <span class="md-ellipsis">
+      last
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#count" class="md-nav__link">
+    <span class="md-ellipsis">
+      count
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#max" class="md-nav__link">
+    <span class="md-ellipsis">
+      max
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#min" class="md-nav__link">
+    <span class="md-ellipsis">
+      min
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#avg" class="md-nav__link">
+    <span class="md-ellipsis">
+      avg
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sum" class="md-nav__link">
+    <span class="md-ellipsis">
+      sum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      curTime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#today" class="md-nav__link">
+    <span class="md-ellipsis">
+      today
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#now" class="md-nav__link">
+    <span class="md-ellipsis">
+      now
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time" class="md-nav__link">
+    <span class="md-ellipsis">
+      time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#date" class="md-nav__link">
+    <span class="md-ellipsis">
+      date
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      dateTime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#year" class="md-nav__link">
+    <span class="md-ellipsis">
+      year
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#month" class="md-nav__link">
+    <span class="md-ellipsis">
+      month
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#day" class="md-nav__link">
+    <span class="md-ellipsis">
+      day
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weekday" class="md-nav__link">
+    <span class="md-ellipsis">
+      weekday
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hour" class="md-nav__link">
+    <span class="md-ellipsis">
+      hour
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minute" class="md-nav__link">
+    <span class="md-ellipsis">
+      minute
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#second" class="md-nav__link">
+    <span class="md-ellipsis">
+      second
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#millisecond" class="md-nav__link">
+    <span class="md-ellipsis">
+      millisecond
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addyear" class="md-nav__link">
+    <span class="md-ellipsis">
+      addYear
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addmonth" class="md-nav__link">
+    <span class="md-ellipsis">
+      addMonth
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addday" class="md-nav__link">
+    <span class="md-ellipsis">
+      addDay
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addhour" class="md-nav__link">
+    <span class="md-ellipsis">
+      addHour
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addminute" class="md-nav__link">
+    <span class="md-ellipsis">
+      addMinute
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addsecond" class="md-nav__link">
+    <span class="md-ellipsis">
+      addSecond
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addmillisecond" class="md-nav__link">
+    <span class="md-ellipsis">
+      addMillisecond
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      addTime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtracttime" class="md-nav__link">
+    <span class="md-ellipsis">
+      subtractTime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yeardiff" class="md-nav__link">
+    <span class="md-ellipsis">
+      yearDiff
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#daydiff" class="md-nav__link">
+    <span class="md-ellipsis">
+      dayDiff
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hourdiff" class="md-nav__link">
+    <span class="md-ellipsis">
+      hourDiff
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seconddiff" class="md-nav__link">
+    <span class="md-ellipsis">
+      secondDiff
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#milliseconddiff" class="md-nav__link">
+    <span class="md-ellipsis">
+      millisecondDiff
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#daytodate" class="md-nav__link">
+    <span class="md-ellipsis">
+      dayToDate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hourtodate" class="md-nav__link">
+    <span class="md-ellipsis">
+      hourToDate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secondtodate" class="md-nav__link">
+    <span class="md-ellipsis">
+      secondToDate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#millisecondtodate" class="md-nav__link">
+    <span class="md-ellipsis">
+      millisecondToDate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tostring" class="md-nav__link">
+    <span class="md-ellipsis">
+      toString
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tonumber" class="md-nav__link">
+    <span class="md-ellipsis">
+      toNumber
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datetostring" class="md-nav__link">
+    <span class="md-ellipsis">
+      dateToString
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stringify" class="md-nav__link">
+    <span class="md-ellipsis">
+      stringify
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse" class="md-nav__link">
+    <span class="md-ellipsis">
+      parse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#values" class="md-nav__link">
+    <span class="md-ellipsis">
+      values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entries" class="md-nav__link">
+    <span class="md-ellipsis">
+      entries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fromentries" class="md-nav__link">
+    <span class="md-ellipsis">
+      fromEntries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#union" class="md-nav__link">
+    <span class="md-ellipsis">
+      union
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersection" class="md-nav__link">
+    <span class="md-ellipsis">
+      intersection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      difference
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symmetricdifference" class="md-nav__link">
+    <span class="md-ellipsis">
+      symmetricDifference
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tobase64" class="md-nav__link">
+    <span class="md-ellipsis">
+      toBase64
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getbase64" class="md-nav__link">
+    <span class="md-ellipsis">
+      getBase64
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encrypt" class="md-nav__link">
+    <span class="md-ellipsis">
+      encrypt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decrypt" class="md-nav__link">
+    <span class="md-ellipsis">
+      decrypt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    <span class="md-ellipsis">
+      update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updateall" class="md-nav__link">
+    <span class="md-ellipsis">
+      updateAll
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleteall" class="md-nav__link">
+    <span class="md-ellipsis">
+      deleteAll
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      merge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bulkmerge" class="md-nav__link">
+    <span class="md-ellipsis">
+      bulkMerge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#having" class="md-nav__link">
+    <span class="md-ellipsis">
+      having
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#include" class="md-nav__link">
+    <span class="md-ellipsis">
+      include
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desc" class="md-nav__link">
+    <span class="md-ellipsis">
+      desc
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asc" class="md-nav__link">
+    <span class="md-ellipsis">
+      asc
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ormexecute" class="md-nav__link">
+    <span class="md-ellipsis">
+      orm.execute
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ormplan" class="md-nav__link">
+    <span class="md-ellipsis">
+      orm.plan
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ormmetadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      orm.metadata
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ormmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      orm.model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ormparameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      orm.parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ormconstraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      orm.constraints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contains" class="md-nav__link">
+    <span class="md-ellipsis">
+      contains
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#substr" class="md-nav__link">
+    <span class="md-ellipsis">
+      substr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenate" class="md-nav__link">
+    <span class="md-ellipsis">
+      concatenate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startswith" class="md-nav__link">
+    <span class="md-ellipsis">
+      startsWith
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#select" class="md-nav__link">
+    <span class="md-ellipsis">
+      select
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#each" class="md-nav__link">
+    <span class="md-ellipsis">
+      each
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where" class="md-nav__link">
+    <span class="md-ellipsis">
+      where
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#order" class="md-nav__link">
+    <span class="md-ellipsis">
+      order
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      delete
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#len" class="md-nav__link">
+    <span class="md-ellipsis">
+      len
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Function functions</h1>
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sleep</td>
+<td>Sleeps for the specified number of milliseconds</td>
+</tr>
+<tr>
+<td>console</td>
+<td>Prints to console</td>
+</tr>
+<tr>
+<td>between</td>
+<td>Between</td>
+</tr>
+<tr>
+<td>includes</td>
+<td>Includes</td>
+</tr>
+<tr>
+<td>in</td>
+<td>In</td>
+</tr>
+<tr>
+<td>like</td>
+<td>String contains pattern</td>
+</tr>
+<tr>
+<td>isNull</td>
+<td>Check if value is null</td>
+</tr>
+<tr>
+<td>isNotNull</td>
+<td>Check if value is not null</td>
+</tr>
+<tr>
+<td>isEmpty</td>
+<td>Check if value is empty</td>
+</tr>
+<tr>
+<td>isNotEmpty</td>
+<td>Check if value is not empty</td>
+</tr>
+<tr>
+<td>isBoolean</td>
+<td>Check if value is boolean</td>
+</tr>
+<tr>
+<td>isNumber</td>
+<td>Check if value is number</td>
+</tr>
+<tr>
+<td>isInteger</td>
+<td>Check if value is integer</td>
+</tr>
+<tr>
+<td>isDecimal</td>
+<td>Check if value is decimal</td>
+</tr>
+<tr>
+<td>isString</td>
+<td>Check if value is string</td>
+</tr>
+<tr>
+<td>isDate</td>
+<td>Check if value is date</td>
+</tr>
+<tr>
+<td>isDateTime</td>
+<td>Check if value is date time</td>
+</tr>
+<tr>
+<td>isTime</td>
+<td>Check if value is time</td>
+</tr>
+<tr>
+<td>isObject</td>
+<td>Check if value is object</td>
+</tr>
+<tr>
+<td>isArray</td>
+<td>Check if value is array</td>
+</tr>
+<tr>
+<td>isBooleanFormat</td>
+<td>Check if value is boolean format</td>
+</tr>
+<tr>
+<td>isNumberFormat</td>
+<td>Check if value is number format</td>
+</tr>
+<tr>
+<td>isIntegerFormat</td>
+<td>Check if value is integer format</td>
+</tr>
+<tr>
+<td>isDecimalFormat</td>
+<td>Check if value is decimal format</td>
+</tr>
+<tr>
+<td>isDateFormat</td>
+<td>Check if value is date format</td>
+</tr>
+<tr>
+<td>isDateTimeFormat</td>
+<td>Check if value is date time format</td>
+</tr>
+<tr>
+<td>isTimeFormat</td>
+<td>Check if value is time format</td>
+</tr>
+<tr>
+<td>nvl</td>
+<td>Null value</td>
+</tr>
+<tr>
+<td>nvl2</td>
+<td>Null value</td>
+</tr>
+<tr>
+<td>abs</td>
+<td>Absolute value</td>
+</tr>
+<tr>
+<td>acos</td>
+<td>Arc cosine</td>
+</tr>
+<tr>
+<td>asin</td>
+<td>Arc sine</td>
+</tr>
+<tr>
+<td>atan</td>
+<td>Arc tangent</td>
+</tr>
+<tr>
+<td>atan2</td>
+<td>Arc tangent of two variables</td>
+</tr>
+<tr>
+<td>ceil</td>
+<td>Ceiling</td>
+</tr>
+<tr>
+<td>cos</td>
+<td>Cosine</td>
+</tr>
+<tr>
+<td>cosh</td>
+<td>Hyperbolic cosine</td>
+</tr>
+<tr>
+<td>exp</td>
+<td>Exponential</td>
+</tr>
+<tr>
+<td>floor</td>
+<td>Floor</td>
+</tr>
+<tr>
+<td>ln</td>
+<td>Natural logarithm</td>
+</tr>
+<tr>
+<td>log10</td>
+<td>Base 10 logarithm</td>
+</tr>
+<tr>
+<td>log</td>
+<td>Natural logarithm</td>
+</tr>
+<tr>
+<td>remainder</td>
+<td>Remainder</td>
+</tr>
+<tr>
+<td>round</td>
+<td>Round</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>Sign</td>
+</tr>
+<tr>
+<td>sin</td>
+<td>Sine</td>
+</tr>
+<tr>
+<td>sinh</td>
+<td>Hyperbolic sine</td>
+</tr>
+<tr>
+<td>tan</td>
+<td>Tangent</td>
+</tr>
+<tr>
+<td>tanh</td>
+<td>Hyperbolic tangent</td>
+</tr>
+<tr>
+<td>trunc</td>
+<td>Truncate</td>
+</tr>
+<tr>
+<td>chr</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>capitalize</td>
+<td>Capitalize</td>
+</tr>
+<tr>
+<td>endsWith</td>
+<td>Ends with</td>
+</tr>
+<tr>
+<td>strCount</td>
+<td>Count</td>
+</tr>
+<tr>
+<td>lower</td>
+<td>Lower case</td>
+</tr>
+<tr>
+<td>lpad</td>
+<td>Left pad</td>
+</tr>
+<tr>
+<td>ltrim</td>
+<td>Left trim</td>
+</tr>
+<tr>
+<td>indexOf</td>
+<td>Index of</td>
+</tr>
+<tr>
+<td>join</td>
+<td>Join</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>Replace</td>
+</tr>
+<tr>
+<td>rpad</td>
+<td>Right pad</td>
+</tr>
+<tr>
+<td>rtrim</td>
+<td>Right trim</td>
+</tr>
+<tr>
+<td>substring</td>
+<td>Substring</td>
+</tr>
+<tr>
+<td>trim</td>
+<td>Trim</td>
+</tr>
+<tr>
+<td>upper</td>
+<td>Upper case</td>
+</tr>
+<tr>
+<td>concat</td>
+<td>Concatenate</td>
+</tr>
+<tr>
+<td>test</td>
+<td>Test</td>
+</tr>
+<tr>
+<td>title</td>
+<td>Title case</td>
+</tr>
+<tr>
+<td>match</td>
+<td>Match</td>
+</tr>
+<tr>
+<td>mask</td>
+<td>Mask sensitive data</td>
+</tr>
+<tr>
+<td>split</td>
+<td>Split string</td>
+</tr>
+<tr>
+<td>startWith</td>
+<td>Starts with</td>
+</tr>
+<tr>
+<td>map</td>
+<td>Map</td>
+</tr>
+<tr>
+<td>foreach</td>
+<td>Foreach</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>Filter</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>Reverse</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>Sort</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>Remove</td>
+</tr>
+<tr>
+<td>push</td>
+<td>Push</td>
+</tr>
+<tr>
+<td>bulkInsert</td>
+<td>Bulk Insert</td>
+</tr>
+<tr>
+<td>pop</td>
+<td>Pop</td>
+</tr>
+<tr>
+<td>length</td>
+<td>Length</td>
+</tr>
+<tr>
+<td>slice</td>
+<td>Slice</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Paging</td>
+</tr>
+<tr>
+<td>distinct</td>
+<td>Distinct</td>
+</tr>
+<tr>
+<td>first</td>
+<td>First</td>
+</tr>
+<tr>
+<td>last</td>
+<td>Last</td>
+</tr>
+<tr>
+<td>count</td>
+<td>Count</td>
+</tr>
+<tr>
+<td>max</td>
+<td>Max</td>
+</tr>
+<tr>
+<td>min</td>
+<td>Min</td>
+</tr>
+<tr>
+<td>avg</td>
+<td>Average</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>Sum</td>
+</tr>
+<tr>
+<td>curTime</td>
+<td>Current time</td>
+</tr>
+<tr>
+<td>today</td>
+<td>Current date</td>
+</tr>
+<tr>
+<td>now</td>
+<td>Current date time</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Get time</td>
+</tr>
+<tr>
+<td>date</td>
+<td>Get date</td>
+</tr>
+<tr>
+<td>dateTime</td>
+<td>Get date time</td>
+</tr>
+<tr>
+<td>year</td>
+<td>Get year</td>
+</tr>
+<tr>
+<td>month</td>
+<td>Get month</td>
+</tr>
+<tr>
+<td>day</td>
+<td>Get day</td>
+</tr>
+<tr>
+<td>weekday</td>
+<td>Get day of week</td>
+</tr>
+<tr>
+<td>hour</td>
+<td>Get hours</td>
+</tr>
+<tr>
+<td>minute</td>
+<td>Get minutes</td>
+</tr>
+<tr>
+<td>second</td>
+<td>Get seconds</td>
+</tr>
+<tr>
+<td>millisecond</td>
+<td>Get milliseconds</td>
+</tr>
+<tr>
+<td>addYear</td>
+<td>Add years</td>
+</tr>
+<tr>
+<td>addMonth</td>
+<td>Add months</td>
+</tr>
+<tr>
+<td>addDay</td>
+<td>Add days</td>
+</tr>
+<tr>
+<td>addHour</td>
+<td>Add hours</td>
+</tr>
+<tr>
+<td>addMinute</td>
+<td>Add minutes</td>
+</tr>
+<tr>
+<td>addSecond</td>
+<td>Add seconds</td>
+</tr>
+<tr>
+<td>addMillisecond</td>
+<td>Add milliseconds</td>
+</tr>
+<tr>
+<td>addTime</td>
+<td>Add time</td>
+</tr>
+<tr>
+<td>subtractTime</td>
+<td>Subtract time</td>
+</tr>
+<tr>
+<td>yearDiff</td>
+<td>Year difference</td>
+</tr>
+<tr>
+<td>dayDiff</td>
+<td>Day difference</td>
+</tr>
+<tr>
+<td>hourDiff</td>
+<td>Hour difference</td>
+</tr>
+<tr>
+<td>secondDiff</td>
+<td>Second difference</td>
+</tr>
+<tr>
+<td>millisecondDiff</td>
+<td>Millisecond difference</td>
+</tr>
+<tr>
+<td>dayToDate</td>
+<td>Convert days to date time</td>
+</tr>
+<tr>
+<td>hourToDate</td>
+<td>Convert hours to date time</td>
+</tr>
+<tr>
+<td>secondToDate</td>
+<td>Convert seconds to date time</td>
+</tr>
+<tr>
+<td>millisecondToDate</td>
+<td>Convert milliseconds to date time</td>
+</tr>
+<tr>
+<td>toString</td>
+<td>Convert to string</td>
+</tr>
+<tr>
+<td>toNumber</td>
+<td>Convert to number</td>
+</tr>
+<tr>
+<td>dateToString</td>
+<td>Convert date to string</td>
+</tr>
+<tr>
+<td>stringify</td>
+<td>Convert to JSON string</td>
+</tr>
+<tr>
+<td>parse</td>
+<td>Parse JSON string</td>
+</tr>
+<tr>
+<td>keys</td>
+<td>Object keys</td>
+</tr>
+<tr>
+<td>values</td>
+<td>Object values</td>
+</tr>
+<tr>
+<td>entries</td>
+<td>Object entries</td>
+</tr>
+<tr>
+<td>fromEntries</td>
+<td>Object from entries</td>
+</tr>
+<tr>
+<td>union</td>
+<td>Union</td>
+</tr>
+<tr>
+<td>intersection</td>
+<td>Intersection</td>
+</tr>
+<tr>
+<td>difference</td>
+<td>Difference</td>
+</tr>
+<tr>
+<td>symmetricDifference</td>
+<td>Symmetric Difference</td>
+</tr>
+<tr>
+<td>toBase64</td>
+<td>Convert a string to base64</td>
+</tr>
+<tr>
+<td>getBase64</td>
+<td>Get a string from base64</td>
+</tr>
+<tr>
+<td>encrypt</td>
+<td>Encrypt a string</td>
+</tr>
+<tr>
+<td>decrypt</td>
+<td>Decrypt a string</td>
+</tr>
+<tr>
+<td>update</td>
+<td>Update a list</td>
+</tr>
+<tr>
+<td>updateAll</td>
+<td>Update all items in a list</td>
+</tr>
+<tr>
+<td>deleteAll</td>
+<td>Delete all items in a list</td>
+</tr>
+<tr>
+<td>merge</td>
+<td>Merge a list</td>
+</tr>
+<tr>
+<td>bulkMerge</td>
+<td>Bulk merge a list</td>
+</tr>
+<tr>
+<td>having</td>
+<td>Having a list</td>
+</tr>
+<tr>
+<td>include</td>
+<td>Include a list</td>
+</tr>
+<tr>
+<td>desc</td>
+<td>Descending</td>
+</tr>
+<tr>
+<td>asc</td>
+<td>Ascending</td>
+</tr>
+<tr>
+<td>orm.execute</td>
+<td>Execute query</td>
+</tr>
+<tr>
+<td>orm.plan</td>
+<td>Plan of query</td>
+</tr>
+<tr>
+<td>orm.metadata</td>
+<td>Get metadata from query</td>
+</tr>
+<tr>
+<td>orm.model</td>
+<td>Get model from query</td>
+</tr>
+<tr>
+<td>orm.parameters</td>
+<td>Get parameters from query</td>
+</tr>
+<tr>
+<td>orm.constraints</td>
+<td>Get constraints from query</td>
+</tr>
+<tr>
+<td>contains</td>
+<td>Includes</td>
+</tr>
+<tr>
+<td>substr</td>
+<td>Substring</td>
+</tr>
+<tr>
+<td>concatenate</td>
+<td>Concatenate</td>
+</tr>
+<tr>
+<td>startsWith</td>
+<td>Starts with</td>
+</tr>
+<tr>
+<td>select</td>
+<td>Map</td>
+</tr>
+<tr>
+<td>each</td>
+<td>Foreach</td>
+</tr>
+<tr>
+<td>where</td>
+<td>Filter</td>
+</tr>
+<tr>
+<td>order</td>
+<td>Sort</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>Remove</td>
+</tr>
+<tr>
+<td>insert</td>
+<td>Push</td>
+</tr>
+<tr>
+<td>len</td>
+<td>Length</td>
+</tr>
+</tbody>
+</table>
+<h2 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h2>
+<h3 id="sleep">sleep<a class="headerlink" href="#sleep" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Sleeps for the specified number of milliseconds</li>
+<li>deterministic: true</li>
+<li>return: void</li>
+<li>params:<ul>
+<li>ms?: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="console">console<a class="headerlink" href="#console" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Prints to console</li>
+<li>deterministic: true</li>
+<li>return: void</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="between">between<a class="headerlink" href="#between" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Between</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: T</li>
+<li>from: T</li>
+<li>to: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="includes">includes<a class="headerlink" href="#includes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Includes</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>source: string|T[]</li>
+<li>value: string|T</li>
+</ul>
+</li>
+</ul>
+<h3 id="in">in<a class="headerlink" href="#in" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: In</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>source: T</li>
+<li>values: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="like">like<a class="headerlink" href="#like" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: String contains pattern</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>pattern: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isnull">isNull<a class="headerlink" href="#isnull" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is null</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isnotnull">isNotNull<a class="headerlink" href="#isnotnull" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is not null</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isempty">isEmpty<a class="headerlink" href="#isempty" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is empty</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isnotempty">isNotEmpty<a class="headerlink" href="#isnotempty" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is not empty</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isboolean">isBoolean<a class="headerlink" href="#isboolean" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is boolean</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isnumber">isNumber<a class="headerlink" href="#isnumber" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is number</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isinteger">isInteger<a class="headerlink" href="#isinteger" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is integer</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isdecimal">isDecimal<a class="headerlink" href="#isdecimal" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is decimal</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isstring">isString<a class="headerlink" href="#isstring" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is string</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isdate">isDate<a class="headerlink" href="#isdate" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is date</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isdatetime">isDateTime<a class="headerlink" href="#isdatetime" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is date time</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="istime">isTime<a class="headerlink" href="#istime" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is time</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isobject">isObject<a class="headerlink" href="#isobject" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is object</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isarray">isArray<a class="headerlink" href="#isarray" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is array</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="isbooleanformat">isBooleanFormat<a class="headerlink" href="#isbooleanformat" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is boolean format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isnumberformat">isNumberFormat<a class="headerlink" href="#isnumberformat" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is number format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isintegerformat">isIntegerFormat<a class="headerlink" href="#isintegerformat" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is integer format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isdecimalformat">isDecimalFormat<a class="headerlink" href="#isdecimalformat" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is decimal format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isdateformat">isDateFormat<a class="headerlink" href="#isdateformat" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is date format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="isdatetimeformat">isDateTimeFormat<a class="headerlink" href="#isdatetimeformat" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is date time format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="istimeformat">isTimeFormat<a class="headerlink" href="#istimeformat" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Check if value is time format</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="nvl">nvl<a class="headerlink" href="#nvl" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Null value</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>value: T</li>
+<li>default: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="nvl2">nvl2<a class="headerlink" href="#nvl2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Null value</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>value: any</li>
+<li>a: T</li>
+<li>b: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="abs">abs<a class="headerlink" href="#abs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Absolute value</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="acos">acos<a class="headerlink" href="#acos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Arc cosine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="asin">asin<a class="headerlink" href="#asin" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Arc sine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="atan">atan<a class="headerlink" href="#atan" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Arc tangent</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="atan2">atan2<a class="headerlink" href="#atan2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Arc tangent of two variables</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="ceil">ceil<a class="headerlink" href="#ceil" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Ceiling</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="cos">cos<a class="headerlink" href="#cos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Cosine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="cosh">cosh<a class="headerlink" href="#cosh" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Hyperbolic cosine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="exp">exp<a class="headerlink" href="#exp" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Exponential</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="floor">floor<a class="headerlink" href="#floor" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Floor</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="ln">ln<a class="headerlink" href="#ln" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Natural logarithm</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="log10">log10<a class="headerlink" href="#log10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Base 10 logarithm</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="log">log<a class="headerlink" href="#log" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Natural logarithm</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="remainder">remainder<a class="headerlink" href="#remainder" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Remainder</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>n1: number</li>
+<li>n2: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="round">round<a class="headerlink" href="#round" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Round</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>num: number</li>
+<li>decimals: 0</li>
+</ul>
+</li>
+</ul>
+<h3 id="sign">sign<a class="headerlink" href="#sign" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Sign</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="sin">sin<a class="headerlink" href="#sin" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Sine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="sinh">sinh<a class="headerlink" href="#sinh" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Hyperbolic sine</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="tan">tan<a class="headerlink" href="#tan" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Tangent</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="tanh">tanh<a class="headerlink" href="#tanh" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Hyperbolic tangent</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="trunc">trunc<a class="headerlink" href="#trunc" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Truncate</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>x: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="chr">chr<a class="headerlink" href="#chr" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Character</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>ascii: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="capitalize">capitalize<a class="headerlink" href="#capitalize" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Capitalize</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="endswith">endsWith<a class="headerlink" href="#endswith" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Ends with</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>sub: string</li>
+<li>start: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="strcount">strCount<a class="headerlink" href="#strcount" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Count</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>source: string</li>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="lower">lower<a class="headerlink" href="#lower" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Lower case</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="lpad">lpad<a class="headerlink" href="#lpad" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Left pad</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>len: number</li>
+<li>pad: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="ltrim">ltrim<a class="headerlink" href="#ltrim" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Left trim</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="indexof">indexOf<a class="headerlink" href="#indexof" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Index of</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>sub: string</li>
+<li>start: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="join">join<a class="headerlink" href="#join" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Join</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>values: string[]</li>
+<li>separator: string</li>
+<li>: "</li>
+</ul>
+</li>
+</ul>
+<h3 id="replace">replace<a class="headerlink" href="#replace" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Replace</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>source: string</li>
+<li>target: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="rpad">rpad<a class="headerlink" href="#rpad" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Right pad</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>len: number</li>
+<li>pad: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="rtrim">rtrim<a class="headerlink" href="#rtrim" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Right trim</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="substring">substring<a class="headerlink" href="#substring" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Substring</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>from: number</li>
+<li>count: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="trim">trim<a class="headerlink" href="#trim" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Trim</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="upper">upper<a class="headerlink" href="#upper" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Upper case</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="concat">concat<a class="headerlink" href="#concat" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Concatenate</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>values: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="test">test<a class="headerlink" href="#test" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Test</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>regexp: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="title">title<a class="headerlink" href="#title" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Title case</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="match">match<a class="headerlink" href="#match" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Match</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>regexp: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="mask">mask<a class="headerlink" href="#mask" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Mask sensitive data</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="split">split<a class="headerlink" href="#split" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Split string</li>
+<li>deterministic: true</li>
+<li>return: string[]</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>separator: string</li>
+<li>: "</li>
+</ul>
+</li>
+</ul>
+<h3 id="startwith">startWith<a class="headerlink" href="#startwith" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Starts with</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>sub: string</li>
+<li>start: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="map">map<a class="headerlink" href="#map" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Map</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="foreach">foreach<a class="headerlink" href="#foreach" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Foreach</li>
+<li>deterministic: true</li>
+<li>return: void</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="filter">filter<a class="headerlink" href="#filter" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Filter</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="reverse">reverse<a class="headerlink" href="#reverse" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Reverse</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="sort">sort<a class="headerlink" href="#sort" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Sort</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="remove">remove<a class="headerlink" href="#remove" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Remove</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="push">push<a class="headerlink" href="#push" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Push</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>value: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="bulkinsert">bulkInsert<a class="headerlink" href="#bulkinsert" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Bulk Insert</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>value: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="pop">pop<a class="headerlink" href="#pop" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Pop</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>list: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="length">length<a class="headerlink" href="#length" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Length</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>source: any[]|string</li>
+</ul>
+</li>
+</ul>
+<h3 id="slice">slice<a class="headerlink" href="#slice" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Slice</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>from: integer</li>
+<li>to: integer</li>
+</ul>
+</li>
+</ul>
+<h3 id="page">page<a class="headerlink" href="#page" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Paging</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>page: integer</li>
+<li>records: integer</li>
+</ul>
+</li>
+</ul>
+<h3 id="distinct">distinct<a class="headerlink" href="#distinct" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Distinct</li>
+<li>deterministic: true</li>
+<li>return: any[]</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="first">first<a class="headerlink" href="#first" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: First</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="last">last<a class="headerlink" href="#last" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Last</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="count">count<a class="headerlink" href="#count" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Count</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="max">max<a class="headerlink" href="#max" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Max</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="min">min<a class="headerlink" href="#min" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Min</li>
+<li>deterministic: true</li>
+<li>return: T</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="avg">avg<a class="headerlink" href="#avg" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Average</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="sum">sum<a class="headerlink" href="#sum" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Sum</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="curtime">curTime<a class="headerlink" href="#curtime" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Current time</li>
+<li>deterministic: true</li>
+<li>return: time</li>
+<li>params:<ul>
+<li>: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="today">today<a class="headerlink" href="#today" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Current date</li>
+<li>deterministic: true</li>
+<li>return: date</li>
+<li>params:<ul>
+<li>: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="now">now<a class="headerlink" href="#now" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Current date time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="time">time<a class="headerlink" href="#time" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get time</li>
+<li>deterministic: true</li>
+<li>return: time</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="date">date<a class="headerlink" href="#date" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get date</li>
+<li>deterministic: true</li>
+<li>return: date</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="datetime">dateTime<a class="headerlink" href="#datetime" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get date time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="year">year<a class="headerlink" href="#year" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get year</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="month">month<a class="headerlink" href="#month" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get month</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="day">day<a class="headerlink" href="#day" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get day</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="weekday">weekday<a class="headerlink" href="#weekday" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get day of week</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="hour">hour<a class="headerlink" href="#hour" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get hours</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="minute">minute<a class="headerlink" href="#minute" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get minutes</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="second">second<a class="headerlink" href="#second" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get seconds</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="millisecond">millisecond<a class="headerlink" href="#millisecond" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get milliseconds</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>value: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="addyear">addYear<a class="headerlink" href="#addyear" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Add years</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addmonth">addMonth<a class="headerlink" href="#addmonth" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Add months</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addday">addDay<a class="headerlink" href="#addday" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Add days</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addhour">addHour<a class="headerlink" href="#addhour" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Add hours</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addminute">addMinute<a class="headerlink" href="#addminute" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Add minutes</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addsecond">addSecond<a class="headerlink" href="#addsecond" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Add seconds</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addmillisecond">addMillisecond<a class="headerlink" href="#addmillisecond" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Add milliseconds</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="addtime">addTime<a class="headerlink" href="#addtime" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Add time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>time: time</li>
+</ul>
+</li>
+</ul>
+<h3 id="subtracttime">subtractTime<a class="headerlink" href="#subtracttime" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Subtract time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>date: dateTime</li>
+<li>time: time</li>
+</ul>
+</li>
+</ul>
+<h3 id="yeardiff">yearDiff<a class="headerlink" href="#yeardiff" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Year difference</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>date1: dateTime</li>
+<li>date2: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="daydiff">dayDiff<a class="headerlink" href="#daydiff" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Day difference</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>date1: dateTime</li>
+<li>date2: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="hourdiff">hourDiff<a class="headerlink" href="#hourdiff" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Hour difference</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>date1: dateTime</li>
+<li>date2: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="seconddiff">secondDiff<a class="headerlink" href="#seconddiff" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Second difference</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>date1: dateTime</li>
+<li>date2: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="milliseconddiff">millisecondDiff<a class="headerlink" href="#milliseconddiff" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Millisecond difference</li>
+<li>deterministic: true</li>
+<li>return: integer</li>
+<li>params:<ul>
+<li>date1: dateTime</li>
+<li>date2: dateTime</li>
+</ul>
+</li>
+</ul>
+<h3 id="daytodate">dayToDate<a class="headerlink" href="#daytodate" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Convert days to date time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="hourtodate">hourToDate<a class="headerlink" href="#hourtodate" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Convert hours to date time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="secondtodate">secondToDate<a class="headerlink" href="#secondtodate" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Convert seconds to date time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="millisecondtodate">millisecondToDate<a class="headerlink" href="#millisecondtodate" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Convert milliseconds to date time</li>
+<li>deterministic: true</li>
+<li>return: dateTime</li>
+<li>params:<ul>
+<li>value: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="tostring">toString<a class="headerlink" href="#tostring" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Convert to string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="tonumber">toNumber<a class="headerlink" href="#tonumber" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Convert to number</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="datetostring">dateToString<a class="headerlink" href="#datetostring" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Convert date to string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>date: date</li>
+</ul>
+</li>
+</ul>
+<h3 id="stringify">stringify<a class="headerlink" href="#stringify" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Convert to JSON string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="parse">parse<a class="headerlink" href="#parse" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Parse JSON string</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="keys">keys<a class="headerlink" href="#keys" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Object keys</li>
+<li>deterministic: true</li>
+<li>return: string[]</li>
+<li>params:<ul>
+<li>obj: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="values">values<a class="headerlink" href="#values" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Object values</li>
+<li>deterministic: true</li>
+<li>return: any[]</li>
+<li>params:<ul>
+<li>obj: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="entries">entries<a class="headerlink" href="#entries" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Object entries</li>
+<li>deterministic: true</li>
+<li>return: [string,any][]</li>
+<li>params:<ul>
+<li>obj: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="fromentries">fromEntries<a class="headerlink" href="#fromentries" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Object from entries</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>entries: [string</li>
+<li>: any][]</li>
+</ul>
+</li>
+</ul>
+<h3 id="union">union<a class="headerlink" href="#union" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Union</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>a: T[]</li>
+<li>b: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="intersection">intersection<a class="headerlink" href="#intersection" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Intersection</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>a: T[]</li>
+<li>b: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="difference">difference<a class="headerlink" href="#difference" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Difference</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>a: T[]</li>
+<li>b: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="symmetricdifference">symmetricDifference<a class="headerlink" href="#symmetricdifference" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Symmetric Difference</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>a: T[]</li>
+<li>b: T[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="tobase64">toBase64<a class="headerlink" href="#tobase64" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Convert a string to base64</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="getbase64">getBase64<a class="headerlink" href="#getbase64" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get a string from base64</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="encrypt">encrypt<a class="headerlink" href="#encrypt" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Encrypt a string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="decrypt">decrypt<a class="headerlink" href="#decrypt" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Decrypt a string</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="update">update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Update a list</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="updateall">updateAll<a class="headerlink" href="#updateall" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Update all items in a list</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="deleteall">deleteAll<a class="headerlink" href="#deleteall" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Delete all items in a list</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>list: any[]</li>
+</ul>
+</li>
+</ul>
+<h3 id="merge">merge<a class="headerlink" href="#merge" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Merge a list</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="bulkmerge">bulkMerge<a class="headerlink" href="#bulkmerge" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Bulk merge a list</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="having">having<a class="headerlink" href="#having" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Having a list</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="include">include<a class="headerlink" href="#include" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Include a list</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="desc">desc<a class="headerlink" href="#desc" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Descending</li>
+<li>deterministic: true</li>
+<li>return: void</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="asc">asc<a class="headerlink" href="#asc" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Ascending</li>
+<li>deterministic: true</li>
+<li>return: void</li>
+<li>params:<ul>
+<li>value: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="ormexecute">orm.execute<a class="headerlink" href="#ormexecute" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Execute query</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>query: string</li>
+<li>data: any</li>
+<li>options: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="ormplan">orm.plan<a class="headerlink" href="#ormplan" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Plan of query</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>query: string</li>
+<li>options: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="ormmetadata">orm.metadata<a class="headerlink" href="#ormmetadata" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get metadata from query</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>query: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="ormmodel">orm.model<a class="headerlink" href="#ormmodel" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get model from query</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>query: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="ormparameters">orm.parameters<a class="headerlink" href="#ormparameters" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get parameters from query</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>query: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="ormconstraints">orm.constraints<a class="headerlink" href="#ormconstraints" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Get constraints from query</li>
+<li>deterministic: true</li>
+<li>return: any</li>
+<li>params:<ul>
+<li>query: string</li>
+</ul>
+</li>
+</ul>
+<h3 id="contains">contains<a class="headerlink" href="#contains" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Includes</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>source: string|T[]</li>
+<li>value: string|T</li>
+</ul>
+</li>
+</ul>
+<h3 id="substr">substr<a class="headerlink" href="#substr" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Substring</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>from: number</li>
+<li>count: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="concatenate">concatenate<a class="headerlink" href="#concatenate" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Concatenate</li>
+<li>deterministic: true</li>
+<li>return: string</li>
+<li>params:<ul>
+<li>values: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="startswith">startsWith<a class="headerlink" href="#startswith" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Starts with</li>
+<li>deterministic: true</li>
+<li>return: boolean</li>
+<li>params:<ul>
+<li>value: string</li>
+<li>sub: string</li>
+<li>start: number</li>
+</ul>
+</li>
+</ul>
+<h3 id="select">select<a class="headerlink" href="#select" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Map</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="each">each<a class="headerlink" href="#each" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Foreach</li>
+<li>deterministic: true</li>
+<li>return: void</li>
+<li>params:<ul>
+<li>list: any[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="where">where<a class="headerlink" href="#where" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Filter</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="order">order<a class="headerlink" href="#order" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Sort</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: any</li>
+</ul>
+</li>
+</ul>
+<h3 id="delete">delete<a class="headerlink" href="#delete" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Remove</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>predicate: boolean</li>
+</ul>
+</li>
+</ul>
+<h3 id="insert">insert<a class="headerlink" href="#insert" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Push</li>
+<li>deterministic: true</li>
+<li>return: T[]</li>
+<li>params:<ul>
+<li>list: T[]</li>
+<li>value: T</li>
+</ul>
+</li>
+</ul>
+<h3 id="len">len<a class="headerlink" href="#len" title="Permanent link">&para;</a></h3>
+<ul>
+<li>description: Length</li>
+<li>deterministic: true</li>
+<li>return: number</li>
+<li>params:<ul>
+<li>source: any[]|string</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

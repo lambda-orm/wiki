@@ -1,30 +1,29 @@
 # Grouping
 
-In the case of grouping, it is not necessary to define it explicitly, since it is deduced when one of the grouping functions is used. \
-The fields by which they are grouped are deduced by which they are contained with some of the grouping functions.
+This page shows how to group records and compute aggregates (sums, counts, maximums…), and how to filter the groups with `having`. The SQL shown is the one generated for MySQL.
 
-## Grouping Functions
+You do not declare the grouping: λORM deduces it when the query uses an aggregate function. The records are grouped by the properties returned that are not inside an aggregate function.
 
-|Function   |Description                                   										|
-|-----------|-----------------------------------------------------------------|
-|avg				|Calculates the average of the specified columns in a set of rows	|
-|count			|Calculating the number of rows in a set.													|
-|first			|Returns the first value of the selected column										|
-|last				|Returns the last value of the selected column.										|
-|max				|Calculating the maximum.																					|
-|min				|Calculating the minimum.																					|
-|sum				|Calculating the sum.																							|
+## Aggregate functions
 
-## Grouping by sum with order and filter
+| Function | Description |
+|:--|:--|
+| avg | Calculates the average of the values in a group. |
+| count | Counts the records in a group. |
+| first | Returns the first value in a group. |
+| last | Returns the last value in a group. |
+| max | Calculates the maximum. |
+| min | Calculates the minimum. |
+| sum | Calculates the sum. |
 
-Filters order details based on customer name
-Maps the results to get the order date and the total calculated as the sum of (quantity * unit price)
-Orders the results in descending order by total
+## Sum with filter and sort
+
+Reads, for the orders of a customer, the order date and the total (sum of quantity × unit price), sorted by total in descending order. The records are grouped by `order`, the only property returned that is not an aggregate.
 
 **Lambda:**
 
-```Typescript
-OrderDetails
+```typescript
+Orders.details
 	.filter(p => p.order.customer.name == customerName)
 	.map(p => ({ order: p.order.orderDate, total: sum(p.quantity * p.unitPrice) }))
 	.sort(p => desc(p.total))
@@ -32,31 +31,25 @@ OrderDetails
 
 **SQL Result:**
 
-``` sql
--- Selects order date and calculates the sum of (quantity * unit price) as 'total'
--- Performs inner join with Orders and Customers table to get additional customer information
--- Filters the results based on customer company name
--- Groups the results by order date
--- Orders the results in descending order by total
-SELECT o1.OrderDate AS `order`, SUM(o.Quantity * o.UnitPrice) AS `total` 
-FROM `Order Details` o 
-INNER JOIN Orders o1 ON o1.OrderID = o.OrderID 
-INNER JOIN Customers c ON c.CustomerID = o1.CustomerID 
-WHERE c.CompanyName = ? 
-GROUP BY o1.OrderDate 
-ORDER BY `total` desc 
+```sql
+SELECT o1.OrderDate AS `order`, SUM((o.Quantity * o.UnitPrice)) AS total
+FROM `Order Details` o
+INNER JOIN Orders o1 ON o1.OrderID = o.OrderID
+INNER JOIN Customers c ON c.CustomerID = o1.CustomerID
+WHERE c.CompanyName = ?
+GROUP BY o1.OrderDate
+ORDER BY total desc
 ```
 
-## Grouping and Having
+## Grouping and having
 
-Filters products based on price and supplier country, or stock quantity
-Filters the results based on maximum price
-Maps the results to get the product category and maximum price
-Sorts the results in descending order by maximum price
+Reads the highest price of each category, considering the products with a price greater than 5 whose supplier is from a given country, or with fewer than 3 units in stock. Only the categories whose highest price is greater than 50 are returned, sorted by that price in descending order.
+
+`filter` is applied to the records before grouping (WHERE); `having` is applied to the groups (HAVING).
 
 **Lambda:**
 
-```Typescript
+```typescript
 Products
 	.filter(p => (p.price > 5 && p.supplier.country == country) || (p.inStock < 3))
 	.having(p => max(p.price) > 50)
@@ -67,46 +60,37 @@ Products
 **SQL Result:**
 
 ```sql
--- Selects product category and calculates the maximum price as 'largestPrice'
--- Performs inner join with Suppliers and Categories tables to get additional product information
--- Filters the results based on price and supplier country, or stock quantity
--- Groups the results by product category
--- Filters the results based on maximum price
--- Orders the results in descending order by maximum price
-SELECT c.CategoryName AS `category`, MAX(p.UnitPrice) AS `largestPrice` 
-FROM Products p 
-INNER JOIN Suppliers s ON s.SupplierID = p.SupplierID 
-INNER JOIN Categories c ON c.CategoryID = p.CategoryID 
-WHERE ((p.UnitPrice > 5 AND s.Country = ?) OR p.UnitsInStock < 3) 
-GROUP BY c.CategoryName 
-HAVING MAX(p.UnitPrice) > 50 
-ORDER BY `largestPrice` desc 
+SELECT c.CategoryName AS category, MAX(p.UnitPrice) AS largestPrice
+FROM Products p
+INNER JOIN Suppliers s ON s.SupplierID = p.SupplierID
+INNER JOIN Categories c ON c.CategoryID = p.CategoryID
+WHERE ((p.UnitPrice > 5 AND s.Country = ?) OR p.UnitsInStock < 3)
+GROUP BY c.CategoryName
+HAVING MAX(p.UnitPrice) > 50
+ORDER BY largestPrice desc
 ```
 
 ## Code example
 
-```Typescript
-import { orm } from '../../lib'
-import { Products } from '../northwind/model/__model'
+```typescript
+import { orm } from '@lambdaorm/lib'
+import { Products } from './domain/model' // model generated by `lambdaorm build`
+
 (async () => {
-	try {		
-		await orm.init('./config/northwind.yaml')
-		// Defining a query function that accepts a country parameter
-		// Filtering products based on price and supplier country, or stock quantity
-		// Filtering the results based on maximum price
-		// Mapping the results to get the product category and maximum price
-		// Sorting the results in descending order by maximum price		
-		const query = (country:string) => Products						
-						.filter(p => (p.price > 5 && p.supplier.country == country) || (p.inStock < 3))						
-						.having(p => max(p.price) > 50)						
-						.map(p => ({ category: p.category.name, largestPrice: max(p.price) }))						
-						.sort(p => desc(p.largestPrice))
-		const result = await orm.execute(query, {country:'ARG'})
+	try {
+		await orm.init('./lambdaORM.yaml')
+		// highest price per category, for the categories whose highest price is greater than 50
+		const query = (country: string) => Products
+			.filter(p => (p.price > 5 && p.supplier.country == country) || (p.inStock < 3))
+			.having(p => max(p.price) > 50)
+			.map(p => ({ category: p.category.name, largestPrice: max(p.price) }))
+			.sort(p => desc(p.largestPrice))
+		const result = await orm.execute(query, { country: 'USA' })
 		console.log(JSON.stringify(result, null, 2))
-	} catch (error:any) {
+	} catch (error: any) {
 		console.error(error.stack)
 	} finally {
-		// Ending the ORM connection
+		// releases the connections
 		await orm.end()
 	}
 })()

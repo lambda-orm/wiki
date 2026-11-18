@@ -1,15 +1,15 @@
 # Extend
 
-Through the `extends` property we can extend the configuration in the schema. \
-Entities, mappings and mapping entities can be extended.
+This page shows how to reuse definitions with the `extends` key.
+
+With `extends`, an element of the schema inherits the definition of another one. Enums, entities, mappings and entity mappings can be extended.
 
 ## Extend Entity
 
-In this scheme we can see how to extend entities. \
-In this case, the Countries and States entities are extended from the abstract entity Positions \
-It is not mandatory that the entity be abstract to be able to use it as a basis to extend
+In this schema, the entities `Countries` and `States` extend the abstract entity `Positions`, so both get the properties `latitude` and `longitude`.
+An entity does not need to be abstract to be extended; an abstract entity is only a base and has no table.
 
-![schema](../images/schema2.svg)
+![schema](images/schema2.svg)
 
 ```yaml
 domain:
@@ -68,6 +68,10 @@ infrastructure:
         database: test
 ```
 
-## Laboratories
+## Extend mappings
+
+Mappings and entity mappings are extended in the same way. See [Abstract and extends in Entity Mapping](SchemaDefinition.md#abstract-and-extends-in-entity-mapping), and the mapping `mongoDb`, which extends the mapping `default`, in the [Listener example](SchemaExample-Listener.md#listener-example).
+
+## Labs
 
 - [CLI - extend model](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/02-extend-model)

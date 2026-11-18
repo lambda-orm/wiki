@@ -1,88 +1,84 @@
-|Operator   |Description  |
-|-----------|-------------|
-|!					|not					|
-|&&					|and					|
-|\|\|				|or						|
+# Logical Operators
 
-## Examples
+Logical operators combine or negate boolean expressions, for example to join several conditions in the predicate of `filter`.
 
-| Example           																																																	| Result 				|
-|---------------------------------------------------------------------------------------------------------------------|---------------|
-|Countries.filter(p=> p.subregion == "South America" &&  p.longitude < -30 ).map(p=> {result:count(1)})								|[{"result":15}]|
-|Countries.filter(p=> p.subregion == "South America" || p.subregion == "Central America" ).map(p=> {result:count(1)})	|[{"result":23}]|
-|Countries.filter(p=> p.region == "Americas" &&  p.subregion != "Northern America" ).map(p=> {result:count(1)})				|[{"result":51}]|
+!!! note "About the examples"
+    The examples run against the `Countries` entity of the countries sample schema. Each one shows the query, the result it returned on the test database and the SQL sentence that λORM generated for MySQL. Other engines receive their own translation; to see the sentence generated for your data source, use [`orm.plan`](../Metadata.md).
 
-## Sentences
+## Summary
 
-**Lambda:**
+| Operator | Description | SQL |
+|---|---|---|
+| `!` | Logical NOT | `NOT` |
+| `&&` | Logical AND | `AND` |
+| `||` | Logical OR | `OR` |
 
-Query to get the count of countries in the Americas region
+## NOT (`!`)
 
-```js
+Negates a boolean expression: returns `true` when `value` is `false`, and `false` when it is `true`.
+
+**Syntax:** `!value`
+
+For example, `Countries.filter(p=> !(p.iso3 == "BRA"))` generates the condition `WHERE NOT c.iso3 = 'BRA'`.
+
+## AND (`&&`)
+
+Returns `true` when both operands are `true`.
+
+**Syntax:** `a && b`
+
+Number of countries in South America whose longitude is less than -30:
+
+```typescript
 Countries.filter(p=> p.subregion == "South America" &&  p.longitude < -30 ).map(p=> {result:count(1)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":15}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT COUNT(1) AS result 
-FROM Countries c  
-WHERE (c.subregion = 'South America' AND c.longitude < -30) 
+SELECT COUNT(1) AS result
+FROM Countries c
+WHERE (c.subregion = 'South America' AND c.longitude < -30)
 ```
 
-**Lambda:**
+## OR (`||`)
 
-Query to get the count of countries in each region
+Returns `true` when at least one of the operands is `true`.
 
-```js
+**Syntax:** `a || b`
+
+Number of countries in South America or Central America:
+
+```typescript
 Countries.filter(p=> p.subregion == "South America" || p.subregion == "Central America" ).map(p=> {result:count(1)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":23}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT COUNT(1) AS result 
-FROM Countries c  
-WHERE (c.subregion = 'South America' OR c.subregion = 'Central America') 
+SELECT COUNT(1) AS result
+FROM Countries c
+WHERE (c.subregion = 'South America' OR c.subregion = 'Central America')
 ```
 
-**Lambda:**
+## Combining conditions
 
-Query to get the maximum latitude of countries in each region
+Operators can be combined with the comparison operators described in [Comparison](Comparison.md). Number of countries in the Americas region that are not in Northern America:
 
-```js
+```typescript
 Countries.filter(p=> p.region == "Americas" &&  p.subregion != "Northern America" ).map(p=> {result:count(1)})
 ```
 
-**SQL Result:**
+**Result:** `[{"result":51}]`
+
+**Generated SQL (MySQL):**
 
 ```sql
-SELECT COUNT(1) AS result 
-FROM Countries c  
-WHERE (c.region = 'Americas' AND c.subregion <> 'Northern America') 
+SELECT COUNT(1) AS result
+FROM Countries c
+WHERE (c.region = 'Americas' AND c.subregion <> 'Northern America')
 ```
-
-## Definition
-
-### Operator !
-
-- description: not
-- return: boolean
-- params:
-	- value: boolean
-
-### Operator &&
-
-- description: and
-- return: boolean
-- params:
-	- a: boolean
-	- b: boolean
-
-### Operator ||
-
-- description: or
-- return: boolean
-- params:
-	- a: boolean
-	- b: boolean

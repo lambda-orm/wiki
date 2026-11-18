@@ -1,6 +1,6 @@
 # Fetch
 
-The fetch is the process that shows the differences between the sources (Databases) and the schema, without applying any change. It is done by the command `lambdaorm fetch`.
+This page explains fetch, which shows the differences between the sources (databases) of a stage and the schema without applying any change: what it compares, the CLI command `lambdaorm fetch` and the `orm.stage.fetch()` method.
 
 ## What fetch compares
 
@@ -11,7 +11,7 @@ Fetch reads the databases of the stage and compares them with the model (drift).
 - columns with another type, length or nullability,
 - a different primary key.
 
-Each entity carries its `differences`, readable. **When the databases are in step with the model, every mapping has no entities.**
+Each entity has its `differences`, in readable text. **When the databases are in step with the model, every mapping has no entities.**
 
 Relations (foreign keys) and indexes are not compared.
 On MongoDB, which is schemaless, fetch only checks that each collection exists.
@@ -27,7 +27,7 @@ Example of a result, after adding the property `phone` to `Customers` in the mod
         - column phone missing in the database
 ```
 
-In step:
+Result when the database is in step with the model:
 
 ```yaml
 - name: default
@@ -40,7 +40,12 @@ In step:
 lambdaorm fetch -s default -o yaml
 ```
 
-The `-o` argument sets the output format: `json`, `beautiful`, `light` or `yaml`.
+| Option | Description |
+|--------|-------------|
+| `-w`, `--workspace` | Folder of the project (default: the current folder). |
+| `-s`, `--stage` | Name of the stage (default: the first stage). |
+| `-e`, `--envfile` | File of environment variables to read. |
+| `-o`, `--output` | Output format: `json`, `beautiful`, `light` or `yaml`. |
 
 **The command exits with code 1 when there are differences** (and 0 when the databases are in step), so it can be used in CI to detect drift:
 
@@ -48,13 +53,13 @@ The `-o` argument sets the output format: `json`, `beautiful`, `light` or `yaml`
 lambdaorm fetch -s default || echo "the database differs from the model"
 ```
 
-[View lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/10-fetch)
+See the [CLI lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/10-fetch).
 
 ## Node
 
 `orm.stage.fetch()` returns the differences. To read the mappings of the databases as they are (every table and column), use `orm.stage.read()`.
 
-```Typescript
+```typescript
 import { Orm } from '@lambdaorm/lib'
 (async () => {
 	const orm = new Orm()
@@ -74,4 +79,4 @@ import { Orm } from '@lambdaorm/lib'
 })()
 ```
 
-[View lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/10-fetch)
+See the [Node lab](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node/10-fetch).
