@@ -7,7 +7,7 @@ build model, repositories.
 | parameter		| short | describe 																												|
 |-------------|-------|-----------------------------------------------------------------|
 |workspace		| -w 		| Project path.																										|
-|url					| -u 		| When working with a client you must pass the url of the service	|
+|url					| -u 		| URL of the schema on a Data Gateway	|
 |language			| -l 		| Develop language: `node` (default) or `client-node`.							|
 |model				| -m 		| Build model.																										|
 |repositories	| -r 		| Build repositories.																							|

@@ -1,0 +1,29 @@
+# Data Gateway: the northwind example of the Getting started guide
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: northwind
+      POSTGRES_PASSWORD: northwind
+      POSTGRES_DB: northwind
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "northwind" ]
+      interval: 2s
+      retries: 30
+
+  data-gateway:
+    image: flaviorita/data-gateway:3.0.0-rc.4
+    depends_on:
+      postgres: { condition: service_healthy }
+    environment:
+      # the connection of the source "Northwind" of lambdaORM.yaml
+      NORTHWIND_DB: '{"host":"postgres","port":5432,"user":"northwind","password":"northwind","database":"northwind"}'
+      READER_KEY: ${READER_KEY:-reader-demo-key}
+      BACKEND_KEY: ${BACKEND_KEY:-backend-demo-key}
+    volumes:
+      - ./data-gateway.config.yaml:/config/data-gateway.config.yaml:ro
+      - ./workspace:/workspace
+    ports:
+      - "${HTTP_PORT:-8080}:8080"
+      - "${MCP_PORT:-8081}:8081"
+      - "${WS_PORT:-8083}:8083"

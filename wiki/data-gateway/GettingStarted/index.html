@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lambda-orm.github.io/wiki/data-gateway/GettingStarted/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Getting started - λORM Wiki</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs2015.min.css" />
+        <link href="../../assets/wiki-v2.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Getting started";
+        var mkdocs_page_input_path = "data-gateway/GettingStarted.md";
+        var mkdocs_page_url = "/wiki/data-gateway/GettingStarted/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Features">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../cli">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Getting started</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-the-files">1. The files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-start-it">2. Start it</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-create-the-tables">3. Create the tables</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-import-the-data-through-the-rest-api">4. Import the data, through the REST API</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-query">5. Query</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-write-and-the-permissions">6. Write, and the permissions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-a-script-several-queries-in-one-transaction">7. A script: several queries in one transaction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-the-api-documentation">8. The API documentation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#9-the-ui">9. The UI</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#10-an-ai-agent-through-mcp">10. An AI agent, through MCP</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#11-websocket">11. WebSocket</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#12-stop-it">12. Stop it</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#next-steps">Next steps</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Transports/">Transports</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Security/">Security</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Operations/">Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Change log</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../queries/Query-Language">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Expression">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Select">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Join">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Grouping">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Include">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Insert">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/BulkInsert">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Update">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Delete">Delete</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/operatorsAndFunctions/OperatorsAndFunctions">Operators & Functions</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Expressions">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-EnvironmentVariables">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Composite">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Listener">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Basic">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Extend">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-MultiplesStages">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-StageMultiplesSources">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Composite">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Push">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Pull">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Fetch">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Introspect">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Incorporate">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Schema-Use">Use</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Engines">Engines</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/CHANGELOG">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Data Gateway</li>
+      <li class="breadcrumb-item active">Getting started</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="getting-started">Getting started</h1>
+<p>This guide goes from an empty folder to the northwind database published by a Data Gateway: its REST API, its web UI,
+MCP for an AI agent and its WebSocket API. It takes about ten minutes and needs only <strong>Docker</strong> (with Docker Compose).</p>
+<p><img alt="Overview" src="../images/overview.svg" /></p>
+<h2 id="1-the-files">1. The files</h2>
+<p>Create a folder with this layout (the files can be downloaded from this wiki):</p>
+<pre><code class="language-text">northwind/
+├── docker-compose.yml          ← PostgreSQL and the Data Gateway
+├── data-gateway.config.yaml    ← how the gateway exposes the schema and who can use it
+├── data.json                   ← the rows of northwind, to import
+└── workspace/
+    └── lambdaORM.yaml          ← the λORM schema: domain, mapping, source, stage
+</code></pre>
+<pre><code class="language-sh">mkdir -p northwind/workspace &amp;&amp; cd northwind
+W=https://lambda-orm.github.io/wiki/data-gateway/northwind
+curl -sO $W/docker-compose.yml
+curl -sO $W/data-gateway.config.yaml
+curl -sO $W/data.json
+curl -s $W/lambdaORM.yaml -o workspace/lambdaORM.yaml
+</code></pre>
+<h3 id="the-schema-workspacelambdaormyaml">The schema: <code>workspace/lambdaORM.yaml</code></h3>
+<p>A normal λORM <a href="../../schema/SchemaDefinition/">schema</a>: the <strong>domain</strong> (entities, properties, relations), the
+<strong>mapping</strong> to the tables, one <strong>source</strong> (PostgreSQL) and the <strong>stage</strong> <code>default</code>. An excerpt:</p>
+<pre><code class="language-yaml">domain:
+  entities:
+  - name: Products
+    primaryKey: [&quot;id&quot;]
+    uniqueKey: [&quot;name&quot;, &quot;supplierId&quot;]
+    properties:
+    - { name: id, type: integer, required: true, autoIncrement: true }
+    - { name: name, required: true }
+    - { name: categoryId, type: integer }
+    - { name: price, type: decimal, default: 0 }
+    relations:
+    - { name: category, from: categoryId, entity: Categories, to: id, target: products }
+  # … Categories, Customers, Orders, Orders.details
+infrastructure:
+  mappings:
+  - name: default
+    entities:
+    - name: Products
+      mapping: Products
+      properties:
+      - { name: id, mapping: ProductID }
+      - { name: name, mapping: ProductName }
+      # …
+  sources:
+  - name: Northwind
+    dialect: PostgreSQL
+    mapping: default
+    connection: ${NORTHWIND_DB}      # an environment variable: the gateway gives it to this schema
+  stages:
+  - name: default
+    sources:
+    - name: Northwind
+</code></pre>
+<h3 id="the-gateway-data-gatewayconfigyaml">The gateway: <code>data-gateway.config.yaml</code></h3>
+<pre><code class="language-yaml">orm:
+  workspacePath: /workspace            # the folder with lambdaORM.yaml (a single schema: served at the root)
+  schemas:
+    - path: &quot;&quot;                         # that schema: it receives only the variables given here
+      env: { NORTHWIND_DB: $NORTHWIND_DB }
+authentication:
+  adapter: local
+  type: apikey
+  header: X-Api-Key
+  keys:
+    - { name: reader,  value: $READER_KEY,  permissions: [ read ] }
+    - { name: backend, value: $BACKEND_KEY, permissions: [ read, write, script, queue, stageImport ] }
+scripts:
+  enabled: true
+transports:
+  http:
+    port: 8080
+    ui: { enabled: true }
+  mcpHttp:
+    port: 8081
+  webSocket:
+    port: 8083
+</code></pre>
+<ul>
+<li><strong>Two credentials:</strong> <code>reader</code> can only read; <code>backend</code> can also write, run scripts, queue and import.</li>
+<li><strong>Three transports:</strong> REST and the UI on 8080, MCP on 8081, WebSocket on 8083.</li>
+<li><strong>The variables of the schema:</strong> each schema receives only its own variables, for its safety; <code>env</code> gives it the
+  connection.</li>
+</ul>
+<h3 id="docker-composeyml"><code>docker-compose.yml</code></h3>
+<pre><code class="language-yaml">services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: northwind
+      POSTGRES_PASSWORD: northwind
+      POSTGRES_DB: northwind
+    healthcheck:
+      test: [ &quot;CMD&quot;, &quot;pg_isready&quot;, &quot;-U&quot;, &quot;northwind&quot; ]
+      interval: 2s
+      retries: 30
+
+  data-gateway:
+    image: flaviorita/data-gateway:3.0.0-rc.4
+    depends_on:
+      postgres: { condition: service_healthy }
+    environment:
+      NORTHWIND_DB: '{&quot;host&quot;:&quot;postgres&quot;,&quot;port&quot;:5432,&quot;user&quot;:&quot;northwind&quot;,&quot;password&quot;:&quot;northwind&quot;,&quot;database&quot;:&quot;northwind&quot;}'
+      READER_KEY: ${READER_KEY:-reader-demo-key}
+      BACKEND_KEY: ${BACKEND_KEY:-backend-demo-key}
+    volumes:
+      - ./data-gateway.config.yaml:/config/data-gateway.config.yaml:ro
+      - ./workspace:/workspace
+    ports:
+      - &quot;${HTTP_PORT:-8080}:8080&quot;
+      - &quot;${MCP_PORT:-8081}:8081&quot;
+      - &quot;${WS_PORT:-8083}:8083&quot;
+</code></pre>
+<p>The keys <code>reader-demo-key</code> and <code>backend-demo-key</code> are for this example only: in any real use, give <code>READER_KEY</code> and
+<code>BACKEND_KEY</code> long random values (<code>openssl rand -hex 24</code>).</p>
+<h2 id="2-start-it">2. Start it</h2>
+<pre><code class="language-sh">docker compose up -d
+curl http://localhost:8080/schemas
+</code></pre>
+<pre><code class="language-json">[ { &quot;path&quot;: &quot;&quot;, &quot;status&quot;: &quot;ready&quot;, &quot;since&quot;: &quot;2026-11-18T14:07:33.561Z&quot;, &quot;restarts&quot;: 0 } ]
+</code></pre>
+<p>The schema is <code>ready</code>: it is served at the root (<code>/execute</code>, <code>/mcp</code>, …). If it says <code>error</code>, <code>reason</code> tells why (a
+database that can't be reached, a variable not given); the gateway keeps retrying.</p>
+<h2 id="3-create-the-tables">3. Create the tables</h2>
+<p>The image includes the <a href="../../cli/">λORM CLI</a>. <code>push</code> creates the tables of the stage from the schema:</p>
+<pre><code class="language-sh">docker compose exec data-gateway lambdaorm push -w /workspace -s default
+</code></pre>
+<pre><code class="language-text">create table Categories
+…
+add foreign key Order Details_product_FK
+</code></pre>
+<h2 id="4-import-the-data-through-the-rest-api">4. Import the data, through the REST API</h2>
+<p>The import needs the <code>stageImport</code> permission, so <code>reader</code> can't:</p>
+<pre><code class="language-sh">curl -X POST http://localhost:8080/stages/default/import -H &quot;X-Api-Key: reader-demo-key&quot; \
+  -H &quot;Content-Type: application/json&quot; -d @data.json
+</code></pre>
+<pre><code class="language-json">{ &quot;error&quot;: &quot;ForbiddenError&quot;, &quot;message&quot;: &quot;the credential \&quot;reader\&quot; does not have the \&quot;stageImport\&quot; permission&quot; }
+</code></pre>
+<p>and <code>backend</code> can (it answers <code>204</code>, and the import leaves an audit line in the log):</p>
+<pre><code class="language-sh">curl -X POST http://localhost:8080/stages/default/import -H &quot;X-Api-Key: backend-demo-key&quot; \
+  -H &quot;Content-Type: application/json&quot; -d @data.json
+docker compose logs data-gateway | grep '&quot;type&quot;:&quot;audit&quot;'
+</code></pre>
+<pre><code class="language-json">{&quot;type&quot;:&quot;audit&quot;,&quot;time&quot;:&quot;2026-11-18T14:07:39.720Z&quot;,&quot;schema&quot;:&quot;&quot;,&quot;transport&quot;:&quot;http&quot;,&quot;credential&quot;:&quot;backend&quot;,&quot;operation&quot;:&quot;stageImport&quot;,&quot;stage&quot;:&quot;default&quot;,&quot;durationMs&quot;:189,&quot;result&quot;:&quot;ok&quot;}
+</code></pre>
+<h2 id="5-query">5. Query</h2>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:8080/execute?format=beautiful&quot; -H &quot;X-Api-Key: reader-demo-key&quot; \
+  -H &quot;Content-Type: application/json&quot; -d '{
+    &quot;query&quot;: &quot;Products.filter(p =&gt; p.price &gt; minPrice).map(p =&gt; ({ name: p.name, category: p.category.name, price: p.price })).sort(p =&gt; desc(p.price)).page(1, 3)&quot;,
+    &quot;data&quot;: { &quot;minPrice&quot;: 50 }
+  }'
+</code></pre>
+<pre><code class="language-json">[
+  { &quot;name&quot;: &quot;Côte de Blaye&quot;, &quot;category&quot;: &quot;Beverages&quot;, &quot;price&quot;: 263.5 },
+  { &quot;name&quot;: &quot;Thüringer Rostbratwurst&quot;, &quot;category&quot;: &quot;Meat/Poultry&quot;, &quot;price&quot;: 123.79 },
+  { &quot;name&quot;: &quot;Mishi Kobe Niku&quot;, &quot;category&quot;: &quot;Meat/Poultry&quot;, &quot;price&quot;: 97 }
+]
+</code></pre>
+<p><code>p.category.name</code> follows the relation: λORM joins <code>Categories</code>. <code>plan</code> shows how, without running it:</p>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:8080/plan?format=beautiful&quot; -H &quot;X-Api-Key: reader-demo-key&quot; -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;query&quot;: &quot;Products.filter(p =&gt; p.price &gt; minPrice).map(p =&gt; ({ name: p.name, category: p.category.name, price: p.price })).sort(p =&gt; desc(p.price)).page(1, 3)&quot;}'
+</code></pre>
+<pre><code class="language-json">{
+  &quot;entity&quot;: &quot;Products&quot;,
+  &quot;dialect&quot;: &quot;PostgreSQL&quot;,
+  &quot;source&quot;: &quot;Northwind&quot;,
+  &quot;sentence&quot;: &quot;SELECT p.ProductName AS \&quot;name\&quot;, c.CategoryName AS \&quot;category\&quot;, p.UnitPrice AS \&quot;price\&quot; FROM Products p INNER JOIN Categories c ON c.CategoryID = p.CategoryID WHERE p.UnitPrice &gt; $1 ORDER BY p.UnitPrice desc  OFFSET 0 LIMIT 3 &quot;
+}
+</code></pre>
+<h2 id="6-write-and-the-permissions">6. Write, and the permissions</h2>
+<p>A query that writes, with <code>reader</code>:</p>
+<pre><code class="language-sh">curl -X POST http://localhost:8080/execute -H &quot;X-Api-Key: reader-demo-key&quot; -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;query&quot;: &quot;Products.update(p =&gt; ({ price: price })).filter(p =&gt; p.id == id)&quot;, &quot;data&quot;: {&quot;id&quot;: 38, &quot;price&quot;: 270}}'
+</code></pre>
+<pre><code class="language-json">{ &quot;error&quot;: &quot;ForbiddenError&quot;, &quot;message&quot;: &quot;the credential \&quot;reader\&quot; does not have the \&quot;write\&quot; permission&quot; }
+</code></pre>
+<p>The gateway refused it <strong>before reaching the database</strong>, because the query is not a select. With <code>backend</code> it
+answers the rows updated, <code>1</code>, and leaves an audit line.</p>
+<h2 id="7-a-script-several-queries-in-one-transaction">7. A script: several queries in one transaction</h2>
+<pre><code class="language-sh">curl -X POST &quot;http://localhost:8080/script?format=beautiful&quot; -H &quot;X-Api-Key: backend-demo-key&quot; -H &quot;Content-Type: application/json&quot; -d '{
+  &quot;script&quot;: &quot;orders = orm.execute(\&quot;Orders.filter(p =&gt; p.customerId == customerId).map(p =&gt; p.id)\&quot;, { customerId: customerId }); { customer: customerId, orders: orders.length() }&quot;,
+  &quot;data&quot;: { &quot;customerId&quot;: &quot;ALFKI&quot; }
+}'
+</code></pre>
+<pre><code class="language-json">{ &quot;customer&quot;: &quot;ALFKI&quot;, &quot;orders&quot;: 6 }
+</code></pre>
+<p>A script chooses the status of the answer with <code>throw { status, message }</code>: a <code>customer not found</code> with
+<code>status: 404</code> answers <code>404</code>. See <a href="../../usage/Script/">Script</a>.</p>
+<h2 id="8-the-api-documentation">8. The API documentation</h2>
+<p><code>http://localhost:8080/doc/</code> is the Swagger UI of the REST API. <strong>Authorize</strong> asks for the API key in the
+<code>X-Api-Key</code> header; then every method can be tried from the page.</p>
+<p><img alt="Swagger" src="../images/swagger.png" /></p>
+<p><img alt="Authorize" src="../images/swagger-authorize.png" /></p>
+<h2 id="9-the-ui">9. The UI</h2>
+<p>Open <code>http://localhost:8080/ui/</code>:</p>
+<p><img alt="Home" src="../images/ui-home.png" /></p>
+<p><strong>Login</strong> with the API key (the <strong>Show</strong> button shows what was typed):</p>
+<p><img alt="Login" src="../images/ui-login.png" /></p>
+<p>On the left, the <strong>explorer</strong>: the schema, its domain, its entities with their properties and relations. Choose the
+schema <code>/</code>, write a query (the editor completes the entities and properties as you type), its data, and <strong>execute</strong>
+(Ctrl+Enter). The result can be seen as a table, tree, JSON or YAML, copied and exported:</p>
+<p><img alt="A query" src="../images/ui-query.png" /></p>
+<p><img alt="Autocompletion" src="../images/ui-autocomplete.png" /></p>
+<p><strong>Save it</strong> with Ctrl+S: a name, a description and a folder (folders are created with the <strong>+</strong> of the schema):</p>
+<p><img alt="Save a query" src="../images/ui-save-query.png" /></p>
+<p>A double click on an entity (or its <strong>Open</strong> button) shows its <strong>form</strong>: properties, relations, keys and indexes, its
+rows and its diagram.</p>
+<p><img alt="Entity form" src="../images/ui-entity-properties.png" /></p>
+<p><img alt="Relations of an entity" src="../images/ui-entity-relations.png" /></p>
+<p><strong>A diagram:</strong> the <strong>+</strong> of a folder → <strong>New diagram</strong>, choose <code>Orders</code> and <strong>Add their neighbours</strong>:</p>
+<p><img alt="New diagram" src="../images/ui-new-diagram.png" /></p>
+<p>The boxes are laid out by themselves; they and the lines can be dragged, and <strong>Save</strong> keeps them where they were left:</p>
+<p><img alt="Diagram" src="../images/ui-diagram.png" /></p>
+<p>Everything is explained in <a href="../Ui/">UI</a>.</p>
+<h2 id="10-an-ai-agent-through-mcp">10. An AI agent, through MCP</h2>
+<p>With <a href="https://claude.com/claude-code">Claude Code</a>:</p>
+<pre><code class="language-sh">claude mcp add --transport http northwind http://localhost:8081/mcp --header &quot;X-Api-Key: reader-demo-key&quot;
+</code></pre>
+<p>Then ask it, for example, <em>"how many products does each category have?"</em>. The agent sees the tools the <code>reader</code>
+credential can use (<code>orm_execute</code>, <code>orm_plan</code>, <code>schema_domain</code>, …; not the ones that write), with the domain of
+northwind in their descriptions, and answers with a query like:</p>
+<pre><code class="language-json">{ &quot;name&quot;: &quot;orm_execute&quot;, &quot;arguments&quot;: { &quot;query&quot;: &quot;Categories.map(p =&gt; ({ category: p.name, products: count(p.products.id) }))&quot; } }
+</code></pre>
+<pre><code class="language-json">[ { &quot;category&quot;: &quot;Grains/Cereals&quot;, &quot;products&quot;: 7 }, { &quot;category&quot;: &quot;Beverages&quot;, &quot;products&quot;: 12 }, … ]
+</code></pre>
+<p>With <code>reader</code>, the agent cannot change anything, whatever it is asked. See <a href="../Mcp/">MCP</a>.</p>
+<h2 id="11-websocket">11. WebSocket</h2>
+<p>One connection for every operation, with notifications. With <code>@lambdaorm/client</code>:</p>
+<pre><code class="language-ts">import { orm } from '@lambdaorm/client'
+
+await orm.init('ws://localhost:8083/', { headers: { 'X-Api-Key': 'reader-demo-key' } })
+const customers = await orm.execute('Customers.filter(p =&gt; p.country == country).map(p =&gt; p.name)', { country: 'Argentina' })
+// [ { name: 'Cactus Comidas para llevar' }, { name: 'Océano Atlántico Ltda.' }, { name: 'Rancho grande' } ]
+await orm.end()
+</code></pre>
+<p>or the JSON-RPC messages themselves:</p>
+<pre><code class="language-json">→ { &quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;id&quot;: 1, &quot;method&quot;: &quot;query.execute&quot;, &quot;params&quot;: { &quot;query&quot;: &quot;Customers.filter(p =&gt; p.country == country).map(p =&gt; p.name)&quot;, &quot;data&quot;: { &quot;country&quot;: &quot;Argentina&quot; } } }
+← { &quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;id&quot;: 1, &quot;result&quot;: [ { &quot;name&quot;: &quot;Cactus Comidas para llevar&quot; }, { &quot;name&quot;: &quot;Océano Atlántico Ltda.&quot; }, { &quot;name&quot;: &quot;Rancho grande&quot; } ] }
+</code></pre>
+<p>See <a href="../WebSocket/">WebSocket API</a>.</p>
+<h2 id="12-stop-it">12. Stop it</h2>
+<pre><code class="language-sh">docker compose down            # keeps nothing: the database is in the container
+</code></pre>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li>Several schemas, one route each, and the environment of each: <a href="../Configuration/#schemas">Configuration</a>.</li>
+<li>Credentials per schema or per transport, the audit, the limits: <a href="../Security/">Security</a>.</li>
+<li>Every REST method: <a href="../Rest/">REST API</a>. Production: <a href="../Operations/">Operations</a>.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Configuration/" class="btn btn-neutral float-right" title="Configuration">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Configuration/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../assets/wiki-v2.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

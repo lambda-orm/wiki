@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lambda-orm.github.io/wiki/data-gateway/Mcp/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>MCP - λORM Wiki</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs2015.min.css" />
+        <link href="../../assets/wiki-v2.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "MCP";
+        var mkdocs_page_input_path = "data-gateway/Mcp.md";
+        var mkdocs_page_url = "/wiki/data-gateway/Mcp/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Features">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../cli">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../GettingStarted/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Transports/">Transports</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">MCP</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#tools">Tools</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#results-and-errors">Results and errors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-an-agent-can-do">What an agent can do</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#transports">Transports</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Security/">Security</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Operations/">Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Change log</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../queries/Query-Language">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Expression">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Select">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Join">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Grouping">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Include">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Insert">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/BulkInsert">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Update">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Delete">Delete</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/operatorsAndFunctions/OperatorsAndFunctions">Operators & Functions</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Expressions">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-EnvironmentVariables">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Composite">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Listener">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Basic">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Extend">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-MultiplesStages">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-StageMultiplesSources">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Composite">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Push">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Pull">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Fetch">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Introspect">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Incorporate">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Schema-Use">Use</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Engines">Engines</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/CHANGELOG">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Data Gateway</li>
+      <li class="breadcrumb-item active">MCP</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="mcp">MCP</h1>
+<p>The gateway is a <a href="https://modelcontextprotocol.io">Model Context Protocol</a> server, so AI agents (Claude Code and any
+MCP client) can explore the domain and query the data with λORM's language. There is <strong>one MCP server per schema</strong>
+(<code>/iot/v1/mcp</code>): its tools describe that schema's domain, and each version is registered as a separate server in the
+client (<code>iot-v1</code>, <code>iot-v2</code>).</p>
+<pre><code class="language-sh">claude mcp add --transport http iot-v1 http://localhost:8081/iot/v1/mcp --header &quot;X-Api-Key: $KEY&quot;
+</code></pre>
+<p>With a single schema at the root: <code>http://localhost:8081/mcp</code>.</p>
+<h2 id="tools">Tools</h2>
+<p>One tool per operation of the schema, <strong>writes included</strong>: an agent can do what an application does, <strong>if its
+credential allows it</strong>. The descriptions and input schemas are generated when the schema starts and carry its domain
+(entities, properties, relations, enums), so the model knows what to query without a previous call.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Arguments</th>
+<th>REST equivalent</th>
+<th>Permission</th>
+<th>Hint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>orm_execute</code></td>
+<td><code>query</code>, <code>data?</code>, <code>options?</code></td>
+<td><code>POST /execute</code></td>
+<td><code>read</code> (selects) or <code>write</code></td>
+<td>read only with <code>read</code>; destructive with <code>write</code></td>
+</tr>
+<tr>
+<td><code>orm_execute_script</code></td>
+<td><code>script</code>, <code>data?</code>, <code>options?</code></td>
+<td><code>POST /script</code></td>
+<td><code>script</code></td>
+<td>destructive</td>
+</tr>
+<tr>
+<td><code>orm_execute_queued</code></td>
+<td><code>topic</code>, <code>query</code>, <code>data?</code>, <code>chunk?</code>, <code>options?</code></td>
+<td><code>POST /execute-queued</code></td>
+<td><code>queue</code></td>
+<td>destructive</td>
+</tr>
+<tr>
+<td><code>orm_plan</code></td>
+<td><code>query</code>, <code>options?</code></td>
+<td><code>POST /plan</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>orm_metadata</code></td>
+<td><code>query</code></td>
+<td><code>POST /metadata</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>orm_model</code></td>
+<td><code>query</code></td>
+<td><code>POST /model</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>orm_parameters</code></td>
+<td><code>query</code></td>
+<td><code>POST /parameters</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>orm_constraints</code></td>
+<td><code>query</code></td>
+<td><code>POST /constraints</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>schema_get</code></td>
+<td>—</td>
+<td><code>GET /schema</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>schema_version</code></td>
+<td>—</td>
+<td><code>GET /schema/version</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>schema_domain</code></td>
+<td>—</td>
+<td><code>GET /domain</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>schema_entities</code></td>
+<td><code>entity?</code></td>
+<td><code>GET /entities[/{entity}]</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>schema_enums</code></td>
+<td><code>enum?</code></td>
+<td><code>GET /enums[/{enum}]</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>schema_sources</code></td>
+<td><code>source?</code></td>
+<td><code>GET /sources[/{source}]</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>schema_mappings</code></td>
+<td><code>mapping?</code>, <code>entity?</code></td>
+<td><code>GET /mappings…</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>schema_views</code></td>
+<td>—</td>
+<td><code>GET /views</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>schema_stages</code></td>
+<td><code>stage?</code></td>
+<td><code>GET /stages[/{stage}]</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>stage_exists</code></td>
+<td><code>stage</code></td>
+<td><code>GET /stages/{stage}/exists</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>stage_export</code></td>
+<td><code>stage</code></td>
+<td><code>GET /stages/{stage}/export</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>stage_import</code></td>
+<td><code>stage</code>, <code>data</code></td>
+<td><code>POST /stages/{stage}/import</code></td>
+<td><code>stageImport</code></td>
+<td>destructive</td>
+</tr>
+<tr>
+<td><code>gateway_version</code></td>
+<td>—</td>
+<td><code>GET /version</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+<tr>
+<td><code>gateway_health</code></td>
+<td>—</td>
+<td><code>GET /health</code></td>
+<td><code>read</code></td>
+<td>read only</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong><code>tools/list</code> shows a credential only the tools it can use.</strong> Without <code>script</code>, <code>orm_execute_script</code> doesn't
+  appear; with only <code>read</code>, <code>orm_execute</code> is described as "read-only queries with this credential".</li>
+<li>The hints (<code>readOnlyHint</code>, <code>destructiveHint</code>) don't block anything: they tell the client which tools change data,
+  so it can ask for confirmation. What blocks is the <a href="../Security/#permissions">permissions</a>.</li>
+<li>The same rules as REST: <code>orm_execute_script</code> fails if scripts are disabled; <code>orm_execute_queued</code>, if the schema has
+  no queue.</li>
+<li><code>mcp.tools.include</code> / <code>exclude</code> (global or per schema) restrict the list further, for example
+  <code>exclude: [ orm_execute_script, stage_import ]</code>.</li>
+</ul>
+<h2 id="results-and-errors">Results and errors</h2>
+<ul>
+<li>A result is <code>{ content: [{ type: "text", text: &lt;JSON&gt; }] }</code>, with <code>structuredContent</code> too when it is small.</li>
+<li><strong>Row limit (<code>mcp.maxRows</code>, default 500).</strong> When <code>orm_execute</code> or <code>orm_execute_script</code> answer a longer list, it is
+  cut and the model is told how to ask for less:</li>
+</ul>
+<p><code>json
+  { "rows": [ "…500 rows…" ], "truncated": true, "returned": 500, "total": 18234,
+    "hint": "The result was cut to 500 rows. Use .page(1, 500) (or a smaller page), aggregate with map/count, or filter the query more." }</code></p>
+<p>It applies only to MCP and after the query ran: it protects the model's context. The database is protected by
+  <code>server.maxResponseBytes</code> and <code>server.timeout</code>.
+- An error of λORM (syntax, an unknown entity, a constraint, a disabled script) or a missing permission answers
+  <code>isError: true</code> with the message, so the model can read it and correct the query.</p>
+<h2 id="resources">Resources</h2>
+<table>
+<thead>
+<tr>
+<th>URI</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lambdaorm://guide/expressions</code></td>
+<td>a short guide of the query language (Markdown), to give the model context</td>
+</tr>
+<tr>
+<td><code>lambdaorm://schema/domain</code></td>
+<td>the whole domain of the schema, JSON</td>
+</tr>
+<tr>
+<td><code>lambdaorm://entities/{entity}</code></td>
+<td>one entity (template)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-an-agent-can-do">What an agent can do</h2>
+<p>There is no read-only mode of the transport: what an agent can do is decided by <strong>its credential's permissions</strong>. An
+agent that only queries gets a credential with <code>[ read ]</code>: it can run selects but not write, run scripts, queue or
+import, by any transport. Besides: <code>schemas[].transports</code> to keep a schema out of MCP, <code>mcp.tools.exclude</code>, the hints,
+and the permissions of the database user (the guarantee underneath). Every write an agent makes is
+<a href="../Security/#audit">audited</a> with the name of its credential and <code>"transport": "mcpHttp"</code>.</p>
+<h2 id="transports">Transports</h2>
+<h3 id="mcphttp">mcpHttp</h3>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Protocol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST/GET/DELETE {basePath}/{schema}/mcp</code></td>
+<td>Streamable HTTP: Claude Code <code>--transport http</code> and current clients</td>
+</tr>
+<tr>
+<td><code>GET {basePath}/{schema}/sse</code> + <code>POST {basePath}/{schema}/messages?sessionId=&lt;id&gt;</code></td>
+<td>HTTP+SSE (deprecated), with <code>legacySse: true</code></td>
+</tr>
+<tr>
+<td><code>GET {basePath}/status</code></td>
+<td>the state of the transport, the schemas and the open SSE sessions</td>
+</tr>
+</tbody>
+</table>
+<p>Streamable HTTP is stateless by default (<code>stateful: false</code>): each <code>POST</code> stands alone and any replica answers it. The
+credential goes in every request.</p>
+<h3 id="mcpwebsocket">mcpWebSocket</h3>
+<p>An upgrade at <code>{basePath}/{schema}/mcp</code>, authenticated in the handshake; JSON-RPC 2.0 messages with the MCP methods
+(<code>initialize</code>, <code>ping</code>, <code>tools/list</code>, <code>tools/call</code>, <code>resources/list</code>, <code>resources/read</code>, …). It is not a standard MCP
+transport: it is offered for clients and gateways that support it on their own. Its AsyncAPI document is at
+<code>GET {basePath}/asyncapi</code>.</p>
+<pre><code class="language-json">→ { &quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;id&quot;: 1, &quot;method&quot;: &quot;tools/call&quot;, &quot;params&quot;: { &quot;name&quot;: &quot;orm_execute&quot;, &quot;arguments&quot;: { &quot;query&quot;: &quot;Products.filter(p =&gt; p.price &gt; 50).map(p =&gt; p.name)&quot; } } }
+← { &quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;id&quot;: 1, &quot;result&quot;: { &quot;content&quot;: [ { &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;[\&quot;Côte de Blaye\&quot;, \&quot;Thüringer Rostbratwurst\&quot;]&quot; } ] } }
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Rest/" class="btn btn-neutral float-left" title="REST API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../WebSocket/" class="btn btn-neutral float-right" title="WebSocket API">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Rest/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../WebSocket/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../assets/wiki-v2.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

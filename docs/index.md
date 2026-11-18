@@ -16,9 +16,9 @@
 
 In λORM, queries are defined using lambda expressions based on a domain model which abstracts us from the infrastructure. For example, in a query you can obtain or modify records from different entities, where some persist in MySQL, others in Postgres, and others in Mongo.
 
-λORM allows you to define different scenarios for the same domain. For example, in one scenario, the infrastructure may consist of distributed instances across SQL Server, MongoDB, and Oracle, while in another scenario it may be a single Postgres instance. This allows the [CQRS](https://microservices.io/patterns/data/cqrs.html) pattern to be implemented through configuration, without needing to write a single line of code. [view example](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/svc/04-northwind-cqrs-with-kafka)
+λORM allows you to define different scenarios for the same domain. For example, in one scenario, the infrastructure may consist of distributed instances across SQL Server, MongoDB, and Oracle, while in another scenario it may be a single Postgres instance. This allows the [CQRS](https://microservices.io/patterns/data/cqrs.html) pattern to be implemented through configuration, without needing to write a single line of code.
 
-In addition to being used as a Node.js library, it can be consumed from a command line interface (CLI), a REST service, or a REST service client in other programming languages.
+In addition to being used as a Node.js library, it can be consumed from a command line interface (CLI), or through the [Data Gateway](data-gateway/index.md): a REST API, MCP for AI agents, a WebSocket API and a web UI, with the clients for Node and other languages.
 
 ## Query Language
 
@@ -153,7 +153,7 @@ You can access various labs at [lambdaorm labs](https://github.com/lambda-orm/la
 
 ## Related projects
 
-- [Lambda ORM CLI](https://www.npmjs.com/package/lambdaorm-cli): Command line interface for λORM
-- [Lambda ORM Service](https://lambda-orm.github.io/wiki/api/index.html): REST service for λORM
-- [Client Node](https://www.npmjs.com/package/lambdaorm-client-node): HTTP client for λORM
+- [λORM CLI](https://www.npmjs.com/package/@lambdaorm/cli): Command line interface for λORM
+- [Data Gateway](https://lambda-orm.github.io/wiki/data-gateway/): λORM schemas over REST, MCP and WebSocket, with a web UI
+- [Client](https://www.npmjs.com/package/@lambdaorm/client): Node client for the Data Gateway
 - [3xpr](https://www.npmjs.com/package/3xpr): Extensible expression engine, which allows evaluating mathematical and logical expressions.

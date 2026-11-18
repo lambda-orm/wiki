@@ -266,10 +266,10 @@ application:
 
 **Query:**
 
-In this case we will execute the query from the REST service.
+In this case we will execute the query on a [Data Gateway](../data-gateway/index.md).
 
 ```sh
-curl -X POST "http://localhost:9291/execute?format=beautiful" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>[p.details.include(p=>p.product.map(p=>p.name)).map(p=>{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=>p.name)]).order(p=>p.orderDate).page(1,1)","data":"{\"customerId\": \"CENTC\"}", "options":"{\"stage\": \"default\"}"}'
+curl -X POST "http://localhost:8080/execute?format=beautiful" -H "X-Api-Key: $KEY" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>[p.details.include(p=>p.product.map(p=>p.name)).map(p=>{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=>p.name)]).order(p=>p.orderDate).page(1,1)", "data": {"customerId": "CENTC"}, "options": {"stage": "default"}}'
 ```
 
 **Result:**
@@ -306,7 +306,7 @@ curl -X POST "http://localhost:9291/execute?format=beautiful" -H "Content-Type: 
 When a query is executed in the default stage, data will be obtained from different data sources according to the stage configuration.
 
 ```sh
-curl -X POST "http://localhost:9291/plan?format=beautiful" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>[p.details.include(p=>p.product.map(p=>p.name)).map(p=>{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=>p.name)]).order(p=>p.orderDate).page(1,1)", "options":"{\"default\": \"cqrs\"}"}'
+curl -X POST "http://localhost:8080/plan?format=beautiful" -H "X-Api-Key: $KEY" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>[p.details.include(p=>p.product.map(p=>p.name)).map(p=>{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=>p.name)]).order(p=>p.orderDate).page(1,1)", "options": {"stage": "default"}}'
 ```
 
 **Result:**
@@ -347,7 +347,7 @@ When you run a query on the cqrs stage, you will get data from a single data sou
 But if the query is for insert, update or delete, it will be executed in the corresponding data source.
 
 ```sh
-curl -X POST "http://localhost:9291/plan?format=beautiful" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>[p.details.include(p=>p.product.map(p=>p.name)).map(p=>{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=>p.name)]).order(p=>p.orderDate).page(1,1)", "options":"{\"stage\": \"cqrs\"}"}'
+curl -X POST "http://localhost:8080/plan?format=beautiful" -H "X-Api-Key: $KEY" -H "Content-Type: application/json" -d '{"query": "Orders.filter(p=>p.customerId==customerId).include(p=>[p.details.include(p=>p.product.map(p=>p.name)).map(p=>{subTotal:p.quantity*p.unitPrice}),p.customer.map(p=>p.name)]).order(p=>p.orderDate).page(1,1)", "options": {"stage": "cqrs"}}'
 ```
 
 **Result:**
@@ -383,11 +383,10 @@ curl -X POST "http://localhost:9291/plan?format=beautiful" -H "Content-Type: app
 }
 ```
 
-[view complete laboratory](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/svc/03-northwind-cqrs)
 
 ## [CQRS (Command Query Responsibility Segregation)](https://microservices.io/patterns/data/cqrs.html) with Kafka
 
-If we use the ORM from the REST service, we can use Kafka to publish the insert, update and delete data events in the default and cqrs scenario. And configure Kafka consumers to update the data in the insights scenario.
+If we use the ORM from a [Data Gateway](../data-gateway/index.md), we can use Kafka to publish the insert, update and delete data events in the default and cqrs scenario. And configure Kafka consumers to update the data in the insights scenario.
 
 **Schema:**
 
@@ -413,14 +412,13 @@ application:
       after: queue.send("insights-sync",[{query,data}]) 
 ```
 
-[view complete laboratory](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/svc/04-northwind-cqrs-kafka)
 
 ### Node Client
 
 **Schema:**
 
-In the case of using a rest service client, the schema only defines the domain and the paths in the infrastructure.
-Since the infrastructure definition is done in the rest service configuration.
+In the case of using a client, the schema only defines the domain and the paths in the infrastructure, since the
+sources and their connections are in the schema served by the [Data Gateway](../data-gateway/index.md).
 
 ```yaml
 domain:  
@@ -438,16 +436,16 @@ infrastructure:
 
 **Query:**
 
-In this case we will use a Node client that will connect to the REST service to execute the query.
+In this case we will use the [Node client](../data-gateway/Clients.md) (`@lambdaorm/client`), which connects to a Data Gateway to execute the query.
 And in this case we will write the query in string format.
 
 ```typescript
-import { orm } from 'lambdaorm-client-node'
+import { orm } from '@lambdaorm/client'
 import fs from 'fs'
 import path from'path'
 ( async () => {
  try { 
-  await orm.init('http://localhost:9291')
+  await orm.init('http://localhost:8080', { headers: { 'X-Api-Key': process.env.BACKEND_KEY } })
   // test connection
   console.log(await orm.general.ping())
   // Gets the content of the data.json file to insert the data
@@ -478,9 +476,8 @@ import path from'path'
 
 ## Considerations
 
-[view complete laboratory](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/client-node/02-import-data)
 
-Keep in mind that whether we use the "lambdaorm" or "lambdaorm-client-node" library we can write the queries in lambda or string format.
+Keep in mind that whether we use the `@lambdaorm/lib` or the `@lambdaorm/client` library we can write the queries in lambda or string format.
 
 We could start a development by proposing a simple infrastructure and then make modifications to it and this would not affect our code, since the queries are written based on the domain model and are independent of the infrastructure.
 

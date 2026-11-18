@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lambda-orm.github.io/wiki/data-gateway/Security/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Security - λORM Wiki</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs2015.min.css" />
+        <link href="../../assets/wiki-v2.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Security";
+        var mkdocs_page_input_path = "data-gateway/Security.md";
+        var mkdocs_page_url = "/wiki/data-gateway/Security/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Features">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../cli">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../GettingStarted/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Transports/">Transports</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Security</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#authentication">Authentication</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#permissions">Permissions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#audit">Audit</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#limits">Limits</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#errors">Errors</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Operations/">Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Change log</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../queries/Query-Language">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Expression">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Select">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Join">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Grouping">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Include">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Insert">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/BulkInsert">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Update">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Delete">Delete</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/operatorsAndFunctions/OperatorsAndFunctions">Operators & Functions</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Expressions">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-EnvironmentVariables">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Composite">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Listener">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Basic">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Extend">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-MultiplesStages">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-StageMultiplesSources">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Composite">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Push">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Pull">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Fetch">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Introspect">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Incorporate">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Schema-Use">Use</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Engines">Engines</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/CHANGELOG">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Data Gateway</li>
+      <li class="breadcrumb-item active">Security</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="security">Security</h1>
+<h2 id="authentication">Authentication</h2>
+<p>The <code>authentication</code> block has three levels: global, per transport (<code>transports.&lt;t&gt;.authentication</code>) and per schema
+(<code>orm.schemas[].authentication</code>). The most specific replaces the others (schema → transport → global). It is applied
+by the edge worker before anything reaches the schema.</p>
+<table>
+<thead>
+<tr>
+<th><code>adapter</code></th>
+<th>One credential (every permission)</th>
+<th>Several credentials with permissions</th>
+<th>The client sends</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>none</code> (default)</td>
+<td>—</td>
+<td>—</td>
+<td>nothing: an anonymous credential with every permission</td>
+</tr>
+<tr>
+<td><code>local</code>, <code>type: bearer</code></td>
+<td><code>token</code></td>
+<td><code>tokens: [{ name, value, permissions }]</code></td>
+<td><code>Authorization: Bearer &lt;token&gt;</code></td>
+</tr>
+<tr>
+<td><code>local</code>, <code>type: apikey</code></td>
+<td><code>value</code> (and <code>header</code>, default <code>X-Api-Key</code>)</td>
+<td><code>keys: [{ name, value, permissions }]</code></td>
+<td><code>&lt;header&gt;: &lt;key&gt;</code></td>
+</tr>
+<tr>
+<td><code>local</code>, <code>type: basic</code></td>
+<td><code>username</code>, <code>password</code></td>
+<td><code>users: [{ username, password, permissions }]</code></td>
+<td><code>Authorization: Basic &lt;base64(user:password)&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-yaml">authentication:
+  adapter: local
+  type: bearer
+  tokens:
+    - { name: reports, value: $REPORTS_TOKEN, permissions: [ read ] }
+    - { name: backend, value: $BACKEND_TOKEN, permissions: [ read, write, script, queue, stageImport ] }
+</code></pre>
+<ul>
+<li>A <code>local</code> credential without its secret (or whose <code>$VAR</code> is not defined) stops the start. Open access is only
+  <code>adapter: none</code>, written on purpose.</li>
+<li>Secrets are compared in constant time. The secret never travels to the schema workers: only the name and the
+  permissions of the credential.</li>
+<li>Without a credential (or with a wrong one) the answer is <code>401</code>; the WebSocket upgrades are refused.</li>
+<li><code>/ping</code>, <code>/health</code>, <code>/metrics</code>, <code>/version</code>, <code>/schemas</code>, <code>/doc</code> and the UI's files need no credential.</li>
+</ul>
+<h2 id="permissions">Permissions</h2>
+<table>
+<thead>
+<tr>
+<th>Permission</th>
+<th>Allows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>read</code></td>
+<td>the schema, the domain, plan, metadata, model, parameters, constraints, stage exists and export, and <code>execute</code> <strong>only when every sentence is a <code>select</code></strong></td>
+</tr>
+<tr>
+<td><code>write</code></td>
+<td><code>execute</code> that writes (<code>insert</code>, <code>update</code>, <code>delete</code>, <code>upsert</code>, <code>merge</code>, <code>bulk*</code>, …)</td>
+</tr>
+<tr>
+<td><code>script</code></td>
+<td>scripts (<code>POST /script</code>, <code>orm_execute_script</code>, <code>query.script</code>): a script can do anything inside, so it is a permission of its own</td>
+</tr>
+<tr>
+<td><code>queue</code></td>
+<td><code>execute-queued</code> (and <code>write</code> if the query writes)</td>
+</tr>
+<tr>
+<td><code>stageImport</code></td>
+<td>importing a stage</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Authorization happens in the schema's worker, before running anything, the same for REST, MCP and WebSocket.</li>
+<li>To know whether a query writes, the gateway analyses it (its <code>metadata</code>): with only <code>read</code>, a query with any
+  sentence that is not a <code>select</code>, also inside an <code>include</code>, is refused.</li>
+<li>Without the permission: <code>403</code> in REST, <code>status: 403</code> in WebSocket, <code>isError: true</code> in MCP, with the message
+  <code>the credential "reader" does not have the "write" permission</code>.</li>
+<li><code>GET /whoami</code> answers the name and permissions of the credential, never its secret.</li>
+</ul>
+<h2 id="audit">Audit</h2>
+<p>Every operation that changes data, or may, leaves an audit entry: a JSON line with <code>"type": "audit"</code> on the standard
+output, so the log collector (Loki, ELK, CloudWatch, …) can keep it apart.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Audited</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>execute</code></td>
+<td>when some sentence is not a <code>select</code></td>
+</tr>
+<tr>
+<td>script</td>
+<td>always</td>
+</tr>
+<tr>
+<td>execute queued</td>
+<td>always (when queued)</td>
+</tr>
+<tr>
+<td>stage import</td>
+<td>always</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-json">{ &quot;type&quot;: &quot;audit&quot;, &quot;time&quot;: &quot;2026-11-17T14:03:22.114Z&quot;, &quot;schema&quot;: &quot;iot/v1&quot;, &quot;transport&quot;: &quot;mcpHttp&quot;,
+  &quot;credential&quot;: &quot;agent&quot;, &quot;operation&quot;: &quot;execute&quot;, &quot;actions&quot;: [&quot;insert&quot;], &quot;entities&quot;: [&quot;Devices&quot;],
+  &quot;query&quot;: &quot;Devices.insert()&quot;, &quot;rows&quot;: 1, &quot;durationMs&quot;: 42, &quot;result&quot;: &quot;ok&quot; }
+</code></pre>
+<ul>
+<li>It is written after running, also when it fails (<code>"result": "error"</code> with the message).</li>
+<li>It has the credential's name, never its secret. The parameters (<code>data</code>) are added only with
+  <code>audit.includeData: true</code>, because they can have personal data. <code>audit.enabled: false</code> turns it off.</li>
+</ul>
+<h2 id="limits">Limits</h2>
+<table>
+<thead>
+<tr>
+<th>Limit</th>
+<th>Key</th>
+<th>When it is reached</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requests per window (<code>http</code> only)</td>
+<td><code>rateLimit.windowMs</code>, <code>rateLimit.max</code> (<code>0</code> = off)</td>
+<td><code>429</code></td>
+</tr>
+<tr>
+<td>Simultaneous operations per schema</td>
+<td><code>server.maxConcurrent</code></td>
+<td><code>429</code> with <code>Retry-After</code> (MCP: <code>isError</code>; WebSocket: <code>status: 429</code>)</td>
+</tr>
+<tr>
+<td>Time of an operation</td>
+<td><code>server.timeout</code></td>
+<td>error, the operation is abandoned</td>
+</tr>
+<tr>
+<td>Size of a body</td>
+<td><code>server.requestBodySize</code></td>
+<td><code>413</code></td>
+</tr>
+<tr>
+<td>Size of an answer</td>
+<td><code>server.maxResponseBytes</code></td>
+<td><code>413</code>: use <code>.page(1, n)</code> or aggregate in the query</td>
+</tr>
+<tr>
+<td>Scripts</td>
+<td><code>scripts.maxLength</code>, <code>timeoutMs</code>, <code>maxIterations</code></td>
+<td><code>413</code> (length) or an error of the script</td>
+</tr>
+<tr>
+<td>Rows of a result for MCP</td>
+<td><code>mcp.maxRows</code></td>
+<td>cut, with a hint (<a href="../Mcp/#results-and-errors">MCP</a>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="errors">Errors</h2>
+<p>A failed request answers a status a client can map and a JSON body:</p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;ExecutionError&quot;,
+  &quot;code&quot;: &quot;23505&quot;,
+  &quot;message&quot;: &quot;ERROR: duplicate key value violates unique constraint \&quot;device_types_pkey\&quot; …&quot;
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>error</code></td>
+<td>the name of the error: <code>ExecutionError</code>, <code>ValidationError</code>, <code>ForbiddenError</code>, <code>ScriptDisabledError</code>, …</td>
+</tr>
+<tr>
+<td><code>code</code></td>
+<td>the database's error code when there is one (Postgres SQLSTATE such as <code>23505</code>, MySQL <code>ER_DUP_ENTRY</code>)</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>the message</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>400</code></td>
+<td>an invalid query or model (<code>ValidationError</code>, <code>SchemaError</code>, <code>SintaxisError</code>, <code>LanguageError</code>), a not null or check violation, invalid data (Postgres <code>22xxx</code>)</td>
+</tr>
+<tr>
+<td><code>401</code></td>
+<td>no credential, or a wrong one</td>
+</tr>
+<tr>
+<td><code>403</code></td>
+<td>the credential lacks the permission; scripts disabled</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td>a schema not exposed on that transport, an unknown route</td>
+</tr>
+<tr>
+<td><code>409</code></td>
+<td>a unique or foreign key violation (Postgres <code>23505</code>, <code>23503</code>; MySQL <code>ER_DUP_ENTRY</code>, <code>ER_NO_REFERENCED_ROW_2</code>, <code>ER_ROW_IS_REFERENCED_2</code>)</td>
+</tr>
+<tr>
+<td><code>413</code></td>
+<td>a body, an answer or a script too large</td>
+</tr>
+<tr>
+<td><code>429</code></td>
+<td>rate limit, or too many simultaneous operations on the schema</td>
+</tr>
+<tr>
+<td><code>503</code></td>
+<td>the schema is not <code>ready</code> (starting, in error, restarting)</td>
+</tr>
+<tr>
+<td><em>n</em></td>
+<td>a script ran <code>throw { status: n, message }</code> (400–599)</td>
+</tr>
+<tr>
+<td><code>500</code></td>
+<td>anything else</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../WebSocket/" class="btn btn-neutral float-left" title="WebSocket API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Ui/" class="btn btn-neutral float-right" title="UI">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../WebSocket/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Ui/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../assets/wiki-v2.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

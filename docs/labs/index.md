@@ -12,15 +12,7 @@ The [lambdaorm-labs](https://github.com/lambda-orm/lambdaorm-labs) repository co
 
 [Lambdaorm labs consuming the lambdaorm package in a node application](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/node)
 
-### Service Labs
+### Data Gateway
 
-[Lambdaorm labs consuming the lambdaorm rest api](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/svc)
-
-### Client Node Labs
-
-[Lambdaorm labs using a node client which consumes the lambdaorm rest api](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/client-node)
-
-### Client Kotlin Labs
-
-[Lambdaorm labs using a Kotlin client which consumes the rest lambdaorm api](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/client-kotlin)
-
+The [Data Gateway](../data-gateway/index.md) section has complete examples of its configuration, its REST, MCP and
+WebSocket APIs and its UI.

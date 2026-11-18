@@ -230,8 +230,8 @@ import { Products } from '../northwind/model/__model'
 lambdaorm execute -q "Products.filter(p=>p.price>10).map(p=>({name:p.name,category:p.category.name})).sort(p=>p.category).page(1, 10)" -d "{\"maxPrice\":10}"
 ```
 
-### Service
+### Data Gateway
 
 ```bash
-curl -X POST "http://localhost:9291/plan?format=beautiful" -H "Content-Type: application/json" -d '{"query": "Products.filter(p=>p.price>10).map(p=>({name:p.name,category:p.category.name})).sort(p=>p.category).page(1, 10)", "data": "{\"maxPrice\":10}" }'
+curl -X POST "http://localhost:8080/plan?format=beautiful" -H "X-Api-Key: $KEY" -H "Content-Type: application/json" -d '{"query": "Products.filter(p=>p.price>10).map(p=>({name:p.name,category:p.category.name})).sort(p=>p.category).page(1, 10)", "data": {"maxPrice": 10}}'
 ```

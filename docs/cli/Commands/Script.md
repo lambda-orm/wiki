@@ -5,8 +5,9 @@ script whose `orm.execute(query, data, options)` calls all run in the same trans
 when the script ends and rolls back on any error (a query or a `throw`). The result is the value of the last statement
 (or of `return`).
 
-It runs locally with the workspace (`-w`) or on a λORM service (`-u`, [`POST /script`](../../api/Endpoints/Script.md);
-the service must run with `SCRIPT_ENABLED=true`).
+It runs locally with the workspace (`-w`) or on a [Data Gateway](../../data-gateway/index.md) (`-u`,
+[`POST /script`](../../data-gateway/Rest.md#script); the gateway must have `scripts.enabled` and the credential the
+`script` permission).
 
 ## Params
 
@@ -19,7 +20,7 @@ the service must run with `SCRIPT_ENABLED=true`).
 | data | -d | Variables of the script: JSON, or the path of a JSON file. |
 | envfile | -e | Read in a file of environment variables. |
 | output | -o | Generates an output according to the following possible values [json\|beautiful\|light\|yaml] |
-| url | -u | Url of the service (`POST /script`). |
+| url | -u | URL of the schema on a Data Gateway (`POST /script`). |
 
 ## Examples
 
@@ -53,10 +54,10 @@ lambdaorm script -w . -f create-quote.3xpr -d quote.json
 `orm.execute(…, { stage: "insights" })` runs on another stage and joins the same transaction (from `@lambdaorm/lib`
 3.3.0).
 
-### On a service
+### On a Data Gateway
 
 ```sh
-lambdaorm script -u http://localhost:9291 -f create-quote.3xpr -d '{"quoteId": 10, "accountId": 1, "lines": []}'
+lambdaorm script -u http://localhost:8080 -f create-quote.3xpr -d '{"quoteId": 10, "accountId": 1, "lines": []}'
 ```
 
 ## Notes
@@ -65,6 +66,6 @@ lambdaorm script -u http://localhost:9291 -f create-quote.3xpr -d '{"quoteId": 1
   `? :` operator, no `++` / `--` (use `i += 1`), no user-defined functions.
 - The script works on a copy of the data and can't read environment variables (`$VAR` fails).
 - Errors are printed as `error: …` and nothing of the script is written.
-- With `-u`, a service started with `SERVICE_TOKEN` needs the same `SERVICE_TOKEN` in the CLI's environment
+- With `-u`, a Data Gateway with bearer authentication needs the token in `SERVICE_TOKEN` in the CLI's environment
   (sent as `Authorization: Bearer`; @lambdaorm/cli 1.6.3).
 - The command exits with code 1 when the script fails (@lambdaorm/cli 1.6.3).

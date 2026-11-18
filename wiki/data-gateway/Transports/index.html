@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lambda-orm.github.io/wiki/data-gateway/Transports/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Transports - λORM Wiki</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs2015.min.css" />
+        <link href="../../assets/wiki-v2.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Transports";
+        var mkdocs_page_input_path = "data-gateway/Transports.md";
+        var mkdocs_page_url = "/wiki/data-gateway/Transports/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> λORM Wiki
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.html">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../Features">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../cli">Cli</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../labs">Labs</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../GettingStarted/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Transports</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#http">http</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mcphttp">mcpHttp</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mcpwebsocket">mcpWebSocket</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#websocket">webSocket</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Security/">Security</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Operations/">Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Change log</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Queries</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../queries/Query-Language">Query Language</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Expression">Expression</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Select">Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Join">Join</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Grouping">Grouping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Include">Include</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Insert">Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/BulkInsert">Bulk Insert</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Update">Update</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/Delete">Delete</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../queries/operatorsAndFunctions/OperatorsAndFunctions">Operators & Functions</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition">Definition</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Expressions">Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-EnvironmentVariables">Environment Variables</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaDefinition-Composite">Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Listener">Listeners</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Basic">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Extend">Extend Entity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-MultiplesStages">Multiples Stages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-StageMultiplesSources">Stage with Multiples Sources</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaExample-Composite">Entity Composite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Push">Push</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Pull">Pull</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Fetch">Fetch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Introspect">Introspect</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/SchemaSynchronization-Incorporate">Incorporate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Schema-Use">Use</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../schema/Engines">Engines</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../usage/Repository">Repository</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Transaction">Transaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Script">Script</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/Usage">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/CHANGELOG">Change log</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">λORM Wiki</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Data Gateway</li>
+      <li class="breadcrumb-item active">Transports</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="transports">Transports</h1>
+<p>The gateway has four transports. Each one listens on its own port, only when the port is configured
+(<a href="../Configuration/#transports-and-ports">Configuration</a>), and each one reaches every schema by its route.</p>
+<table>
+<thead>
+<tr>
+<th>Transport</th>
+<th>What it is</th>
+<th>Routes of the schema <code>iot/v1</code></th>
+<th>Routes of the gateway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../Rest/"><code>http</code></a></td>
+<td>REST API, OpenAPI 3</td>
+<td><code>POST /iot/v1/execute</code>, <code>GET /iot/v1/entities</code>, …</td>
+<td><code>/ping</code>, <code>/health</code>, <code>/metrics</code>, <code>/version</code>, <code>/schemas</code>, <code>/doc</code>, <code>/api-docs</code>, <code>/ui</code></td>
+</tr>
+<tr>
+<td><a href="../Mcp/"><code>mcpHttp</code></a></td>
+<td>MCP for AI agents</td>
+<td><code>POST/GET/DELETE /iot/v1/mcp</code> (Streamable HTTP); <code>GET /iot/v1/sse</code> + <code>POST /iot/v1/messages?sessionId=</code> (HTTP+SSE)</td>
+<td><code>GET /status</code></td>
+</tr>
+<tr>
+<td><a href="../Mcp/#mcpwebsocket"><code>mcpWebSocket</code></a></td>
+<td>MCP over WebSocket</td>
+<td>upgrade at <code>/iot/v1/mcp</code></td>
+<td><code>GET /status</code>, <code>/asyncapi</code></td>
+</tr>
+<tr>
+<td><a href="../WebSocket/"><code>webSocket</code></a></td>
+<td>JSON-RPC API with notifications</td>
+<td>connection to <code>ws://host:port/iot/v1</code></td>
+<td>connection to the root: <code>general.*</code> and <code>gateway.schemas</code>; <code>/asyncapi</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>{basePath}</code> (<code>transports.&lt;t&gt;.basePath</code>) goes before every route: with <code>basePath: /data-gateway</code>,
+  <code>/data-gateway/iot/v1/execute</code> and <code>/data-gateway/ui/</code>.</li>
+<li>With a single schema at the root, its routes have no prefix (<code>/execute</code>, <code>/mcp</code>, <code>ws://host:port/</code>).</li>
+<li>A schema that is not exposed on a transport (<code>schemas[].transports</code>) answers <code>404</code> there. A schema that is not
+  <code>ready</code> answers <code>503</code> with the reason.</li>
+<li>Each transport authenticates every request (or the WebSocket upgrade) with the effective authentication of the
+  schema (<a href="../Security/">Security</a>).</li>
+</ul>
+<h2 id="http">http</h2>
+<p>The REST API: every operation of λORM on a schema (queries, scripts, the schema, stages), plus the routes of the
+gateway. JSON in and out. Methods and examples in <a href="../Rest/">REST API</a>.</p>
+<pre><code class="language-yaml">transports:
+  http:
+    port: 8080
+    basePath: /data-gateway   # optional
+    swagger: { enabled: true }   # /doc and /api-docs (Swagger UI, OpenAPI 3)
+    ui: { enabled: true }        # the web UI at /ui
+</code></pre>
+<ul>
+<li><code>GET /doc</code> (and <code>/api-docs</code>) serves Swagger UI with the OpenAPI document. Its <strong>Authorize</strong> button asks for the
+  credential as the schemas are configured: an API key in its header, a bearer token or a user and password.</li>
+<li><code>/ping</code>, <code>/health</code> and <code>/metrics</code> need no credential (Kubernetes probes, Prometheus).</li>
+<li>The rate limit (<code>rateLimit</code>) applies to this transport only.</li>
+</ul>
+<h2 id="mcphttp">mcpHttp</h2>
+<p><a href="https://modelcontextprotocol.io">Model Context Protocol</a> for AI agents: a server per schema, with a tool per
+operation. See <a href="../Mcp/">MCP</a>.</p>
+<pre><code class="language-yaml">transports:
+  mcpHttp:
+    port: 8081
+    legacySse: true    # also the older HTTP+SSE transport, for older clients
+    stateful: false    # stateless: any replica answers any request, no session affinity needed
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Protocol</th>
+<th>Clients</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST/GET/DELETE {basePath}/{schema}/mcp</code></td>
+<td>Streamable HTTP</td>
+<td>Claude Code (<code>--transport http</code>), current clients</td>
+</tr>
+<tr>
+<td><code>GET {basePath}/{schema}/sse</code> + <code>POST {basePath}/{schema}/messages?sessionId=&lt;id&gt;</code></td>
+<td>HTTP+SSE (deprecated), with <code>legacySse: true</code></td>
+<td>older clients</td>
+</tr>
+<tr>
+<td><code>GET {basePath}/status</code></td>
+<td>the state, the schemas and the open SSE sessions</td>
+<td>operations</td>
+</tr>
+</tbody>
+</table>
+<p>The credential goes in every request (Streamable HTTP) or in the <code>GET</code> and every <code>POST</code> (SSE). HTTP+SSE keeps a
+session in memory: with several replicas it needs session affinity.</p>
+<h2 id="mcpwebsocket">mcpWebSocket</h2>
+<p>The same MCP servers over WebSocket. <strong>It is not a standard MCP transport</strong>: it is offered for clients and gateways
+that support it on their own; most clients use <code>mcpHttp</code>.</p>
+<pre><code class="language-yaml">transports:
+  mcpWebSocket:
+    port: 8082
+    maxConnections: 100
+</code></pre>
+<p>The connection is an upgrade at <code>{basePath}/{schema}/mcp</code>, authenticated in the handshake (without a credential it
+answers <code>401</code> and closes). The messages are JSON-RPC 2.0 with the MCP methods (<code>initialize</code>, <code>ping</code>, <code>tools/list</code>,
+<code>tools/call</code>, <code>resources/*</code>, …). <code>GET {basePath}/status</code> and <code>GET {basePath}/asyncapi</code> (the AsyncAPI document) are
+plain HTTP.</p>
+<h2 id="websocket">webSocket</h2>
+<p>A JSON-RPC 2.0 API over one persistent connection, with the same operations as REST, plus <strong>notifications</strong> that REST
+cannot give: the end of a queued execution and the changes of state of the schema. See <a href="../WebSocket/">WebSocket API</a>.</p>
+<pre><code class="language-yaml">transports:
+  webSocket:
+    port: 8083
+    maxConnections: 100
+    asyncapi: { enabled: true }   # GET /asyncapi, /asyncapi.json
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Configuration/" class="btn btn-neutral float-left" title="Configuration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Rest/" class="btn btn-neutral float-right" title="REST API">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Configuration/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Rest/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../assets/wiki-v2.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

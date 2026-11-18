@@ -49,16 +49,39 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="../../api">Api</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="" href="../../cli">Cli</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="" href="../../labs">Labs</a>
                 </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/GettingStarted/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Transports/">Transports</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Security/">Security</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Operations/">Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/CHANGELOG/">Change log</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Queries</span></p>
               <ul>
@@ -167,7 +190,7 @@ options)</code> runs λORM queries, and variables, conditions and loops decide w
 between warehouses, register a payment and its audit. Their writes must happen <strong>completely or not at all</strong>: an order
 without its lines, or a balance discounted for an order that was not saved, is a corrupt state.</p>
 <p><code>orm.transaction(callback)</code> solves it in Node code. A script solves it <strong>in a single call that carries the whole use
-case</strong>, wherever the call comes from: Node (<code>orm.executeScript</code>), the <a href="../../api/Endpoints/Script/">REST service</a>
+case</strong>, wherever the call comes from: Node (<code>orm.executeScript</code>), the <a href="../../data-gateway/Rest/#script">Data Gateway</a>
 (<code>POST /script</code>), the client (<code>@lambdaorm/client</code>) or the <a href="../../cli/Commands/Script/">CLI</a> (<code>lambdaorm script</code>). A
 client in any language can run a use case with several reads and writes in one transaction, which it could not do
 sending one query per request.</p>
@@ -184,7 +207,8 @@ sending one query per request.</p>
 <li><strong>Read your writes</strong>: a statement sees what the previous ones wrote, before the commit.</li>
 <li><strong>A result</strong>: the value of the last statement (or of <code>return</code>) — a value, a row, an object built by the script.</li>
 <li><strong>Safe for scripts sent by clients</strong>: no access to environment variables, works on a copy of <code>data</code>, <code>timeout</code> and
-  <code>maxIterations</code> stop it (also a loop that never ends), and the REST endpoint is off unless <code>SCRIPT_ENABLED=true</code>.</li>
+  <code>maxIterations</code> stop it (also a loop that never ends), and the <a href="../../data-gateway/">Data Gateway</a> runs
+  scripts only when its configuration enables them (<code>scripts.enabled</code>) and the credential has the <code>script</code> permission.</li>
 </ul>
 <p>A first look — the <a href="#examples">examples</a> go step by step, from a single query to a complete use case:</p>
 <pre><code class="language-typescript">const total = await orm.executeScript(`
@@ -214,7 +238,7 @@ the same connections:</p>
 </ul>
 <p>That is what a script is for: a use case with several reads and writes (an order with its lines, a stock movement, a
 transfer) that must happen <strong>completely or not at all</strong>, in a single call — also from the
-<a href="../../api/Endpoints/Script/">REST service</a> (<code>POST /script</code>), the client or the <a href="../../cli/Commands/Script/">CLI</a>,
+<a href="../../data-gateway/Rest/#script">Data Gateway</a> (<code>POST /script</code>), the client or the <a href="../../cli/Commands/Script/">CLI</a>,
 where a client could otherwise only send one query per request and could not undo the previous ones.</p>
 <table>
 <thead>
@@ -370,7 +394,7 @@ generated ones included: <code>customer.data.id</code> is the id the database ge
 <p><strong>Result:</strong> the id generated for the customer.</p>
 <h3 id="4-affected-rows-not-found-as-an-error">4. Affected rows: "not found" as an error</h3>
 <p><code>update</code> and <code>delete</code> answer the number of affected rows. A script can turn 0 into an error; <code>throw</code> with
-a <code>status</code> is answered with that HTTP status by the REST service.</p>
+a <code>status</code> is answered with that HTTP status by the Data Gateway.</p>
 <pre><code class="language-typescript">const result = await orm.executeScript(`
   updated = orm.execute(&quot;Customers.update(p =&gt; ({ name: name })).filter(p =&gt; p.code == code)&quot;, { code: code, name: name });
   if (updated == 0) {
@@ -585,13 +609,13 @@ total are left anywhere. (A model with <code>Accounts</code>, <code>Quotes</code
 </code></pre>
 <h2 id="the-same-script-from-a-client">The same script from a client</h2>
 <p>The script and its data are the same everywhere; only the call changes.</p>
-<pre><code class="language-typescript">// @lambdaorm/client, against the REST service
+<pre><code class="language-typescript">// @lambdaorm/client, against a Data Gateway
 import { orm } from '@lambdaorm/client'
-await orm.init('http://localhost:9291', { token: process.env.SERVICE_TOKEN })
+await orm.init('http://localhost:8080', { headers: { 'X-Api-Key': process.env.BACKEND_KEY } })
 const result = await orm.executeScript(script, data, { stage: 'default', timeout: 10000 })
 </code></pre>
-<pre><code class="language-bash"># REST (the service runs with SCRIPT_ENABLED=true)
-curl -X POST http://localhost:9291/script -H 'Content-Type: application/json' \
+<pre><code class="language-bash"># REST: a Data Gateway with scripts.enabled and a credential with the script permission
+curl -X POST http://localhost:8080/script -H 'Content-Type: application/json' -H &quot;X-Api-Key: $BACKEND_KEY&quot; \
   -d '{ &quot;script&quot;: &quot;orm.execute(\&quot;Customers.filter(p =&gt; p.code == code)\&quot;, { code: code })&quot;, &quot;data&quot;: { &quot;code&quot;: &quot;c1&quot; }, &quot;options&quot;: { &quot;stage&quot;: &quot;default&quot; } }'
 
 # CLI: a script file, data as JSON
@@ -603,8 +627,8 @@ lambdaorm script -f place-order.3xpr -d '{ &quot;customerCode&quot;: &quot;c1&qu
 <li>Variables: <code>total = 0;</code>, objects <code>{ id: id, name: "x" }</code>, lists <code>[1, 2]</code>, <code>items[0].name</code>.</li>
 <li><code>if</code> / <code>else if</code> / <code>else</code>, <code>while</code>, <code>for (i = 0; i &lt; n; i += 1)</code>, <code>for (item in items)</code>, <code>switch</code>/<code>case</code>, <code>break</code>,
   <code>continue</code>, <code>return</code>.</li>
-<li><code>throw "message"</code>; <code>try { … } catch (e) { e.message }</code>. <code>throw { status: 404, message: "…" }</code> makes the REST
-  service answer with that status; in Node the error's <code>message</code> is that object as JSON.</li>
+<li><code>throw "message"</code>; <code>try { … } catch (e) { e.message }</code>. <code>throw { status: 404, message: "…" }</code> makes the Data
+  Gateway answer with that status; in Node the error's <code>message</code> is that object as JSON.</li>
 <li>Arrow functions as arguments: <code>items.filter(p =&gt; p.qty &gt; 1).map(p =&gt; p.name)</code>, <code>items.sum(p =&gt; p.qty)</code>,
   <code>items.each(p =&gt; …)</code>.</li>
 <li>3xpr's functions: strings (<code>upper</code>, <code>concat</code>, …), numbers, dates (<code>now()</code>, …), lists, <code>nvl</code>, <code>iif</code>, … (see
@@ -680,9 +704,9 @@ lambdaorm script -f place-order.3xpr -d '{ &quot;customerCode&quot;: &quot;c1&qu
 <li><code>timeout</code>: when it passes, the script's loops stop, the transaction rolls back and the script rejects; whatever it
   still executes afterwards fails without reaching the database.</li>
 <li><code>maxIterations</code>: the loop iterations of the script, all loops together; past it the script fails and rolls back.
-  The REST service uses <code>SCRIPT_MAX_ITERATIONS</code> (default 100000).</li>
+  The Data Gateway uses <code>scripts.maxIterations</code> (default 100000).</li>
 <li>Since @lambdaorm/lib 3.3.0 (3xpr 5.3.0) a <code>while (true) {}</code> no longer blocks the process: the timeout and
-  <code>maxIterations</code> stop it. The REST endpoint is still off by default (<code>SCRIPT_ENABLED</code>); enable it for internal clients.</li>
+  <code>maxIterations</code> stop it. In the Data Gateway scripts are off by default (<code>scripts.enabled</code>) and need the <code>script</code> permission.</li>
 </ul>
               
             </div>

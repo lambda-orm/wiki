@@ -49,16 +49,39 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="../../api">Api</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="" href="../../cli">Cli</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="" href="../../labs">Labs</a>
                 </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Gateway</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/GettingStarted/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Transports/">Transports</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Rest/">REST API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Mcp/">MCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/WebSocket/">WebSocket API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Security/">Security</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Ui/">UI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Clients/">Clients</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/Operations/">Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data-gateway/CHANGELOG/">Change log</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Queries</span></p>
               <ul>
@@ -324,8 +347,8 @@ import { Products } from '../northwind/model/__model'
 <h3 id="cli">CLI</h3>
 <pre><code class="language-bash">lambdaorm execute -q &quot;Products.filter(p=&gt;p.price&gt;10).map(p=&gt;({name:p.name,category:p.category.name})).sort(p=&gt;p.category).page(1, 10)&quot; -d &quot;{\&quot;maxPrice\&quot;:10}&quot;
 </code></pre>
-<h3 id="service">Service</h3>
-<pre><code class="language-bash">curl -X POST &quot;http://localhost:9291/plan?format=beautiful&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Products.filter(p=&gt;p.price&gt;10).map(p=&gt;({name:p.name,category:p.category.name})).sort(p=&gt;p.category).page(1, 10)&quot;, &quot;data&quot;: &quot;{\&quot;maxPrice\&quot;:10}&quot; }'
+<h3 id="data-gateway">Data Gateway</h3>
+<pre><code class="language-bash">curl -X POST &quot;http://localhost:8080/plan?format=beautiful&quot; -H &quot;X-Api-Key: $KEY&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;: &quot;Products.filter(p=&gt;p.price&gt;10).map(p=&gt;({name:p.name,category:p.category.name})).sort(p=&gt;p.category).page(1, 10)&quot;, &quot;data&quot;: {&quot;maxPrice&quot;: 10}}'
 </code></pre>
               
             </div>

@@ -11,7 +11,7 @@ between warehouses, register a payment and its audit. Their writes must happen *
 without its lines, or a balance discounted for an order that was not saved, is a corrupt state.
 
 `orm.transaction(callback)` solves it in Node code. A script solves it **in a single call that carries the whole use
-case**, wherever the call comes from: Node (`orm.executeScript`), the [REST service](../api/Endpoints/Script.md)
+case**, wherever the call comes from: Node (`orm.executeScript`), the [Data Gateway](../data-gateway/Rest.md#script)
 (`POST /script`), the client (`@lambdaorm/client`) or the [CLI](../cli/Commands/Script.md) (`lambdaorm script`). A
 client in any language can run a use case with several reads and writes in one transaction, which it could not do
 sending one query per request.
@@ -29,7 +29,8 @@ sending one query per request.
 - **Read your writes**: a statement sees what the previous ones wrote, before the commit.
 - **A result**: the value of the last statement (or of `return`) — a value, a row, an object built by the script.
 - **Safe for scripts sent by clients**: no access to environment variables, works on a copy of `data`, `timeout` and
-  `maxIterations` stop it (also a loop that never ends), and the REST endpoint is off unless `SCRIPT_ENABLED=true`.
+  `maxIterations` stop it (also a loop that never ends), and the [Data Gateway](../data-gateway/index.md) runs
+  scripts only when its configuration enables them (`scripts.enabled`) and the credential has the `script` permission.
 
 A first look — the [examples](#examples) go step by step, from a single query to a complete use case:
 
@@ -63,7 +64,7 @@ the same connections:
 
 That is what a script is for: a use case with several reads and writes (an order with its lines, a stock movement, a
 transfer) that must happen **completely or not at all**, in a single call — also from the
-[REST service](../api/Endpoints/Script.md) (`POST /script`), the client or the [CLI](../cli/Commands/Script.md),
+[Data Gateway](../data-gateway/Rest.md#script) (`POST /script`), the client or the [CLI](../cli/Commands/Script.md),
 where a client could otherwise only send one query per request and could not undo the previous ones.
 
 | When the script… | Result |
@@ -189,7 +190,7 @@ const result = await orm.executeScript(`
 ### 4. Affected rows: "not found" as an error
 
 `update` and `delete` answer the number of affected rows. A script can turn 0 into an error; `throw` with
-a `status` is answered with that HTTP status by the REST service.
+a `status` is answered with that HTTP status by the Data Gateway.
 
 ```typescript
 const result = await orm.executeScript(`
@@ -462,15 +463,15 @@ const quoteId = await orm.executeScript(`
 The script and its data are the same everywhere; only the call changes.
 
 ```typescript
-// @lambdaorm/client, against the REST service
+// @lambdaorm/client, against a Data Gateway
 import { orm } from '@lambdaorm/client'
-await orm.init('http://localhost:9291', { token: process.env.SERVICE_TOKEN })
+await orm.init('http://localhost:8080', { headers: { 'X-Api-Key': process.env.BACKEND_KEY } })
 const result = await orm.executeScript(script, data, { stage: 'default', timeout: 10000 })
 ```
 
 ```bash
-# REST (the service runs with SCRIPT_ENABLED=true)
-curl -X POST http://localhost:9291/script -H 'Content-Type: application/json' \
+# REST: a Data Gateway with scripts.enabled and a credential with the script permission
+curl -X POST http://localhost:8080/script -H 'Content-Type: application/json' -H "X-Api-Key: $BACKEND_KEY" \
   -d '{ "script": "orm.execute(\"Customers.filter(p => p.code == code)\", { code: code })", "data": { "code": "c1" }, "options": { "stage": "default" } }'
 
 # CLI: a script file, data as JSON
@@ -484,8 +485,8 @@ Everything 3xpr has:
 - Variables: `total = 0;`, objects `{ id: id, name: "x" }`, lists `[1, 2]`, `items[0].name`.
 - `if` / `else if` / `else`, `while`, `for (i = 0; i < n; i += 1)`, `for (item in items)`, `switch`/`case`, `break`,
   `continue`, `return`.
-- `throw "message"`; `try { … } catch (e) { e.message }`. `throw { status: 404, message: "…" }` makes the REST
-  service answer with that status; in Node the error's `message` is that object as JSON.
+- `throw "message"`; `try { … } catch (e) { e.message }`. `throw { status: 404, message: "…" }` makes the Data
+  Gateway answer with that status; in Node the error's `message` is that object as JSON.
 - Arrow functions as arguments: `items.filter(p => p.qty > 1).map(p => p.name)`, `items.sum(p => p.qty)`,
   `items.each(p => …)`.
 - 3xpr's functions: strings (`upper`, `concat`, …), numbers, dates (`now()`, …), lists, `nvl`, `iif`, … (see
@@ -532,6 +533,6 @@ Plus the functions λORM adds:
 - `timeout`: when it passes, the script's loops stop, the transaction rolls back and the script rejects; whatever it
   still executes afterwards fails without reaching the database.
 - `maxIterations`: the loop iterations of the script, all loops together; past it the script fails and rolls back.
-  The REST service uses `SCRIPT_MAX_ITERATIONS` (default 100000).
+  The Data Gateway uses `scripts.maxIterations` (default 100000).
 - Since @lambdaorm/lib 3.3.0 (3xpr 5.3.0) a `while (true) {}` no longer blocks the process: the timeout and
-  `maxIterations` stop it. The REST endpoint is still off by default (`SCRIPT_ENABLED`); enable it for internal clients.
+  `maxIterations` stop it. In the Data Gateway scripts are off by default (`scripts.enabled`) and need the `script` permission.

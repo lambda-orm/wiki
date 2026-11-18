@@ -27,7 +27,10 @@
 - [Listeners and subscribers](https://lambda-orm.github.io/wiki/SchemaExample-Listener): awaited, in the sentence's transaction
 - TypeScript and JavaScript support
 - [CLI Support](https://www.npmjs.com/package/@lambdaorm/cli) (`npm i -g @lambdaorm/cli`)
-- [REST API Support](https://hub.docker.com/r/flaviorita/lambdaorm-svc) (Docker image `flaviorita/lambdaorm-svc`)
-- HTTP Client Support
-  - [Node Client](https://www.npmjs.com/package/@lambdaorm/client)
-  - Other languages: generate a client from the service's OpenAPI 3 document
+- [Data Gateway](https://lambda-orm.github.io/wiki/data-gateway/) (Docker image `flaviorita/data-gateway`)
+  - REST API, MCP for AI agents and a WebSocket API, several schemas per instance
+  - Credentials with permissions, audit of writes, metrics and health
+  - A web UI: explorer, entity forms, saved queries and diagrams of the domain
+- Client Support
+  - [Node Client](https://www.npmjs.com/package/@lambdaorm/client) (REST or WebSocket)
+  - Other languages: generate a client from the Data Gateway's OpenAPI 3 document
