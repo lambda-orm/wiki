@@ -15,18 +15,16 @@ theme:
       toggle: { icon: material/brightness-auto, name: Switch to light mode }
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
+      primary: white
       accent: indigo
       toggle: { icon: material/brightness-7, name: Switch to dark mode }
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
+      primary: black
       accent: indigo
       toggle: { icon: material/brightness-4, name: Switch to system preference }
   features:
-    - navigation.tabs
-    - navigation.tabs.sticky
-    - navigation.sections
+    # a wiki: the whole index is a tree on the left, with folding sections (no tabs on top)
     - navigation.indexes
     - navigation.top
     - navigation.footer
@@ -38,7 +36,7 @@ theme:
 
 extra_css:
   # a new name when it changes: a browser never mixes a cached old one with the new pages
-  - assets/lambdaorm-v1.css
+  - assets/lambdaorm-v2.css
 
 plugins:
   - search
