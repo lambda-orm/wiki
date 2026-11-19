@@ -143,10 +143,11 @@ Gibt `true` zurück, wenn `list` den Wert `value` enthält. Es ist dieselbe Prü
 
 **Signatur:** `includes(list: T[], value: T): boolean`
 
-Beispielsweise erzeugt `includes(["BRA","ARG"], p.iso3)` auf MySQL, MariaDB, PostgreSQL, Oracle und SQLite dieselbe Bedingung `WHERE c.iso3 IN ('BRA', 'ARG')` wie das obige Beispiel mit `in`.
+Beispielsweise erzeugt `includes(["BRA","ARG"], p.iso3)` auf allen SQL-Engines dieselbe Bedingung `WHERE c.iso3 IN ('BRA', 'ARG')` wie das obige Beispiel mit `in`; auf MongoDB `{"iso3": {"$in": ["BRA", "ARG"]}}`. Die Methodenform `["BRA","ARG"].includes(p.iso3)` ist dieselbe.
+
+Wie in JavaScript ist `includes` eines **Textes** eine andere Prüfung: `p.name.includes("ar")` gibt `true` zurück, wenn der Text `"ar"` enthält (`LIKE '%ar%'` auf SQL, eine wörtliche Suche auf MongoDB). Der Typ des ersten Arguments entscheidet: Eine Liste (oder eine Variable) ist die Listenprüfung, ein Text die Textprüfung.
 
 ## Datenbankunterstützung {#database-support}
 
 !!! warning "Unterschiede zwischen Datenbank-Engines"
-    - **MongoDB**: `between` wird in `{"$gte": from, "$lt": to}` übersetzt, sodass die Obergrenze – anders als bei SQL `BETWEEN` – **ausgeschlossen** ist. `includes` kann derzeit nicht in eine MongoDB-Abfrage übersetzt werden; verwenden Sie stattdessen `in`.
-    - **SQL Server**: `includes` wird in ein `LIKE` (Textsuche) statt in `IN` übersetzt; verwenden Sie `in`, um einen Wert gegen eine Liste zu prüfen.
+    - **MongoDB**: `between` wird in `{"$gte": from, "$lt": to}` übersetzt, sodass die Obergrenze – anders als bei SQL `BETWEEN` – **ausgeschlossen** ist.

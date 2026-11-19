@@ -183,7 +183,7 @@ Retorna o último valor do conjunto.
 
 **Assinatura:** `last(value: T): T`
 
-!!! warning "first e last em bancos de dados SQL"
-    Em bancos de dados SQL, `first` e `last` usados como agregados são traduzidos para `FIRST(...)` e `LAST(...)`; verifique se o seu mecanismo de banco de dados suporta essas funções de agregação. No MongoDB eles são traduzidos para `$first` e `$last`.
+!!! warning "first e last como agregados: só MongoDB"
+    Nenhum banco de dados SQL tem um agregado `FIRST` ou `LAST`, e em SQL a ordem das linhas de um grupo não é definida: em bancos de dados SQL, `first` e `last` usados como agregados são um erro ao montar a consulta. Use `min` ou `max`, ou a cláusula `.first()` / `.last()` da consulta. No MongoDB eles são traduzidos para `$first` e `$last`.
 
     Não os confunda com os métodos de consulta `first` e `last` (por exemplo `Countries.first(p=> p.name)`), que retornam a primeira ou a última linha de uma consulta; veja [Select](../Select.md).
