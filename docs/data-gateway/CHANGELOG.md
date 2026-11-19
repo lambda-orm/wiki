@@ -2,6 +2,27 @@
 
 The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway).
 
+### 3.0.0 (2026-11-19)
+
+The first stable version: it moves `latest`. Uses `@lambdaorm/lib` 3.5.5 and `@lambdaorm/ui` 0.3.2. Nothing changes in
+the configuration or the API since `3.0.0-rc.4`; the queries the gateway runs are translated right on more engines.
+
+**Bug Fixes:**
+
+- From `@lambdaorm/lib` 3.5.4 and 3.5.5, every engine checked against a real database by the engines lab:
+    - **MongoDB:** `sort` by a column, names with spaces (`Order Details`), `like` / `startsWith` / `includes` /
+      `isNull` in filters, the date functions on stored dates, comparisons of an expression in a filter
+      (`year(p.date) == 2026`), `log`, `trunc` and a map of one expression.
+    - **SQL Server:** the functions are T-SQL (they were Oracle's: 52 of 62 failed).
+    - **Oracle:** the date functions are Oracle's (they were MySQL's: 20 of 56 failed).
+    - **Every engine:** `includes` of a list is an `IN` and of a text a contains (on SQL Server a list was a `LIKE`);
+      an `include` with its own filter keeps the condition on the parents; `first` / `last` as aggregates are a clear
+      error on SQL databases, which have no such aggregate.
+- UI: the autocompletion of the query editor offers the functions the language has (`hour`, `addHour`, `dayDiff`, …),
+  not names that don't exist (`hours`, `addHours`).
+- Swagger (`/doc`): `POST /script` says what scripts need, `scripts.enabled: true` and a credential with the `script`
+  permission, instead of the former service's `SCRIPT_ENABLED`.
+
 ### 3.0.0-rc.4 (2026-11-18)
 
 Prerelease: it doesn't move `latest`. Uses `@lambdaorm/lib` 3.5.3.
