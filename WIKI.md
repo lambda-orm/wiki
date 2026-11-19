@@ -25,7 +25,7 @@ exec $SHELL -l
 
 - `mkdocs.yml` → main configuration file
 - `docs/` → source documents in Markdown
-- `wiki/` → output folder with generated HTML files (`mkdocs build` will create/update it)
+- `wiki/` → output folder with the generated HTML (`mkdocs build` creates it; not committed: CI builds the site)
 
 ## Local usage
 
@@ -39,22 +39,15 @@ Then open [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ## Build
 
-Generate the static site in the `wiki/` folder:
+Generate the static site in the `wiki/` folder (ignored by git), as CI does:
 
 ```bash
-mkdocs build
+mkdocs build --strict
 ```
 
 ## Deployment to GitHub Pages
 
-Deploy the wiki to GitHub Pages:
-
-```bash
-mkdocs gh-deploy
-```
-
-This will create or update the `gh-pages` branch in the repository and the wiki will be available at:
-
-```sh
-https://<username>.github.io/<repository>/
-```
+CI publishes the wiki: on every push to `main`, `.github/workflows/static.yml` builds the site with
+`mkdocs build --strict`, checks the README's links to the wiki and deploys it to
+[lambda-orm.github.io/wiki](https://lambda-orm.github.io/wiki). Pull requests build and check without publishing.
+There is nothing to deploy by hand.
