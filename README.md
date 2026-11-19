@@ -1,13 +1,13 @@
 # λORM
 
-[![CLI](https://img.shields.io/badge/Api-CLI-blue.svg)](https://lambda-orm.github.io/wiki/cli)
-[![Api REST](https://img.shields.io/badge/Api-REST-blue.svg)](https://lambda-orm.github.io/wiki/api)
+[![CLI](https://img.shields.io/badge/Api-CLI-blue.svg)](https://lambda-orm.github.io/wiki/cli/)
+[![Data Gateway](https://img.shields.io/badge/Api-REST%20%7C%20MCP%20%7C%20WebSocket-blue.svg)](https://lambda-orm.github.io/wiki/data-gateway/)
 [![Join the community on GitHub Discussions](https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue.svg)](https://github.com/lambda-orm/wiki/discussions)
 [![Slack](https://img.shields.io/badge/chat-on%20slack-orange)](https://join.slack.com/t/nuevoespaciod-xo58767/shared_invite/zt-29ix7pc2r-Wd_ZBWnWRDv_5DM4NPtVhQ)
 [![Gitter](https://badges.gitter.im/lambdaorm/community.svg)](https://app.gitter.im/#/room/#lambdaorm-how-to-contribute:gitter.im)
 [![Discord](https://img.shields.io/badge/chat-on%20discord-orange)](https://discord.com/invite/yXT6XBX2)
-[![language typescript](https://img.shields.io/badge/language-typescript-blue)](https://www.npmjs.com/package/lambdaorm)
-[![npm version](https://img.shields.io/badge/npm-10.2.5-green)](https://www.npmjs.com/package/lambdaorm)
+[![language typescript](https://img.shields.io/badge/language-typescript-blue)](https://www.npmjs.com/package/@lambdaorm/lib)
+[![npm version](https://img.shields.io/npm/v/@lambdaorm/lib.svg)](https://www.npmjs.com/package/@lambdaorm/lib)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
@@ -18,7 +18,7 @@ In λORM, queries are defined using lambda expressions based on a domain model w
 
 λORM allows you to define different scenarios for the same domain. For example, in one scenario, the infrastructure may consist of distributed instances across SQL Server, MongoDB, and Oracle, while in another scenario it may be a single Postgres instance. This allows the [CQRS](https://microservices.io/patterns/data/cqrs.html) pattern to be implemented through configuration, without needing to write a single line of code. [view example](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/svc/04-northwind-cqrs-with-kafka)
 
-In addition to being used as a Node.js library, it can be consumed from a command line interface (CLI), a REST service, or a REST service client in other programming languages.
+In addition to being used as a Node.js library, it can be consumed from a command line interface (CLI) and, through the [Data Gateway](https://lambda-orm.github.io/wiki/data-gateway/), over REST, WebSocket or MCP (for AI agents) from any language.
 
 ## Query Language
 
@@ -42,18 +42,18 @@ In this example:
 - Map each product to an object with category name and maximum price
 - Sort the products by largest price in descending order
 
-**view:** [queries](https://lambda-orm.github.io/wiki/queries/Query-Language/index.html) |
-[select](https://lambda-orm.github.io/wiki/queries/dql/Select/index.html) |
-[join](https://lambda-orm.github.io/wiki/queries/dql/Join/index.html) |
-[grouping](https://lambda-orm.github.io/wiki/queries/dql/Grouping/index.html) |
-[include](https://lambda-orm.github.io/wiki/queries/dql/Include/index.html) |
-[insert](https://lambda-orm.github.io/wiki/queries/dml/Insert/index.html) |
-[bulkInsert](https://lambda-orm.github.io/wiki/queries/dmlBulkInsert/index.html) |
-[update](https://lambda-orm.github.io/wiki/queries/dml/Update/index.html) |
-[delete](https://lambda-orm.github.io/wiki/queries/dml/Delete/index.html) |
-[repository](https://lambda-orm.github.io/wiki/Repository/index.html) |
-[usage](https://lambda-orm.github.io/wiki/Usage/index.html) |
-[metadata](https://lambda-orm.github.io/wiki/queries/Metadata/index.html)
+**view:** [queries](https://lambda-orm.github.io/wiki/queries/Query-Language/) |
+[select](https://lambda-orm.github.io/wiki/queries/Select/) |
+[join](https://lambda-orm.github.io/wiki/queries/Join/) |
+[grouping](https://lambda-orm.github.io/wiki/queries/Grouping/) |
+[include](https://lambda-orm.github.io/wiki/queries/Include/) |
+[insert](https://lambda-orm.github.io/wiki/queries/Insert/) |
+[bulkInsert](https://lambda-orm.github.io/wiki/queries/BulkInsert/) |
+[update](https://lambda-orm.github.io/wiki/queries/Update/) |
+[delete](https://lambda-orm.github.io/wiki/queries/Delete/) |
+[repository](https://lambda-orm.github.io/wiki/usage/Repository/) |
+[usage](https://lambda-orm.github.io/wiki/usage/Usage/) |
+[metadata](https://lambda-orm.github.io/wiki/queries/Metadata/)
 
 ### Include
 
@@ -126,26 +126,26 @@ import { orm } from '../../lib'
 ]
 ```
 
-**more info:** [include](https://lambda-orm.github.io/wiki/Include)
+**more info:** [include](https://lambda-orm.github.io/wiki/queries/Include/)
 
 ## Schema Configuration
 
 Through the schema, you can define entities, enumerations, indexes, unique keys, default values, constraints, mapping, sources, stages, listeners, etc. The schema can be defined in a JSON or YAML format. Conditions or actions are performed using the same [expression language](https://www.npmjs.com/package/3xpr) that is used to define queries.
 
-**view:**  [schema](https://lambda-orm.github.io/wiki/schema/Schema/index.html) |
-[definition](https://lambda-orm.github.io/wiki/schema/Definition/SchemaDefinition/index.html) |
-[use](https://lambda-orm.github.io/wiki/schema/Schema-Us/index.html) |
-[expressions](https://lambda-orm.github.io/wiki/schema/Definition/SchemaDefinition-Expressions/index.html) |
-[environment Variables](https://lambda-orm.github.io/wiki/schema/Definition/SchemaDefinition-EnvironmentVariables/index.html) |
-[composite](https://lambda-orm.github.io/wiki/schema/Definition/SchemaDefinition-Composite/index.html) |
-[listener](https://lambda-orm.github.io/wiki/schema/Examples/SchemaExample-Listener/index.html) |
-[multiple stages](https://lambda-orm.github.io/wiki/schema/Examples/SchemaExample-MultiplesStages/index.html) |
-[multiple sources](https://lambda-orm.github.io/wiki/schema/Examples/SchemaExample-StageMultiplesSources/index.html) |
-[push](https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Push/index.html) |
-[pull](https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Pull/index.html) |
-[fetch](https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Fetch/index.html) |
-[introspect](https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Introspect/index.html) |
-[incorporate](https://lambda-orm.github.io/wiki/schema/Examples/SchemaSynchronization-Incorporate/index.html)
+**view:**  [schema](https://lambda-orm.github.io/wiki/schema/Schema/) |
+[definition](https://lambda-orm.github.io/wiki/schema/SchemaDefinition/) |
+[use](https://lambda-orm.github.io/wiki/schema/Schema-Use/) |
+[expressions](https://lambda-orm.github.io/wiki/schema/SchemaDefinition-Expressions/) |
+[environment Variables](https://lambda-orm.github.io/wiki/schema/SchemaDefinition-EnvironmentVariables/) |
+[composite](https://lambda-orm.github.io/wiki/schema/SchemaDefinition-Composite/) |
+[listener](https://lambda-orm.github.io/wiki/schema/SchemaExample-Listener/) |
+[multiple stages](https://lambda-orm.github.io/wiki/schema/SchemaExample-MultiplesStages/) |
+[multiple sources](https://lambda-orm.github.io/wiki/schema/SchemaExample-StageMultiplesSources/) |
+[push](https://lambda-orm.github.io/wiki/schema/SchemaSynchronization-Push/) |
+[pull](https://lambda-orm.github.io/wiki/schema/SchemaSynchronization-Pull/) |
+[fetch](https://lambda-orm.github.io/wiki/schema/SchemaSynchronization-Fetch/) |
+[introspect](https://lambda-orm.github.io/wiki/schema/SchemaSynchronization-Introspect/) |
+[incorporate](https://lambda-orm.github.io/wiki/schema/SchemaSynchronization-Incorporate/)
 
 ## All Labs
 
@@ -153,7 +153,8 @@ You can access various labs at [lambdaorm labs](https://github.com/lambda-orm/la
 
 ## Related projects
 
-- [Lambda ORM CLI](https://www.npmjs.com/package/lambdaorm-cli): Command line interface for λORM
-- [Lambda ORM Service](https://lambda-orm.github.io/wiki/api/index.html): REST service for λORM
-- [Client Node](https://www.npmjs.com/package/lambdaorm-client-node): HTTP client for λORM
+- [@lambdaorm/lib](https://www.npmjs.com/package/@lambdaorm/lib): the library
+- [@lambdaorm/cli](https://www.npmjs.com/package/@lambdaorm/cli): command line interface for λORM
+- [Data Gateway](https://lambda-orm.github.io/wiki/data-gateway/): your databases as a governed data API (REST, WebSocket, MCP for AI agents and a web UI), as the Docker image `flaviorita/data-gateway`
+- [@lambdaorm/client](https://www.npmjs.com/package/@lambdaorm/client): Node.js client of the Data Gateway
 - [3xpr](https://www.npmjs.com/package/3xpr): Extensible expression engine, which allows evaluating mathematical and logical expressions.
