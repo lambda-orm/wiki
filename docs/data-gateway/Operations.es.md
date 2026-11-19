@@ -11,7 +11,7 @@ y Oracle Instant Client. Ejecuta `node index.js` como el usuario 1000, lee la co
 # docker-compose.yml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:3.0.0
+    image: flaviorita/data-gateway:3.0.1
     environment:
       DATA_GATEWAY_HTTP_PORT: "8080"
       DATA_GATEWAY_MCP_PORT: "8081"

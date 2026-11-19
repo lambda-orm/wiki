@@ -712,6 +712,8 @@ SQL Server, `NUMTODSINTERVAL`, `ADD_MONTHS` e a aritmética de datas no Oracle, 
 MongoDB. As diferenças (`dayDiff(date1, date2)`, …) são sempre `date1 - date2`.
 
 !!! note "MongoDB"
-    Todas as funções desta página estão disponíveis no MongoDB. λORM guarda as datas no MongoDB como texto ISO 8601,
-    por isso cada argumento de data passa por `$toDate`, que aceita tanto uma data guardada quanto uma data BSON. Em um
+    Todas as funções desta página estão disponíveis no MongoDB. λORM guarda as datas no MongoDB como datas BSON
+    (desde `@lambdaorm/lib` 3.6.0; antes, como texto ISO 8601), também as datas escritas em um filtro
+    (`p.orderDate >= "2026-01-01"`). Cada argumento de data de uma função passa por `$toDate`, por isso as datas
+    guardadas como texto por versões anteriores também são lidas. Em um
     filtro, uma comparação com uma função (`year(p.orderDate) == 2026`) é traduzida para um `$expr`.

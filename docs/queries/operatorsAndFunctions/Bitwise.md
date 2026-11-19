@@ -157,4 +157,7 @@ LIMIT 0,1
     - **Oracle**: `&`, `|` and `^` are translated to `BITAND`, `BITOR` and `BITXOR`.
     - **PostgreSQL**: `^` is translated to the `#` operator (XOR).
     - **MongoDB**: `&`, `|`, `^` and `~` are translated to `$bitAnd`, `$bitOr`, `$bitXor` and `$bitNot` (MongoDB 6.3 or
-      later); the shifts `<<` and `>>` cannot currently be translated.
+      later).
+    - **MongoDB** and **Oracle**: `<<` and `>>` are a multiplication or a division by a power of 2.
+    - With a negative number each engine shifts its own way: arithmetically on PostgreSQL, Oracle and MongoDB
+      (`-21 >> 2` is `-6`), over unsigned integers on MySQL, MariaDB and SQL Server.

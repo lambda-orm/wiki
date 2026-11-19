@@ -712,6 +712,8 @@ Jede Engine hat ihre eigenen Datumsfunktionen, und λORM verwendet die der jewei
 und `$year` bei MongoDB. Die Differenzen (`dayDiff(date1, date2)`, …) sind immer `date1 - date2`.
 
 !!! note "MongoDB"
-    Alle Funktionen dieser Seite sind auf MongoDB verfügbar. λORM speichert Datumswerte in MongoDB als ISO-8601-Text,
-    daher durchläuft jedes Datumsargument `$toDate`, das sowohl ein gespeichertes Datum als auch ein BSON-Datum annimmt.
+    Alle Funktionen dieser Seite sind auf MongoDB verfügbar. λORM speichert Datumswerte in MongoDB als BSON-Daten
+    (ab `@lambdaorm/lib` 3.6.0; vorher als ISO-8601-Text), auch die in einem Filter geschriebenen Daten
+    (`p.orderDate >= "2026-01-01"`). Jedes Datumsargument einer Funktion durchläuft `$toDate`, sodass auch von früheren
+    Versionen als Text gespeicherte Daten gelesen werden.
     In einem Filter wird ein Vergleich mit einer Funktion (`year(p.orderDate) == 2026`) in einen `$expr` übersetzt.

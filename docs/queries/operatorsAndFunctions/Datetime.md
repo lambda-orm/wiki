@@ -712,6 +712,7 @@ Server, `NUMTODSINTERVAL`, `ADD_MONTHS` and date arithmetic on Oracle, `$dateAdd
 The differences (`dayDiff(date1, date2)`, …) are always `date1 - date2`.
 
 !!! note "MongoDB"
-    Every function on this page is available on MongoDB. λORM stores dates in MongoDB as ISO 8601 text, so each date
-    argument goes through `$toDate`, which takes both a stored date and a BSON date. In a filter, a comparison with a
+    Every function on this page is available on MongoDB. λORM stores dates in MongoDB as BSON dates (from
+    `@lambdaorm/lib` 3.6.0; before, as ISO 8601 text), also the dates written in a filter (`p.orderDate >= "2026-01-01"`).
+    Each date argument of a function goes through `$toDate`, so dates stored as text by earlier versions are read too. In a filter, a comparison with a
     function (`year(p.orderDate) == 2026`) is translated to a `$expr`.

@@ -157,4 +157,7 @@ LIMIT 0,1
     - **Oracle**: `&`, `|` und `^` werden in `BITAND`, `BITOR` und `BITXOR` übersetzt.
     - **PostgreSQL**: `^` wird in den Operator `#` (XOR) übersetzt.
     - **MongoDB**: `&`, `|`, `^` und `~` werden in `$bitAnd`, `$bitOr`, `$bitXor` und `$bitNot` übersetzt (MongoDB 6.3
-      oder neuer); die Verschiebungen `<<` und `>>` können derzeit nicht übersetzt werden.
+      oder neuer).
+    - **MongoDB** und **Oracle**: `<<` und `>>` sind eine Multiplikation oder Division durch eine Zweierpotenz.
+    - Bei einer negativen Zahl verschiebt jede Engine auf ihre Weise: arithmetisch bei PostgreSQL, Oracle und MongoDB
+      (`-21 >> 2` ist `-6`), über vorzeichenlose Ganzzahlen bei MySQL, MariaDB und SQL Server.

@@ -2,6 +2,19 @@
 
 The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway).
 
+### 3.0.1 (2026-11-19)
+
+Uses `@lambdaorm/lib` 3.6.0 and `@lambdaorm/ui` 0.3.3. Nothing changes in the configuration or the API.
+
+**Bug Fixes:**
+
+- From `@lambdaorm/lib` 3.6.0, checked by the engines lab on the six engines:
+    - **MongoDB:** dates are stored and compared as BSON dates (the `Date` of MongoDB), not ISO text: the values of
+      inserts and updates, and the dates of filters. `distinct` applies `sort` and `page` (they were ignored, and the
+      rows came nested in one list), also as a function of the map. `<<` and `>>` work.
+    - **Oracle:** a date written in the query is a `DATE` / `TIMESTAMP` literal (`ORA-01861`), a variable named as a
+      reserved word works (`to`, `from`, `date`: `ORA-01745`), and `<<` and `>>` work.
+
 ### 3.0.0 (2026-11-19)
 
 The first stable version: it moves `latest`. Uses `@lambdaorm/lib` 3.5.5 and `@lambdaorm/ui` 0.3.2. Nothing changes in

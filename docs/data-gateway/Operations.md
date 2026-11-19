@@ -11,7 +11,7 @@ CLI and the Oracle Instant Client. It runs `node index.js` as the user 1000, rea
 # docker-compose.yml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:3.0.0
+    image: flaviorita/data-gateway:3.0.1
     environment:
       DATA_GATEWAY_HTTP_PORT: "8080"
       DATA_GATEWAY_MCP_PORT: "8081"
