@@ -183,7 +183,7 @@ Returns the last value of the set.
 
 **Signature:** `last(value: T): T`
 
-!!! warning "first and last on SQL databases"
-    On SQL databases, `first` and `last` used as aggregates are translated to `FIRST(...)` and `LAST(...)`; check that your database engine supports these aggregate functions. On MongoDB they are translated to `$first` and `$last`.
+!!! warning "first and last as aggregates: MongoDB only"
+    No SQL database has a `FIRST` or `LAST` aggregate, and the order of the rows of a group is not defined in SQL: on SQL databases `first` and `last` used as aggregates are an error when the query is built. Use `min` or `max`, or the `.first()` / `.last()` clause of the query. On MongoDB they are translated to `$first` and `$last`.
 
     Do not confuse them with the `first` and `last` query methods (for example `Countries.first(p=> p.name)`), which return the first or last row of a query; see [Select](../Select.md).

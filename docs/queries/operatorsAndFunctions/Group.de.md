@@ -183,7 +183,7 @@ Gibt den letzten Wert der Menge zurück.
 
 **Signatur:** `last(value: T): T`
 
-!!! warning "first und last auf SQL-Datenbanken"
-    Auf SQL-Datenbanken werden `first` und `last` als Aggregate in `FIRST(...)` und `LAST(...)` übersetzt; prüfen Sie, ob Ihre Datenbank-Engine diese Aggregatfunktionen unterstützt. Auf MongoDB werden sie in `$first` und `$last` übersetzt.
+!!! warning "first und last als Aggregate: nur MongoDB"
+    Keine SQL-Datenbank hat ein Aggregat `FIRST` oder `LAST`, und in SQL ist die Reihenfolge der Zeilen einer Gruppe nicht definiert: Auf SQL-Datenbanken sind `first` und `last` als Aggregate ein Fehler beim Erstellen der Abfrage. Verwenden Sie `min` oder `max` oder die Klausel `.first()` / `.last()` der Abfrage. Auf MongoDB werden sie in `$first` und `$last` übersetzt.
 
     Verwechseln Sie sie nicht mit den Abfragemethoden `first` und `last` (zum Beispiel `Countries.first(p=> p.name)`), die die erste bzw. letzte Zeile einer Abfrage zurückgeben; siehe [Select](../Select.md).

@@ -143,10 +143,11 @@ Returns `true` when `list` contains `value`. It is the same check as `in`, with 
 
 **Signature:** `includes(list: T[], value: T): boolean`
 
-For example, `includes(["BRA","ARG"], p.iso3)` generates the same `WHERE c.iso3 IN ('BRA', 'ARG')` condition as the `in` example above on MySQL, MariaDB, PostgreSQL, Oracle and SQLite.
+For example, `includes(["BRA","ARG"], p.iso3)` generates the same `WHERE c.iso3 IN ('BRA', 'ARG')` condition as the `in` example above on every SQL engine; on MongoDB it is `{"iso3": {"$in": ["BRA", "ARG"]}}`. The method form `["BRA","ARG"].includes(p.iso3)` is the same.
+
+As in JavaScript, `includes` of a **text** is a different check: `p.name.includes("ar")` returns `true` when the text contains `"ar"` (`LIKE '%ar%'` on SQL, a literal search on MongoDB). The type of the first argument decides: a list (or a variable) is the list check, a text is the text check.
 
 ## Database support
 
 !!! warning "Engine differences"
-    - **MongoDB**: `between` is translated to `{"$gte": from, "$lt": to}`, so the upper limit is **excluded**, unlike SQL `BETWEEN`. `includes` cannot currently be translated to a MongoDB query; use `in` instead.
-    - **SQL Server**: `includes` is translated to a `LIKE` (text search) instead of `IN`; use `in` to check a value against a list.
+    - **MongoDB**: `between` is translated to `{"$gte": from, "$lt": to}`, so the upper limit is **excluded**, unlike SQL `BETWEEN`.
