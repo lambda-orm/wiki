@@ -118,5 +118,6 @@ WHERE (s.LATITUDE IS NOT NULL)
 
 ## Soporte por base de datos {#database-support}
 
-!!! warning "MongoDB"
-    En la versión actual, `nvl`, `nvl2`, `isNull` e `isNotNull` no se pueden traducir a consultas de MongoDB.
+!!! note "MongoDB"
+    `nvl`, `nvl2`, `isNull` e `isNotNull` se traducen a `$ifNull` y `$cond`; en un filtro, `isNull` e `isNotNull` van en
+    un `$expr`. Un campo que no existe cuenta como nulo.

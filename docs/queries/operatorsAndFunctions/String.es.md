@@ -312,4 +312,7 @@ WHERE c.iso3 = 'BRA'
 ## Soporte por base de datos {#database-support}
 
 !!! warning "MongoDB"
-    En la versión actual, `chr`, `lpad`, `rpad`, `ltrim`, `rtrim`, `trim`, `replace`, `mask`, `substr`, `substring` y `strCount` no se pueden traducir a consultas de MongoDB. `concat`, `lower`, `upper` y `toString` sí están soportadas.
+    `chr`, `lpad` y `rpad` no tienen equivalente en MongoDB y no se pueden traducir. El resto de las funciones de esta
+    página están disponibles. `like`, `startsWith` e `includes` de un texto comparan el texto de forma literal
+    (`includes` y `startsWith` con `$indexOfCP`, `like` con una expresión regular construida a partir del patrón); en
+    un filtro van en un `$expr`.

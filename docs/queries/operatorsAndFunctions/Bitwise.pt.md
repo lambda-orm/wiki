@@ -156,4 +156,5 @@ LIMIT 0,1
 !!! warning "Diferenças entre mecanismos de banco de dados"
     - **Oracle**: `&`, `|` e `^` são traduzidos para `BITAND`, `BITOR` e `BITXOR`.
     - **PostgreSQL**: `^` é traduzido para o operador `#` (XOR).
-    - **MongoDB**: atualmente os operadores bit a bit não podem ser traduzidos para consultas MongoDB.
+    - **MongoDB**: `&`, `|`, `^` e `~` são traduzidos para `$bitAnd`, `$bitOr`, `$bitXor` e `$bitNot` (MongoDB 6.3 ou
+      posterior); os deslocamentos `<<` e `>>` ainda não podem ser traduzidos.

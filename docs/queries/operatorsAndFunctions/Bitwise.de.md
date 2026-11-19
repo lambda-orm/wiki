@@ -156,4 +156,5 @@ LIMIT 0,1
 !!! warning "Unterschiede zwischen Datenbank-Engines"
     - **Oracle**: `&`, `|` und `^` werden in `BITAND`, `BITOR` und `BITXOR` übersetzt.
     - **PostgreSQL**: `^` wird in den Operator `#` (XOR) übersetzt.
-    - **MongoDB**: Bitweise Operatoren können derzeit nicht in MongoDB-Abfragen übersetzt werden.
+    - **MongoDB**: `&`, `|`, `^` und `~` werden in `$bitAnd`, `$bitOr`, `$bitXor` und `$bitNot` übersetzt (MongoDB 6.3
+      oder neuer); die Verschiebungen `<<` und `>>` können derzeit nicht übersetzt werden.
