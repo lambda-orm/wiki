@@ -1,8 +1,11 @@
-name: Publish prebuilt wiki/ to GitHub Pages
+name: Build the wiki and publish it to GitHub Pages
 
+# The site is built here from docs/ (mkdocs build --strict: a broken link between pages fails the build), so what is
+# published is always what docs/ says. A pull request only builds and checks; a push to main also publishes.
 on:
   push:
     branches: ["main"]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -11,7 +14,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: "pages-${{ github.ref }}"
   cancel-in-progress: false
 
 jobs:
@@ -20,17 +23,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # (Opcional) Verifica que exista index.html en wiki/
-      - name: Check wiki output
-        run: |
-          test -f wiki/index.html || (echo "Falta wiki/index.html" && exit 1)
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install MkDocs
+        run: pip install -r requirements-docs.txt
+
+      - name: Build (strict)
+        run: mkdocs build --strict
+
+      - name: Links of the README to the wiki
+        run: python scripts/check_wiki_links.py wiki README.md
 
       - name: Upload artifact (wiki)
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./wiki   # ← publicamos exactamente lo que ya está en wiki/
+          path: ./wiki
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
