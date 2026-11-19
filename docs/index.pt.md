@@ -1,202 +1,290 @@
 # λORM {#orm}
 
-[![versão no npm](https://img.shields.io/npm/v/@lambdaorm/lib.svg)](https://www.npmjs.com/package/@lambdaorm/lib)
-[![linguagem typescript](https://img.shields.io/badge/language-typescript-blue)](https://www.npmjs.com/package/@lambdaorm/lib)
-[![Licença: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Participe da comunidade no GitHub Discussions](https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue.svg)](https://github.com/lambda-orm/wiki/discussions)
-[![Slack](https://img.shields.io/badge/chat-on%20slack-orange)](https://join.slack.com/t/nuevoespaciod-xo58767/shared_invite/zt-29ix7pc2r-Wd_ZBWnWRDv_5DM4NPtVhQ)
-[![Gitter](https://badges.gitter.im/lambdaorm/community.svg)](https://app.gitter.im/#/room/#lambdaorm-how-to-contribute:gitter.im)
-[![Discord](https://img.shields.io/badge/chat-on%20discord-orange)](https://discord.com/invite/yXT6XBX2)
+[![npm version](https://img.shields.io/npm/v/@lambdaorm/lib.svg)](https://www.npmjs.com/package/@lambdaorm/lib)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-O λORM (LambdaORM) é um ORM em TypeScript que executa **consultas distribuídas** entre diferentes mecanismos de banco de dados: MySQL,
-MariaDB, PostgreSQL, SQL Server, Oracle, MongoDB e SQLite.
+**Escreva uma consulta uma vez. Execute-a em qualquer banco de dados: a partir do seu código, de um terminal, de uma API ou de um agente de IA.**
 
-As consultas são escritas como **expressões lambda** sobre um **modelo de domínio** independente da infraestrutura. Uma
-única consulta pode ler ou gravar entidades armazenadas em bancos de dados diferentes — por exemplo, algumas em MySQL, outras em
-PostgreSQL e outras em MongoDB — e o λORM a divide em uma sentença por fonte e une os resultados.
+λORM é uma linguagem de consulta e um ambiente de execução para os seus dados. Você descreve o seu **domínio** uma vez
+(entidades, relações, regras) em um esquema e escreve as consultas como **expressões lambda** sobre ele:
 
-O mesmo domínio pode ter vários **stages** (cenários de infraestrutura). Em um stage os dados podem estar distribuídos entre SQL
-Server, MongoDB e Oracle; em outro, tudo pode estar em um único banco de dados PostgreSQL. Isso permite
-implementar padrões como [CQRS](https://microservices.io/patterns/data/cqrs.html) por meio de configuração, sem
-alterar o código.
+```typescript
+Orders
+  .filter(p => p.customer.country == country && p.orderDate >= since)
+  .include(p => [p.customer.map(c => c.name), p.details.include(d => d.product.map(p => p.name))])
+```
+
+λORM converte essa consulta em SQL para **MySQL, MariaDB, PostgreSQL, SQL Server, Oracle e SQLite**, ou em um pipeline
+de agregação para **MongoDB**, mesmo quando as entidades de uma consulta estão em **bancos de dados diferentes**. E a
+mesma consulta é executada a partir de uma biblioteca Node.js, da linha de comando, de uma API REST ou WebSocket, ou de
+um agente de IA via MCP.
+
+## Por que λORM {#why-orm}
+
+- **Um domínio, qualquer banco de dados.** As consultas falam de `Orders` e `Customers`, não de tabelas, dialetos ou de
+  onde cada entidade está armazenada.
+- **Uma consulta sobre vários bancos de dados.** Pedidos no MongoDB, clientes no PostgreSQL, produtos no MySQL: uma
+  consulta, um resultado. λORM a divide por fonte e junta os resultados.
+- **Stages.** O mesmo domínio em um SQLite no desenvolvimento e distribuído em três mecanismos na produção, ou um lado
+  de escrita e um de leitura ([CQRS](https://microservices.io/patterns/data/cqrs.html)), por configuração, não por
+  código.
+- **Todos os canais.** TypeScript (tipado), um texto, a CLI, REST, WebSocket, MCP: a mesma linguagem em todo lugar.
+- **Acesso governado.** O [Data Gateway](data-gateway/index.md) publica os seus esquemas com credenciais, permissões
+  (`read`, `write`, …) e uma auditoria de cada alteração, para aplicações, pessoas e agentes de IA.
+- **Schema-first, nos dois sentidos.** De um YAML para as tabelas (`push`), dos bancos de dados para o YAML (`pull`),
+  ou de um arquivo JSON com dados para um esquema, suas tabelas e linhas (`incorporate`).
 
 Veja as [funcionalidades](Features.md) para uma lista completa.
 
-## Como usar {#how-to-use-it}
+## A mesma consulta, de qualquer lugar {#the-same-query-from-everywhere}
 
-| Forma | Pacote | Quando usar |
-| --- | --- | --- |
-| Biblioteca Node.js | [`@lambdaorm/lib`](https://www.npmjs.com/package/@lambdaorm/lib) | Executar consultas a partir de uma aplicação Node.js / TypeScript. Veja [Uso](usage/Usage.md). |
-| Linha de comando | [`@lambdaorm/cli`](https://www.npmjs.com/package/@lambdaorm/cli) (comando `lambdaorm`) | Criar um projeto, sincronizar os bancos de dados, importar e exportar dados e executar consultas em um terminal ou em CI. Veja [CLI](cli/index.md). |
-| Data Gateway | Imagem Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | Expor esquemas do λORM pela rede: uma API REST, MCP para agentes de IA, uma API WebSocket e uma UI web. Veja [Data Gateway](data-gateway/index.md). |
-| Cliente Node.js | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | Executar as mesmas consultas a partir do Node.js em um Data Gateway. Veja [Clientes](data-gateway/Clients.md). |
+A expressão `Products.filter(p => p.price > minPrice).map(p => [p.name, p.price])` é a mesma em todos os canais.
 
-```sh
-npm install @lambdaorm/lib      # the library
-npm install -g @lambdaorm/cli   # the lambdaorm command
-```
+### Node.js / TypeScript {#nodejs-typescript}
 
-!!! note "Nota"
-    Os pacotes sem escopo `lambdaorm`, `lambdaorm-cli` e `lambdaorm-client-node` não são mais mantidos: use os
-    pacotes `@lambdaorm/*`.
-
-## Linguagem de consulta {#query-language}
-
-A consulta a seguir retorna o maior preço de cada categoria de produto, considerando apenas os produtos que atendem ao
-filtro e as categorias cujo maior preço é superior a 50:
+A biblioteca, [`@lambdaorm/lib`](https://www.npmjs.com/package/@lambdaorm/lib). Veja [Uso](usage/Usage.md).
 
 ```typescript
 import { orm } from '@lambdaorm/lib'
-import { Products } from './northwind/domain/model'
-
-const query = (country: string) => Products
-  .filter(p => (p.price > 5 && p.supplier.country == country) || (p.inStock < 3))
-  .having(p => max(p.price) > 50)
-  .map(p => ({ category: p.category.name, largestPrice: max(p.price) }))
-  .sort(p => desc(p.largestPrice))
 
 await orm.init('./lambdaORM.yaml')
-// run the query, passing the value of the country parameter
-const result = await orm.execute(query, { country: 'ARG' })
-await orm.end()
+const products = await orm.execute(
+  (minPrice: number) => Products.filter(p => p.price > minPrice).map(p => [p.name, p.price]),
+  { minPrice: 50 })
 ```
 
-Nesta consulta:
+### Linha de comando {#command-line}
 
-- `filter` mantém os produtos cujo preço é maior que 5 e cujo fornecedor está no país informado, assim como
-  aqueles com menos de 3 unidades em estoque.
-- `map` retorna o nome da categoria e o maior preço. O agrupamento é implícito: os produtos são agrupados por categoria
-  porque `max` é uma função de agregação.
-- `having` mantém apenas as categorias cujo maior preço é maior que 50.
-- `sort` ordena o resultado pelo maior preço, em ordem decrescente.
-- `supplier` e `category` são relações: os joins são implícitos.
+O comando `lambdaorm`, [`@lambdaorm/cli`](https://www.npmjs.com/package/@lambdaorm/cli). Veja [CLI](cli/index.md).
 
-**Veja também:** [linguagem de consulta](queries/Query-Language.md) |
-[select](queries/Select.md) |
-[join](queries/Join.md) |
-[agrupamento](queries/Grouping.md) |
-[include](queries/Include.md) |
-[insert](queries/Insert.md) |
-[bulk insert](queries/BulkInsert.md) |
-[update](queries/Update.md) |
-[delete](queries/Delete.md) |
-[metadados](queries/Metadata.md) |
-[repositório](usage/Repository.md) |
-[uso](usage/Usage.md)
+```sh
+lambdaorm execute -q "Products.filter(p => p.price > minPrice).map(p => [p.name, p.price])" -d '{"minPrice": 50}'
+```
 
-### Include {#include}
+### API REST, de qualquer linguagem {#rest-api-from-any-language}
 
-`include` retorna uma entidade junto com suas relações na mesma consulta, mesmo quando estão armazenadas em bancos de dados
-diferentes. Neste exemplo a consulta é escrita como string, uma alternativa à expressão lambda:
+O [Data Gateway](data-gateway/index.md) publica o esquema via HTTP. Veja [API REST](data-gateway/Rest.md).
+
+```sh
+curl -X POST http://gateway:8080/northwind/execute -H "X-Api-Key: $KEY" -H "Content-Type: application/json" \
+  -d '{"query": "Products.filter(p => p.price > minPrice).map(p => [p.name, p.price])", "data": {"minPrice": 50}}'
+```
+
+```python
+import requests
+
+products = requests.post("http://gateway:8080/northwind/execute", headers={"X-Api-Key": key}, json={
+    "query": "Products.filter(p => p.price > minPrice).map(p => [p.name, p.price])",
+    "data": {"minPrice": 50},
+}).json()
+```
+
+### Cliente Node.js {#nodejs-client}
+
+[`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client): a interface da biblioteca, executada em um
+Data Gateway via REST ou WebSocket. Veja [Clientes](data-gateway/Clients.md) e [API WebSocket](data-gateway/WebSocket.md).
 
 ```typescript
-import { orm } from '@lambdaorm/lib'
+import { orm } from '@lambdaorm/client'
 
-(async () => {
-  try {
-    await orm.init('./config/northwind.yaml')
-    const query = `Orders
-      .filter(p => p.id === id)
-      .include(p => [
-        p.customer.map(p => p.name),
-        p.details
-          .include(p => p.product
-            .include(p => p.category.map(p => p.name))
-            .map(p => p.name))
-          .map(p => [p.quantity, p.unitPrice])
-      ])`
-    const result = await orm.execute(query, { id: 102 }, { stage: 'PostgreSQL' })
-    console.log(JSON.stringify(result, null, 2))
-  } catch (error: any) {
-    console.error(error.message)
-  } finally {
-    await orm.end()
-  }
-})()
+await orm.init('ws://gateway:8083/northwind', { headers: { 'X-Api-Key': key } })
+const products = await orm.execute('Products.filter(p => p.price > minPrice).map(p => [p.name, p.price])', { minPrice: 50 })
+orm.on('schema.statusChanged', ({ status }) => console.log(status))
 ```
 
-**Resultado:**
+### Agentes de IA {#ai-agents}
 
-```json
-[
-  {
-    "id": 102,
-    "customerId": "SPLIR",
-    "employeeId": 7,
-    "orderDate": "1996-11-07T23:00:00.000Z",
-    "requiredDate": "1996-12-05T23:00:00.000Z",
-    "shippedDate": "1996-11-14T23:00:00.000Z",
-    "shipViaId": 1,
-    "freight": 8.63,
-    "name": "Split Rail Beer & Ale",
-    "address": "P.O. Box 555",
-    "city": "Lander",
-    "region": "WY",
-    "postalCode": "82520",
-    "country": "USA",
-    "customer": {
-      "name": "Split Rail Beer & Ale"
-    },
-    "details": [
-      {
-        "quantity": 24,
-        "unitPrice": 5.9,
-        "product": {
-          "name": "Tourtire",
-          "category": {
-            "name": "Meat/Poultry"
-          }
-        }
-      }
-    ]
-  }
-]
+O Data Gateway fala [MCP](data-gateway/Mcp.md): um agente explora o domínio e o consulta com as permissões da sua
+credencial, nunca mais.
+
+```sh
+claude mcp add --transport http northwind http://gateway:8081/northwind/mcp --header "X-Api-Key: $KEY"
 ```
 
-**Mais informações:** [include](queries/Include.md)
+> *"Quais produtos custam mais de 50?"*: o agente lê o domínio do esquema a partir das ferramentas e chama
+> `orm_execute` com `Products.filter(p => p.price > 50).map(p => [p.name, p.price])`. Com uma credencial `read`, ele
+> não pode alterar nada.
 
-## Esquema {#schema}
+### O navegador {#the-browser}
 
-O esquema define entidades, enumerações, índices, chaves únicas, valores padrão, restrições, mapeamentos, fontes,
-stages, listeners e muito mais. Ele é escrito em YAML ou JSON. Condições e ações usam a mesma
-[linguagem de expressões](https://www.npmjs.com/package/3xpr) das consultas.
+A [UI](data-gateway/Ui.md) do Data Gateway, construída com [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui):
+percorra os esquemas, leia cada entidade como um formulário, escreva consultas com autocompletar e desenhe diagramas.
 
-**Veja também:** [esquema](schema/Schema.md) |
-[definição](schema/SchemaDefinition.md) |
-[uso](schema/Schema-Use.md) |
-[expressões](schema/SchemaDefinition-Expressions.md) |
-[variáveis de ambiente](schema/SchemaDefinition-EnvironmentVariables.md) |
-[composição](schema/SchemaDefinition-Composite.md) |
-[listeners](schema/SchemaExample-Listener.md) |
-[múltiplos stages](schema/SchemaExample-MultiplesStages.md) |
-[múltiplas fontes](schema/SchemaExample-StageMultiplesSources.md) |
-[mecanismos de banco de dados](schema/Engines.md)
+![A UI do Data Gateway](data-gateway/images/ui-query.png)
 
-### Sincronização {#synchronization}
+## Uma consulta, três bancos de dados {#one-query-three-databases}
 
-O λORM mantém os bancos de dados e o esquema em sincronia, nas duas direções:
-[sincronização](schema/SchemaSynchronization.md) |
-[push](schema/SchemaSynchronization-Push.md) |
-[pull](schema/SchemaSynchronization-Pull.md) |
-[fetch](schema/SchemaSynchronization-Fetch.md) |
-[introspect](schema/SchemaSynchronization-Introspect.md) |
-[incorporate](schema/SchemaSynchronization-Incorporate.md)
+Um stage do [lab northwind](https://github.com/lambda-orm/lambdaorm-labs/tree/main/labs/cli/06-northwind-multiples-datasources)
+guarda o catálogo no MySQL, os clientes no PostgreSQL e os pedidos no MongoDB:
 
-## Transações e scripts {#transactions-and-scripts}
+```yaml
+stages:
+  - name: default
+    sources:
+      - name: Catalog                                   # MySQL
+        condition: entity.in(["Categories","Products"])
+      - name: Crm                                       # PostgreSQL
+        condition: entity.in(["Address","Customers"])
+      - name: Ordering                                  # MongoDB
+        condition: entity.in(["Orders","Orders.details"])
+```
 
-- [Transações](usage/Transaction.md): `orm.transaction` executa várias consultas em uma só transação, inclusive entre fontes
-  e stages.
-- [Scripts](usage/Script.md): um caso de uso inteiro (variáveis, condições, laços e várias consultas) em uma só transação
-  e em uma única chamada — a partir do Node.js, da CLI ou do Data Gateway.
+A aplicação não sabe disso. Ela pede os pedidos de um cliente com o nome do cliente e, para cada linha, o produto e
+a sua categoria:
 
-## Labs {#labs}
+```typescript
+Orders
+  .filter(p => p.customerId == customerId)
+  .include(p => [
+    p.customer.map(c => c.name),
+    p.details
+      .include(d => d.product.include(pr => pr.category.map(c => c.name)).map(pr => pr.name))
+      .map(d => [d.quantity, d.unitPrice])
+  ])
+```
 
-Exemplos completos estão disponíveis nos [labs do λORM](labs/index.md).
+e `orm.plan` mostra o que λORM vai executar (resumido):
 
-## Projetos relacionados {#related-projects}
+```text
+Orders            MongoDB     Ordering   aggregate [{ $match: { CustomerID: … } }, { $project: … }]
+├─ Customers      PostgreSQL  Crm        SELECT c.CompanyName AS "name", … FROM Customers c WHERE c.CustomerID IN ($1)
+└─ Orders.details MongoDB     Ordering   aggregate [{ $unwind: … }, { $match: { OrderID: { $in: … } } }, …]
+   └─ Products    MySQL       Catalog    SELECT p.ProductName AS name, … FROM Products p WHERE p.ProductID IN (?)
+      └─ Categories MySQL     Catalog    SELECT c1.CategoryName AS name, … FROM Categories c1 WHERE c1.CategoryID IN (?)
+```
 
-- [CLI do λORM](https://www.npmjs.com/package/@lambdaorm/cli): interface de linha de comando do λORM.
-- [Data Gateway](data-gateway/index.md): esquemas do λORM por REST, MCP e WebSocket, com uma UI web.
-- [Cliente do λORM](https://www.npmjs.com/package/@lambdaorm/client): cliente Node.js para o Data Gateway.
-- [3xpr](https://www.npmjs.com/package/3xpr): mecanismo de expressões extensível que avalia expressões matemáticas e lógicas;
-  as consultas e os scripts do λORM são construídos sobre ele.
+**Uma consulta por relação, nunca uma por linha:** cada nível lê as chaves do nível acima com um `IN`. Quando são
+muitas, as chaves são divididas em blocos (no máximo 999 no Oracle, 7000 nos demais) que são executados em paralelo.
+O resultado é uma única árvore JSON, como se tudo estivesse em um só banco de dados. Veja
+[include](queries/Include.md).
+
+## Uma consulta, o dialeto de cada mecanismo {#one-query-each-engines-dialect}
+
+```typescript
+Products
+  .filter(p => p.price > minPrice && p.category.name == category)
+  .map(p => ({ name: p.name, price: p.price }))
+  .sort(p => desc(p.price))
+  .page(1, 10)
+```
+
+```sql
+-- MySQL
+SELECT p.ProductName AS name, p.UnitPrice AS price FROM Products p INNER JOIN Categories c ON c.CategoryID = p.CategoryID
+WHERE (p.UnitPrice > ? AND c.CategoryName = ?) ORDER BY p.UnitPrice desc LIMIT 0,10
+
+-- PostgreSQL
+SELECT p.ProductName AS "name", p.UnitPrice AS "price" FROM Products p INNER JOIN Categories c ON c.CategoryID = p.CategoryID
+WHERE (p.UnitPrice > $1 AND c.CategoryName = $2) ORDER BY p.UnitPrice desc OFFSET 0 LIMIT 10
+
+-- SQL Server
+SELECT p.ProductName AS name, p.UnitPrice AS price FROM Products p INNER JOIN Categories c ON c.CategoryID = p.CategoryID
+WHERE (p.UnitPrice > @minPrice AND c.CategoryName = @category) ORDER BY p.UnitPrice desc OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY
+
+-- Oracle
+SELECT p.ProductName AS "name", p.UnitPrice AS "price" FROM Products p INNER JOIN Categories c ON c.CategoryID = p.CategoryID
+WHERE (p.UnitPrice > :minPrice AND c.CategoryName = :category) ORDER BY p.UnitPrice desc OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY
+```
+
+O join é implícito (`p.category.name`), os parâmetros são sempre vinculados e os nomes das propriedades são os do
+domínio (`price`), não os das colunas (`UnitPrice`): o [mapeamento](schema/SchemaDefinition.md) está no esquema. Veja
+os [mecanismos](schema/Engines.md) e a [linguagem de consulta](queries/Query-Language.md).
+
+## Stages: o mesmo código, outra infraestrutura {#stages-the-same-code-another-infrastructure}
+
+```yaml
+infrastructure:
+  stages:
+    - name: dev                  # everything in one database
+      sources: [ { name: Local } ]
+    - name: prod                 # the same domain, spread over three engines
+      sources:
+        - { name: Catalog,  condition: 'entity.in(["Categories","Products"])' }
+        - { name: Crm,      condition: 'entity.in(["Address","Customers"])' }
+        - { name: Ordering, condition: 'entity.in(["Orders","Orders.details"])' }
+```
+
+```typescript
+await orm.execute(query, data, { stage: 'prod' })
+```
+
+Um stage de escrita e um de leitura sobre bancos de dados diferentes é
+[CQRS por configuração](schema/SchemaExample-MultiplesStages.md).
+
+## Acesso governado: o Data Gateway {#governed-access-the-data-gateway}
+
+O [Data Gateway](data-gateway/index.md) (Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway))
+publica um ou vários esquemas via REST, WebSocket e MCP, com uma UI web, sem escrever um backend:
+
+```yaml
+authentication:
+  adapter: local
+  type: apikey
+  keys:
+    - { name: agent,   value: $AGENT_KEY,   permissions: [ read ] }
+    - { name: backend, value: $BACKEND_KEY, permissions: [ read, write, script ] }
+transports:
+  http:    { port: 8080, ui: { enabled: true } }    # REST, OpenAPI, the UI
+  mcpHttp: { port: 8081 }                           # AI agents
+```
+
+- As mesmas permissões em todos os transportes: um agente com `read` pode consultar, nunca escrever.
+- Cada escrita deixa uma linha de auditoria: quem, o quê, quais entidades, quantas linhas.
+- Cada esquema no seu próprio worker; métricas do Prometheus, probes de saúde para Kubernetes, limites de taxa e de
+  tamanho.
+
+**Experimente em dez minutos:** [Primeiros passos](data-gateway/GettingStarted.md), de uma pasta vazia até a API REST,
+a UI, MCP e WebSocket.
+
+## O ecossistema {#the-ecosystem}
+
+| Projeto | Publicado como | O que é |
+| --- | --- | --- |
+| [Biblioteca](usage/Usage.md) | [`@lambdaorm/lib`](https://www.npmjs.com/package/@lambdaorm/lib) | o ORM: executa as consultas nos bancos de dados |
+| [CLI](cli/index.md) | [`@lambdaorm/cli`](https://www.npmjs.com/package/@lambdaorm/cli) | o comando `lambdaorm`: projetos, sincronização, importação / exportação, consultas, scripts |
+| [Data Gateway](data-gateway/index.md) | Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | os esquemas via REST, MCP e WebSocket, com uma UI web |
+| [Cliente Node.js](data-gateway/Clients.md) | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | a interface da biblioteca, executada em um Data Gateway |
+| [Componentes de UI](data-gateway/Ui.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | componentes React: o editor de consultas, os resultados, o explorador e os diagramas |
+| [3xpr](https://www.npmjs.com/package/3xpr) | [`3xpr`](https://www.npmjs.com/package/3xpr) | o mecanismo de expressões sobre o qual as consultas, os scripts e as regras do esquema são construídos |
+
+O código-fonte está em [github.com/lambda-orm/core](https://github.com/lambda-orm/core).
+
+!!! note "Nota"
+    Os pacotes sem escopo `lambdaorm`, `lambdaorm-cli` e `lambdaorm-client-node` não são mais mantidos: use os pacotes
+    `@lambdaorm/*`.
+
+## Primeiros passos {#get-started}
+
+| Eu quero… | Comece aqui |
+| --- | --- |
+| consultar os meus bancos de dados a partir de Node.js / TypeScript | [Uso](usage/Usage.md) |
+| criar um projeto, sincronizar os bancos de dados, importar dados | [CLI](cli/index.md) |
+| dar acesso aos meus dados a aplicações em qualquer linguagem, ou a agentes de IA | [Data Gateway: primeiros passos](data-gateway/GettingStarted.md) |
+| aprender a linguagem de consulta | [Linguagem de consulta](queries/Query-Language.md) |
+| definir o domínio, as fontes e os stages | [Esquema](schema/Schema.md) |
+| ver exemplos completos | [Labs](labs/index.md) |
+
+## Saiba mais {#learn-more}
+
+- **Consultas:** [linguagem de consulta](queries/Query-Language.md) | [select](queries/Select.md) |
+  [join](queries/Join.md) | [agrupamento](queries/Grouping.md) | [include](queries/Include.md) |
+  [insert](queries/Insert.md) | [bulk insert](queries/BulkInsert.md) | [update](queries/Update.md) |
+  [delete](queries/Delete.md) | [metadados](queries/Metadata.md) |
+  [operadores e funções](queries/operatorsAndFunctions/OperatorsAndFunctions.md)
+- **Esquema:** [esquema](schema/Schema.md) | [definição](schema/SchemaDefinition.md) |
+  [expressões](schema/SchemaDefinition-Expressions.md) |
+  [variáveis de ambiente](schema/SchemaDefinition-EnvironmentVariables.md) |
+  [composição](schema/SchemaDefinition-Composite.md) | [listeners](schema/SchemaExample-Listener.md) |
+  [vários stages](schema/SchemaExample-MultiplesStages.md) |
+  [várias fontes](schema/SchemaExample-StageMultiplesSources.md) | [mecanismos](schema/Engines.md)
+- **Sincronização:** [visão geral](schema/SchemaSynchronization.md) | [push](schema/SchemaSynchronization-Push.md) |
+  [pull](schema/SchemaSynchronization-Pull.md) | [fetch](schema/SchemaSynchronization-Fetch.md) |
+  [introspect](schema/SchemaSynchronization-Introspect.md) | [incorporate](schema/SchemaSynchronization-Incorporate.md)
+- **Uso:** [uso](usage/Usage.md) | [repositório](usage/Repository.md) | [transações](usage/Transaction.md) |
+  [scripts](usage/Script.md)
+
+## Comunidade {#community}
+
+Perguntas, ideias e comentários são bem-vindos no [GitHub Discussions](https://github.com/lambda-orm/wiki/discussions)
+e no [Discord](https://discord.com/invite/yXT6XBX2); issues e pull requests em
+[github.com/lambda-orm/core](https://github.com/lambda-orm/core).
