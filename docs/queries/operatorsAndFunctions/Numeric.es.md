@@ -614,8 +614,11 @@ WHERE c.iso3 = 'BRA'
 
 ## Soporte por base de datos {#database-support}
 
-Algunas funciones no tienen un equivalente directo en todos los motores de base de datos, por lo que λORM las traduce a una expresión equivalente. Por ejemplo, en MySQL, MariaDB y SQLite `cosh`, `sinh` y `tanh` se calculan con `EXP`, y `trunc` se traduce a `TRUNCATE`; en SQL Server `trunc` se traduce a `ROUND(value,decimals,1)`, `ceil` a `CEILING` y `atan2` a `ATN2`.
+Algunas funciones no tienen un equivalente directo en todos los motores, así que λORM las traduce a una expresión
+equivalente. Por ejemplo, en MySQL, MariaDB, SQLite y SQL Server `cosh`, `sinh` y `tanh` se calculan con `EXP`; `trunc`
+se traduce a `TRUNCATE` en MySQL y MariaDB y a `ROUND(value,decimals,1)` en SQL Server; en SQL Server `ceil` es
+`CEILING`, `atan2` es `ATN2` y `remainder` es `%`.
 
-!!! warning "MongoDB"
-    - Actualmente `remainder` y `toNumber` no se pueden traducir a consultas de MongoDB.
-    - `trunc` se traduce a `$trunc` sin el número de decimales, por lo que el valor se trunca a un entero.
+!!! note "MongoDB"
+    Todas las funciones de esta página están disponibles en MongoDB: `remainder` es `$mod`, `toNumber` es `$toDouble` y
+    `trunc` conserva la cantidad de decimales.

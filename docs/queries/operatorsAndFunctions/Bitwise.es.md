@@ -156,4 +156,5 @@ LIMIT 0,1
 !!! warning "Diferencias entre motores"
     - **Oracle**: `&`, `|` y `^` se traducen a `BITAND`, `BITOR` y `BITXOR`.
     - **PostgreSQL**: `^` se traduce al operador `#` (XOR).
-    - **MongoDB**: actualmente los operadores a nivel de bits no se pueden traducir a consultas de MongoDB.
+    - **MongoDB**: `&`, `|`, `^` y `~` se traducen a `$bitAnd`, `$bitOr`, `$bitXor` y `$bitNot` (MongoDB 6.3 o
+      posterior); los desplazamientos `<<` y `>>` todavía no se pueden traducir.

@@ -707,5 +707,11 @@ WHERE c.iso3 = 'BRA'
 
 ## Datenbankunterstützung {#database-support}
 
-!!! warning "MongoDB"
-    In der aktuellen Version können nur `now`, `today`, `date`, `year`, `month`, `day` und `weekday` in MongoDB-Abfragen übersetzt werden. Die übrigen Datums- und Zeitfunktionen dieser Seite sind auf MongoDB nicht verfügbar.
+Jede Engine hat ihre eigenen Datumsfunktionen, und λORM verwendet die der jeweiligen Engine: `DATEADD`, `DATEDIFF` und
+`DATEPART` bei SQL Server, `NUMTODSINTERVAL`, `ADD_MONTHS` und Datumsarithmetik bei Oracle, `$dateAdd`, `$dateDiff`
+und `$year` bei MongoDB. Die Differenzen (`dayDiff(date1, date2)`, …) sind immer `date1 - date2`.
+
+!!! note "MongoDB"
+    Alle Funktionen dieser Seite sind auf MongoDB verfügbar. λORM speichert Datumswerte in MongoDB als ISO-8601-Text,
+    daher durchläuft jedes Datumsargument `$toDate`, das sowohl ein gespeichertes Datum als auch ein BSON-Datum annimmt.
+    In einem Filter wird ein Vergleich mit einer Funktion (`year(p.orderDate) == 2026`) in einen `$expr` übersetzt.
