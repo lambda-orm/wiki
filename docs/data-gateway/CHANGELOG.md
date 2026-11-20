@@ -2,6 +2,18 @@
 
 The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway).
 
+### 3.0.2 (2026-11-20)
+
+Uses `@lambdaorm/lib` 3.7.0 and `@lambdaorm/ui` 0.3.3. Nothing changes in the configuration or the API.
+
+**Bug Fixes:**
+
+- From `@lambdaorm/lib` 3.7.0: dates are stored in UTC on every engine, whatever the time zone of the gateway
+  (`TZ`). On PostgreSQL, MySQL, MariaDB and Oracle they were written in the time zone of the process (12:34Z was
+  stored as 13:34 by a gateway in Madrid), so the functions of the database (`hour`, `dateToString`, a comparison with
+  `now()`) and other applications saw a different time. Dates already stored in the local time of the gateway are
+  read shifted by its offset.
+
 ### 3.0.1 (2026-11-19)
 
 Uses `@lambdaorm/lib` 3.6.0 and `@lambdaorm/ui` 0.3.3. Nothing changes in the configuration or the API.

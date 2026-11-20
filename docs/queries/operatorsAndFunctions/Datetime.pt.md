@@ -5,8 +5,8 @@ As funções de data e hora obtêm a data e a hora atuais, convertem strings em 
 !!! note "Sobre os exemplos"
     Os exemplos são executados sobre a entidade `Countries` do esquema de exemplo de países. Cada um mostra a consulta, o resultado que ela retornou no banco de dados de teste e a sentença SQL que o λORM gerou para MySQL. Os demais mecanismos de banco de dados recebem sua própria tradução; para ver a sentença gerada para a sua fonte de dados, use [`orm.plan`](../Metadata.md).
 
-!!! note "Os resultados dependem do mecanismo de banco de dados e do fuso horário"
-    Os valores de data e hora são calculados pelo banco de dados. Os resultados abaixo foram obtidos no MySQL em uma sessão que não estava em UTC, por isso alguns valores (por exemplo os de `date`, `time` ou `hour`) estão deslocados pelo fuso horário. Espere valores diferentes em outros mecanismos de banco de dados ou fusos horários.
+!!! note "As datas são armazenadas em UTC"
+    Desde `@lambdaorm/lib` 3.7.0 (Data Gateway 3.0.2) o λORM armazena as datas em UTC em todos os mecanismos e abre cada sessão em UTC, de modo que as funções do banco de dados (`hour`, `date`, `now`, ...) veem a mesma hora qualquer que seja o fuso horário da aplicação. Os valores de data e hora são calculados pelo banco de dados. Os resultados abaixo foram obtidos antes, no MySQL em uma sessão que não estava em UTC, por isso alguns valores (por exemplo os de `date`, `time` ou `hour`) estão deslocados por esse fuso horário. Em outros mecanismos de banco de dados os valores serão diferentes.
 
 ## Resumo {#summary}
 

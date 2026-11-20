@@ -5,8 +5,8 @@ Datums- und Zeitfunktionen ermitteln das aktuelle Datum und die aktuelle Uhrzeit
 !!! note "Zu den Beispielen"
     Die Beispiele laufen gegen die Entität `Countries` des Beispielschemas für Länder. Jedes zeigt die Abfrage, das Ergebnis, das sie auf der Testdatenbank geliefert hat, und die SQL-Anweisung, die λORM für MySQL erzeugt hat. Andere Datenbank-Engines erhalten ihre eigene Übersetzung; um die für Ihre Datenquelle erzeugte Anweisung zu sehen, verwenden Sie [`orm.plan`](../Metadata.md).
 
-!!! note "Ergebnisse hängen von der Datenbank-Engine und der Zeitzone ab"
-    Datums- und Zeitwerte werden von der Datenbank berechnet. Die folgenden Ergebnisse wurden auf MySQL in einer Sitzung ermittelt, die nicht in UTC lief, daher sind einige Werte (zum Beispiel die von `date`, `time` oder `hour`) um die Zeitzone verschoben. Auf anderen Datenbank-Engines oder in anderen Zeitzonen sind abweichende Werte zu erwarten.
+!!! note "Datumswerte werden in UTC gespeichert"
+    Seit `@lambdaorm/lib` 3.7.0 (Data Gateway 3.0.2) speichert λORM Datumswerte auf jeder Engine in UTC und öffnet jede Sitzung in UTC, sodass die Funktionen der Datenbank (`hour`, `date`, `now`, ...) unabhängig von der Zeitzone der Anwendung dieselbe Uhrzeit sehen. Datums- und Zeitwerte werden von der Datenbank berechnet. Die folgenden Ergebnisse wurden zuvor auf MySQL in einer Sitzung ermittelt, die nicht in UTC war, daher sind einige Werte (zum Beispiel die von `date`, `time` oder `hour`) um diese Zeitzone verschoben. Auf anderen Engines sind andere Werte zu erwarten.
 
 ## Übersicht {#summary}
 
