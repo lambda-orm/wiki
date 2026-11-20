@@ -5,8 +5,8 @@ Datums- und Zeitfunktionen ermitteln das aktuelle Datum und die aktuelle Uhrzeit
 !!! note "Zu den Beispielen"
     Die Beispiele laufen gegen die Entität `Countries` des Beispielschemas für Länder. Jedes zeigt die Abfrage, das Ergebnis, das sie auf der Testdatenbank geliefert hat, und die SQL-Anweisung, die λORM für MySQL erzeugt hat. Andere Datenbank-Engines erhalten ihre eigene Übersetzung; um die für Ihre Datenquelle erzeugte Anweisung zu sehen, verwenden Sie [`orm.plan`](../Metadata.md).
 
-!!! note "Ergebnisse hängen von der Datenbank-Engine und der Zeitzone ab"
-    Datums- und Zeitwerte werden von der Datenbank berechnet. Die folgenden Ergebnisse wurden auf MySQL in einer Sitzung ermittelt, die nicht in UTC lief, daher sind einige Werte (zum Beispiel die von `date`, `time` oder `hour`) um die Zeitzone verschoben. Auf anderen Datenbank-Engines oder in anderen Zeitzonen sind abweichende Werte zu erwarten.
+!!! note "Datumswerte werden in UTC gespeichert"
+    Seit `@lambdaorm/lib` 3.7.0 (Data Gateway 3.0.2) speichert λORM Datumswerte auf jeder Engine in UTC und öffnet jede Sitzung in UTC, sodass die Funktionen der Datenbank (`hour`, `date`, `now`, ...) unabhängig von der Zeitzone der Anwendung dieselbe Uhrzeit sehen. Datums- und Zeitwerte werden von der Datenbank berechnet. Die folgenden Ergebnisse wurden zuvor auf MySQL in einer Sitzung ermittelt, die nicht in UTC war, daher sind einige Werte (zum Beispiel die von `date`, `time` oder `hour`) um diese Zeitzone verschoben. Auf anderen Engines sind andere Werte zu erwarten.
 
 ## Übersicht {#summary}
 
@@ -712,6 +712,8 @@ Jede Engine hat ihre eigenen Datumsfunktionen, und λORM verwendet die der jewei
 und `$year` bei MongoDB. Die Differenzen (`dayDiff(date1, date2)`, …) sind immer `date1 - date2`.
 
 !!! note "MongoDB"
-    Alle Funktionen dieser Seite sind auf MongoDB verfügbar. λORM speichert Datumswerte in MongoDB als ISO-8601-Text,
-    daher durchläuft jedes Datumsargument `$toDate`, das sowohl ein gespeichertes Datum als auch ein BSON-Datum annimmt.
+    Alle Funktionen dieser Seite sind auf MongoDB verfügbar. λORM speichert Datumswerte in MongoDB als BSON-Daten
+    (ab `@lambdaorm/lib` 3.6.0; vorher als ISO-8601-Text), auch die in einem Filter geschriebenen Daten
+    (`p.orderDate >= "2026-01-01"`). Jedes Datumsargument einer Funktion durchläuft `$toDate`, sodass auch von früheren
+    Versionen als Text gespeicherte Daten gelesen werden.
     In einem Filter wird ein Vergleich mit einer Funktion (`year(p.orderDate) == 2026`) in einen `$expr` übersetzt.

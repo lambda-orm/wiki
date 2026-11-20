@@ -5,8 +5,8 @@ Date and time functions get the current date and time, convert strings to dates,
 !!! note "About the examples"
     The examples run against the `Countries` entity of the countries sample schema. Each one shows the query, the result it returned on the test database and the SQL sentence that λORM generated for MySQL. Other engines receive their own translation; to see the sentence generated for your data source, use [`orm.plan`](../Metadata.md).
 
-!!! note "Results depend on the engine and the time zone"
-    Date and time values are calculated by the database. The results below were obtained on MySQL in a session that was not in UTC, so some values (for example those of `date`, `time` or `hour`) are shifted by the time zone. Expect different values on other engines or time zones.
+!!! note "Dates are stored in UTC"
+    Since `@lambdaorm/lib` 3.7.0 (Data Gateway 3.0.2) λORM stores dates in UTC on every engine and opens every session in UTC, so the functions of the database (`hour`, `date`, `now`, ...) see the same time whatever the time zone of the application. Date and time values are calculated by the database. The results below were obtained before, on MySQL in a session that was not in UTC, so some values (for example those of `date`, `time` or `hour`) are shifted by that time zone. Expect different values on other engines.
 
 ## Summary
 
@@ -712,6 +712,7 @@ Server, `NUMTODSINTERVAL`, `ADD_MONTHS` and date arithmetic on Oracle, `$dateAdd
 The differences (`dayDiff(date1, date2)`, …) are always `date1 - date2`.
 
 !!! note "MongoDB"
-    Every function on this page is available on MongoDB. λORM stores dates in MongoDB as ISO 8601 text, so each date
-    argument goes through `$toDate`, which takes both a stored date and a BSON date. In a filter, a comparison with a
+    Every function on this page is available on MongoDB. λORM stores dates in MongoDB as BSON dates (from
+    `@lambdaorm/lib` 3.6.0; before, as ISO 8601 text), also the dates written in a filter (`p.orderDate >= "2026-01-01"`).
+    Each date argument of a function goes through `$toDate`, so dates stored as text by earlier versions are read too. In a filter, a comparison with a
     function (`year(p.orderDate) == 2026`) is translated to a `$expr`.

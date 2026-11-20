@@ -5,8 +5,8 @@ As funções de data e hora obtêm a data e a hora atuais, convertem strings em 
 !!! note "Sobre os exemplos"
     Os exemplos são executados sobre a entidade `Countries` do esquema de exemplo de países. Cada um mostra a consulta, o resultado que ela retornou no banco de dados de teste e a sentença SQL que o λORM gerou para MySQL. Os demais mecanismos de banco de dados recebem sua própria tradução; para ver a sentença gerada para a sua fonte de dados, use [`orm.plan`](../Metadata.md).
 
-!!! note "Os resultados dependem do mecanismo de banco de dados e do fuso horário"
-    Os valores de data e hora são calculados pelo banco de dados. Os resultados abaixo foram obtidos no MySQL em uma sessão que não estava em UTC, por isso alguns valores (por exemplo os de `date`, `time` ou `hour`) estão deslocados pelo fuso horário. Espere valores diferentes em outros mecanismos de banco de dados ou fusos horários.
+!!! note "As datas são armazenadas em UTC"
+    Desde `@lambdaorm/lib` 3.7.0 (Data Gateway 3.0.2) o λORM armazena as datas em UTC em todos os mecanismos e abre cada sessão em UTC, de modo que as funções do banco de dados (`hour`, `date`, `now`, ...) veem a mesma hora qualquer que seja o fuso horário da aplicação. Os valores de data e hora são calculados pelo banco de dados. Os resultados abaixo foram obtidos antes, no MySQL em uma sessão que não estava em UTC, por isso alguns valores (por exemplo os de `date`, `time` ou `hour`) estão deslocados por esse fuso horário. Em outros mecanismos de banco de dados os valores serão diferentes.
 
 ## Resumo {#summary}
 
@@ -712,6 +712,8 @@ SQL Server, `NUMTODSINTERVAL`, `ADD_MONTHS` e a aritmética de datas no Oracle, 
 MongoDB. As diferenças (`dayDiff(date1, date2)`, …) são sempre `date1 - date2`.
 
 !!! note "MongoDB"
-    Todas as funções desta página estão disponíveis no MongoDB. λORM guarda as datas no MongoDB como texto ISO 8601,
-    por isso cada argumento de data passa por `$toDate`, que aceita tanto uma data guardada quanto uma data BSON. Em um
+    Todas as funções desta página estão disponíveis no MongoDB. λORM guarda as datas no MongoDB como datas BSON
+    (desde `@lambdaorm/lib` 3.6.0; antes, como texto ISO 8601), também as datas escritas em um filtro
+    (`p.orderDate >= "2026-01-01"`). Cada argumento de data de uma função passa por `$toDate`, por isso as datas
+    guardadas como texto por versões anteriores também são lidas. Em um
     filtro, uma comparação com uma função (`year(p.orderDate) == 2026`) é traduzida para um `$expr`.
