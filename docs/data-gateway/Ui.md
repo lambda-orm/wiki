@@ -65,6 +65,12 @@ the tab bar. For each schema:
   The **Open** button (↗) of an entity, a double click or Enter open its [form](#entity-form).
 - **What is saved** in the schema: folders, queries and diagrams ([below](#saved-queries-and-diagrams)).
 
+- **Filter.** The box above the entities keeps those whose name, or the name of a property or relation, contains the
+  text (`21 of 192`); the properties and relations that matched show under their entity.
+- The width of the explorer is kept; a double click on its edge (or Enter) fits it to the names, and the arrows
+  change it from the keyboard (Shift: 60 px).
+- A schema that didn't start shows muted, with its state and its reason.
+
 ![Domain as YAML](images/ui-domain-yaml.png)
 
 ## Entity form
@@ -104,6 +110,9 @@ opened with **+**, from an entity (**Query**) or from a saved query, and closed 
     - The **copy** icon copies what is shown (the table as tab-separated text, ready to paste in a spreadsheet).
     - **Export** downloads the whole result as **JSON**, **YAML** or **TXT (tab-separated)**.
 - **History** of the last queries of each schema, to bring one back.
+
+- **An error with a suggestion** (`entity Area not found; did you mean Areas?`) has a **use Areas** button that
+  replaces the name in the query.
 
 ![A query and its result](images/ui-query.png)
 

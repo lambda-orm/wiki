@@ -22,7 +22,7 @@ gateway with several schemas has only `general.*` and `gateway.schemas`.
 ```
 
 The `params` are the body (or the route parameters) of the equivalent REST method. An error carries in `data` the
-`name` and the HTTP `status` that REST would have answered.
+`name` and the HTTP `status` that REST would have answered. For a name of the query that doesn't exist, `data.suggestions` has the closest ones.
 
 ## Methods
 
@@ -50,6 +50,7 @@ The `params` are the body (or the route parameters) of the equivalent REST metho
 | `schema.views` | — | `GET /views` |
 | `schema.stages` / `schema.stage` | — / `stage` | `GET /stages[/{stage}]` |
 | `schema.typings` | — | `GET /typings` |
+| `schema.search` / `schema.describe` | `text` / `entities` | `GET /search`, `GET /describe` |
 | `stage.exists` | `stage` | `GET /stages/{stage}/exists` |
 | `stage.export` | `stage` | `GET /stages/{stage}/export` |
 | `stage.import` | `stage`, `data` | `POST /stages/{stage}/import` |

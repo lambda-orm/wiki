@@ -98,16 +98,17 @@ Eine fehlgeschlagene Anfrage liefert einen Status, den ein Client zuordnen kann,
 | `error` | der Name des Fehlers: `ExecutionError`, `ValidationError`, `ForbiddenError`, `ScriptDisabledError`, … |
 | `code` | der Fehlercode der Datenbank, falls vorhanden (Postgres-SQLSTATE wie `23505`, MySQL `ER_DUP_ENTRY`) |
 | `message` | die Meldung |
+| `suggestions` | für einen Namen der Abfrage, den es nicht gibt, die nächstliegenden: `[{ "name": "nme", "didYouMean": ["name"] }]` |
 
 | Status | Ursache |
 | --- | --- |
 | `400` | eine ungültige Abfrage oder ein ungültiges Modell (`ValidationError`, `SchemaError`, `SintaxisError`, `LanguageError`), eine Verletzung von NOT NULL oder CHECK, ungültige Daten (Postgres `22xxx`) |
 | `401` | keine oder falsche Zugangsdaten |
 | `403` | den Zugangsdaten fehlt die Berechtigung; Skripte deaktiviert |
-| `404` | ein auf diesem Transport nicht bereitgestelltes Schema, eine unbekannte Route |
+| `404` | ein Name, den das Schema nicht hat (eine Entität, ein Enum, eine Source, ein Mapping, eine Stage), ein auf diesem Transport nicht bereitgestelltes Schema, eine unbekannte Route |
 | `409` | eine Verletzung eines eindeutigen Schlüssels oder Fremdschlüssels (Postgres `23505`, `23503`; MySQL `ER_DUP_ENTRY`, `ER_NO_REFERENCED_ROW_2`, `ER_ROW_IS_REFERENCED_2`) |
 | `413` | ein zu großer Body, eine zu große Antwort oder ein zu großes Skript |
 | `429` | Rate Limit oder zu viele gleichzeitige Operationen auf dem Schema |
-| `503` | das Schema ist nicht `ready` (startet, im Fehlerzustand, startet neu) |
+| `503` | das Schema ist nicht `ready` (startet, im Fehlerzustand, startet neu); eine Source, die das Gateway nicht erreicht oder deren Verbindungsvariable nicht gesetzt ist (`ConnectionError`) |
 | *n* | ein Skript hat `throw { status: n, message }` ausgeführt (400–599) |
 | `500` | alles andere |

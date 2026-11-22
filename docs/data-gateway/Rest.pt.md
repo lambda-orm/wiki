@@ -20,6 +20,9 @@ Com `transports.http.basePath: /data-gateway`, todas as rotas ficam sob ele: `/d
 - `data` (os parâmetros de uma consulta) e `options` (por exemplo `{ "stage": "default" }`) são objetos JSON; texto JSON
   (`"data": "{\"id\": 10}"`) também é aceito.
 - Um erro responde com um status e `{ "error", "code"?, "message" }` ([Erros](Security.md#errors)).
+- Uma consulta com um nome que o esquema não tem responde `400` com os nomes mais próximos, na mensagem (`nam is
+  neither a property nor a relation of Areas; did you mean name?`) e como dados: `"suggestions": [{ "name": "nam", "didYouMean": ["name"] }]`.
+- Uma rota que não existe responde `404` em JSON, com as rotas mais próximas na mensagem.
 
 ## Métodos do gateway {#gateway-methods}
 
@@ -242,6 +245,8 @@ O modelo do esquema. Eles precisam de `read`. As conexões das fontes nunca são
 | `GET` | `/{schema}/stages` | os stages, com suas fontes |
 | `GET` | `/{schema}/stages/{stage}` | um stage |
 | `GET` | `/{schema}/typings` | o domínio como declarações TypeScript (`text/plain`), para o autocompletar de um editor |
+| `GET` | `/{schema}/search?q={texto}` | as entidades, propriedades e relações cujo nome contém o texto, compacto ([esquemas grandes](#large-schemas)) |
+| `GET` | `/{schema}/describe?entities={A,B}` | algumas entidades em duas linhas cada uma, e os nomes que não conhece com os mais próximos |
 
 ```sh
 curl http://localhost:8080/sources -H "X-Api-Key: $KEY"
@@ -266,6 +271,31 @@ curl http://localhost:8080/entities/Categories -H "X-Api-Key: $KEY"
     { "name": "description", "type": "string", "length": 1000 }
   ],
   "relations": []
+}
+```
+
+### Esquemas grandes {#large-schemas}
+
+Com centenas de entidades, o domínio inteiro é demais para ler antes de escrever uma consulta. `/search` encontra
+nomes por uma parte deles (`Products.cat` busca só em Products; sem correspondências, os nomes mais próximos) e
+`/describe` dá algumas entidades em duas linhas cada uma. O MCP tem o mesmo em [`schema_search` e `schema_describe`](Mcp.md#large-schemas).
+
+```sh
+curl "http://localhost:8080/search?q=Products.cat" -H "X-Api-Key: $KEY"
+```
+
+```json
+{ "matches": [ "Products.categoryId: integer", "Products.category → Categories" ] }
+```
+
+```sh
+curl "http://localhost:8080/describe?entities=Categories,Categorie" -H "X-Api-Key: $KEY"
+```
+
+```json
+{
+  "entities": [ "- Categories: id: integer (pk, auto); name: string (required)\n  relations: products → Products[]" ],
+  "notFound": [ { "name": "Categorie", "didYouMean": [ "Categories" ] } ]
 }
 ```
 
@@ -304,6 +334,8 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 | views | `GET /views` | `schema_views` | `schema.views` | `read` |
 | stages | `GET /stages[/{stage}]` | `schema_stages` | `schema.stages`, `schema.stage` | `read` |
 | typings | `GET /typings` | — | `schema.typings` | `read` |
+| search | `GET /search?q=` | `schema_search` | `schema.search` | `read` |
+| describe | `GET /describe?entities=` | `schema_describe` | `schema.describe` | `read` |
 | existência de stage | `GET /stages/{stage}/exists` | `stage_exists` | `stage.exists` | `read` |
 | exportação de stage | `GET /stages/{stage}/export` | `stage_export` | `stage.export` | `read` |
 | importação de stage | `POST /stages/{stage}/import` | `stage_import` | `stage.import` | `stageImport` |

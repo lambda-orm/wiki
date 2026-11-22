@@ -2,6 +2,60 @@
 
 The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway).
 
+### 3.1.0 (2026-11-21)
+
+Uses `@lambdaorm/lib` 3.8.0 and `@lambdaorm/ui` 0.4.0. Nothing to change in the configuration; the API gains routes,
+tools and fields, and some answers change status (below).
+
+**Features:**
+
+- **Large schemas** (Ilusor's Cloud: 192 entities, the domain 389 KB as JSON):
+    - MCP: a domain that doesn't fit in the description of `orm_execute` gives the names of its entities and points to
+      two new tools, `schema_search { text }` (entities, properties and relations by part of their name, compact;
+      `Areas.type` only in Areas; the closest names when nothing matches) and `schema_describe { entities }` (some
+      entities in two lines each). It used to cut the domain and point to reading it whole.
+    - The same on REST, `GET /{schema}/search?q=` and `GET /{schema}/describe?entities=A,B`, and on WebSocket,
+      `schema.search` and `schema.describe`.
+- **The errors of a query say what is there instead** (from `@lambdaorm/lib` 3.8.0): `nam is neither a property nor
+  a relation of Areas; did you mean name?`, `entity Area not found; did you mean Areas?`, or the key of the entity;
+  and as data, `suggestions: [{ name, didYouMean }]`, in the body of REST, `error.data` of WebSocket and
+  `structuredContent` of MCP.
+- **MCP errors** carry `structuredContent` with the name, status and database code that REST and WebSocket answer.
+- **From `@lambdaorm/lib` 3.8.0:** relations of several fields (`from: [locationId, areaId]`), and Ilusor's model:
+  reads with includes without a transaction and MongoDB `transactions: false` (FerretDB), includes by a `uuid` key
+  with several parents, UUIDs read from MongoDB as text, `fetch` with `uuid` and `character(n)` columns and the
+  PostgreSQL catalog across schemas and partitions.
+- **The UI at `/ui`** (from `@lambdaorm/ui` 0.4.0): a filter of the entities in the explorer, "use name" on an error
+  with a suggestion, the width of the explorer kept and fitted to the names, and the schemas that didn't start
+  shown with their reason.
+
+**Changes of status:**
+
+- A name that doesn't exist (an entity, an enum, a source, a mapping, a stage, `GET /entities/Nope`) answers `404`; it
+  answered `204` without a body.
+- A query error that answered `500` answers `400`: an unknown entity, a missing required property (λORM kept the
+  class of the error), an include of a relation that doesn't exist, a function that doesn't exist.
+- A route that doesn't exist answers a `404` in JSON (`{ error: "NotFoundError", message }`) with the closest routes;
+  it was the HTML page of Express.
+- `ConnectionError` (a source the gateway can't reach, or whose connection variable is not set) answers `503`, not
+  `500`.
+
+**Bug Fixes:**
+
+- A connection whose environment variable is not set (`${ORM_SALES_DOCUMENTS_CNX}`) failed with `Cannot read
+  properties of undefined (reading 'startsWith')`. With `runtime.checkConnections`, the schema now doesn't start and
+  its reason lists every variable that is missing and where to give it, before connecting to anything; without it, the
+  first query to that source answers `503` naming the variable.
+
+### 3.0.3 (2026-11-20)
+
+Uses `@lambdaorm/lib` 3.7.0 and `@lambdaorm/ui` 0.3.4. Nothing changes in the configuration or the API.
+
+**Bug Fixes:**
+
+- From `@lambdaorm/ui` 0.3.4, in the UI at `/ui`: a new query tab picks the schema by itself when only one is ready
+  (it asked even with one), and the checkboxes of the diagram dialog sit next to their names.
+
 ### 3.0.2 (2026-11-20)
 
 Uses `@lambdaorm/lib` 3.7.0 and `@lambdaorm/ui` 0.3.3. Nothing changes in the configuration or the API.

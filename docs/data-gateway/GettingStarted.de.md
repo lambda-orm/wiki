@@ -117,7 +117,7 @@ services:
       retries: 30
 
   data-gateway:
-    image: flaviorita/data-gateway:3.0.2
+    image: flaviorita/data-gateway:3.1.0
     depends_on:
       postgres: { condition: service_healthy }
     environment:
