@@ -2,6 +2,61 @@
 
 The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway).
 
+### 3.2.0 (2026-11-22)
+
+Uses `@lambdaorm/lib` 3.8.1 and `@lambdaorm/ui` 0.5.0. The administration of the workspaces (phases 1 to 6 of
+`docs/DATA_GATEWAY_ADMIN_PLAN.md`). Nothing to change in the configuration: `orm.watch` is on by default, `admin` off.
+
+**Features:**
+
+- **The workspaces are watched while the gateway runs** (`orm.watch`): a folder with a `lambdaORM.yaml` that appears
+  is a new schema, served on every transport without restarting the gateway; a folder that goes takes its schema (its
+  routes answer `404`, its WebSocket connections are closed with `4404`).
+- **A `lambdaORM.yaml` or `.env` whose content changed reloads its schema blue-green**: the new worker starts next to
+  the current one, which keeps serving until the new one is ready, without a moment out of service. If the new
+  version doesn't start (an invalid YAML), the last one that did keeps serving, and the state of the schema says why
+  in `pending` (`GET /schemas`, `schema.statusChanged`).
+- WebSocket notification `workspace.changed` (`{ path, kind, files?, at }`; `added`, `removed`, `schema`, `env`,
+  `files`), on the connections to that schema and to the root.
+- With `orm.watch`, an empty volume starts and waits for its first schema, and an `orm.schemas` adjustment of a schema
+  not there yet is a warning, applied when it appears.
+- **The administration of the workspaces** (`admin.enabled`, off by default; `docs/DATA_GATEWAY.md` §11), on
+  `/admin` of the http transport, with new permissions never given by default (`schemaRead`, `schemaWrite`,
+  `schemaAdmin`, `workbenchWrite`): workspaces created (empty or a copy) and removed (to `.trash`), the
+  `lambdaORM.yaml` read and written with its version (`If-Match`; `412` with what there is now, `428` without it), its
+  validation with the line of each issue (without running `application.start`), and what the UI saves as files in
+  `workbench/` of each workspace. Writes to a workspace go one at a time (a lock file, also across replicas) and are
+  atomic; the monitor of the workspaces serves what is written.
+- **The commands of a workspace as jobs** (`DATA_GATEWAY.md` §11.3): `version`, `fetch`, `export` (also saved in
+  `data/`), `push`, `drop` and `import`, run by the worker of the schema, one at a time per schema. The ones that change
+  the databases first show what they will do (the sentences by source, the rows of each entity) and run exactly that
+  preview, only with the same `lambdaORM.yaml`. New permission `ddl`; `admin.commandTimeoutMs`.
+- `pull`, `introspect` and `incorporate` from the gateway: their preview is the diff of the `lambdaORM.yaml`, and it is
+  written keeping its comments, order and style (only what changed is new; λORM writes it with js-yaml, which loses
+  them). `pull` updates the state of the stage as λORM does; `incorporate` waits for the new schema, pushes it and
+  imports the data.
+- **One element of a schema at a time** (`DATA_GATEWAY.md` §11.4): `PATCH /admin/workspaces/{path}/schema` with `set`,
+  `add`, `remove` or `rename` of an element named by names; a rename renames what names it (relations, keys, indexes,
+  mappings, stages…). Concurrency per element: someone else's change to another element doesn't collide. Written
+  keeping the comments and the rest of the file. The validation rejects a name repeated in a list.
+- **The connections and the code** (`DATA_GATEWAY.md` §11.5): the variables of the connections in the `.env` of a
+  workspace, listed (defined or not, used by which sources) and set or removed keeping the rest of the file, never
+  answered; and `build` of the model and repositories (node, client-node) in `src/` of the workspace or as a `.zip`.
+  New permission `build`.
+- **The administration over MCP, read only** (`DATA_GATEWAY.md` §11.6): `admin_schema_get`, `admin_schema_validate` and
+  `admin_stage_fetch`, for credentials with `schemaRead` when `admin.enabled`. Writing is not offered over MCP.
+- The UI at `/ui` (`@lambdaorm/ui` 0.5.0), with those permissions: the `lambdaORM.yaml` of each schema editable in Monaco
+  (validated while typed, saved with Ctrl+S, a conflict shown side by side), new and removed schemas, what is saved
+  shared in the workspaces, the panel of commands, the schema as forms with
+  its variables, the code of the domain and the completion of the keys and values of the lambdaORM.yaml.
+- The UI at `/ui` reads the schemas again every 5 s: a schema added, removed or reloaded shows without reloading the
+  page (its domain and typings are read again), and a version that didn't start is marked ⚠ with its reason.
+
+**Bug Fixes:**
+
+- After a blue-green reload, the new worker was terminated 30 s later (its pongs were not counted) and its fall didn't
+  restart the schema: it is now a worker of the schema like any other.
+
 ### 3.1.0 (2026-11-21)
 
 Uses `@lambdaorm/lib` 3.8.0 and `@lambdaorm/ui` 0.4.0. Nothing to change in the configuration; the API gains routes,
