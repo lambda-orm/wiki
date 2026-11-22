@@ -43,6 +43,11 @@ credential allows it**. The descriptions and input schemas are generated when th
 | `stage_import` | `stage`, `data` | `POST /stages/{stage}/import` | `stageImport` | destructive |
 | `gateway_version` | — | `GET /version` | `read` | read only |
 | `gateway_health` | — | `GET /health` | `read` | read only |
+| `admin_schema_get` | — | `GET /admin/workspaces/{route}/schema` | `schemaRead` | read only |
+| `admin_schema_validate` | `text` | `POST /admin/validate` | `schemaRead` | read only |
+| `admin_stage_fetch` | `stage?` | `fetch` | `schemaRead` | read only |
+
+The `admin_*` tools exist only with `admin.enabled` ([Administration](Admin.md#over-mcp)); writing is not offered over MCP.
 
 - **`tools/list` shows a credential only the tools it can use.** Without `script`, `orm_execute_script` doesn't
   appear; with only `read`, `orm_execute` is described as "read-only queries with this credential".

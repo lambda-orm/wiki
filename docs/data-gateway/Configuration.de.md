@@ -76,10 +76,12 @@ Die spezifischste Angabe gewinnt immer und **ersetzt** die anderen: Schema → T
 - Mindestens eines von `orm.workspacePath` oder ein `orm.schemas[]` mit `workspace`, und mindestens ein Schema.
 - Zwei Schemas mit derselben Route oder eine Route, die Präfix einer anderen ist (`iot` und `iot/v1`), sind ein Fehler.
 - Jedes Segment einer Route: `[a-zA-Z0-9_.-]`, und keiner der reservierten Namen: `health`, `ping`, `metrics`, `version`,
-  `schemas`, `mcp`, `sse`, `messages`, `status`, `doc`, `api-docs`, `swagger`, `asyncapi`, `ui`, `whoami`, `typings`.
+  `schemas`, `mcp`, `sse`, `messages`, `status`, `doc`, `api-docs`, `swagger`, `asyncapi`, `ui`, `whoami`, `typings`, `admin`.
 - **Ein Schema an der Wurzel:** Wenn `workspacePath` selbst eine `lambdaORM.yaml` enthält (oder ein deklariertes Schema
   `path: ""` verwendet), wird es an der Wurzel bereitgestellt (`/execute`). Nur wenn es das einzige Schema ist.
-- Kein Hot Reload: Ein neues Schema wird beim Neustart des Gateways übernommen.
+- **Hot Reload** (`orm.watch`, standardmäßig an): ein neuer Ordner mit einer `lambdaORM.yaml` ist ein neues Schema,
+  eine geänderte `lambdaORM.yaml` oder `.env` lädt ihr Schema blue-green neu (die zuletzt gestartete Version antwortet
+  weiter, wenn die neue nicht startet), ein verschwundener Ordner nimmt sein Schema mit. Siehe [Administration](Admin.md#workspaces-in-the-volume).
 - Jedes Schema verwendet die `infrastructure.queue` (Kafka) seiner eigenen `lambdaORM.yaml`, falls vorhanden.
 
 ## Umgebung jedes Schemas {#environment-of-each-schema}
@@ -221,6 +223,11 @@ transports:
 | --- | --- | --- |
 | `orm.workspacePath` | — | der Ordner, in dem Schemas erkannt werden |
 | `orm.schemas[]` | `[]` | `path` (obligatorisch), `workspace` (definiert ein Schema) und Anpassungen |
+| `orm.watch` | `true` | Hot Reload der Workspaces; `false`, oder `{ enabled, intervalMs, debounceMs }` |
+| `orm.watch.intervalMs` / `debounceMs` | `5000` / `300` | der Durchlauf der Workspaces; wie lange Änderungen gesammelt werden |
+| `admin.enabled` | `false` | die [Administration](Admin.md) unter `/admin` des `http`-Transports |
+| `admin.allowAnonymous` | `false` | mit `authentication: none` administriert jeder (nur lokale Entwicklung) |
+| `admin.commandTimeoutMs` / `maxFileBytes` | `600000` / `2MB` | wie lange ein Befehl dauern darf; die größte geschriebene Datei |
 | `runtime.schemas` | `thread` | `thread` / `process` |
 | `runtime.maxMemoryMb` | `512` | pro Worker |
 | `runtime.checkConnections` | `true` | eine nicht erreichbare Datenbank lässt das Schema in `error` (mit erneuten Versuchen), statt bei der ersten Abfrage fehlzuschlagen |

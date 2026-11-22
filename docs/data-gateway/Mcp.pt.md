@@ -43,6 +43,11 @@ credencial permitir**. As descrições e os esquemas de entrada são gerados qua
 | `stage_import` | `stage`, `data` | `POST /stages/{stage}/import` | `stageImport` | destrutiva |
 | `gateway_version` | — | `GET /version` | `read` | somente leitura |
 | `gateway_health` | — | `GET /health` | `read` | somente leitura |
+| `admin_schema_get` | — | `GET /admin/workspaces/{rota}/schema` | `schemaRead` | somente leitura |
+| `admin_schema_validate` | `text` | `POST /admin/validate` | `schemaRead` | somente leitura |
+| `admin_stage_fetch` | `stage?` | `fetch` | `schemaRead` | somente leitura |
+
+As tools `admin_*` existem só com `admin.enabled` ([Administração](Admin.md#over-mcp)); escrever não é oferecido por MCP.
 
 - **`tools/list` mostra a uma credencial apenas as ferramentas que ela pode usar.** Sem `script`, `orm_execute_script` não
   aparece; com apenas `read`, `orm_execute` é descrita como "consultas somente leitura com esta credencial".

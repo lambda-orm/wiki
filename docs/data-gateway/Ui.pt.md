@@ -214,3 +214,10 @@ import '@lambdaorm/ui/styles.css'
 
 O que é salvo pode ir para outro lugar além do navegador informando `store` (um `WorkspaceStore`, por exemplo um backend
 próprio).
+
+## Administração {#administration-ui}
+
+Com `admin.enabled` e suas permissões, o explorador também edita os esquemas (como YAML e como formulários), cria e
+remove, salva o que é salvo nos workspaces, define as variáveis das conexões e roda os comandos da CLI: ver
+[Administração](Admin.md). Os esquemas são lidos de novo a cada 5 s: um adicionado, removido ou recarregado aparece
+sem recarregar a página, e uma versão nova que não iniciou é marcada com ⚠ e seu motivo.

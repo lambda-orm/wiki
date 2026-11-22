@@ -65,7 +65,8 @@ Mensajes del servidor sin `id`:
 | --- | --- | --- |
 | `queue.completed` | terminó una ejecución encolada con `query.executeQueued` y `notify: true` en esta conexión | `queueId`, `ok: true`, `rows` (enviadas al topic) |
 | `queue.failed` | esa ejecución falló | `queueId`, `ok: false`, `error` |
-| `schema.statusChanged` | el esquema de la conexión pasó a `error` / `restarting`, o volvió a `ready` | `path`, `status`, `reason` |
+| `schema.statusChanged` | el esquema de la conexión pasó a `error` / `restarting`, o volvió a `ready` | `path`, `status`, `reason`, `pending` |
+| `workspace.changed` | cambió algo en el workspace del esquema (una conexión a la raíz: en cualquiera): `added`, `removed`, `schema`, `env` o `files` | `path`, `kind`, `files`, `at` |
 
 ```json
 → { "jsonrpc": "2.0", "id": 7, "method": "query.executeQueued", "params": { "topic": "countries", "query": "Countries.map(p => [p.iso3, p.name])", "chunk": 1000, "notify": true } }

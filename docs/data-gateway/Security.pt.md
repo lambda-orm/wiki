@@ -38,6 +38,7 @@ authentication:
 | `script` | scripts (`POST /script`, `orm_execute_script`, `query.script`): um script pode fazer qualquer coisa internamente, por isso é uma permissão própria |
 | `queue` | `execute-queued` (e `write` se a consulta grava) |
 | `stageImport` | importar um stage |
+| `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | a [administração](Admin.md#turning-it-on): nunca dadas por padrão |
 
 - A autorização acontece no worker do esquema, antes de executar qualquer coisa, igual para REST, MCP e WebSocket.
 - Para saber se uma consulta grava, o gateway a analisa (seu `metadata`): com apenas `read`, uma consulta com qualquer

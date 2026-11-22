@@ -342,3 +342,23 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 | versão | `GET /version` | `gateway_version` | `general.version` | — |
 | saúde | `GET /health` | `gateway_health` | `general.health` | — |
 | ping | `GET /ping` | — | `general.ping` | — |
+
+## Administração {#administration}
+
+Com `admin.enabled` ([Administração](Admin.md)), sob `/admin` deste transporte. Um workspace é nomeado pela sua rota em um segmento (`iot%2Fv1`; `~` a raiz). Cada leitura devolve sua versão (`ETag`); cada escrita diz qual altera (`If-Match`, ou o elemento como foi lido): outra versão é um `412` com o que há agora.
+
+| Method | Route | | Permission |
+| --- | --- | --- | --- |
+| `GET` | `/admin` | `{ enabled, can }` | — |
+| `GET` / `POST` | `/admin/workspaces` | the workspaces / a new one (`{ path, copyOf? }`) | `schemaRead` / `schemaAdmin` |
+| `DELETE` | `/admin/workspaces/{route}?confirm={route}` | to `.trash` | `schemaAdmin` |
+| `GET` / `PUT` / `PATCH` | `/admin/workspaces/{route}/schema` | the `lambdaORM.yaml`; replaced; one element changed (`{ op, at, value?, to?, expected? }`) | `schemaRead` / `schemaWrite` |
+| `POST` | `/admin/workspaces/{route}/references` | who uses an element | `schemaRead` |
+| `POST` | `/admin/validate` | `{ text }` → `{ valid, issues }` | `schemaRead` |
+| `GET` / `PUT` | `/admin/workspaces/{route}/variables` | the variables of the connections (never their value) / set or removed | `schemaRead` / `schemaAdmin` |
+| `GET` / `PUT` / `POST` | `/admin/workbench`, `/admin/workbench/remove` | what is saved / saved / removed | `read` / `workbenchWrite` |
+| `GET` | `/admin/workspaces/{route}/commands` | the stages and what may be run | `read` |
+| `POST` | `/admin/workspaces/{route}/commands/{command}/preview` | what it will do | the command's |
+| `POST` | `/admin/workspaces/{route}/commands/{command}` | runs it (`{ stage?, previewId?, force?, save? }`) → a job | the command's |
+| `GET` | `/admin/workspaces/{route}/jobs[/{id}]` | the last jobs / one with its result | `read` |
+| `POST` / `GET` | `/admin/workspaces/{route}/build`, `…/build.zip` | the code of the domain in `src/` / as a zip | `build` |
