@@ -44,6 +44,11 @@ was es abfragen kann.
 | `stage_import` | `stage`, `data` | `POST /stages/{stage}/import` | `stageImport` | destruktiv |
 | `gateway_version` | — | `GET /version` | `read` | nur lesend |
 | `gateway_health` | — | `GET /health` | `read` | nur lesend |
+| `admin_schema_get` | — | `GET /admin/workspaces/{route}/schema` | `schemaRead` | nur lesend |
+| `admin_schema_validate` | `text` | `POST /admin/validate` | `schemaRead` | nur lesend |
+| `admin_stage_fetch` | `stage?` | `fetch` | `schemaRead` | nur lesend |
+
+Die Tools `admin_*` gibt es nur mit `admin.enabled` ([Administration](Admin.md#over-mcp)); Schreiben wird über MCP nicht angeboten.
 
 - **`tools/list` zeigt Zugangsdaten nur die Tools, die sie verwenden dürfen.** Ohne `script` erscheint
   `orm_execute_script` nicht; mit nur `read` wird `orm_execute` als „read-only queries with this credential“ beschrieben.

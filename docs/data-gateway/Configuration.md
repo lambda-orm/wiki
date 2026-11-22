@@ -74,10 +74,12 @@ The most specific always wins and **replaces** the others: schema → transport 
 - At least one of `orm.workspacePath` or a `orm.schemas[]` with `workspace`, and at least one schema.
 - Two schemas with the same route, or a route that is the prefix of another (`iot` and `iot/v1`), are an error.
 - Each segment of a route: `[a-zA-Z0-9_.-]`, and none of the reserved names: `health`, `ping`, `metrics`, `version`,
-  `schemas`, `mcp`, `sse`, `messages`, `status`, `doc`, `api-docs`, `swagger`, `asyncapi`, `ui`, `whoami`, `typings`.
+  `schemas`, `mcp`, `sse`, `messages`, `status`, `doc`, `api-docs`, `swagger`, `asyncapi`, `ui`, `whoami`, `typings`, `admin`.
 - **A schema at the root:** if `workspacePath` itself has a `lambdaORM.yaml` (or a declared schema uses `path: ""`),
   it is served at the root (`/execute`). Only when it is the only schema.
-- No hot reload: a new schema is taken when the gateway restarts.
+- **Hot reload** (`orm.watch`, on by default): a new folder with a `lambdaORM.yaml` is a new schema, a changed
+  `lambdaORM.yaml` or `.env` reloads its schema blue-green (the last version that started keeps serving if the new one
+  doesn't), a folder that goes takes its schema. See [Administration](Admin.md#workspaces-in-the-volume).
 - Each schema uses the `infrastructure.queue` (Kafka) of its own `lambdaORM.yaml`, if it has one.
 
 ## Environment of each schema
@@ -218,6 +220,11 @@ transports:
 | --- | --- | --- |
 | `orm.workspacePath` | — | the folder where schemas are discovered |
 | `orm.schemas[]` | `[]` | `path` (mandatory), `workspace` (defines a schema) and adjustments |
+| `orm.watch` | `true` | hot reload of the workspaces; `false`, or `{ enabled, intervalMs, debounceMs }` |
+| `orm.watch.intervalMs` / `debounceMs` | `5000` / `300` | the scan of the workspaces; how long changes are gathered |
+| `admin.enabled` | `false` | the [administration](Admin.md) at `/admin` of the `http` transport |
+| `admin.allowAnonymous` | `false` | with `authentication: none`, anyone administers (local development only) |
+| `admin.commandTimeoutMs` / `maxFileBytes` | `600000` / `2MB` | how long a command may take; the largest file written |
 | `runtime.schemas` | `thread` | `thread` / `process` |
 | `runtime.maxMemoryMb` | `512` | per worker |
 | `runtime.checkConnections` | `true` | a database down leaves the schema in `error`, retried, instead of failing in the first query |

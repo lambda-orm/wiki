@@ -38,6 +38,7 @@ authentication:
 | `script` | scripts (`POST /script`, `orm_execute_script`, `query.script`): un script puede hacer cualquier cosa dentro, por eso es un permiso propio |
 | `queue` | `execute-queued` (y `write` si la consulta escribe) |
 | `stageImport` | importar un stage |
+| `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | la [administración](Admin.md#turning-it-on): nunca se dan por defecto |
 
 - La autorización ocurre en el worker del esquema, antes de ejecutar nada, igual para REST, MCP y WebSocket.
 - Para saber si una consulta escribe, el gateway la analiza (su `metadata`): con solo `read`, se rechaza una consulta con alguna

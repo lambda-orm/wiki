@@ -345,3 +345,23 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 | Version | `GET /version` | `gateway_version` | `general.version` | — |
 | Health | `GET /health` | `gateway_health` | `general.health` | — |
 | ping | `GET /ping` | — | `general.ping` | — |
+
+## Administration {#administration}
+
+Mit `admin.enabled` ([Administration](Admin.md)), unter `/admin` dieses Transports. Ein Workspace wird über seine Route in einem Segment benannt (`iot%2Fv1`; `~` die Wurzel). Jedes Lesen liefert seine Version (`ETag`); jedes Schreiben nennt die, die es ändert (`If-Match`, oder das Element wie gelesen): eine andere Version ist ein `412` mit dem aktuellen Stand.
+
+| Method | Route | | Permission |
+| --- | --- | --- | --- |
+| `GET` | `/admin` | `{ enabled, can }` | — |
+| `GET` / `POST` | `/admin/workspaces` | the workspaces / a new one (`{ path, copyOf? }`) | `schemaRead` / `schemaAdmin` |
+| `DELETE` | `/admin/workspaces/{route}?confirm={route}` | to `.trash` | `schemaAdmin` |
+| `GET` / `PUT` / `PATCH` | `/admin/workspaces/{route}/schema` | the `lambdaORM.yaml`; replaced; one element changed (`{ op, at, value?, to?, expected? }`) | `schemaRead` / `schemaWrite` |
+| `POST` | `/admin/workspaces/{route}/references` | who uses an element | `schemaRead` |
+| `POST` | `/admin/validate` | `{ text }` → `{ valid, issues }` | `schemaRead` |
+| `GET` / `PUT` | `/admin/workspaces/{route}/variables` | the variables of the connections (never their value) / set or removed | `schemaRead` / `schemaAdmin` |
+| `GET` / `PUT` / `POST` | `/admin/workbench`, `/admin/workbench/remove` | what is saved / saved / removed | `read` / `workbenchWrite` |
+| `GET` | `/admin/workspaces/{route}/commands` | the stages and what may be run | `read` |
+| `POST` | `/admin/workspaces/{route}/commands/{command}/preview` | what it will do | the command's |
+| `POST` | `/admin/workspaces/{route}/commands/{command}` | runs it (`{ stage?, previewId?, force?, save? }`) → a job | the command's |
+| `GET` | `/admin/workspaces/{route}/jobs[/{id}]` | the last jobs / one with its result | `read` |
+| `POST` / `GET` | `/admin/workspaces/{route}/build`, `…/build.zip` | the code of the domain in `src/` / as a zip | `build` |

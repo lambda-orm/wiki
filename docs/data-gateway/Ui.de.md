@@ -223,3 +223,11 @@ import '@lambdaorm/ui/styles.css'
 
 Das Gespeicherte kann an einem anderen Ort als im Browser abgelegt werden, indem `store` übergeben wird (ein
 `WorkspaceStore`, zum Beispiel ein eigenes Backend).
+
+## Administration {#administration-ui}
+
+Mit `admin.enabled` und seinen Berechtigungen bearbeitet der Explorer auch die Schemas (als YAML und als Formulare),
+legt sie an und entfernt sie, speichert Gespeichertes in den Workspaces, setzt die Variablen der Verbindungen und führt
+die Befehle der CLI aus: siehe [Administration](Admin.md). Die Schemas werden alle 5 s neu gelesen: ein hinzugefügtes,
+entferntes oder neu geladenes erscheint ohne Neuladen der Seite, und eine neue Version, die nicht gestartet ist, wird
+mit ⚠ und ihrem Grund markiert.

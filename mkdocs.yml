@@ -40,6 +40,7 @@ plugins:
             Home: Start
             Features: Funktionen
             Overview: Überblick
+            Administration: Administration
             Getting started: Erste Schritte
             Configuration: Konfiguration
             Transports: Transporte
@@ -91,6 +92,7 @@ plugins:
             Home: Inicio
             Features: Características
             Overview: Introducción
+            Administration: Administración
             Getting started: Primeros pasos
             Configuration: Configuración
             Transports: Transportes
@@ -145,6 +147,7 @@ plugins:
             Home: Início
             Features: Recursos
             Overview: Visão geral
+            Administration: Administração
             Getting started: Primeiros passos
             Configuration: Configuração
             Transports: Transportes
@@ -215,6 +218,7 @@ nav:
       - WebSocket API: data-gateway/WebSocket.md
       - Security: data-gateway/Security.md
       - UI: data-gateway/Ui.md
+      - Administration: data-gateway/Admin.md
       - Clients: data-gateway/Clients.md
       - Operations: data-gateway/Operations.md
       - Change log: data-gateway/CHANGELOG.md

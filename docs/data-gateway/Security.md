@@ -38,6 +38,7 @@ authentication:
 | `script` | scripts (`POST /script`, `orm_execute_script`, `query.script`): a script can do anything inside, so it is a permission of its own |
 | `queue` | `execute-queued` (and `write` if the query writes) |
 | `stageImport` | importing a stage |
+| `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | the [administration](Admin.md#turning-it-on): never given by default |
 
 - Authorization happens in the schema's worker, before running anything, the same for REST, MCP and WebSocket.
 - To know whether a query writes, the gateway analyses it (its `metadata`): with only `read`, a query with any

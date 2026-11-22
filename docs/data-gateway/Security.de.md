@@ -38,6 +38,7 @@ authentication:
 | `script` | Skripte (`POST /script`, `orm_execute_script`, `query.script`): Ein Skript kann intern alles tun, daher ist es eine eigene Berechtigung |
 | `queue` | `execute-queued` (und `write`, wenn die Abfrage schreibt) |
 | `stageImport` | das Importieren eines Stages |
+| `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | die [Administration](Admin.md#turning-it-on): nie standardmäßig vergeben |
 
 - Die Autorisierung erfolgt im Worker des Schemas, bevor irgendetwas ausgeführt wird, gleich für REST, MCP und WebSocket.
 - Um zu wissen, ob eine Abfrage schreibt, analysiert das Gateway sie (ihre `metadata`): Mit nur `read` wird eine Abfrage

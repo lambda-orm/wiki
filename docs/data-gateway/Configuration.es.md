@@ -74,10 +74,12 @@ Siempre gana el más específico, que **reemplaza** a los demás: esquema → tr
 - Al menos uno de `orm.workspacePath` o un `orm.schemas[]` con `workspace`, y al menos un esquema.
 - Dos esquemas con la misma ruta, o una ruta que es prefijo de otra (`iot` e `iot/v1`), son un error.
 - Cada segmento de una ruta: `[a-zA-Z0-9_.-]`, y ninguno de los nombres reservados: `health`, `ping`, `metrics`, `version`,
-  `schemas`, `mcp`, `sse`, `messages`, `status`, `doc`, `api-docs`, `swagger`, `asyncapi`, `ui`, `whoami`, `typings`.
+  `schemas`, `mcp`, `sse`, `messages`, `status`, `doc`, `api-docs`, `swagger`, `asyncapi`, `ui`, `whoami`, `typings`, `admin`.
 - **Un esquema en la raíz:** si el propio `workspacePath` tiene un `lambdaORM.yaml` (o un esquema declarado usa `path: ""`),
   se sirve en la raíz (`/execute`). Solo cuando es el único esquema.
-- No hay recarga en caliente: un esquema nuevo se toma cuando se reinicia el gateway.
+- **Recarga en caliente** (`orm.watch`, activo por defecto): una carpeta nueva con un `lambdaORM.yaml` es un esquema
+  nuevo, un `lambdaORM.yaml` o `.env` cambiado recarga su esquema blue-green (sigue la última versión que arrancó si la
+  nueva no arranca), una carpeta que se va se lleva su esquema. Ver [Administración](Admin.md#workspaces-in-the-volume).
 - Cada esquema usa la `infrastructure.queue` (Kafka) de su propio `lambdaORM.yaml`, si la tiene.
 
 ## Entorno de cada esquema {#environment-of-each-schema}
@@ -218,6 +220,11 @@ transports:
 | --- | --- | --- |
 | `orm.workspacePath` | — | la carpeta donde se descubren los esquemas |
 | `orm.schemas[]` | `[]` | `path` (obligatorio), `workspace` (define un esquema) y ajustes |
+| `orm.watch` | `true` | recarga en caliente de los workspaces; `false`, o `{ enabled, intervalMs, debounceMs }` |
+| `orm.watch.intervalMs` / `debounceMs` | `5000` / `300` | el recorrido de los workspaces; cuánto se juntan los cambios |
+| `admin.enabled` | `false` | la [administración](Admin.md) en `/admin` del transporte `http` |
+| `admin.allowAnonymous` | `false` | con `authentication: none`, cualquiera administra (solo desarrollo local) |
+| `admin.commandTimeoutMs` / `maxFileBytes` | `600000` / `2MB` | cuánto puede tardar un comando; el archivo más grande que se escribe |
 | `runtime.schemas` | `thread` | `thread` / `process` |
 | `runtime.maxMemoryMb` | `512` | por worker |
 | `runtime.checkConnections` | `true` | una base de datos caída deja el esquema en `error`, con reintentos, en lugar de fallar en la primera consulta |

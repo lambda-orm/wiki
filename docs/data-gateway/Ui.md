@@ -214,3 +214,10 @@ import '@lambdaorm/ui/styles.css'
 
 What is saved can go to another place than the browser by giving `store` (a `WorkspaceStore`, for example a backend of
 your own).
+
+## Administration {#administration-ui}
+
+With `admin.enabled` and its permissions, the explorer also edits the schemas (as YAML and as forms), creates and
+removes them, saves what is saved in the workspaces, sets the variables of the connections and runs the commands of
+the CLI: see [Administration](Admin.md). The schemas are read again every 5 s: one added, removed or reloaded shows
+without reloading the page, and a new version that didn't start is marked ⚠ with its reason.
