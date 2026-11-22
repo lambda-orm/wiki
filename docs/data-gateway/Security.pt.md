@@ -97,16 +97,17 @@ Uma requisição que falha responde com um status que um cliente pode mapear e u
 | `error` | o nome do erro: `ExecutionError`, `ValidationError`, `ForbiddenError`, `ScriptDisabledError`, … |
 | `code` | o código de erro do banco de dados, quando existe (SQLSTATE do Postgres como `23505`, `ER_DUP_ENTRY` do MySQL) |
 | `message` | a mensagem |
+| `suggestions` | para um nome da consulta que não existe, os mais próximos: `[{ "name": "nme", "didYouMean": ["name"] }]` |
 
 | Status | Causa |
 | --- | --- |
 | `400` | uma consulta ou um modelo inválido (`ValidationError`, `SchemaError`, `SintaxisError`, `LanguageError`), uma violação de not null ou de check, dados inválidos (Postgres `22xxx`) |
 | `401` | nenhuma credencial, ou uma incorreta |
 | `403` | a credencial não tem a permissão; scripts desabilitados |
-| `404` | um esquema não exposto nesse transporte, uma rota desconhecida |
+| `404` | um nome que o esquema não tem (uma entidade, enum, source, mapping, stage), um esquema não exposto nesse transporte, uma rota desconhecida |
 | `409` | uma violação de chave única ou estrangeira (Postgres `23505`, `23503`; MySQL `ER_DUP_ENTRY`, `ER_NO_REFERENCED_ROW_2`, `ER_ROW_IS_REFERENCED_2`) |
 | `413` | um corpo, uma resposta ou um script grande demais |
 | `429` | limite de taxa, ou operações simultâneas demais no esquema |
-| `503` | o esquema não está `ready` (iniciando, em erro, reiniciando) |
+| `503` | o esquema não está `ready` (iniciando, em erro, reiniciando); uma source que o gateway não alcança, ou cuja variável de conexão não está definida (`ConnectionError`) |
 | *n* | um script executou `throw { status: n, message }` (400–599) |
 | `500` | qualquer outra coisa |

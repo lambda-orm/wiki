@@ -23,7 +23,7 @@ Wurzel eines Gateways mit mehreren Schemas bietet nur `general.*` und `gateway.s
 ```
 
 Die `params` entsprechen dem Body (oder den Routenparametern) der entsprechenden REST-Methode. Ein Fehler enthält in
-`data` den `name` und den HTTP-`status`, den REST geliefert hätte.
+`data` den `name` und den HTTP-`status`, den REST geliefert hätte. Für einen Namen der Abfrage, den es nicht gibt, enthält `data.suggestions` die nächstliegenden.
 
 ## Methoden {#methods}
 
@@ -51,6 +51,7 @@ Die `params` entsprechen dem Body (oder den Routenparametern) der entsprechenden
 | `schema.views` | — | `GET /views` |
 | `schema.stages` / `schema.stage` | — / `stage` | `GET /stages[/{stage}]` |
 | `schema.typings` | — | `GET /typings` |
+| `schema.search` / `schema.describe` | `text` / `entities` | `GET /search`, `GET /describe` |
 | `stage.exists` | `stage` | `GET /stages/{stage}/exists` |
 | `stage.export` | `stage` | `GET /stages/{stage}/export` |
 | `stage.import` | `stage`, `data` | `POST /stages/{stage}/import` |

@@ -1,5 +1,34 @@
 # Clients {#clients}
 
+## Node: @lambdaorm/data-gateway-client
+
+[`@lambdaorm/data-gateway-client`](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) (0.1.0) ist der
+neue Client: eine API über die fünf Transporte des Gateways, gewählt über das Schema der Verbindungszeichenfolge
+(`http://`, `ws://`, `mcp+http://`, `mcp+sse://`, `mcp+ws://`), und derselbe Fehlercode auf allen. Er besteht die
+Konformitätssuite des Gateways auf jedem davon.
+
+```sh
+npm install @lambdaorm/data-gateway-client
+```
+
+```ts
+import { connect, GatewayError } from '@lambdaorm/data-gateway-client'
+
+const gateway = await connect('http://gateway:8080/iot/v1', { apiKey: process.env.IOT_KEY })
+const devices = await gateway.execute('Devices.filter(p => p.status == status)', { status: 'active' })
+const found = await gateway.schema.search('Devices.area')     // ein großes Schema, über einen Teil eines Namens
+try {
+	await gateway.execute('Devic.map(p => p.id)')
+} catch (error) {
+	if (error instanceof GatewayError && error.code === 'invalid') console.log(error.suggestions) // [{ name: 'Devic', didYouMean: ['Devices'] }]
+}
+await gateway.close()
+```
+
+Die Anmeldedaten stehen in den Optionen (`apiKey`, `token`) oder in `DATA_GATEWAY_API_KEY` / `DATA_GATEWAY_TOKEN`,
+nie in der URL. Sein [README](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) enthält die ganze API und
+die Codes. `@lambdaorm/client` weiter unten funktioniert weiter; die CLI wechselt zum neuen Client.
+
 ## Node: @lambdaorm/client {#node-lambdaormclient}
 
 [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) hat dieselbe Schnittstelle wie die Bibliothek

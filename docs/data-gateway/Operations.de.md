@@ -11,7 +11,7 @@ angibt (per Konvention `/workspace`). Es hat kein `EXPOSE`: Die Ports stehen nur
 # docker-compose.yml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:3.0.2
+    image: flaviorita/data-gateway:3.1.0
     environment:
       DATA_GATEWAY_HTTP_PORT: "8080"
       DATA_GATEWAY_MCP_PORT: "8081"

@@ -65,6 +65,12 @@ da barra de abas. Para cada esquema:
   O botão **Abrir** (↗) de uma entidade, um duplo clique ou Enter abrem seu [formulário](#entity-form).
 - **O que está salvo** no esquema: pastas, consultas e diagramas ([abaixo](#saved-queries-and-diagrams)).
 
+- **Filtro.** A caixa sobre as entidades deixa as que têm o texto no nome ou no de uma propriedade ou relação
+  (`21 de 192`); as propriedades e relações que coincidem aparecem sob a sua entidade.
+- A largura do explorador é guardada; um duplo clique na borda (ou Enter) a ajusta aos nomes, e as setas a mudam
+  pelo teclado (Shift: 60 px).
+- Um esquema que não iniciou aparece atenuado, com seu estado e seu motivo.
+
 ![Domínio como YAML](images/ui-domain-yaml.png)
 
 ## Formulário da entidade {#entity-form}
@@ -104,6 +110,9 @@ aberta com **+**, a partir de uma entidade (**Consultar**) ou de uma consulta sa
     - O ícone **copiar** copia o que é mostrado (a tabela como texto separado por tabulações, pronto para colar em uma planilha).
     - **Exportar** baixa o resultado inteiro como **JSON**, **YAML** ou **TXT (separado por tabulações)**.
 - **Histórico** das últimas consultas de cada esquema, para recuperar uma delas.
+
+- **Um erro com uma sugestão** (`entity Area not found; did you mean Areas?`) tem um botão **usar Areas** que
+  substitui o nome na consulta.
 
 ![Uma consulta e seu resultado](images/ui-query.png)
 

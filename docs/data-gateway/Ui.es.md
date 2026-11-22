@@ -65,6 +65,12 @@ la barra de pestañas. Para cada esquema:
   El botón **Abrir** (↗) de una entidad, un doble clic o Enter abren su [formulario](#entity-form).
 - **Lo guardado** en el esquema: carpetas, consultas y diagramas ([más abajo](#saved-queries-and-diagrams)).
 
+- **Filtro.** La caja sobre las entidades deja las que tienen el texto en su nombre o en el de una propiedad o relación
+  (`21 de 192`); las propiedades y relaciones que coinciden se muestran bajo su entidad.
+- El ancho del explorador se guarda; un doble clic en su borde (o Enter) lo ajusta a los nombres, y las flechas lo
+  cambian desde el teclado (Shift: 60 px).
+- Un esquema que no arrancó se ve atenuado, con su estado y su motivo.
+
 ![Dominio como YAML](images/ui-domain-yaml.png)
 
 ## Formulario de entidad {#entity-form}
@@ -104,6 +110,9 @@ abre con **+**, desde una entidad (**Consultar**) o desde una consulta guardada,
     - El icono de **copiar** copia lo que se muestra (la tabla como texto separado por tabulaciones, listo para pegar en una hoja de cálculo).
     - **Exportar** descarga el resultado completo como **JSON**, **YAML** o **TXT (separado por tabulaciones)**.
 - **Historial** de las últimas consultas de cada esquema, para recuperar una.
+
+- **Un error con una sugerencia** (`entity Area not found; did you mean Areas?`) tiene un botón **usar Areas** que
+  reemplaza el nombre en la consulta.
 
 ![Una consulta y su resultado](images/ui-query.png)
 

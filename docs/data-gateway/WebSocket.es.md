@@ -22,7 +22,7 @@ gateway con varios esquemas solo tiene `general.*` y `gateway.schemas`.
 ```
 
 Los `params` son el cuerpo (o los parámetros de ruta) del método REST equivalente. Un error lleva en `data` el
-`name` y el `status` HTTP que habría respondido REST.
+`name` y el `status` HTTP que habría respondido REST. Para un nombre de la consulta que no existe, `data.suggestions` tiene los más cercanos.
 
 ## Métodos {#methods}
 
@@ -50,6 +50,7 @@ Los `params` son el cuerpo (o los parámetros de ruta) del método REST equivale
 | `schema.views` | — | `GET /views` |
 | `schema.stages` / `schema.stage` | — / `stage` | `GET /stages[/{stage}]` |
 | `schema.typings` | — | `GET /typings` |
+| `schema.search` / `schema.describe` | `text` / `entities` | `GET /search`, `GET /describe` |
 | `stage.exists` | `stage` | `GET /stages/{stage}/exists` |
 | `stage.export` | `stage` | `GET /stages/{stage}/export` |
 | `stage.import` | `stage`, `data` | `POST /stages/{stage}/import` |

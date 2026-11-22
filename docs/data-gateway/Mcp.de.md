@@ -37,6 +37,8 @@ was es abfragen kann.
 | `schema_mappings` | `mapping?`, `entity?` | `GET /mappings…` | `read` | nur lesend |
 | `schema_views` | — | `GET /views` | `read` | nur lesend |
 | `schema_stages` | `stage?` | `GET /stages[/{stage}]` | `read` | nur lesend |
+| `schema_search` | `text` | `GET /search?q=` | `read` | nur lesend |
+| `schema_describe` | `entities` | `GET /describe?entities=` | `read` | nur lesend |
 | `stage_exists` | `stage` | `GET /stages/{stage}/exists` | `read` | nur lesend |
 | `stage_export` | `stage` | `GET /stages/{stage}/export` | `read` | nur lesend |
 | `stage_import` | `stage`, `data` | `POST /stages/{stage}/import` | `stageImport` | destruktiv |
@@ -51,6 +53,17 @@ was es abfragen kann.
   `orm_execute_queued`, wenn das Schema keine Warteschlange hat.
 - `mcp.tools.include` / `exclude` (global oder pro Schema) schränken die Liste weiter ein, zum Beispiel
   `exclude: [ orm_execute_script, stage_import ]`.
+
+### Große Schemas {#large-schemas}
+
+Passt die Domäne nicht in die Beschreibung von `orm_execute` (Ilusors Cloud: 192 Entitäten, 389 KB als JSON), nennt
+die Beschreibung die Namen der Entitäten und verweist auf zwei Tools, damit das Modell nur liest, was es braucht:
+
+- `schema_search { text }`: die Entitäten, Eigenschaften und Beziehungen, deren Name den Text enthält, je eine Zeile
+  (`Products.cat` → `Products.categoryId: integer`, `Products.category → Categories`); ohne Treffer die
+  nächstliegenden Namen (`Prodcts` → `products`, `Products`, `product`).
+- `schema_describe { entities }`: bis zu 30 Entitäten in je zwei Zeilen, ihre Eigenschaften und Beziehungen; ein
+  unbekannter Name kommt in `notFound` mit den nächstliegenden.
 
 ## Ergebnisse und Fehler {#results-and-errors}
 
@@ -68,6 +81,8 @@ was es abfragen kann.
   durch `server.maxResponseBytes` und `server.timeout` geschützt.
 - Ein Fehler von λORM (Syntax, eine unbekannte Entität, ein Constraint, ein deaktiviertes Skript) oder eine fehlende
   Berechtigung liefert `isError: true` mit der Meldung, sodass das Modell sie lesen und die Abfrage korrigieren kann.
+- Der Fehler kommt auch in `structuredContent`: `{ error, status, code?, message, suggestions? }`, der Status und der
+  Datenbankcode, die REST liefern würde, und für einen Namen, den es nicht gibt, die nächstliegenden.
 
 ## Ressourcen {#resources}
 

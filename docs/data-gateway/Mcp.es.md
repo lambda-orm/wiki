@@ -36,6 +36,8 @@ credencial lo permite**. Las descripciones y los esquemas de entrada se generan 
 | `schema_mappings` | `mapping?`, `entity?` | `GET /mappings…` | `read` | solo lectura |
 | `schema_views` | — | `GET /views` | `read` | solo lectura |
 | `schema_stages` | `stage?` | `GET /stages[/{stage}]` | `read` | solo lectura |
+| `schema_search` | `text` | `GET /search?q=` | `read` | solo lectura |
+| `schema_describe` | `entities` | `GET /describe?entities=` | `read` | solo lectura |
 | `stage_exists` | `stage` | `GET /stages/{stage}/exists` | `read` | solo lectura |
 | `stage_export` | `stage` | `GET /stages/{stage}/export` | `read` | solo lectura |
 | `stage_import` | `stage`, `data` | `POST /stages/{stage}/import` | `stageImport` | destructiva |
@@ -50,6 +52,17 @@ credencial lo permite**. Las descripciones y los esquemas de entrada se generan 
   cola.
 - `mcp.tools.include` / `exclude` (globales o por esquema) restringen aún más la lista, por ejemplo
   `exclude: [ orm_execute_script, stage_import ]`.
+
+### Esquemas grandes {#large-schemas}
+
+Cuando el dominio no entra en la descripción de `orm_execute` (el Cloud de Ilusor: 192 entidades, 389 KB en JSON), la
+descripción da los nombres de las entidades y apunta a dos herramientas, para que el modelo lea solo lo que necesita:
+
+- `schema_search { text }`: las entidades, propiedades y relaciones cuyo nombre contiene el texto, una línea cada una
+  (`Products.cat` → `Products.categoryId: integer`, `Products.category → Categories`); sin coincidencias, los nombres
+  más cercanos (`Prodcts` → `products`, `Products`, `product`).
+- `schema_describe { entities }`: hasta 30 entidades en dos líneas cada una, sus propiedades y sus relaciones; un
+  nombre que no conoce viene en `notFound` con los más cercanos.
 
 ## Resultados y errores {#results-and-errors}
 
@@ -66,6 +79,8 @@ credencial lo permite**. Las descripciones y los esquemas de entrada se generan 
   `server.maxResponseBytes` y `server.timeout`.
 - Un error de λORM (sintaxis, una entidad desconocida, una restricción, un script deshabilitado) o un permiso que falta responde
   `isError: true` con el mensaje, para que el modelo pueda leerlo y corregir la consulta.
+- El error viene también en `structuredContent`: `{ error, status, code?, message, suggestions? }`, el status y el código
+  de la base de datos que respondería REST, y para un nombre que no existe los más cercanos.
 
 ## Recursos {#resources}
 

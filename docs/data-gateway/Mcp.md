@@ -36,6 +36,8 @@ credential allows it**. The descriptions and input schemas are generated when th
 | `schema_mappings` | `mapping?`, `entity?` | `GET /mappings…` | `read` | read only |
 | `schema_views` | — | `GET /views` | `read` | read only |
 | `schema_stages` | `stage?` | `GET /stages[/{stage}]` | `read` | read only |
+| `schema_search` | `text` | `GET /search?q=` | `read` | read only |
+| `schema_describe` | `entities` | `GET /describe?entities=` | `read` | read only |
 | `stage_exists` | `stage` | `GET /stages/{stage}/exists` | `read` | read only |
 | `stage_export` | `stage` | `GET /stages/{stage}/export` | `read` | read only |
 | `stage_import` | `stage`, `data` | `POST /stages/{stage}/import` | `stageImport` | destructive |
@@ -50,6 +52,17 @@ credential allows it**. The descriptions and input schemas are generated when th
   no queue.
 - `mcp.tools.include` / `exclude` (global or per schema) restrict the list further, for example
   `exclude: [ orm_execute_script, stage_import ]`.
+
+### Large schemas
+
+When the domain doesn't fit in the description of `orm_execute` (Ilusor's Cloud: 192 entities, 389 KB as JSON), the
+description gives the names of the entities and points to two tools, so the model reads only what it needs:
+
+- `schema_search { text }`: the entities, properties and relations whose name contains the text, one line each
+  (`Products.cat` → `Products.categoryId: integer`, `Products.category → Categories`); with no match, the closest
+  names (`Prodcts` → `products`, `Products`, `product`).
+- `schema_describe { entities }`: up to 30 entities in two lines each, their properties and their relations; a name
+  it doesn't know comes in `notFound` with the closest ones.
 
 ## Results and errors
 
@@ -66,6 +79,8 @@ credential allows it**. The descriptions and input schemas are generated when th
   `server.maxResponseBytes` and `server.timeout`.
 - An error of λORM (syntax, an unknown entity, a constraint, a disabled script) or a missing permission answers
   `isError: true` with the message, so the model can read it and correct the query.
+- The error also comes in `structuredContent`: `{ error, status, code?, message, suggestions? }`, the status and the
+  database code REST would answer, and for a name that doesn't exist the closest ones.
 
 ## Resources
 

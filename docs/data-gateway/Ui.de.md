@@ -68,6 +68,12 @@ Panel-Schaltfläche der Tab-Leiste ausblenden. Für jedes Schema:
   Die Schaltfläche **Öffnen** (↗) einer Entität, ein Doppelklick oder Enter öffnen ihr [Formular](#entity-form).
 - **Was gespeichert ist** im Schema: Ordner, Abfragen und Diagramme ([siehe unten](#saved-queries-and-diagrams)).
 
+- **Filter.** Das Feld über den Entitäten behält die, deren Name oder der Name einer Eigenschaft oder Beziehung den
+  Text enthält (`21 von 192`); die passenden Eigenschaften und Beziehungen erscheinen unter ihrer Entität.
+- Die Breite des Explorers bleibt erhalten; ein Doppelklick auf seinen Rand (oder Enter) passt sie an die Namen an,
+  und die Pfeiltasten ändern sie über die Tastatur (Shift: 60 px).
+- Ein Schema, das nicht gestartet ist, erscheint abgeblendet, mit seinem Zustand und seinem Grund.
+
 ![Domäne als YAML](images/ui-domain-yaml.png)
 
 ## Entitätsformular {#entity-form}
@@ -110,6 +116,9 @@ seinem × geschlossen.
       eine Tabellenkalkulation).
     - **exportieren** lädt das gesamte Ergebnis als **JSON**, **YAML** oder **TXT (tabulatorgetrennt)** herunter.
 - **Verlauf** der letzten Abfragen jedes Schemas, um eine davon zurückzuholen.
+
+- **Ein Fehler mit einem Vorschlag** (`entity Area not found; did you mean Areas?`) hat eine Schaltfläche
+  **Areas verwenden**, die den Namen in der Abfrage ersetzt.
 
 ![Eine Abfrage und ihr Ergebnis](images/ui-query.png)
 
