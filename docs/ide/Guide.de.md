@@ -59,7 +59,7 @@ seinen [Sitzungen](#sessions); andernfalls zeigt jede Sitzung die Adresse der ID
 | --- | --- | --- |
 | Nur das Gateway, ohne `management` | Produktion, mit den Schemas in seinen Volumes: keine IDE, keine Administration | kein Port |
 | Das Gateway und das Image der IDE | eine gemeinsame IDE im Browser | nur im internen Netzwerk, nie veröffentlicht: der Container der IDE erreicht es |
-| Nur das Gateway, mit `management` | eine IDE auf Ihrem eigenen Rechner: die [Desktop-App](index.md#download), oder das Image mit `docker run` | Ihr Rechner muss seinen Port erreichen (unten) |
+| Nur das Gateway, mit `management` | eine IDE auf Ihrem eigenen Rechner: die [Desktop-App](Download.md), oder das Image mit `docker run` | Ihr Rechner muss seinen Port erreichen (unten) |
 
 Eine IDE auf Ihrem Rechner erreicht ein `management` an einem anderen Ort, ohne es offen zu veröffentlichen:
 

@@ -248,7 +248,7 @@ REST-API, der IDE, MCP und WebSocket.
 | [Bibliothek](usage/Usage.md) | [`@lambdaorm/lib`](https://www.npmjs.com/package/@lambdaorm/lib) | das ORM: führt die Abfragen gegen die Datenbanken aus |
 | [CLI](cli/index.md) | [`@lambdaorm/cli`](https://www.npmjs.com/package/@lambdaorm/cli) | der Befehl `lambdaorm`: Projekte, Synchronisation, Import / Export, Abfragen, Skripte |
 | [Data Gateway](data-gateway/index.md) | Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | die Schemas über REST, MCP und WebSocket |
-| [Data Gateway IDE](ide/index.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) · [Desktop: Linux, Windows, macOS](ide/index.md#download) | die IDE der Gateways: Verbindungen, Explorer, Abfragen, Diagramme, Administration |
+| [Data Gateway IDE](ide/index.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) · [Desktop: Linux, Windows, macOS](ide/Download.md) | die IDE der Gateways: Verbindungen, Explorer, Abfragen, Diagramme, Administration |
 | [Node.js-Client](data-gateway/Clients.md) | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | die Schnittstelle der Bibliothek, ausgeführt auf einem Data Gateway |
 | [UI-Komponenten](ide/Guide.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | React-Komponenten: der Abfrage-Editor, die Ergebnisse, der Explorer und die Diagramme |
 | [3xpr](https://www.npmjs.com/package/3xpr) | [`3xpr`](https://www.npmjs.com/package/3xpr) | die Ausdrucks-Engine, auf der die Abfragen, Skripte und Schemaregeln aufbauen |

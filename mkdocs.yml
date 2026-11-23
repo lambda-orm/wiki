@@ -19,7 +19,7 @@ extra_css:
   - assets/wiki-v5.css
 extra_javascript:
   - assets/wiki-v2.js
-  # the downloads of the IDE page (docs/ide/index.md): GitHub releases ide-v*, read by the browser
+  # the downloads of the IDE (docs/ide/Download.md): GitHub releases ide-v*, read by the browser
   - assets/downloads-v1.js
 
 plugins:
@@ -58,6 +58,7 @@ plugins:
             Operations: Betrieb
             Change log: Änderungsprotokoll
             Guide: Anleitung
+            Download: Herunterladen
             Queries: Abfragen
             Query Language: Abfragesprache
             Expression: Ausdruck
@@ -111,6 +112,7 @@ plugins:
             Operations: Operación
             Change log: Cambios
             Guide: Guía
+            Download: Descargar
             Queries: Consultas
             Query Language: Lenguaje de consultas
             Expression: Expresión
@@ -167,6 +169,7 @@ plugins:
             Operations: Operação
             Change log: Alterações
             Guide: Guia
+            Download: Baixar
             Queries: Consultas
             Query Language: Linguagem de consultas
             Expression: Expressão
@@ -233,8 +236,9 @@ nav:
       - Clients: data-gateway/Clients.md
       - Operations: data-gateway/Operations.md
       - Change log: data-gateway/CHANGELOG.md
-  - IDE:
+  - Data Gateway IDE:
       - Overview: ide/index.md
+      - Download: ide/Download.md
       - Guide: ide/Guide.md
   - Queries:
       - Query Language: queries/Query-Language.md
