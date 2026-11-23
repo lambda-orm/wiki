@@ -2,6 +2,38 @@
 
 The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway).
 
+### 4.0.0 (unreleased)
+
+The UI becomes the [data-gateway-ide](Ui.md), an image of its own, and the gateway gains a port for it.
+
+**Breaking changes:**
+
+- **The `management` transport** ([Transports](Transports.md#management)): the API of the IDE on its own port, the
+  routes of `http` for every schema and the [administration](Admin.md) at `/admin`, with the same credentials and
+  permissions. Without its port there is no administration and no IDE: a production gateway whose schemas come in its
+  volumes leaves it out. The `admin_*` tools of MCP are there when it is exposed.
+- **`/admin` is no longer on `http`**, and `admin.enabled` is gone (warned about and ignored): the administration is on
+  when `management` has a port. `admin.allowAnonymous`, `maxFileBytes` and `commandTimeoutMs` stay.
+- **The gateway serves no UI:** `/ui` and `transports.http.ui` (warned about and ignored) are gone.
+- **No CORS on any transport:** a web application that called the gateway from the browser calls it from its backend.
+
+| 3.x | 4.0.0 |
+| --- | --- |
+| `admin: { enabled: true }` | `transports.management.port` |
+| `transports.http.ui: { enabled: true }`, the UI at `/ui` | the data-gateway-ide, with a connection to `management` |
+| a browser calling the gateway (CORS) | through a backend of its own (the IDE's, or the application's) |
+
+**Features:**
+
+- `GET /transports`: the transports of the gateway (port, base path, how a schema is reached, its document), and
+  `GET /openapi.json`.
+- A WebSocket from a browser authenticates with the credential in its subprotocols (`lambdaorm`,
+  `lambdaorm.headers.<base64url>`). Also the MCP over WebSocket.
+- `GET /admin/workspaces/{path}/files` and `…/files/content`: the files of `data/` and `src/` of a workspace.
+- `GET /admin/expressions` and `POST /admin/expressions/check`: the language of the expressions and the variables of
+  the condition of a source of a stage, and one expression checked.
+- `GET`/`PUT /admin/session`: where the UI of each credential was, so that a reload or another browser starts there.
+
 ### 3.2.0 (2026-11-22)
 
 Uses `@lambdaorm/lib` 3.8.1 and `@lambdaorm/ui` 0.5.0. The administration of the workspaces (phases 1 to 6 of

@@ -345,7 +345,7 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 
 ## Administration {#administration}
 
-With `admin.enabled` ([Administration](Admin.md)), under `/admin` of this transport. A workspace is named by its route in one segment (`iot%2Fv1`; `~` the root). Every read answers its version (`ETag`); every write says the one it changes (`If-Match`, or the element as it was read): another version is a `412` with what there is now.
+On the [`management` transport](Transports.md#management) ([Administration](Admin.md)), under `/admin`. A workspace is named by its route in one segment (`iot%2Fv1`; `~` the root). Every read answers its version (`ETag`); every write says the one it changes (`If-Match`, or the element as it was read): another version is a `412` with what there is now.
 
 | Method | Route | | Permission |
 | --- | --- | --- | --- |

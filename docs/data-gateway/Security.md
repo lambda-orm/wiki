@@ -27,7 +27,8 @@ authentication:
 - Secrets are compared in constant time. The secret never travels to the schema workers: only the name and the
   permissions of the credential.
 - Without a credential (or with a wrong one) the answer is `401`; the WebSocket upgrades are refused.
-- `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/doc` and the UI's files need no credential.
+- `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/transports` and `/doc` need no credential.
+- No transport answers CORS: a browser of another origin can't call the gateway, a backend of its own does.
 
 ## Permissions
 

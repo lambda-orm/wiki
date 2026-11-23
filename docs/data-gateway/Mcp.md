@@ -47,7 +47,7 @@ credential allows it**. The descriptions and input schemas are generated when th
 | `admin_schema_validate` | `text` | `POST /admin/validate` | `schemaRead` | read only |
 | `admin_stage_fetch` | `stage?` | `fetch` | `schemaRead` | read only |
 
-The `admin_*` tools exist only with `admin.enabled` ([Administration](Admin.md#over-mcp)); writing is not offered over MCP.
+The `admin_*` tools exist only when the `management` transport is exposed ([Administration](Admin.md#over-mcp)); writing is not offered over MCP.
 
 - **`tools/list` shows a credential only the tools it can use.** Without `script`, `orm_execute_script` doesn't
   appear; with only `read`, `orm_execute` is described as "read-only queries with this credential".

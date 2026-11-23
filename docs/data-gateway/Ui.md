@@ -1,58 +1,83 @@
 # UI
 
-A step by step tour, from the login to a diagram, is in [Getting started](GettingStarted.md#9-the-ui).
+A step by step tour, from the first connection to a diagram, is in [Getting started](GettingStarted.md#9-the-ui).
 
-The gateway serves a web interface to explore its schemas and query them: an explorer of the schemas and their
-entities, the form of each entity, query tabs with the autocompletion of the domain, saved queries and diagrams of the
-domain. It is useful to try queries, to learn the language and to check what an agent does through MCP.
+The UI of the Data Gateway is the **data-gateway-ide**, an image of its own
+([`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide)): an explorer of the schemas and
+their entities, the form of each entity, query tabs with the autocompletion of the domain, saved queries and diagrams of
+the domain. It is useful to try queries, to learn the language and to check what an agent does through MCP.
+
+Like a database IDE, it connects to data gateways, one or several, each with its credential; their schemas,
+workspaces and projects stay in them.
+
+## Deploying it
+
+Since 4.0.0 the gateway serves no UI and answers no CORS. The IDE reaches it through its **`management`** port
+([Transports](Transports.md#management)): the routes of the REST API for every schema plus the
+[administration](Admin.md). A gateway without that port has no IDE, which is what a production gateway whose schemas
+come in its volumes may want.
 
 ```yaml
+# data-gateway.config.yaml
 transports:
-  http:
-    port: 8080
-    ui: { enabled: true }       # off by default
+  http: { port: 8080 }
+  management: { port: 9090 }    # the API of the IDE; without a port, not exposed
 ```
 
-It is at `http://localhost:8080/ui/` (with `basePath: /data-gateway`, at `/data-gateway/ui/`). It is served by the
-same `http` transport and calls its [REST API](Rest.md) with the credential that is entered: it has no other access.
+```yaml
+# docker-compose.yml
+services:
+  data-gateway:
+    image: flaviorita/data-gateway:4.0.0
+    # 9090 is not published: only the IDE reaches it, on the network of the compose
+  ide:
+    image: flaviorita/data-gateway-ide:1.0.0
+    environment:
+      DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080"
+    ports:
+      - "127.0.0.1:8090:8080"
+```
 
-## Pages
+- **The browser talks only to the server of the IDE.** It serves the page and forwards each request to the gateway (a
+  proxy): REST, MCP and the WebSocket alike. The gateways never see the browser.
+- **`DATA_GATEWAY_IDE_TARGETS`** lists the origins the IDE may reach, separated by commas, or `*` for any (an IDE run
+  locally). Without it, the IDE reaches none and says so: an open proxy would reach any host of its network.
+- **The IDE keeps no connection and no credential.** They stay in the browser. It forwards the credential to the
+  gateway and drops the cookies and the origin of the page.
+- **Keep `management` on an internal network.** It writes the schemas and their variables and runs DDL; the IDE is
+  the one to publish.
 
-**Home.** What the Data Gateway is, its version, the schemas of the instance with their state (`ready`, `error`, …), a
-link to the API documentation (Swagger) and the **Login** button.
+## Connections
 
-![Home](images/ui-home.png)
+The IDE has no home page and no login: it opens on the workspace, and the first time on a **New connection**.
 
-**Login.** The authentication of the instance and the credential:
-
-| Authentication | Asks for |
+| Field | What it is |
 | --- | --- |
-| API key | the header (default `X-Api-Key`) and the key |
-| Bearer token | the token |
-| Basic | the user and the password |
-| None | nothing |
+| **Name** | how the connection is shown |
+| **Protocol** and **address** | the `management` of the gateway as **the server of the IDE** reaches it: `data-gateway:9090` (host, port and base path), not the address of the browser |
+| **Authentication** | API key (the header, default `X-Api-Key`, and the key), bearer token, basic (user and password) or none |
+| **Remember the key** | keep the key in the browser; otherwise it is kept in that tab only, and asked again after closing it |
+| **Other URLs of its transports** | the REST, WebSocket and MCP of the gateway, only when the IDE doesn't reach them at the ports the gateway tells (a proxy in front, another network) |
 
-The **Show / Hide** button shows what was typed. The credential is checked against a schema (`/whoami`): a wrong one
-says so and stays on the page. **The credential is kept only in that browser tab**: closing it or reloading forgets
-it, and it is never stored.
+**Test** checks the connection: who the credential is (`/whoami`) and the version of the gateway. **Show / Hide** shows
+the key that was typed.
 
-![Login](images/ui-login.png)
+- The page of a connection shows who that credential is and **its roles**: each permission, with what it allows.
+- The explorer lists the connections, each with its schemas; tabs of several connections can be open side by side.
+  A connection is edited or removed from its row (removing it takes it from the IDE only).
+- From a connection, in tabs, with its credential: its **REST API** (Swagger, to try every method), its **WebSocket**
+  (its methods, a JSON-RPC console and what comes back) and its **MCP** (the tools of a schema, called with their
+  arguments). A transport the gateway doesn't expose is disabled.
 
-**Queries.** The workspace, after the login: at the top, the name and permissions of the credential, the API docs and
-**Logout** (back to the home page).
-
-At the top of every page there are two selectors:
-
-- **Theme:** System (as the operating system), Light or Dark.
-- **Language:** English, Español, Português, Français, Italiano, Deutsch, Nederlands, Català, Galego, Euskara.
-
-Both are remembered by the browser.
+**Preferences** (the menu ☰): the theme (System, Light, Dark and others), the language (English, Español, Português,
+Français, Italiano, Deutsch, Nederlands, Català, Galego, Euskara) and the regional format of the numbers and dates of
+the results. They are remembered by the browser.
 
 ![Dark theme, in Spanish](images/ui-dark-es.png)
 
 ## Explorer
 
-On the left, the schemas of the instance. It can be resized by dragging its edge and hidden with the panel button of
+On the left, the connections and the schemas of each one. It can be resized by dragging its edge and hidden with the panel button of
 the tab bar. For each schema:
 
 - **Domain (YAML).** The domain of the schema (entities, properties, relations, keys, enums) in a **read-only**
@@ -170,9 +195,10 @@ The diagram is saved (**Save** or Ctrl+S) with the place of every box and line, 
 
 ## Where it is saved
 
-What is saved (folders, queries, diagrams) stays **in the browser**, in its IndexedDB, separated by gateway and by
-credential: what one credential saves is not seen with another. Only the name of the credential is used for this,
-never its secret.
+With the `workbenchWrite` permission, what is saved (folders, queries, diagrams) goes to the `workbench/` folder of
+each workspace, in the gateway ([Administration](Admin.md)), shared by everyone who uses it. Without it, it stays **in
+the browser**, in its IndexedDB, separated by gateway and by credential: what one credential saves is not seen with
+another. Only the name of the credential is used for this, never its secret. In the browser:
 
 - It is in that browser on that device: another browser or another device doesn't see it.
 - It goes if the site data of the browser is cleared. The browser is asked to keep it, and the explorer exports
@@ -184,7 +210,8 @@ never its secret.
 ## In your own application
 
 The UI is built with [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui), a library of React components
-that any web application can use against a Data Gateway:
+that any web application can use against a Data Gateway. The gateway answers no CORS: the application calls it through
+its own backend, as the IDE does.
 
 ```sh
 npm install @lambdaorm/ui react react-dom
@@ -195,7 +222,7 @@ import { Workspace } from '@lambdaorm/ui'
 import '@lambdaorm/ui/styles.css'
 
 <Workspace
-  baseUrl="https://gateway.example.com"          // the http transport of the gateway
+  baseUrl="/api/gateway"                         // your backend, which forwards to the gateway (it answers no CORS)
   headers={() => ({ 'X-Api-Key': key })}         // how to authenticate; the library keeps no credential
   locale="es"
   theme="dark"
@@ -217,7 +244,7 @@ your own).
 
 ## Administration {#administration-ui}
 
-With `admin.enabled` and its permissions, the explorer also edits the schemas (as YAML and as forms), creates and
+Through the `management` port and with its permissions, the explorer also edits the schemas (as YAML and as forms), creates and
 removes them, saves what is saved in the workspaces, sets the variables of the connections and runs the commands of
 the CLI: see [Administration](Admin.md). The schemas are read again every 5 s: one added, removed or reloaded shows
 without reloading the page, and a new version that didn't start is marked ⚠ with its reason.

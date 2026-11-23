@@ -16,8 +16,9 @@ scripts:
 transports:
   http:
     port: 8080
-    ui: { enabled: true }
   mcpHttp:
     port: 8081
   webSocket:
     port: 8083
+  management:                          # the API of the IDE (not published: only the IDE reaches it)
+    port: 9090
