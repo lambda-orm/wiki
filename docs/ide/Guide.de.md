@@ -1,7 +1,7 @@
 # UI {#ui}
 
 Eine Schritt-für-Schritt-Tour, von der ersten Verbindung bis zu einem Diagramm, finden Sie unter
-[Erste Schritte](GettingStarted.md#9-the-ui).
+[Erste Schritte](../data-gateway/GettingStarted.md#9-the-ui).
 
 Die UI des Data Gateway ist die **data-gateway-ide**, ein eigenes Image
 ([`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide)): ein Explorer der Schemas und
@@ -15,8 +15,8 @@ Schemas, Workspaces und Projekte bleiben in ihnen.
 ## Bereitstellen {#deploying-it}
 
 Seit 4.0.0 stellt das Gateway keine UI bereit und beantwortet kein CORS. Die IDE erreicht es über seinen
-**`management`**-Port ([Transporte](Transports.md#management)): die Routen der REST API für jedes Schema plus die
-[Administration](Admin.md). Ein Gateway ohne diesen Port hat keine IDE, und genau das kann ein Produktions-Gateway
+**`management`**-Port ([Transporte](../data-gateway/Transports.md#management)): die Routen der REST API für jedes Schema plus die
+[Administration](../data-gateway/Admin.md). Ein Gateway ohne diesen Port hat keine IDE, und genau das kann ein Produktions-Gateway
 wollen, dessen Schemas in seinen Volumes mitkommen.
 
 ```yaml
@@ -59,7 +59,7 @@ seinen [Sitzungen](#sessions); andernfalls zeigt jede Sitzung die Adresse der ID
 | --- | --- | --- |
 | Nur das Gateway, ohne `management` | Produktion, mit den Schemas in seinen Volumes: keine IDE, keine Administration | kein Port |
 | Das Gateway und das Image der IDE | eine gemeinsame IDE im Browser | nur im internen Netzwerk, nie veröffentlicht: der Container der IDE erreicht es |
-| Nur das Gateway, mit `management` | eine IDE auf Ihrem eigenen Rechner: das Image mit `docker run` (und später die Desktop-App) | Ihr Rechner muss seinen Port erreichen (unten) |
+| Nur das Gateway, mit `management` | eine IDE auf Ihrem eigenen Rechner: die [Desktop-App](index.md#download), oder das Image mit `docker run` | Ihr Rechner muss seinen Port erreichen (unten) |
 
 Eine IDE auf Ihrem Rechner erreicht ein `management` an einem anderen Ort, ohne es offen zu veröffentlichen:
 
@@ -91,7 +91,7 @@ den eingegebenen Key an.
 
 ### Ihre Sitzung {#sessions}
 
-Das Verbinden meldet sich am `management` des Gateways an ([Sitzungen](Transports.md#sessions)): Die IDE behält das
+Das Verbinden meldet sich am `management` des Gateways an ([Sitzungen](../data-gateway/Transports.md#sessions)): Die IDE behält das
 Token in diesem Tab, und jede Anfrage trägt es, nie den Key.
 
 - Wenn die Sitzung **abläuft** (30 Minuten ohne Aktivität oder 12 Stunden) und der Key zur Hand ist, öffnet die IDE
@@ -117,7 +117,7 @@ Token in diesem Tab, und jede Anfrage trägt es, nie den Key.
 Português, Français, Italiano, Deutsch, Nederlands, Català, Galego, Euskara) und das regionale Format der Zahlen und
 Daten der Ergebnisse. Der Browser merkt sie sich.
 
-![Dunkles Design, auf Spanisch](images/ui-dark-es.png)
+![Dunkles Design, auf Spanisch](../data-gateway/images/ui-dark-es.png)
 
 ## Explorer {#explorer}
 
@@ -140,7 +140,7 @@ lässt sich mit der Panel-Schaltfläche der Tab-Leiste ausblenden. Für jedes Sc
   und die Pfeiltasten ändern sie über die Tastatur (Shift: 60 px).
 - Ein Schema, das nicht gestartet ist, erscheint abgeblendet, mit seinem Zustand und seinem Grund.
 
-![Domäne als YAML](images/ui-domain-yaml.png)
+![Domäne als YAML](../data-gateway/images/ui-domain-yaml.png)
 
 ## Entitätsformular {#entity-form}
 
@@ -156,11 +156,11 @@ Wie eine Tabelle in einer Datenbank-IDE, in einem eigenen Tab, mit diesen Abschn
 
 Die Schaltfläche **Abfragen** öffnet einen Abfrage-Tab mit `Entity.page(1, 10)`.
 
-![Eigenschaften](images/ui-entity-properties.png)
+![Eigenschaften](../data-gateway/images/ui-entity-properties.png)
 
-![Beziehungen](images/ui-entity-relations.png)
+![Beziehungen](../data-gateway/images/ui-entity-relations.png)
 
-![Daten](images/ui-entity-data.png)
+![Daten](../data-gateway/images/ui-entity-data.png)
 
 ## Abfragen {#queries}
 
@@ -186,11 +186,11 @@ seinem × geschlossen.
 - **Ein Fehler mit einem Vorschlag** (`entity Area not found; did you mean Areas?`) hat eine Schaltfläche
   **Areas verwenden**, die den Namen in der Abfrage ersetzt.
 
-![Eine Abfrage und ihr Ergebnis](images/ui-query.png)
+![Eine Abfrage und ihr Ergebnis](../data-gateway/images/ui-query.png)
 
-![Autovervollständigung](images/ui-autocomplete.png)
+![Autovervollständigung](../data-gateway/images/ui-autocomplete.png)
 
-![Export](images/ui-export.png)
+![Export](../data-gateway/images/ui-export.png)
 
 ## Gespeicherte Abfragen und Diagramme {#saved-queries-and-diagrams}
 
@@ -209,7 +209,7 @@ Ein Abfrage-Tab hat **Speichern** (Strg+S) und **Speichern unter…**: Beim erst
 abgefragt. Ein **•** im Tab kennzeichnet nicht gespeicherte Änderungen; nach dem Speichern steht dort **gespeichert**. Wird
 eine bereits geöffnete gespeicherte Abfrage geöffnet, wechselt die UI zu ihrem Tab.
 
-![Eine Abfrage speichern](images/ui-save-query.png)
+![Eine Abfrage speichern](../data-gateway/images/ui-save-query.png)
 
 ## Diagramme {#diagrams}
 
@@ -220,7 +220,7 @@ ist eine gestrichelte Linie.
 **Neues Diagramm** fragt nach Name, Beschreibung, Ordner und **den Entitäten**: Sie werden gesucht, einzeln angehakt oder
 mit **Nachbarn hinzufügen** ergänzt (die mit den ausgewählten verbundenen Entitäten).
 
-![Neues Diagramm](images/ui-new-diagram.png)
+![Neues Diagramm](../data-gateway/images/ui-new-diagram.png)
 
 In einem Diagramm:
 
@@ -240,12 +240,12 @@ In einem Diagramm:
 Das Diagramm wird (mit **Speichern** oder Strg+S) mit der Position jedes Kastens und jeder Linie, der Namensoption und den
 Entitäten gespeichert.
 
-![Ein Diagramm](images/ui-diagram.png)
+![Ein Diagramm](../data-gateway/images/ui-diagram.png)
 
 ## Wo gespeichert wird {#where-it-is-saved}
 
 Mit der Berechtigung `workbenchWrite` geht das Gespeicherte (Ordner, Abfragen, Diagramme) in den Ordner `workbench/`
-jedes Workspace, im Gateway ([Administration](Admin.md)), geteilt mit allen, die ihn verwenden. Ohne sie bleibt es
+jedes Workspace, im Gateway ([Administration](../data-gateway/Admin.md)), geteilt mit allen, die ihn verwenden. Ohne sie bleibt es
 **im Browser**, in seiner IndexedDB, getrennt nach Gateway und nach Zugangsdaten: Was mit einem Zugang gespeichert wird,
 ist mit einem anderen nicht sichtbar. Dafür wird nur der Name der Zugangsdaten verwendet, nie deren Secret. Im Browser:
 
@@ -296,6 +296,6 @@ Das Gespeicherte kann an einem anderen Ort als im Browser abgelegt werden, indem
 
 Über den `management`-Port und mit seinen Berechtigungen bearbeitet der Explorer auch die Schemas (als YAML und als Formulare),
 legt sie an und entfernt sie, speichert Gespeichertes in den Workspaces, setzt die Variablen der Verbindungen und führt
-die Befehle der CLI aus: siehe [Administration](Admin.md). Die Schemas werden alle 5 s neu gelesen: ein hinzugefügtes,
+die Befehle der CLI aus: siehe [Administration](../data-gateway/Admin.md). Die Schemas werden alle 5 s neu gelesen: ein hinzugefügtes,
 entferntes oder neu geladenes erscheint ohne Neuladen der Seite, und eine neue Version, die nicht gestartet ist, wird
 mit ⚠ und ihrem Grund markiert.

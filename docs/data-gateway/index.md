@@ -90,7 +90,7 @@ slow down another; a schema whose database is down answers `503` and is retried,
 - [MCP](Mcp.md): the tools, resources and transports for AI agents.
 - [WebSocket API](WebSocket.md): the JSON-RPC methods and the notifications.
 - [Security](Security.md): authentication, permissions, audit, limits and errors.
-- [UI](Ui.md): the IDE: connections, explorer, entity forms, queries, saved queries and diagrams.
+- [UI](../ide/Guide.md): the IDE: connections, explorer, entity forms, queries, saved queries and diagrams.
 - [Clients](Clients.md): `@lambdaorm/client`, the CLI and the OpenAPI document.
 - [Operations](Operations.md): Docker, Kubernetes, health, metrics and logs.
 - [Change log](CHANGELOG.md)

@@ -4,7 +4,7 @@ The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.
 
 ### 4.0.0 (unreleased)
 
-The UI becomes the [data-gateway-ide](Ui.md), an image of its own, and the gateway gains a port for it.
+The UI becomes the [data-gateway-ide](../ide/Guide.md), an image of its own, and the gateway gains a port for it.
 
 **Breaking changes:**
 

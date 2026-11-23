@@ -92,7 +92,7 @@ und wird erneut versucht, während die anderen weiterarbeiten.
 - [MCP](Mcp.md): die Tools, Ressourcen und Transporte für KI-Agenten.
 - [WebSocket API](WebSocket.md): die JSON-RPC-Methoden und die Benachrichtigungen.
 - [Sicherheit](Security.md): Authentifizierung, Berechtigungen, Audit, Limits und Fehler.
-- [UI](Ui.md): die IDE: Verbindungen, Explorer, Entitätsformulare, Abfragen, gespeicherte Abfragen und Diagramme.
+- [UI](../ide/Guide.md): die IDE: Verbindungen, Explorer, Entitätsformulare, Abfragen, gespeicherte Abfragen und Diagramme.
 - [Clients](Clients.md): `@lambdaorm/client`, die CLI und das OpenAPI-Dokument.
 - [Betrieb](Operations.md): Docker, Kubernetes, Health, Metriken und Logs.
 - [Änderungsprotokoll](CHANGELOG.md)

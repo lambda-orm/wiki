@@ -1,6 +1,6 @@
 # Administration {#administration}
 
-Mit seinem `management`-Port sind das Gateway und seine [UI](Ui.md) nicht mehr nur lesend: Schemas werden dort **angelegt,
+Mit seinem `management`-Port sind das Gateway und seine [UI](../ide/Guide.md) nicht mehr nur lesend: Schemas werden dort **angelegt,
 bearbeitet und entfernt**, als YAML oder Element für Element, Gespeichertes (Abfragen, Skripte, Diagramme) wird in den
 Workspaces geteilt, und die **Befehle der [CLI](../cli/index.md)** laufen aus der UI. Alles liegt im Volume des
 Gateways, ein Workspace pro Schema; das Gateway bemerkt Änderungen und stellt sie ohne Neustart bereit.

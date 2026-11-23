@@ -316,7 +316,7 @@ sie abgelegt wurden:
 
 ![Diagramm](images/ui-diagram.png)
 
-Alles wird unter [UI](Ui.md) erklärt.
+Alles wird unter [UI](../ide/Guide.md) erklärt.
 
 ## 10. Ein KI-Agent über MCP {#10-an-ai-agent-through-mcp}
 

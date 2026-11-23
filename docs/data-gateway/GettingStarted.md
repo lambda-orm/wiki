@@ -309,7 +309,7 @@ The boxes are laid out by themselves; they and the lines can be dragged, and **S
 
 ![Diagram](images/ui-diagram.png)
 
-Everything is explained in [UI](Ui.md).
+Everything is explained in [UI](../ide/Guide.md).
 
 ## 10. An AI agent, through MCP
 

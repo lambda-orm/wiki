@@ -309,7 +309,7 @@ Las cajas se distribuyen solas; tanto ellas como las líneas se pueden arrastrar
 
 ![Diagrama](images/ui-diagram.png)
 
-Todo se explica en [UI](Ui.md).
+Todo se explica en [UI](../ide/Guide.md).
 
 ## 10. Un agente de IA, a través de MCP {#10-an-ai-agent-through-mcp}
 

@@ -9,7 +9,7 @@ O gateway tem cinco transportes. Cada um escuta em sua própria porta, apenas qu
 | [`mcpHttp`](Mcp.md) | MCP para agentes de IA | `POST/GET/DELETE /iot/v1/mcp` (Streamable HTTP); `GET /iot/v1/sse` + `POST /iot/v1/messages?sessionId=` (HTTP+SSE) | `GET /status` |
 | [`mcpWebSocket`](Mcp.md#mcpwebsocket) | MCP sobre WebSocket | upgrade em `/iot/v1/mcp` | `GET /status`, `/asyncapi` |
 | [`webSocket`](WebSocket.md) | API JSON-RPC com notificações | conexão a `ws://host:port/iot/v1` | conexão à raiz: `general.*` e `gateway.schemas`; `/asyncapi` |
-| [`management`](#management) | a API da [IDE](Ui.md) | as mesmas do `http`, para todos os esquemas | as do `http` (sem Swagger) e `/admin/…` |
+| [`management`](#management) | a API da [IDE](../ide/Guide.md) | as mesmas do `http`, para todos os esquemas | as do `http` (sem Swagger) e `/admin/…` |
 
 - `{basePath}` (`transports.<t>.basePath`) vai antes de todas as rotas: com `basePath: /data-gateway`,
   `/data-gateway/iot/v1/execute` e `/data-gateway/schemas`.
@@ -19,7 +19,7 @@ O gateway tem cinco transportes. Cada um escuta em sua própria porta, apenas qu
 - Cada transporte autentica todas as requisições (ou o upgrade do WebSocket) com a autenticação efetiva do
   esquema ([Segurança](Security.md)).
 - **Nenhum transporte responde CORS** (desde a 4.0.0): uma aplicação web chama o gateway pelo seu próprio backend, como
-  faz a [IDE](Ui.md).
+  faz a [IDE](../ide/Guide.md).
 
 ## http {#http}
 
@@ -95,7 +95,7 @@ transports:
 
 ## management {#management}
 
-A API da [IDE](Ui.md) (desde a 4.0.0), em sua própria porta para que uma implantação possa deixá-la de fora: um gateway
+A API da [IDE](../ide/Guide.md) (desde a 4.0.0), em sua própria porta para que uma implantação possa deixá-la de fora: um gateway
 de produção cujos esquemas vêm em seus volumes é implantado sem ela, sem administração e sem IDE.
 
 ```yaml

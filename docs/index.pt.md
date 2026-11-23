@@ -107,7 +107,7 @@ claude mcp add --transport http northwind http://gateway:8081/northwind/mcp --he
 
 ### O navegador {#the-browser}
 
-A [IDE](data-gateway/Ui.md) do Data Gateway, construída com [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui):
+A [IDE](ide/Guide.md) do Data Gateway, construída com [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui):
 conecte-se a gateways, percorra os esquemas, leia cada entidade como um formulário, escreva consultas com autocompletar e desenhe diagramas.
 
 ![A UI do Data Gateway](data-gateway/images/ui-query.png)
@@ -244,9 +244,9 @@ a IDE, MCP e WebSocket.
 | [Biblioteca](usage/Usage.md) | [`@lambdaorm/lib`](https://www.npmjs.com/package/@lambdaorm/lib) | o ORM: executa as consultas nos bancos de dados |
 | [CLI](cli/index.md) | [`@lambdaorm/cli`](https://www.npmjs.com/package/@lambdaorm/cli) | o comando `lambdaorm`: projetos, sincronização, importação / exportação, consultas, scripts |
 | [Data Gateway](data-gateway/index.md) | Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | os esquemas via REST, MCP e WebSocket |
-| [IDE do Data Gateway](data-gateway/Ui.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) | a IDE dos gateways: conexões, explorador, consultas, diagramas, administração |
+| [IDE do Data Gateway](ide/index.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) · [desktop: Linux, Windows, macOS](ide/index.md#download) | a IDE dos gateways: conexões, explorador, consultas, diagramas, administração |
 | [Cliente Node.js](data-gateway/Clients.md) | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | a interface da biblioteca, executada em um Data Gateway |
-| [Componentes de UI](data-gateway/Ui.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | componentes React: o editor de consultas, os resultados, o explorador e os diagramas |
+| [Componentes de UI](ide/Guide.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | componentes React: o editor de consultas, os resultados, o explorador e os diagramas |
 | [3xpr](https://www.npmjs.com/package/3xpr) | [`3xpr`](https://www.npmjs.com/package/3xpr) | o mecanismo de expressões sobre o qual as consultas, os scripts e as regras do esquema são construídos |
 
 O código-fonte está em [github.com/lambda-orm/core](https://github.com/lambda-orm/core).

@@ -90,7 +90,7 @@ deixa outro mais lento; um esquema cujo banco de dados está fora do ar responde
 - [MCP](Mcp.md): as ferramentas, os recursos e os transportes para agentes de IA.
 - [API WebSocket](WebSocket.md): os métodos JSON-RPC e as notificações.
 - [Segurança](Security.md): autenticação, permissões, auditoria, limites e erros.
-- [UI](Ui.md): a IDE: conexões, explorador, formulários de entidades, consultas, consultas salvas e diagramas.
+- [UI](../ide/Guide.md): a IDE: conexões, explorador, formulários de entidades, consultas, consultas salvas e diagramas.
 - [Clientes](Clients.md): `@lambdaorm/client`, a CLI e o documento OpenAPI.
 - [Operações](Operations.md): Docker, Kubernetes, saúde, métricas e logs.
 - [Registro de alterações](CHANGELOG.md)

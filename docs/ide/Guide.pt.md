@@ -1,6 +1,6 @@
 # UI {#ui}
 
-Um tour passo a passo, da primeira conexão até um diagrama, está em [Primeiros passos](GettingStarted.md#9-the-ui).
+Um tour passo a passo, da primeira conexão até um diagrama, está em [Primeiros passos](../data-gateway/GettingStarted.md#9-the-ui).
 
 A UI do Data Gateway é o **data-gateway-ide**, uma imagem própria
 ([`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide)): um explorador dos esquemas e de
@@ -13,8 +13,8 @@ workspaces e projetos ficam neles.
 ## Implantação {#deploying-it}
 
 Desde a 4.0.0 o gateway não serve nenhuma UI e não responde CORS. A IDE o alcança pela sua porta **`management`**
-([Transportes](Transports.md#management)): as rotas da API REST para todos os esquemas mais a
-[administração](Admin.md). Um gateway sem essa porta não tem IDE, que é o que pode querer um gateway de produção cujos
+([Transportes](../data-gateway/Transports.md#management)): as rotas da API REST para todos os esquemas mais a
+[administração](../data-gateway/Admin.md). Um gateway sem essa porta não tem IDE, que é o que pode querer um gateway de produção cujos
 esquemas vêm em seus volumes.
 
 ```yaml
@@ -57,7 +57,7 @@ Com `trustedProxies` de `management` definido para a rede da IDE, o gateway vê 
 | --- | --- | --- |
 | Só o gateway, sem `management` | produção, com os esquemas nos seus volumes: sem IDE nem administração | sem porta |
 | O gateway e a imagem da IDE | uma IDE compartilhada no navegador | só na rede interna, nunca publicado: o contêiner da IDE o alcança |
-| Só o gateway, com `management` | uma IDE na sua própria máquina: a imagem com `docker run` (e, mais adiante, o aplicativo de desktop) | sua máquina precisa alcançar a porta (abaixo) |
+| Só o gateway, com `management` | uma IDE na sua própria máquina: o [aplicativo de desktop](index.md#download), ou a imagem com `docker run` | sua máquina precisa alcançar a porta (abaixo) |
 
 Uma IDE na sua máquina alcança um `management` que está em outro lugar sem publicá-lo aberto:
 
@@ -88,7 +88,7 @@ digitada.
 
 ### Sua sessão {#sessions}
 
-Conectar faz login no `management` do gateway ([sessões](Transports.md#sessions)): a IDE guarda o token naquela aba e
+Conectar faz login no `management` do gateway ([sessões](../data-gateway/Transports.md#sessions)): a IDE guarda o token naquela aba e
 toda requisição o leva, nunca a chave.
 
 - Quando a sessão **expira** (30 minutos sem atividade, ou 12 horas) e a chave está à mão, a IDE abre outra por conta
@@ -113,7 +113,7 @@ toda requisição o leva, nunca a chave.
 Français, Italiano, Deutsch, Nederlands, Català, Galego, Euskara) e o formato regional dos números e das datas dos
 resultados. Elas são lembradas pelo navegador.
 
-![Tema escuro, em espanhol](images/ui-dark-es.png)
+![Tema escuro, em espanhol](../data-gateway/images/ui-dark-es.png)
 
 ## Explorador {#explorer}
 
@@ -136,7 +136,7 @@ da barra de abas. Para cada esquema:
   pelo teclado (Shift: 60 px).
 - Um esquema que não iniciou aparece atenuado, com seu estado e seu motivo.
 
-![Domínio como YAML](images/ui-domain-yaml.png)
+![Domínio como YAML](../data-gateway/images/ui-domain-yaml.png)
 
 ## Formulário da entidade {#entity-form}
 
@@ -152,11 +152,11 @@ Como uma tabela em uma IDE de banco de dados, em sua própria aba, com estas se�
 
 O botão **Consultar** abre uma aba de consulta com `Entity.page(1, 10)`.
 
-![Propriedades](images/ui-entity-properties.png)
+![Propriedades](../data-gateway/images/ui-entity-properties.png)
 
-![Relações](images/ui-entity-relations.png)
+![Relações](../data-gateway/images/ui-entity-relations.png)
 
-![Dados](images/ui-entity-data.png)
+![Dados](../data-gateway/images/ui-entity-data.png)
 
 ## Consultas {#queries}
 
@@ -179,11 +179,11 @@ aberta com **+**, a partir de uma entidade (**Consultar**) ou de uma consulta sa
 - **Um erro com uma sugestão** (`entity Area not found; did you mean Areas?`) tem um botão **usar Areas** que
   substitui o nome na consulta.
 
-![Uma consulta e seu resultado](images/ui-query.png)
+![Uma consulta e seu resultado](../data-gateway/images/ui-query.png)
 
-![Autocompletar](images/ui-autocomplete.png)
+![Autocompletar](../data-gateway/images/ui-autocomplete.png)
 
-![Exportar](images/ui-export.png)
+![Exportar](../data-gateway/images/ui-export.png)
 
 ## Consultas salvas e diagramas {#saved-queries-and-diagrams}
 
@@ -201,7 +201,7 @@ Uma aba de consulta tem **Salvar** (Ctrl+S) e **Salvar como…**: o primeiro sal
 Um **•** na aba marca alterações não salvas; depois de salva, ela indica **salvo**. Abrir uma consulta salva que
 já está aberta leva à sua aba.
 
-![Salvar uma consulta](images/ui-save-query.png)
+![Salvar uma consulta](../data-gateway/images/ui-save-query.png)
 
 ## Diagramas {#diagrams}
 
@@ -212,7 +212,7 @@ linha tracejada.
 **Novo diagrama** pede o nome, a descrição, a pasta e **as entidades**: elas são buscadas, marcadas uma
 a uma ou completadas com **Adicionar as vizinhas** (as entidades relacionadas às escolhidas).
 
-![Novo diagrama](images/ui-new-diagram.png)
+![Novo diagrama](../data-gateway/images/ui-new-diagram.png)
 
 Em um diagrama:
 
@@ -231,12 +231,12 @@ Em um diagrama:
 
 O diagrama é salvo (**Salvar** ou Ctrl+S) com a posição de cada caixa e linha, a opção de nomes e as entidades.
 
-![Um diagrama](images/ui-diagram.png)
+![Um diagrama](../data-gateway/images/ui-diagram.png)
 
 ## Onde é salvo {#where-it-is-saved}
 
 Com a permissão `workbenchWrite`, o que é salvo (pastas, consultas, diagramas) vai para a pasta `workbench/` de
-cada workspace, no gateway ([Administração](Admin.md)), compartilhado por todos que o usam. Sem ela, fica **no
+cada workspace, no gateway ([Administração](../data-gateway/Admin.md)), compartilhado por todos que o usam. Sem ela, fica **no
 navegador**, em seu IndexedDB, separado por gateway e por credencial: o que uma credencial salva não é visto com
 outra. Apenas o nome da credencial é usado para isso, nunca seu segredo. No navegador:
 
@@ -286,5 +286,5 @@ próprio).
 
 Pela porta `management` e com suas permissões, o explorador também edita os esquemas (como YAML e como formulários), cria e
 remove, salva o que é salvo nos workspaces, define as variáveis das conexões e roda os comandos da CLI: ver
-[Administração](Admin.md). Os esquemas são lidos de novo a cada 5 s: um adicionado, removido ou recarregado aparece
+[Administração](../data-gateway/Admin.md). Os esquemas são lidos de novo a cada 5 s: um adicionado, removido ou recarregado aparece
 sem recarregar a página, e uma versão nova que não iniciou é marcada com ⚠ e seu motivo.

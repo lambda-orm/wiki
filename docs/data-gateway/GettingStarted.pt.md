@@ -309,7 +309,7 @@ As caixas se organizam sozinhas; elas e as linhas podem ser arrastadas, e **Salv
 
 ![Diagrama](images/ui-diagram.png)
 
-Tudo é explicado em [UI](Ui.md).
+Tudo é explicado em [UI](../ide/Guide.md).
 
 ## 10. Um agente de IA, por MCP {#10-an-ai-agent-through-mcp}
 

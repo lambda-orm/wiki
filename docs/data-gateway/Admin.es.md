@@ -1,6 +1,6 @@
 # Administración {#administration}
 
-Con su puerto `management`, la gateway y su [UI](Ui.md) dejan de ser solo de lectura: los esquemas se **crean, editan y
+Con su puerto `management`, la gateway y su [UI](../ide/Guide.md) dejan de ser solo de lectura: los esquemas se **crean, editan y
 eliminan** desde ellas, como YAML o elemento por elemento, lo guardado (consultas, scripts, diagramas) se comparte en
 los workspaces, y los **comandos de la [CLI](../cli/index.md)** corren desde la UI. Todo está en el volumen de la
 gateway, un workspace por esquema; la gateway ve lo que cambia y lo sirve sin reiniciar.

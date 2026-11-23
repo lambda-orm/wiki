@@ -1,6 +1,6 @@
 # UI
 
-A step by step tour, from the first connection to a diagram, is in [Getting started](GettingStarted.md#9-the-ui).
+A step by step tour, from the first connection to a diagram, is in [Getting started](../data-gateway/GettingStarted.md#9-the-ui).
 
 The UI of the Data Gateway is the **data-gateway-ide**, an image of its own
 ([`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide)): an explorer of the schemas and
@@ -13,8 +13,8 @@ workspaces and projects stay in them.
 ## Deploying it
 
 Since 4.0.0 the gateway serves no UI and answers no CORS. The IDE reaches it through its **`management`** port
-([Transports](Transports.md#management)): the routes of the REST API for every schema plus the
-[administration](Admin.md). A gateway without that port has no IDE, which is what a production gateway whose schemas
+([Transports](../data-gateway/Transports.md#management)): the routes of the REST API for every schema plus the
+[administration](../data-gateway/Admin.md). A gateway without that port has no IDE, which is what a production gateway whose schemas
 come in its volumes may want.
 
 ```yaml
@@ -56,7 +56,7 @@ its [sessions](#sessions); otherwise every session shows the address of the IDE.
 | --- | --- | --- |
 | Only the gateway, without `management` | production, with the schemas in its volumes: no IDE, no administration | no port |
 | The gateway and the IDE image | an IDE shared in the browser | on the internal network only, never published: the IDE container reaches it |
-| Only the gateway, with `management` | an IDE on your own machine: the image run with `docker run` (and, later, the desktop app) | your machine has to reach its port (below) |
+| Only the gateway, with `management` | an IDE on your own machine: the [desktop app](index.md#download), or the image run with `docker run` | your machine has to reach its port (below) |
 
 An IDE on your machine reaches a `management` that is elsewhere without publishing it open:
 
@@ -87,7 +87,7 @@ that was typed.
 
 ### Its session {#sessions}
 
-Connecting logs in to the `management` of the gateway ([sessions](Transports.md#sessions)): the IDE keeps the token in
+Connecting logs in to the `management` of the gateway ([sessions](../data-gateway/Transports.md#sessions)): the IDE keeps the token in
 that tab and every request carries it, never the key.
 
 - When the session **expires** (30 minutes without activity, or 12 hours) and the key is at hand, the IDE opens another
@@ -112,7 +112,7 @@ that tab and every request carries it, never the key.
 Français, Italiano, Deutsch, Nederlands, Català, Galego, Euskara) and the regional format of the numbers and dates of
 the results. They are remembered by the browser.
 
-![Dark theme, in Spanish](images/ui-dark-es.png)
+![Dark theme, in Spanish](../data-gateway/images/ui-dark-es.png)
 
 ## Explorer
 
@@ -135,7 +135,7 @@ the tab bar. For each schema:
   change it from the keyboard (Shift: 60 px).
 - A schema that didn't start shows muted, with its state and its reason.
 
-![Domain as YAML](images/ui-domain-yaml.png)
+![Domain as YAML](../data-gateway/images/ui-domain-yaml.png)
 
 ## Entity form
 
@@ -151,11 +151,11 @@ Like a table in a database IDE, in its own tab, with these sections:
 
 The **Query** button opens a query tab with `Entity.page(1, 10)`.
 
-![Properties](images/ui-entity-properties.png)
+![Properties](../data-gateway/images/ui-entity-properties.png)
 
-![Relations](images/ui-entity-relations.png)
+![Relations](../data-gateway/images/ui-entity-relations.png)
 
-![Data](images/ui-entity-data.png)
+![Data](../data-gateway/images/ui-entity-data.png)
 
 ## Queries
 
@@ -178,11 +178,11 @@ opened with **+**, from an entity (**Query**) or from a saved query, and closed 
 - **An error with a suggestion** (`entity Area not found; did you mean Areas?`) has a **use Areas** button that
   replaces the name in the query.
 
-![A query and its result](images/ui-query.png)
+![A query and its result](../data-gateway/images/ui-query.png)
 
-![Autocompletion](images/ui-autocomplete.png)
+![Autocompletion](../data-gateway/images/ui-autocomplete.png)
 
-![Export](images/ui-export.png)
+![Export](../data-gateway/images/ui-export.png)
 
 ## Saved queries and diagrams
 
@@ -200,7 +200,7 @@ A query tab has **Save** (Ctrl+S) and **Save as…**: the first save asks for th
 A **•** in the tab marks changes that are not saved; once saved it says **saved**. Opening a saved query that is
 already open goes to its tab.
 
-![Save a query](images/ui-save-query.png)
+![Save a query](../data-gateway/images/ui-save-query.png)
 
 ## Diagrams
 
@@ -211,7 +211,7 @@ dashed line.
 **New diagram** asks for the name, the description, the folder and **the entities**: they are searched, checked one
 by one, or completed with **Add their neighbours** (the entities related to the chosen ones).
 
-![New diagram](images/ui-new-diagram.png)
+![New diagram](../data-gateway/images/ui-new-diagram.png)
 
 In a diagram:
 
@@ -230,12 +230,12 @@ In a diagram:
 
 The diagram is saved (**Save** or Ctrl+S) with the place of every box and line, the names option and the entities.
 
-![A diagram](images/ui-diagram.png)
+![A diagram](../data-gateway/images/ui-diagram.png)
 
 ## Where it is saved
 
 With the `workbenchWrite` permission, what is saved (folders, queries, diagrams) goes to the `workbench/` folder of
-each workspace, in the gateway ([Administration](Admin.md)), shared by everyone who uses it. Without it, it stays **in
+each workspace, in the gateway ([Administration](../data-gateway/Admin.md)), shared by everyone who uses it. Without it, it stays **in
 the browser**, in its IndexedDB, separated by gateway and by credential: what one credential saves is not seen with
 another. Only the name of the credential is used for this, never its secret. In the browser:
 
@@ -285,5 +285,5 @@ your own).
 
 Through the `management` port and with its permissions, the explorer also edits the schemas (as YAML and as forms), creates and
 removes them, saves what is saved in the workspaces, sets the variables of the connections and runs the commands of
-the CLI: see [Administration](Admin.md). The schemas are read again every 5 s: one added, removed or reloaded shows
+the CLI: see [Administration](../data-gateway/Admin.md). The schemas are read again every 5 s: one added, removed or reloaded shows
 without reloading the page, and a new version that didn't start is marked ⚠ with its reason.

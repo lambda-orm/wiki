@@ -1,6 +1,6 @@
 # Administration {#administration}
 
-With its `management` port, the gateway and its [UI](Ui.md) stop being read only: the schemas are **created, edited and
+With its `management` port, the gateway and its [UI](../ide/Guide.md) stop being read only: the schemas are **created, edited and
 removed** from them, as YAML or element by element, what is saved (queries, scripts, diagrams) is shared in the
 workspaces, and the **commands of the [CLI](../cli/index.md)** run from the UI. Everything is in the volume of the
 gateway, one workspace per schema; the gateway notices what changes and serves it without restarting.
