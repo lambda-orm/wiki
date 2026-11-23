@@ -72,3 +72,26 @@
 .lang-switch { margin-top: .6em; font-size: .85em; }
 .lang-switch a { color: #fcfcfc; opacity: .75; margin: 0 .35em; }
 .lang-switch a.current { opacity: 1; font-weight: 700; text-decoration: underline; }
+
+/* the downloads of the IDE page (docs/ide/index.md, assets/downloads-v1.js) */
+.ide-downloads { margin: 1rem 0 1.5rem; }
+.ide-dl-version { font-weight: 600; margin-bottom: .5rem; }
+.ide-dl-primary { display: flex; flex-wrap: wrap; gap: .5rem; }
+.rst-content a.ide-dl-button, a.ide-dl-button { display: inline-block; padding: .55rem 1rem; border-radius: 4px; background: #2980b9; color: #fff; font-weight: 600; text-decoration: none; }
+.rst-content a.ide-dl-button:hover, a.ide-dl-button:hover { background: #2472a4; color: #fff; }
+.ide-dl-platforms { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1rem 0; }
+.ide-dl-platform { border: 1px solid #e1e4e5; border-radius: 4px; padding: .5rem .9rem; }
+.ide-dl-platform h4 { margin: .25rem 0 .5rem; }
+.rst-content .ide-dl-platform ul { margin: 0 0 .25rem; list-style: none; }
+.rst-content .ide-dl-platform ul li { list-style: none; margin-left: 0; }
+.ide-dl-size, .ide-dl-muted { color: #6a6a6a; font-size: .9em; }
+.ide-dl-problem { color: #b94a48; }
+.ide-dl-table { overflow-x: auto; max-width: 100%; }
+.ide-dl-table table { border-collapse: collapse; width: 100%; }
+.ide-dl-table th, .ide-dl-table td { border-bottom: 1px solid #e1e4e5; padding: .35rem .6rem; text-align: left; vertical-align: top; }
+.ide-dl-table td a.ide-dl-file { margin-right: .5rem; white-space: nowrap; }
+.ide-dl-notes { font-size: .95em; padding: .25rem 0 .5rem; }
+.ide-dl-tests, .ide-dl-latest-notes { margin: 1rem 0; }
+@media (max-width: 700px) {
+  .ide-dl-table th:nth-child(2), .ide-dl-table td:nth-child(2) { display: none; }
+}

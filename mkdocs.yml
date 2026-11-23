@@ -16,12 +16,21 @@ theme:
 
 extra_css:
   # a new name when they change: a browser never mixes a cached old one with the new pages
-  - assets/wiki-v4.css
+  - assets/wiki-v5.css
 extra_javascript:
   - assets/wiki-v2.js
+  # the downloads of the IDE page (docs/ide/index.md): GitHub releases ide-v*, read by the browser
+  - assets/downloads-v1.js
 
 plugins:
   - search
+  # the guide of the IDE moved from the Data Gateway tab: its old address takes there
+  - redirects:
+      redirect_maps:
+        data-gateway/Ui.md: ide/Guide.md
+        es/data-gateway/Ui.md: https://lambda-orm.github.io/wiki/es/ide/Guide/
+        pt/data-gateway/Ui.md: https://lambda-orm.github.io/wiki/pt/ide/Guide/
+        de/data-gateway/Ui.md: https://lambda-orm.github.io/wiki/de/ide/Guide/
   - i18n:
       # a translation is next to its page: GettingStarted.md, GettingStarted.de.md, GettingStarted.es.md, GettingStarted.pt.md
       docs_structure: suffix
@@ -48,6 +57,7 @@ plugins:
             Clients: Clients
             Operations: Betrieb
             Change log: Änderungsprotokoll
+            Guide: Anleitung
             Queries: Abfragen
             Query Language: Abfragesprache
             Expression: Ausdruck
@@ -100,6 +110,7 @@ plugins:
             Clients: Clientes
             Operations: Operación
             Change log: Cambios
+            Guide: Guía
             Queries: Consultas
             Query Language: Lenguaje de consultas
             Expression: Expresión
@@ -155,6 +166,7 @@ plugins:
             Clients: Clientes
             Operations: Operação
             Change log: Alterações
+            Guide: Guia
             Queries: Consultas
             Query Language: Linguagem de consultas
             Expression: Expressão
@@ -217,11 +229,13 @@ nav:
       - MCP: data-gateway/Mcp.md
       - WebSocket API: data-gateway/WebSocket.md
       - Security: data-gateway/Security.md
-      - UI: data-gateway/Ui.md
       - Administration: data-gateway/Admin.md
       - Clients: data-gateway/Clients.md
       - Operations: data-gateway/Operations.md
       - Change log: data-gateway/CHANGELOG.md
+  - IDE:
+      - Overview: ide/index.md
+      - Guide: ide/Guide.md
   - Queries:
       - Query Language: queries/Query-Language.md
       - Expression: queries/Expression.md

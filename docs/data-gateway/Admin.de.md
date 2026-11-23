@@ -1,6 +1,6 @@
 # Administration {#administration}
 
-Mit `admin.enabled` sind das Gateway und seine [UI](Ui.md) nicht mehr nur lesend: Schemas werden dort **angelegt,
+Mit seinem `management`-Port sind das Gateway und seine [UI](../ide/Guide.md) nicht mehr nur lesend: Schemas werden dort **angelegt,
 bearbeitet und entfernt**, als YAML oder Element für Element, Gespeichertes (Abfragen, Skripte, Diagramme) wird in den
 Workspaces geteilt, und die **Befehle der [CLI](../cli/index.md)** laufen aus der UI. Alles liegt im Volume des
 Gateways, ein Workspace pro Schema; das Gateway bemerkt Änderungen und stellt sie ohne Neustart bereit.
@@ -8,8 +8,10 @@ Gateways, ein Workspace pro Schema; das Gateway bemerkt Änderungen und stellt s
 ## Aktivieren {#turning-it-on}
 
 ```yaml
+transports:
+  management:
+    port: 9090               # ohne Port keine Administration (und keine IDE)
 admin:
-  enabled: true              # standardmäßig aus
   commandTimeoutMs: 600000   # wie lange ein Befehl dauern darf
   maxFileBytes: 2MB          # die größte Datei, die geschrieben werden kann
 authentication:
@@ -20,8 +22,9 @@ authentication:
     - { name: analyst, value: $ANALYST_KEY, permissions: [ read, workbenchWrite ] }
 ```
 
-Die Administration antwortet unter `/admin` des [`http`-Transports](Transports.md#http), mit dessen Authentifizierung.
-Ihre Berechtigungen werden **nie standardmäßig vergeben**: Anmeldedaten ohne Berechtigungsliste haben nur die der Daten.
+Die Administration antwortet unter `/admin` des [`management`-Transports](Transports.md#management), mit dessen
+Authentifizierung; `http` hat sie nicht. Ihre Berechtigungen werden **nie standardmäßig vergeben**: Anmeldedaten ohne
+Berechtigungsliste haben nur die der Daten.
 
 | Berechtigung | Erlaubt |
 | --- | --- |
@@ -31,6 +34,7 @@ Ihre Berechtigungen werden **nie standardmäßig vergeben**: Anmeldedaten ohne B
 | `workbenchWrite` | Abfragen, Skripte und Diagramme in den Workspaces speichern, ohne das Schema zu ändern |
 | `ddl` | die Struktur der Datenbanken eines Stage ändern (`push`, `drop`) |
 | `build` | den Code der Domäne in `src/` des Workspace erzeugen |
+| `sessionAdmin` | jede [Sitzung](Transports.md#sessions) von `management` sehen (wer verbunden ist) und sie widerrufen |
 
 Mit `authentication: none` administriert niemand, außer mit `admin.allowAnonymous: true` (nur lokale Entwicklung).
 

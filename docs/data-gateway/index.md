@@ -13,7 +13,7 @@ databases of different engines). The Data Gateway publishes that schema so that:
 - an **application** queries and writes it through a REST API (or a WebSocket connection), with the same lambda
   queries it would use in Node;
 - an **AI agent** explores the domain and queries it through MCP, knowing the entities and the language;
-- a **person** explores the schemas, reads each entity as a form, tries queries and draws diagrams in a web UI;
+- a **person** explores the schemas, reads each entity as a form, tries queries and draws diagrams in its IDE;
 
 and so that **who can do what** is decided in one place, the same for all of them: each credential has permissions,
 and every change is audited.
@@ -34,7 +34,8 @@ and every change is audited.
   affect the others.
 - **Audit** of writes, **metrics** (Prometheus), **health** (Kubernetes probes), limits (rate, concurrency, sizes,
   time).
-- A **web UI**: explorer, entity forms, query tabs with autocompletion, saved queries and diagrams of the domain.
+- An **IDE** (its own image, reaching the gateway's `management` port): explorer, entity forms, query tabs with
+  autocompletion, saved queries and diagrams of the domain.
 
 **What it doesn't do:**
 
@@ -43,7 +44,7 @@ and every change is audited.
 - It doesn't accept SQL: only λORM queries, translated for each source.
 - No users nor roles of its own beyond the credentials of its configuration (no login against an identity provider
   yet).
-- The UI keeps what is saved in each browser; there is no shared storage of saved queries on the server.
+- Without the `workbenchWrite` permission, the IDE keeps what is saved in each browser.
 
 ## Description
 
@@ -82,14 +83,14 @@ slow down another; a schema whose database is down answers `503` and is retried,
 
 ## In this section
 
-- [Getting started](GettingStarted.md): step by step, from an empty folder to the REST API, the UI, MCP and WebSocket.
+- [Getting started](GettingStarted.md): step by step, from an empty folder to the REST API, the IDE, MCP and WebSocket.
 - [Configuration](Configuration.md): the configuration file, schemas, environment, runtime and every key.
-- [Transports](Transports.md): the four transports, their routes and options.
+- [Transports](Transports.md): the five transports (four of data and `management`, the IDE's), their routes and options.
 - [REST API](Rest.md): every method of the `http` transport, with examples.
 - [MCP](Mcp.md): the tools, resources and transports for AI agents.
 - [WebSocket API](WebSocket.md): the JSON-RPC methods and the notifications.
 - [Security](Security.md): authentication, permissions, audit, limits and errors.
-- [UI](Ui.md): the web interface: explorer, entity forms, queries, saved queries and diagrams.
+- [UI](../ide/Guide.md): the IDE: connections, explorer, entity forms, queries, saved queries and diagrams.
 - [Clients](Clients.md): `@lambdaorm/client`, the CLI and the OpenAPI document.
 - [Operations](Operations.md): Docker, Kubernetes, health, metrics and logs.
 - [Change log](CHANGELOG.md)

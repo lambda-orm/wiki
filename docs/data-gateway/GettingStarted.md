@@ -1,6 +1,6 @@
 # Getting started
 
-This guide goes from an empty folder to the northwind database published by a Data Gateway: its REST API, its web UI,
+This guide goes from an empty folder to the northwind database published by a Data Gateway: its REST API, its IDE,
 MCP for an AI agent and its WebSocket API. It takes about ten minutes and needs only **Docker** (with Docker Compose).
 
 ![Overview](images/overview.svg)
@@ -11,7 +11,7 @@ Create a folder with this layout (the files can be downloaded from this wiki):
 
 ```text
 northwind/
-├── docker-compose.yml          ← PostgreSQL and the Data Gateway
+├── docker-compose.yml          ← PostgreSQL, the Data Gateway and its IDE
 ├── data-gateway.config.yaml    ← how the gateway exposes the schema and who can use it
 ├── data.json                   ← the rows of northwind, to import
 └── workspace/
@@ -87,15 +87,17 @@ scripts:
 transports:
   http:
     port: 8080
-    ui: { enabled: true }
   mcpHttp:
     port: 8081
   webSocket:
     port: 8083
+  management:
+    port: 9090
 ```
 
 - **Two credentials:** `reader` can only read; `backend` can also write, run scripts, queue and import.
-- **Three transports:** REST and the UI on 8080, MCP on 8081, WebSocket on 8083.
+- **Four transports:** REST on 8080, MCP on 8081, WebSocket on 8083, and `management` on 9090: the API of the IDE,
+  reached only by the IDE (it is not published).
 - **The variables of the schema:** each schema receives only its own variables, for its safety; `env` gives it the
   connection.
 
@@ -115,7 +117,7 @@ services:
       retries: 30
 
   data-gateway:
-    image: flaviorita/data-gateway:3.2.0
+    image: flaviorita/data-gateway:4.0.0
     depends_on:
       postgres: { condition: service_healthy }
     environment:
@@ -125,10 +127,17 @@ services:
     volumes:
       - ./data-gateway.config.yaml:/config/data-gateway.config.yaml:ro
       - ./workspace:/workspace
-    ports:
+    ports:                                  # management (9090) is not published
       - "${HTTP_PORT:-8080}:8080"
       - "${MCP_PORT:-8081}:8081"
       - "${WS_PORT:-8083}:8083"
+
+  ide:
+    image: flaviorita/data-gateway-ide:1.0.0
+    environment:
+      DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081,http://data-gateway:8083"
+    ports:
+      - "${IDE_PORT:-8090}:8080"
 ```
 
 The keys `reader-demo-key` and `backend-demo-key` are for this example only: in any real use, give `READER_KEY` and
@@ -264,15 +273,16 @@ A script chooses the status of the answer with `throw { status, message }`: a `c
 
 ## 9. The UI
 
-Open `http://localhost:8080/ui/`:
+Open `http://localhost:8090`: the IDE opens on a **New connection**. Fill it in:
 
-![Home](images/ui-home.png)
+- **Name:** `northwind`;
+- **Address:** `data-gateway:9090`, the `management` of the gateway as the IDE reaches it in the compose;
+- **Authentication:** API key, the header `X-Api-Key` and the key `reader-demo-key` (**Show** shows what was typed).
 
-**Login** with the API key (the **Show** button shows what was typed):
+**Test** says who the key is; **Connect** adds the connection. Its page shows the permissions of the key, and its
+REST API, WebSocket and MCP can be tried from there in their own tabs.
 
-![Login](images/ui-login.png)
-
-On the left, the **explorer**: the schema, its domain, its entities with their properties and relations. Choose the
+On the left, the **explorer**: the connection, its schema, the domain, its entities with their properties and relations. Choose the
 schema `/`, write a query (the editor completes the entities and properties as you type), its data, and **execute**
 (Ctrl+Enter). The result can be seen as a table, tree, JSON or YAML, copied and exported:
 
@@ -299,7 +309,7 @@ The boxes are laid out by themselves; they and the lines can be dragged, and **S
 
 ![Diagram](images/ui-diagram.png)
 
-Everything is explained in [UI](Ui.md).
+Everything is explained in [UI](../ide/Guide.md).
 
 ## 10. An AI agent, through MCP
 

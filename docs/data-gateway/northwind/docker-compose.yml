@@ -12,7 +12,7 @@ services:
       retries: 30
 
   data-gateway:
-    image: flaviorita/data-gateway:3.0.2
+    image: flaviorita/data-gateway:4.0.0
     depends_on:
       postgres: { condition: service_healthy }
     environment:
@@ -23,7 +23,15 @@ services:
     volumes:
       - ./data-gateway.config.yaml:/config/data-gateway.config.yaml:ro
       - ./workspace:/workspace
-    ports:
+    ports:                                  # management (9090) is not published
       - "${HTTP_PORT:-8080}:8080"
       - "${MCP_PORT:-8081}:8081"
       - "${WS_PORT:-8083}:8083"
+
+  # the IDE: the browser talks to it, and it reaches the gateway (its management, and its transports for their tabs)
+  ide:
+    image: flaviorita/data-gateway-ide:1.0.0
+    environment:
+      DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081,http://data-gateway:8083"
+    ports:
+      - "${IDE_PORT:-8090}:8080"

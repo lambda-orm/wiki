@@ -105,8 +105,8 @@ claude mcp add --transport http northwind http://gateway:8081/northwind/mcp --he
 
 ### The browser
 
-The [UI](data-gateway/Ui.md) of the Data Gateway, built with
-[`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui): browse the schemas, read each entity as a form, write
+The [IDE](ide/Guide.md) of the Data Gateway, built with
+[`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui): connect to gateways, browse the schemas, read each entity as a form, write
 queries with autocompletion and draw diagrams.
 
 ![The UI of the Data Gateway](data-gateway/images/ui-query.png)
@@ -221,8 +221,9 @@ authentication:
     - { name: agent,   value: $AGENT_KEY,   permissions: [ read ] }
     - { name: backend, value: $BACKEND_KEY, permissions: [ read, write, script ] }
 transports:
-  http:    { port: 8080, ui: { enabled: true } }    # REST, OpenAPI, the UI
-  mcpHttp: { port: 8081 }                           # AI agents
+  http:       { port: 8080 }    # REST, OpenAPI
+  mcpHttp:    { port: 8081 }    # AI agents
+  management: { port: 9090 }    # the IDE (internal network only; left out in production)
 ```
 
 - The same permissions on every transport: an agent with `read` can query, never write.
@@ -230,7 +231,7 @@ transports:
 - Each schema in its own worker; Prometheus metrics, health probes for Kubernetes, rate and size limits.
 
 **Try it in ten minutes:** [Getting started](data-gateway/GettingStarted.md), from an empty folder to the REST API,
-the UI, MCP and WebSocket.
+the IDE, MCP and WebSocket.
 
 ## The ecosystem
 
@@ -238,9 +239,10 @@ the UI, MCP and WebSocket.
 | --- | --- | --- |
 | [Library](usage/Usage.md) | [`@lambdaorm/lib`](https://www.npmjs.com/package/@lambdaorm/lib) | the ORM: runs the queries against the databases |
 | [CLI](cli/index.md) | [`@lambdaorm/cli`](https://www.npmjs.com/package/@lambdaorm/cli) | the `lambdaorm` command: projects, synchronization, import / export, queries, scripts |
-| [Data Gateway](data-gateway/index.md) | Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | the schemas over REST, MCP and WebSocket, with a web UI |
+| [Data Gateway](data-gateway/index.md) | Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | the schemas over REST, MCP and WebSocket |
+| [Data Gateway IDE](ide/index.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) · [desktop: Linux, Windows, macOS](ide/index.md#download) | the IDE of the gateways: connections, explorer, queries, diagrams, administration |
 | [Node.js client](data-gateway/Clients.md) | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | the interface of the library, run on a Data Gateway |
-| [UI components](data-gateway/Ui.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | React components: the query editor, results, explorer and diagrams |
+| [UI components](ide/Guide.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | React components: the query editor, results, explorer and diagrams |
 | [3xpr](https://www.npmjs.com/package/3xpr) | [`3xpr`](https://www.npmjs.com/package/3xpr) | the expression engine the queries, scripts and schema rules are built on |
 
 The source is in [github.com/lambda-orm/core](https://github.com/lambda-orm/core).

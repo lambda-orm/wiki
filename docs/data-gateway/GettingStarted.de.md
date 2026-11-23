@@ -1,7 +1,7 @@
 # Erste Schritte {#getting-started}
 
 Diese Anleitung führt von einem leeren Ordner bis zur Datenbank northwind, die von einem Data Gateway veröffentlicht
-wird: seine REST API, seine Web-UI, MCP für einen KI-Agenten und seine WebSocket API. Sie dauert etwa zehn Minuten und
+wird: seine REST API, seine IDE, MCP für einen KI-Agenten und seine WebSocket API. Sie dauert etwa zehn Minuten und
 benötigt nur **Docker** (mit Docker Compose).
 
 ![Überblick](images/overview.svg)
@@ -12,7 +12,7 @@ Erstellen Sie einen Ordner mit dieser Struktur (die Dateien können aus diesem W
 
 ```text
 northwind/
-├── docker-compose.yml          ← PostgreSQL and the Data Gateway
+├── docker-compose.yml          ← PostgreSQL, the Data Gateway and its IDE
 ├── data-gateway.config.yaml    ← how the gateway exposes the schema and who can use it
 ├── data.json                   ← the rows of northwind, to import
 └── workspace/
@@ -88,16 +88,18 @@ scripts:
 transports:
   http:
     port: 8080
-    ui: { enabled: true }
   mcpHttp:
     port: 8081
   webSocket:
     port: 8083
+  management:
+    port: 9090
 ```
 
 - **Zwei Zugangsdaten:** `reader` darf nur lesen; `backend` darf außerdem schreiben, Skripte ausführen, Warteschlangen
   nutzen und importieren.
-- **Drei Transporte:** REST und die UI auf 8080, MCP auf 8081, WebSocket auf 8083.
+- **Vier Transporte:** REST auf 8080, MCP auf 8081, WebSocket auf 8083 und `management` auf 9090: die API der IDE,
+  die nur die IDE erreicht (er wird nicht veröffentlicht).
 - **Die Variablen des Schemas:** Jedes Schema erhält zu seiner Sicherheit nur seine eigenen Variablen; `env` übergibt
   ihm die Verbindung.
 
@@ -117,7 +119,7 @@ services:
       retries: 30
 
   data-gateway:
-    image: flaviorita/data-gateway:3.2.0
+    image: flaviorita/data-gateway:4.0.0
     depends_on:
       postgres: { condition: service_healthy }
     environment:
@@ -127,10 +129,17 @@ services:
     volumes:
       - ./data-gateway.config.yaml:/config/data-gateway.config.yaml:ro
       - ./workspace:/workspace
-    ports:
+    ports:                                  # management (9090) wird nicht veröffentlicht
       - "${HTTP_PORT:-8080}:8080"
       - "${MCP_PORT:-8081}:8081"
       - "${WS_PORT:-8083}:8083"
+
+  ide:
+    image: flaviorita/data-gateway-ide:1.0.0
+    environment:
+      DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081,http://data-gateway:8083"
+    ports:
+      - "${IDE_PORT:-8090}:8080"
 ```
 
 Die Keys `reader-demo-key` und `backend-demo-key` sind nur für dieses Beispiel gedacht: Geben Sie `READER_KEY` und
@@ -267,15 +276,17 @@ liefert `404`. Siehe [Skript](../usage/Script.md).
 
 ## 9. Die UI {#9-the-ui}
 
-Öffnen Sie `http://localhost:8080/ui/`:
+Öffnen Sie `http://localhost:8090`: Die IDE öffnet sich mit einer **Neuen Verbindung**. Füllen Sie sie aus:
 
-![Startseite](images/ui-home.png)
+- **Name:** `northwind`;
+- **Adresse:** `data-gateway:9090`, das `management` des Gateways, wie die IDE es im Compose erreicht;
+- **Authentifizierung:** API-Key, der Header `X-Api-Key` und der Key `reader-demo-key` (**Anzeigen** zeigt das
+  Eingegebene an).
 
-**Anmelden** mit dem API-Key (die Schaltfläche **Anzeigen** zeigt das Eingegebene an):
+**Testen** sagt, wer der Key ist; **Verbinden** fügt die Verbindung hinzu. Ihre Seite zeigt die Berechtigungen des Keys,
+und ihre REST API, ihr WebSocket und ihr MCP lassen sich von dort in eigenen Tabs ausprobieren.
 
-![Anmeldung](images/ui-login.png)
-
-Links der **Explorer**: das Schema, seine Domäne, seine Entitäten mit ihren Eigenschaften und Beziehungen. Wählen Sie
+Links der **Explorer**: die Verbindung, ihr Schema, die Domäne, ihre Entitäten mit ihren Eigenschaften und Beziehungen. Wählen Sie
 das Schema `/`, schreiben Sie eine Abfrage (der Editor vervollständigt beim Tippen Entitäten und Eigenschaften), ihre
 Daten, und klicken Sie auf **execute** (Strg+Enter). Das Ergebnis kann als Tabelle, Baum, JSON oder YAML angezeigt,
 kopiert und exportiert werden:
@@ -305,7 +316,7 @@ sie abgelegt wurden:
 
 ![Diagramm](images/ui-diagram.png)
 
-Alles wird unter [UI](Ui.md) erklärt.
+Alles wird unter [UI](../ide/Guide.md) erklärt.
 
 ## 10. Ein KI-Agent über MCP {#10-an-ai-agent-through-mcp}
 

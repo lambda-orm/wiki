@@ -27,7 +27,12 @@ authentication:
 - Secrets werden in konstanter Zeit verglichen. Das Secret gelangt nie zu den Workern der Schemas: nur der Name und die
   Berechtigungen der Zugangsdaten.
 - Ohne Zugangsdaten (oder mit falschen) lautet die Antwort `401`; WebSocket-Upgrades werden abgelehnt.
-- `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/doc` und die Dateien der UI benötigen keine Zugangsdaten.
+- `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/transports` und `/doc` benötigen keine Zugangsdaten.
+- In `management` (der IDE) gehen die Zugangsdaten nur in die Anmeldung, und jede Anfrage trägt das Token einer
+  [Sitzung](Transports.md#sessions): Sitzungen werden aufgelistet, enden bei Inaktivität und können sofort widerrufen
+  werden.
+- Kein Transport beantwortet CORS: Ein Browser eines anderen Origins kann das Gateway nicht aufrufen, ein eigenes
+  Backend schon.
 
 ## Berechtigungen {#permissions}
 
@@ -39,6 +44,7 @@ authentication:
 | `queue` | `execute-queued` (und `write`, wenn die Abfrage schreibt) |
 | `stageImport` | das Importieren eines Stages |
 | `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | die [Administration](Admin.md#turning-it-on): nie standardmäßig vergeben |
+| `sessionAdmin` | jede [Sitzung](Transports.md#sessions) von `management` auflisten und die anderer Zugangsdaten widerrufen (ohne sie sehen und schließen Zugangsdaten nur ihre eigenen): nie standardmäßig vergeben |
 
 - Die Autorisierung erfolgt im Worker des Schemas, bevor irgendetwas ausgeführt wird, gleich für REST, MCP und WebSocket.
 - Um zu wissen, ob eine Abfrage schreibt, analysiert das Gateway sie (ihre `metadata`): Mit nur `read` wird eine Abfrage

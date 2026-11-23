@@ -1,6 +1,6 @@
 # Primeiros passos {#getting-started}
 
-Este guia vai de uma pasta vazia até o banco de dados northwind publicado por um Data Gateway: sua API REST, sua UI web,
+Este guia vai de uma pasta vazia até o banco de dados northwind publicado por um Data Gateway: sua API REST, sua IDE,
 o MCP para um agente de IA e sua API WebSocket. Leva cerca de dez minutos e precisa apenas do **Docker** (com Docker Compose).
 
 ![Visão geral](images/overview.svg)
@@ -11,11 +11,11 @@ Crie uma pasta com esta estrutura (os arquivos podem ser baixados desta wiki):
 
 ```text
 northwind/
-├── docker-compose.yml          ← PostgreSQL and the Data Gateway
-├── data-gateway.config.yaml    ← how the gateway exposes the schema and who can use it
-├── data.json                   ← the rows of northwind, to import
+├── docker-compose.yml          ← PostgreSQL, o Data Gateway e sua IDE
+├── data-gateway.config.yaml    ← como o gateway expõe o esquema e quem pode usá-lo
+├── data.json                   ← as linhas do northwind, para importar
 └── workspace/
-    └── lambdaORM.yaml          ← the λORM schema: domain, mapping, source, stage
+    └── lambdaORM.yaml          ← o esquema λORM: domínio, mapeamento, fonte, stage
 ```
 
 ```sh
@@ -87,15 +87,17 @@ scripts:
 transports:
   http:
     port: 8080
-    ui: { enabled: true }
   mcpHttp:
     port: 8081
   webSocket:
     port: 8083
+  management:
+    port: 9090
 ```
 
 - **Duas credenciais:** `reader` só pode ler; `backend` também pode gravar, executar scripts, enfileirar e importar.
-- **Três transportes:** REST e a UI na 8080, MCP na 8081, WebSocket na 8083.
+- **Quatro transportes:** REST na 8080, MCP na 8081, WebSocket na 8083 e `management` na 9090: a API da IDE,
+  alcançada apenas pela IDE (não é publicada).
 - **As variáveis do esquema:** cada esquema recebe apenas suas próprias variáveis, por segurança; `env` lhe fornece a
   conexão.
 
@@ -115,7 +117,7 @@ services:
       retries: 30
 
   data-gateway:
-    image: flaviorita/data-gateway:3.2.0
+    image: flaviorita/data-gateway:4.0.0
     depends_on:
       postgres: { condition: service_healthy }
     environment:
@@ -125,10 +127,17 @@ services:
     volumes:
       - ./data-gateway.config.yaml:/config/data-gateway.config.yaml:ro
       - ./workspace:/workspace
-    ports:
+    ports:                                  # management (9090) não é publicado
       - "${HTTP_PORT:-8080}:8080"
       - "${MCP_PORT:-8081}:8081"
       - "${WS_PORT:-8083}:8083"
+
+  ide:
+    image: flaviorita/data-gateway-ide:1.0.0
+    environment:
+      DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081,http://data-gateway:8083"
+    ports:
+      - "${IDE_PORT:-8090}:8080"
 ```
 
 As chaves `reader-demo-key` e `backend-demo-key` servem apenas para este exemplo: em qualquer uso real, atribua a `READER_KEY` e
@@ -264,15 +273,16 @@ Um script escolhe o status da resposta com `throw { status, message }`: um `cust
 
 ## 9. A UI {#9-the-ui}
 
-Abra `http://localhost:8080/ui/`:
+Abra `http://localhost:8090`: a IDE abre em uma **Nova conexão**. Preencha-a:
 
-![Página inicial](images/ui-home.png)
+- **Nome:** `northwind`;
+- **Endereço:** `data-gateway:9090`, o `management` do gateway como a IDE o alcança no compose;
+- **Autenticação:** API key, o header `X-Api-Key` e a chave `reader-demo-key` (**Mostrar** mostra o que foi digitado).
 
-**Entre** com a API key (o botão **Mostrar** mostra o que foi digitado):
+**Testar** diz quem é a chave; **Conectar** adiciona a conexão. Sua página mostra as permissões da chave, e sua API
+REST, seu WebSocket e seu MCP podem ser experimentados a partir dali, em suas próprias abas.
 
-![Login](images/ui-login.png)
-
-À esquerda, o **explorador**: o esquema, seu domínio, suas entidades com suas propriedades e relações. Escolha o
+À esquerda, o **explorador**: a conexão, seu esquema, o domínio, suas entidades com suas propriedades e relações. Escolha o
 esquema `/`, escreva uma consulta (o editor completa as entidades e propriedades enquanto você digita), seus dados, e clique em **execute**
 (Ctrl+Enter). O resultado pode ser visto como tabela, árvore, JSON ou YAML, copiado e exportado:
 
@@ -299,7 +309,7 @@ As caixas se organizam sozinhas; elas e as linhas podem ser arrastadas, e **Salv
 
 ![Diagrama](images/ui-diagram.png)
 
-Tudo é explicado em [UI](Ui.md).
+Tudo é explicado em [UI](../ide/Guide.md).
 
 ## 10. Um agente de IA, por MCP {#10-an-ai-agent-through-mcp}
 

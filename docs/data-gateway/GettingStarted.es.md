@@ -1,6 +1,6 @@
 # Primeros pasos {#getting-started}
 
-Esta guía va desde una carpeta vacía hasta la base de datos northwind publicada por un Data Gateway: su API REST, su UI web,
+Esta guía va desde una carpeta vacía hasta la base de datos northwind publicada por un Data Gateway: su API REST, su IDE,
 MCP para un agente de IA y su API WebSocket. Lleva unos diez minutos y solo necesita **Docker** (con Docker Compose).
 
 ![Introducción](images/overview.svg)
@@ -11,7 +11,7 @@ Se crea una carpeta con esta estructura (los archivos se pueden descargar de est
 
 ```text
 northwind/
-├── docker-compose.yml          ← PostgreSQL and the Data Gateway
+├── docker-compose.yml          ← PostgreSQL, the Data Gateway and its IDE
 ├── data-gateway.config.yaml    ← how the gateway exposes the schema and who can use it
 ├── data.json                   ← the rows of northwind, to import
 └── workspace/
@@ -87,15 +87,17 @@ scripts:
 transports:
   http:
     port: 8080
-    ui: { enabled: true }
   mcpHttp:
     port: 8081
   webSocket:
     port: 8083
+  management:
+    port: 9090
 ```
 
 - **Dos credenciales:** `reader` solo puede leer; `backend` además puede escribir, ejecutar scripts, encolar e importar.
-- **Tres transportes:** REST y la UI en el 8080, MCP en el 8081, WebSocket en el 8083.
+- **Cuatro transportes:** REST en el 8080, MCP en el 8081, WebSocket en el 8083, y `management` en el 9090: la API
+  del IDE, a la que solo llega el IDE (no se publica).
 - **Las variables del esquema:** cada esquema recibe solo sus propias variables, por seguridad; `env` le da la
   conexión.
 
@@ -115,7 +117,7 @@ services:
       retries: 30
 
   data-gateway:
-    image: flaviorita/data-gateway:3.2.0
+    image: flaviorita/data-gateway:4.0.0
     depends_on:
       postgres: { condition: service_healthy }
     environment:
@@ -125,10 +127,17 @@ services:
     volumes:
       - ./data-gateway.config.yaml:/config/data-gateway.config.yaml:ro
       - ./workspace:/workspace
-    ports:
+    ports:                                  # management (9090) no se publica
       - "${HTTP_PORT:-8080}:8080"
       - "${MCP_PORT:-8081}:8081"
       - "${WS_PORT:-8083}:8083"
+
+  ide:
+    image: flaviorita/data-gateway-ide:1.0.0
+    environment:
+      DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081,http://data-gateway:8083"
+    ports:
+      - "${IDE_PORT:-8090}:8080"
 ```
 
 Las claves `reader-demo-key` y `backend-demo-key` son solo para este ejemplo: en cualquier uso real, hay que dar a `READER_KEY` y
@@ -264,15 +273,16 @@ header `X-Api-Key`; después, cada método se puede probar desde la página.
 
 ## 9. La UI {#9-the-ui}
 
-Se abre `http://localhost:8080/ui/`:
+Se abre `http://localhost:8090`: el IDE se abre en una **Nueva conexión**. Se completa así:
 
-![Inicio](images/ui-home.png)
+- **Nombre:** `northwind`;
+- **Dirección:** `data-gateway:9090`, el `management` del gateway tal como lo alcanza el IDE en el compose;
+- **Autenticación:** API key, el header `X-Api-Key` y la clave `reader-demo-key` (**Mostrar** muestra lo que se escribió).
 
-**Ingresar** con la API key (el botón **Mostrar** muestra lo que se escribió):
+**Probar** dice quién es la clave; **Conectar** agrega la conexión. Su página muestra los permisos de la clave, y desde
+ahí se pueden probar su API REST, su WebSocket y su MCP, cada uno en su propia pestaña.
 
-![Login](images/ui-login.png)
-
-A la izquierda, el **explorador**: el esquema, su dominio, sus entidades con sus propiedades y relaciones. Se elige el
+A la izquierda, el **explorador**: la conexión, su esquema, el dominio, sus entidades con sus propiedades y relaciones. Se elige el
 esquema `/`, se escribe una consulta (el editor completa las entidades y propiedades mientras se escribe), sus datos, y se pulsa **execute**
 (Ctrl+Enter). El resultado se puede ver como tabla, árbol, JSON o YAML, copiar y exportar:
 
@@ -299,7 +309,7 @@ Las cajas se distribuyen solas; tanto ellas como las líneas se pueden arrastrar
 
 ![Diagrama](images/ui-diagram.png)
 
-Todo se explica en [UI](Ui.md).
+Todo se explica en [UI](../ide/Guide.md).
 
 ## 10. Un agente de IA, a través de MCP {#10-an-ai-agent-through-mcp}
 

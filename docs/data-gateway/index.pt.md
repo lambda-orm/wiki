@@ -13,7 +13,7 @@ bancos de dados de mecanismos diferentes). O Data Gateway publica esse esquema p
 - uma **aplicação** o consulte e grave dados por uma API REST (ou uma conexão WebSocket), com as mesmas consultas
   lambda que usaria no Node;
 - um **agente de IA** explore o domínio e o consulte por MCP, conhecendo as entidades e a linguagem;
-- uma **pessoa** explore os esquemas, leia cada entidade como um formulário, experimente consultas e desenhe diagramas em uma UI web;
+- uma **pessoa** explore os esquemas, leia cada entidade como um formulário, experimente consultas e desenhe diagramas em sua IDE;
 
 e para que **quem pode fazer o quê** seja decidido em um só lugar, igual para todos eles: cada credencial tem permissões,
 e toda alteração é auditada.
@@ -34,7 +34,8 @@ e toda alteração é auditada.
   afeta os demais.
 - **Auditoria** das escritas, **métricas** (Prometheus), **saúde** (probes do Kubernetes), limites (taxa, concorrência, tamanhos,
   tempo).
-- Uma **UI web**: explorador, formulários de entidades, abas de consulta com autocompletar, consultas salvas e diagramas do domínio.
+- Uma **IDE** (imagem própria, que alcança a porta `management` do gateway): explorador, formulários de entidades, abas de
+  consulta com autocompletar, consultas salvas e diagramas do domínio.
 
 **O que ele não faz:**
 
@@ -43,7 +44,7 @@ e toda alteração é auditada.
 - Não aceita SQL: apenas consultas do λORM, traduzidas para cada fonte.
 - Não tem usuários nem papéis próprios além das credenciais de sua configuração (ainda sem login em um provedor de
   identidade).
-- A UI guarda o que é salvo em cada navegador; não há armazenamento compartilhado de consultas salvas no servidor.
+- Sem a permissão `workbenchWrite`, a IDE guarda o que é salvo em cada navegador.
 
 ## Descrição {#description}
 
@@ -82,14 +83,14 @@ deixa outro mais lento; um esquema cujo banco de dados está fora do ar responde
 
 ## Nesta seção {#in-this-section}
 
-- [Primeiros passos](GettingStarted.md): passo a passo, de uma pasta vazia à API REST, à UI, ao MCP e ao WebSocket.
+- [Primeiros passos](GettingStarted.md): passo a passo, de uma pasta vazia à API REST, à IDE, ao MCP e ao WebSocket.
 - [Configuração](Configuration.md): o arquivo de configuração, esquemas, ambiente, runtime e todas as chaves.
-- [Transportes](Transports.md): os quatro transportes, suas rotas e opções.
+- [Transportes](Transports.md): os cinco transportes (quatro de dados e `management`, o do IDE), suas rotas e opções.
 - [API REST](Rest.md): todos os métodos do transporte `http`, com exemplos.
 - [MCP](Mcp.md): as ferramentas, os recursos e os transportes para agentes de IA.
 - [API WebSocket](WebSocket.md): os métodos JSON-RPC e as notificações.
 - [Segurança](Security.md): autenticação, permissões, auditoria, limites e erros.
-- [UI](Ui.md): a interface web: explorador, formulários de entidades, consultas, consultas salvas e diagramas.
+- [UI](../ide/Guide.md): a IDE: conexões, explorador, formulários de entidades, consultas, consultas salvas e diagramas.
 - [Clientes](Clients.md): `@lambdaorm/client`, a CLI e o documento OpenAPI.
 - [Operações](Operations.md): Docker, Kubernetes, saúde, métricas e logs.
 - [Registro de alterações](CHANGELOG.md)

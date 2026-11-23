@@ -1,6 +1,6 @@
 # Administration {#administration}
 
-With `admin.enabled`, the gateway and its [UI](Ui.md) stop being read only: the schemas are **created, edited and
+With its `management` port, the gateway and its [UI](../ide/Guide.md) stop being read only: the schemas are **created, edited and
 removed** from them, as YAML or element by element, what is saved (queries, scripts, diagrams) is shared in the
 workspaces, and the **commands of the [CLI](../cli/index.md)** run from the UI. Everything is in the volume of the
 gateway, one workspace per schema; the gateway notices what changes and serves it without restarting.
@@ -8,8 +8,10 @@ gateway, one workspace per schema; the gateway notices what changes and serves i
 ## Turning it on
 
 ```yaml
+transports:
+  management:
+    port: 9090               # without a port, no administration (and no IDE)
 admin:
-  enabled: true              # off by default
   commandTimeoutMs: 600000   # how long a command may take
   maxFileBytes: 2MB          # the largest file that can be written
 authentication:
@@ -20,7 +22,8 @@ authentication:
     - { name: analyst, value: $ANALYST_KEY, permissions: [ read, workbenchWrite ] }
 ```
 
-The administration answers at `/admin` of the [`http` transport](Transports.md#http), with its authentication. Its
+The administration answers at `/admin` of the [`management` transport](Transports.md#management), with its
+authentication; `http` doesn't have it. Its
 permissions are **never given by default**: a credential without a list of permissions gets those of the data only.
 
 | Permission | Allows |
@@ -31,6 +34,7 @@ permissions are **never given by default**: a credential without a list of permi
 | `workbenchWrite` | save queries, scripts and diagrams in the workspaces, without touching the schema |
 | `ddl` | change the structure of the databases of a stage (`push`, `drop`) |
 | `build` | generate the code of the domain in `src/` of the workspace |
+| `sessionAdmin` | see every [session](Transports.md#sessions) of `management` (who is connected) and revoke them |
 
 With `authentication: none`, nobody administers unless `admin.allowAnonymous: true` (local development only).
 
