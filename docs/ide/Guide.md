@@ -56,7 +56,7 @@ its [sessions](#sessions); otherwise every session shows the address of the IDE.
 | --- | --- | --- |
 | Only the gateway, without `management` | production, with the schemas in its volumes: no IDE, no administration | no port |
 | The gateway and the IDE image | an IDE shared in the browser | on the internal network only, never published: the IDE container reaches it |
-| Only the gateway, with `management` | an IDE on your own machine: the [desktop app](index.md#download), or the image run with `docker run` | your machine has to reach its port (below) |
+| Only the gateway, with `management` | an IDE on your own machine: the [desktop app](Download.md), or the image run with `docker run` | your machine has to reach its port (below) |
 
 An IDE on your machine reaches a `management` that is elsewhere without publishing it open:
 

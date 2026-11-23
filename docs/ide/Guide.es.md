@@ -58,7 +58,7 @@ Con `trustedProxies` de `management` apuntando a la red del IDE, el gateway ve l
 | --- | --- | --- |
 | Solo el gateway, sin `management` | producción, con los esquemas en sus volúmenes: sin IDE ni administración | sin puerto |
 | El gateway y la imagen del IDE | un IDE compartido en el navegador | solo en la red interna, nunca publicado: lo alcanza el contenedor del IDE |
-| Solo el gateway, con `management` | un IDE en tu propia máquina: la [aplicación de escritorio](index.md#download), o la imagen con `docker run` | tu máquina tiene que llegar a su puerto (abajo) |
+| Solo el gateway, con `management` | un IDE en tu propia máquina: la [aplicación de escritorio](Download.md), o la imagen con `docker run` | tu máquina tiene que llegar a su puerto (abajo) |
 
 Un IDE en tu máquina llega a un `management` que está en otro lado sin publicarlo abierto:
 

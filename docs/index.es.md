@@ -244,7 +244,7 @@ REST, el IDE, MCP y WebSocket.
 | [Librería](usage/Usage.md) | [`@lambdaorm/lib`](https://www.npmjs.com/package/@lambdaorm/lib) | el ORM: ejecuta las consultas contra las bases de datos |
 | [CLI](cli/index.md) | [`@lambdaorm/cli`](https://www.npmjs.com/package/@lambdaorm/cli) | el comando `lambdaorm`: proyectos, sincronización, importar / exportar, consultas, scripts |
 | [Data Gateway](data-gateway/index.md) | Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | los esquemas por REST, MCP y WebSocket |
-| [IDE del Data Gateway](ide/index.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) · [escritorio: Linux, Windows, macOS](ide/index.md#download) | el IDE de los gateways: conexiones, explorador, consultas, diagramas, administración |
+| [IDE del Data Gateway](ide/index.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) · [escritorio: Linux, Windows, macOS](ide/Download.md) | el IDE de los gateways: conexiones, explorador, consultas, diagramas, administración |
 | [Cliente de Node.js](data-gateway/Clients.md) | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | la interfaz de la librería, ejecutada en un Data Gateway |
 | [Componentes de UI](ide/Guide.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | componentes de React: el editor de consultas, los resultados, el explorador y los diagramas |
 | [3xpr](https://www.npmjs.com/package/3xpr) | [`3xpr`](https://www.npmjs.com/package/3xpr) | el motor de expresiones sobre el que se construyen las consultas, los scripts y las reglas del esquema |
