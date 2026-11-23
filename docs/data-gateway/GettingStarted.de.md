@@ -291,32 +291,32 @@ das Schema `/`, schreiben Sie eine Abfrage (der Editor vervollständigt beim Tip
 Daten, und klicken Sie auf **execute** (Strg+Enter). Das Ergebnis kann als Tabelle, Baum, JSON oder YAML angezeigt,
 kopiert und exportiert werden:
 
-![Eine Abfrage](images/ui-query.png)
+![Eine Abfrage](../ide/images/ide-query.png)
 
-![Autovervollständigung](images/ui-autocomplete.png)
+![Autovervollständigung](../ide/images/ide-autocomplete.png)
 
 **Speichern Sie sie** mit Strg+S: ein Name, eine Beschreibung und ein Ordner (Ordner werden mit dem **+** des Schemas
 erstellt):
 
-![Eine Abfrage speichern](images/ui-save-query.png)
+![Eine Abfrage speichern](../ide/images/ide-save-query.png)
 
 Ein Doppelklick auf eine Entität (oder ihre Schaltfläche **Öffnen**) zeigt ihr **Formular**: Eigenschaften,
 Beziehungen, Schlüssel und Indizes, ihre Zeilen und ihr Diagramm.
 
-![Entitätsformular](images/ui-entity-properties.png)
+![Entitätsformular](../ide/images/ide-entity-properties.png)
 
-![Beziehungen einer Entität](images/ui-entity-relations.png)
+![Beziehungen einer Entität](../ide/images/ide-entity-relations.png)
 
 **Ein Diagramm:** das **+** eines Ordners → **Neues Diagramm**, wählen Sie `Orders` und **Nachbarn hinzufügen**:
 
-![Neues Diagramm](images/ui-new-diagram.png)
+![Neues Diagramm](../ide/images/ide-new-diagram.png)
 
 Die Kästen werden automatisch angeordnet; sie und die Linien lassen sich ziehen, und **Speichern** behält sie dort, wo
 sie abgelegt wurden:
 
-![Diagramm](images/ui-diagram.png)
+![Diagramm](../ide/images/ide-diagram.png)
 
-Alles wird unter [UI](../ide/Guide.md) erklärt.
+Alles wird unter [UI](../ide/index.md) erklärt.
 
 ## 10. Ein KI-Agent über MCP {#10-an-ai-agent-through-mcp}
 

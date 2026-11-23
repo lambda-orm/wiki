@@ -90,7 +90,7 @@ ralentiza a otro; un esquema cuya base de datos está caída responde `503` y se
 - [MCP](Mcp.md): las herramientas, los recursos y los transportes para agentes de IA.
 - [API WebSocket](WebSocket.md): los métodos JSON-RPC y las notificaciones.
 - [Seguridad](Security.md): autenticación, permisos, auditoría, límites y errores.
-- [UI](../ide/Guide.md): el IDE: conexiones, explorador, formularios de entidades, consultas, consultas guardadas y diagramas.
+- [UI](../ide/index.md): el IDE: conexiones, explorador, formularios de entidades, consultas, consultas guardadas y diagramas.
 - [Clientes](Clients.md): `@lambdaorm/client`, la CLI y el documento OpenAPI.
 - [Operaciones](Operations.md): Docker, Kubernetes, salud, métricas y logs.
 - [Registro de cambios](CHANGELOG.md)

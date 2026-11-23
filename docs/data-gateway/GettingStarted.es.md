@@ -286,30 +286,30 @@ A la izquierda, el **explorador**: la conexión, su esquema, el dominio, sus ent
 esquema `/`, se escribe una consulta (el editor completa las entidades y propiedades mientras se escribe), sus datos, y se pulsa **execute**
 (Ctrl+Enter). El resultado se puede ver como tabla, árbol, JSON o YAML, copiar y exportar:
 
-![Una consulta](images/ui-query.png)
+![Una consulta](../ide/images/ide-query.png)
 
-![Autocompletado](images/ui-autocomplete.png)
+![Autocompletado](../ide/images/ide-autocomplete.png)
 
 Se **guarda** con Ctrl+S: un nombre, una descripción y una carpeta (las carpetas se crean con el **+** del esquema):
 
-![Guardar una consulta](images/ui-save-query.png)
+![Guardar una consulta](../ide/images/ide-save-query.png)
 
 Un doble clic en una entidad (o su botón **Abrir**) muestra su **formulario**: propiedades, relaciones, claves e índices, sus
 filas y su diagrama.
 
-![Formulario de entidad](images/ui-entity-properties.png)
+![Formulario de entidad](../ide/images/ide-entity-properties.png)
 
-![Relaciones de una entidad](images/ui-entity-relations.png)
+![Relaciones de una entidad](../ide/images/ide-entity-relations.png)
 
 **Un diagrama:** el **+** de una carpeta → **Nuevo diagrama**, se elige `Orders` y **Agregar sus vecinas**:
 
-![Nuevo diagrama](images/ui-new-diagram.png)
+![Nuevo diagrama](../ide/images/ide-new-diagram.png)
 
 Las cajas se distribuyen solas; tanto ellas como las líneas se pueden arrastrar, y **Guardar** las conserva donde se dejaron:
 
-![Diagrama](images/ui-diagram.png)
+![Diagrama](../ide/images/ide-diagram.png)
 
-Todo se explica en [UI](../ide/Guide.md).
+Todo se explica en [UI](../ide/index.md).
 
 ## 10. Un agente de IA, a través de MCP {#10-an-ai-agent-through-mcp}
 

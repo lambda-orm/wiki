@@ -286,30 +286,30 @@ On the left, the **explorer**: the connection, its schema, the domain, its entit
 schema `/`, write a query (the editor completes the entities and properties as you type), its data, and **execute**
 (Ctrl+Enter). The result can be seen as a table, tree, JSON or YAML, copied and exported:
 
-![A query](images/ui-query.png)
+![A query](../ide/images/ide-query.png)
 
-![Autocompletion](images/ui-autocomplete.png)
+![Autocompletion](../ide/images/ide-autocomplete.png)
 
 **Save it** with Ctrl+S: a name, a description and a folder (folders are created with the **+** of the schema):
 
-![Save a query](images/ui-save-query.png)
+![Save a query](../ide/images/ide-save-query.png)
 
 A double click on an entity (or its **Open** button) shows its **form**: properties, relations, keys and indexes, its
 rows and its diagram.
 
-![Entity form](images/ui-entity-properties.png)
+![Entity form](../ide/images/ide-entity-properties.png)
 
-![Relations of an entity](images/ui-entity-relations.png)
+![Relations of an entity](../ide/images/ide-entity-relations.png)
 
 **A diagram:** the **+** of a folder → **New diagram**, choose `Orders` and **Add their neighbours**:
 
-![New diagram](images/ui-new-diagram.png)
+![New diagram](../ide/images/ide-new-diagram.png)
 
 The boxes are laid out by themselves; they and the lines can be dragged, and **Save** keeps them where they were left:
 
-![Diagram](images/ui-diagram.png)
+![Diagram](../ide/images/ide-diagram.png)
 
-Everything is explained in [UI](../ide/Guide.md).
+Everything is explained in [UI](../ide/index.md).
 
 ## 10. An AI agent, through MCP
 

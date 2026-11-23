@@ -259,8 +259,8 @@ transports:
 | `transports.<t>.basePath` | `''` | ein Präfix vor der Route des Schemas (`/data-gateway`), hinter einem Ingress mit Pfad |
 | `transports.<t>.maxConnections` | `100` | `webSocket`, `mcpWebSocket` und das SSE von `mcpHttp` |
 | `transports.http.swagger.enabled` | `true` | `/doc` und `/api-docs` |
-| `transports.http.ui` | — | **in 4.0.0 entfernt** (mit Warnung ignoriert): die [UI](../ide/Guide.md) ist die data-gateway-ide |
-| `transports.management.port` | **keiner** | die API der [IDE](../ide/Guide.md) und die [Administration](Admin.md) ([Transporte](Transports.md#management)) |
+| `transports.http.ui` | — | **in 4.0.0 entfernt** (mit Warnung ignoriert): die [UI](../ide/index.md) ist die data-gateway-ide |
+| `transports.management.port` | **keiner** | die API der [IDE](../ide/index.md) und die [Administration](Admin.md) ([Transporte](Transports.md#management)) |
 | `transports.management.sessions.idleTimeout` / `maxLifetime` | `30m` / `12h` | wann eine [Sitzung](Transports.md#sessions) endet: ohne Anfragen bzw. nach der Anmeldung |
 | `transports.management.sessions.maxPerCredential` | `0` | gleichzeitige Sitzungen pro Zugangsdaten; `0` = kein Limit; darüber schließt eine Anmeldung die älteste |
 | `transports.management.sessions.store` | `auto` | `auto`: `<orm.workspacePath>/.data-gateway/state.sqlite` (von den Replikas geteilt); `memory`: nur diese Replika |

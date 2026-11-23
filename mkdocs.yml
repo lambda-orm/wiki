@@ -24,13 +24,18 @@ extra_javascript:
 
 plugins:
   - search
-  # the guide of the IDE moved from the Data Gateway tab: its old address takes there
+  # the guide of the IDE, first in the Data Gateway tab and then one page of its own, is now its pages: the old
+  # addresses take to the overview, which lists them
   - redirects:
       redirect_maps:
-        data-gateway/Ui.md: ide/Guide.md
-        es/data-gateway/Ui.md: https://lambda-orm.github.io/wiki/es/ide/Guide/
-        pt/data-gateway/Ui.md: https://lambda-orm.github.io/wiki/pt/ide/Guide/
-        de/data-gateway/Ui.md: https://lambda-orm.github.io/wiki/de/ide/Guide/
+        data-gateway/Ui.md: ide/index.md
+        es/data-gateway/Ui.md: https://lambda-orm.github.io/wiki/es/ide/
+        pt/data-gateway/Ui.md: https://lambda-orm.github.io/wiki/pt/ide/
+        de/data-gateway/Ui.md: https://lambda-orm.github.io/wiki/de/ide/
+        ide/Guide.md: ide/index.md
+        es/ide/Guide.md: https://lambda-orm.github.io/wiki/es/ide/
+        pt/ide/Guide.md: https://lambda-orm.github.io/wiki/pt/ide/
+        de/ide/Guide.md: https://lambda-orm.github.io/wiki/de/ide/
   - i18n:
       # a translation is next to its page: GettingStarted.md, GettingStarted.de.md, GettingStarted.es.md, GettingStarted.pt.md
       docs_structure: suffix
@@ -59,6 +64,14 @@ plugins:
             Change log: Änderungsprotokoll
             Guide: Anleitung
             Download: Herunterladen
+            Connections: Verbindungen
+            Explorer: Explorer
+            Entities: Entitäten
+            Query wizard: Abfrage-Assistent
+            Diagrams: Diagramme
+            Projects: Projekte
+            Deploying: Bereitstellung
+            In your own application: In deiner eigenen Anwendung
             Queries: Abfragen
             Query Language: Abfragesprache
             Expression: Ausdruck
@@ -113,6 +126,14 @@ plugins:
             Change log: Cambios
             Guide: Guía
             Download: Descargar
+            Connections: Conexiones
+            Explorer: Explorador
+            Entities: Entidades
+            Query wizard: Asistente de consultas
+            Diagrams: Diagramas
+            Projects: Proyectos
+            Deploying: Despliegue
+            In your own application: En tu propia aplicación
             Queries: Consultas
             Query Language: Lenguaje de consultas
             Expression: Expresión
@@ -170,6 +191,14 @@ plugins:
             Change log: Alterações
             Guide: Guia
             Download: Baixar
+            Connections: Conexões
+            Explorer: Explorador
+            Entities: Entidades
+            Query wizard: Assistente de consultas
+            Diagrams: Diagramas
+            Projects: Projetos
+            Deploying: Implantação
+            In your own application: Na sua própria aplicação
             Queries: Consultas
             Query Language: Linguagem de consultas
             Expression: Expressão
@@ -239,7 +268,17 @@ nav:
   - Data Gateway IDE:
       - Overview: ide/index.md
       - Download: ide/Download.md
-      - Guide: ide/Guide.md
+      - Getting started: ide/GettingStarted.md
+      - Connections: ide/Connections.md
+      - Explorer: ide/Explorer.md
+      - Entities: ide/Entities.md
+      - Queries: ide/Queries.md
+      - Query wizard: ide/QueryWizard.md
+      - Diagrams: ide/Diagrams.md
+      - Projects: ide/Projects.md
+      - Administration: ide/Administration.md
+      - Deploying: ide/Deploying.md
+      - In your own application: ide/Embedding.md
   - Queries:
       - Query Language: queries/Query-Language.md
       - Expression: queries/Expression.md

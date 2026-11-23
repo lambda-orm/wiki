@@ -9,7 +9,7 @@ Das Gateway hat fünf Transporte. Jeder lauscht auf einem eigenen Port, nur wenn
 | [`mcpHttp`](Mcp.md) | MCP für KI-Agenten | `POST/GET/DELETE /iot/v1/mcp` (Streamable HTTP); `GET /iot/v1/sse` + `POST /iot/v1/messages?sessionId=` (HTTP+SSE) | `GET /status` |
 | [`mcpWebSocket`](Mcp.md#mcpwebsocket) | MCP über WebSocket | Upgrade unter `/iot/v1/mcp` | `GET /status`, `/asyncapi` |
 | [`webSocket`](WebSocket.md) | JSON-RPC-API mit Benachrichtigungen | Verbindung zu `ws://host:port/iot/v1` | Verbindung zur Wurzel: `general.*` und `gateway.schemas`; `/asyncapi` |
-| [`management`](#management) | die API der [IDE](../ide/Guide.md) | dieselben wie `http`, für jedes Schema | die von `http` (ohne Swagger) und `/admin/…` |
+| [`management`](#management) | die API der [IDE](../ide/index.md) | dieselben wie `http`, für jedes Schema | die von `http` (ohne Swagger) und `/admin/…` |
 
 - `{basePath}` (`transports.<t>.basePath`) steht vor jeder Route: mit `basePath: /data-gateway`
   `/data-gateway/iot/v1/execute` und `/data-gateway/schemas`.
@@ -19,7 +19,7 @@ Das Gateway hat fünf Transporte. Jeder lauscht auf einem eigenen Port, nur wenn
 - Jeder Transport authentifiziert jede Anfrage (bzw. das WebSocket-Upgrade) mit der effektiven Authentifizierung des
   Schemas ([Sicherheit](Security.md)).
 - **Kein Transport beantwortet CORS** (seit 4.0.0): Eine Webanwendung ruft das Gateway aus ihrem eigenen Backend auf, wie
-  es die [IDE](../ide/Guide.md) tut.
+  es die [IDE](../ide/index.md) tut.
 
 ## http {#http}
 
@@ -97,7 +97,7 @@ transports:
 
 ## management {#management}
 
-Die API der [IDE](../ide/Guide.md) (seit 4.0.0), auf einem eigenen Port, damit eine Bereitstellung ihn weglassen kann: Ein
+Die API der [IDE](../ide/index.md) (seit 4.0.0), auf einem eigenen Port, damit eine Bereitstellung ihn weglassen kann: Ein
 Produktions-Gateway, dessen Schemas in seinen Volumes mitkommen, wird ohne ihn bereitgestellt, ohne Administration und
 ohne IDE.
 

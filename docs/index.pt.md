@@ -107,10 +107,10 @@ claude mcp add --transport http northwind http://gateway:8081/northwind/mcp --he
 
 ### O navegador {#the-browser}
 
-A [IDE](ide/Guide.md) do Data Gateway, construída com [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui):
+A [IDE](ide/index.md) do Data Gateway, construída com [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui):
 conecte-se a gateways, percorra os esquemas, leia cada entidade como um formulário, escreva consultas com autocompletar e desenhe diagramas.
 
-![A UI do Data Gateway](data-gateway/images/ui-query.png)
+![A UI do Data Gateway](ide/images/ide-query.png)
 
 ## Uma consulta, três bancos de dados {#one-query-three-databases}
 
@@ -246,7 +246,7 @@ a IDE, MCP e WebSocket.
 | [Data Gateway](data-gateway/index.md) | Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | os esquemas via REST, MCP e WebSocket |
 | [IDE do Data Gateway](ide/index.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) · [desktop: Linux, Windows, macOS](ide/Download.md) | a IDE dos gateways: conexões, explorador, consultas, diagramas, administração |
 | [Cliente Node.js](data-gateway/Clients.md) | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | a interface da biblioteca, executada em um Data Gateway |
-| [Componentes de UI](ide/Guide.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | componentes React: o editor de consultas, os resultados, o explorador e os diagramas |
+| [Componentes de UI](ide/Embedding.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | componentes React: o editor de consultas, os resultados, o explorador e os diagramas |
 | [3xpr](https://www.npmjs.com/package/3xpr) | [`3xpr`](https://www.npmjs.com/package/3xpr) | o mecanismo de expressões sobre o qual as consultas, os scripts e as regras do esquema são construídos |
 
 O código-fonte está em [github.com/lambda-orm/core](https://github.com/lambda-orm/core).
