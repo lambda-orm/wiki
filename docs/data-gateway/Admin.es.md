@@ -33,6 +33,7 @@ autenticación; `http` no la tiene. Sus permisos **nunca se dan por defecto**: u
 | `workbenchWrite` | guardar consultas, scripts y diagramas en los workspaces, sin tocar el esquema |
 | `ddl` | cambiar la estructura de las bases de un stage (`push`, `drop`) |
 | `build` | generar el código del dominio en `src/` del workspace |
+| `sessionAdmin` | ver todas las [sesiones](Transports.md#sessions) de `management` (quién está conectado) y revocarlas |
 
 Con `authentication: none` nadie administra, salvo con `admin.allowAnonymous: true` (solo desarrollo local).
 

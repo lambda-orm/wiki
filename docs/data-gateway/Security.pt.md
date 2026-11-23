@@ -28,6 +28,8 @@ authentication:
   permissões da credencial.
 - Sem credencial (ou com uma incorreta) a resposta é `401`; os upgrades de WebSocket são recusados.
 - `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/transports` e `/doc` não precisam de credencial.
+- Em `management` (a IDE) a credencial vai apenas no login, e toda requisição leva o token de uma
+  [sessão](Transports.md#sessions): as sessões são listadas, terminam por inatividade e podem ser revogadas na hora.
 - Nenhum transporte responde CORS: um navegador de outra origem não pode chamar o gateway; um backend próprio pode.
 
 ## Permissões {#permissions}
@@ -40,6 +42,7 @@ authentication:
 | `queue` | `execute-queued` (e `write` se a consulta grava) |
 | `stageImport` | importar um stage |
 | `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | a [administração](Admin.md#turning-it-on): nunca dadas por padrão |
+| `sessionAdmin` | listar todas as [sessões](Transports.md#sessions) de `management` e revogar as de outras credenciais (sem ela, uma credencial vê e fecha apenas as suas): nunca dada por padrão |
 
 - A autorização acontece no worker do esquema, antes de executar qualquer coisa, igual para REST, MCP e WebSocket.
 - Para saber se uma consulta grava, o gateway a analisa (seu `metadata`): com apenas `read`, uma consulta com qualquer

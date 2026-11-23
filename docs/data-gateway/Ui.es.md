@@ -39,6 +39,9 @@ services:
       - "127.0.0.1:8090:8080"
 ```
 
+Con `trustedProxies` de `management` apuntando a la red del IDE, el gateway ve la dirección de cada navegador en sus
+[sesiones](#sessions); si no, todas las sesiones muestran la dirección del IDE.
+
 - **El navegador habla solo con el servidor del IDE.** Este sirve la página y reenvía cada petición al gateway (un
   proxy): REST, MCP y el WebSocket por igual. Los gateways nunca ven al navegador.
 - **`DATA_GATEWAY_IDE_TARGETS`** lista los orígenes a los que el IDE puede llegar, separados por comas, o `*` para
@@ -81,8 +84,24 @@ El IDE no tiene página de inicio ni login: se abre en el workspace, y la primer
 | **Recordar la clave** | guardar la clave en el navegador; si no, se guarda solo en esa pestaña, y se vuelve a pedir al cerrarla |
 | **Otras URLs de sus transportes** | el REST, el WebSocket y el MCP del gateway, solo cuando el IDE no llega a ellos en los puertos que el gateway indica (un proxy delante, otra red) |
 
-**Probar** comprueba la conexión: quién es la credencial (`/whoami`) y la versión del gateway. **Mostrar / Ocultar**
-muestra la clave que se escribió.
+**Probar** comprueba la conexión: quién es la credencial y la versión del gateway. **Mostrar / Ocultar** muestra la
+clave que se escribió.
+
+### Su sesión {#sessions}
+
+Conectar inicia sesión en el `management` del gateway ([sesiones](Transports.md#sessions)): el IDE guarda el token en
+esa pestaña y cada petición lo lleva, nunca la clave.
+
+- Cuando la sesión **expira** (30 minutos sin actividad, o 12 horas) y la clave está a mano, el IDE abre otra por sí
+  solo; sin ella, pide la clave.
+- Cuando se **revoca**, el IDE indica quién la revocó y no vuelve por sí solo, aunque la clave esté recordada: guardar
+  de nuevo la conexión la conecta.
+- El IDE mantiene abierto el WebSocket de eventos del gateway: la sesión se muestra como *conectada*, y un esquema que
+  cambia, o algo guardado por otra persona, se muestra al instante.
+- La página de una conexión lista **Mis sesiones**: las otras de la misma credencial (otro navegador, otro ordenador),
+  con su dirección, qué están mirando y cuándo terminan, para **Cerrar** una o **Cerrar las otras**. Con
+  `sessionAdmin`, también **Sesiones activas**: todas las del gateway, por credencial, para **Revocar** una o
+  **Revocar todas** las de una credencial.
 
 - La página de una conexión muestra quién es esa credencial y **sus roles**: cada permiso, con lo que permite.
 - El explorador lista las conexiones, cada una con sus esquemas; se pueden tener abiertas, lado a lado, pestañas de

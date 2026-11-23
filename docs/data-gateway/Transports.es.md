@@ -103,12 +103,44 @@ transports:
   management:
     port: 9090
     basePath: ''          # opcional
-    # authentication: …   # como cualquier transporte; si no, la global
+    # authentication: …   # como cualquier transporte; si no, la global (la que comprueba un login)
+    trustedProxies: [ 172.30.0.0/16 ]   # el IDE: su X-Forwarded-For indica la dirección del navegador
+    sessions:
+      idleTimeout: 30m    # sin peticiones, una sesión termina
+      maxLifetime: 12h    # tras el login, termina
+      maxPerCredential: 0 # 0 = sin límite; por encima, un login cierra la más antigua de esa credencial
 ```
 
 - **Las rutas de `http` para todos los esquemas**, diga lo que diga `orm.schemas[].transports` (consultas, scripts, el
   esquema, stages, `/whoami`, `/typings`, `/schemas`, `/transports`), con los mismos cuerpos y permisos, y la
   [administración](Admin.md) en `/admin/…`.
-- **Las mismas credenciales y permisos** que los otros transportes; sin Swagger y sin límite de tasa.
+- **Las mismas credenciales y permisos** que los otros transportes, pero a través de una **sesión**: la credencial va
+  solo en el login, y cada una de las demás peticiones lleva el token de la sesión ([abajo](#sessions)). Una
+  credencial enviada directamente responde `401 SessionRequiredError`. Sin Swagger y sin límite de tasa.
 - **Solo en una red interna:** escribe los esquemas y las variables de las conexiones y corre DDL. En un compose, sin
   `ports:`; en Kubernetes, un `Service` interno sin ingress. El IDE llega a él, y lo que se publica es el IDE.
+
+### Sesiones {#sessions}
+
+Desde 4.0.0, `management` funciona con sesiones, para que se sepa quién lo usa y se le pueda cortar el acceso:
+
+| Método | Ruta | Hace | Permiso |
+| --- | --- | --- | --- |
+| `POST` | `/sessions` | el **login**: la credencial en sus headers habituales → `201 { id, token, credential, permissions, expiresAt, idleTimeoutMs }` | cualquier credencial válida |
+| `GET` / `DELETE` | `/sessions/current` | la sesión del token / el **logout** | la sesión |
+| `GET` | `/sessions` | las sesiones de la misma credencial; con `?all=true`, todas | `all` necesita `sessionAdmin` |
+| `DELETE` | `/sessions/{id}` | revoca una sesión | la propia credencial, o `sessionAdmin` |
+| `DELETE` | `/sessions?credential={name}` | revoca todas las sesiones de una credencial (`&except=current`: cerrar las otras) | la propia credencial, o `sessionAdmin` |
+
+- El token va en `X-Data-Gateway-Session`. Solo se guarda su hash, en `<orm.workspacePath>/.data-gateway/state.sqlite`,
+  compartido por las réplicas sobre ese volumen (sin ruta de workspace, en memoria).
+- Una sesión termina tras `idleTimeout` sin peticiones o `maxLifetime` después del login: `401 SessionExpiredError`.
+  Una revocada responde `401 SessionRevokedError`, con quién la revocó y cuándo.
+- Una sesión listada tiene su credencial, la dirección y el cliente (el IDE, su versión, web o escritorio), cuándo se
+  usó por última vez y cuándo termina, si está **conectada** ahora y qué está mirando. Nunca su token.
+- **El WebSocket de eventos**, `ws://…/events`, con la sesión en el upgrade (`X-Data-Gateway-Session`, o el
+  subprotocolo `lambdaorm.session.<token>` desde un navegador): envía `session.revoked` (y cierra con `4401`),
+  `session.expiring` (2 minutos antes del fin de su vida), `schema.statusChanged` y `workspace.changed`. Una sesión con
+  su socket abierto está *conectada*; revocarla, en cualquier réplica, cierra su socket.
+- Cada login, logout, expiración y revocación deja una línea de [auditoría](Security.md#audit).
+- Los transportes de datos no cambian: reciben la credencial en cada petición.

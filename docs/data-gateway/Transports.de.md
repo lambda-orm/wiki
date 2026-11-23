@@ -106,13 +106,47 @@ transports:
   management:
     port: 9090
     basePath: ''          # optional
-    # authentication: …   # wie bei jedem Transport; sonst die globale
+    # authentication: …   # wie bei jedem Transport; sonst die globale (was eine Anmeldung prüft)
+    trustedProxies: [ 172.30.0.0/16 ]   # die IDE: ihr X-Forwarded-For nennt die Adresse des Browsers
+    sessions:
+      idleTimeout: 30m    # ohne Anfragen endet eine Sitzung
+      maxLifetime: 12h    # nach der Anmeldung endet sie
+      maxPerCredential: 0 # 0 = kein Limit; darüber schließt eine Anmeldung die älteste dieser Zugangsdaten
 ```
 
 - **Die Routen von `http` für jedes Schema**, unabhängig davon, was `orm.schemas[].transports` sagt (Abfragen, Skripte,
   das Schema, Stages, `/whoami`, `/typings`, `/schemas`, `/transports`), mit denselben Bodys und Berechtigungen, sowie
   die [Administration](Admin.md) unter `/admin/…`.
-- **Dieselben Zugangsdaten und Berechtigungen** wie die anderen Transporte; kein Swagger und kein Rate Limit.
+- **Dieselben Zugangsdaten und Berechtigungen** wie die anderen Transporte, aber über eine **Sitzung**: Die
+  Zugangsdaten gehen nur in die Anmeldung, und jede andere Anfrage trägt das Token der Sitzung ([unten](#sessions)).
+  Direkt gesendete Zugangsdaten werden mit `401 SessionRequiredError` beantwortet. Kein Swagger und kein Rate Limit.
 - **Nur in einem internen Netzwerk:** Er schreibt die Schemas und die Variablen der Verbindungen und führt DDL aus. In
   einem Compose ohne `ports:`; in Kubernetes ein interner `Service` ohne Ingress. Die IDE erreicht ihn, und
   veröffentlicht wird die IDE.
+
+### Sitzungen {#sessions}
+
+Seit 4.0.0 arbeitet `management` mit Sitzungen, damit bekannt ist, wer es nutzt, und der Zugang entzogen werden kann:
+
+| Methode | Route | Tut | Berechtigung |
+| --- | --- | --- | --- |
+| `POST` | `/sessions` | die **Anmeldung**: die Zugangsdaten in ihren üblichen Headern → `201 { id, token, credential, permissions, expiresAt, idleTimeoutMs }` | beliebige gültige Zugangsdaten |
+| `GET` / `DELETE` | `/sessions/current` | die Sitzung des Tokens / die **Abmeldung** | die Sitzung |
+| `GET` | `/sessions` | die Sitzungen derselben Zugangsdaten; mit `?all=true` alle | `all` erfordert `sessionAdmin` |
+| `DELETE` | `/sessions/{id}` | widerruft eine Sitzung | die eigenen Zugangsdaten oder `sessionAdmin` |
+| `DELETE` | `/sessions?credential={name}` | widerruft alle Sitzungen von Zugangsdaten (`&except=current`: die anderen schließen) | die eigenen Zugangsdaten oder `sessionAdmin` |
+
+- Das Token geht in `X-Data-Gateway-Session`. Nur sein Hash wird gespeichert, in
+  `<orm.workspacePath>/.data-gateway/state.sqlite`, geteilt von den Replikas auf diesem Volume (ohne Workspace-Pfad im
+  Speicher).
+- Eine Sitzung endet nach `idleTimeout` ohne Anfragen oder `maxLifetime` nach der Anmeldung: `401 SessionExpiredError`.
+  Eine widerrufene antwortet mit `401 SessionRevokedError` und nennt, wer sie wann widerrufen hat.
+- Eine aufgelistete Sitzung hat ihre Zugangsdaten, die Adresse und den Client (die IDE, ihre Version, Web oder
+  Desktop), wann sie zuletzt genutzt wurde und wann sie endet, ob sie gerade **verbunden** ist und was sie sich ansieht.
+  Nie ihr Token.
+- **Der WebSocket der Ereignisse**, `ws://…/events`, mit der Sitzung im Upgrade (`X-Data-Gateway-Session` oder, aus
+  einem Browser, das Subprotokoll `lambdaorm.session.<token>`): Er sendet `session.revoked` (und schließt mit `4401`),
+  `session.expiring` (2 Minuten vor dem Ende ihrer Lebensdauer), `schema.statusChanged` und `workspace.changed`. Eine
+  Sitzung mit offenem Socket ist *verbunden*; sie zu widerrufen, in welcher Replika auch immer, schließt ihren Socket.
+- Jede Anmeldung, Abmeldung, jeder Ablauf und jeder Widerruf hinterlässt eine [Audit](Security.md#audit)-Zeile.
+- Die Daten-Transporte ändern sich nicht: Sie nehmen die Zugangsdaten bei jeder Anfrage entgegen.

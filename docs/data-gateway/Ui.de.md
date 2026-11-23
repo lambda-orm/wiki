@@ -40,6 +40,9 @@ services:
       - "127.0.0.1:8090:8080"
 ```
 
+Mit `trustedProxies` von `management` auf das Netzwerk der IDE gesetzt, sieht das Gateway die Adresse jedes Browsers in
+seinen [Sitzungen](#sessions); andernfalls zeigt jede Sitzung die Adresse der IDE.
+
 - **Der Browser spricht nur mit dem Server der IDE.** Dieser stellt die Seite bereit und leitet jede Anfrage an das
   Gateway weiter (ein Proxy): REST, MCP und den WebSocket gleichermaßen. Die Gateways sehen den Browser nie.
 - **`DATA_GATEWAY_IDE_TARGETS`** listet die Origins, die die IDE erreichen darf, durch Kommas getrennt, oder `*` für
@@ -83,8 +86,24 @@ Die IDE hat keine Startseite und keine Anmeldung: Sie öffnet sich im Arbeitsber
 | **Key merken** | den Key im Browser behalten; sonst bleibt er nur in diesem Tab und wird nach dem Schließen erneut abgefragt |
 | **Andere URLs seiner Transporte** | REST, WebSocket und MCP des Gateways, nur wenn die IDE sie nicht unter den Ports erreicht, die das Gateway nennt (ein Proxy davor, ein anderes Netzwerk) |
 
-**Testen** prüft die Verbindung: wer die Zugangsdaten sind (`/whoami`) und die Version des Gateways. **Anzeigen /
-Verbergen** zeigt den eingegebenen Key an.
+**Testen** prüft die Verbindung: wer die Zugangsdaten sind und die Version des Gateways. **Anzeigen / Verbergen** zeigt
+den eingegebenen Key an.
+
+### Ihre Sitzung {#sessions}
+
+Das Verbinden meldet sich am `management` des Gateways an ([Sitzungen](Transports.md#sessions)): Die IDE behält das
+Token in diesem Tab, und jede Anfrage trägt es, nie den Key.
+
+- Wenn die Sitzung **abläuft** (30 Minuten ohne Aktivität oder 12 Stunden) und der Key zur Hand ist, öffnet die IDE
+  selbst eine neue; ohne ihn fragt sie nach dem Key.
+- Wenn sie **widerrufen** wird, sagt die IDE, wer sie widerrufen hat, und verbindet sich nicht von selbst neu, auch nicht
+  mit gemerktem Key: Erneutes Speichern der Verbindung verbindet sie.
+- Die IDE hält den WebSocket der Ereignisse des Gateways offen: Die Sitzung erscheint als *verbunden*, und ein Schema,
+  das sich ändert, oder etwas, das jemand anderes gespeichert hat, erscheint sofort.
+- Die Seite einer Verbindung listet **Meine Sitzungen**: die anderen derselben Zugangsdaten (ein anderer Browser, ein
+  anderer Rechner), mit ihrer Adresse, was sie sich ansehen und wann sie enden, um eine zu **Schließen** oder **Die
+  anderen schließen**. Mit `sessionAdmin` auch **Aktive Sitzungen**: alle des Gateways, nach Zugangsdaten, um eine zu
+  **Widerrufen** oder **Alle widerrufen** für Zugangsdaten.
 
 - Die Seite einer Verbindung zeigt, wer diese Zugangsdaten sind, und **ihre Rollen**: jede Berechtigung mit dem, was
   sie erlaubt.

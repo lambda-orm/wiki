@@ -213,6 +213,7 @@ transports:
     port: $DATA_GATEWAY_WS_PORT
   management:                      # a API da IDE; sem a variável, não é exposta (produção)
     port: $DATA_GATEWAY_MANAGEMENT_PORT
+    sessions: { idleTimeout: 30m, maxLifetime: 12h }
 ```
 
 ## Referência {#reference}
@@ -257,6 +258,10 @@ transports:
 | `transports.http.swagger.enabled` | `true` | `/doc` e `/api-docs` |
 | `transports.http.ui` | — | **removida na 4.0.0** (avisada e ignorada): a [UI](Ui.md) é o data-gateway-ide |
 | `transports.management.port` | **nenhum** | a API da [IDE](Ui.md) e a [administração](Admin.md) ([Transportes](Transports.md#management)) |
+| `transports.management.sessions.idleTimeout` / `maxLifetime` | `30m` / `12h` | quando uma [sessão](Transports.md#sessions) termina: sem requisições, e depois do login |
+| `transports.management.sessions.maxPerCredential` | `0` | sessões simultâneas por credencial; `0` = sem limite; acima dele, um login fecha a mais antiga |
+| `transports.management.sessions.store` | `auto` | `auto`: `<orm.workspacePath>/.data-gateway/state.sqlite` (compartilhado pelas réplicas); `memory`: apenas esta réplica |
+| `transports.management.trustedProxies` | `[]` | endereços ou redes (CIDR) cujo `X-Forwarded-For` é aceito: a IDE, para que se veja o endereço do navegador |
 | `transports.mcpHttp.legacySse` | `true` | além do Streamable HTTP, o antigo HTTP+SSE para clientes antigos |
 | `transports.mcpHttp.stateful` | `false` | Streamable HTTP sem estado: qualquer réplica responde a qualquer requisição |
 | `transports.<ws>.asyncapi.enabled` | `true` | `GET /asyncapi` e `/asyncapi.json` de `webSocket` e `mcpWebSocket` |

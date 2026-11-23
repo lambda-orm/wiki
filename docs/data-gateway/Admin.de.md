@@ -34,6 +34,7 @@ Berechtigungsliste haben nur die der Daten.
 | `workbenchWrite` | Abfragen, Skripte und Diagramme in den Workspaces speichern, ohne das Schema zu ändern |
 | `ddl` | die Struktur der Datenbanken eines Stage ändern (`push`, `drop`) |
 | `build` | den Code der Domäne in `src/` des Workspace erzeugen |
+| `sessionAdmin` | jede [Sitzung](Transports.md#sessions) von `management` sehen (wer verbunden ist) und sie widerrufen |
 
 Mit `authentication: none` administriert niemand, außer mit `admin.allowAnonymous: true` (nur lokale Entwicklung).
 

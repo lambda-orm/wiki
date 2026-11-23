@@ -33,6 +33,7 @@ A administração responde em `/admin` do [transporte `management`](Transports.m
 | `workbenchWrite` | salvar consultas, scripts e diagramas nos workspaces, sem tocar no esquema |
 | `ddl` | alterar a estrutura dos bancos de um stage (`push`, `drop`) |
 | `build` | gerar o código do domínio em `src/` do workspace |
+| `sessionAdmin` | ver todas as [sessões](Transports.md#sessions) de `management` (quem está conectado) e revogá-las |
 
 Com `authentication: none` ninguém administra, salvo com `admin.allowAnonymous: true` (só desenvolvimento local).
 
