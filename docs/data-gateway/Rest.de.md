@@ -16,7 +16,7 @@ unter seiner Route:
 Mit `transports.http.basePath: /data-gateway` liegt jede Route darunter: `/data-gateway/iot/v1/execute`.
 
 - Jede Anfrage benötigt die Zugangsdaten, außer `/ping`, `/health` und `/metrics` (an der Wurzel und unter jedem
-  Schema), `/schemas`, `/version`, `/doc` und die UI. Wie sie gesendet werden, hängt von der
+  Schema), `/schemas`, `/transports`, `/version` und `/doc`. Wie sie gesendet werden, hängt von der
   [Authentifizierung](Security.md) ab: `X-Api-Key: <key>`, `Authorization: Bearer <token>` oder
   `Authorization: Basic <base64>`.
 - `?format=beautiful` rückt das JSON der Antwort ein.
@@ -348,7 +348,7 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 
 ## Administration {#administration}
 
-Mit `admin.enabled` ([Administration](Admin.md)), unter `/admin` dieses Transports. Ein Workspace wird über seine Route in einem Segment benannt (`iot%2Fv1`; `~` die Wurzel). Jedes Lesen liefert seine Version (`ETag`); jedes Schreiben nennt die, die es ändert (`If-Match`, oder das Element wie gelesen): eine andere Version ist ein `412` mit dem aktuellen Stand.
+Auf dem [`management`-Transport](Transports.md#management) ([Administration](Admin.md)), unter `/admin`. Ein Workspace wird über seine Route in einem Segment benannt (`iot%2Fv1`; `~` die Wurzel). Jedes Lesen liefert seine Version (`ETag`); jedes Schreiben nennt die, die es ändert (`If-Match`, oder das Element wie gelesen): eine andere Version ist ein `412` mit dem aktuellen Stand.
 
 | Method | Route | | Permission |
 | --- | --- | --- | --- |

@@ -1,6 +1,6 @@
 # Administração {#administration}
 
-Com `admin.enabled`, a gateway e sua [UI](Ui.md) deixam de ser somente leitura: os esquemas são **criados, editados e
+Com sua porta `management`, a gateway e sua [UI](Ui.md) deixam de ser somente leitura: os esquemas são **criados, editados e
 removidos** a partir delas, como YAML ou elemento por elemento, o que é salvo (consultas, scripts, diagramas) é
 compartilhado nos workspaces, e os **comandos da [CLI](../cli/index.md)** rodam pela UI. Tudo fica no volume da
 gateway, um workspace por esquema; a gateway percebe o que muda e serve sem reiniciar.
@@ -8,8 +8,10 @@ gateway, um workspace por esquema; a gateway percebe o que muda e serve sem rein
 ## Ativação {#turning-it-on}
 
 ```yaml
+transports:
+  management:
+    port: 9090               # sem porta, nenhuma administração (e nenhuma IDE)
 admin:
-  enabled: true              # desligada por padrão
   commandTimeoutMs: 600000   # quanto um comando pode demorar
   maxFileBytes: 2MB          # o maior arquivo que pode ser gravado
 authentication:
@@ -20,8 +22,8 @@ authentication:
     - { name: analyst, value: $ANALYST_KEY, permissions: [ read, workbenchWrite ] }
 ```
 
-A administração responde em `/admin` do [transporte `http`](Transports.md#http), com sua autenticação. Suas permissões
-**nunca são dadas por padrão**: uma credencial sem lista de permissões tem só as dos dados.
+A administração responde em `/admin` do [transporte `management`](Transports.md#management), com sua autenticação; o
+`http` não a tem. Suas permissões **nunca são dadas por padrão**: uma credencial sem lista de permissões tem só as dos dados.
 
 | Permissão | Permite |
 | --- | --- |

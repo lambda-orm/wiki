@@ -27,7 +27,8 @@ authentication:
 - Los secretos se comparan en tiempo constante. El secreto nunca viaja a los workers de los esquemas: solo el nombre y los
   permisos de la credencial.
 - Sin credencial (o con una incorrecta) la respuesta es `401`; los upgrades de WebSocket se rechazan.
-- `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/doc` y los archivos de la UI no necesitan credencial.
+- `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/transports` y `/doc` no necesitan credencial.
+- Ningún transporte responde CORS: un navegador de otro origen no puede llamar al gateway; un backend propio, sí.
 
 ## Permisos {#permissions}
 

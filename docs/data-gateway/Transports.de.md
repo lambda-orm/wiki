@@ -1,22 +1,25 @@
 # Transporte {#transports}
 
-Das Gateway hat vier Transporte. Jeder lauscht auf einem eigenen Port, nur wenn der Port konfiguriert ist
+Das Gateway hat fünf Transporte. Jeder lauscht auf einem eigenen Port, nur wenn der Port konfiguriert ist
 ([Konfiguration](Configuration.md#transports-and-ports)), und jeder erreicht jedes Schema über dessen Route.
 
 | Transport | Was er ist | Routen des Schemas `iot/v1` | Routen des Gateways |
 | --- | --- | --- | --- |
-| [`http`](Rest.md) | REST API, OpenAPI 3 | `POST /iot/v1/execute`, `GET /iot/v1/entities`, … | `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/doc`, `/api-docs`, `/ui` |
+| [`http`](Rest.md) | REST API, OpenAPI 3 | `POST /iot/v1/execute`, `GET /iot/v1/entities`, … | `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/transports`, `/doc`, `/api-docs` |
 | [`mcpHttp`](Mcp.md) | MCP für KI-Agenten | `POST/GET/DELETE /iot/v1/mcp` (Streamable HTTP); `GET /iot/v1/sse` + `POST /iot/v1/messages?sessionId=` (HTTP+SSE) | `GET /status` |
 | [`mcpWebSocket`](Mcp.md#mcpwebsocket) | MCP über WebSocket | Upgrade unter `/iot/v1/mcp` | `GET /status`, `/asyncapi` |
 | [`webSocket`](WebSocket.md) | JSON-RPC-API mit Benachrichtigungen | Verbindung zu `ws://host:port/iot/v1` | Verbindung zur Wurzel: `general.*` und `gateway.schemas`; `/asyncapi` |
+| [`management`](#management) | die API der [IDE](Ui.md) | dieselben wie `http`, für jedes Schema | die von `http` (ohne Swagger) und `/admin/…` |
 
 - `{basePath}` (`transports.<t>.basePath`) steht vor jeder Route: mit `basePath: /data-gateway`
-  `/data-gateway/iot/v1/execute` und `/data-gateway/ui/`.
+  `/data-gateway/iot/v1/execute` und `/data-gateway/schemas`.
 - Mit einem einzigen Schema an der Wurzel haben seine Routen kein Präfix (`/execute`, `/mcp`, `ws://host:port/`).
 - Ein Schema, das auf einem Transport nicht bereitgestellt wird (`schemas[].transports`), antwortet dort mit `404`. Ein
   Schema, das nicht `ready` ist, antwortet mit `503` und dem Grund.
 - Jeder Transport authentifiziert jede Anfrage (bzw. das WebSocket-Upgrade) mit der effektiven Authentifizierung des
   Schemas ([Sicherheit](Security.md)).
+- **Kein Transport beantwortet CORS** (seit 4.0.0): Eine Webanwendung ruft das Gateway aus ihrem eigenen Backend auf, wie
+  es die [IDE](Ui.md) tut.
 
 ## http {#http}
 
@@ -29,7 +32,6 @@ transports:
     port: 8080
     basePath: /data-gateway   # optional
     swagger: { enabled: true }   # /doc and /api-docs (Swagger UI, OpenAPI 3)
-    ui: { enabled: true }        # the web UI at /ui
 ```
 
 - `GET /doc` (und `/api-docs`) stellt Swagger UI mit dem OpenAPI-Dokument bereit. Die Schaltfläche **Authorize** fragt
@@ -37,6 +39,8 @@ transports:
   Benutzer und Passwort.
 - `/ping`, `/health` und `/metrics` benötigen keine Zugangsdaten (Kubernetes-Probes, Prometheus).
 - Das Rate Limit (`rateLimit`) gilt nur für diesen Transport.
+- `GET /transports` nennt die Transporte des Gateways (ihren Port, ihren Base-Path und ihr Dokument), und
+  `GET /openapi.json` ist das OpenAPI-Dokument: was ein Client, oder die IDE, braucht, um sie zu finden.
 
 ## mcpHttp {#mcphttp}
 
@@ -90,3 +94,25 @@ transports:
     maxConnections: 100
     asyncapi: { enabled: true }   # GET /asyncapi, /asyncapi.json
 ```
+
+## management {#management}
+
+Die API der [IDE](Ui.md) (seit 4.0.0), auf einem eigenen Port, damit eine Bereitstellung ihn weglassen kann: Ein
+Produktions-Gateway, dessen Schemas in seinen Volumes mitkommen, wird ohne ihn bereitgestellt, ohne Administration und
+ohne IDE.
+
+```yaml
+transports:
+  management:
+    port: 9090
+    basePath: ''          # optional
+    # authentication: …   # wie bei jedem Transport; sonst die globale
+```
+
+- **Die Routen von `http` für jedes Schema**, unabhängig davon, was `orm.schemas[].transports` sagt (Abfragen, Skripte,
+  das Schema, Stages, `/whoami`, `/typings`, `/schemas`, `/transports`), mit denselben Bodys und Berechtigungen, sowie
+  die [Administration](Admin.md) unter `/admin/…`.
+- **Dieselben Zugangsdaten und Berechtigungen** wie die anderen Transporte; kein Swagger und kein Rate Limit.
+- **Nur in einem internen Netzwerk:** Er schreibt die Schemas und die Variablen der Verbindungen und führt DDL aus. In
+  einem Compose ohne `ports:`; in Kubernetes ein interner `Service` ohne Ingress. Die IDE erreicht ihn, und
+  veröffentlicht wird die IDE.

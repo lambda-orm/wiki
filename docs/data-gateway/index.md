@@ -85,7 +85,7 @@ slow down another; a schema whose database is down answers `503` and is retried,
 
 - [Getting started](GettingStarted.md): step by step, from an empty folder to the REST API, the IDE, MCP and WebSocket.
 - [Configuration](Configuration.md): the configuration file, schemas, environment, runtime and every key.
-- [Transports](Transports.md): the four transports, their routes and options.
+- [Transports](Transports.md): the five transports (four of data and `management`, the IDE's), their routes and options.
 - [REST API](Rest.md): every method of the `http` transport, with examples.
 - [MCP](Mcp.md): the tools, resources and transports for AI agents.
 - [WebSocket API](WebSocket.md): the JSON-RPC methods and the notifications.

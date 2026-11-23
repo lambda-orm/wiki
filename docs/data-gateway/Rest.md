@@ -14,7 +14,7 @@ The examples use a gateway at `http://localhost:8080` with an API key. Each sche
 With `transports.http.basePath: /data-gateway`, every route is under it: `/data-gateway/iot/v1/execute`.
 
 - Every request needs the credential, except `/ping`, `/health` and `/metrics` (at the root and under each schema),
-  `/schemas`, `/version`, `/doc` and the UI. How it is sent depends on the [authentication](Security.md):
+  `/schemas`, `/transports`, `/version` and `/doc`. How it is sent depends on the [authentication](Security.md):
   `X-Api-Key: <key>`, `Authorization: Bearer <token>` or `Authorization: Basic <base64>`.
 - `?format=beautiful` indents the JSON of the answer.
 - `data` (the parameters of a query) and `options` (for example `{ "stage": "default" }`) are JSON objects; JSON text

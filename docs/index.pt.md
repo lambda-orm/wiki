@@ -107,8 +107,8 @@ claude mcp add --transport http northwind http://gateway:8081/northwind/mcp --he
 
 ### O navegador {#the-browser}
 
-A [UI](data-gateway/Ui.md) do Data Gateway, construída com [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui):
-percorra os esquemas, leia cada entidade como um formulário, escreva consultas com autocompletar e desenhe diagramas.
+A [IDE](data-gateway/Ui.md) do Data Gateway, construída com [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui):
+conecte-se a gateways, percorra os esquemas, leia cada entidade como um formulário, escreva consultas com autocompletar e desenhe diagramas.
 
 ![A UI do Data Gateway](data-gateway/images/ui-query.png)
 
@@ -224,8 +224,9 @@ authentication:
     - { name: agent,   value: $AGENT_KEY,   permissions: [ read ] }
     - { name: backend, value: $BACKEND_KEY, permissions: [ read, write, script ] }
 transports:
-  http:    { port: 8080, ui: { enabled: true } }    # REST, OpenAPI, the UI
-  mcpHttp: { port: 8081 }                           # AI agents
+  http:       { port: 8080 }    # REST, OpenAPI
+  mcpHttp:    { port: 8081 }    # agentes de IA
+  management: { port: 9090 }    # a IDE (apenas rede interna; omitido em produção)
 ```
 
 - As mesmas permissões em todos os transportes: um agente com `read` pode consultar, nunca escrever.
@@ -234,7 +235,7 @@ transports:
   tamanho.
 
 **Experimente em dez minutos:** [Primeiros passos](data-gateway/GettingStarted.md), de uma pasta vazia até a API REST,
-a UI, MCP e WebSocket.
+a IDE, MCP e WebSocket.
 
 ## O ecossistema {#the-ecosystem}
 
@@ -242,7 +243,8 @@ a UI, MCP e WebSocket.
 | --- | --- | --- |
 | [Biblioteca](usage/Usage.md) | [`@lambdaorm/lib`](https://www.npmjs.com/package/@lambdaorm/lib) | o ORM: executa as consultas nos bancos de dados |
 | [CLI](cli/index.md) | [`@lambdaorm/cli`](https://www.npmjs.com/package/@lambdaorm/cli) | o comando `lambdaorm`: projetos, sincronização, importação / exportação, consultas, scripts |
-| [Data Gateway](data-gateway/index.md) | Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | os esquemas via REST, MCP e WebSocket, com uma UI web |
+| [Data Gateway](data-gateway/index.md) | Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | os esquemas via REST, MCP e WebSocket |
+| [IDE do Data Gateway](data-gateway/Ui.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) | a IDE dos gateways: conexões, explorador, consultas, diagramas, administração |
 | [Cliente Node.js](data-gateway/Clients.md) | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | a interface da biblioteca, executada em um Data Gateway |
 | [Componentes de UI](data-gateway/Ui.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | componentes React: o editor de consultas, os resultados, o explorador e os diagramas |
 | [3xpr](https://www.npmjs.com/package/3xpr) | [`3xpr`](https://www.npmjs.com/package/3xpr) | o mecanismo de expressões sobre o qual as consultas, os scripts e as regras do esquema são construídos |

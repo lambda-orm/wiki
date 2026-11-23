@@ -14,7 +14,7 @@ Los ejemplos usan un gateway en `http://localhost:8080` con una API key. Los mé
 Con `transports.http.basePath: /data-gateway`, todas las rutas quedan bajo ella: `/data-gateway/iot/v1/execute`.
 
 - Todas las peticiones necesitan la credencial, excepto `/ping`, `/health` y `/metrics` (en la raíz y bajo cada esquema),
-  `/schemas`, `/version`, `/doc` y la UI. Cómo se envía depende de la [autenticación](Security.md):
+  `/schemas`, `/version`, `/transports` y `/doc`. Cómo se envía depende de la [autenticación](Security.md):
   `X-Api-Key: <key>`, `Authorization: Bearer <token>` o `Authorization: Basic <base64>`.
 - `?format=beautiful` indenta el JSON de la respuesta.
 - `data` (los parámetros de una consulta) y `options` (por ejemplo `{ "stage": "default" }`) son objetos JSON; también se acepta
@@ -345,7 +345,7 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 
 ## Administración {#administration}
 
-Con `admin.enabled` ([Administración](Admin.md)), bajo `/admin` de este transporte. Un workspace se nombra por su ruta en un segmento (`iot%2Fv1`; `~` la raíz). Cada lectura devuelve su versión (`ETag`); cada escritura dice cuál cambia (`If-Match`, o el elemento como se leyó): otra versión es un `412` con lo que hay ahora.
+En el [transporte `management`](Transports.md#management) ([Administración](Admin.md)), bajo `/admin`. Un workspace se nombra por su ruta en un segmento (`iot%2Fv1`; `~` la raíz). Cada lectura devuelve su versión (`ETag`); cada escritura dice cuál cambia (`If-Match`, o el elemento como se leyó): otra versión es un `412` con lo que hay ahora.
 
 | Method | Route | | Permission |
 | --- | --- | --- | --- |

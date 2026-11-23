@@ -90,5 +90,5 @@ claude mcp add --transport http iot-v1 http://gateway:8081/iot/v1/mcp --header "
 
 ## Web {#web}
 
-La [UI](Ui.md) del gateway, y [`@lambdaorm/ui`](Ui.md#in-your-own-application) para incluirla en una aplicación
-propia.
+El [IDE](Ui.md) del gateway, y [`@lambdaorm/ui`](Ui.md#in-your-own-application) para incluir la UI en una
+aplicación propia. El gateway no responde CORS: una aplicación web lo llama desde su backend.

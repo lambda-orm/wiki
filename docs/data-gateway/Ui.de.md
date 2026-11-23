@@ -1,62 +1,89 @@
 # UI {#ui}
 
-Eine Schritt-für-Schritt-Tour, von der Anmeldung bis zu einem Diagramm, finden Sie unter
+Eine Schritt-für-Schritt-Tour, von der ersten Verbindung bis zu einem Diagramm, finden Sie unter
 [Erste Schritte](GettingStarted.md#9-the-ui).
 
-Das Gateway stellt eine Weboberfläche bereit, um seine Schemas zu erkunden und abzufragen: einen Explorer der Schemas und
+Die UI des Data Gateway ist die **data-gateway-ide**, ein eigenes Image
+([`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide)): ein Explorer der Schemas und
 ihrer Entitäten, das Formular jeder Entität, Abfrage-Tabs mit Autovervollständigung der Domäne, gespeicherte Abfragen und
 Diagramme der Domäne. Sie eignet sich, um Abfragen auszuprobieren, die Sprache zu lernen und zu prüfen, was ein Agent
 über MCP tut.
 
+Wie eine Datenbank-IDE verbindet sie sich mit Data Gateways, einem oder mehreren, jedes mit seinen Zugangsdaten; deren
+Schemas, Workspaces und Projekte bleiben in ihnen.
+
+## Bereitstellen {#deploying-it}
+
+Seit 4.0.0 stellt das Gateway keine UI bereit und beantwortet kein CORS. Die IDE erreicht es über seinen
+**`management`**-Port ([Transporte](Transports.md#management)): die Routen der REST API für jedes Schema plus die
+[Administration](Admin.md). Ein Gateway ohne diesen Port hat keine IDE, und genau das kann ein Produktions-Gateway
+wollen, dessen Schemas in seinen Volumes mitkommen.
+
 ```yaml
+# data-gateway.config.yaml
 transports:
-  http:
-    port: 8080
-    ui: { enabled: true }       # off by default
+  http: { port: 8080 }
+  management: { port: 9090 }    # die API der IDE; ohne Port nicht bereitgestellt
 ```
 
-Sie ist unter `http://localhost:8080/ui/` erreichbar (mit `basePath: /data-gateway` unter `/data-gateway/ui/`). Sie wird
-vom selben Transport `http` bereitgestellt und ruft dessen [REST API](Rest.md) mit den eingegebenen Zugangsdaten auf:
-Sie hat keinen anderen Zugriff.
+```yaml
+# docker-compose.yml
+services:
+  data-gateway:
+    image: flaviorita/data-gateway:4.0.0
+    # 9090 wird nicht veröffentlicht: nur die IDE erreicht ihn, im Netzwerk des Compose
+  ide:
+    image: flaviorita/data-gateway-ide:1.0.0
+    environment:
+      DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080"
+    ports:
+      - "127.0.0.1:8090:8080"
+```
 
-## Seiten {#pages}
+- **Der Browser spricht nur mit dem Server der IDE.** Dieser stellt die Seite bereit und leitet jede Anfrage an das
+  Gateway weiter (ein Proxy): REST, MCP und den WebSocket gleichermaßen. Die Gateways sehen den Browser nie.
+- **`DATA_GATEWAY_IDE_TARGETS`** listet die Origins, die die IDE erreichen darf, durch Kommas getrennt, oder `*` für
+  alle (eine lokal ausgeführte IDE). Ohne die Variable erreicht die IDE keinen und sagt das: Ein offener Proxy würde
+  jeden Host seines Netzwerks erreichen.
+- **Die IDE behält keine Verbindung und keine Zugangsdaten.** Sie bleiben im Browser. Sie leitet die Zugangsdaten an das
+  Gateway weiter und verwirft die Cookies und den Origin der Seite.
+- **Halten Sie `management` in einem internen Netzwerk.** Es schreibt die Schemas und ihre Variablen und führt DDL aus;
+  veröffentlicht wird die IDE.
 
-**Startseite.** Was das Data Gateway ist, seine Version, die Schemas der Instanz mit ihrem Zustand (`ready`, `error`, …),
-ein Link zur API-Dokumentation (Swagger) und die Schaltfläche **Anmelden**.
+## Verbindungen {#connections}
 
-![Startseite](images/ui-home.png)
+Die IDE hat keine Startseite und keine Anmeldung: Sie öffnet sich im Arbeitsbereich, beim ersten Mal mit einer
+**Neuen Verbindung**.
 
-**Anmeldung.** Die Authentifizierung der Instanz und die Zugangsdaten:
-
-| Authentifizierung | Fragt ab |
+| Feld | Was es ist |
 | --- | --- |
-| API-Key | den Header (Standard `X-Api-Key`) und den Key |
-| Bearer-Token | das Token |
-| Basic | den Benutzer und das Passwort |
-| Keine | nichts |
+| **Name** | wie die Verbindung angezeigt wird |
+| **Protokoll** und **Adresse** | das `management` des Gateways, wie **der Server der IDE** es erreicht: `data-gateway:9090` (Host, Port und Base-Path), nicht die Adresse des Browsers |
+| **Authentifizierung** | API-Key (der Header, Standard `X-Api-Key`, und der Key), Bearer-Token, Basic (Benutzer und Passwort) oder keine |
+| **Key merken** | den Key im Browser behalten; sonst bleibt er nur in diesem Tab und wird nach dem Schließen erneut abgefragt |
+| **Andere URLs seiner Transporte** | REST, WebSocket und MCP des Gateways, nur wenn die IDE sie nicht unter den Ports erreicht, die das Gateway nennt (ein Proxy davor, ein anderes Netzwerk) |
 
-Die Schaltfläche **Anzeigen / Verbergen** zeigt das Eingegebene an. Die Zugangsdaten werden gegen ein Schema geprüft (`/whoami`):
-Falsche Zugangsdaten werden gemeldet, und die Seite bleibt bestehen. **Die Zugangsdaten werden nur in diesem
-Browser-Tab gehalten**: Durch Schließen oder Neuladen werden sie vergessen, und sie werden nie gespeichert.
+**Testen** prüft die Verbindung: wer die Zugangsdaten sind (`/whoami`) und die Version des Gateways. **Anzeigen /
+Verbergen** zeigt den eingegebenen Key an.
 
-![Anmeldung](images/ui-login.png)
+- Die Seite einer Verbindung zeigt, wer diese Zugangsdaten sind, und **ihre Rollen**: jede Berechtigung mit dem, was
+  sie erlaubt.
+- Der Explorer listet die Verbindungen, jede mit ihren Schemas; Tabs mehrerer Verbindungen können nebeneinander
+  geöffnet sein. Eine Verbindung wird in ihrer Zeile bearbeitet oder entfernt (Entfernen nimmt sie nur aus der IDE).
+- Aus einer Verbindung, in Tabs, mit ihren Zugangsdaten: ihre **REST API** (Swagger, um jede Methode auszuprobieren),
+  ihr **WebSocket** (seine Methoden, eine JSON-RPC-Konsole und was zurückkommt) und ihr **MCP** (die Tools eines
+  Schemas, mit ihren Argumenten aufgerufen). Ein Transport, den das Gateway nicht bereitstellt, ist deaktiviert.
 
-**Abfragen.** Der Arbeitsbereich nach der Anmeldung: oben der Name und die Berechtigungen der Zugangsdaten, die
-API-Dokumentation und **Abmelden** (zurück zur Startseite).
-
-Oben auf jeder Seite gibt es zwei Auswahlfelder:
-
-- **Design:** System (wie das Betriebssystem), Hell oder Dunkel.
-- **Sprache:** English, Español, Português, Français, Italiano, Deutsch, Nederlands, Català, Galego, Euskara.
-
-Beide merkt sich der Browser.
+**Einstellungen** (das Menü ☰): das Design (System, Hell, Dunkel und weitere), die Sprache (English, Español,
+Português, Français, Italiano, Deutsch, Nederlands, Català, Galego, Euskara) und das regionale Format der Zahlen und
+Daten der Ergebnisse. Der Browser merkt sie sich.
 
 ![Dunkles Design, auf Spanisch](images/ui-dark-es.png)
 
 ## Explorer {#explorer}
 
-Links die Schemas der Instanz. Seine Größe lässt sich durch Ziehen am Rand ändern, und er lässt sich mit der
-Panel-Schaltfläche der Tab-Leiste ausblenden. Für jedes Schema:
+Links die Verbindungen und die Schemas jeder Verbindung. Seine Größe lässt sich durch Ziehen am Rand ändern, und er
+lässt sich mit der Panel-Schaltfläche der Tab-Leiste ausblenden. Für jedes Schema:
 
 - **Domäne (YAML).** Die Domäne des Schemas (Entitäten, Eigenschaften, Beziehungen, Schlüssel, Enums) in einem
   **schreibgeschützten** Editor mit Syntaxhervorhebung, Suche und Einklappen. Er zeigt nur die Domäne: nie die Quellen,
@@ -178,9 +205,10 @@ Entitäten gespeichert.
 
 ## Wo gespeichert wird {#where-it-is-saved}
 
-Was gespeichert wird (Ordner, Abfragen, Diagramme), bleibt **im Browser**, in seiner IndexedDB, getrennt nach Gateway und
-nach Zugangsdaten: Was mit einem Zugang gespeichert wird, ist mit einem anderen nicht sichtbar. Dafür wird
-nur der Name der Zugangsdaten verwendet, nie deren Secret.
+Mit der Berechtigung `workbenchWrite` geht das Gespeicherte (Ordner, Abfragen, Diagramme) in den Ordner `workbench/`
+jedes Workspace, im Gateway ([Administration](Admin.md)), geteilt mit allen, die ihn verwenden. Ohne sie bleibt es
+**im Browser**, in seiner IndexedDB, getrennt nach Gateway und nach Zugangsdaten: Was mit einem Zugang gespeichert wird,
+ist mit einem anderen nicht sichtbar. Dafür wird nur der Name der Zugangsdaten verwendet, nie deren Secret. Im Browser:
 
 - Es liegt in diesem Browser auf diesem Gerät: Ein anderer Browser oder ein anderes Gerät sieht es nicht.
 - Es geht verloren, wenn die Websitedaten des Browsers gelöscht werden. Der Browser wird gebeten, es zu behalten, und
@@ -193,7 +221,8 @@ nur der Name der Zugangsdaten verwendet, nie deren Secret.
 ## In Ihrer eigenen Anwendung {#in-your-own-application}
 
 Die UI ist mit [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) gebaut, einer Bibliothek von
-React-Komponenten, die jede Webanwendung gegen ein Data Gateway verwenden kann:
+React-Komponenten, die jede Webanwendung gegen ein Data Gateway verwenden kann. Das Gateway beantwortet kein CORS: Die
+Anwendung ruft es über ihr eigenes Backend auf, wie es die IDE tut.
 
 ```sh
 npm install @lambdaorm/ui react react-dom
@@ -204,11 +233,11 @@ import { Workspace } from '@lambdaorm/ui'
 import '@lambdaorm/ui/styles.css'
 
 <Workspace
-  baseUrl="https://gateway.example.com"          // the http transport of the gateway
-  headers={() => ({ 'X-Api-Key': key })}         // how to authenticate; the library keeps no credential
+  baseUrl="/api/gateway"                         // Ihr Backend, das an das Gateway weiterleitet (es beantwortet kein CORS)
+  headers={() => ({ 'X-Api-Key': key })}         // wie authentifiziert wird; die Bibliothek behält keine Zugangsdaten
   locale="es"
   theme="dark"
-  workspaceKey={`gateway.example.com|${user}`}   // separates what is saved
+  workspaceKey={`gateway.example.com|${user}`}   // trennt das Gespeicherte
 />
 ```
 
@@ -226,7 +255,7 @@ Das Gespeicherte kann an einem anderen Ort als im Browser abgelegt werden, indem
 
 ## Administration {#administration-ui}
 
-Mit `admin.enabled` und seinen Berechtigungen bearbeitet der Explorer auch die Schemas (als YAML und als Formulare),
+Über den `management`-Port und mit seinen Berechtigungen bearbeitet der Explorer auch die Schemas (als YAML und als Formulare),
 legt sie an und entfernt sie, speichert Gespeichertes in den Workspaces, setzt die Variablen der Verbindungen und führt
 die Befehle der CLI aus: siehe [Administration](Admin.md). Die Schemas werden alle 5 s neu gelesen: ein hinzugefügtes,
 entferntes oder neu geladenes erscheint ohne Neuladen der Seite, und eine neue Version, die nicht gestartet ist, wird

@@ -48,7 +48,7 @@ was es abfragen kann.
 | `admin_schema_validate` | `text` | `POST /admin/validate` | `schemaRead` | nur lesend |
 | `admin_stage_fetch` | `stage?` | `fetch` | `schemaRead` | nur lesend |
 
-Die Tools `admin_*` gibt es nur mit `admin.enabled` ([Administration](Admin.md#over-mcp)); Schreiben wird über MCP nicht angeboten.
+Die Tools `admin_*` gibt es nur, wenn der Transport `management` bereitgestellt wird ([Administration](Admin.md#over-mcp)); Schreiben wird über MCP nicht angeboten.
 
 - **`tools/list` zeigt Zugangsdaten nur die Tools, die sie verwenden dürfen.** Ohne `script` erscheint
   `orm_execute_script` nicht; mit nur `read` wird `orm_execute` als „read-only queries with this credential“ beschrieben.

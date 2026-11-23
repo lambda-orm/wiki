@@ -1,58 +1,85 @@
 # UI {#ui}
 
-Un recorrido paso a paso, desde el login hasta un diagrama, está en [Primeros pasos](GettingStarted.md#9-the-ui).
+Un recorrido paso a paso, desde la primera conexión hasta un diagrama, está en [Primeros pasos](GettingStarted.md#9-the-ui).
 
-El gateway sirve una interfaz web para explorar sus esquemas y consultarlos: un explorador de los esquemas y sus
-entidades, el formulario de cada entidad, pestañas de consultas con el autocompletado del dominio, consultas guardadas y diagramas del
-dominio. Es útil para probar consultas, para aprender el lenguaje y para comprobar lo que hace un agente a través de MCP.
+La UI del Data Gateway es el **data-gateway-ide**, una imagen propia
+([`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide)): un explorador de los esquemas y
+sus entidades, el formulario de cada entidad, pestañas de consultas con el autocompletado del dominio, consultas
+guardadas y diagramas del dominio. Es útil para probar consultas, para aprender el lenguaje y para comprobar lo que hace
+un agente a través de MCP.
+
+Como un IDE de bases de datos, se conecta a data gateways, uno o varios, cada uno con su credencial; sus esquemas,
+workspaces y proyectos quedan en ellos.
+
+## Desplegarlo {#deploying-it}
+
+Desde 4.0.0 el gateway no sirve ninguna UI ni responde CORS. El IDE llega a él por su puerto **`management`**
+([Transportes](Transports.md#management)): las rutas de la API REST para todos los esquemas más la
+[administración](Admin.md). Un gateway sin ese puerto no tiene IDE, que es lo que puede querer un gateway de producción
+cuyos esquemas vienen en sus volúmenes.
 
 ```yaml
+# data-gateway.config.yaml
 transports:
-  http:
-    port: 8080
-    ui: { enabled: true }       # off by default
+  http: { port: 8080 }
+  management: { port: 9090 }    # la API del IDE; sin un puerto, no se expone
 ```
 
-Está en `http://localhost:8080/ui/` (con `basePath: /data-gateway`, en `/data-gateway/ui/`). La sirve el
-mismo transporte `http` y llama a su [API REST](Rest.md) con la credencial que se introduce: no tiene otro acceso.
+```yaml
+# docker-compose.yml
+services:
+  data-gateway:
+    image: flaviorita/data-gateway:4.0.0
+    # 9090 no se publica: solo el IDE llega a él, en la red del compose
+  ide:
+    image: flaviorita/data-gateway-ide:1.0.0
+    environment:
+      DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080"
+    ports:
+      - "127.0.0.1:8090:8080"
+```
 
-## Páginas {#pages}
+- **El navegador habla solo con el servidor del IDE.** Este sirve la página y reenvía cada petición al gateway (un
+  proxy): REST, MCP y el WebSocket por igual. Los gateways nunca ven al navegador.
+- **`DATA_GATEWAY_IDE_TARGETS`** lista los orígenes a los que el IDE puede llegar, separados por comas, o `*` para
+  cualquiera (un IDE que corre en local). Sin ella, el IDE no llega a ninguno y lo indica: un proxy abierto llegaría a
+  cualquier host de su red.
+- **El IDE no guarda ninguna conexión ni ninguna credencial.** Quedan en el navegador. Reenvía la credencial al
+  gateway y descarta las cookies y el origen de la página.
+- **`management` se mantiene en una red interna.** Escribe los esquemas y sus variables y corre DDL; lo que se publica
+  es el IDE.
 
-**Inicio.** Qué es el Data Gateway, su versión, los esquemas de la instancia con su estado (`ready`, `error`, …), un
-enlace a la documentación de la API (Swagger) y el botón **Ingresar**.
+## Conexiones {#connections}
 
-![Inicio](images/ui-home.png)
+El IDE no tiene página de inicio ni login: se abre en el workspace, y la primera vez en una **Nueva conexión**.
 
-**Ingreso.** La autenticación de la instancia y la credencial:
-
-| Autenticación | Pide |
+| Campo | Qué es |
 | --- | --- |
-| API key | el header (por defecto `X-Api-Key`) y la clave |
-| Bearer token | el token |
-| Basic | el usuario y la contraseña |
-| Ninguna | nada |
+| **Nombre** | cómo se muestra la conexión |
+| **Protocolo** y **dirección** | el `management` del gateway tal como lo alcanza **el servidor del IDE**: `data-gateway:9090` (host, puerto y base path), no la dirección del navegador |
+| **Autenticación** | API key (el header, por defecto `X-Api-Key`, y la clave), bearer token, basic (usuario y contraseña) o ninguna |
+| **Recordar la clave** | guardar la clave en el navegador; si no, se guarda solo en esa pestaña, y se vuelve a pedir al cerrarla |
+| **Otras URLs de sus transportes** | el REST, el WebSocket y el MCP del gateway, solo cuando el IDE no llega a ellos en los puertos que el gateway indica (un proxy delante, otra red) |
 
-El botón **Mostrar / Ocultar** muestra lo que se escribió. La credencial se comprueba contra un esquema (`/whoami`): si es incorrecta,
-se indica y se permanece en la página. **La credencial se guarda solo en esa pestaña del navegador**: al cerrarla o recargarla se
-olvida, y nunca se almacena.
+**Probar** comprueba la conexión: quién es la credencial (`/whoami`) y la versión del gateway. **Mostrar / Ocultar**
+muestra la clave que se escribió.
 
-![Login](images/ui-login.png)
+- La página de una conexión muestra quién es esa credencial y **sus roles**: cada permiso, con lo que permite.
+- El explorador lista las conexiones, cada una con sus esquemas; se pueden tener abiertas, lado a lado, pestañas de
+  varias conexiones. Una conexión se edita o se quita desde su fila (quitarla la saca solo del IDE).
+- Desde una conexión, en pestañas, con su credencial: su **API REST** (Swagger, para probar cada método), su
+  **WebSocket** (sus métodos, una consola JSON-RPC y lo que vuelve) y su **MCP** (las tools de un esquema, llamadas con
+  sus argumentos). Un transporte que el gateway no expone está deshabilitado.
 
-**Consultas.** El workspace, después del login: arriba, el nombre y los permisos de la credencial, la documentación de la API y
-**Salir** (vuelve a la página de inicio).
-
-En la parte superior de cada página hay dos selectores:
-
-- **Tema:** Sistema (como el sistema operativo), Claro u Oscuro.
-- **Idioma:** English, Español, Português, Français, Italiano, Deutsch, Nederlands, Català, Galego, Euskara.
-
-El navegador recuerda ambos.
+**Preferencias** (el menú ☰): el tema (Sistema, Claro, Oscuro y otros), el idioma (English, Español, Português,
+Français, Italiano, Deutsch, Nederlands, Català, Galego, Euskara) y el formato regional de los números y las fechas de
+los resultados. El navegador los recuerda.
 
 ![Tema oscuro, en español](images/ui-dark-es.png)
 
 ## Explorador {#explorer}
 
-A la izquierda, los esquemas de la instancia. Se puede redimensionar arrastrando su borde y ocultar con el botón de panel de
+A la izquierda, las conexiones y los esquemas de cada una. Se puede redimensionar arrastrando su borde y ocultar con el botón de panel de
 la barra de pestañas. Para cada esquema:
 
 - **Dominio (YAML).** El dominio del esquema (entidades, propiedades, relaciones, claves, enums) en un editor de
@@ -170,9 +197,10 @@ El diagrama se guarda (**Guardar** o Ctrl+S) con la posición de cada caja y cad
 
 ## Dónde se guarda {#where-it-is-saved}
 
-Lo guardado (carpetas, consultas, diagramas) permanece **en el navegador**, en su IndexedDB, separado por gateway y por
-credencial: lo que guarda una credencial no se ve con otra. Para ello solo se usa el nombre de la credencial,
-nunca su secreto.
+Con el permiso `workbenchWrite`, lo guardado (carpetas, consultas, diagramas) va a la carpeta `workbench/` de cada
+workspace, en el gateway ([Administración](Admin.md)), compartido por todos los que lo usan. Sin él, permanece **en el
+navegador**, en su IndexedDB, separado por gateway y por credencial: lo que guarda una credencial no se ve con otra.
+Para ello solo se usa el nombre de la credencial, nunca su secreto. En el navegador:
 
 - Está en ese navegador en ese dispositivo: otro navegador u otro dispositivo no lo ven.
 - Se pierde si se borran los datos del sitio en el navegador. Se pide al navegador que lo conserve, y el explorador exporta
@@ -184,7 +212,8 @@ nunca su secreto.
 ## En tu propia aplicación {#in-your-own-application}
 
 La UI está construida con [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui), una librería de componentes React
-que cualquier aplicación web puede usar contra un Data Gateway:
+que cualquier aplicación web puede usar contra un Data Gateway. El gateway no responde CORS: la aplicación lo llama a
+través de su propio backend, como hace el IDE.
 
 ```sh
 npm install @lambdaorm/ui react react-dom
@@ -195,11 +224,11 @@ import { Workspace } from '@lambdaorm/ui'
 import '@lambdaorm/ui/styles.css'
 
 <Workspace
-  baseUrl="https://gateway.example.com"          // the http transport of the gateway
-  headers={() => ({ 'X-Api-Key': key })}         // how to authenticate; the library keeps no credential
+  baseUrl="/api/gateway"                         // tu backend, que reenvía al gateway (no responde CORS)
+  headers={() => ({ 'X-Api-Key': key })}         // cómo autenticarse; la librería no guarda ninguna credencial
   locale="es"
   theme="dark"
-  workspaceKey={`gateway.example.com|${user}`}   // separates what is saved
+  workspaceKey={`gateway.example.com|${user}`}   // separa lo guardado
 />
 ```
 
@@ -217,7 +246,7 @@ propio).
 
 ## Administración {#administration-ui}
 
-Con `admin.enabled` y sus permisos, el explorador también edita los esquemas (como YAML y como formularios), los crea
+A través del puerto `management` y con sus permisos, el explorador también edita los esquemas (como YAML y como formularios), los crea
 y elimina, guarda lo guardado en los workspaces, define las variables de las conexiones y corre los comandos de la
 CLI: ver [Administración](Admin.md). Los esquemas se vuelven a leer cada 5 s: uno agregado, quitado o recargado se ve
 sin recargar la página, y una versión nueva que no arrancó se marca con ⚠ y su motivo.

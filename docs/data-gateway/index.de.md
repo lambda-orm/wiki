@@ -13,7 +13,7 @@ oder mehrere Datenbanken unterschiedlicher Datenbank-Engines). Das Data Gateway 
 - eine **Anwendung** es über eine REST API (oder eine WebSocket-Verbindung) abfragt und beschreibt, mit denselben
   Lambda-Abfragen, die sie in Node verwenden würde;
 - ein **KI-Agent** die Domäne über MCP erkundet und abfragt und dabei die Entitäten und die Sprache kennt;
-- eine **Person** in einer Web-UI die Schemas erkundet, jede Entität als Formular liest, Abfragen ausprobiert und
+- eine **Person** in seiner IDE die Schemas erkundet, jede Entität als Formular liest, Abfragen ausprobiert und
   Diagramme zeichnet;
 
 und sodass **wer was tun darf** an einer einzigen Stelle festgelegt wird, für alle gleich: Alle Zugangsdaten haben
@@ -35,8 +35,8 @@ Berechtigungen, und jede Änderung wird protokolliert.
   aus, sind die anderen nicht betroffen.
 - **Audit** von Schreibvorgängen, **Metriken** (Prometheus), **Health** (Kubernetes-Probes), Limits (Rate, Nebenläufigkeit,
   Größen, Zeit).
-- Eine **Web-UI**: Explorer, Entitätsformulare, Abfrage-Tabs mit Autovervollständigung, gespeicherte Abfragen und
-  Diagramme der Domäne.
+- Eine **IDE** (ein eigenes Image, das den `management`-Port des Gateways erreicht): Explorer, Entitätsformulare,
+  Abfrage-Tabs mit Autovervollständigung, gespeicherte Abfragen und Diagramme der Domäne.
 
 **Was es nicht tut:**
 
@@ -45,8 +45,7 @@ Berechtigungen, und jede Änderung wird protokolliert.
 - Es akzeptiert kein SQL: nur λORM-Abfragen, die für jede Quelle übersetzt werden.
 - Keine eigenen Benutzer oder Rollen über die Zugangsdaten seiner Konfiguration hinaus (noch keine Anmeldung bei einem
   Identity Provider).
-- Die UI speichert das Gespeicherte in jedem Browser; es gibt keinen gemeinsamen Speicher für gespeicherte Abfragen auf
-  dem Server.
+- Ohne die Berechtigung `workbenchWrite` speichert die IDE das Gespeicherte in jedem Browser.
 
 ## Beschreibung {#description}
 
@@ -86,14 +85,14 @@ und wird erneut versucht, während die anderen weiterarbeiten.
 
 ## In diesem Abschnitt {#in-this-section}
 
-- [Erste Schritte](GettingStarted.md): Schritt für Schritt von einem leeren Ordner zur REST API, zur UI, zu MCP und WebSocket.
+- [Erste Schritte](GettingStarted.md): Schritt für Schritt von einem leeren Ordner zur REST API, zur IDE, zu MCP und WebSocket.
 - [Konfiguration](Configuration.md): die Konfigurationsdatei, Schemas, Umgebung, Laufzeit und jeder Schlüssel.
-- [Transporte](Transports.md): die vier Transporte, ihre Routen und Optionen.
+- [Transporte](Transports.md): die fünf Transporte (vier für die Daten und `management`, der der IDE), ihre Routen und Optionen.
 - [REST API](Rest.md): jede Methode des Transports `http`, mit Beispielen.
 - [MCP](Mcp.md): die Tools, Ressourcen und Transporte für KI-Agenten.
 - [WebSocket API](WebSocket.md): die JSON-RPC-Methoden und die Benachrichtigungen.
 - [Sicherheit](Security.md): Authentifizierung, Berechtigungen, Audit, Limits und Fehler.
-- [UI](Ui.md): die Weboberfläche: Explorer, Entitätsformulare, Abfragen, gespeicherte Abfragen und Diagramme.
+- [UI](Ui.md): die IDE: Verbindungen, Explorer, Entitätsformulare, Abfragen, gespeicherte Abfragen und Diagramme.
 - [Clients](Clients.md): `@lambdaorm/client`, die CLI und das OpenAPI-Dokument.
 - [Betrieb](Operations.md): Docker, Kubernetes, Health, Metriken und Logs.
 - [Änderungsprotokoll](CHANGELOG.md)

@@ -27,7 +27,9 @@ authentication:
 - Secrets werden in konstanter Zeit verglichen. Das Secret gelangt nie zu den Workern der Schemas: nur der Name und die
   Berechtigungen der Zugangsdaten.
 - Ohne Zugangsdaten (oder mit falschen) lautet die Antwort `401`; WebSocket-Upgrades werden abgelehnt.
-- `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/doc` und die Dateien der UI benötigen keine Zugangsdaten.
+- `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/transports` und `/doc` benötigen keine Zugangsdaten.
+- Kein Transport beantwortet CORS: Ein Browser eines anderen Origins kann das Gateway nicht aufrufen, ein eigenes
+  Backend schon.
 
 ## Berechtigungen {#permissions}
 

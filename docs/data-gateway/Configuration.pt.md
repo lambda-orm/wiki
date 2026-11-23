@@ -205,13 +205,14 @@ mcp:
 transports:
   http:
     port: $DATA_GATEWAY_HTTP_PORT
-    ui: { enabled: true }
   mcpHttp:
     port: $DATA_GATEWAY_MCP_HTTP_PORT
   mcpWebSocket:
     port: $DATA_GATEWAY_MCP_WS_PORT
   webSocket:
     port: $DATA_GATEWAY_WS_PORT
+  management:                      # a API da IDE; sem a variável, não é exposta (produção)
+    port: $DATA_GATEWAY_MANAGEMENT_PORT
 ```
 
 ## Referência {#reference}
@@ -222,7 +223,7 @@ transports:
 | `orm.schemas[]` | `[]` | `path` (obrigatório), `workspace` (define um esquema) e ajustes |
 | `orm.watch` | `true` | recarga a quente dos workspaces; `false`, ou `{ enabled, intervalMs, debounceMs }` |
 | `orm.watch.intervalMs` / `debounceMs` | `5000` / `300` | a varredura dos workspaces; quanto as mudanças são agrupadas |
-| `admin.enabled` | `false` | a [administração](Admin.md) em `/admin` do transporte `http` |
+| `admin.enabled` | — | **removida na 4.0.0** (avisada e ignorada): a [administração](Admin.md) fica ligada quando `transports.management` tem uma porta |
 | `admin.allowAnonymous` | `false` | com `authentication: none`, qualquer um administra (só desenvolvimento local) |
 | `admin.commandTimeoutMs` / `maxFileBytes` | `600000` / `2MB` | quanto um comando pode demorar; o maior arquivo gravado |
 | `runtime.schemas` | `thread` | `thread` / `process` |
@@ -254,7 +255,8 @@ transports:
 | `transports.<t>.basePath` | `''` | um prefixo antes da rota do esquema (`/data-gateway`), atrás de um ingress com um caminho |
 | `transports.<t>.maxConnections` | `100` | `webSocket`, `mcpWebSocket` e o SSE de `mcpHttp` |
 | `transports.http.swagger.enabled` | `true` | `/doc` e `/api-docs` |
-| `transports.http.ui.enabled` | `false` | a [UI](Ui.md) em `/ui` |
+| `transports.http.ui` | — | **removida na 4.0.0** (avisada e ignorada): a [UI](Ui.md) é o data-gateway-ide |
+| `transports.management.port` | **nenhum** | a API da [IDE](Ui.md) e a [administração](Admin.md) ([Transportes](Transports.md#management)) |
 | `transports.mcpHttp.legacySse` | `true` | além do Streamable HTTP, o antigo HTTP+SSE para clientes antigos |
 | `transports.mcpHttp.stateful` | `false` | Streamable HTTP sem estado: qualquer réplica responde a qualquer requisição |
 | `transports.<ws>.asyncapi.enabled` | `true` | `GET /asyncapi` e `/asyncapi.json` de `webSocket` e `mcpWebSocket` |
