@@ -48,6 +48,26 @@ services:
 - **Mantenha `management` em uma rede interna.** Ele grava os esquemas e suas variáveis e roda DDL; o que se publica é a
   IDE.
 
+### Onde a IDE roda {#where-the-ide-runs}
+
+| Você implanta | Para | `management` |
+| --- | --- | --- |
+| Só o gateway, sem `management` | produção, com os esquemas nos seus volumes: sem IDE nem administração | sem porta |
+| O gateway e a imagem da IDE | uma IDE compartilhada no navegador | só na rede interna, nunca publicado: o contêiner da IDE o alcança |
+| Só o gateway, com `management` | uma IDE na sua própria máquina: a imagem com `docker run` (e, mais adiante, o aplicativo de desktop) | sua máquina precisa alcançar a porta (abaixo) |
+
+Uma IDE na sua máquina alcança um `management` que está em outro lugar sem publicá-lo aberto:
+
+| O gateway roda | Como a IDE o alcança | `management` publicado |
+| --- | --- | --- |
+| na mesma máquina | `localhost:9090` | — |
+| em uma rede interna, ou atrás de uma VPN | `host-interno:9090` | só para essa rede |
+| em um servidor, sem VPN | um túnel SSH, `ssh -L 9090:localhost:9090 servidor`, e a conexão em `localhost:9090` | só no loopback do servidor |
+| no Kubernetes | `kubectl port-forward svc/data-gateway 9090`, e a conexão em `localhost:9090` | um `Service` interno, sem ingress |
+
+Com um túnel, as abas REST, WebSocket e MCP também precisam do seu caminho: tunelize as portas delas, ou defina as URLs
+na conexão (**Outras URLs dos seus transportes**).
+
 ## Conexões {#connections}
 
 A IDE não tem página inicial nem login: ela abre no espaço de trabalho e, na primeira vez, em uma **Nova conexão**.

@@ -47,6 +47,26 @@ services:
 - **Keep `management` on an internal network.** It writes the schemas and their variables and runs DDL; the IDE is
   the one to publish.
 
+### Where the IDE runs {#where-the-ide-runs}
+
+| You deploy | For | `management` |
+| --- | --- | --- |
+| Only the gateway, without `management` | production, with the schemas in its volumes: no IDE, no administration | no port |
+| The gateway and the IDE image | an IDE shared in the browser | on the internal network only, never published: the IDE container reaches it |
+| Only the gateway, with `management` | an IDE on your own machine: the image run with `docker run` (and, later, the desktop app) | your machine has to reach its port (below) |
+
+An IDE on your machine reaches a `management` that is elsewhere without publishing it open:
+
+| The gateway runs | How the IDE reaches it | `management` published |
+| --- | --- | --- |
+| on the same machine | `localhost:9090` | — |
+| in an internal network, or behind a VPN | `internal-host:9090` | only to that network |
+| on a server, without a VPN | an SSH tunnel, `ssh -L 9090:localhost:9090 server`, and the connection to `localhost:9090` | only on the loopback of the server |
+| in Kubernetes | `kubectl port-forward svc/data-gateway 9090`, and the connection to `localhost:9090` | an internal `Service`, no ingress |
+
+Through a tunnel, the REST, WebSocket and MCP tabs need their own way too: tunnel their ports as well, or set their
+URLs in the connection (**Other URLs of its transports**).
+
 ## Connections
 
 The IDE has no home page and no login: it opens on the workspace, and the first time on a **New connection**.

@@ -50,6 +50,26 @@ services:
 - **Halten Sie `management` in einem internen Netzwerk.** Es schreibt die Schemas und ihre Variablen und führt DDL aus;
   veröffentlicht wird die IDE.
 
+### Wo die IDE läuft {#where-the-ide-runs}
+
+| Bereitgestellt wird | Wofür | `management` |
+| --- | --- | --- |
+| Nur das Gateway, ohne `management` | Produktion, mit den Schemas in seinen Volumes: keine IDE, keine Administration | kein Port |
+| Das Gateway und das Image der IDE | eine gemeinsame IDE im Browser | nur im internen Netzwerk, nie veröffentlicht: der Container der IDE erreicht es |
+| Nur das Gateway, mit `management` | eine IDE auf Ihrem eigenen Rechner: das Image mit `docker run` (und später die Desktop-App) | Ihr Rechner muss seinen Port erreichen (unten) |
+
+Eine IDE auf Ihrem Rechner erreicht ein `management` an einem anderen Ort, ohne es offen zu veröffentlichen:
+
+| Das Gateway läuft | Wie die IDE es erreicht | `management` veröffentlicht |
+| --- | --- | --- |
+| auf demselben Rechner | `localhost:9090` | — |
+| in einem internen Netzwerk oder hinter einem VPN | `interner-host:9090` | nur in dieses Netzwerk |
+| auf einem Server, ohne VPN | ein SSH-Tunnel, `ssh -L 9090:localhost:9090 server`, und die Verbindung zu `localhost:9090` | nur auf dem Loopback des Servers |
+| in Kubernetes | `kubectl port-forward svc/data-gateway 9090`, und die Verbindung zu `localhost:9090` | ein interner `Service`, kein Ingress |
+
+Über einen Tunnel brauchen auch die Tabs REST, WebSocket und MCP ihren Weg: ihre Ports ebenfalls tunneln oder ihre URLs
+in der Verbindung festlegen (**Andere URLs seiner Transporte**).
+
 ## Verbindungen {#connections}
 
 Die IDE hat keine Startseite und keine Anmeldung: Sie öffnet sich im Arbeitsbereich, beim ersten Mal mit einer
