@@ -16,6 +16,9 @@ The UI becomes the [data-gateway-ide](Ui.md), an image of its own, and the gatew
   when `management` has a port. `admin.allowAnonymous`, `maxFileBytes` and `commandTimeoutMs` stay.
 - **The gateway serves no UI:** `/ui` and `transports.http.ui` (warned about and ignored) are gone.
 - **No CORS on any transport:** a web application that called the gateway from the browser calls it from its backend.
+- **`management` works with sessions** ([Transports](Transports.md#sessions)): `POST /sessions` with the credential
+  answers a token that every other request carries in `X-Data-Gateway-Session`; a credential sent directly answers
+  `401 SessionRequiredError`.
 
 | 3.x | 4.0.0 |
 | --- | --- |
@@ -25,6 +28,12 @@ The UI becomes the [data-gateway-ide](Ui.md), an image of its own, and the gatew
 
 **Features:**
 
+- **Sessions of `management`:** listed (one's own; all with the new `sessionAdmin` permission), revoked at once (one, or
+  every one of a credential), ended after `sessions.idleTimeout` (30 min) without requests or `sessions.maxLifetime`
+  (12 h); kept, hashed, in the `state.sqlite` of the volume, shared by the replicas; audited. `trustedProxies` takes
+  the browser's address from the IDE.
+- **The WebSocket of events of `management`** (`/events`): `session.revoked`, `session.expiring`,
+  `schema.statusChanged` and `workspace.changed`; a session with its socket open is *connected*.
 - `GET /transports`: the transports of the gateway (port, base path, how a schema is reached, its document), and
   `GET /openapi.json`.
 - A WebSocket from a browser authenticates with the credential in its subprotocols (`lambdaorm`,

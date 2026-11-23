@@ -38,6 +38,9 @@ services:
       - "127.0.0.1:8090:8080"
 ```
 
+With `trustedProxies` of `management` set to the network of the IDE, the gateway sees the address of each browser in
+its [sessions](#sessions); otherwise every session shows the address of the IDE.
+
 - **The browser talks only to the server of the IDE.** It serves the page and forwards each request to the gateway (a
   proxy): REST, MCP and the WebSocket alike. The gateways never see the browser.
 - **`DATA_GATEWAY_IDE_TARGETS`** lists the origins the IDE may reach, separated by commas, or `*` for any (an IDE run
@@ -79,8 +82,24 @@ The IDE has no home page and no login: it opens on the workspace, and the first 
 | **Remember the key** | keep the key in the browser; otherwise it is kept in that tab only, and asked again after closing it |
 | **Other URLs of its transports** | the REST, WebSocket and MCP of the gateway, only when the IDE doesn't reach them at the ports the gateway tells (a proxy in front, another network) |
 
-**Test** checks the connection: who the credential is (`/whoami`) and the version of the gateway. **Show / Hide** shows
-the key that was typed.
+**Test** checks the connection: who the credential is and the version of the gateway. **Show / Hide** shows the key
+that was typed.
+
+### Its session {#sessions}
+
+Connecting logs in to the `management` of the gateway ([sessions](Transports.md#sessions)): the IDE keeps the token in
+that tab and every request carries it, never the key.
+
+- When the session **expires** (30 minutes without activity, or 12 hours) and the key is at hand, the IDE opens another
+  one by itself; without it, it asks for the key.
+- When it is **revoked**, the IDE says who revoked it and doesn't come back by itself, even with the key remembered:
+  saving the connection again connects it.
+- The IDE keeps the gateway's WebSocket of events open: the session shows as *connected*, and a schema that changes, or
+  something saved by someone else, shows at once.
+- The page of a connection lists **My sessions**: the others of the same credential (another browser, another
+  computer), with their address, what they are looking at and when they end, to **Close** one or **Close the
+  others**. With `sessionAdmin`, also **Active sessions**: every one of the gateway, by credential, to **Revoke** one
+  or **Revoke all** of a credential.
 
 - The page of a connection shows who that credential is and **its roles**: each permission, with what it allows.
 - The explorer lists the connections, each with its schemas; tabs of several connections can be open side by side.

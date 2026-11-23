@@ -28,6 +28,8 @@ authentication:
   permissions of the credential.
 - Without a credential (or with a wrong one) the answer is `401`; the WebSocket upgrades are refused.
 - `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/transports` and `/doc` need no credential.
+- On `management` (the IDE) the credential goes only in the login, and every request carries the token of a
+  [session](Transports.md#sessions): sessions are listed, end on inactivity and can be revoked at once.
 - No transport answers CORS: a browser of another origin can't call the gateway, a backend of its own does.
 
 ## Permissions
@@ -40,6 +42,7 @@ authentication:
 | `queue` | `execute-queued` (and `write` if the query writes) |
 | `stageImport` | importing a stage |
 | `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | the [administration](Admin.md#turning-it-on): never given by default |
+| `sessionAdmin` | list every [session](Transports.md#sessions) of `management` and revoke those of other credentials (without it, a credential sees and closes only its own): never given by default |
 
 - Authorization happens in the schema's worker, before running anything, the same for REST, MCP and WebSocket.
 - To know whether a query writes, the gateway analyses it (its `metadata`): with only `read`, a query with any

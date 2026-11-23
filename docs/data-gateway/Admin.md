@@ -34,6 +34,7 @@ permissions are **never given by default**: a credential without a list of permi
 | `workbenchWrite` | save queries, scripts and diagrams in the workspaces, without touching the schema |
 | `ddl` | change the structure of the databases of a stage (`push`, `drop`) |
 | `build` | generate the code of the domain in `src/` of the workspace |
+| `sessionAdmin` | see every [session](Transports.md#sessions) of `management` (who is connected) and revoke them |
 
 With `authentication: none`, nobody administers unless `admin.allowAnonymous: true` (local development only).
 
