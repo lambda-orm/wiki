@@ -107,10 +107,10 @@ claude mcp add --transport http northwind http://gateway:8081/northwind/mcp --he
 
 ### El navegador {#the-browser}
 
-El [IDE](ide/Guide.md) del Data Gateway, hecho con [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui):
+El [IDE](ide/index.md) del Data Gateway, hecho con [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui):
 se conecta a gateways, recorre los esquemas, muestra cada entidad como un formulario, escribe consultas con autocompletado y dibuja diagramas.
 
-![La UI del Data Gateway](data-gateway/images/ui-query.png)
+![La UI del Data Gateway](ide/images/ide-query.png)
 
 ## Una consulta, tres bases de datos {#one-query-three-databases}
 
@@ -246,7 +246,7 @@ REST, el IDE, MCP y WebSocket.
 | [Data Gateway](data-gateway/index.md) | Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | los esquemas por REST, MCP y WebSocket |
 | [IDE del Data Gateway](ide/index.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) · [escritorio: Linux, Windows, macOS](ide/Download.md) | el IDE de los gateways: conexiones, explorador, consultas, diagramas, administración |
 | [Cliente de Node.js](data-gateway/Clients.md) | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | la interfaz de la librería, ejecutada en un Data Gateway |
-| [Componentes de UI](ide/Guide.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | componentes de React: el editor de consultas, los resultados, el explorador y los diagramas |
+| [Componentes de UI](ide/Embedding.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | componentes de React: el editor de consultas, los resultados, el explorador y los diagramas |
 | [3xpr](https://www.npmjs.com/package/3xpr) | [`3xpr`](https://www.npmjs.com/package/3xpr) | el motor de expresiones sobre el que se construyen las consultas, los scripts y las reglas del esquema |
 
 El código fuente está en [github.com/lambda-orm/core](https://github.com/lambda-orm/core).

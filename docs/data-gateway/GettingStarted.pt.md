@@ -286,30 +286,30 @@ REST, seu WebSocket e seu MCP podem ser experimentados a partir dali, em suas pr
 esquema `/`, escreva uma consulta (o editor completa as entidades e propriedades enquanto você digita), seus dados, e clique em **execute**
 (Ctrl+Enter). O resultado pode ser visto como tabela, árvore, JSON ou YAML, copiado e exportado:
 
-![Uma consulta](images/ui-query.png)
+![Uma consulta](../ide/images/ide-query.png)
 
-![Autocompletar](images/ui-autocomplete.png)
+![Autocompletar](../ide/images/ide-autocomplete.png)
 
 **Salve-a** com Ctrl+S: um nome, uma descrição e uma pasta (as pastas são criadas com o **+** do esquema):
 
-![Salvar uma consulta](images/ui-save-query.png)
+![Salvar uma consulta](../ide/images/ide-save-query.png)
 
 Um duplo clique em uma entidade (ou seu botão **Abrir**) mostra seu **formulário**: propriedades, relações, chaves e índices, suas
 linhas e seu diagrama.
 
-![Formulário da entidade](images/ui-entity-properties.png)
+![Formulário da entidade](../ide/images/ide-entity-properties.png)
 
-![Relações de uma entidade](images/ui-entity-relations.png)
+![Relações de uma entidade](../ide/images/ide-entity-relations.png)
 
 **Um diagrama:** o **+** de uma pasta → **Novo diagrama**, escolha `Orders` e **Adicionar as vizinhas**:
 
-![Novo diagrama](images/ui-new-diagram.png)
+![Novo diagrama](../ide/images/ide-new-diagram.png)
 
 As caixas se organizam sozinhas; elas e as linhas podem ser arrastadas, e **Salvar** as mantém onde foram deixadas:
 
-![Diagrama](images/ui-diagram.png)
+![Diagrama](../ide/images/ide-diagram.png)
 
-Tudo é explicado em [UI](../ide/Guide.md).
+Tudo é explicado em [UI](../ide/index.md).
 
 ## 10. Um agente de IA, por MCP {#10-an-ai-agent-through-mcp}
 

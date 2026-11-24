@@ -105,11 +105,11 @@ claude mcp add --transport http northwind http://gateway:8081/northwind/mcp --he
 
 ### The browser
 
-The [IDE](ide/Guide.md) of the Data Gateway, built with
+The [IDE](ide/index.md) of the Data Gateway, built with
 [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui): connect to gateways, browse the schemas, read each entity as a form, write
 queries with autocompletion and draw diagrams.
 
-![The UI of the Data Gateway](data-gateway/images/ui-query.png)
+![The UI of the Data Gateway](ide/images/ide-query.png)
 
 ## One query, three databases
 
@@ -242,7 +242,7 @@ the IDE, MCP and WebSocket.
 | [Data Gateway](data-gateway/index.md) | Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | the schemas over REST, MCP and WebSocket |
 | [Data Gateway IDE](ide/index.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) · [desktop: Linux, Windows, macOS](ide/Download.md) | the IDE of the gateways: connections, explorer, queries, diagrams, administration |
 | [Node.js client](data-gateway/Clients.md) | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | the interface of the library, run on a Data Gateway |
-| [UI components](ide/Guide.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | React components: the query editor, results, explorer and diagrams |
+| [UI components](ide/Embedding.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | React components: the query editor, results, explorer and diagrams |
 | [3xpr](https://www.npmjs.com/package/3xpr) | [`3xpr`](https://www.npmjs.com/package/3xpr) | the expression engine the queries, scripts and schema rules are built on |
 
 The source is in [github.com/lambda-orm/core](https://github.com/lambda-orm/core).

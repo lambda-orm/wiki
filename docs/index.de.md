@@ -109,11 +109,11 @@ claude mcp add --transport http northwind http://gateway:8081/northwind/mcp --he
 
 ### Der Browser {#the-browser}
 
-Die [IDE](ide/Guide.md) des Data Gateway, gebaut mit [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui):
+Die [IDE](ide/index.md) des Data Gateway, gebaut mit [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui):
 sich mit Gateways verbinden, Schemas durchsuchen, jede Entität als Formular lesen, Abfragen mit Autovervollständigung schreiben und Diagramme
 zeichnen.
 
-![Die UI des Data Gateway](data-gateway/images/ui-query.png)
+![Die UI des Data Gateway](ide/images/ide-query.png)
 
 ## Eine Abfrage, drei Datenbanken {#one-query-three-databases}
 
@@ -250,7 +250,7 @@ REST-API, der IDE, MCP und WebSocket.
 | [Data Gateway](data-gateway/index.md) | Docker [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway) | die Schemas über REST, MCP und WebSocket |
 | [Data Gateway IDE](ide/index.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) · [Desktop: Linux, Windows, macOS](ide/Download.md) | die IDE der Gateways: Verbindungen, Explorer, Abfragen, Diagramme, Administration |
 | [Node.js-Client](data-gateway/Clients.md) | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | die Schnittstelle der Bibliothek, ausgeführt auf einem Data Gateway |
-| [UI-Komponenten](ide/Guide.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | React-Komponenten: der Abfrage-Editor, die Ergebnisse, der Explorer und die Diagramme |
+| [UI-Komponenten](ide/Embedding.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | React-Komponenten: der Abfrage-Editor, die Ergebnisse, der Explorer und die Diagramme |
 | [3xpr](https://www.npmjs.com/package/3xpr) | [`3xpr`](https://www.npmjs.com/package/3xpr) | die Ausdrucks-Engine, auf der die Abfragen, Skripte und Schemaregeln aufbauen |
 
 Der Quellcode liegt unter [github.com/lambda-orm/core](https://github.com/lambda-orm/core).
