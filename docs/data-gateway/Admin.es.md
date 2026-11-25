@@ -110,19 +110,24 @@ por esquema), desde el panel **Comandos** de la UI:
 | `version` | — (las versiones de la gateway y del esquema) | `read` |
 | `fetch` | — (compara las bases con el modelo) | `read` |
 | `export` | — (se descarga, o se guarda en `data/`) | `read` |
-| `push` | las sentencias por source | `ddl` |
+| `push` | las sentencias por source, y las que pueden perder datos (4.1.0: se ejecutan solo con `allowDestructive`) | `ddl` |
 | `drop` | las sentencias; se vuelve a escribir el stage | `ddl` |
 | `import` | las filas de cada entidad | `stageImport` |
 | `pull` | el diff del `lambdaORM.yaml` | `schemaWrite` |
 | `introspect` | el diff y las filas de los datos | `schemaWrite` |
 | `incorporate` | el diff y las filas; después el esquema se recarga, `push` crea sus tablas y se importan las filas | `schemaWrite`, `ddl`, `stageImport` |
 | `build` | — (se escribe en `src/`, o se descarga como `.zip`) | `build` |
+| `migrations` (4.1.0) | — (el [historial de las migraciones](../schema/SchemaSynchronization-Migrations.md) del stage) | `read` |
+| `migrate` (4.1.0) | el deshacer de cada migración posterior a la `version`, y lo que de él puede perder datos | `ddl` |
+| `seed` (4.1.0) | los archivos del [seed](../schema/SchemaSynchronization-Seed.md) del stage | `stageImport` |
 
 Un comando que cambia las bases o el esquema ejecuta **exactamente la vista previa que se mostró**, una vez, dentro de
 10 minutos, y solo mientras el `lambdaORM.yaml` sea el mismo con que se hizo (si no, `409 PreviewRequiredError`); otro
 comando del mismo esquema mientras uno corre responde `409 BusyError`. Cada job deja su registro en
-`orm_state/jobs/`; `push`, `drop` e `import` se [auditan](Security.md#audit). `admin.commandTimeoutMs` (10 minutos)
-limita cuánto puede tardar uno.
+`orm_state/jobs/`; `push`, `drop`, `import`, `migrate` y `seed` se [auditan](Security.md#audit). Un `push` o un
+`migrate` cuya vista previa lista cambios que pueden perder datos (un tipo más estrecho, una longitud más corta) los
+ejecuta solo con `"allowDestructive": true`; sin él el job falla con `DestructiveChangeError`. `admin.commandTimeoutMs`
+(10 minutos) limita cuánto puede tardar uno.
 
 Por la API, un comando es una vista previa y después un job:
 
@@ -159,7 +164,8 @@ advertencia.
 
 ## En la próxima versión {#in-the-next-version}
 
-No está en la imagen 4.0.0: el **historial de un esquema** (cada cambio hecho por la administración, con quién, el
+No está en la imagen 4.0.0: los comandos `migrations`, `migrate` y `seed`, y los cambios que pueden perder datos en
+`push` (arriba); el **historial de un esquema** (cada cambio hecho por la administración, con quién, el
 antes, el después y el diff, en `logs/changes.jsonl` del workspace y `GET /admin/workspaces/{route}/history`), el
 **ruteo de un stage** (adónde va cada entidad, `…/stages/{stage}/routing`) y `build` por lenguaje
 (`src/<language>/domain/`), con solo el modelo o solo los repositorios, y un código generado descargado como zip o

@@ -234,6 +234,38 @@ infrastructure:
 Über die [WebSocket API](WebSocket.md) teilt `query.executeQueued` mit `notify: true` der Verbindung zusätzlich mit,
 wann die Ausführung endet.
 
+### Benannte Abfragen {#named-queries}
+
+Seit data-gateway 4.1.0. Die im Schema mit einem Namen deklarierten Abfragen der Anwendung
+([`application.queries`](../usage/TypedQueries.md)) werden über ihren Namen bereitgestellt: Ein Client (oder ein Agent)
+verwendet eine kuratierte Abfrage, statt eine eigene zu schreiben, und sieht ihren Text nie.
+
+```yaml
+# lambdaORM.yaml
+application:
+  queries:
+    - name: customersOf
+      description: the customers of a country, by their id
+      query: 'Customers.filter(p => p.country == country).map(p => [p.id, p.city]).sort(p => p.id)'
+```
+
+```sh
+curl http://localhost:8080/queries -H "X-Api-Key: $KEY"
+# [{ "name": "customersOf", "description": "…", "parameters": [{ "name": "country", "type": "string" }],
+#    "model": [{ "name": "id", "type": "string" }, { "name": "city", "type": "string" }], "writes": false }]
+curl -X POST http://localhost:8080/queries/customersOf -H "X-Api-Key: $KEY" -H "Content-Type: application/json" \
+  -d '{ "data": { "country": "Germany" } }'
+```
+
+- In der [View des Aufrufers](Security.md#views): Eine Abfrage, die verwendet, was seine View ausschließt, wird ihm nicht
+  aufgelistet, und ihre Zeilen sind die seiner View.
+- Sie läuft als `execute`: Eine Abfrage, die schreibt, benötigt `write`, und das [Audit](Security.md#audit) nennt ihren
+  `name`.
+- Ihre Limits, zusätzlich zu denen des Gateways: `orm.schemas[].queries: { customersOf: { maxRows: 100, timeout: 5s } }`
+  in der [Konfiguration](Configuration.md#reference); mehr Zeilen ergeben `422 TooManyRowsError`, länger ergibt `504`.
+- Über [WebSocket](WebSocket.md#methods) `queries.list` und `queries.execute`; über [MCP](Mcp.md#named-queries) je ein
+  Tool `query_<name>`.
+
 ## Schema-Methoden {#schema-methods}
 
 Das Modell des Schemas. Sie benötigen `read`. Die Verbindungen der Quellen werden nie zurückgegeben.
@@ -335,6 +367,7 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 | model | `POST /model` | `orm_model` | `query.model` | `read` |
 | parameters | `POST /parameters` | `orm_parameters` | `query.parameters` | `read` |
 | constraints | `POST /constraints` | `orm_constraints` | `query.constraints` | `read` |
+| [benannte Abfragen](#named-queries) (4.1.0) | `GET /queries`, `POST /queries/{name}` | `query_<name>` | `queries.list`, `queries.execute` | `read` / `write` |
 | Schema | `GET /schema` | `schema_get` | `schema.schema` | `read` |
 | Schema-Version | `GET /schema/version` | `schema_version` | `schema.version` | `read` |
 | Domäne | `GET /domain` | `schema_domain` | `schema.domain` | `read` |

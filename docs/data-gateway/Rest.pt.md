@@ -232,6 +232,37 @@ infrastructure:
 Pela [API WebSocket](WebSocket.md), `query.executeQueued` com `notify: true` também avisa a conexão quando a
 execução termina.
 
+### Consultas nomeadas {#named-queries}
+
+Desde o data-gateway 4.1.0. As consultas da aplicação declaradas no esquema com um nome
+([`application.queries`](../usage/TypedQueries.md)) são servidas pelo seu nome: um cliente (ou um agente) usa uma
+consulta curada em vez de escrever a sua, e nunca vê seu texto.
+
+```yaml
+# lambdaORM.yaml
+application:
+  queries:
+    - name: customersOf
+      description: the customers of a country, by their id
+      query: 'Customers.filter(p => p.country == country).map(p => [p.id, p.city]).sort(p => p.id)'
+```
+
+```sh
+curl http://localhost:8080/queries -H "X-Api-Key: $KEY"
+# [{ "name": "customersOf", "description": "…", "parameters": [{ "name": "country", "type": "string" }],
+#    "model": [{ "name": "id", "type": "string" }, { "name": "city", "type": "string" }], "writes": false }]
+curl -X POST http://localhost:8080/queries/customersOf -H "X-Api-Key: $KEY" -H "Content-Type: application/json" \
+  -d '{ "data": { "country": "Germany" } }'
+```
+
+- Na [view de quem chama](Security.md#views): uma consulta que usa o que sua view exclui não lhe é listada, e suas
+  linhas são as da sua view.
+- Executa como `execute`: uma consulta que grava precisa de `write`, e a [auditoria](Security.md#audit) informa seu `name`.
+- Seus limites, além dos do gateway: `orm.schemas[].queries: { customersOf: { maxRows: 100, timeout: 5s } }`
+  na [configuração](Configuration.md#reference); mais linhas é `422 TooManyRowsError`, mais tempo é `504`.
+- Por [WebSocket](WebSocket.md#methods), `queries.list` e `queries.execute`; por [MCP](Mcp.md#named-queries), uma
+  ferramenta `query_<name>` cada.
+
 ## Métodos do esquema {#schema-methods}
 
 O modelo do esquema. Eles precisam de `read`. As conexões das fontes nunca são retornadas.
@@ -333,6 +364,7 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 | model | `POST /model` | `orm_model` | `query.model` | `read` |
 | parameters | `POST /parameters` | `orm_parameters` | `query.parameters` | `read` |
 | constraints | `POST /constraints` | `orm_constraints` | `query.constraints` | `read` |
+| [consultas nomeadas](#named-queries) (4.1.0) | `GET /queries`, `POST /queries/{name}` | `query_<name>` | `queries.list`, `queries.execute` | `read` / `write` |
 | esquema | `GET /schema` | `schema_get` | `schema.schema` | `read` |
 | versão do esquema | `GET /schema/version` | `schema_version` | `schema.version` | `read` |
 | domínio | `GET /domain` | `schema_domain` | `schema.domain` | `read` |

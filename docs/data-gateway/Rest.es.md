@@ -232,6 +232,38 @@ infrastructure:
 A través de la [API WebSocket](WebSocket.md), `query.executeQueued` con `notify: true` además avisa a la conexión cuando la
 ejecución termina.
 
+### Consultas con nombre {#named-queries}
+
+Desde data-gateway 4.1.0. Las consultas de la aplicación declaradas en el esquema con un nombre
+([`application.queries`](../usage/TypedQueries.md)) se sirven por su nombre: un cliente (o un agente) usa una consulta
+curada en lugar de escribir la suya, y nunca ve su texto.
+
+```yaml
+# lambdaORM.yaml
+application:
+  queries:
+    - name: customersOf
+      description: the customers of a country, by their id
+      query: 'Customers.filter(p => p.country == country).map(p => [p.id, p.city]).sort(p => p.id)'
+```
+
+```sh
+curl http://localhost:8080/queries -H "X-Api-Key: $KEY"
+# [{ "name": "customersOf", "description": "…", "parameters": [{ "name": "country", "type": "string" }],
+#    "model": [{ "name": "id", "type": "string" }, { "name": "city", "type": "string" }], "writes": false }]
+curl -X POST http://localhost:8080/queries/customersOf -H "X-Api-Key: $KEY" -H "Content-Type: application/json" \
+  -d '{ "data": { "country": "Germany" } }'
+```
+
+- En la [vista de quien llama](Security.md#views): una consulta que usa lo que su vista excluye no se le lista, y sus
+  filas son las de su vista.
+- Se ejecuta como `execute`: una consulta que escribe necesita `write`, y la [auditoría](Security.md#audit) dice su
+  `name`.
+- Sus límites, además de los del gateway: `orm.schemas[].queries: { customersOf: { maxRows: 100, timeout: 5s } }`
+  en la [configuración](Configuration.md#reference); más filas es `422 TooManyRowsError`, más tiempo es `504`.
+- Por [WebSocket](WebSocket.md#methods), `queries.list` y `queries.execute`; por [MCP](Mcp.md#named-queries), una
+  herramienta `query_<name>` cada una.
+
 ## Métodos del esquema {#schema-methods}
 
 El modelo del esquema. Necesitan `read`. Las conexiones de las fuentes nunca se devuelven.
@@ -333,6 +365,7 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 | model | `POST /model` | `orm_model` | `query.model` | `read` |
 | parameters | `POST /parameters` | `orm_parameters` | `query.parameters` | `read` |
 | constraints | `POST /constraints` | `orm_constraints` | `query.constraints` | `read` |
+| [consultas con nombre](#named-queries) (4.1.0) | `GET /queries`, `POST /queries/{name}` | `query_<name>` | `queries.list`, `queries.execute` | `read` / `write` |
 | esquema | `GET /schema` | `schema_get` | `schema.schema` | `read` |
 | versión del esquema | `GET /schema/version` | `schema_version` | `schema.version` | `read` |
 | dominio | `GET /domain` | `schema_domain` | `schema.domain` | `read` |

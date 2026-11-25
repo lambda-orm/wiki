@@ -17,6 +17,8 @@ pelo edge worker antes que qualquer coisa chegue ao esquema.
 | `local`, `type: bearer` | `token` | `tokens: [{ name, value, permissions }]` | `Authorization: Bearer <token>` |
 | `local`, `type: apikey` | `value` (e `header`, padrão `X-Api-Key`) | `keys: [{ name, value, permissions }]` | `<header>: <key>` |
 | `local`, `type: basic` | `username`, `password` | `users: [{ username, password, permissions }]` | `Authorization: Basic <base64(user:password)>` |
+| `jwt` (4.1.0) | — | os usuários de um provedor de identidade, seus papéis mapeados para permissões ([abaixo](#jwt)) | `Authorization: Bearer <JWT>` |
+| `methods` (4.1.0) | — | vários dos anteriores, em ordem: tokens para os usuários, chaves para os serviços ([abaixo](#jwt)) | o que cada um recebe |
 
 ```yaml
 authentication:
@@ -41,6 +43,84 @@ authentication:
   [sessão](Transports.md#sessions): as sessões são listadas, terminam por inatividade e podem ser revogadas na hora.
 - Nenhum transporte responde CORS: um navegador de outra origem não pode chamar o gateway; um backend próprio pode.
 
+## Tokens de um provedor de identidade (JWT / OIDC) {#jwt}
+
+Desde o data-gateway 4.1.0. Os usuários trazem o token que seu provedor de identidade lhes dá (Keycloak, Auth0, Entra
+ID, Cognito, Google…) e o gateway o verifica sem chamar o provedor a cada requisição:
+
+```yaml
+authentication:
+  methods:
+    - adapter: jwt
+      issuer: https://auth.example.com/realms/shop          # iss; suas chaves são descobertas a partir dele (OIDC)
+      audience: data-gateway                                # aud
+      # jwksUri: https://…/certs                            # se a descoberta não estiver disponível
+      # algorithms: [ RS256, ES256 ]                        # padrão RS256, ES256, PS256
+      # clockTolerance: 30s
+      principal:
+        name: preferred_username                            # o claim do nome (padrão sub)
+        permissions:
+          claim: realm_access.roles                         # uma lista, ou um texto separado por espaços (como scope)
+          roles:
+            reader: [ read ]
+            support: { permissions: [ read ], view: support }  # um papel com sua view (abaixo)
+            admin: [ read, write, script ]
+      context:                                              # claim → variável do contexto do λORM
+        tenant: tenant_id
+        region: address.region
+    - adapter: local                                        # os serviços mantêm suas chaves
+      type: apikey
+      keys:
+        - { name: billing, value: $BILLING_KEY, permissions: [ read, write ] }
+```
+
+- **A assinatura** é verificada com as chaves públicas do emissor (seu JWKS, em cache; um token assinado com uma chave
+  nova faz relê-las), depois o emissor, a audiência e os tempos. `secret: $JWT_SECRET` (HS256) em vez das chaves é para
+  desenvolvimento e testes.
+- **Quem é:** seu nome (`principal.name`), as permissões de seus papéis (um papel deve listá-las: um papel não listado
+  não dá nada) e seu **contexto**: o que os [filtros de linhas das views](#views), os valores padrão e as condições do
+  esquema leem (`context.tenant`). Um claim pode ser um caminho (`address.region`) ou um nome com pontos ou uma URL, como
+  o Auth0 os nomeia (`https://example.com/roles`).
+- **`methods`:** o primeiro que reconhece a credencial decide. Um JWT que falha é recusado como token, uma chave
+  incorreta como chave; nenhum é tentado pelo outro.
+- **Um token recusado diz por quê:** `401` com `the token is not valid: expired` (ou `issuer`, `audience`, `signature`,
+  `algorithm`, `unknown key`, `not yet valid`) e `WWW-Authenticate: Bearer error="invalid_token"`. Um emissor que não
+  pode ser alcançado é `503`, não `401`. O token nunca é escrito nos logs, na auditoria ou nos traces.
+- **Nada sobrevive ao token:** uma sessão de `management` termina no seu `exp`; uma conexão WebSocket ou MCP WebSocket
+  é fechada com o código `4401`.
+- O [cliente Node](Clients.md) recebe o token como uma função, para renová-lo; a [IDE](../ide/Connections.md) o recebe
+  como um Bearer token.
+
+## A view de cada chamador {#views}
+
+Desde o data-gateway 4.1.0. Uma [view](../schema/Views.md) do esquema decide o que do domínio é visto: suas entidades,
+suas propriedades (mascaradas, ocultas ou calculadas) e suas linhas (um filtro com o contexto). **O gateway escolhe a
+view de cada requisição**, nunca o cliente:
+
+```yaml
+authentication:
+  adapter: local
+  type: apikey
+  keys:
+    - { name: billing, value: $BILLING_KEY, permissions: [ read ], view: billing }   # a view de uma chave
+# ou a view de um papel de um token: roles: { support: { permissions: [ read ], view: support } }
+orm:
+  schemas:
+    - path: shop
+      view: public            # a de um chamador sem view; sem ela, default (o domínio inteiro)
+```
+
+- **Tudo está nessa view:** as consultas (o que ela mascara vem mascarado, o que ela exclui não existe, suas linhas são
+  filtradas com o contexto do token), seus `metadata`, `model`, `parameters` e `constraints`, o domínio (`/schema`,
+  `/domain`, `/entities`, `/typings`, a busca), as entidades dos mappings, as views listadas, o que o MCP diz a um agente
+  e `/whoami` (`view`).
+- **Uma `view` ou um `context` enviado por um cliente em `options` é descartado**, por todos os transportes: um cliente
+  não pode pular o que sua view oculta nem ler as linhas de outro tenant.
+- **Nunca adivinhada:** um token cujos papéis dão duas views é `403`; uma view que o esquema não tem é avisada quando o
+  esquema carrega e suas requisições são `403`. Uma entidade que a view exclui é `403 ViewError`.
+- Os comandos de stage (`import`, `export`, `push`…) veem o esquema inteiro: uma credencial com uma view e `stageImport`
+  ou `ddl` é avisada quando a configuração é lida.
+
 ## Permissões {#permissions}
 
 | Permissão | Permite |
@@ -58,7 +138,7 @@ authentication:
   sentença que não seja `select`, inclusive dentro de um `include`, é recusada.
 - Sem a permissão: `403` no REST, `status: 403` no WebSocket, `isError: true` no MCP, com a mensagem
   `the credential "reader" does not have the "write" permission`.
-- `GET /whoami` responde o nome e as permissões da credencial, nunca seu segredo.
+- `GET /whoami` responde o nome e as permissões da credencial (e sua view, 4.1.0), nunca seu segredo.
 
 ## Auditoria {#audit}
 
@@ -72,6 +152,7 @@ padrão, para que o coletor de logs (Loki, ELK, CloudWatch, …) possa separá-l
 | `executeQueued` | sempre (quando enfileirada) |
 | `stageImport` | sempre, também o comando `import` da [administração](Admin.md#the-commands) |
 | `stagePush`, `stageDrop` | os comandos `push` e `drop` da administração |
+| `stageMigrate`, `stageSeed` | os comandos `migrate` e `seed` da administração (4.1.0) |
 | `login`, `logout`, `sessionExpired`, `sessionRevoked`, `loginRejected` | as [sessões](Transports.md#sessions) de `management`, com o id da sessão (nunca seu token), o endereço e quem a revogou |
 
 ```json
@@ -81,6 +162,7 @@ padrão, para que o coletor de logs (Loki, ELK, CloudWatch, …) possa separá-l
 ```
 
 - É gravada após a execução, inclusive quando ela falha (`"result": "error"` com a mensagem).
+- Uma [consulta nomeada](Rest.md#named-queries) é auditada com seu `name` (4.1.0).
 - Contém o nome da credencial, nunca seu segredo. Os parâmetros (`data`) são adicionados apenas com
   `audit.includeData: true`, porque podem conter dados pessoais. `audit.enabled: false` a desativa.
 
@@ -95,6 +177,7 @@ padrão, para que o coletor de logs (Loki, ELK, CloudWatch, …) possa separá-l
 | Tamanho de uma resposta | `server.maxResponseBytes` | `413`: use `.page(1, n)` ou agregue na consulta |
 | Scripts | `scripts.maxLength`, `timeoutMs`, `maxIterations` | `413 ScriptTooLongError` (tamanho) ou um erro do script |
 | Linhas de um resultado para o MCP | `mcp.maxRows` | cortado, com uma dica ([MCP](Mcp.md#results-and-errors)) |
+| Linhas e tempo de uma [consulta nomeada](Rest.md#named-queries) (4.1.0) | `orm.schemas[].queries.<name>.maxRows` / `timeout` | `422 TooManyRowsError` / `504` |
 
 ## Erros {#errors}
 
@@ -118,16 +201,16 @@ Uma requisição que falha responde com um status que um cliente pode mapear e u
 
 | Status | Causa |
 | --- | --- |
-| `400` | uma consulta ou um modelo inválido (`ValidationError`, `SchemaError`, `SintaxisError`, `LanguageError`), uma violação de not null ou de check, dados inválidos (Postgres `22xxx`) |
-| `401` | nenhuma credencial, ou uma incorreta; em `management`, nenhuma sessão ou uma expirada ou revogada |
-| `403` | a credencial não tem a permissão; scripts desabilitados |
+| `400` | uma consulta ou um modelo inválido (`ValidationError`, `SchemaError`, `SintaxisError`, `LanguageError`), uma violação de not null ou de check, dados inválidos (Postgres `22xxx`); um valor do contexto de que um filtro precisa e que a identidade não traz (`ContextError`, `details.variable`) |
+| `401` | nenhuma credencial, ou uma incorreta (um token diz por quê: `expired`, `audience`…); em `management`, nenhuma sessão ou uma expirada ou revogada |
+| `403` | a credencial não tem a permissão; scripts desabilitados; uma entidade que sua view exclui, ou uma escrita fora do filtro da sua view (`ViewError`, `details.view`, `details.entity`); um token com duas views |
 | `404` | um nome que o esquema não tem (uma entidade, enum, source, mapping, stage), um esquema não exposto nesse transporte, uma rota desconhecida |
-| `409` | uma violação de chave única ou estrangeira (Postgres `23505`, `23503`; MySQL `ER_DUP_ENTRY`, `ER_NO_REFERENCED_ROW_2`, `ER_ROW_IS_REFERENCED_2`); na administração, um workspace ocupado, um comando em execução ou sem sua pré-visualização |
+| `409` | uma violação de chave única ou estrangeira (Postgres `23505`, `23503`; MySQL `ER_DUP_ENTRY`, `ER_NO_REFERENCED_ROW_2`, `ER_ROW_IS_REFERENCED_2`); na administração, um workspace ocupado, um comando em execução ou sem sua pré-visualização, um `push` que pode perder dados sem `allowDestructive` (`DestructiveChangeError`, `details.changes`) |
 | `412`, `428` | administração: alguém o alterou desde que foi lido; uma escrita sem a versão que altera |
 | `413` | um corpo, uma resposta ou um script grande demais |
-| `422` | administração: o esquema não seria válido (`details.issues`, cada um em sua linha) |
+| `422` | administração: o esquema não seria válido (`details.issues`, cada um em sua linha); uma consulta entre sources com mais linhas do que pode trazer para a memória (`CrossSourceError`); uma consulta nomeada acima do seu `maxRows` (`TooManyRowsError`) |
 | `429` | limite de taxa, ou operações simultâneas demais no esquema |
-| `503` | o esquema não está `ready` (`SchemaUnavailableError`: iniciando, em erro, reiniciando); uma source que o gateway não alcança, ou cuja variável de conexão não está definida (`ConnectionError`) |
+| `503` | o esquema não está `ready` (`SchemaUnavailableError`: iniciando, em erro, reiniciando); uma source que o gateway não alcança, ou cuja variável de conexão não está definida (`ConnectionError`); o emissor dos tokens não pode ser alcançado |
 | `504` | a operação demorou mais que `server.timeout` (`TimeoutError`) |
 | *n* | um script executou `throw { status: n, message }` (400–599) |
 | `500` | qualquer outra coisa |

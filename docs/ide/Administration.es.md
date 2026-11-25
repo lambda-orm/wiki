@@ -35,12 +35,15 @@ deshabilitado.
 | **export** | los datos del stage, para descargar (`northwind-default.json`, **Descargar**) | se ejecuta enseguida |
 | **export → data/** | los datos del stage, a `data/` del workspace | se ejecuta enseguida |
 | **import…** | un archivo exportado al stage | pide el archivo, luego muestra las filas que va a escribir |
-| **push…** | aplica el modelo a las bases de datos (crea y altera tablas) | muestra las sentencias, por source |
+| **push…** | aplica el modelo a las bases de datos (crea y altera tablas) | muestra las sentencias, por source, y las que pueden perder datos (data-gateway 4.1.0) |
 | **pull…** | trae las bases de datos al modelo | muestra cómo va a cambiar `lambdaORM.yaml` |
 | **drop…** | elimina las tablas del stage | muestra las sentencias; escribes el nombre del stage para confirmar |
 | **introspect…** | crea una entidad desde un archivo de datos | pide el archivo y la entidad, luego muestra cómo va a cambiar `lambdaORM.yaml` |
 | **incorporate…** | crea una entidad desde un archivo de datos e importa sus filas | pide el archivo y la entidad, luego muestra el cambio y las filas |
 | **build…** | genera el código del dominio ([abajo](#source-code)) | el lenguaje y lo que genera |
+| **migrations** | el historial de las migraciones del stage (data-gateway 4.1.0): versión, source, aplicada o deshecha, cuándo y quién; **volver acá** en una versión aplicada ejecuta **migrate** | se ejecuta enseguida |
+| **migrate…** | vuelve a una versión: el deshacer de cada migración posterior | muestra las sentencias del deshacer, por migración |
+| **seed…** | inserta las filas de los archivos de seed del stage que todavía no están (data-gateway 4.1.0) | muestra sus archivos |
 | **version** | las versiones de λORM en el gateway | se ejecuta enseguida |
 
 Para ejecutar un comando que muestra primero lo que va a hacer:
@@ -48,7 +51,9 @@ Para ejecutar un comando que muestra primero lo que va a hacer:
 1. Elige el **Stage**.
 2. Haz clic en el comando (y, para import, introspect e incorporate, elige el archivo y **Ver qué va a hacer**).
 3. Lee la vista previa: las sentencias por source, el cambio de `lambdaORM.yaml` (`+3 −0 líneas`) o las filas de cada
-   entidad. Push y drop tienen **seguir aunque falle una sentencia (tryAllCan)**; drop pide el nombre del stage.
+   entidad. Push y drop tienen **seguir aunque falle una sentencia (tryAllCan)**; drop pide el nombre del stage. Cuando
+   push o migrate cambiaría algo que puede perder datos, la vista previa lo lista y se ejecuta solo después de marcar
+   **aplicar también los cambios que pueden perder datos**.
 4. **Ejecutar push** (en rojo) ejecuta exactamente eso; **Cancelar** no.
 
 Cada comando se ejecuta como un job: su estado (**en curso**, **terminado**, **falló**) y su resultado se muestran

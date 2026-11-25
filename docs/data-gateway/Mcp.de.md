@@ -28,6 +28,7 @@ was es abfragen kann.
 | `orm_model` | `query` | `POST /model` | `read` | nur lesend |
 | `orm_parameters` | `query` | `POST /parameters` | `read` | nur lesend |
 | `orm_constraints` | `query` | `POST /constraints` | `read` | nur lesend |
+| `query_<name>` (4.1.0) | die Parameter der Abfrage | `POST /queries/{name}` | `read` (oder `write`, wenn sie schreibt) | nur lesend oder destruktiv |
 | `schema_get` | — | `GET /schema` | `read` | nur lesend |
 | `schema_version` | — | `GET /schema/version` | `read` | nur lesend |
 | `schema_domain` | — | `GET /domain` | `read` | nur lesend |
@@ -57,7 +58,30 @@ Die Tools `admin_*` gibt es nur, wenn der Transport `management` bereitgestellt 
 - Es gelten dieselben Regeln wie bei REST: `orm_execute_script` schlägt fehl, wenn Skripte deaktiviert sind;
   `orm_execute_queued`, wenn das Schema keine Warteschlange hat.
 - `mcp.tools.include` / `exclude` (global oder pro Schema) schränken die Liste weiter ein, zum Beispiel
-  `exclude: [ orm_execute_script, stage_import ]`.
+  `exclude: [ orm_execute_script, stage_import ]` (oder `query_<name>`).
+- Mit einer [View](Security.md#views) (4.1.0) tragen die Beschreibungen und die Ressourcen die Domäne **dieser View**:
+  einem Agenten wird nichts von dem mitgeteilt, was er nicht sehen kann.
+
+### Benannte Abfragen und kuratierte Tools {#named-queries}
+
+Seit data-gateway 4.1.0. Jede [benannte Abfrage](Rest.md#named-queries) des Schemas ist ein Tool `query_<name>`: ihre
+Beschreibung, ihre Parameter als typisierte Argumente und was sie zurückgibt. Ein Agent ruft eine kuratierte Abfrage
+auf, statt selbst eine zu schreiben:
+
+```yaml
+mcp:
+  freeQueries: false      # without orm_execute, orm_execute_script, orm_execute_queued nor orm_plan
+orm:
+  schemas:
+    - path: shop
+      mcp: { freeQueries: false }                         # or per schema
+      queries:
+        customersOf: { maxRows: 100, timeout: 5s }        # the limits of a query
+```
+
+Mit `freeQueries: false` hat ein Agent nur die benannten Abfragen und die Tools des Schemas (`schema_*`): Was er
+ausführen kann, ist das, was das Schema deklariert. Die Tools werden in der View des Aufrufers aufgelistet, und eine
+Abfrage, die schreibt, nur für Anmeldedaten mit `write`.
 
 ### Große Schemas {#large-schemas}
 
