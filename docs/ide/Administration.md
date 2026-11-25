@@ -34,12 +34,15 @@ The commands are icons; the pointer over one says what it does. A command the cr
 | **export** | the data of the stage, to download (`northwind-default.json`, **Download**) | runs at once |
 | **export → data/** | the data of the stage, to `data/` of the workspace | runs at once |
 | **import…** | an export file into the stage | asks for the file, then shows the rows it will write |
-| **push…** | applies the model to the databases (creates and alters tables) | shows the sentences, by source |
+| **push…** | applies the model to the databases (creates and alters tables) | shows the sentences, by source, and those that can lose data (data-gateway 4.1.0) |
 | **pull…** | brings the databases into the model | shows how `lambdaORM.yaml` will change |
 | **drop…** | removes the tables of the stage | shows the sentences; you type the name of the stage to confirm |
 | **introspect…** | creates an entity from a data file | asks for the file and the entity, then shows how `lambdaORM.yaml` will change |
 | **incorporate…** | creates an entity from a data file and imports its rows | asks for the file and the entity, then shows the change and the rows |
 | **build…** | generates the code of the domain ([below](#source-code)) | the language and what it generates |
+| **migrations** | the history of the migrations of the stage (data-gateway 4.1.0): version, source, applied or undone, when and who; **go back here** on an applied version runs **migrate** | runs at once |
+| **migrate…** | goes back to a version: the undo of each later migration | shows the sentences of the undo, by migration |
+| **seed…** | inserts the rows of the seed files of the stage that are not there yet (data-gateway 4.1.0) | shows its files |
 | **version** | the versions of λORM in the gateway | runs at once |
 
 To run a command that shows first what it will do:
@@ -47,7 +50,9 @@ To run a command that shows first what it will do:
 1. Choose the **Stage**.
 2. Click the command (and, for import, introspect and incorporate, choose the file and **See what it will do**).
 3. Read the preview: the sentences by source, the change of `lambdaORM.yaml` (`+3 −0 lines`) or the rows of each
-   entity. Push and drop have **go on after a sentence fails (tryAllCan)**; drop asks for the name of the stage.
+   entity. Push and drop have **go on after a sentence fails (tryAllCan)**; drop asks for the name of the stage. When
+   push or migrate would change something that can lose data, the preview lists it and runs only after **apply also the
+   changes that can lose data** is checked.
 4. **Run push** (red) runs exactly that; **Cancel** doesn't.
 
 Each command runs as a job: its state (**running**, **done**, **failed**) and its result show under it, and **Last

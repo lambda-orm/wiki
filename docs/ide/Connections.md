@@ -16,7 +16,7 @@ The **+** next to **Connections**, at the top of the explorer:
 | **Name** | how the connection is shown (`local`, `production`…) |
 | **Protocol** | `REST · http` or `REST · https` |
 | **Management address** | `host:port/base path` of the `management` of the gateway, **as the server of the IDE reaches it**: `data-gateway:9090` for a web IDE in the same compose, `localhost:9090` for the desktop app on the machine of the gateway |
-| **Authentication** | **API key** (its **Header**, default `X-Api-Key`, and its **Key**), **Bearer token** (its **Token**), **Basic (user and password)** or **None** |
+| **Authentication** | **API key** (its **Header**, default `X-Api-Key`, and its **Key**), **Bearer token (JWT)** (its **Token**: a key of the gateway or the [token of an identity provider](../data-gateway/Security.md#jwt); when it expires the connection says so and asks for a new one), **Basic (user and password)** or **None** |
 | **Remember the key in this browser** | kept with the connection; otherwise only in that tab of the browser, and asked again after closing it |
 | **Other URLs of its transports** (folded) | the **REST URL**, **WebSocket URL** and **MCP URL**, only when the IDE doesn't reach them at the ports the gateway tells (a proxy in front, another network) |
 | **Observability** (folded) | the **Grafana URL** and its **Tempo datasource (uid)** (`tempo` by default): an entity then shows a link to its traces ([Entities](Entities.md)) |

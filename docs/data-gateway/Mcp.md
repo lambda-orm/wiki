@@ -27,6 +27,7 @@ credential allows it**. The descriptions and input schemas are generated when th
 | `orm_model` | `query` | `POST /model` | `read` | read only |
 | `orm_parameters` | `query` | `POST /parameters` | `read` | read only |
 | `orm_constraints` | `query` | `POST /constraints` | `read` | read only |
+| `query_<name>` (4.1.0) | the parameters of the query | `POST /queries/{name}` | `read` (or `write` if it writes) | read only, or destructive |
 | `schema_get` | — | `GET /schema` | `read` | read only |
 | `schema_version` | — | `GET /schema/version` | `read` | read only |
 | `schema_domain` | — | `GET /domain` | `read` | read only |
@@ -56,7 +57,30 @@ The `admin_*` tools exist only when the `management` transport is exposed ([Admi
 - The same rules as REST: `orm_execute_script` fails if scripts are disabled; `orm_execute_queued`, if the schema has
   no queue.
 - `mcp.tools.include` / `exclude` (global or per schema) restrict the list further, for example
-  `exclude: [ orm_execute_script, stage_import ]`.
+  `exclude: [ orm_execute_script, stage_import ]` (or `query_<name>`).
+- With a [view](Security.md#views) (4.1.0), the descriptions and the resources carry the domain **of that view**: an
+  agent is not told of what it can't see.
+
+### Named queries and curated tools {#named-queries}
+
+Since data-gateway 4.1.0. Each [named query](Rest.md#named-queries) of the schema is a tool `query_<name>`: its
+description, its parameters as typed arguments and what it returns. An agent calls a curated query instead of writing
+one:
+
+```yaml
+mcp:
+  freeQueries: false      # without orm_execute, orm_execute_script, orm_execute_queued nor orm_plan
+orm:
+  schemas:
+    - path: shop
+      mcp: { freeQueries: false }                         # or per schema
+      queries:
+        customersOf: { maxRows: 100, timeout: 5s }        # the limits of a query
+```
+
+With `freeQueries: false` an agent has only the named queries and the tools of the schema (`schema_*`): what it can
+run is what the schema declares. The tools are listed in the view of who calls, and a query that writes only to a
+credential with `write`.
 
 ### Large schemas
 
