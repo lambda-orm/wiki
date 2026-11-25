@@ -1,75 +1,119 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="980" height="414" viewBox="0 0 980 414" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="546" viewBox="0 0 1080 546" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
   <title>Extending an abstract entity: Countries and States take the position of Positions</title>
-
   <style>
     .bg { fill: #ffffff } .t { fill: #111827 } .s { fill: #4b5563 } .m { fill: #6b7280 }
-    .dom { fill: #f8fafc; stroke: #6366f1 } .domt { fill: #3730a3 }
-    .ent { fill: #eef2ff; stroke: #6366f1 } .abs { fill: #f5f3ff; stroke: #8b5cf6; stroke-dasharray: 5 3 }
-    .stg { fill: #ecfdf5; stroke: #10b981 } .stgt { fill: #065f46 }
-    .src { fill: #fff7ed; stroke: #f97316 } .srct { fill: #9a3412 }
-    .tbl { fill: #ffffff; stroke: #fdba74 } .tblh { fill: #ffedd5 }
-    .ln { stroke: #6b7280 } .hd { fill: #6b7280 } .ext { stroke: #8b5cf6 }
+    .app { fill: #f1f5f9; stroke: #64748b } .code { fill: #0f172a }
+    .sch { fill: #f8fafc; stroke: #94a3b8 } .scht { fill: #334155 }
+    .dom { fill: #eef2ff; stroke: #6366f1 } .domt { fill: #3730a3 } .chip { fill: #ffffff; stroke: #a5b4fc } .domi { fill: #6366f1 }
+    .abs { fill: #ffffff; stroke: #8b5cf6; stroke-dasharray: 5 3 }
+    .inf { fill: #fffbeb; stroke: #d97706 } .inft { fill: #92400e } .ichip { fill: #ffffff; stroke: #fcd34d } .infi { fill: #d97706 }
+    .stgc { fill: #ffffff; stroke: #6ee7b7 } .stgt { fill: #065f46 }
+    .orm { fill: #ecfdf5; stroke: #10b981 } .ormt { fill: #065f46 } .ormi { fill: #10b981 }
+    .tbl { fill: #ffffff; stroke: #cbd5e1 } .tblh { fill: #f1f5f9 } .key { fill: #c2410c }
+    .ln { stroke: #64748b } .hd { fill: #64748b } .ext { stroke: #8b5cf6 } .exth { fill: #8b5cf6 }
+    .mysql { fill: #e0f2fe; stroke: #0369a1 } .mysqltop { fill: #bae6fd; stroke: #0369a1 } .mysqlt { fill: #075985 }
     @media (prefers-color-scheme: dark) {
       .bg { fill: #0f172a } .t { fill: #e5e7eb } .s { fill: #9ca3af } .m { fill: #9ca3af }
-      .dom { fill: #111827; stroke: #818cf8 } .domt { fill: #a5b4fc }
-      .ent { fill: #1e1b4b; stroke: #818cf8 } .abs { fill: #2e1065; stroke: #a78bfa }
-      .stg { fill: #064e3b; stroke: #34d399 } .stgt { fill: #6ee7b7 }
-      .src { fill: #431407; stroke: #fb923c } .srct { fill: #fdba74 }
-      .tbl { fill: #0f172a; stroke: #c2410c } .tblh { fill: #7c2d12 }
-      .ln { stroke: #9ca3af } .hd { fill: #9ca3af } .ext { stroke: #a78bfa }
+      .app { fill: #1e293b; stroke: #94a3b8 } .code { fill: #e2e8f0 }
+      .sch { fill: #111827; stroke: #64748b } .scht { fill: #cbd5e1 }
+      .dom { fill: #1e1b4b; stroke: #818cf8 } .domt { fill: #a5b4fc } .chip { fill: #0f172a; stroke: #6366f1 } .domi { fill: #818cf8 }
+      .abs { fill: #0f172a; stroke: #a78bfa }
+      .inf { fill: #422006; stroke: #f59e0b } .inft { fill: #fcd34d } .ichip { fill: #0f172a; stroke: #b45309 } .infi { fill: #f59e0b }
+      .stgc { fill: #0f172a; stroke: #059669 } .stgt { fill: #6ee7b7 }
+      .orm { fill: #064e3b; stroke: #34d399 } .ormt { fill: #6ee7b7 } .ormi { fill: #34d399 }
+      .tbl { fill: #0f172a; stroke: #475569 } .tblh { fill: #1e293b } .key { fill: #fb923c }
+      .ln { stroke: #94a3b8 } .hd { fill: #94a3b8 } .ext { stroke: #a78bfa } .exth { fill: #a78bfa }
+      .mysql { fill: #0c4a6e; stroke: #38bdf8 } .mysqltop { fill: #075985; stroke: #38bdf8 } .mysqlt { fill: #e0f2fe }
     }
   </style>
-  <rect class="bg" width="980" height="414"/>
-  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="hd" d="M0 0L10 5L0 10z"/></marker><marker id="e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="none" stroke="#8b5cf6"/></marker></defs>
-  <rect class="dom" x="16" y="16" width="200" height="374" rx="12"/>
-  <text class="domt" x="116.0" y="40" text-anchor="middle" font-size="15" font-weight="700">Domain</text>
-  <rect class="abs" x="30" y="52" width="172" height="66" rx="8"/>
-  <text class="t" x="116.0" y="72" text-anchor="middle" font-size="14" font-weight="700">Positions</text>
-  <text class="m" x="194" y="72" text-anchor="end" font-size="10">abstract</text>
-  <text class="s" x="42" y="96" font-size="12">latitude</text>
-  <text class="s" x="42" y="114" font-size="12">longitude</text>
-  <rect class="ent" x="30" y="148" width="172" height="84" rx="8"/>
-  <text class="t" x="116.0" y="168" text-anchor="middle" font-size="14" font-weight="700">Countries</text>
-  <text class="s" x="42" y="192" font-size="12">iso3</text>
-  <text class="s" x="42" y="210" font-size="12">name</text>
-  <text class="m" x="42" y="228" font-size="12" font-style="italic">states</text>
-  <rect class="ent" x="30" y="262" width="172" height="102" rx="8"/>
-  <text class="t" x="116.0" y="282" text-anchor="middle" font-size="14" font-weight="700">States</text>
-  <text class="s" x="42" y="306" font-size="12">id</text>
-  <text class="s" x="42" y="324" font-size="12">name</text>
-  <text class="s" x="42" y="342" font-size="12">countryCode</text>
-  <text class="m" x="42" y="360" font-size="12" font-style="italic">country</text>
-  <path class="ext" d="M192 148V122" stroke-width="1.4" stroke-dasharray="4 3" fill="none" marker-end="url(#e)"/>
-  <path class="ext" d="M192 262V122" stroke-width="1.4" stroke-dasharray="4 3" fill="none" marker-end="url(#e)"/>
-  <rect class="stg" x="276" y="167.0" width="298" height="80" rx="12"/>
-  <text class="stgt" x="425.0" y="193.0" text-anchor="middle" font-size="15" font-weight="700">Stage · default</text>
-  <text class="t" x="290" y="219.0" font-size="12" font-weight="600">→ source1</text>
-  <text class="s" x="290" y="234.0" font-size="11">every entity</text>
-  <rect class="src" x="634" y="16" width="330" height="188" rx="12"/>
-  <text class="srct" x="650" y="40" font-size="14" font-weight="700">source1 · MySQL</text>
-  <text class="s" x="650" y="56" font-size="11">mapping: the domain names</text>
-  <rect class="tbl" x="650" y="64" width="140" height="106" rx="4"/>
-  <rect class="tblh" x="650.5" y="64.5" width="139" height="24" rx="4"/>
-  <text class="t" x="720.0" y="81" text-anchor="middle" font-size="12" font-weight="700">Countries</text>
-  <text class="srct" x="658" y="106" font-size="10" font-weight="700">PK</text>
-  <text class="t" x="684" y="106" font-size="12" font-weight="600">iso3</text>
-  <text class="srct" x="658" y="124" font-size="10" font-weight="700">UK</text>
-  <text class="t" x="684" y="124" font-size="12">name</text>
-  <text class="t" x="684" y="142" font-size="12">latitude</text>
-  <text class="t" x="684" y="160" font-size="12">longitude</text>
-  <rect class="tbl" x="804" y="64" width="150" height="124" rx="4"/>
-  <rect class="tblh" x="804.5" y="64.5" width="149" height="24" rx="4"/>
-  <text class="t" x="879.0" y="81" text-anchor="middle" font-size="12" font-weight="700">States</text>
-  <text class="srct" x="812" y="106" font-size="10" font-weight="700">PK</text>
-  <text class="t" x="838" y="106" font-size="12" font-weight="600">id</text>
-  <text class="srct" x="812" y="124" font-size="10" font-weight="700">FK</text>
-  <text class="t" x="838" y="124" font-size="12">countryCode</text>
-  <text class="t" x="838" y="142" font-size="12">name</text>
-  <text class="t" x="838" y="160" font-size="12">latitude</text>
-  <text class="t" x="838" y="178" font-size="12">longitude</text>
-  <g class="ln" stroke-width="1.6" fill="none" marker-end="url(#a)">
-    <path d="M216 203.0C246 203.0 246 207.0 274 207.0"/>
-    <path d="M574 215.0C604 215.0 604 110.0 632 110.0"/>
+  <rect class="bg" width="1080" height="546"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="hd" d="M0 0L10 5L0 10z"/></marker>
+    <marker id="e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="exth" d="M0 0L10 5L0 10z"/></marker>
+  </defs>
+  <rect class="app" x="16" y="16" width="436" height="64" rx="12"/>
+  <g class="ln" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="32" y="30" width="40" height="30" rx="4"/><path d="M32 39H72"/><path d="M45 46l-4 4 4 4M59 46l4 4-4 4"/></g>
+  <text class="t" x="86" y="42" font-size="14" font-weight="700">Your application</text>
+  <text class="code" x="86" y="64" font-size="13" font-family="ui-monospace, Menlo, monospace">States.map(p =&gt; [p.name, p.latitude])</text>
+  <rect class="sch" x="8" y="96" width="452" height="436" rx="14" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <path class="scht" d="M24 110h11l6 6v15H24z" opacity="0.15"/>
+  <path d="M24 110h11l6 6v15H24zM35 110v6h6" fill="none" class="ln" stroke-width="1.5"/>
+  <text class="scht" x="50" y="126" font-size="15" font-weight="700">schema</text>
+  <text class="m" x="112" y="126" font-size="12" font-family="ui-monospace, Menlo, monospace">lambdaORM.yaml</text>
+  <rect class="dom" x="20" y="142" width="428" height="244" rx="12"/>
+  <g class="domi"><rect x="36" y="157" width="8" height="8" rx="2"/><rect x="48" y="157" width="8" height="8" rx="2"/><rect x="36" y="169" width="8" height="8" rx="2"/><rect x="48" y="169" width="8" height="8" rx="2"/></g>
+  <text class="domt" x="66" y="174" font-size="16" font-weight="700" font-family="ui-monospace, Menlo, monospace">domain:</text>
+  <text class="s" x="154" y="174" font-size="12">the business model</text>
+  <rect class="abs" x="36" y="190" width="396" height="44" rx="8"/>
+  <text class="t" x="52" y="208" font-size="12" font-weight="700">Positions</text>
+  <text class="m" x="416" y="208" text-anchor="end" font-size="11">abstract</text>
+  <text class="s" x="52" y="225" font-size="12">latitude · longitude</text>
+  <rect class="chip" x="36" y="258" width="190" height="112" rx="8"/>
+  <text class="t" x="52" y="279" font-size="12" font-weight="700">Countries</text>
+  <text class="s" x="52" y="300" font-size="12">iso3 · key</text>
+  <text class="s" x="52" y="318" font-size="12">name</text>
+  <text class="m" x="52" y="336" font-size="12" font-style="italic">states → States</text>
+  <text class="m" x="52" y="358" font-size="11">+ latitude · longitude</text>
+  <path class="ext" d="M131 258V236" stroke-width="1.4" fill="none" stroke-dasharray="4 3" marker-end="url(#e)"/>
+  <rect class="chip" x="242" y="258" width="190" height="112" rx="8"/>
+  <text class="t" x="258" y="279" font-size="12" font-weight="700">States</text>
+  <text class="s" x="258" y="300" font-size="12">id · key</text>
+  <text class="s" x="258" y="318" font-size="12">name · countryCode</text>
+  <text class="m" x="258" y="336" font-size="12" font-style="italic">country → Countries</text>
+  <text class="m" x="258" y="358" font-size="11">+ latitude · longitude</text>
+  <path class="ext" d="M337 258V236" stroke-width="1.4" fill="none" stroke-dasharray="4 3" marker-end="url(#e)"/>
+  <text class="m" x="234" y="250" text-anchor="middle" font-size="10">extends</text>
+  <rect class="inf" x="20" y="400" width="428" height="120" rx="12"/>
+  <path class="infi" d="M36 416l9-4 9 4 9-4v15l-9 4-9-4-9 4z"/>
+  <text class="inft" x="72" y="429" font-size="16" font-weight="700" font-family="ui-monospace, Menlo, monospace">infrastructure:</text>
+  <text class="s" x="232" y="429" font-size="12">mappings · sources · stages</text>
+  <rect class="stgc" x="36" y="444" width="396" height="62" rx="8"/>
+  <text class="stgt" x="52" y="465" font-size="12" font-weight="700">default</text>
+  <text class="s" x="112.5" y="465" font-size="11">which source each entity goes to</text>
+  <text class="t" x="52" y="490" font-size="12" font-family="ui-monospace, Menlo, monospace">every entity</text>
+  <text class="s" x="232" y="490" font-size="12">→ source1 · MySQL</text>
+  <rect class="orm" x="490" y="207.0" width="196" height="132" rx="14"/>
+  <circle class="ormi" cx="514" cy="233.0" r="13"/>
+  <text x="514" y="238.0" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">λ</text>
+  <text class="ormt" x="536" y="238.0" font-size="16" font-weight="700">λORM</text>
+  <text class="s" x="506" y="269.0" font-size="12">reads the schema</text>
+  <text class="s" x="506" y="287.0" font-size="12">Positions has no table: its</text>
+  <text class="s" x="506" y="305.0" font-size="12">properties are columns of</text>
+  <text class="s" x="506" y="323.0" font-size="12">Countries and States</text>
+  <g stroke-width="2">
+    <path class="mysql" d="M712 164.0V278.0A54 14 0 0 0 820 278.0V164.0"/>
+    <path class="ln" d="M712 202.0A54 14 0 0 0 820 202.0M712 240.0A54 14 0 0 0 820 240.0" fill="none" stroke-width="1.4" opacity="0.6"/>
+    <ellipse class="mysqltop" cx="766" cy="164.0" rx="54" ry="14"/>
   </g>
-  <text class="m" x="28" y="406" font-size="11">- - ▷ extends</text>
+  <text class="mysqlt" x="766" y="226.0" text-anchor="middle" font-size="15" font-weight="700">MySQL</text>
+  <text class="s" x="766" y="316.0" text-anchor="middle" font-size="11">source1</text>
+  <text class="m" x="766" y="331.0" text-anchor="middle" font-size="10">the domain names</text>
+  <rect class="tbl" x="872" y="146.0" width="190" height="112" rx="8"/>
+  <rect class="tblh" x="872.5" y="146.5" width="189" height="28" rx="8"/>
+  <text class="t" x="888" y="165.0" font-size="12" font-weight="700">Countries</text>
+  <text class="key" x="888" y="194.0" font-size="10" font-weight="700">PK</text>
+  <text class="t" x="914" y="194.0" font-size="12" font-weight="600">iso3</text>
+  <text class="key" x="888" y="212.0" font-size="10" font-weight="700">UK</text>
+  <text class="t" x="914" y="212.0" font-size="12">name</text>
+  <text class="t" x="914" y="230.0" font-size="12">latitude</text>
+  <text class="t" x="914" y="248.0" font-size="12">longitude</text>
+  <path class="ln" d="M820 186.0H870" stroke-width="1.4" stroke-dasharray="3 3" fill="none"/>
+  <rect class="tbl" x="872" y="270.0" width="190" height="130" rx="8"/>
+  <rect class="tblh" x="872.5" y="270.5" width="189" height="28" rx="8"/>
+  <text class="t" x="888" y="289.0" font-size="12" font-weight="700">States</text>
+  <text class="key" x="888" y="318.0" font-size="10" font-weight="700">PK</text>
+  <text class="t" x="914" y="318.0" font-size="12" font-weight="600">id</text>
+  <text class="key" x="888" y="336.0" font-size="10" font-weight="700">FK</text>
+  <text class="t" x="914" y="336.0" font-size="12">countryCode</text>
+  <text class="t" x="914" y="354.0" font-size="12">name</text>
+  <text class="t" x="914" y="372.0" font-size="12">latitude</text>
+  <text class="t" x="914" y="390.0" font-size="12">longitude</text>
+  <path class="ln" d="M820 224.0H870" stroke-width="1.4" stroke-dasharray="3 3" fill="none"/>
+  <g class="ln" stroke-width="1.6" fill="none" marker-end="url(#a)">
+    <path d="M452 48C540 48 588 127.0 588 205.0"/>
+    <path d="M460 273.0H488"/>
+    <path d="M686 222.0H708"/>
+  </g>
+  <text class="m" x="500" y="40" font-size="10">the query</text>
+  <text class="m" x="464" y="265.0" font-size="10">reads</text>
 </svg>
