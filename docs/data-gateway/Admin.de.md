@@ -165,9 +165,9 @@ ein Fehler des Schemas, eine Variable, die nicht zu einem Satz gehört (`entity`
   `<orm.workspacePath>/.data-gateway/state.sqlite` (`/admin/session`), sodass ein Neuladen oder ein anderer Browser dort
   beginnt.
 
-## In der nächsten Version {#in-the-next-version}
+## Seit 4.1.0 {#since-4-1-0}
 
-Nicht im Image 4.0.0: die Befehle `migrations`, `migrate` und `seed` sowie die Änderungen, die Daten verlieren können,
+Seit data-gateway 4.1.0: die Befehle `migrations`, `migrate` und `seed` sowie die Änderungen, die Daten verlieren können,
 in `push` (oben); die **Historie eines Schemas** (jede über die Administration gemachte Änderung, mit wem, vorher,
 nachher und dem Diff, in `logs/changes.jsonl` des Workspaces und unter `GET /admin/workspaces/{route}/history`), das
 **Routing einer Stage** (wohin jede Entität geht, `…/stages/{stage}/routing`) und `build` pro Sprache

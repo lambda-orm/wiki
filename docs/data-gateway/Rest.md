@@ -406,7 +406,7 @@ On the [`management` transport](Transports.md#management) ([Administration](Admi
 | `GET` | `/admin/workspaces/{route}/jobs[/{id}]` | the last jobs / one with its result | `read` |
 | `POST` / `GET` | `/admin/workspaces/{route}/build`, `…/build.zip` | the code of the domain in `src/` / as a zip | `build` |
 
-After 4.0.0 (in the next version of the image): `GET /admin/workspaces/{route}/history` (the changes of the schema,
+Since 4.1.0: `GET /admin/workspaces/{route}/history` (the changes of the schema,
 with who and the diff; `schemaRead`), `GET /admin/workspaces/{route}/stages/{stage}/routing` (the source of each entity
 of a stage; `schemaRead`), `GET …/files.zip?dir=` (a folder of `data/` or `src/` as a zip; `schemaRead`) and
 `DELETE …/files?dir=src/…` (removes a generated code; `build`).

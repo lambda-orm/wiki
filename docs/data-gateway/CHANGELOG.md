@@ -2,7 +2,7 @@
 
 The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway).
 
-### 4.1.0 (unreleased)
+### 4.1.0 (2026-11-25)
 
 Security: who calls is the user of an identity provider, sees its view of the domain, and an agent can be left with
 curated queries.

@@ -410,7 +410,7 @@ Auf dem [`management`-Transport](Transports.md#management) ([Administration](Adm
 | `GET` | `/admin/workspaces/{route}/jobs[/{id}]` | die letzten Jobs / einer mit seinem Ergebnis | `read` |
 | `POST` / `GET` | `/admin/workspaces/{route}/build`, `…/build.zip` | der Code der Domäne in `src/` / als Zip | `build` |
 
-Nach 4.0.0 (in der nächsten Version des Images): `GET /admin/workspaces/{route}/history` (die Änderungen des Schemas,
+Seit 4.1.0: `GET /admin/workspaces/{route}/history` (die Änderungen des Schemas,
 mit wem und dem Diff; `schemaRead`), `GET /admin/workspaces/{route}/stages/{stage}/routing` (die Quelle jeder Entität
 einer Stage; `schemaRead`), `GET …/files.zip?dir=` (ein Ordner von `data/` oder `src/` als Zip; `schemaRead`) und
 `DELETE …/files?dir=src/…` (entfernt einen generierten Code; `build`).

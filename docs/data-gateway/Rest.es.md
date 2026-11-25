@@ -408,7 +408,7 @@ En el [transporte `management`](Transports.md#management) ([Administración](Adm
 | `GET` | `/admin/workspaces/{route}/jobs[/{id}]` | los últimos jobs / uno con su resultado | `read` |
 | `POST` / `GET` | `/admin/workspaces/{route}/build`, `…/build.zip` | el código del dominio en `src/` / como zip | `build` |
 
-Después de 4.0.0 (en la próxima versión de la imagen): `GET /admin/workspaces/{route}/history` (los cambios del
+Desde 4.1.0: `GET /admin/workspaces/{route}/history` (los cambios del
 esquema, con quién y el diff; `schemaRead`), `GET /admin/workspaces/{route}/stages/{stage}/routing` (el source de cada
 entidad de un stage; `schemaRead`), `GET …/files.zip?dir=` (una carpeta de `data/` o `src/` como zip; `schemaRead`) y
 `DELETE …/files?dir=src/…` (quita un código generado; `build`).
