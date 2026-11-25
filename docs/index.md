@@ -21,6 +21,9 @@ an AI agent through MCP.
 
 ## Why λORM
 
+- **Plain JavaScript over your domain.** A query is the code you would write over an array of objects:
+  `filter`, `map`, `sort`, `p.customer.name`. No SQL in strings, no query builder, no new language; in TypeScript the
+  editor completes it, and the Data Gateway IDE does the same ([why it matters](queries/Query-Language.md#javascript-over-your-domain)).
 - **One domain, any database.** Queries talk about `Orders` and `Customers`, not about tables, dialects or where each
   entity is stored.
 - **One query across several databases.** Orders in MongoDB, customers in PostgreSQL, products in MySQL: one query,

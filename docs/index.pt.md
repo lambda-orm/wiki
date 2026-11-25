@@ -21,6 +21,9 @@ de uma API REST ou WebSocket, ou de um agente de IA via MCP.
 
 ## Por que λORM {#why-orm}
 
+- **JavaScript puro sobre o seu domínio.** Uma consulta é o código que você escreveria sobre um array de objetos:
+  `filter`, `map`, `sort`, `p.customer.name`. Sem SQL em strings, sem query builder, sem uma linguagem nova; em
+  TypeScript o editor a completa, e a IDE do Data Gateway faz o mesmo ([por que isso importa](queries/Query-Language.md#javascript-over-your-domain)).
 - **Um domínio, qualquer banco de dados.** As consultas falam de `Orders` e `Customers`, não de tabelas, dialetos ou de
   onde cada entidade está armazenada.
 - **Uma consulta sobre vários bancos de dados.** Pedidos no MongoDB, clientes no PostgreSQL, produtos no MySQL: uma

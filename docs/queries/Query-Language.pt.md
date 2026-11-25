@@ -6,6 +6,85 @@ As consultas λORM são escritas como [expressões lambda do JavaScript](https:/
 
 O λORM traduz cada consulta para a linguagem do mecanismo de banco de dados de cada fonte (SQL para MySQL, MariaDB, PostgreSQL, SQL Server, Oracle e SQLite, pipelines de agregação do MongoDB, ou requisições HTTP a uma API REST para uma [fonte Http](../schema/HttpSource.md)). Uma consulta também pode combinar entidades de fontes diferentes: veja [Consultas entre fontes](CrossSource.md).
 
+## JavaScript sobre o seu domínio {#javascript-over-your-domain}
+
+Uma consulta λORM é **o código que você escreveria sobre um array de objetos**. Pegue uma lista de produtos em memória:
+
+```typescript
+// an array in memory: plain JavaScript
+products
+  .filter(p => p.category.name == 'Beverages' && p.price > 20)
+  .map(p => ({ name: p.name, category: p.category.name, price: p.price }))
+  .sort((a, b) => b.price - a.price)
+```
+
+A mesma intenção, como uma consulta λORM sobre os `Products` do domínio:
+
+```typescript
+// a λORM query: the same lambdas, over the domain
+Products
+  .filter(p => p.category.name == 'Beverages' && p.price > 20)
+  .map(p => ({ name: p.name, category: p.category.name, price: p.price }))
+  .sort(p => desc(p.price))
+```
+
+que o λORM executa no PostgreSQL como:
+
+```sql
+SELECT p.ProductName AS "name", c.CategoryName AS "category", p.UnitPrice AS "price"
+FROM Products p INNER JOIN Categories c ON c.CategoryID = p.CategoryID
+WHERE (c.CategoryName = 'Beverages' AND p.UnitPrice > 20)
+ORDER BY p.UnitPrice desc
+```
+
+A consulta não citou nenhuma tabela, coluna ou join: basta `p.category.name`, e o mapping do esquema diz que
+`Products` é a tabela `Products`, `name` a coluna `ProductName` e a relação `category` um join sobre `CategoryID`.
+
+`filter`, `map`, `sort`, `includes`, `p.category.name`: arrow functions, caminhos de propriedades e operadores do
+JavaScript. O λORM lê essa expressão e a transforma em SQL, em um pipeline do MongoDB ou em chamadas a uma API REST. É
+isso que o diferencia de outros ORMs e linguagens de consulta:
+
+| | λORM | Outras abordagens |
+| --- | --- | --- |
+| **A linguagem** | lambdas do JavaScript, como com um array | SQL em strings, um query builder próprio (`.where('price', '>', 20)`) ou uma DSL (GraphQL, JPQL, HQL) |
+| **O que uma consulta cita** | o domínio: `p.category.name`, `p.details` | tabelas, colunas e joins, ou os nomes de um banco de dados específico |
+| **Relações** | seguidas com um ponto (`p.category.name`): o λORM escreve os joins, ou as consultas por fonte | joins escritos à mão, ou uma API para carregá-las |
+| **Onde é executada** | MySQL, MariaDB, PostgreSQL, SQL Server, Oracle, SQLite, MongoDB, APIs REST, vários ao mesmo tempo | geralmente uma única família de mecanismos |
+| **Onde você a escreve** | código TypeScript, uma string, a CLI, REST, WebSocket, MCP, a IDE: o mesmo texto | uma forma diferente para cada um |
+
+### Transparente em TypeScript e JavaScript {#transparent-in-typescript-and-javascript}
+
+Em uma aplicação, uma consulta é código. `lambdaorm build` gera o modelo do domínio (`Orders`, `Customers`…, veja
+[Uso do esquema](../schema/Schema-Use.md)) e uma consulta é uma função sobre ele: seus parâmetros são os parâmetros da
+consulta.
+
+```typescript
+import { orm } from '@lambdaorm/lib'
+import { Orders } from './domain/model'
+
+const ordersOf = (country: string) => Orders
+  .filter(p => p.customer.country == country)
+  .map(p => ({ id: p.id, customer: p.customer.name, date: p.orderDate }))
+
+const result = await orm.execute(ordersOf, { country: 'Germany' })
+```
+
+- **IntelliSense:** o editor completa as entidades, suas propriedades e suas relações, como faz com qualquer objeto
+  tipado; um nome errado é um erro de compilação, não uma surpresa em tempo de execução.
+- **Refatoração e revisão:** uma consulta é lida como o resto do código, por qualquer pessoa que conheça JavaScript.
+- **Resultados tipados:** as [consultas nomeadas](../usage/TypedQueries.md) do esquema recebem o tipo do seu
+  resultado.
+
+### O mesmo texto em todo lugar {#the-same-text-everywhere}
+
+A mesma expressão trafega como string onde não há TypeScript: a [CLI](../cli/index.md), as APIs REST, WebSocket e MCP
+do [Data Gateway](../data-gateway/index.md), ou um agente de IA. Na [IDE do Data Gateway](../ide/Queries.md), o editor
+de consultas a completa enquanto você digita, a partir do esquema: entidades, propriedades e relações (`p.customer.`
+lista as propriedades de `Customers`), e o [assistente de consultas](../ide/QueryWizard.md) a monta para você.
+
+A mesma linguagem é usada no próprio esquema: os filtros das [visões](../schema/Views.md), as condições dos stages, as
+restrições e os valores padrão também são expressões lambda.
+
 ## Tipos de consulta {#query-types}
 
 ### DQL {#dql}
@@ -68,11 +147,3 @@ WHERE SUBSTR(s.NAME,1,1) = 'F'
 ```
 
 Em seguida, os estados são associados ao seu país em memória, de modo que cada país do resultado tem um array `states`.
-
-## Vantagens {#advantages}
-
-- As consultas são escritas na mesma linguagem de programação da aplicação.
-- Não há uma nova linguagem para aprender.
-- As consultas são fáceis de escrever e de ler.
-- O IntelliSense da IDE ajuda a escrever as expressões.
-- Os erros de sintaxe são detectados enquanto você escreve.

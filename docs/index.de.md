@@ -21,6 +21,9 @@ REST- oder WebSocket-API oder einem KI-Agenten über MCP.
 
 ## Warum λORM {#why-orm}
 
+- **Reines JavaScript über Ihre Domäne.** Eine Abfrage ist der Code, den Sie über ein Array von Objekten schreiben
+  würden: `filter`, `map`, `sort`, `p.customer.name`. Kein SQL in Zeichenketten, kein Query Builder, keine neue Sprache;
+  in TypeScript vervollständigt der Editor sie, und die Data Gateway IDE ebenso ([warum das wichtig ist](queries/Query-Language.md#javascript-over-your-domain)).
 - **Eine Domäne, jede Datenbank.** Abfragen sprechen von `Orders` und `Customers`, nicht von Tabellen, Dialekten oder
   davon, wo jede Entität gespeichert ist.
 - **Eine Abfrage über mehrere Datenbanken.** Bestellungen in MongoDB, Kunden in PostgreSQL, Produkte in MySQL: eine
