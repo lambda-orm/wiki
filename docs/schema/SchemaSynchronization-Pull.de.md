@@ -1,6 +1,7 @@
 # Pull {#pull}
 
 Diese Seite erklärt pull, das die Schema-Datei mit der Struktur der Quellen (Datenbanken) eines Stages aktualisiert: was erhalten bleibt, den CLI-Befehl `lambdaorm pull` und die Methode `orm.stage.pull()`.
+Verwenden Sie es, um ein Schema aus einer bereits bestehenden Datenbank zu beginnen oder um Änderungen, die jemand in der Datenbank vorgenommen hat, in das Schema zu übernehmen.
 
 ## Was pull erhält {#what-pull-keeps}
 

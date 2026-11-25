@@ -3,7 +3,10 @@
 This page shows how to use environment variables in the schema, to keep connections and secrets out of the schema file.
 
 Any value of the schema can be taken from an environment variable, with the notation `$VARIABLE` or `${VARIABLE}`.
-The variables are replaced when the schema is loaded. With the CLI, the `-e` option reads them from a file (for example `-e .env`).
+The variables are replaced once, when the schema is loaded. With the CLI, the `-e` option reads them from a file (for example `-e .env`).
+A value that is a JSON text after the replacement (such as a connection) is read as an object; a connection with a variable that is not defined is reported as a warning when the schema loads.
+
+Because they are replaced at load time, environment variables are the same for every query. A value that depends on who runs each query (user, tenant, region) goes in the [context](Context.md) instead.
 
 ## Examples
 

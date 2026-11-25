@@ -1,6 +1,7 @@
 # Introspect
 
 This page explains introspect, which updates the schema from the structure of a JSON data file and then pushes the changes to the sources (databases): the CLI command `lambdaorm introspect` and the `orm.stage.introspect()` method.
+Use it to start a model from data you already have (an export, the answer of an API) instead of writing the entities by hand.
 
 Introspect:
 

@@ -1,6 +1,7 @@
 # Pull
 
 This page explains pull, which updates the schema file with the structure of the sources (databases) of a stage: what it keeps, the CLI command `lambdaorm pull` and the `orm.stage.pull()` method.
+Use it to start a schema from a database that already exists, or to bring into the schema the changes someone made in the database.
 
 ## What pull keeps
 

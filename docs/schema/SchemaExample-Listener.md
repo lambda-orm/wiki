@@ -45,6 +45,7 @@ The arguments available in `condition`, `before`, `after` and `error`:
 | query       | The query expression that was executed                                                                          |
 | data        | The data that was sent when the expression was executed                                                         |
 | options     | The options that were sent when the expression was executed                                                     |
+| context     | The [context](Context.md) of who runs it (`options.context`)                                                    |
 | result      | It is only available in the after event and contains the result of the expression execution                     |
 | action      | The action that was executed (select, insert, bulkInsert, update, upsert, merge, bulkMerge, delete, bulkDelete) |
 | type        | The type of sentence that was executed (dql, dml)                                                               |

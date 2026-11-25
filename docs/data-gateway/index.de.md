@@ -24,13 +24,18 @@ Berechtigungen, und jede Änderung wird protokolliert.
 **Was es tut:**
 
 - Stellt pro Instanz **ein oder mehrere λORM-Schemas** bereit, jedes unter einer Route (`/iot/v1`, `/iot/v2`, `/accounts`).
-- Stellt sie über vier **Transporte** bereit, jeden nur, wenn er einen Port hat: REST (`http`), MCP (`mcpHttp`,
-  `mcpWebSocket`) und eine JSON-RPC-API über WebSocket (`webSocket`).
+- Stellt sie über vier **Transporte** für die Daten bereit, jeden nur, wenn er einen Port hat: REST (`http`), MCP
+  (`mcpHttp`, `mcpWebSocket`) und eine JSON-RPC-API über WebSocket (`webSocket`); dazu einen fünften, `management`,
+  für die IDE und die Administration, der in einem internen Netz bleibt.
 - Alle Operationen von λORM: Abfragen (`execute`, `plan`, `metadata`, `model`, `parameters`, `constraints`), Skripte
   (mehrere Abfragen in einer Transaktion), Ausführungen in einer Warteschlange (Kafka), das Schema und sein Modell sowie
   Stages (Export, Import).
 - **Authentifizierung** (API-Key, Bearer-Token, Basic) und **Berechtigungen** pro Zugangsdaten (`read`, `write`, `script`,
   `queue`, `stageImport`), global, pro Transport oder pro Schema.
+- **Administration** der Workspaces über `management`: Schemas werden angelegt, bearbeitet (als YAML oder Element für
+  Element) und entfernt, die Variablen ihrer Verbindungen gesetzt und die Befehle der CLI (`push`, `pull`, `import`, …)
+  mit einer Vorschau ausgeführt, mit eigenen Berechtigungen; die Schemas werden neu geladen, ohne das Gateway neu zu
+  starten.
 - **Isolation**: Jedes Schema läuft in einem eigenen Worker, mit eigener Umgebung und eigenen Verbindungen; fällt eines
   aus, sind die anderen nicht betroffen.
 - **Audit** von Schreibvorgängen, **Metriken** (Prometheus), **Health** (Kubernetes-Probes), Limits (Rate, Nebenläufigkeit,
@@ -68,9 +73,9 @@ und wird erneut versucht, während die anderen weiterarbeiten.
 | --- | --- |
 | **Schema** | ein λORM-Workspace (ein Ordner mit `lambdaORM.yaml`): Domäne, Quellen, Mappings, Stages; unter einer Route bereitgestellt |
 | **Route** | wo ein Schema erreichbar ist: `/iot/v1/execute`, `/iot/v1/mcp`, `ws://host/iot/v1`; ein einzelnes Schema kann an der Wurzel liegen |
-| **Transport** | ein Zugang, auf einem eigenen Port: `http`, `mcpHttp`, `mcpWebSocket`, `webSocket` |
+| **Transport** | ein Zugang, auf einem eigenen Port: `http`, `mcpHttp`, `mcpWebSocket`, `webSocket` und `management` (der der IDE) |
 | **Zugangsdaten** | ein Key, Token oder Benutzer mit einem **Namen** und **Berechtigungen**; vom Client mit jeder Anfrage gesendet |
-| **Berechtigung** | `read`, `write`, `script`, `queue`, `stageImport`: was die Zugangsdaten tun dürfen, auf jedem Transport |
+| **Berechtigung** | `read`, `write`, `script`, `queue`, `stageImport`: was die Zugangsdaten tun dürfen, auf jedem Transport; die Administration hat eigene (`schemaRead`, `ddl`, …), die nie standardmäßig vergeben werden |
 | **Stage** | ein λORM-Szenario eines Schemas (welche Quellen welche Entitäten enthalten); ausgewählt mit `options.stage` |
 | **Worker** | wo ein Schema läuft: ein eigener Thread oder Prozess |
 
@@ -92,6 +97,7 @@ und wird erneut versucht, während die anderen weiterarbeiten.
 - [MCP](Mcp.md): die Tools, Ressourcen und Transporte für KI-Agenten.
 - [WebSocket API](WebSocket.md): die JSON-RPC-Methoden und die Benachrichtigungen.
 - [Sicherheit](Security.md): Authentifizierung, Berechtigungen, Audit, Limits und Fehler.
+- [Administration](Admin.md): die Workspaces, aus der IDE bearbeitet, die Befehle, die Nebenläufigkeit.
 - [UI](../ide/index.md): die IDE: Verbindungen, Explorer, Entitätsformulare, Abfragen, gespeicherte Abfragen und Diagramme.
 - [Clients](Clients.md): `@lambdaorm/client`, die CLI und das OpenAPI-Dokument.
 - [Betrieb](Operations.md): Docker, Kubernetes, Health, Metriken und Logs.

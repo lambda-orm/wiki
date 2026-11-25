@@ -78,6 +78,25 @@ Orders.update({ name: entity.name }).filter(p => p.id === entity.id)
 UPDATE Orders o SET ShipName = ? WHERE o.OrderID = ?
 ```
 
+## Atualizar um caminho de uma propriedade json {#update-a-path-of-a-json-property}
+
+Para mudar um valor dentro de uma propriedade `json` sem enviar o json inteiro, use `jsonSet(json, path, value)`. O resto do json é mantido como está.
+
+**Lambda:**
+
+```typescript
+Customers.update(p => ({ meta: jsonSet(p.meta, "address.city", city) })).filter(p => p.id == id)
+```
+
+**Resultado SQL:**
+
+```sql
+UPDATE Customers c SET meta = JSON_SET(COALESCE(c.meta, JSON_OBJECT()), '$.address.city', CAST(? AS JSON))
+WHERE c.id = ?
+```
+
+Veja [JSON, vetores e pontos](JsonVectorsPoints.md#write-a-path) para a tradução em cada motor.
+
 ## Atualizar com uma entidade relacionada {#update-with-a-related-entity}
 
 Atualiza o nome de um pedido e, para cada detalhe enviado, todas as propriedades do detalhe. Cada detalhe é filtrado pela sua chave primária.
@@ -207,7 +226,7 @@ ON CONFLICT (order_id,line) DO UPDATE SET product = EXCLUDED.product, quantity =
 DELETE FROM order_lines WHERE order_id = $1 AND NOT ((order_id = $2 AND line = $3) OR (order_id = $4 AND line = $5))
 ```
 
-É suportado em PostgreSQL, MySQL, MariaDB, SQL Server e Oracle (estes dois a partir de `@lambdaorm/lib` 3.5.0), que salvam os filhos com [upsert](Insert.md#upsert). No MongoDB, os filhos compostos ficam embutidos no documento do pai, por isso são substituídos ali.
+É suportado em PostgreSQL, MySQL, MariaDB, SQL Server e Oracle (estes dois a partir de `@lambdaorm/lib` 3.5.0) e SQLite (a partir da 3.15.0), que salvam os filhos com [upsert](Insert.md#upsert). No MongoDB, os filhos compostos ficam embutidos no documento do pai, por isso são substituídos ali.
 
 Para atualizar apenas os filhos enviados (sem inserir nem excluir), inclua a relação com um update explícito: `Orders.update().include(p => p.lines.update(l => ({ quantity: quantity })))`. Dentro dele, `quantity` é o valor enviado para cada filho (veja [Atualizar campos da entidade relacionada](#update-fields-of-the-related-entity)).
 

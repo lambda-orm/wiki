@@ -78,6 +78,25 @@ Orders.update({ name: entity.name }).filter(p => p.id === entity.id)
 UPDATE Orders o SET ShipName = ? WHERE o.OrderID = ?
 ```
 
+## Update a path of a json property
+
+To change one value inside a `json` property without sending the whole json, use `jsonSet(json, path, value)`. The rest of the json is kept as it is.
+
+**Lambda:**
+
+```typescript
+Customers.update(p => ({ meta: jsonSet(p.meta, "address.city", city) })).filter(p => p.id == id)
+```
+
+**SQL Result:**
+
+```sql
+UPDATE Customers c SET meta = JSON_SET(COALESCE(c.meta, JSON_OBJECT()), '$.address.city', CAST(? AS JSON))
+WHERE c.id = ?
+```
+
+See [JSON, vectors and points](JsonVectorsPoints.md#write-a-path) for the translation on each engine.
+
 ## Update with a related entity
 
 Updates the name of an order and, for each detail sent, all the properties of the detail. Each detail is filtered by its primary key.
@@ -207,7 +226,7 @@ ON CONFLICT (order_id,line) DO UPDATE SET product = EXCLUDED.product, quantity =
 DELETE FROM order_lines WHERE order_id = $1 AND NOT ((order_id = $2 AND line = $3) OR (order_id = $4 AND line = $5))
 ```
 
-It is supported on PostgreSQL, MySQL, MariaDB, SQL Server and Oracle (these two from `@lambdaorm/lib` 3.5.0), which save the children with [upsert](Insert.md#upsert). On MongoDB the composite children are embedded in the parent's document, so they are replaced there.
+It is supported on PostgreSQL, MySQL, MariaDB, SQL Server and Oracle (these two from `@lambdaorm/lib` 3.5.0) and SQLite (from 3.15.0), which save the children with [upsert](Insert.md#upsert). On MongoDB the composite children are embedded in the parent's document, so they are replaced there.
 
 To only update the children sent (without inserting or deleting), include the relation with an explicit update: `Orders.update().include(p => p.lines.update(l => ({ quantity: quantity })))`. Inside it, `quantity` is the value sent for each child (see [Update fields of the related entity](#update-fields-of-the-related-entity)).
 

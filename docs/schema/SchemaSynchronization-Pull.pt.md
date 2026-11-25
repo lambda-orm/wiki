@@ -1,6 +1,7 @@
 # Pull {#pull}
 
 Esta página explica o pull, que atualiza o arquivo do esquema com a estrutura das fontes (bancos de dados) de um stage: o que ele mantém, o comando da CLI `lambdaorm pull` e o método `orm.stage.pull()`.
+Use-o para começar um esquema a partir de um banco de dados que já existe, ou para trazer para o esquema as alterações que alguém fez no banco de dados.
 
 ## O que o pull mantém {#what-pull-keeps}
 

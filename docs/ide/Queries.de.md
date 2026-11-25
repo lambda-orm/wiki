@@ -1,8 +1,11 @@
 # Abfragen
 
-Jede Abfrage ist ein Tab mit eigenem Schema, Text, Daten, Optionen und Ergebnis; beim Wechseln der Tabs geht nichts
-verloren. Ein Tab wird mit dem **+** der Tabs geöffnet, mit **Abfragen** einer Entität oder aus einer gespeicherten
-Abfrage; der [Abfrage-Assistent](QueryWizard.md) schreibt eine aus einem Diagramm.
+In einem Abfrage-Tab wird eine Abfrage in der [Sprache](../queries/Query-Language.md) von λORM geschrieben, geprüft
+und auf einem Schema des Gateways ausgeführt, mit ihren Daten und Optionen, und ihr Ergebnis als Baum, Tabelle, JSON
+oder YAML angesehen. Jeder Tab hat sein eigenes Schema, seinen Text, seine Daten, Optionen und sein Ergebnis; beim
+Wechseln der Tabs geht nichts verloren. Ein Tab wird mit dem **+** der Tabs geöffnet, mit **Abfragen** einer
+[Entität](Entities.md), aus einer gespeicherten Abfrage, mit **Abfrage des Diagramms** eines
+[Diagramms](Diagrams.md) oder vom [Abfrage-Assistenten](QueryWizard.md), der eine aus einem Diagramm schreibt.
 
 ![Eine Abfrage und ihr Ergebnis](images/ide-query.png)
 
@@ -11,11 +14,11 @@ Abfrage; der [Abfrage-Assistent](QueryWizard.md) schreibt eine aus einem Diagram
 | Steuerelement | Was es tut |
 | --- | --- |
 | **Schema** | das Schema, auf dem die Abfrage läuft (nur die bereiten; `/` ist das an der Wurzel) |
-| **Abfrage** / **Skript** | der Modus: eine Abfrage oder ein [Skript](../data-gateway/Rest.md#script), mehrere Abfragen in einer Transaktion (nur wenn das Schema Skripte aktiviert hat und das Gateway sie anbietet). Jeder Modus behält seinen eigenen Text |
+| **Abfrage** / **Skript** | der Modus: eine Abfrage oder ein [Skript](../data-gateway/Rest.md#script), mehrere Abfragen in einer Transaktion (sie läuft dort, wo das Schema Skripte aktiviert hat). Jeder Modus behält seinen eigenen Text |
 | kopieren | kopiert die Abfrage (oder das Skript) |
 | formatieren | setzt jede Klausel der Abfrage in eine eigene Zeile ([unten](#format)) |
 | **Assistent** | öffnet den [Abfrage-Assistenten](QueryWizard.md) auf dieser Abfrage |
-| **Speichern** (Strg+S) / **Speichern unter…** | bewahrt die Abfrage in einem [Projekt](Projects.md) auf; **gespeichert** sagt, dass sie keine Änderungen hat |
+| **Speichern** (Strg+S) / **Speichern unter…** | bewahrt die Abfrage in der [Workbench](Projects.md) auf; **gespeichert** sagt, dass sie keine Änderungen hat |
 
 ## Der Editor {#the-editor}
 
@@ -64,17 +67,17 @@ Abfrage, jeder mit einem Wert seines Typs (`0`, `""`, heute…), und behält die
 ## Optionen {#options}
 
 Die Optionen, mit denen die Abfrage läuft, in einer Zeile (`keine: die Standardwerte`, oder `stage: default · view:
-sales`), und **bearbeiten**, das sie als Formular oder als JSON öffnet:
+sales`), und **bearbeiten**, das sie als **Formular** oder als **JSON** öffnet; **fertig** schließt sie:
 
 | Option | Was sie ist |
 | --- | --- |
-| **Stage** | wo sie läuft: ein Stage des Schemas; leer, sein Standard-Stage |
-| **View** | eine View des Schemas, die begrenzt, was gelesen werden kann |
+| **Stage** | wo sie läuft: ein Stage des Schemas, zur Auswahl; leer, sein Standard-Stage |
+| **View** | eine View des Schemas, zur Auswahl, die begrenzt, was gelesen werden kann |
 | **Blockgröße** | Zeilen pro Block einer Massenoperation |
-| **so viel wie möglich versuchen** | weitermachen, wenn eine Anweisung fehlschlägt |
+| **so viel wie möglich versuchen** | weitermachen, wenn eine Anweisung fehlschlägt: (Standard), ja oder nein |
 | **Zeitlimit (ms)** | eines Skripts: es stoppt nach dieser Zeit (Skriptmodus) |
 | **max. Iterationen** | eines Skripts: seine Schleifen, alle zusammen (Skriptmodus) |
-| **Header** | Paare aus Name und Wert, die mit der Abfrage gesendet werden |
+| **Header** | Paare aus Name und Wert, die mit der Abfrage gesendet werden (**Header hinzufügen**) |
 
 Ein leeres Feld wird nicht gesendet. Optionen, die das Formular nicht kennt, bleiben im JSON, wie sie sind.
 
@@ -96,9 +99,9 @@ Zeilen pro Nachricht.
 | **execute queued** | stellt sie in die Warteschlange von **Topic**, um sie später auszuführen | `queue` |
 | **execute script** | führt das Skript aus (Skriptmodus) | `script`, und Skripte im Schema aktiviert |
 
-Eine Aktion, die die Zugangsdaten nicht nutzen können, ist deaktiviert, und ihr Tooltip sagt warum. **plan**,
-**metadata**, **model**, **parameters** und **constraints** lesen nur den Text der Abfrage: Sie senden keine Daten und
-keine Optionen.
+Eine Aktion, die die Zugangsdaten nicht nutzen können, ist deaktiviert, und ihr Tooltip sagt warum
+(`„reader“ hat die Berechtigung queue nicht`). **plan**, **metadata**, **model**, **parameters** und **constraints**
+lesen nur den Text der Abfrage: Sie senden keine Daten und keine Optionen.
 
 ## Das Ergebnis {#the-result}
 
@@ -108,9 +111,9 @@ Der Status, die Operation, ihre Zeit, die Zeilen und die Größe; dann vier Ansi
 | --- | --- |
 | **tree** | das Ergebnis, zwei Ebenen aufgeklappt, jede Liste und jedes Objekt mit seiner Größe |
 | **table** | die Zeilen als Tabelle, wenn das Ergebnis eine Liste von Zeilen ist; ein Objekt in einer Zelle als JSON |
-| **json** / **yaml** | der Text, mit Farben, Einklappen und Suche |
+| **json** / **yaml** | der Text, schreibgeschützt, mit Farben, Einklappen und Suche |
 
-- Baum und Tabelle zeigen bis zu 200 Zeilen (`200 von N Zeilen angezeigt: die Downloads enthalten alle`); Zahlen und
+- Baum und Tabelle zeigen bis zu 200 Zeilen (`200 von N Zeilen angezeigt: die Downloads enthalten alle.`); Zahlen und
   Daten folgen dem regionalen Format der [Einstellungen](index.md#the-window) (der Wert, wie er kam, in seinem Tooltip).
 - **kopieren** kopiert, was angezeigt wird; die Tabelle als tabulatorgetrennter Text, bereit zum Einfügen in eine
   Tabellenkalkulation.

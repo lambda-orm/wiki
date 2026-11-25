@@ -3,7 +3,7 @@
 Esta página muestra cómo λORM lee propiedades de entidades relacionadas. No hay un método join: cuando una consulta usa una propiedad a través de una relación, como `p.category.name`, λORM añade el join que la relación define en el esquema. El SQL que se muestra es el generado para MySQL.
 
 !!! note "Nota"
-    Un join necesita que ambas entidades estén en la misma fuente. Para leer entidades relacionadas que están en otra fuente se usa [Include](Include.md); para filtrar por una propiedad de una relación en otra fuente, ver [Filtrar por un campo de una relación en otra fuente](Include.md#filter-by-a-field-of-a-relation-in-another-source).
+    Un join necesita que ambas entidades estén en la misma fuente. Cuando la relación va a una entidad de otra fuente, la misma consulta sigue funcionando: λORM lee cada fuente con su propia sentencia y une las filas en memoria (ver [Consultas entre fuentes](CrossSource.md)). Para cargar las entidades relacionadas como objetos anidados, se usa [Include](Include.md).
 
 ## Join simple {#simple-join}
 

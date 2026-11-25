@@ -1,76 +1,105 @@
 # Funktionen {#features}
 
-Ein Überblick über das, was λORM bietet, mit Links zu den Seiten, die jede Funktion beschreiben.
+Ein Überblick über das, was λORM heute kann, mit Links zu den Seiten, die jede Funktion beschreiben.
 
-## Datenbank-Engines {#database-engines}
+## Quellen {#sources}
 
-- MySQL, MariaDB, PostgreSQL, SQL Server, Oracle, MongoDB und SQLite (SQLjs).
-- Eine einzige Abfrage kann mehrere Datenbanken einbeziehen, auch unterschiedlicher Datenbank-Engines.
-- [Datenbank-Engines](schema/Engines.md): die Unterschiede zwischen den Datenbank-Engines (Typen, leere Strings, `upsert`, …).
+- Datenbanken: MySQL, MariaDB, PostgreSQL, SQL Server, Oracle, MongoDB und SQLite (über sql.js, Dialekt `SQLjs`).
+- [Eine REST-API als Quelle](schema/HttpSource.md): der Dialekt `Http`, mit OAuth2 Client Credentials und Headern, die
+  aus dem Kontext des Aufrufers weitergereicht werden.
+- Eine Abfrage kann mehrere Quellen einbeziehen, auch unterschiedlicher Engines; die
+  [Stages](schema/SchemaExample-MultiplesStages.md) entscheiden, wo jede Entität gespeichert wird.
+- [Datenbank-Engines](schema/Engines.md): worin sie sich unterscheiden (Typen, leere Strings, `upsert`, …).
 
 ## Abfragesprache {#query-language}
 
-- [Abfragesprache](queries/Query-Language.md) auf Basis von JavaScript-Lambda-Ausdrücken.
-- Abfragen können als JavaScript-/TypeScript-Code oder als String geschrieben werden.
-- Klauseln für [Select](queries/Select.md), [Insert](queries/Insert.md), [Bulk Insert](queries/BulkInsert.md),
+- Eine [Abfragesprache](queries/Query-Language.md) auf Basis von JavaScript-Lambda-Ausdrücken, geschrieben als
+  TypeScript-Code oder als String.
+- [Select](queries/Select.md), [Insert](queries/Insert.md), [Bulk Insert](queries/BulkInsert.md),
   [Update](queries/Update.md) und [Delete](queries/Delete.md).
 - Implizite [Joins](queries/Join.md) und [Gruppierung](queries/Grouping.md).
-- Eager Loading von Beziehungen mit [include](queries/Include.md), auch über Datenbanken hinweg.
-- [Abfragen über Quellen hinweg](queries/CrossSource.md): map, Gruppierung und Sortierung mit Feldern mehrerer Datenbanken.
-- [JSON-Pfade, Vektoren und Punkte](queries/JsonVectorsPoints.md): `p.meta.address.zip`, `cosineDistance` (RAG),
-  `distance` in Metern.
+- Eager Loading von Beziehungen mit [include](queries/Include.md), auch über Datenbanken hinweg: eine Abfrage pro
+  Beziehung, nie eine pro Zeile.
+- [Abfragen über Quellen hinweg](queries/CrossSource.md): filtern, abbilden, gruppieren und sortieren nach Feldern von
+  Beziehungen, die in anderen Quellen gespeichert sind.
+- [JSON-Pfade, Vektoren und Punkte](queries/JsonVectorsPoints.md): `p.meta.address.zip` und `jsonSet`;
+  `cosineDistance`, `l2Distance` und `innerProduct` für die Ähnlichkeitssuche (RAG); `distance` in Metern, `within`
+  und `inside` (ein Polygon) für Geodaten.
 - [Operatoren und Funktionen](queries/operatorsAndFunctions/OperatorsAndFunctions.md).
-- [Abfrage-Metadaten](queries/Metadata.md): die Parameter, das Modell, die Constraints und der Ausführungsplan einer Abfrage.
+- [Abfrage-Metadaten](queries/Metadata.md): die Parameter, das Modell, die Constraints und der Ausführungsplan einer
+  Abfrage, ohne sie auszuführen.
+
+## Schreiben {#writes}
+
+- Inserts mit ihren Kindern (`Orders.insert().include(p => p.details)`), [Bulk Insert](queries/BulkInsert.md),
+  `upsert`, `bulkMerge` und `bulkDelete`.
+- `update` und `delete` liefern die Anzahl der betroffenen Zeilen: 0 bedeutet nicht gefunden oder einen Konflikt beim
+  optimistischen Sperren.
+- `update().include()` einer zusammengesetzten Beziehung speichert das ganze Aggregat.
 
 ## Verwendung {#usage}
 
-- [Repositories und benutzerdefinierte Repositories](usage/Repository.md).
-- [Transaktionen und verteilte Transaktionen](usage/Transaction.md), über Quellen und Stages hinweg.
-- [Skripte](usage/Script.md): ein ganzer Anwendungsfall (Variablen, Bedingungen, Schleifen und mehrere Abfragen) in einer
-  Transaktion, auch über das Data Gateway.
-- [Verwendungsbeispiele](usage/Usage.md): eine einzelne Quelle, mehrere Quellen, CQRS und der Node.js-Client.
-- [Datenänderungen und Outbox](usage/DataEvents.md): `orm.onDataChange` nach jedem Commit und ein Outbox, das in
+- [Anwendungsbeispiele](usage/Usage.md): eine einzelne Quelle, mehrere Quellen, CQRS und der Node.js-Client.
+- [Repositories](usage/Repository.md), von `lambdaorm build` erzeugt und mit eigenen Methoden erweitert.
+- [Transaktionen](usage/Transaction.md) über Quellen und Stages hinweg.
+- [Skripte](usage/Script.md): ein ganzer Anwendungsfall (Variablen, Bedingungen, Schleifen und mehrere Abfragen) in
+  einer Transaktion, auch über das Data Gateway.
+- [Datenänderungen und Outbox](usage/DataEvents.md): `orm.onDataChange` nach jedem Commit und eine Outbox, die in
   derselben Transaktion geschrieben wird.
 - [Typisierte Abfragen](usage/TypedQueries.md): benannte Abfragen im Schema und die Typen ihrer Ergebnisse.
 
 ## Schema {#schema}
 
-- [Schema](schema/Schema.md)-Konfiguration, die das Domänenmodell von der Infrastruktur entkoppelt.
-- Konfiguration in JSON oder YAML.
-- [Mappings](schema/SchemaDefinition.md) zwischen der Domäne und der Infrastruktur.
-- [Vererbung von Entitäten](schema/SchemaExample-Extend.md) (`extends`).
-- [Umgebungsvariablen](schema/SchemaDefinition-EnvironmentVariables.md).
-- Indizes, eindeutige Schlüssel und Constraints.
-- Bedingungen und Aktionen auf Basis der Ausdrucks-Engine [3xpr](https://www.npmjs.com/package/3xpr)
-  ([Ausdrücke](schema/SchemaDefinition-Expressions.md)).
-- [Stages](schema/SchemaExample-MultiplesStages.md): mehrere Infrastruktur-Szenarien für dieselbe Domäne.
-- [Synchronisierung](schema/SchemaSynchronization.md) zwischen dem Schema und den Datenbanken:
+- Ein [Schema](schema/Schema.md) in YAML oder JSON, das die Domäne von der Infrastruktur entkoppelt.
+- [Mappings](schema/SchemaDefinition.md) zwischen der Domäne und den Datenbanken, und
+  [Entitätsvererbung](schema/SchemaExample-Extend.md) (`extends`).
+- [Umgebungsvariablen](schema/SchemaDefinition-EnvironmentVariables.md) für Verbindungen und Geheimnisse.
+- Indizes, eindeutige Schlüssel, Constraints, Standardwerte und berechnete Eigenschaften, geschrieben als
+  [Ausdrücke](schema/SchemaDefinition-Expressions.md) von [3xpr](https://www.npmjs.com/package/3xpr).
+- [Stages](schema/SchemaExample-MultiplesStages.md): mehrere Infrastrukturen für dieselbe Domäne (Entwicklung,
+  Produktion, CQRS).
+- [Listener und Subscriber](schema/SchemaExample-Listener.md): werden abgewartet (await) und laufen in der Transaktion
+  der Anweisung, die sie auslöst.
+
+## Zugriffskontrolle {#access-control}
+
+- [Views](schema/Views.md): schränken Entitäten und Eigenschaften ein, maskieren sie, fügen berechnete hinzu und
+  kennzeichnen personenbezogene Daten (PII).
+- [Kontext und Zeilenfilter](schema/Context.md): wer eine Abfrage ausführt und welche Zeilen jede View sieht.
+- Das [Data Gateway](data-gateway/Security.md): Zugangsdaten mit Berechtigungen und ein Audit jedes Schreibvorgangs.
+
+## Synchronisation und Migrationen {#synchronization-and-migrations}
+
+- [Synchronisation](schema/SchemaSynchronization.md) zwischen dem Schema und den Datenbanken:
   [push](schema/SchemaSynchronization-Push.md), [pull](schema/SchemaSynchronization-Pull.md),
-  [fetch](schema/SchemaSynchronization-Fetch.md), [introspect](schema/SchemaSynchronization-Introspect.md) und
+  [fetch](schema/SchemaSynchronization-Fetch.md) (die Abweichungen, mit Exit-Code 1 für CI),
+  [introspect](schema/SchemaSynchronization-Introspect.md) und
   [incorporate](schema/SchemaSynchronization-Incorporate.md).
-- [Listener und Subscriber](schema/SchemaExample-Listener.md): werden abgewartet und in der Transaktion der Anweisung
-  ausgeführt, die sie auslöst.
-- [Views](schema/Views.md): schränken Entitäten und Eigenschaften ein, maskieren sie, fügen berechnete hinzu, personenbezogene Daten (PII).
-- [Kontext und Zeilenfilter](schema/Context.md): wer eine Abfrage ausführt und welche Zeilen eine View sieht.
-- [Observability](schema/Observability.md): Logs, Metriken und Traces mit OpenTelemetry.
-- [Eine REST-API als Quelle](schema/HttpSource.md): der Dialekt `Http`.
-- [Migrationen](schema/SchemaSynchronization-Migrations.md) (Änderungen, die Daten verlieren können, Rückgängigmachen,
-  `migrate`) und [Seed](schema/SchemaSynchronization-Seed.md).
+- [Migrationen](schema/SchemaSynchronization-Migrations.md): Änderungen, die Daten verlieren können, stoppen `push`,
+  sofern sie nicht erlaubt werden; jede Änderung wird mit ihrem Undo geschrieben, und `migrate` kehrt zu einer Version
+  zurück.
+- [Seed](schema/SchemaSynchronization-Seed.md): die Daten, mit denen eine Stage beginnt, nur dort eingefügt, wo sie
+  fehlen.
 
-## Performance {#performance}
+## Performance und Betrieb {#performance-and-operations}
 
-- [Bulk Insert](queries/BulkInsert.md).
-- Hochperformante Abfragen.
+- [Bulk Insert](queries/BulkInsert.md), und Includes, die die Schlüssel jeder Ebene mit `IN` lesen, in Blöcken, die
+  parallel laufen.
 - Connection Pooling.
+- [Observability](schema/Observability.md): Logs, Metriken und Traces mit OpenTelemetry.
 
-## Tools und Clients {#tools-and-clients}
+## Werkzeuge und Clients {#tools-and-clients}
 
-- Unterstützung für TypeScript und JavaScript.
-- [CLI](cli/index.md) (`npm i -g @lambdaorm/cli`, Befehl `lambdaorm`).
-- [Data Gateway](data-gateway/index.md) (Docker-Image `flaviorita/data-gateway`):
-    - eine REST API, MCP für KI-Agenten und eine WebSocket API, mit mehreren Schemas pro Instanz;
-    - Zugangsdaten mit Berechtigungen, Audit von Schreibvorgängen, Metriken und Health Checks;
-    - eine Web-UI: Explorer, Entitätsformulare, gespeicherte Abfragen und Diagramme der Domäne.
+- Die [CLI](cli/index.md) (`npm i -g @lambdaorm/cli`, Befehl `lambdaorm`): Projekte, Codegenerierung, Synchronisation,
+  Import und Export, Abfragen und Skripte.
+- Das [Data Gateway](data-gateway/index.md) (Docker-Image `flaviorita/data-gateway`):
+    - [REST](data-gateway/Rest.md), [WebSocket](data-gateway/WebSocket.md) und [MCP](data-gateway/Mcp.md) für
+      KI-Agenten, mit mehreren Schemas pro Instanz;
+    - [Zugangsdaten mit Berechtigungen](data-gateway/Security.md), Audit der Schreibvorgänge, Metriken und Health
+      Checks.
+- Die [IDE](ide/index.md) des Data Gateway (Docker oder Desktop): Verbindungen, Explorer, Entitätsformulare, Abfragen
+  mit Autovervollständigung, Diagramme und Administration; ihre React-Komponenten sind
+  [`@lambdaorm/ui`](ide/Embedding.md).
 - [Clients](data-gateway/Clients.md):
-    - [Node.js-Client](https://www.npmjs.com/package/@lambdaorm/client) (`@lambdaorm/client`, REST oder WebSocket);
-    - andere Sprachen: Generieren Sie einen Client aus dem OpenAPI-3-Dokument des Data Gateways.
+    - der Node.js-Client (`@lambdaorm/client`, REST oder WebSocket), mit der Schnittstelle der Bibliothek;
+    - andere Sprachen: einen Client aus dem OpenAPI-3-Dokument des Data Gateway generieren.

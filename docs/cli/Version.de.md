@@ -18,8 +18,8 @@ lambdaorm version
 Ergebnis (die Versionen hängen von Ihrer Installation ab):
 
 ```text
-lambdaorm cli version: 1.6.10
-Local lambdaorm version: 3.5.3
+lambdaorm cli version: 1.10.0
+Local lambdaorm version: 3.15.0
 ```
 
 Wenn das Projekt nicht von `@lambdaorm/lib` abhängt, lautet die zweite Zeile `Local lambdaorm not found.`
@@ -31,5 +31,5 @@ lambdaorm --version   # or lambdaorm -v
 ```
 
 ```text
-1.6.10
+1.10.0
 ```

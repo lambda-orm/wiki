@@ -117,14 +117,16 @@ um ein Schema aus MCP herauszuhalten, `mcp.tools.exclude`, die Hinweise und die 
 | `GET {basePath}/status` | der Zustand des Transports, die Schemas und die offenen SSE-Sitzungen |
 
 Streamable HTTP ist standardmäßig zustandslos (`stateful: false`): Jeder `POST` steht für sich, und jede Replika kann ihn
-beantworten. Die Zugangsdaten werden mit jeder Anfrage gesendet.
+beantworten. Mit `stateful: true` hält der Server eine Sitzung pro Client (bis zu `maxConnections`), was bei mehreren
+Replikas Session-Affinität erfordert, wie bei HTTP+SSE. Die Zugangsdaten werden mit jeder Anfrage gesendet.
 
 ### mcpWebSocket {#mcpwebsocket}
 
-Ein Upgrade unter `{basePath}/{schema}/mcp`, authentifiziert im Handshake; JSON-RPC-2.0-Nachrichten mit den MCP-Methoden
-(`initialize`, `ping`, `tools/list`, `tools/call`, `resources/list`, `resources/read`, …). Es ist kein
-Standard-MCP-Transport: Er wird für Clients und Gateways angeboten, die ihn von sich aus unterstützen. Sein
-AsyncAPI-Dokument befindet sich unter `GET {basePath}/asyncapi`.
+Ein Upgrade unter `{basePath}/{schema}/mcp` mit dem Subprotokoll `mcp`, authentifiziert im Handshake (ein Browser
+sendet die Zugangsdaten in den Subprotokollen, wie bei der [WebSocket API](Transports.md#websocket));
+JSON-RPC-2.0-Nachrichten mit den MCP-Methoden (`initialize`, `ping`, `tools/list`, `tools/call`, `resources/list`,
+`resources/read`, …). Es ist kein Standard-MCP-Transport: Er wird für Clients und Gateways angeboten, die ihn von sich
+aus unterstützen. Sein AsyncAPI-Dokument befindet sich unter `GET {basePath}/asyncapi` (und `/asyncapi.json`).
 
 ```json
 → { "jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": { "name": "orm_execute", "arguments": { "query": "Products.filter(p => p.price > 50).map(p => p.name)" } } }

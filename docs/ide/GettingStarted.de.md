@@ -1,13 +1,13 @@
 # Erste Schritte
 
 Von nichts zu einer Abfrage, einer vom Assistenten geschriebenen Abfrage und einem Diagramm, mit Northwind. Etwa 10
-Minuten.
+Minuten, mit Docker und einem Browser (oder der [Desktop-App](Download.md)).
 
 ## 1. Ein Gateway mit Northwind {#1-a-gateway-with-northwind}
 
 Folge den Schritten 1 bis 4 der [Ersten Schritte](../data-gateway/GettingStarted.md) des Data Gateway: Sein Compose
 startet Postgres, ein Gateway mit Northwind und die Web-IDE, legt die Tabellen an und importiert die Daten. Das Gateway
-hat seinen Port `management` auf 9090, den Port der IDE, den im Compose nur die IDE erreicht.
+hat seinen Port `management`, den Port der IDE, auf 9090, den im Compose nur die IDE erreicht.
 
 Mit der [Desktop-App](Download.md) statt der Web-IDE veröffentlichst du diesen Port nur auf deinem Rechner, im Dienst
 `data-gateway` des Compose:
@@ -27,7 +27,7 @@ Mit der [Desktop-App](Download.md) statt der Web-IDE veröffentlichst du diesen 
 | **Name** | `northwind` |
 | **Protokoll** | `REST · http` |
 | **Management-Adresse** | `data-gateway:9090` in der Web-IDE (so wie die IDE es im Compose erreicht); `localhost:9090` in der Desktop-App |
-| **Authentifizierung** | API-Schlüssel, Header `X-Api-Key`, Schlüssel `reader-demo-key` |
+| **Authentifizierung** | **API-Schlüssel**, **Header** `X-Api-Key`, **Schlüssel** `reader-demo-key` |
 | **Schlüssel in diesem Browser merken** | angehakt, damit er nicht erneut abgefragt wird |
 
 **Testen** sagt, wer der Schlüssel ist, und die Version des Gateways; **Verbinden** fügt die Verbindung hinzu.
@@ -35,15 +35,15 @@ Mit der [Desktop-App](Download.md) statt der Web-IDE veröffentlichst du diesen 
 ![Neue Verbindung](images/ide-new-connection.png)
 
 Die Seite der Verbindung öffnet sich. Ihr Tab **Rollen** zeigt, was `reader` darf: `read`, nichts weiter. Damit liest
-und fragst du ab; was du speicherst, bleibt in deinem Browser ([Projekte](Projects.md#where-it-is-saved)).
+und fragst du ab; was du speicherst, bleibt in deinem Browser ([Workbench](Projects.md#where-it-is-saved)).
 
 ## 3. Der Explorer {#3-the-explorer}
 
 Links die Verbindung und ihr Schema (`/`, das einzige dieses Gateways). Klappe **Metadaten → domain → Entitäten** auf:
-die Entitäten von Northwind. Ein Klick auf `Orders` öffnet sein Formular: seine Eigenschaften, seine Beziehungen, seine
+die Entitäten von Northwind. Ein Klick auf `Orders` öffnet seine Ansicht: seine Eigenschaften, seine Beziehungen, seine
 Schlüssel, seine Zeilen und sein Diagramm ([Entitäten](Entities.md)).
 
-![Das Formular von Orders](images/ide-entity-properties.png)
+![Die Ansicht von Orders](images/ide-entity-properties.png)
 
 ## 4. Eine Abfrage {#4-a-query}
 
@@ -69,8 +69,9 @@ Ein neuer Tab (**+**), dann **Assistent**:
 1. **ausgehend von** `Orders`;
 2. das **+** von `Orders`: hake `Customers` und `Orders.details` an, **hinzufügen (2)**; das **+** von
    `Orders.details`: `Products`;
-3. hake `id` und `orderDate` von `Orders` an, `name` und `country` von `Customers`, `quantity` und `unitPrice` der
-   Positionen, `name` von `Products`;
+3. die Felder: Jedes Feld einer Tabelle beginnt angehakt. Entferne das Häkchen im Titel von `Orders` (nur sein
+   Schlüssel, `id`, bleibt) und hake `orderDate` an; mach dasselbe bei `Customers` und hake `name` und `country` an,
+   und bei `Products` und hake `name` an. Lass die Positionen (`Orders.details`) mit all ihren Feldern;
 4. **Filter:** `p.customer.country == 'Germany'`;
 5. **+ Reihenfolge hinzufügen:** `orderDate`, **absteigend**; **Zeilen pro Seite:** `20`;
 6. **Abfrage erstellen**, dann **execute**.
@@ -83,7 +84,7 @@ Jede Bestellung kommt mit ihrem Kunden und ihren Positionen, jede Position mit i
 ## 6. Speichere sie {#6-save-it}
 
 **Speichern** (Strg+S) fragt nach einem Namen, einer Beschreibung und einem Ordner. Ein Ordner wird zuerst mit dem
-**+** von **Projekte** → **Neues Projekt** angelegt. Die gespeicherte Abfrage behält ihren Assistenten: Ihre
+**+** von **Workbench** → **Neues Projekt** angelegt. Die gespeicherte Abfrage behält ihren Assistenten: Ihre
 Schaltfläche **Assistent** öffnet ihn so, wie er verlassen wurde.
 
 ![Die Abfrage speichern](images/ide-save-query.png)

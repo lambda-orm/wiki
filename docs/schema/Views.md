@@ -5,6 +5,10 @@ properties, new properties computed by an expression and properties read through
 `options.view` is compiled against **the domain of its view**, as if it were the only one. The database doesn't
 change.
 
+Use a view to give each kind of user (support, analytics, a partner, a public API) only the data it should see,
+without a second model and without views of the database. The keys of `infrastructure.views` are in the
+[Definition](SchemaDefinition.md#view).
+
 ```yaml
 infrastructure:
   views:
@@ -39,7 +43,9 @@ schema doesn't write it) and it can't change entities.
 | A property of the domain with `readExp` | **Masked**: read through the expression, also in filters and sorts ("what is seen is what is filtered"); written with its real value |
 | A new property with `readExp` (and `type`) | Computed in the source; read only |
 
-The primary key and the keys of the relations the view keeps can't be excluded. A view that names what doesn't exist,
+The primary key and the keys of the relations the view keeps can't be excluded (to hide a relation, exclude the
+entity it goes to). A hidden property that is `required` and has no `default` makes every insert in the view fail in
+the database: give it a `default`. A view that names what doesn't exist,
 a `readExp` that doesn't compile or an invalid `type` is a `SchemaError` when the schema loads.
 
 ## Personal data (PII)
@@ -62,7 +68,15 @@ infrastructure:
     - { name: public, pii: exclude }
 ```
 
-What the view says of a property wins over its `pii`; the keys stay.
+| `pii` of the property | Mask of `pii: mask` |
+| --- | --- |
+| `email` | `maskEmail` |
+| `phone`, `card`, `id` | `maskLeft(x, 4)` |
+| `name` | `maskRight(x, 1)` |
+| another one | `mask` |
+
+What the view says of a property wins over its `pii`; the keys stay. The view `default` sees the personal data as it
+is.
 
 ## Mask functions
 
@@ -73,7 +87,7 @@ They are functions of the query language, translated to each engine with the res
 | `mask(x)` | A quarter of each side visible (3 at most), the rest `*`; less than 4 characters, all `*` |
 | `maskLeft(x, n)` / `maskRight(x, n)` | All but the last / the first `n` |
 | `maskEmail(x)` | The first character of the user and the domain: `f*****@x.com` |
-| `hash(x, key?)` | SHA-256 in hexadecimal; with a key, HMAC-SHA256 (PostgreSQL with `pgcrypto`). Not in MongoDB |
+| `hash(x, key?)` | SHA-256 in hexadecimal; with a key, HMAC-SHA256. Without a key it is translated on PostgreSQL, MySQL, MariaDB, SQL Server and Oracle; with a key, only on PostgreSQL (`pgcrypto`). On MongoDB and SQLite it is an error when the query is compiled |
 
 ## The whole API
 
@@ -82,5 +96,12 @@ gives the domain of the view; a transaction, its scripts and listeners inherit i
 (`new CustomersRepository(stage, orm, view)`), and `lambdaorm build --view` generates the model and repositories of a
 view.
 
-The rows a view sees are limited by its [filter](Context.md). Who chooses the view decides what is seen: in the Data
-Gateway, the gateway.
+## What a view does not restrict
+
+- **Who chooses the view:** in the library, whoever calls it (it can ask for `default`); in the Data Gateway, the
+  gateway, from the credential or the claims.
+- **The actions:** a view is not read only; `insert`, `update` and `delete` on its entities are allowed. They are
+  limited by the permissions of the gateway or by the application.
+- **The stage commands** (`push`, `pull`, `import`, `export`, `drop`, `truncate`) work on the whole schema: they are
+  administration, not for whoever uses a view.
+- **The rows:** a view sees all of them unless its [filter](Context.md) limits them with the context.

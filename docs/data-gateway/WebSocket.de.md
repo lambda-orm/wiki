@@ -2,7 +2,8 @@
 
 Der Transport `webSocket` bietet die Operationen der REST API über **eine einzige dauerhafte JSON-RPC-2.0-Verbindung**,
 dazu **Benachrichtigungen**, die REST nicht bieten kann: das Ende einer Ausführung in der Warteschlange und die
-Zustandsänderungen des Schemas.
+Änderungen des Zustands des Schemas und seines Workspaces. Verwenden Sie ihn für einen Prozess, der viele Abfragen
+sendet oder wissen möchte, wann sich etwas ändert.
 
 ```yaml
 transports:
@@ -11,8 +12,18 @@ transports:
 ```
 
 Die Verbindung wird zur Route des Schemas geöffnet, `ws://localhost:8083/iot/v1` (`ws://localhost:8083/` für ein
-einzelnes Schema an der Wurzel), und im Upgrade mit denselben Headern wie bei REST authentifiziert. Eine Verbindung zur
-Wurzel eines Gateways mit mehreren Schemas bietet nur `general.*` und `gateway.schemas`.
+einzelnes Schema an der Wurzel), und im Upgrade mit denselben Headern wie bei REST authentifiziert (ein Browser, der
+keine Header senden kann, sendet sie in den Subprotokollen: [Transporte](Transports.md#websocket)). Eine Verbindung zur
+Wurzel eines Gateways mit mehreren Schemas bietet nur `general.*` und `gateway.schemas`. Wird ihr Schema entfernt, wird
+eine Verbindung mit dem Code `4404` geschlossen.
+
+```ts
+import WebSocket from 'ws'
+
+const ws = new WebSocket('ws://localhost:8083/', { headers: { 'X-Api-Key': process.env.KEY } })
+ws.on('open', () => ws.send(JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'query.execute', params: { query: 'Categories.map(p => p.name)' } })))
+ws.on('message', message => console.log(JSON.parse(message.toString())))
+```
 
 ```json
 → { "jsonrpc": "2.0", "id": 1, "method": "query.execute", "params": { "query": "Products.filter(p => p.price > minPrice)", "data": { "minPrice": 50 } } }
@@ -37,10 +48,10 @@ Die `params` entsprechen dem Body (oder den Routenparametern) der entsprechenden
 | `query.script` | `script`, `data?`, `options?` | `POST /script` |
 | `query.executeQueued` | `topic`, `query`, `data?`, `chunk?`, `options?`, `notify?` | `POST /execute-queued` |
 | `query.plan` | `query`, `options?` | `POST /plan` |
-| `query.metadata` | `query` | `POST /metadata` |
-| `query.model` | `query` | `POST /model` |
-| `query.parameters` | `query` | `POST /parameters` |
-| `query.constraints` | `query` | `POST /constraints` |
+| `query.metadata` | `query`, `options?` | `POST /metadata` |
+| `query.model` | `query`, `options?` | `POST /model` |
+| `query.parameters` | `query`, `options?` | `POST /parameters` |
+| `query.constraints` | `query`, `options?` | `POST /constraints` |
 | `schema.schema` | — | `GET /schema` |
 | `schema.version` | — | `GET /schema/version` |
 | `schema.domain` | — | `GET /domain` |

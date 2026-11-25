@@ -3,7 +3,7 @@
 Diese Seite zeigt, wie λORM Eigenschaften verbundener Entitäten liest. Es gibt keine Join-Methode: Wenn eine Abfrage eine Eigenschaft über eine Beziehung verwendet, etwa `p.category.name`, fügt λORM den Join hinzu, den die Beziehung im Schema definiert. Das gezeigte SQL ist das für MySQL erzeugte.
 
 !!! note "Hinweis"
-    Ein Join setzt voraus, dass sich beide Entitäten in derselben Quelle befinden. Um verbundene Entitäten aus einer anderen Quelle zu lesen, verwenden Sie [Include](Include.md); um nach einer Eigenschaft einer Beziehung in einer anderen Quelle zu filtern, siehe [Nach einem Feld einer Beziehung in einer anderen Quelle filtern](Include.md#filter-by-a-field-of-a-relation-in-another-source).
+    Ein Join setzt voraus, dass sich beide Entitäten in derselben Quelle befinden. Führt die Beziehung zu einer Entität in einer anderen Quelle, funktioniert dieselbe Abfrage trotzdem: λORM liest jede Quelle mit ihrer eigenen Anweisung und verbindet die Zeilen im Speicher (siehe [Abfragen über Quellen hinweg](CrossSource.md)). Um die verbundenen Entitäten als verschachtelte Objekte zu laden, verwenden Sie [Include](Include.md).
 
 ## Einfacher Join {#simple-join}
 

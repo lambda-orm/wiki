@@ -1,17 +1,20 @@
 # Push {#push}
 
 Diese Seite erklärt push, das die Quellen (Datenbanken) eines Stages anhand des Schemas aktualisiert: wie es funktioniert, den CLI-Befehl `lambdaorm push` und die Methode `orm.stage.push()`.
+Führen Sie es aus, nachdem Sie die Domäne oder die Mappings geändert haben, damit die Datenbanken die neuen Tabellen und Spalten erhalten.
 
 ## Wie push funktioniert {#how-push-works}
 
 Push liest die Datenbanken des Stages (wie [fetch](SchemaSynchronization-Fetch.md)) und generiert die DDL, die sie auf den Stand des Modells bringt:
 
 - Nicht existierende Tabellen werden mit ihrem Primärschlüssel, Unique Key, ihren Fremdschlüsseln und Indizes erstellt.
-- In bestehenden Tabellen werden fehlende Spalten hinzugefügt (`ALTER TABLE … ADD`) und Spalten mit anderem Typ, anderer Länge oder anderer Nullbarkeit geändert.
+- In bestehenden Tabellen werden fehlende Spalten hinzugefügt (`ALTER TABLE … ADD`) und Spalten mit anderem Typ, anderer Länge oder anderer Nullbarkeit geändert, mit der Syntax der jeweiligen Engine (auf MySQL und MariaDB die vollständige Definition, sodass `AUTO_INCREMENT` erhalten bleibt; auf SQL Server der Typ mit seiner Nullbarkeit).
 - Eine Spalte, die im Mapping ihrer Eigenschaft mit `previousMapping` deklariert ist, wird umbenannt (`ALTER TABLE … RENAME COLUMN`, bei SqlServer `sp_rename`), anstatt hinzugefügt zu werden. Siehe [Eine Spalte umbenennen](SchemaDefinition.md#rename-a-column-with-previousmapping).
 - **Push löscht niemals** etwas, das nur in der Datenbank existiert (Tabellen, Spalten). `fetch` meldet es, sodass es bei Bedarf von Hand entfernt werden kann.
 - Die Spaltentypen folgen den Eigenschaftstypen und dem `dbType` im Mapping der Eigenschaft. Siehe [Eigenschaftstypen](SchemaDefinition.md#property-types).
 - Jede Entität geht an die durch die Regeln des Stages gewählte Quelle; eine Quelle ohne Bedingung erhält nur die Entitäten, die keine andere Quelle übernommen hat.
+- **Eine Änderung, die Daten verlieren kann, stoppt push**: das Ändern einer Spalte auf einen Typ, der nicht breiter ist (`decimal` zu `integer`, Text zu Datum), oder auf einen kürzeren Text (`string(50)` zu `string(20)`). Push listet diese Änderungen auf und schlägt mit einem `DestructiveChangeError` fehl; `--allow-destructive` wendet sie an. Einen Typ oder eine Länge zu verbreitern ist nicht destruktiv. Siehe [Migrationen](SchemaSynchronization-Migrations.md).
+- Auf SQLite ist der Unique Key ein eindeutiger Index, Fremdschlüssel werden nicht erstellt, und eine Änderung des Typs oder der Nullbarkeit einer Spalte ist ein Fehler. Auf MongoDB, das schemalos ist, erstellt push die Collections und ihre Indizes. Auf einer Http-Quelle tut push nichts. Siehe [Datenbank-Engines](Engines.md).
 
 Da der Vergleich mit den Datenbanken erfolgt, funktioniert push auf jedem Host und in jedem CI-Job gleich: Es benötigt nicht den Ordner `orm_state` eines vorherigen Push.
 Der Ordner `orm_state` wird trotzdem geschrieben, als Protokoll dessen, was angewendet wurde.
@@ -33,6 +36,8 @@ lambdaorm push
 | `-e`, `--envfile` | Zu lesende Datei mit Umgebungsvariablen. |
 | `-o`, `--output` | Generiert die DDL, ohne sie anzuwenden (siehe unten). |
 | `-f`, `--force` | Fährt bei einer fehlschlagenden Anweisung mit den nächsten fort. |
+| `--allow-destructive` | Wendet auch die Änderungen an, die Daten verlieren können. |
+| `--seed` | Fügt nach dem Push die Daten ein, mit denen der Stage beginnt (siehe [Seed](SchemaSynchronization-Seed.md)). |
 
 Beispiel der generierten DDL auf einer leeren Datenbank:
 
@@ -78,11 +83,13 @@ Wenn push die Änderungen anwendet, protokolliert es sie im Ordner `orm_state`:
 ├── orm_state
 │   ├── default-model.json
 │   └── main
+│       ├── U231122154351__push.sql
 │       └── V231122154351__push.sql
 ```
 
 - `<stage>-model.json`: das Modell des Stages beim letzten Push.
-- `<source>/V<yyMMddHHmmss>__push.sql`: die auf dieser Quelle ausgeführten Anweisungen.
+- `<source>/V<yyMMddHHmmss>__push.sql`: die auf dieser Quelle ausgeführten Anweisungen. Die Version ist das Datum, sodass die Dateien zweier Entwickler in git nicht kollidieren.
+- `<source>/U<yyMMddHHmmss>__push.sql`: die Anweisungen, die sie rückgängig machen (siehe [Migrationen](SchemaSynchronization-Migrations.md)).
 
 Labs:
 
@@ -106,7 +113,7 @@ import { Orm } from '@lambdaorm/lib'
 		const sentences = await orm.stage.push({ stage: 'default' }).sentence()
 		// the sentences grouped by source: [{ source: 'accounts', sentences: ['ALTER TABLE accounts ADD phone VARCHAR(32)'] }]
 		const bySource = await orm.stage.push({ stage: 'default' }).sentencesBySource()
-		// apply them
+		// apply them ({ stage: 'default', allowDestructive: true } also applies the changes that can lose data)
 		await orm.stage.push({ stage: 'default' }).execute()
 	} finally {
 		await orm.end()

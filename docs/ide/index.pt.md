@@ -1,9 +1,13 @@
-# Data Gateway IDE
+# Data Gateway IDE {#data-gateway-ide}
 
 A IDE do Data Gateway: conecte-se aos seus gateways, percorra os esquemas, leia cada entidade como um formulário,
 escreva consultas com autocompletar ou com o [assistente de consultas](QueryWizard.md), desenhe diagramas e administre
 os esquemas. Como uma IDE de bancos de dados, ela se conecta a gateways, um ou vários, cada um com sua credencial; os
-esquemas, workspaces e projetos ficam neles.
+esquemas, os workspaces e o que neles se salva ficam nos gateways.
+
+Use-a para explorar um esquema que você não conhece, para testar uma consulta antes que ela vá para o seu código, para
+mostrar o domínio como um diagrama e, com uma credencial de administração, para alterar o esquema e aplicá-lo aos
+bancos de dados.
 
 Ela vem de duas formas, o mesmo app e a mesma versão:
 
@@ -22,12 +26,12 @@ Ela vem de duas formas, o mesmo app e a mesma versão:
 | [Primeiros passos](GettingStarted.md) | da primeira conexão a uma consulta, uma consulta do assistente e um diagrama, no Northwind |
 | [Conexões](Connections.md) | uma conexão a um gateway, sua credencial, sua sessão, seus papéis, seu REST, WebSocket e MCP |
 | [Explorador](Explorer.md) | a árvore das conexões e seus esquemas, seu filtro, as abas |
-| [Entidades](Entities.md) | o formulário de uma entidade: propriedades, relações, chaves, suas linhas e seu diagrama |
+| [Entidades](Entities.md) | a vista de uma entidade: propriedades, relações, chaves, restrições, suas linhas, seu diagrama e seu histórico |
 | [Consultas](Queries.md) | o editor de consultas, suas sugestões, dados e opções, suas ações, o resultado, o histórico |
 | [Assistente de consultas](QueryWizard.md) | uma consulta escrita a partir de um diagrama: tabelas, campos, filtro, ordem e página |
 | [Diagramas](Diagrams.md) | os diagramas do domínio: salvos, editados, exportados |
-| [Projetos](Projects.md) | pastas, consultas e diagramas salvos; onde ficam guardados, exportação e importação |
-| [Administração](Administration.md) | os esquemas editados a partir da IDE: YAML e formulários, variáveis, comandos, novos esquemas |
+| [Workbench](Projects.md) | projetos, pastas, consultas e diagramas salvos; onde ficam guardados, exportação e importação |
+| [Administração](Administration.md) | os esquemas editados a partir da IDE: YAML e formulários, variáveis, comandos, stages, código, histórico, novos esquemas |
 | [Implantação](Deploying.md) | a IDE web em um contêiner, seus destinos, onde ela roda e como alcança um gateway |
 | [Na sua própria aplicação](Embedding.md) | os componentes de `@lambdaorm/ui` em uma aplicação React |
 
@@ -35,22 +39,35 @@ Ela vem de duas formas, o mesmo app e a mesma versão:
 
 | Parte | Onde | O que tem |
 | --- | --- | --- |
-| **O cabeçalho** | em cima | o nome e a versão da IDE, **Documentação** (esta wiki, no seu idioma) e o menu ☰: **Nova conexão** e **Preferências** |
-| **O explorador** | à esquerda | as conexões e, para cada uma, seus esquemas: metadados, domínio, entidades, projetos ([Explorador](Explorer.md)) |
+| **O menu λORM Data Gateway ▾** | em cima à esquerda, sobre o explorador | **Preferências**, **Wiki** (esta documentação, no idioma da IDE), **Atualizar** e **Sobre** |
+| **Conexões** | ao lado do menu | quantas conexões existem, ⟳ (ler tudo de novo) e **+** (**Nova conexão**) |
+| **O explorador** | à esquerda | as conexões e, para cada uma, seus esquemas: metadados, estado, código-fonte e workbench ([Explorador](Explorer.md)) |
 | **As abas** | à direita | consultas, entidades, diagramas, esquemas, conexões e preferências, lado a lado; várias conexões ao mesmo tempo |
 
-**Preferências** (menu ☰ → Preferências) tem:
+![O menu do aplicativo](images/ide-app-menu.png)
 
-- **Idioma:** English, Español, Português, Français, Italiano, Deutsch, Nederlands, Català, Galego, Euskara.
+**Preferências** abre em uma aba:
+
+- **Idioma:** English, Español, Português, Français, Italiano, Deutsch, Nederlands, Català, Galego, Euskara. Na
+  primeira vez, o idioma do navegador.
 - **Formato regional:** a cultura dos números e datas dos resultados (en-US, es-AR, pt-BR, de-DE…), com um exemplo.
 - **Tema:** Sistema (claro ou escuro, como o sistema), Claro, Escuro, Dracula, Night, Nord, Solarized Light, Solarized
-  Dark, Monokai, High Contrast.
+  Dark, Monokai, High Contrast, cada um com uma prévia das suas cores.
 
 Elas são lembradas pelo navegador (ou pelo aplicativo de desktop).
 
 ![Preferências](images/ide-preferences.png)
 
 ![Escuro, em espanhol](images/ide-dark-es.png)
+
+**Atualizar** diz se saiu uma versão mais nova. O aplicativo de desktop a procura como faz **Help → Check for updates**
+([Baixar](Download.md#installing-it)); a IDE web não pode se atualizar sozinha, então mostra a nova versão e o comando
+que baixa a sua imagem (`docker pull flaviorita/data-gateway-ide:<version>`), com o que há de novo. **Sobre** mostra a
+versão, como ela roda (web, ou desktop e o seu sistema), a versão de `@lambdaorm/ui`, a licença e os links para o seu
+código-fonte e para esta wiki.
+
+Quando a IDE web é atualizada enquanto uma página está aberta, a página avisa que há uma nova versão, com
+**Recarregar**: o que está salvo permanece.
 
 ## Onde ela se conecta {#where-it-connects}
 
@@ -61,7 +78,8 @@ sua máquina: para um gateway que não está nela, uma VPN, um túnel SSH ou um 
 
 O que ela pode fazer depende das permissões da credencial: ler precisa de `read`; salvar no workspace, de
 `workbenchWrite`; administrar, de `schemaRead`, `schemaWrite` e das demais
-([Conexões → Papéis](Connections.md#roles)).
+([Conexões → Papéis](Connections.md#roles)). O que a credencial não pode fazer não é mostrado, ou aparece desativado
+com o motivo.
 
 ## Em um contêiner {#in-a-container}
 

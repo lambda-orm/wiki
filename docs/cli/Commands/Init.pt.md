@@ -14,6 +14,12 @@ fonte, um mapeamento e um stage.
 | data-path | | Caminho relativo da pasta de dados no workspace (`--data-path`). |
 | url | `-u` | URL de um esquema em um Data Gateway: o projeto é criado com o domínio desse esquema, para ser usado com o [cliente Node.js](../../data-gateway/Clients.md). |
 
+Sem `-c`, a fonte recebe uma conexão local para o dialeto (por exemplo `localhost:5432` para PostgreSQL, ou o arquivo
+`data.sqlite` para `SQLjs`), que deve ser substituída pela sua, de preferência com uma
+[variável de ambiente](../../schema/SchemaDefinition-EnvironmentVariables.md). Se o arquivo do esquema já existir,
+`init` o completa em vez de substituí-lo. Também adiciona a pasta de logs do λORM ao `.gitignore`. Depois,
+[build](Build.md) gera o código e [push](Push.md) cria as tabelas.
+
 ## Exemplo {#example}
 
 ```sh

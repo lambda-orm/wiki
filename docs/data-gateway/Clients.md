@@ -1,11 +1,14 @@
 # Clients
 
+A Data Gateway is plain HTTP, WebSocket and MCP: any language can call it. This page lists the clients made for it:
+the Node clients, the CLI, a generated client from its OpenAPI document, and an AI agent through MCP.
+
 ## Node: @lambdaorm/data-gateway-client
 
-[`@lambdaorm/data-gateway-client`](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) (0.1.0) is the new
-client: one API on the five transports of the gateway, chosen by the scheme of the connection string (`http://`,
-`ws://`, `mcp+http://`, `mcp+sse://`, `mcp+ws://`), and the same error code on all of them. It passes the
-conformance suite of the gateway on each one.
+[`@lambdaorm/data-gateway-client`](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) is the new
+client: one API over every data transport of the gateway, chosen by the scheme of the connection string (`http://`
+REST, `ws://` WebSocket, `mcp+http://` MCP Streamable HTTP, `mcp+sse://` the older MCP HTTP+SSE, `mcp+ws://` MCP over
+WebSocket), and the same error code on all of them. It passes the conformance suite of the gateway on each one.
 
 ```sh
 npm install @lambdaorm/data-gateway-client
@@ -25,8 +28,11 @@ try {
 await gateway.close()
 ```
 
-The credential goes in the options (`apiKey`, `token`) or in `DATA_GATEWAY_API_KEY` / `DATA_GATEWAY_TOKEN`, never in
-the URL. Its [README](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) has the whole API and the codes.
+The credential goes in the options (`apiKey`, `token`, or any `headers`) or in `DATA_GATEWAY_API_KEY` /
+`DATA_GATEWAY_TOKEN`, never in the URL (a credential in it is an error); `DATA_GATEWAY_URL` is the connection string
+when `connect()` gets none, and the URL can carry `?timeout=<ms>` and `?stage=<stage>`. The errors have a `code` that
+is the same on every transport: `invalid`, `unauthorized`, `forbidden`, `not_found`, `unique`, `foreign_key`,
+`timeout`, `unavailable`, `truncated` (MCP, a list cut at `mcp.maxRows`), … Its [README](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) has the whole API and the codes.
 `@lambdaorm/client`, below, keeps working; the CLI will move to the new client.
 
 ## Node: @lambdaorm/client
@@ -77,8 +83,18 @@ lambdaorm script -x "orm.execute(\"Devices.map(p => count(1))\")" -u http://gate
 
 ## Other languages
 
-The OpenAPI 3 document of the REST API is served by the gateway (`/doc`, `/api-docs`): a client for any language can
-be generated from it with [OpenAPI Generator](https://openapi-generator.tech).
+The OpenAPI 3 document of the REST API is served by the gateway at `/openapi.json` (Swagger UI at `/doc`): a client
+for any language can be generated from it with [OpenAPI Generator](https://openapi-generator.tech), or the API called
+with any HTTP library:
+
+```python
+import requests
+
+rows = requests.post("http://gateway:8080/iot/v1/execute", headers={"X-Api-Key": key}, json={
+    "query": "Devices.filter(p => p.status == status)",
+    "data": {"status": "active"},
+}).json()
+```
 
 ## AI agents
 

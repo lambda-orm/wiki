@@ -1,7 +1,8 @@
 # WebSocket API
 
 The `webSocket` transport offers the operations of the REST API over **one persistent JSON-RPC 2.0 connection**, plus
-**notifications** that REST cannot give: the end of a queued execution and the changes of state of the schema.
+**notifications** that REST cannot give: the end of a queued execution, the changes of state of the schema and of its
+workspace. Use it for a process that sends many queries, or that wants to know when something changes.
 
 ```yaml
 transports:
@@ -10,8 +11,18 @@ transports:
 ```
 
 The connection is opened against the schema's route, `ws://localhost:8083/iot/v1` (`ws://localhost:8083/` for a single
-schema at the root), and is authenticated in the upgrade with the same headers as REST. A connection to the root of a
-gateway with several schemas has only `general.*` and `gateway.schemas`.
+schema at the root), and is authenticated in the upgrade with the same headers as REST (a browser, which can't send
+headers, sends them in the subprotocols: [Transports](Transports.md#websocket)). A connection to the root of a gateway
+with several schemas has only `general.*` and `gateway.schemas`. When its schema is removed, a connection is closed with
+the code `4404`.
+
+```ts
+import WebSocket from 'ws'
+
+const ws = new WebSocket('ws://localhost:8083/', { headers: { 'X-Api-Key': process.env.KEY } })
+ws.on('open', () => ws.send(JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'query.execute', params: { query: 'Categories.map(p => p.name)' } })))
+ws.on('message', message => console.log(JSON.parse(message.toString())))
+```
 
 ```json
 → { "jsonrpc": "2.0", "id": 1, "method": "query.execute", "params": { "query": "Products.filter(p => p.price > minPrice)", "data": { "minPrice": 50 } } }
@@ -36,10 +47,10 @@ The `params` are the body (or the route parameters) of the equivalent REST metho
 | `query.script` | `script`, `data?`, `options?` | `POST /script` |
 | `query.executeQueued` | `topic`, `query`, `data?`, `chunk?`, `options?`, `notify?` | `POST /execute-queued` |
 | `query.plan` | `query`, `options?` | `POST /plan` |
-| `query.metadata` | `query` | `POST /metadata` |
-| `query.model` | `query` | `POST /model` |
-| `query.parameters` | `query` | `POST /parameters` |
-| `query.constraints` | `query` | `POST /constraints` |
+| `query.metadata` | `query`, `options?` | `POST /metadata` |
+| `query.model` | `query`, `options?` | `POST /model` |
+| `query.parameters` | `query`, `options?` | `POST /parameters` |
+| `query.constraints` | `query`, `options?` | `POST /constraints` |
 | `schema.schema` | — | `GET /schema` |
 | `schema.version` | — | `GET /schema/version` |
 | `schema.domain` | — | `GET /domain` |

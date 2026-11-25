@@ -58,7 +58,7 @@ La misma consulta se ejecuta en cualquier otro motor de base de datos: en MySQL,
 | delete | Elimina registros; siempre tiene un filtro. | DELETE con WHERE | [Delete](Delete.md) |
 | deleteAll | Elimina todos los registros de una entidad. | DELETE sin WHERE | [Delete](Delete.md) |
 
-- No hay un método para los joins: se deduce un INNER JOIN cuando la consulta navega por una relación, como en `p.category.name` (ver [Join](Join.md)).
+- No hay un método para los joins: se deduce un INNER JOIN cuando la consulta navega por una relación, como en `p.category.name` (ver [Join](Join.md)); cuando la entidad relacionada está en otra fuente, la consulta se resuelve entre fuentes (ver [Consultas entre fuentes](CrossSource.md)).
 - No hay un método para GROUP BY: se deduce cuando se usa una función de agregación (ver [Agrupación](Grouping.md)).
 
 ## Operadores {#operators}
@@ -79,13 +79,16 @@ Los operadores son los mismos que en JavaScript.
 |:--|:--|:--|
 | Numéricas | abs, ceil, cos, exp, ln, log, remainder, round, sign, sin, tan, trunc… | [Numéricos](operatorsAndFunctions/Numeric.md) |
 | Cadenas | chr, lower, lpad, ltrim, replace, rpad, rtrim, substr, trim, upper, concat… | [Cadenas](operatorsAndFunctions/String.md) |
-| Fecha y hora | curTime, today, now, time, date, dateTime, year, month, day, weekday, hours… | [Fecha y hora](operatorsAndFunctions/Datetime.md) |
-| Conversión | toString, toJson, toNumber | [Cadenas](operatorsAndFunctions/String.md) |
+| Fecha y hora | curTime, today, now, time, date, dateTime, year, month, day, weekday, hour… | [Fecha y hora](operatorsAndFunctions/Datetime.md) |
+| Conversión | toString, toNumber | [Cadenas](operatorsAndFunctions/String.md) |
 | Nulos | nvl, nvl2, isNull, isNotNull | [Nulos](operatorsAndFunctions/Nullable.md) |
 | Generales | as, distinct | |
 | Ordenación | asc, desc | [Ordenación](operatorsAndFunctions/Sort.md) |
-| Condición | between, includes | [Comparación](operatorsAndFunctions/Comparison.md) |
+| Condición | between, in, includes | [Comparación](operatorsAndFunctions/Comparison.md) |
 | Agrupación | avg, count, first, last, max, min, sum | [Agrupación](operatorsAndFunctions/Group.md) |
 | Metadatos | user, source | |
+| JSON | jsonHas, jsonSet, jsonIncludes (rutas como `p.meta.address.zip`) | [JSON, vectores y puntos](JsonVectorsPoints.md) |
+| Vectores | cosineDistance, l2Distance, innerProduct | [JSON, vectores y puntos](JsonVectorsPoints.md#vectors) |
+| Geo | point, distance, within, inside | [JSON, vectores y puntos](JsonVectorsPoints.md#points) |
 
 Consultar [Operadores y funciones](operatorsAndFunctions/OperatorsAndFunctions.md) para la referencia completa.

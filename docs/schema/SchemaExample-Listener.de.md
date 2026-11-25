@@ -45,6 +45,7 @@ Die in `condition`, `before`, `after` und `error` verfügbaren Argumente:
 | query       | Der ausgeführte Abfrageausdruck                                                                                 |
 | data        | Die beim Ausführen des Ausdrucks übergebenen Daten                                                              |
 | options     | Die beim Ausführen des Ausdrucks übergebenen Optionen                                                           |
+| context     | Der [Kontext](Context.md) dessen, der sie ausführt (`options.context`)                                          |
 | result      | Nur im after-Ereignis verfügbar; enthält das Ergebnis der Ausführung des Ausdrucks                              |
 | action      | Die ausgeführte Aktion (select, insert, bulkInsert, update, upsert, merge, bulkMerge, delete, bulkDelete)        |
 | type        | Der Typ der ausgeführten Anweisung (dql, dml)                                                                   |

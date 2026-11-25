@@ -114,12 +114,15 @@ A repository file is generated for each entity, for example `repositoryCountry.t
 import { Repository, IOrm } from '@lambdaorm/lib'
 import { Country, QryCountry } from './model'
 export class CountryRepository extends Repository<Country, QryCountry> {
-	constructor (stage?: string, orm?:IOrm) {
-		super('Countries', stage, orm)
+	constructor (stage?: string, orm?:IOrm, view?: string) {
+		super('Countries', stage, orm, view)
 	}
 	// Add your code here
 }
 ```
+
+With `--view <name>`, `build` generates the model and the repositories of that [view](Views.md): only its entities and properties, and repositories that use it.
+When the schema has [named queries](SchemaDefinition.md#named-query) (`application.queries`), `build` also writes `queries.ts`, with the type of the result of each query and a function that runs it (see [Typed queries](../usage/TypedQueries.md)).
 
 ## Set schema
 

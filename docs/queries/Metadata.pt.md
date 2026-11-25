@@ -164,3 +164,5 @@ Uma sentença para os pedidos e, como sua filha, uma para os detalhes (campos `p
   ]
 }
 ```
+
+Quando uma consulta lê campos de uma relação em outra fonte, o plano também tem `inMemory`, os passos executados em memória depois das sentenças (por exemplo `["map", "sort"]`); veja [Consultas entre fontes](CrossSource.md#see-the-plan).

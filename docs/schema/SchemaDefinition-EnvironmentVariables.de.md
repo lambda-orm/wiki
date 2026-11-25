@@ -3,7 +3,10 @@
 Diese Seite zeigt, wie Sie Umgebungsvariablen im Schema verwenden, um Verbindungen und Geheimnisse aus der Schema-Datei herauszuhalten.
 
 Jeder Wert des Schemas kann mit der Notation `$VARIABLE` oder `${VARIABLE}` aus einer Umgebungsvariablen übernommen werden.
-Die Variablen werden beim Laden des Schemas ersetzt. In der CLI liest die Option `-e` sie aus einer Datei (zum Beispiel `-e .env`).
+Die Variablen werden einmal ersetzt, beim Laden des Schemas. In der CLI liest die Option `-e` sie aus einer Datei (zum Beispiel `-e .env`).
+Ein Wert, der nach der Ersetzung ein JSON-Text ist (etwa eine Verbindung), wird als Objekt gelesen; eine Verbindung mit einer nicht definierten Variablen wird beim Laden des Schemas als Warnung gemeldet.
+
+Da sie beim Laden ersetzt werden, sind Umgebungsvariablen für jede Abfrage gleich. Ein Wert, der davon abhängt, wer die jeweilige Abfrage ausführt (Benutzer, Mandant, Region), gehört stattdessen in den [Kontext](Context.md).
 
 ## Beispiele {#examples}
 

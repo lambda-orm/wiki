@@ -31,6 +31,13 @@ import '@lambdaorm/ui/styles.css'
 | `EntityView` | el formulario de una entidad |
 | `ResultViewer` | un resultado como árbol, tabla, JSON o YAML, con copiar y exportar |
 | `ExpressionInput` | un editor de una expresión de 3xpr, verificada por el gateway |
+| `SchemaEditor` | el `lambdaORM.yaml` de un esquema, verificado mientras se escribe ([Administración](Administration.md#the-yaml)) |
+| `SchemaForms` | los formularios de los elementos de un esquema ([Administración](Administration.md#forms)) |
+| `CommandsPanel` | los comandos de un esquema sobre sus stages, con sus vistas previas y sus trabajos |
+| `StageDiagram` | el diagrama de un stage ([Administración](Administration.md#the-diagram-of-a-stage)) |
+| `HistoryView` | el historial de un esquema, o de uno de sus elementos |
 
 Lo guardado puede ir a otro lugar que no sea el navegador dando `store` (un `WorkspaceStore`, por ejemplo un backend
-propio).
+propio). Varios gateways van en un mismo `Workspace` con `connections` (cada uno con su nombre, su `baseUrl`, sus
+`headers` o su propio `fetch`), como hace el IDE; `pages` y `openPage` muestran páginas de tu aplicación (una cuenta,
+las preferencias) como pestañas.

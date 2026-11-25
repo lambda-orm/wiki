@@ -1,15 +1,17 @@
-# Projetos {#projects}
+# Workbench {#workbench}
 
-O que você guarda de um esquema, sob **projetos** no [explorador](Explorer.md): pastas, consultas e diagramas. Um
-projeto é uma pasta no topo; as pastas se aninham para organizar o que está salvo.
+O que você guarda de um esquema, sob **Workbench** no [explorador](Explorer.md): projetos, pastas, consultas e
+diagramas. Um projeto é uma pasta no topo; as pastas se aninham para organizar o que está salvo. Guarde ali as
+consultas que você executa de novo, os diagramas que explicam o domínio e os
+[diagramas dos stages](Administration.md#the-diagram-of-a-stage), cada um com um nome e uma descrição.
 
 ## Adicionar {#adding}
 
-O **+** de **projetos** ou de uma pasta:
+O **+** do **Workbench** ou de uma pasta:
 
 | Item | O que pede |
 | --- | --- |
-| **Novo projeto** / **Nova pasta** | um nome, uma descrição e a pasta em que vai |
+| **Novo projeto** (no **Workbench**) / **Nova pasta** (em uma pasta): os dois abrem o diálogo **Nova pasta** | um nome, uma descrição e a pasta em que vai |
 | **Nova consulta** | abre uma aba de consulta nessa pasta; o seu primeiro **Salvar** pede o seu nome |
 | **Novo diagrama** | um nome, uma descrição, a pasta e as entidades ([Diagramas](Diagrams.md#a-new-diagram)) |
 
@@ -25,23 +27,26 @@ script, os dados, as opções e, quando o [assistente](QueryWizard.md) a escreve
 - Uma consulta salva cujo esquema é mudado na sua aba é salva como uma nova.
 - Abrir uma consulta salva que já está aberta vai para a sua aba.
 
+Um diagrama é salvo com **Salvar** na sua barra ([Diagramas](Diagrams.md)); um diagrama de um stage pede na primeira
+vez o seu nome, descrição e pasta, e também tem **Salvar como…**.
+
 ## Editar, mover, excluir {#editing-moving-deleting}
 
-Cada linha tem **Editar** (o seu nome, descrição e pasta) e **Excluir** (com confirmação; uma pasta leva o que
-contém). Os itens são **movidos arrastando-os** para uma pasta, ou para **projetos** para levá-los ao topo, dentro do
-mesmo esquema. Dois itens do mesmo tipo não podem ter o mesmo nome em uma pasta (`Já existe um com esse nome aqui.`).
-A descrição aparece quando o ponteiro está sobre o item.
+Cada linha tem ✎ **Editar** (o seu nome, descrição e pasta) e 🗑 **Excluir** (com confirmação; uma pasta leva o que
+contém). Os itens são **movidos arrastando-os** para uma pasta, ou para o **Workbench** para levá-los ao topo, dentro
+do mesmo esquema. Dois itens do mesmo tipo não podem ter o mesmo nome em uma pasta (`Já existe um com esse nome
+aqui.`). A descrição aparece quando o ponteiro está sobre o item.
 
 ## Onde é salvo {#where-it-is-saved}
 
 | A credencial tem | O que é salvo vai para | Visto por |
 | --- | --- | --- |
-| `workbenchWrite` | a pasta `workbench/` do workspace do esquema, no gateway: um arquivo por item (`sales/German orders.query.yaml`) | todos que usam esse esquema, de qualquer navegador ou do aplicativo de desktop |
+| `workbenchWrite` | a pasta `workbench/` do workspace do esquema, no gateway: um arquivo por item (`sales/German orders.query.yaml`, `model.diagram.yaml`) | todos que usam esse esquema, de qualquer navegador ou do aplicativo de desktop |
 | sem `workbenchWrite` | **este navegador**, no seu armazenamento, separado para cada gateway e credencial | só este navegador neste dispositivo, com essa credencial |
 
 No workspace, duas pessoas salvando o mesmo item ao mesmo tempo é detectado: a segunda é avisada de que outra pessoa o
-alterou enquanto isso, e o item é lido de novo. Os arquivos de `workbench/` que não podem ser lidos são listados no
-explorador, para corrigi-los à mão.
+alterou enquanto isso, e o item é lido de novo. O que outra pessoa salva aparece na hora. Os arquivos de `workbench/`
+que não podem ser lidos são listados sob a conexão, para corrigi-los à mão.
 
 No navegador:
 

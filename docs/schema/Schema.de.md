@@ -10,7 +10,15 @@ Das Schema enthält die gesamte Konfiguration, die das ORM benötigt. Es trennt 
 
 Das Schema kann in einer YAML- oder JSON-Datei (üblicherweise `lambdaORM.yaml`) geschrieben oder bei der Initialisierung des ORM als Objekt übergeben werden.
 
+Seine Quellen können Datenbanken (MySQL, MariaDB, PostgreSQL, SQL Server, Oracle, MongoDB, SQLite) und REST-APIs sein, gemischt im selben Stage.
+
 Alle Ausdrücke, mit denen Bedingungen und Aktionen definiert werden, werden von der Expression-Engine [3xpr](https://www.npmjs.com/package/3xpr) ausgewertet.
+
+## Auf einen Blick {#at-a-glance}
+
+Eine Abfrage wird gegen die **Domäne** geschrieben. Die **Sichten** bestimmen, was jede Rolle davon sieht, und die **Infrastruktur** bestimmt, wo jede Entität liegt: ihr Mapping benennt die Tabellen und Spalten, und die Regeln der Stage schicken jeden Satz an seine Quelle.
+
+![Das Schema: Domäne, Sichten und Anwendung, Infrastruktur und ihre Quellen](images/schema-anatomy.svg)
 
 ## Beispiel {#example}
 
@@ -19,7 +27,7 @@ Dieses Beispiel zeigt einen Stage, der zwei Quellen verwendet: Quelle 1 ist MySQ
 Bei der Entität `Countries` sind die Namen der Tabelle und ihrer Spalten identisch mit den Namen der Entität und ihrer Eigenschaften, daher muss kein Mapping geschrieben werden.
 Bei der Entität `States` unterscheiden sich die Namen der Tabelle und ihrer Spalten, daher werden sie im Mapping definiert.
 
-![Diagramm](images/schema5.svg)
+![Stage stage1: States auf PostgreSQL mit seinem Mapping, der Rest auf MySQL](images/schema5.svg)
 
 ## In diesem Abschnitt {#in-this-section}
 
@@ -27,7 +35,8 @@ Bei der Entität `States` unterscheiden sich die Namen der Tabelle und ihrer Spa
 - [Ausdrücke](SchemaDefinition-Expressions.md), [Umgebungsvariablen](SchemaDefinition-EnvironmentVariables.md) und [Komposit-Entitäten](SchemaDefinition-Composite.md).
 - [Verwendung des Schemas](Schema-Use.md): wie das Schema geladen und das Modell generiert wird.
 - Beispiele: [Einfach](SchemaExample-Basic.md), [Erweitern](SchemaExample-Extend.md), [Mehrere Stages](SchemaExample-MultiplesStages.md), [Stage mit mehreren Quellen](SchemaExample-StageMultiplesSources.md), [Komposit](SchemaExample-Composite.md) und [Listener](SchemaExample-Listener.md).
-- [Synchronisierung](SchemaSynchronization.md): push, pull, fetch, introspect und incorporate.
-- [Datenbank-Engines](Engines.md): Unterschiede zwischen den Datenbank-Engines.
+- [Sichten](Views.md), [Kontext und Zeilenfilter](Context.md), [Observability](Observability.md) und [Eine REST-API als Quelle](HttpSource.md).
+- [Synchronisierung](SchemaSynchronization.md): push, pull, fetch, introspect, incorporate, [Migrationen](SchemaSynchronization-Migrations.md) und [Seed](SchemaSynchronization-Seed.md).
+- [Datenbank-Engines](Engines.md): Unterschiede zwischen den Datenbank-Engines (PostgreSQL, MySQL, MariaDB, SQL Server, Oracle, SQLite und MongoDB).
 
 Das [Data Gateway](../data-gateway/index.md) stellt ein Schema über das Netzwerk bereit; seine eigenen Einstellungen befinden sich in einer separaten [Konfigurationsdatei](../data-gateway/Configuration.md).

@@ -524,7 +524,7 @@ In MongoDB the details are stored inside each document of the `Orders` collectio
 
 ### Orders in PostgreSQL
 
-In PostgreSQL the orders are stored in the `Orders` table:
+In PostgreSQL the orders are stored in the `orders` table (PostgreSQL folds an unquoted name to lowercase; `Order Details` keeps its case because its space needs quotes):
 
 ![OrderCompositeInPostgres](images/OrderCompositeInPostgres.png)
 

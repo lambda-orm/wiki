@@ -11,10 +11,11 @@ Cada página describe los operadores y funciones de una categoría, con su firma
 | [Comparación](Comparison.md) | `==`, `!=`, `>`, `<`, `>=`, `<=`, `between`, `in`, `includes` |
 | [Lógicos](Logical.md) | `!`, `&&`, `||` |
 | [Numéricos](Numeric.md) | Operadores aritméticos y funciones matemáticas (`abs`, `round`, `log`, `sin`, ...) |
-| [Cadenas](String.md) | Funciones de texto (`concat`, `lower`, `upper`, `replace`, `substring`, ...) |
+| [Cadenas](String.md) | Funciones de texto (`concat`, `lower`, `upper`, `replace`, `substring`, `like`, `startsWith`, ...), máscaras (`mask`, `maskLeft`, `maskRight`, `maskEmail`) y `hash` |
 | [Fecha y hora](Datetime.md) | Fecha actual, conversiones, partes de una fecha, intervalos y diferencias entre fechas |
 | [Nulos](Nullable.md) | `nvl`, `nvl2`, `isNull`, `isNotNull` |
 | [A nivel de bits](Bitwise.md) | `~`, `&`, `|`, `^`, `<<`, `>>` |
+| [JSON, vectores y puntos](../JsonVectorsPoints.md) | Rutas de un json, `jsonHas`, `jsonSet`; `cosineDistance`, `l2Distance`, `innerProduct`; `point`, `distance`, `within`, `inside` |
 
 ## Agregación y ordenación {#aggregation-and-sorting}
 

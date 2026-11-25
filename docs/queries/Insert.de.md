@@ -99,12 +99,15 @@ USING (SELECT 1 FROM DUAL) s
 ON (t.iso3 = :iso3)
 WHEN MATCHED THEN UPDATE SET name = :name
 WHEN NOT MATCHED THEN INSERT (iso3,name) VALUES (:iso3,:name)
+
+-- SQLite
+INSERT INTO Countries(iso3,name) VALUES(?,?) ON CONFLICT DO UPDATE SET name = excluded.name
 ```
 
-Upsert wird auf PostgreSQL, MySQL, MariaDB, SQL Server und Oracle unterstützt (die beiden letzteren mit `MERGE`, ab `@lambdaorm/lib` 3.5.0).
+Upsert wird auf PostgreSQL, MySQL, MariaDB, SQL Server und Oracle (die beiden letzteren mit `MERGE`, ab `@lambdaorm/lib` 3.5.0) sowie auf SQLite (ab 3.15.0) unterstützt. Auf SQLite gilt `ON CONFLICT` ohne Spalten für einen Konflikt beim Primärschlüssel oder bei einem beliebigen eindeutigen Schlüssel.
 
 !!! warning "Warnung"
-    Auf MongoDB schlägt upsert mit dem Fehler „not supported yet“ fehl. SQLite (SQL.js) unterstützt es ebenfalls nicht.
+    Auf MongoDB wird upsert noch nicht unterstützt: es schlägt mit dem Fehler `upsert is not supported on MongoDB yet` fehl.
 
 Wenn der Schlüssel generiert wird (Auto-Increment) und nicht mitgesendet wird, fügt das Upsert ein. Auf SQL Server wird die Identity-Spalte nie eingefügt (die Datenbank erzeugt sie) und `OUTPUT INSERTED` gibt sie zurück; das `MERGE` von Oracle kann keine Werte zurückgeben und liefert daher den gesendeten Schlüssel.
 

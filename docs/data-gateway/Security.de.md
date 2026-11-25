@@ -1,5 +1,11 @@
 # Sicherheit {#security}
 
+Wer das Gateway nutzen darf und was jeder tun darf, wird in seiner Konfiguration entschieden, einmal, für jeden
+Transport: **Zugangsdaten** (ein Schlüssel, ein Token oder ein Benutzer) haben einen Namen und eine Liste von
+**Berechtigungen**; das Gateway prüft sie, bevor irgendetwas eine Datenbank erreicht, **auditiert** jedes Schreiben mit
+dem Namen der Zugangsdaten und setzt **Limits** dafür, was eine Anfrage beanspruchen darf. Diese Seite erklärt jeden
+Teil.
+
 ## Authentifizierung {#authentication}
 
 Der Block `authentication` hat drei Ebenen: global, pro Transport (`transports.<t>.authentication`) und pro Schema
@@ -26,8 +32,12 @@ authentication:
   nur `adapter: none`, bewusst so geschrieben.
 - Secrets werden in konstanter Zeit verglichen. Das Secret gelangt nie zu den Workern der Schemas: nur der Name und die
   Berechtigungen der Zugangsdaten.
-- Ohne Zugangsdaten (oder mit falschen) lautet die Antwort `401`; WebSocket-Upgrades werden abgelehnt.
-- `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/transports` und `/doc` benötigen keine Zugangsdaten.
+- Ohne Zugangsdaten (oder mit falschen) lautet die Antwort `401` (`{ "error": "Unauthorized", "message": … }`);
+  WebSocket-Upgrades werden abgelehnt.
+- `/ping`, `/health`, `/metrics`, `/version` (auch unter jedem Schema), `/schemas`, `/transports` und die
+  Dokumentation (`/openapi.json`, `/doc`, `/api-docs`) benötigen keine Zugangsdaten.
+- Zugangsdaten ohne `permissions` erhalten die der Daten (`read`, `write`, `script`, `queue`, `stageImport`), nie die
+  der Administration.
 - In `management` (der IDE) gehen die Zugangsdaten nur in die Anmeldung, und jede Anfrage trägt das Token einer
   [Sitzung](Transports.md#sessions): Sitzungen werden aufgelistet, enden bei Inaktivität und können sofort widerrufen
   werden.
@@ -61,9 +71,11 @@ Jede Operation, die Daten ändert oder ändern kann, hinterlässt einen Audit-Ei
 | Operation | Protokolliert |
 | --- | --- |
 | `execute` | wenn irgendeine Anweisung kein `select` ist |
-| Skript | immer |
-| Ausführung in der Warteschlange | immer (beim Einreihen) |
-| Stage-Import | immer |
+| `executeScript` | immer |
+| `executeQueued` | immer (beim Einreihen) |
+| `stageImport` | immer, auch der Befehl `import` der [Administration](Admin.md#the-commands) |
+| `stagePush`, `stageDrop` | die Befehle `push` und `drop` der Administration |
+| `login`, `logout`, `sessionExpired`, `sessionRevoked`, `loginRejected` | die [Sitzungen](Transports.md#sessions) von `management`, mit der ID der Sitzung (nie ihr Token), der Adresse und wer sie widerrufen hat |
 
 ```json
 { "type": "audit", "time": "2026-11-17T14:03:22.114Z", "schema": "iot/v1", "transport": "mcpHttp",
@@ -82,10 +94,10 @@ Jede Operation, die Daten ändert oder ändern kann, hinterlässt einen Audit-Ei
 | --- | --- | --- |
 | Anfragen pro Zeitfenster (nur `http`) | `rateLimit.windowMs`, `rateLimit.max` (`0` = aus) | `429` |
 | Gleichzeitige Operationen pro Schema | `server.maxConcurrent` | `429` mit `Retry-After` (MCP: `isError`; WebSocket: `status: 429`) |
-| Dauer einer Operation | `server.timeout` | Fehler, die Operation wird abgebrochen |
+| Dauer einer Operation | `server.timeout` | `504 TimeoutError`, die Operation wird abgebrochen |
 | Größe eines Bodys | `server.requestBodySize` | `413` |
 | Größe einer Antwort | `server.maxResponseBytes` | `413`: Verwenden Sie `.page(1, n)` oder aggregieren Sie in der Abfrage |
-| Skripte | `scripts.maxLength`, `timeoutMs`, `maxIterations` | `413` (Länge) oder ein Fehler des Skripts |
+| Skripte | `scripts.maxLength`, `timeoutMs`, `maxIterations` | `413 ScriptTooLongError` (Länge) oder ein Fehler des Skripts |
 | Zeilen eines Ergebnisses für MCP | `mcp.maxRows` | abgeschnitten, mit einem Hinweis ([MCP](Mcp.md#results-and-errors)) |
 
 ## Fehler {#errors}
@@ -106,16 +118,20 @@ Eine fehlgeschlagene Anfrage liefert einen Status, den ein Client zuordnen kann,
 | `code` | der Fehlercode der Datenbank, falls vorhanden (Postgres-SQLSTATE wie `23505`, MySQL `ER_DUP_ENTRY`) |
 | `message` | die Meldung |
 | `suggestions` | für einen Namen der Abfrage, den es nicht gibt, die nächstliegenden: `[{ "name": "nme", "didYouMean": ["name"] }]` |
+| `details` | in der Administration, was zum Weitermachen nötig ist: die Probleme eines ungültigen Schemas, der aktuelle Stand nach einem Konflikt |
 
 | Status | Ursache |
 | --- | --- |
 | `400` | eine ungültige Abfrage oder ein ungültiges Modell (`ValidationError`, `SchemaError`, `SintaxisError`, `LanguageError`), eine Verletzung von NOT NULL oder CHECK, ungültige Daten (Postgres `22xxx`) |
-| `401` | keine oder falsche Zugangsdaten |
+| `401` | keine oder falsche Zugangsdaten; bei `management` keine Sitzung oder eine abgelaufene oder widerrufene |
 | `403` | den Zugangsdaten fehlt die Berechtigung; Skripte deaktiviert |
 | `404` | ein Name, den das Schema nicht hat (eine Entität, ein Enum, eine Source, ein Mapping, eine Stage), ein auf diesem Transport nicht bereitgestelltes Schema, eine unbekannte Route |
-| `409` | eine Verletzung eines eindeutigen Schlüssels oder Fremdschlüssels (Postgres `23505`, `23503`; MySQL `ER_DUP_ENTRY`, `ER_NO_REFERENCED_ROW_2`, `ER_ROW_IS_REFERENCED_2`) |
+| `409` | eine Verletzung eines eindeutigen Schlüssels oder Fremdschlüssels (Postgres `23505`, `23503`; MySQL `ER_DUP_ENTRY`, `ER_NO_REFERENCED_ROW_2`, `ER_ROW_IS_REFERENCED_2`); in der Administration ein belegter Workspace, ein laufender Befehl oder einer ohne seine Vorschau |
+| `412`, `428` | Administration: jemand hat es seit dem Lesen geändert; ein Schreiben ohne die Version, die es ändert |
 | `413` | ein zu großer Body, eine zu große Antwort oder ein zu großes Skript |
+| `422` | Administration: das Schema wäre nicht gültig (`details.issues`, jeweils mit seiner Zeile) |
 | `429` | Rate Limit oder zu viele gleichzeitige Operationen auf dem Schema |
-| `503` | das Schema ist nicht `ready` (startet, im Fehlerzustand, startet neu); eine Source, die das Gateway nicht erreicht oder deren Verbindungsvariable nicht gesetzt ist (`ConnectionError`) |
+| `503` | das Schema ist nicht `ready` (`SchemaUnavailableError`: startet, im Fehlerzustand, startet neu); eine Source, die das Gateway nicht erreicht oder deren Verbindungsvariable nicht gesetzt ist (`ConnectionError`) |
+| `504` | die Operation dauerte länger als `server.timeout` (`TimeoutError`) |
 | *n* | ein Skript hat `throw { status: n, message }` ausgeführt (400–599) |
 | `500` | alles andere |

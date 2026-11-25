@@ -12,12 +12,14 @@ Each operation is available as a command of the CLI ([@lambdaorm/cli](https://ww
 | fetch       | compares both                | no                 | no                    |
 | introspect  | data file → schema → databases | yes              | yes                   |
 | incorporate | data file → schema → databases, then imports the data | yes | yes      |
+| migrate     | history → databases (goes back to a version) | no      | yes                   |
+| seed        | data files of the stage → databases | no          | yes                   |
 
 ## Push
 
 Push updates the sources (databases) with the schema, with the command `lambdaorm push`.
 
-Push compares the model with the databases themselves: it creates missing tables, adds and alters columns, renames the columns declared with `previousMapping`, and never drops what exists only in the database. `lambdaorm push -o <dir>` writes the DDL as one script per source (`<stage>.<source>.sql`) without applying it.
+Push compares the model with the databases themselves: it creates missing tables, adds and alters columns, renames the columns declared with `previousMapping`, and never drops what exists only in the database. A change that can lose data stops it unless `--allow-destructive` is given. `lambdaorm push -o <dir>` writes the DDL as one script per source (`<stage>.<source>.sql`) without applying it.
 
 [More information](SchemaSynchronization-Push.md)
 
@@ -44,3 +46,15 @@ Introspect updates the schema from the structure of a JSON data file and then pu
 Incorporate does the same as introspect and then imports the data of the file into the sources (databases), with the command `lambdaorm incorporate`.
 
 [More information](SchemaSynchronization-Incorporate.md)
+
+## Migrations
+
+Each push writes its DDL and the DDL that undoes it. With `infrastructure.migrations`, the database keeps the history of its migrations, and `lambdaorm migrate` lists them or goes back to a version.
+
+[More information](SchemaSynchronization-Migrations.md)
+
+## Seed
+
+Seed inserts the data a stage starts with (`stages[].seed`), with the command `lambdaorm seed` or `lambdaorm push --seed`. It only inserts the rows that are not there yet, so it can be run again.
+
+[More information](SchemaSynchronization-Seed.md)

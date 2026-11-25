@@ -58,7 +58,7 @@ Dieselbe Abfrage läuft auf jeder anderen Datenbank-Engine: Auf MySQL wird die P
 | delete | Löscht Datensätze; hat immer einen Filter. | DELETE mit WHERE | [Delete](Delete.md) |
 | deleteAll | Löscht alle Datensätze einer Entität. | DELETE ohne WHERE | [Delete](Delete.md) |
 
-- Es gibt keine Methode für Joins: Ein INNER JOIN wird abgeleitet, wenn die Abfrage eine Beziehung durchläuft, wie in `p.category.name` (siehe [Join](Join.md)).
+- Es gibt keine Methode für Joins: Ein INNER JOIN wird abgeleitet, wenn die Abfrage eine Beziehung durchläuft, wie in `p.category.name` (siehe [Join](Join.md)); liegt die verbundene Entität in einer anderen Quelle, wird die Abfrage quellenübergreifend gelöst (siehe [Abfragen über Quellen hinweg](CrossSource.md)).
 - Es gibt keine Methode für GROUP BY: Es wird abgeleitet, wenn eine Aggregatfunktion verwendet wird (siehe [Grouping](Grouping.md)).
 
 ## Operatoren {#operators}
@@ -79,13 +79,16 @@ Die Operatoren sind dieselben wie in JavaScript.
 |:--|:--|:--|
 | Numerisch | abs, ceil, cos, exp, ln, log, remainder, round, sign, sin, tan, trunc… | [Numeric](operatorsAndFunctions/Numeric.md) |
 | Zeichenkette | chr, lower, lpad, ltrim, replace, rpad, rtrim, substr, trim, upper, concat… | [String](operatorsAndFunctions/String.md) |
-| Datum/Uhrzeit | curTime, today, now, time, date, dateTime, year, month, day, weekday, hours… | [Datetime](operatorsAndFunctions/Datetime.md) |
-| Konvertierung | toString, toJson, toNumber | [String](operatorsAndFunctions/String.md) |
+| Datum/Uhrzeit | curTime, today, now, time, date, dateTime, year, month, day, weekday, hour… | [Datetime](operatorsAndFunctions/Datetime.md) |
+| Konvertierung | toString, toNumber | [String](operatorsAndFunctions/String.md) |
 | Nullable | nvl, nvl2, isNull, isNotNull | [Nullable](operatorsAndFunctions/Nullable.md) |
 | Allgemein | as, distinct | |
 | Sortierung | asc, desc | [Sort](operatorsAndFunctions/Sort.md) |
-| Bedingung | between, includes | [Comparison](operatorsAndFunctions/Comparison.md) |
+| Bedingung | between, in, includes | [Comparison](operatorsAndFunctions/Comparison.md) |
 | Gruppe | avg, count, first, last, max, min, sum | [Group](operatorsAndFunctions/Group.md) |
 | Metadaten | user, source | |
+| JSON | jsonHas, jsonSet, jsonIncludes (Pfade wie `p.meta.address.zip`) | [JSON, Vektoren und Punkte](JsonVectorsPoints.md) |
+| Vektoren | cosineDistance, l2Distance, innerProduct | [JSON, Vektoren und Punkte](JsonVectorsPoints.md#vectors) |
+| Geo | point, distance, within, inside | [JSON, Vektoren und Punkte](JsonVectorsPoints.md#points) |
 
 Die vollständige Referenz finden Sie unter [Operatoren & Funktionen](operatorsAndFunctions/OperatorsAndFunctions.md).

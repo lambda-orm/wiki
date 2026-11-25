@@ -5,6 +5,10 @@ entidades, apenas algumas propriedades, propriedades novas calculadas por uma ex
 uma máscara. Uma expressão com `options.view` é compilada contra **o domínio da sua visão**, como se fosse o único. O
 banco de dados não muda.
 
+Use uma visão para dar a cada tipo de usuário (suporte, analytics, um parceiro, uma API pública) apenas os dados que ele
+deve ver, sem um segundo modelo e sem visões no banco de dados. As chaves de `infrastructure.views` estão na
+[Definição](SchemaDefinition.md#view).
+
 ```yaml
 infrastructure:
   views:
@@ -39,7 +43,9 @@ esquema não a escreve) e não pode alterar entidades.
 | Uma propriedade do domínio com `readExp` | **Mascarada**: lida através da expressão, também em filtros e ordenações ("o que se vê é o que se filtra"); gravada com seu valor real |
 | Uma propriedade nova com `readExp` (e `type`) | Calculada na fonte; somente leitura |
 
-A chave primária e as chaves das relações que a visão mantém não podem ser excluídas. Uma visão que nomeia o que não
+A chave primária e as chaves das relações que a visão mantém não podem ser excluídas (para ocultar uma relação, exclua a
+entidade para a qual ela aponta). Uma propriedade oculta que é `required` e não tem `default` faz com que todo insert na
+visão falhe no banco de dados: dê a ela um `default`. Uma visão que nomeia o que não
 existe, um `readExp` que não compila ou um `type` inválido é um `SchemaError` quando o esquema é carregado.
 
 ## Dados pessoais (PII) {#personal-data-pii}
@@ -62,7 +68,15 @@ infrastructure:
     - { name: public, pii: exclude }
 ```
 
-O que a visão diz de uma propriedade prevalece sobre o seu `pii`; as chaves permanecem.
+| `pii` da propriedade | Máscara de `pii: mask` |
+| --- | --- |
+| `email` | `maskEmail` |
+| `phone`, `card`, `id` | `maskLeft(x, 4)` |
+| `name` | `maskRight(x, 1)` |
+| outro | `mask` |
+
+O que a visão diz de uma propriedade prevalece sobre o seu `pii`; as chaves permanecem. A visão `default` vê os dados
+pessoais como eles são.
 
 ## Funções de máscara {#mask-functions}
 
@@ -73,7 +87,7 @@ São funções da linguagem de consulta, traduzidas para cada banco de dados com
 | `mask(x)` | Um quarto de cada lado visível (no máximo 3), o resto `*`; com menos de 4 caracteres, tudo `*` |
 | `maskLeft(x, n)` / `maskRight(x, n)` | Tudo menos os últimos / os primeiros `n` |
 | `maskEmail(x)` | O primeiro caractere do usuário e o domínio: `f*****@x.com` |
-| `hash(x, key?)` | SHA-256 em hexadecimal; com uma chave, HMAC-SHA256 (PostgreSQL com `pgcrypto`). Não no MongoDB |
+| `hash(x, key?)` | SHA-256 em hexadecimal; com uma chave, HMAC-SHA256. Sem chave é traduzida no PostgreSQL, MySQL, MariaDB, SQL Server e Oracle; com chave, apenas no PostgreSQL (`pgcrypto`). No MongoDB e no SQLite é um erro quando a consulta é compilada |
 
 ## Toda a API {#the-whole-api}
 
@@ -81,5 +95,12 @@ São funções da linguagem de consulta, traduzidas para cada banco de dados com
 dá o domínio da visão; uma transação, seus scripts e listeners herdam a sua visão; um repositório aceita uma
 (`new CustomersRepository(stage, orm, view)`), e `lambdaorm build --view` gera o modelo e os repositórios de uma visão.
 
-As linhas que uma visão vê são limitadas pelo seu [filtro](Context.md). Quem escolhe a visão decide o que se vê: no Data
-Gateway, o gateway.
+## O que uma visão não restringe {#what-a-view-does-not-restrict}
+
+- **Quem escolhe a visão:** na biblioteca, quem a chama (pode pedir `default`); no Data Gateway, o gateway, a partir da
+  credencial ou das claims.
+- **As ações:** uma visão não é somente leitura; `insert`, `update` e `delete` sobre suas entidades são permitidos. Eles
+  são limitados pelas permissões do gateway ou pela aplicação.
+- **Os comandos do stage** (`push`, `pull`, `import`, `export`, `drop`, `truncate`) trabalham sobre o esquema inteiro: são
+  administração, não para quem usa uma visão.
+- **As linhas:** uma visão vê todas elas, a menos que seu [filtro](Context.md) as limite com o contexto.

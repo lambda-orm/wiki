@@ -431,6 +431,8 @@ Die verbundene Entität kann sich in einer anderen Quelle (einer anderen Datenba
 Orders.filter(p => p.id == id).include(p => p.lines.include(l => l.product.include(q => q.category)))
 ```
 
+Ein `map`, `sort` oder `having` kann Felder einer Beziehung in einer anderen Quelle auch ohne Include lesen (`Orders.map(p => [p.id, p.customer.name])`): λORM bindet die Beziehung selbst ein und beendet die Abfrage im Speicher. Siehe [Abfragen über Quellen hinweg](CrossSource.md).
+
 ### Nach einem Feld einer Beziehung in einer anderen Quelle filtern {#filter-by-a-field-of-a-relation-in-another-source}
 
 Ein Filter kann auch eine Eigenschaft einer Beziehung verwenden, deren Entität sich in einer anderen Quelle befindet. Zuerst wird die andere Quelle abgefragt, anschließend werden die gefundenen Schlüssel verwendet, um mit `in` zu filtern:
@@ -455,7 +457,7 @@ Jeder Vergleich wird einzeln ersetzt, sodass `&&`, `||` und `!` ihre Bedeutung b
 
 - Er lässt sich mit anderen Bedingungen kombinieren, auch mit `||`: `OrderLines.filter(p => p.orderId == orderId && (p.product.name == name || p.quantity > 100))`.
 - Gibt es in der anderen Quelle keinen Treffer, liefert die Abfrage keine Zeilen.
-- Es wird nur eine Beziehungsebene unterstützt (`p.product.name`, nicht `p.product.category.name`).
+- In einem Filter wird nur eine Beziehungsebene unterstützt (`p.product.name`, nicht `p.product.category.name`); ein `map` oder `sort` kann jede Ebene lesen (siehe [Abfragen über Quellen hinweg](CrossSource.md)).
 - Die andere Seite jedes Vergleichs muss ein Wert sein (ein Literal oder eine Variable). Ein Vergleich mit einer Eigenschaft, etwa `p.product.name == p.description`, schlägt mit einem Fehler fehl, der meldet, dass sich die Beziehung in einer anderen Quelle befindet.
 
 ## Codebeispiel {#code-example}

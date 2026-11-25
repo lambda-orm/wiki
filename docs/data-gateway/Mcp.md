@@ -113,15 +113,17 @@ and the permissions of the database user (the guarantee underneath). Every write
 | `GET {basePath}/{schema}/sse` + `POST {basePath}/{schema}/messages?sessionId=<id>` | HTTP+SSE (deprecated), with `legacySse: true` |
 | `GET {basePath}/status` | the state of the transport, the schemas and the open SSE sessions |
 
-Streamable HTTP is stateless by default (`stateful: false`): each `POST` stands alone and any replica answers it. The
-credential goes in every request.
+Streamable HTTP is stateless by default (`stateful: false`): each `POST` stands alone and any replica answers it.
+With `stateful: true` the server keeps a session per client (up to `maxConnections`), which needs session affinity with
+several replicas, as HTTP+SSE does. The credential goes in every request.
 
 ### mcpWebSocket
 
-An upgrade at `{basePath}/{schema}/mcp`, authenticated in the handshake; JSON-RPC 2.0 messages with the MCP methods
-(`initialize`, `ping`, `tools/list`, `tools/call`, `resources/list`, `resources/read`, …). It is not a standard MCP
-transport: it is offered for clients and gateways that support it on their own. Its AsyncAPI document is at
-`GET {basePath}/asyncapi`.
+An upgrade at `{basePath}/{schema}/mcp` with the subprotocol `mcp`, authenticated in the handshake (a browser sends
+the credential in the subprotocols, as in the [WebSocket API](Transports.md#websocket)); JSON-RPC 2.0 messages with the
+MCP methods (`initialize`, `ping`, `tools/list`, `tools/call`, `resources/list`, `resources/read`, …). It is not a
+standard MCP transport: it is offered for clients and gateways that support it on their own. Its AsyncAPI document is
+at `GET {basePath}/asyncapi` (and `/asyncapi.json`).
 
 ```json
 → { "jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": { "name": "orm_execute", "arguments": { "query": "Products.filter(p => p.price > 50).map(p => p.name)" } } }

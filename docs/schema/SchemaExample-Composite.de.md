@@ -524,7 +524,7 @@ In MongoDB werden die Positionen innerhalb jedes Dokuments der Collection `Order
 
 ### Orders in PostgreSQL {#orders-in-postgresql}
 
-In PostgreSQL werden die Bestellungen in der Tabelle `Orders` gespeichert:
+In PostgreSQL werden die Bestellungen in der Tabelle `orders` gespeichert (PostgreSQL schreibt einen Namen ohne Anführungszeichen klein; `Order Details` behält seine Schreibweise, weil das Leerzeichen Anführungszeichen verlangt):
 
 ![OrderCompositeInPostgres](images/OrderCompositeInPostgres.png)
 

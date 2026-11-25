@@ -1,6 +1,7 @@
 # Incorporate
 
 This page explains incorporate, which updates the schema from a JSON data file, pushes the changes to the sources (databases) and imports the data: the CLI command `lambdaorm incorporate` and the `orm.stage.incorporate()` method.
+Use it to load a data file into a database in one step, with the model deduced from the data.
 
 Incorporate:
 

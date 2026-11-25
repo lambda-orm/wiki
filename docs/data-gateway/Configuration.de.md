@@ -1,10 +1,14 @@
 # Konfiguration {#configuration}
 
-Alles wird in **einer YAML-Datei** konfiguriert, die in den Container eingebunden und nie in das Image eingebaut wird:
+Alles, was das Gateway tut, entscheidet **eine YAML-Datei**, die in den Container eingebunden und nie in das Image
+eingebaut wird: welche Schemas es unter welchen Routen bereitstellt, welche Transporte es öffnet, wer sie nutzen darf
+und mit welchen Limits. Diese Seite erklärt jeden Teil und endet mit der [Referenz](#reference) aller Schlüssel; der
+[Erste Schritte](GettingStarted.md) enthalten eine vollständige kleine Datei.
 
 - Pfad: `DATA_GATEWAY_CONFIG_PATH` (Standard `/config/data-gateway.config.yaml`). Sie ist **obligatorisch**: Ohne sie
-  protokolliert das Gateway den Fehler und beendet sich mit Code 1. Ein ungültiger Schlüssel oder Wert verhindert
-  ebenfalls den Start, mit der Liste der Probleme.
+  protokolliert das Gateway den Fehler und beendet sich mit Code 1. Ein ungültiger Wert (ein Port, der keine Zahl ist,
+  eine unbekannte Berechtigung oder ein unbekanntes Tool) verhindert ebenfalls den Start, mit der Liste der Probleme;
+  ein unbekannter Abschnitt oder Schlüssel wird gemeldet und ignoriert.
 - `$VAR` und `${VAR}` werden an jeder Stelle der Datei durch Umgebungsvariablen ersetzt, auch innerhalb eines Textes
   (`"${HOST}:${PORT}"`). Eine nicht definierte Variable gilt als **nicht gesetzt**: Ein Transport, dessen `port: $VAR`
   nicht definiert ist, wird nicht bereitgestellt; Zugangsdaten, deren Secret nicht definiert ist, verhindern den Start.
@@ -73,7 +77,9 @@ Die spezifischste Angabe gewinnt immer und **ersetzt** die anderen: Schema → T
 
 **Regeln:**
 
-- Mindestens eines von `orm.workspacePath` oder ein `orm.schemas[]` mit `workspace`, und mindestens ein Schema.
+- Mindestens eines von `orm.workspacePath` oder ein `orm.schemas[]` mit `workspace`. Mit `orm.watch` (dem Standard)
+  startet ein leeres Volume und wartet auf sein erstes Schema, und eine Anpassung eines Schemas, das noch nicht da ist,
+  wird gemeldet und angewendet, sobald es erscheint; ohne `orm.watch` muss mindestens ein Schema gefunden werden.
 - Zwei Schemas mit derselben Route oder eine Route, die Präfix einer anderen ist (`iot` und `iot/v1`), sind ein Fehler.
 - Jedes Segment einer Route: `[a-zA-Z0-9_.-]`, und keiner der reservierten Namen: `health`, `ping`, `metrics`, `version`,
   `schemas`, `mcp`, `sse`, `messages`, `status`, `doc`, `api-docs`, `swagger`, `asyncapi`, `ui`, `whoami`, `typings`, `admin`.
@@ -119,6 +125,7 @@ verbinden und wird mit dem Grund als `error` angezeigt; die anderen starten.
 
 ```yaml
 runtime:
+  transports: shared        # every transport in one edge worker (thread and process: not in this version)
   schemas: thread           # thread | process: one worker per schema (runtime.mode adjusts one schema)
   maxMemoryMb: 512          # JavaScript heap of each worker; above it, only that worker is restarted
   checkConnections: true    # at start each schema opens a connection of each source: a database down → error, retried
@@ -216,8 +223,31 @@ transports:
     port: $DATA_GATEWAY_WS_PORT
   management:                      # die API der IDE; ohne die Variable nicht bereitgestellt (Produktion)
     port: $DATA_GATEWAY_MANAGEMENT_PORT
+    trustedProxies: [ 10.0.0.0/8 ] # das Netz der IDE: ihr X-Forwarded-For liefert die Adresse des Browsers
     sessions: { idleTimeout: 30m, maxLifetime: 12h }
 ```
+
+## Beobachtbarkeit (OpenTelemetry) {#observability}
+
+**Nicht im Image 4.0.0: in der nächsten Version.** Der Abschnitt `observability` hat die Form von
+`infrastructure.observability` einer `lambdaORM.yaml` ([Beobachtbarkeit](../schema/Observability.md)), und die
+Standardvariablen `OTEL_*` haben Vorrang. Das Gateway startet das OpenTelemetry-SDK in jedem Worker vor λORM, sodass eine
+Anfrage, ihr Worker und die Sätze von λORM eine einzige Trace bilden.
+
+```yaml
+observability:
+  serviceName: data-gateway                              # der Standard; OTEL_SERVICE_NAME hat Vorrang
+  exporter: { type: otlp, endpoint: http://alloy:4318 }  # http/protobuf (oder http/json); kein gRPC
+  traces:
+    enabled: true
+    sampler: { ratio: 1, parentBased: true }
+  metrics: { enabled: true }                             # auch per OTLP; /metrics enthält sie ohnehin
+  logs:
+    adapters: [ { type: opentelemetry } ]                # das Audit und die Historie der Schemas
+```
+
+Die Header des Exporters enthalten Tokens: Sie gehören nur in `OTEL_EXPORTER_OTLP_HEADERS` (`exporter.headers` in der
+Datei verhindert den Start). Was sie liefert, steht in [Betrieb](Operations.md#opentelemetry).
 
 ## Referenz {#reference}
 
@@ -230,6 +260,7 @@ transports:
 | `admin.enabled` | — | **in 4.0.0 entfernt** (mit Warnung ignoriert): die [Administration](Admin.md) ist aktiv, wenn `transports.management` einen Port hat |
 | `admin.allowAnonymous` | `false` | mit `authentication: none` administriert jeder (nur lokale Entwicklung) |
 | `admin.commandTimeoutMs` / `maxFileBytes` | `600000` / `2MB` | wie lange ein Befehl dauern darf; die größte geschriebene Datei |
+| `runtime.transports` | `shared` | alle Transporte in einem Edge-Worker; `thread` und `process` werden gemeldet und laufen als `shared` |
 | `runtime.schemas` | `thread` | `thread` / `process` |
 | `runtime.maxMemoryMb` | `512` | pro Worker |
 | `runtime.checkConnections` | `true` | eine nicht erreichbare Datenbank lässt das Schema in `error` (mit erneuten Versuchen), statt bei der ersten Abfrage fehlzuschlagen |
@@ -237,7 +268,7 @@ transports:
 | `runtime.heartbeat.intervalMs` / `timeoutMs` | `5000` / `30000` | |
 | `runtime.restart.initialDelayMs` / `maxDelayMs` | `1000` / `300000` | wachsende Wartezeit zwischen Neustarts |
 | `runtime.env.isolate` / `passthrough` | `true` / `[]` | |
-| `server.timeout` | `120000` | pro HTTP-Anfrage, WebSocket-Nachricht und MCP-Tool-Aufruf |
+| `server.timeout` | `120000` | pro HTTP-Anfrage, WebSocket-Nachricht und MCP-Tool-Aufruf; darüber `504` |
 | `server.maxConcurrent` | `64` | gleichzeitige Operationen pro Schema; darüber `429`; `0` = kein Limit |
 | `server.requestBodySize` | `14MB` | |
 | `server.maxResponseBytes` | `256MB` | darüber `413`; `0` = kein Limit |
@@ -246,6 +277,7 @@ transports:
 | `audit.enabled` | `true` | das Audit von Schreibvorgängen ([Sicherheit](Security.md#audit)) |
 | `audit.includeData` | `false` | `true` fügt die Parameter (`data`) hinzu, die personenbezogene Daten enthalten können |
 | `authentication` | `{ adapter: none }` | [Sicherheit](Security.md) |
+| `authentication.header` | `X-Api-Key` | der Header von `type: apikey` |
 | `transports.<t>.authentication` | `authentication` | ersetzt die globale für diesen Transport |
 | `rateLimit.windowMs` / `rateLimit.max` | `30000` / `30` | nur `http`; `max: 0` deaktiviert es |
 | `scripts.enabled` | `false` | `POST /script` sowie das zugehörige Tool und die Methode |
@@ -257,14 +289,15 @@ transports:
 | `transports.<t>.port` | **keiner** | ohne Port wird der Transport nicht bereitgestellt |
 | `transports.<t>.host` | `0.0.0.0` | |
 | `transports.<t>.basePath` | `''` | ein Präfix vor der Route des Schemas (`/data-gateway`), hinter einem Ingress mit Pfad |
-| `transports.<t>.maxConnections` | `100` | `webSocket`, `mcpWebSocket` und das SSE von `mcpHttp` |
+| `transports.<t>.maxConnections` | `100` | `webSocket`, `mcpWebSocket` sowie die SSE-Streams und zustandsbehafteten Sitzungen von `mcpHttp` |
 | `transports.http.swagger.enabled` | `true` | `/doc` und `/api-docs` |
 | `transports.http.ui` | — | **in 4.0.0 entfernt** (mit Warnung ignoriert): die [UI](../ide/index.md) ist die data-gateway-ide |
 | `transports.management.port` | **keiner** | die API der [IDE](../ide/index.md) und die [Administration](Admin.md) ([Transporte](Transports.md#management)) |
-| `transports.management.sessions.idleTimeout` / `maxLifetime` | `30m` / `12h` | wann eine [Sitzung](Transports.md#sessions) endet: ohne Anfragen bzw. nach der Anmeldung |
+| `transports.management.sessions.idleTimeout` / `maxLifetime` | `30m` / `12h` | wann eine [Sitzung](Transports.md#sessions) endet: ohne Anfragen bzw. nach der Anmeldung; `30s`, `30m`, `12h`, `7d` oder Millisekunden |
 | `transports.management.sessions.maxPerCredential` | `0` | gleichzeitige Sitzungen pro Zugangsdaten; `0` = kein Limit; darüber schließt eine Anmeldung die älteste |
 | `transports.management.sessions.store` | `auto` | `auto`: `<orm.workspacePath>/.data-gateway/state.sqlite` (von den Replikas geteilt); `memory`: nur diese Replika |
 | `transports.management.trustedProxies` | `[]` | Adressen oder Netzwerke (CIDR), deren `X-Forwarded-For` geglaubt wird: die IDE, damit die Adresse des Browsers sichtbar ist |
 | `transports.mcpHttp.legacySse` | `true` | zusätzlich zu Streamable HTTP das ältere HTTP+SSE für ältere Clients |
 | `transports.mcpHttp.stateful` | `false` | zustandsloses Streamable HTTP: Jede Replika beantwortet jede Anfrage |
 | `transports.<ws>.asyncapi.enabled` | `true` | `GET /asyncapi` und `/asyncapi.json` von `webSocket` und `mcpWebSocket` |
+| `observability` | — | OpenTelemetry, [oben](#observability); nicht in 4.0.0 |

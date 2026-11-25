@@ -5,6 +5,10 @@ eliminan** desde ellas, como YAML o elemento por elemento, lo guardado (consulta
 los workspaces, y los **comandos de la [CLI](../cli/index.md)** corren desde la UI. Todo está en el volumen de la
 gateway, un workspace por esquema; la gateway ve lo que cambia y lo sirve sin reiniciar.
 
+Actívala donde las personas modelan los esquemas (desarrollo, un entorno compartido de modelado). En producción, cuando
+los esquemas llegan listos en el volumen, deja `management` fuera: los transportes de datos funcionan igual, y nada
+puede cambiar los esquemas ni la estructura de las bases a través de la gateway.
+
 ## Activarla {#turning-it-on}
 
 ```yaml
@@ -47,7 +51,7 @@ Cada carpeta bajo `orm.workspacePath` con un `lambdaORM.yaml` es un esquema, y s
   .env               las variables de sus conexiones
   workbench/         lo guardado: carpetas, *.query.yaml, *.script.yaml, *.diagram.yaml
   data/              exports
-  src/domain/        el código de build
+  src/domain/        el código de build (después de 4.0.0: src/<language>/domain/)
   orm_state/         el estado de λORM y el registro de cada comando
 ```
 
@@ -103,6 +107,7 @@ por esquema), desde el panel **Comandos** de la UI:
 
 | Comando | Antes de ejecutarlo, la UI muestra | Permiso |
 | --- | --- | --- |
+| `version` | — (las versiones de la gateway y del esquema) | `read` |
 | `fetch` | — (compara las bases con el modelo) | `read` |
 | `export` | — (se descarga, o se guarda en `data/`) | `read` |
 | `push` | las sentencias por source | `ddl` |
@@ -114,8 +119,21 @@ por esquema), desde el panel **Comandos** de la UI:
 | `build` | — (se escribe en `src/`, o se descarga como `.zip`) | `build` |
 
 Un comando que cambia las bases o el esquema ejecuta **exactamente la vista previa que se mostró**, una vez, dentro de
-10 minutos, y solo mientras el `lambdaORM.yaml` sea el mismo con que se hizo. Cada job deja su registro en
-`orm_state/jobs/`; `push`, `drop` e `import` se [auditan](Security.md#audit).
+10 minutos, y solo mientras el `lambdaORM.yaml` sea el mismo con que se hizo (si no, `409 PreviewRequiredError`); otro
+comando del mismo esquema mientras uno corre responde `409 BusyError`. Cada job deja su registro en
+`orm_state/jobs/`; `push`, `drop` e `import` se [auditan](Security.md#audit). `admin.commandTimeoutMs` (10 minutos)
+limita cuánto puede tardar uno.
+
+Por la API, un comando es una vista previa y después un job:
+
+```sh
+S="X-Data-Gateway-Session: $TOKEN"
+curl -X POST http://data-gateway:9090/admin/workspaces/~/commands/push/preview -H "$S" -H "Content-Type: application/json" -d '{"stage": "default"}'
+# {"previewId":"…","stage":"default","sentences":[…],"expiresAt":"…"}
+curl -X POST http://data-gateway:9090/admin/workspaces/~/commands/push -H "$S" -H "Content-Type: application/json" -d '{"stage": "default", "previewId": "…"}'
+# 202 {"id":"…","command":"push","status":"running",…}
+curl http://data-gateway:9090/admin/workspaces/~/jobs/<id> -H "$S"
+```
 
 ## Lo guardado {#what-is-saved}
 
@@ -123,6 +141,29 @@ Con `workbenchWrite`, las carpetas, consultas, scripts y diagramas del explorado
 workspace, un archivo por elemento, y los ve todo el que tiene acceso al esquema (se pueden versionar con git junto al
 esquema). Sin él, quedan en el navegador como antes. Un archivo escrito a mano también es un elemento; uno que no es
 YAML válido se muestra como tal y nunca se pisa.
+
+## Los stages y sus sources {#stages-and-their-sources}
+
+En un stage, cada source tiene una `condition`, una expresión que decide qué sentencias van a ella (el primer source
+cuya condición es verdadera; uno último sin condición toma el resto). El IDE la escribe con sugerencias y la gateway la
+verifica mientras se escribe (`/admin/expressions/check`): una condición que no parsea es un error del esquema, una
+variable que no es de una sentencia (`entity`, `action`, `category`, `type`, `read`, `write`, `dml`, `ddl`), una
+advertencia.
+
+## Los archivos y dónde estaba cada uno {#files-and-where-each-one-was}
+
+- Los archivos de `data/` y `src/` se pueden listar y leer (`/admin/workspaces/{route}/files`), nunca el `.env`,
+  `orm_state/` ni un archivo oculto.
+- Dónde estaba el IDE de cada credencial (sus pestañas y sus borradores, lo desplegado) lo guarda la gateway en
+  `<orm.workspacePath>/.data-gateway/state.sqlite` (`/admin/session`), así que un refresco u otro navegador empieza ahí.
+
+## En la próxima versión {#in-the-next-version}
+
+No está en la imagen 4.0.0: el **historial de un esquema** (cada cambio hecho por la administración, con quién, el
+antes, el después y el diff, en `logs/changes.jsonl` del workspace y `GET /admin/workspaces/{route}/history`), el
+**ruteo de un stage** (adónde va cada entidad, `…/stages/{stage}/routing`) y `build` por lenguaje
+(`src/<language>/domain/`), con solo el modelo o solo los repositorios, y un código generado descargado como zip o
+eliminado.
 
 ## Por MCP {#over-mcp}
 

@@ -2,36 +2,42 @@
 
 Eine Verbindung ist ein Gateway, mit dem die IDE arbeitet: die Adresse seines Ports `management` und Zugangsdaten. Die
 IDE hat weder Login noch Startseite: Sie behält ihre Verbindungen und öffnet sich beim ersten Mal mit einer **Neuen
-Verbindung**. Mehrere Verbindungen können gleichzeitig offen sein, jede mit ihren Schemas im Explorer und ihren Tabs
-nebeneinander.
+Verbindung**. Mehrere Verbindungen können gleichzeitig offen sein, jede mit ihren Schemas im [Explorer](Explorer.md)
+und ihren Tabs nebeneinander.
+
+Lege eine Verbindung pro Gateway und Zugangsdaten an, die du nutzt: eine lokale, die einer Testumgebung, dasselbe
+Gateway mit Zugangsdaten, die nur lesen, und mit anderen, die verwalten.
 
 ## Eine neue Verbindung {#a-new-connection}
 
-Das **+** von **Verbindungen** im Explorer oder das Menü ☰ → **Neue Verbindung**:
+Das **+** neben **Verbindungen**, oben im Explorer:
 
 | Feld | Was es ist |
 | --- | --- |
 | **Name** | wie die Verbindung angezeigt wird (`local`, `production`…) |
 | **Protokoll** | `REST · http` oder `REST · https` |
 | **Management-Adresse** | `host:port/base path` des `management` des Gateways, **so wie der Server der IDE es erreicht**: `data-gateway:9090` für eine Web-IDE im selben Compose, `localhost:9090` für die Desktop-App auf dem Rechner des Gateways |
-| **Authentifizierung** | **API-Schlüssel** (sein **Header**, standardmäßig `X-Api-Key`, und sein **Schlüssel**), **Bearer-Token**, **Basic (Benutzer und Passwort)** oder **Keine** |
+| **Authentifizierung** | **API-Schlüssel** (sein **Header**, standardmäßig `X-Api-Key`, und sein **Schlüssel**), **Bearer-Token** (sein **Token**), **Basic (Benutzer und Passwort)** oder **Keine** |
 | **Schlüssel in diesem Browser merken** | mit der Verbindung aufbewahrt; sonst nur in diesem Tab des Browsers, und nach dem Schließen erneut abgefragt |
-| **Andere URLs seiner Transporte** | die URLs seines REST, WebSocket und MCP, nur wenn die IDE sie nicht an den Ports erreicht, die das Gateway nennt (ein Proxy davor, ein anderes Netzwerk) |
+| **Andere URLs seiner Transporte** (eingeklappt) | die **REST-URL**, **WebSocket-URL** und **MCP-URL**, nur wenn die IDE sie nicht an den Ports erreicht, die das Gateway nennt (ein Proxy davor, ein anderes Netzwerk) |
+| **Beobachtbarkeit** (eingeklappt) | die **Grafana-URL** und ihre **Tempo-Datenquelle (uid)** (standardmäßig `tempo`): Eine Entität zeigt dann einen Link zu ihren Traces ([Entitäten](Entities.md)) |
 
 **Anzeigen** zeigt den eingegebenen Schlüssel. **Testen** öffnet eine Sitzung und schließt sie sofort wieder: `Verbunden
-als admin · data-gateway 4.0.0`, oder warum es nicht ging. **Verbinden** fügt die Verbindung hinzu.
+als admin · data-gateway 4.0.0`, oder warum es nicht ging. **Verbinden** fügt die Verbindung hinzu und öffnet ihre
+Seite.
 
 ![Neue Verbindung](images/ide-new-connection.png)
 
-Die Verbindung bleibt im Browser (in der Desktop-App in deren Daten); ihre Schemas, Workspaces und Projekte liegen im
-Gateway. Eine Verbindung zu entfernen entfernt sie nur aus der IDE: Im Gateway wird nichts entfernt.
+Die Verbindung bleibt im Browser (in der Desktop-App in deren Daten); ihre Schemas, Workspaces und das, was darin
+gespeichert ist, liegen im Gateway.
 
 ## Ihre Zeile im Explorer {#its-row-in-the-explorer}
 
 | Element | Was es tut |
 | --- | --- |
-| ✎ **Verbindung bearbeiten** | öffnet ihre Seite |
-| 🗑 **Entfernen** | fragt nach und entfernt sie aus der IDE |
+| ▸ | klappt ihre Schemas ein und aus |
+| ihr Name und ihre Adresse | öffnen ihre Seite |
+| ⟳ **Aktualisieren** | liest neu, was sich anderswo geändert hat: ihre Schemas, deren Domänen und das Gespeicherte |
 | ⚠ anstelle ihres Symbols | es gibt etwas zu sehen: der Mauszeiger darüber sagt was |
 
 Die Probleme, die sie meldet, in Rot unter ihrem Namen:
@@ -46,30 +52,33 @@ Die Probleme, die sie meldet, in Rot unter ihrem Namen:
 
 ## Ihre Seite {#its-page}
 
-✎ öffnet **Verbindung: Name** mit vier Tabs.
+Ein Klick auf ihren Namen öffnet **Verbindung: Name**, mit vier Tabs.
 
 ### Verbindung {#connection}
 
 Das Formular oben, mit **Speichern** (sie unverändert zu speichern verbindet sie erneut, nach einem Widerruf) und
-**Entfernen**. Darunter, wer die Zugangsdaten sind: ihr Name, die URL und ihre Authentifizierung.
+**Entfernen**, das vorher fragt und sie nur aus der IDE entfernt: Im Gateway wird nichts entfernt, und ihre Tabs
+schließen sich. Unter dem Formular, wer die Zugangsdaten sind: ihr Name, die URL und ihre Authentifizierung.
 
 ### Werkzeuge {#tools}
 
-Die REST API, WebSocket und MCP des Gateways, jedes in einem eigenen Tab, mit den Zugangsdaten der Verbindung. Ein
-Transport, den das Gateway nicht anbietet, ist deaktiviert. Die IDE erfährt vom Gateway, wo sie sind (`GET /transports`
+**REST-API (Swagger)**, **WebSocket** und **MCP**: die Transporte des Gateways, jeder in einem eigenen Tab geöffnet
+(`REST API · northwind`…), mit den Zugangsdaten der Verbindung. Ein Transport, den das Gateway nicht anbietet, ist
+deaktiviert (`von diesem data-gateway nicht angeboten`). Die IDE erfährt vom Gateway, wo sie sind (`GET /transports`
 seines `management`), oder aus **Andere URLs seiner Transporte**.
 
 | Werkzeug | Was es enthält |
 | --- | --- |
 | **REST-API (Swagger)** | die OpenAPI des Gateways, jede Methode mit **Try it out**; die Zugangsdaten gehen mit jeder Anfrage mit |
-| **WebSocket** | ein **Schema**, **Verbinden** / **Trennen**, seine Methoden (aus seiner AsyncAPI: ein Klick füllt die Anfrage), die **Anfrage** (JSON-RPC) mit **Senden** (Strg+Enter) und die gesendeten und empfangenen **Nachrichten** (die letzten 200) |
-| **MCP** | ein **Schema** und **Verbinden**, dann seine **Tools des Schemas**: wenn eines gewählt ist, seine **Argumente** (mit den erforderlichen gefüllt), **Aufrufen** (Strg+Enter) und sein **Ergebnis** |
+| **WebSocket** | ein **Schema**, **Verbinden** / **Trennen**, seine **Methoden** (aus seiner AsyncAPI: ein Klick füllt die Anfrage), die **Anfrage** (JSON-RPC) mit **Senden** (Strg+Enter) und die gesendeten und empfangenen **Nachrichten** (die letzten 200) |
+| **MCP** | ein **Schema** und **Verbinden**, dann die **Tools des Schemas**: wenn eines gewählt ist, seine **Argumente** (mit den erforderlichen gefüllt), **Aufrufen** (Strg+Enter) und sein **Ergebnis** |
 
 ![Werkzeuge](images/ide-connection-tools.png)
 
 ### Rollen {#roles}
 
-Was die Zugangsdaten dürfen: jede Berechtigung, **erteilt** oder **nicht erteilt**, mit dem, was sie erlaubt.
+Was die Zugangsdaten dürfen, in zwei Gruppen, **Daten** und **Verwaltung**, jede mit der Anzahl der erteilten
+(`1 / 5`): jede Berechtigung, **erteilt** oder **nicht erteilt**, mit dem, was sie erlaubt.
 
 | Berechtigung | Erlaubt |
 | --- | --- |
@@ -79,11 +88,11 @@ Was die Zugangsdaten dürfen: jede Berechtigung, **erteilt** oder **nicht erteil
 | `queue` | Abfragen in die Warteschlange stellen, um sie später auszuführen |
 | `stageImport` | Daten in einen Stage importieren |
 | `schemaRead` | die `lambdaORM.yaml` jedes Workspace lesen (ohne Geheimnisse) und prüfen |
-| `schemaWrite` | die `lambdaORM.yaml` ändern: Entitäten, Quellen, Stages…, über die Formulare oder das YAML |
+| `schemaWrite` | die `lambdaORM.yaml` ändern: Entitäten, Sources, Stages…, über die Formulare oder das YAML |
 | `schemaAdmin` | Schemas anlegen und entfernen, die Variablen ihrer `.env` setzen |
 | `workbenchWrite` | Abfragen, Skripte und Diagramme in den Projekten der Workspaces speichern |
 | `ddl` | die Struktur der Datenbanken eines Stage ändern (push, drop) |
-| `build` | den Code der Domäne in `src/` des Workspace erzeugen |
+| `build` | den Code der Domäne (Modell und Repositories) in `src/` des Workspace erzeugen |
 | `sessionAdmin` | alle Sitzungen von `management` sehen und die anderer Zugangsdaten widerrufen |
 
 ![Rollen](images/ide-connection-roles.png)
@@ -99,13 +108,15 @@ behält das Token in diesem Tab des Browsers, und jede Anfrage trägt es, nie de
 - Wenn die Sitzung **abläuft** (30 Minuten ohne Aktivität, oder 12 Stunden) und der Schlüssel zur Hand ist, öffnet die
   IDE von selbst eine neue; ohne ihn fragt sie nach dem Schlüssel.
 - Wenn sie **widerrufen** wird, sagt die IDE, wer sie widerrufen hat, und verbindet sich nicht von selbst wieder, auch
-  nicht mit gemerktem Schlüssel: die Verbindung erneut zu speichern verbindet sie.
-- Die IDE hält den WebSocket der Ereignisse des Gateways offen: die Sitzung erscheint als *verbunden* (ein grüner ●),
-  und ein Schema, das sich ändert, oder etwas, das jemand anderes gespeichert hat, erscheint sofort.
+  nicht mit gemerktem Schlüssel: Die Verbindung erneut zu speichern verbindet sie.
+- Die IDE hält den WebSocket der Ereignisse des Gateways offen: Die Sitzung erscheint als *verbunden* (ein grüner ●),
+  und ein Schema, das sich ändert, oder etwas, das jemand anderes gespeichert hat, erscheint sofort. Eine Änderung aus
+  einer anderen Sitzung (eine andere Person, eine andere IDE, die CLI über das Gateway) wird unter der Verbindung
+  angekündigt, `modeler hat Orders in / geändert`, mit **Aktualisieren**.
 
 **Meine Sitzungen** listet die Sitzungen derselben Zugangsdaten: diese (**diese**) und die anderen (ein anderer Tab,
-Browser oder Computer), jede mit ihrem Client, ihrer Adresse, was sie gerade ansieht, ihrer letzten Aktivität und wann
-sie abläuft. **Schließen** schließt eine; **Die anderen schließen** alle außer dieser.
+Browser oder Computer), jede mit ihrem Client, ihrer Adresse, was sie gerade ansieht (ihr Schema und ihr aktiver Tab),
+ihrer letzten Aktivität und wann sie abläuft. **Schließen** schließt eine; **Die anderen schließen** alle außer dieser.
 
 Mit `sessionAdmin` listet **Aktive Sitzungen** jede Sitzung des Gateways nach Zugangsdaten: **Widerrufen** eine, oder
 **Alle widerrufen** von Zugangsdaten (vorher gefragt; bei deinen bleibt diese Sitzung).

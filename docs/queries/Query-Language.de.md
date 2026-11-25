@@ -4,7 +4,7 @@ Diese Seite stellt die Abfragesprache von λORM vor: wie eine Abfrage aussieht, 
 
 λORM-Abfragen werden als [JavaScript-Lambda-Ausdrücke](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) über die Entitäten der Domäne geschrieben. Sie können sie als TypeScript-/JavaScript-Code schreiben und dabei durch die Entitäten des Modells navigieren, oder sie als Zeichenkette senden (zum Beispiel aus der [CLI](../cli/index.md) oder an das [Data Gateway](../data-gateway/index.md)).
 
-λORM übersetzt jede Abfrage in die Sprache der Datenbank-Engine jeder Quelle (SQL für MySQL, MariaDB, PostgreSQL, SQL Server, Oracle und SQLite oder MongoDB-Abfragen).
+λORM übersetzt jede Abfrage in die Sprache der Datenbank-Engine jeder Quelle (SQL für MySQL, MariaDB, PostgreSQL, SQL Server, Oracle und SQLite MongoDB-Aggregations-Pipelines oder HTTP-Anfragen an eine REST-API für eine [Http-Quelle](../schema/HttpSource.md)). Eine Abfrage kann auch Entitäten verschiedener Quellen kombinieren: siehe [Abfragen über Quellen hinweg](CrossSource.md).
 
 ## Abfragetypen {#query-types}
 
@@ -12,7 +12,7 @@ Diese Seite stellt die Abfragesprache von λORM vor: wie eine Abfrage aussieht, 
 
 DQL-Abfragen (Data Query Language) rufen Daten ab. Sie können so einfach sein wie das Lesen aller Datensätze einer Entität, oder sie können die Datensätze filtern, sortieren, gruppieren und paginieren, Werte daraus berechnen und verbundene Entitäten laden.
 
-**Siehe:** [Select](Select.md), [Join](Join.md), [Grouping](Grouping.md), [Include](Include.md)
+**Siehe:** [Select](Select.md), [Join](Join.md), [Grouping](Grouping.md), [Include](Include.md), [JSON, Vektoren und Punkte](JsonVectorsPoints.md), [Abfragen über Quellen hinweg](CrossSource.md)
 
 ### DML {#dml}
 

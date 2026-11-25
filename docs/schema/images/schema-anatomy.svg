@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <title>The schema of λORM: the domain, the infrastructure, and how a query reaches each source</title>
+  <style>
+    .bg { fill: #ffffff } .t { fill: #111827 } .s { fill: #4b5563 } .m { fill: #6b7280 }
+    .q { fill: #f1f5f9; stroke: #64748b } .code { fill: #0f172a }
+    .dom { fill: #eef2ff; stroke: #6366f1 } .domt { fill: #3730a3 } .chip { fill: #ffffff; stroke: #a5b4fc }
+    .view { fill: #f5f3ff; stroke: #8b5cf6 } .viewt { fill: #5b21b6 }
+    .inf { fill: #fffbeb; stroke: #d97706 } .inft { fill: #92400e } .ichip { fill: #ffffff; stroke: #fcd34d }
+    .stg { fill: #ecfdf5; stroke: #10b981 } .stgt { fill: #065f46 }
+    .src { fill: #fff7ed; stroke: #f97316 }
+    .ln { stroke: #64748b } .hd { fill: #64748b }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #0f172a } .t { fill: #e5e7eb } .s { fill: #9ca3af } .m { fill: #9ca3af }
+      .q { fill: #1e293b; stroke: #94a3b8 } .code { fill: #e2e8f0 }
+      .dom { fill: #1e1b4b; stroke: #818cf8 } .domt { fill: #a5b4fc } .chip { fill: #0f172a; stroke: #6366f1 }
+      .view { fill: #2e1065; stroke: #a78bfa } .viewt { fill: #c4b5fd }
+      .inf { fill: #422006; stroke: #f59e0b } .inft { fill: #fcd34d } .ichip { fill: #0f172a; stroke: #b45309 }
+      .stg { fill: #064e3b; stroke: #34d399 } .stgt { fill: #6ee7b7 }
+      .src { fill: #431407; stroke: #fb923c }
+      .ln { stroke: #94a3b8 } .hd { fill: #94a3b8 }
+    }
+  </style>
+  <rect class="bg" width="1000" height="560"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="hd" d="M0 0L10 5L0 10z"/></marker>
+  </defs>
+
+  <!-- the query -->
+  <rect class="q" x="250" y="16" width="500" height="54" rx="10"/>
+  <text class="m" x="270" y="38" font-size="11">your application writes a query against the domain</text>
+  <text class="code" x="270" y="58" font-size="14" font-family="ui-monospace, Menlo, monospace">States.filter(p =&gt; p.country.name == "Spain")</text>
+
+  <!-- domain -->
+  <rect class="dom" x="16" y="96" width="460" height="176" rx="12"/>
+  <text class="domt" x="36" y="124" font-size="16" font-weight="700">domain</text>
+  <text class="s" x="36" y="143" font-size="12">the business model: no table, column or engine in it</text>
+  <g font-size="12">
+    <rect class="chip" x="36" y="158" width="128" height="44" rx="8"/>
+    <text class="t" x="100" y="178" text-anchor="middle" font-weight="600">entities</text>
+    <text class="s" x="100" y="194" text-anchor="middle" font-size="11">properties · keys</text>
+    <rect class="chip" x="176" y="158" width="128" height="44" rx="8"/>
+    <text class="t" x="240" y="178" text-anchor="middle" font-weight="600">relations</text>
+    <text class="s" x="240" y="194" text-anchor="middle" font-size="11">country · states</text>
+    <rect class="chip" x="316" y="158" width="140" height="44" rx="8"/>
+    <text class="t" x="386" y="178" text-anchor="middle" font-weight="600">enums</text>
+    <text class="s" x="386" y="194" text-anchor="middle" font-size="11">constraints · defaults</text>
+    <rect class="chip" x="36" y="212" width="200" height="44" rx="8"/>
+    <text class="t" x="136" y="232" text-anchor="middle" font-weight="600">abstract · extends</text>
+    <text class="s" x="136" y="248" text-anchor="middle" font-size="11">shared properties</text>
+    <rect class="chip" x="248" y="212" width="208" height="44" rx="8"/>
+    <text class="t" x="352" y="232" text-anchor="middle" font-weight="600">composite entities</text>
+    <text class="s" x="352" y="248" text-anchor="middle" font-size="11">Orders.details</text>
+  </g>
+
+  <!-- views and application -->
+  <rect class="view" x="16" y="290" width="460" height="112" rx="12"/>
+  <text class="viewt" x="36" y="318" font-size="16" font-weight="700">views · application</text>
+  <text class="s" x="36" y="340" font-size="12">what each role sees: hidden or masked properties,</text>
+  <text class="s" x="36" y="357" font-size="12">row filters with the context (context.tenant), PII</text>
+  <text class="s" x="36" y="381" font-size="12">named queries · listeners · outbox of data changes</text>
+
+  <!-- infrastructure -->
+  <rect class="inf" x="524" y="96" width="460" height="306" rx="12"/>
+  <text class="inft" x="544" y="124" font-size="16" font-weight="700">infrastructure</text>
+  <text class="s" x="544" y="143" font-size="12">where and how the data is kept</text>
+  <g font-size="12">
+    <rect class="ichip" x="544" y="158" width="420" height="52" rx="8"/>
+    <text class="t" x="560" y="179" font-weight="600">mappings</text>
+    <text class="s" x="560" y="198" font-size="11">entity → table, property → column: States → TBL_STATES, id → ID</text>
+    <rect class="ichip" x="544" y="220" width="420" height="52" rx="8"/>
+    <text class="t" x="560" y="241" font-weight="600">sources</text>
+    <text class="s" x="560" y="260" font-size="11">a dialect, a mapping and a connection (secrets in ${VARIABLES})</text>
+    <rect class="stg" x="544" y="282" width="420" height="104" rx="8"/>
+    <text class="stgt" x="560" y="304" font-weight="700">stages</text>
+    <text class="s" x="560" y="322" font-size="11">which source each sentence goes to, by a rule:</text>
+    <text class="t" x="572" y="344" font-size="12" font-family="ui-monospace, Menlo, monospace">entity == "States"</text><text class="t" x="740" y="344" font-size="12" font-family="ui-monospace, Menlo, monospace">→ dataSource2</text>
+    <text class="t" x="572" y="364" font-size="12" font-family="ui-monospace, Menlo, monospace">the rest</text><text class="t" x="740" y="364" font-size="12" font-family="ui-monospace, Menlo, monospace">→ dataSource1</text>
+    <text class="s" x="560" y="380" font-size="11">dev, test, prod · read and write apart (CQRS)</text>
+  </g>
+
+  <!-- sources -->
+  <g font-size="13">
+    <rect class="src" x="100" y="460" width="150" height="56" rx="10"/>
+    <text class="t" x="175" y="484" text-anchor="middle" font-weight="700">MySQL</text>
+    <text class="s" x="175" y="503" text-anchor="middle" font-size="11">Countries</text>
+    <rect class="src" x="290" y="460" width="150" height="56" rx="10"/>
+    <text class="t" x="365" y="484" text-anchor="middle" font-weight="700">PostgreSQL</text>
+    <text class="s" x="365" y="503" text-anchor="middle" font-size="11">TBL_STATES</text>
+    <rect class="src" x="480" y="460" width="150" height="56" rx="10"/>
+    <text class="t" x="555" y="484" text-anchor="middle" font-weight="700">MongoDB</text>
+    <text class="s" x="555" y="503" text-anchor="middle" font-size="11">documents</text>
+    <rect class="src" x="670" y="460" width="150" height="56" rx="10"/>
+    <text class="t" x="745" y="484" text-anchor="middle" font-weight="700">REST API</text>
+    <text class="s" x="745" y="503" text-anchor="middle" font-size="11">Http source</text>
+    <text class="m" x="500" y="545" text-anchor="middle" font-size="11">also SQL Server, Oracle, MariaDB and SQLite · one query can read several of them</text>
+  </g>
+
+  <g class="ln" stroke-width="1.6" fill="none" marker-end="url(#a)">
+    <path d="M400 70V94"/>
+    <path d="M600 70V94"/>
+    <path d="M476 184H522" stroke-dasharray="4 3"/>
+    <path d="M600 402C600 432 185 420 175 458"/>
+    <path d="M640 402C640 432 375 424 365 458"/>
+    <path d="M680 402C680 430 560 428 555 458"/>
+    <path d="M720 402C720 430 742 428 745 458"/>
+  </g>
+  <text class="m" x="499" y="178" text-anchor="middle" font-size="10">mapped</text>
+</svg>

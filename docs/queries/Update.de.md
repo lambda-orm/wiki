@@ -78,6 +78,25 @@ Orders.update({ name: entity.name }).filter(p => p.id === entity.id)
 UPDATE Orders o SET ShipName = ? WHERE o.OrderID = ?
 ```
 
+## Einen Pfad einer json-Eigenschaft aktualisieren {#update-a-path-of-a-json-property}
+
+Um einen Wert innerhalb einer `json`-Eigenschaft zu ändern, ohne das ganze json zu senden, verwenden Sie `jsonSet(json, path, value)`. Der Rest des json bleibt unverändert.
+
+**Lambda:**
+
+```typescript
+Customers.update(p => ({ meta: jsonSet(p.meta, "address.city", city) })).filter(p => p.id == id)
+```
+
+**SQL-Ergebnis:**
+
+```sql
+UPDATE Customers c SET meta = JSON_SET(COALESCE(c.meta, JSON_OBJECT()), '$.address.city', CAST(? AS JSON))
+WHERE c.id = ?
+```
+
+Die Übersetzung für jede Engine steht unter [JSON, Vektoren und Punkte](JsonVectorsPoints.md#write-a-path).
+
 ## Aktualisieren mit einer verbundenen Entität {#update-with-a-related-entity}
 
 Aktualisiert den Namen einer Bestellung und für jede übermittelte Position alle Eigenschaften der Position. Jede Position wird über ihren Primärschlüssel gefiltert.
@@ -207,7 +226,7 @@ ON CONFLICT (order_id,line) DO UPDATE SET product = EXCLUDED.product, quantity =
 DELETE FROM order_lines WHERE order_id = $1 AND NOT ((order_id = $2 AND line = $3) OR (order_id = $4 AND line = $5))
 ```
 
-Dies wird auf PostgreSQL, MySQL, MariaDB, SQL Server und Oracle unterstützt (die beiden letzteren ab `@lambdaorm/lib` 3.5.0), die die Kindelemente mit [upsert](Insert.md#upsert) speichern. Auf MongoDB sind die Kompositions-Kindelemente in das Dokument des Elternelements eingebettet und werden daher dort ersetzt.
+Dies wird auf PostgreSQL, MySQL, MariaDB, SQL Server und Oracle (die beiden letzteren ab `@lambdaorm/lib` 3.5.0) sowie auf SQLite (ab 3.15.0) unterstützt, die die Kindelemente mit [upsert](Insert.md#upsert) speichern. Auf MongoDB sind die Kompositions-Kindelemente in das Dokument des Elternelements eingebettet und werden daher dort ersetzt.
 
 Um nur die gesendeten Kindelemente zu aktualisieren (ohne Einfügen oder Löschen), binden Sie die Beziehung mit einem expliziten Update ein: `Orders.update().include(p => p.lines.update(l => ({ quantity: quantity })))`. Darin ist `quantity` der für jedes Kindelement gesendete Wert (siehe [Felder der verbundenen Entität aktualisieren](#update-fields-of-the-related-entity)).
 

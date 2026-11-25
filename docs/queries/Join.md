@@ -3,7 +3,7 @@
 This page shows how λORM reads properties of related entities. There is no join method: when a query uses a property through a relation, such as `p.category.name`, λORM adds the join that the relation defines in the schema. The SQL shown is the one generated for MySQL.
 
 !!! note
-    A join needs both entities in the same source. To read related entities that are in another source, use [Include](Include.md); to filter by a property of a relation in another source, see [Filter by a field of a relation in another source](Include.md#filter-by-a-field-of-a-relation-in-another-source).
+    A join needs both entities in the same source. When the relation goes to an entity in another source, the same query still works: λORM reads each source with its own statement and joins the rows in memory (see [Queries across sources](CrossSource.md)). To load the related entities as nested objects, use [Include](Include.md).
 
 ## Simple join
 

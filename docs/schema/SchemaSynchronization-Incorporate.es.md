@@ -1,6 +1,7 @@
 # Incorporate {#incorporate}
 
 Esta página explica incorporate, que actualiza el esquema a partir de un archivo de datos JSON, aplica los cambios a las fuentes (bases de datos) e importa los datos: el comando de la CLI `lambdaorm incorporate` y el método `orm.stage.incorporate()`.
+Úsalo para cargar un archivo de datos en una base de datos en un solo paso, con el modelo deducido de los datos.
 
 Incorporate:
 

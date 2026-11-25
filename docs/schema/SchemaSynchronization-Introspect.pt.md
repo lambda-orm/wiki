@@ -1,6 +1,7 @@
 # Introspect {#introspect}
 
 Esta página explica o introspect, que atualiza o esquema a partir da estrutura de um arquivo de dados JSON e depois envia as alterações para as fontes (bancos de dados): o comando da CLI `lambdaorm introspect` e o método `orm.stage.introspect()`.
+Use-o para começar um modelo a partir de dados que você já tem (uma exportação, a resposta de uma API) em vez de escrever as entidades à mão.
 
 O introspect:
 

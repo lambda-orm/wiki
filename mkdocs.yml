@@ -69,7 +69,7 @@ plugins:
             Entities: Entitäten
             Query wizard: Abfrage-Assistent
             Diagrams: Diagramme
-            Projects: Projekte
+            Workbench: Workbench
             Deploying: Bereitstellung
             In your own application: In deiner eigenen Anwendung
             Queries: Abfragen
@@ -142,7 +142,7 @@ plugins:
             Entities: Entidades
             Query wizard: Asistente de consultas
             Diagrams: Diagramas
-            Projects: Proyectos
+            Workbench: Workbench
             Deploying: Despliegue
             In your own application: En tu propia aplicación
             Queries: Consultas
@@ -218,7 +218,7 @@ plugins:
             Entities: Entidades
             Query wizard: Assistente de consultas
             Diagrams: Diagramas
-            Projects: Projetos
+            Workbench: Workbench
             Deploying: Implantação
             In your own application: Na sua própria aplicação
             Queries: Consultas
@@ -308,7 +308,7 @@ nav:
       - Queries: ide/Queries.md
       - Query wizard: ide/QueryWizard.md
       - Diagrams: ide/Diagrams.md
-      - Projects: ide/Projects.md
+      - Workbench: ide/Projects.md
       - Administration: ide/Administration.md
       - Deploying: ide/Deploying.md
       - In your own application: ide/Embedding.md
@@ -378,10 +378,10 @@ nav:
       - Commands:
           - Init: cli/Commands/Init.md
           - Build: cli/Commands/Build.md
-          - Sync: cli/Commands/Sync.md
           - Push: cli/Commands/Push.md
           - Seed: cli/Commands/Seed.md
           - Migrate: cli/Commands/Migrate.md
+          - Schema: cli/Commands/Schema.md
           - Drop: cli/Commands/Drop.md
           - Fetch: cli/Commands/Fetch.md
           - Import: cli/Commands/Import.md

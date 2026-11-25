@@ -1,11 +1,23 @@
 # Entidades {#entities}
 
-Cada entidad del dominio tiene un formulario, como una tabla en un IDE de bases de datos: un clic en su fila del
-[explorador](Explorer.md) lo abre en su propia pestaña.
+Cada entidad del dominio tiene una vista, como una tabla en un IDE de bases de datos: sus propiedades, sus relaciones,
+sus claves, sus restricciones, sus filas, su diagrama y el historial de sus cambios. Un clic en su fila del
+[explorador](Explorer.md) la abre en su propia pestaña; un enlace a otra entidad (una relación, una referencia) abre
+esa.
 
-Su cabecera tiene el nombre de la entidad, su esquema, y **abstracta**, **vista** o **extiende Entity** cuando lo es;
-**Editar** (con `schemaWrite`, su formulario de [administración](Administration.md#forms)) y **Consultar**, que abre
-una pestaña de consulta con `Entity.page(1, 10)`.
+Su cabecera tiene el nombre de la entidad, su esquema, y **abstracta**, **vista** o **extiende Entity** cuando lo es.
+Sus botones:
+
+| Botón | Hace | Necesita |
+| --- | --- | --- |
+| **Ver trazas** | abre las trazas de esta entidad en Grafana (Tempo, filtradas por `lambdaorm.entity`) | la **Observabilidad** de la [conexión](Connections.md#a-new-connection) |
+| **Eliminar** | dice qué usa la entidad y, confirmado, la elimina del esquema | `schemaWrite` |
+| **Editar** | abre su [formulario](Administration.md#forms), ya en edición: **Cancelar** o **Guardar** vuelven a esta vista | `schemaWrite` |
+| **Consultar** | abre una pestaña de consulta con `Entity.page(1, 10)` (no en una entidad abstracta) | |
+
+Debajo de la cabecera, sus pestañas: **Propiedades (n)**, **Relaciones (n)**, **Claves e índices**,
+**Restricciones (n)**, **Datos**, **Diagrama** e **Historial**.
+El número de **Relaciones** incluye las relaciones de otras entidades que apuntan a esta (**Referenciada por**), así que puede ser mayor que el del explorador.
 
 ## Propiedades {#properties}
 
@@ -16,26 +28,43 @@ una pestaña de consulta con `Entity.page(1, 10)`.
 | **Tipo** | `string`, `integer`, `decimal`, `dateTime`…, o el enum del que toma sus valores (`Status (enum)`) |
 | **Largo** | de un string |
 | **Obligatoria** | ✓ cuando no puede ser nula |
-| **PK** | ✓ en la clave primaria (`U` cuando además es única) |
+| **PK** | ✓ en la clave primaria (`U` cuando además está en la clave única) |
 | **Auto** | ✓ cuando la base de datos da su valor |
 | **Por defecto** | su valor por defecto |
 | **Referencia a** | para una clave foránea, la entidad y la propiedad a la que referencia: un enlace a esa entidad |
-| **Expresiones** | las expresiones que la leen o la escriben |
+| **Expresiones** | **ƒ Expresión** cuando tiene expresiones o la usan restricciones |
 
 ![Propiedades](images/ide-entity-properties.png)
 
+Un clic en **ƒ Expresión** muestra, debajo de la tabla, las expresiones de esa propiedad con los colores del editor,
+cada una con lo que hace, y las restricciones cuya condición la usa:
+
+| Expresión | Qué hace |
+| --- | --- |
+| `readExp` | reemplaza la columna al leer: λORM la traduce a la consulta (`mask(email)`) |
+| `writeExp` | pensada para lo que se escribe en la columna (λORM todavía no la aplica: usa `writeValue`) |
+| `readValue` | transforma cada valor después de leerlo, en el gateway (`decrypt(email, $DATA_SECRET_KEY)`) |
+| `writeValue` | transforma cada valor antes de escribirlo, en el gateway (`encrypt(email, $DATA_SECRET_KEY)`) |
+
 ## Relaciones {#relations}
 
-**Relaciones** lista sus relaciones: nombre, tipo (`oneToMany`: a una, como un pedido a su cliente; `manyToOne`: a muchas, como un pedido a sus líneas; `oneToOne`; λORM las nombra desde el lado de la otra entidad), la entidad
-a la que llegan, los campos que unen (**Desde**, **Hasta**), la cardinalidad (`N — 1`, `1 — N`) y si es débil.
-**Referenciada por** lista las relaciones de otras entidades que llegan a esta. Cada entidad es un enlace a su
-formulario.
+**Relaciones** lista sus relaciones: nombre, tipo (`oneToMany`: a una, como un pedido a su cliente; `manyToOne`: a
+muchas, como un pedido a sus líneas; `oneToOne`; λORM las nombra desde el lado de la otra entidad), la entidad a la que
+llegan, los campos que unen (**Desde**, **Hasta**), la cardinalidad (`N — 1`, `1 — N`) y si es débil.
+**Referenciada por** lista las relaciones de otras entidades que llegan a esta. Cada entidad es un enlace a su vista.
+El contador de la pestaña suma ambas.
 
 ![Relaciones](images/ide-entity-relations.png)
 
 ## Claves e índices {#keys-and-indexes}
 
-La clave primaria, la clave única, los índices con sus campos, y las restricciones con su mensaje y su condición.
+La clave primaria, la clave única, y los índices con sus campos.
+
+## Restricciones {#constraints}
+
+Las condiciones que λORM comprueba antes de cada insert y update (después de `writeValue`): una condición falsa
+rechaza la sentencia con su mensaje. Cada una con su **Mensaje**, su **Condición** con los colores del editor y las
+**Propiedades que usa**.
 
 ## Datos {#data}
 
@@ -48,7 +77,15 @@ Una entidad abstracta no tiene datos.
 ## Diagrama {#diagram}
 
 La entidad y sus vecinas, solo lectura. La caja **entidad** centra el diagrama en otra, y la profundidad va de
-**vecinas** a **2 niveles** o **todo el modelo**. Un clic en una caja la centra; un doble clic abre su formulario. El
-resto del diagrama (zoom, mostrar, exportar) es como en [Diagramas](Diagrams.md).
+**vecinas** a **2 niveles** o **todo el modelo**. Un clic en una caja la centra; un doble clic abre su vista. El resto
+del diagrama (zoom, mostrar, outline, exportar) es como en [Diagramas](Diagrams.md).
 
 ![Diagrama](images/ide-entity-diagram.png)
+
+## Historial {#history}
+
+Con `schemaRead` (el gateway guarda el historial de sus esquemas desde data-gateway 4.1.0): los cambios de esta
+entidad, los más nuevos primero, con **Cuándo**, **Quién** (la credencial y su cliente: el IDE, la CLI) y **Qué**.
+Un clic en un cambio muestra sus **Cambios** (`+` agregado, `-` quitado, `~` reemplazado) y la entidad **Antes** y
+**Después**; **Cambios anteriores** lee más. El esquema entero también tiene su historial
+([Administración](Administration.md#history)).

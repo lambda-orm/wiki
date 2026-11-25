@@ -114,12 +114,15 @@ Um arquivo de repositório é gerado para cada entidade, por exemplo `repository
 import { Repository, IOrm } from '@lambdaorm/lib'
 import { Country, QryCountry } from './model'
 export class CountryRepository extends Repository<Country, QryCountry> {
-	constructor (stage?: string, orm?:IOrm) {
-		super('Countries', stage, orm)
+	constructor (stage?: string, orm?:IOrm, view?: string) {
+		super('Countries', stage, orm, view)
 	}
 	// Add your code here
 }
 ```
+
+Com `--view <name>`, o `build` gera o modelo e os repositórios dessa [view](Views.md): apenas suas entidades e propriedades, e repositórios que a usam.
+Quando o esquema tem [consultas nomeadas](SchemaDefinition.md#named-query) (`application.queries`), o `build` também escreve `queries.ts`, com o tipo do resultado de cada consulta e uma função que a executa (veja [Consultas tipadas](../usage/TypedQueries.md)).
 
 ## Definir o esquema {#set-schema}
 

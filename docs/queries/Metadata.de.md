@@ -164,3 +164,5 @@ Eine Anweisung für die Bestellungen und, als deren Kind, eine für die Position
   ]
 }
 ```
+
+Wenn eine Abfrage Felder einer Beziehung in einer anderen Quelle liest, enthält der Plan zusätzlich `inMemory`, die Schritte, die nach den Anweisungen im Speicher laufen (zum Beispiel `["map", "sort"]`); siehe [Abfragen über Quellen hinweg](CrossSource.md#see-the-plan).

@@ -431,6 +431,8 @@ La entidad relacionada puede estar en otra fuente (otra base de datos u otro esq
 Orders.filter(p => p.id == id).include(p => p.lines.include(l => l.product.include(q => q.category)))
 ```
 
+Un `map`, un `sort` o un `having` también pueden leer campos de una relación en otra fuente sin un include (`Orders.map(p => [p.id, p.customer.name])`): λORM incluye la relación por ti y termina la consulta en memoria. Ver [Consultas entre fuentes](CrossSource.md).
+
 ### Filtrar por un campo de una relación en otra fuente {#filter-by-a-field-of-a-relation-in-another-source}
 
 Un filtro también puede usar una propiedad de una relación cuya entidad está en otra fuente. Primero se consulta la otra fuente, y después las claves encontradas se usan para filtrar con `in`:
@@ -455,7 +457,7 @@ Cada comparación se reemplaza por separado, por lo que `&&`, `||` y `!` mantien
 
 - Se puede combinar con otras condiciones, también con `||`: `OrderLines.filter(p => p.orderId == orderId && (p.product.name == name || p.quantity > 100))`.
 - Cuando la otra fuente no tiene coincidencias, la consulta no devuelve filas.
-- Solo se admite un nivel de relación (`p.product.name`, no `p.product.category.name`).
+- En un filtro solo se admite un nivel de relación (`p.product.name`, no `p.product.category.name`); un `map` o un `sort` pueden leer cualquier nivel (ver [Consultas entre fuentes](CrossSource.md)).
 - El otro lado de cada comparación debe ser un valor (un literal o una variable). Comparar con una propiedad, como en `p.product.name == p.description`, falla con un error que indica que la relación está en otra fuente.
 
 ## Ejemplo de código {#code-example}

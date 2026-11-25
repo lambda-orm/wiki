@@ -1,6 +1,7 @@
 # Definition {#definition}
 
 Diese Seite ist die Referenz der Schema-Datei (`lambdaORM.yaml`): ihre Struktur und jeder Schlüssel ihrer Abschnitte `domain`, `application` und `infrastructure`, jeweils mit einem Beispiel.
+Verwenden Sie sie, wenn Sie ein Schema schreiben oder prüfen; für einen ersten Kontakt beginnen Sie mit [Verwendung des Schemas](Schema-Use.md) und dem [einfachen Beispiel](SchemaExample-Basic.md).
 
 Das Schema enthält die gesamte Konfiguration, die das ORM benötigt. Es trennt das Geschäftsmodell (**Domäne**) von der Persistenz der Daten (**Infrastruktur**):
 
@@ -15,6 +16,9 @@ Alle Ausdrücke, mit denen Bedingungen und Aktionen definiert werden, werden von
 ## Struktur {#structure}
 
 ```yaml
+name: string
+description: string
+version: string
 domain:
   enums:
     - name: string
@@ -34,13 +38,14 @@ domain:
       required: string[]
       properties:
         - name: string
-          type: string | integer | decimal | boolean | dateTime | date | time | json
+          type: string | integer | decimal | boolean | dateTime | date | time | json | point | vector
           length: number
           required: boolean
           autoIncrement: boolean
           view: boolean
           enum: string
           key: string
+          pii: email | phone | card | id | name | string
           default: expression
           readExp: expression
           readValue: expression
@@ -48,18 +53,22 @@ domain:
       indexes:
         - name: string
           fields: string[]
+          type: string
+          distance: cosine | l2 | ip
       relations:
         - name: string
           type: oneToMany | manyToOne | oneToOne
-          from: string
+          from: string | string[]
           entity: string
-          to: string
+          to: string | string[]
           composite: boolean
           weak: boolean
           target: string
       constraints:
         - message: string
           condition: expression
+      observability:
+        trace: expression
 application:
   start:
     - name: string
@@ -77,6 +86,10 @@ application:
       after: expression
       error: expression
       transactional: boolean
+  queries:
+    - name: string
+      description: string
+      query: expression
 infrastructure:
   mappings:
     - name: string
@@ -88,6 +101,7 @@ infrastructure:
           extends: string
           sequence: string
           filter: expression
+          http: object
           properties:
             - name: string
               mapping: string
@@ -96,27 +110,44 @@ infrastructure:
               previousMapping: string
   sources:
     - name: string
-      dialect: MySQL | MariaDB | PostgreSQL | Oracle | SqlServer | MongoDB | SQLjs
+      dialect: MySQL | MariaDB | PostgreSQL | Oracle | SqlServer | MongoDB | SQLjs | Http
       mapping: string
-      connection: object | environment variable
+      connection: object | string | environment variable
   stages:
     - name: string
       sources:
         - name: string
           condition: expression
+      seed: string[]
   views:
     - name: string
+      pii: mask | hash | exclude
       entities:
         - name: string
           exclude: boolean
+          filter: expression
           properties:
             - name: string
               exclude: boolean
               readExp: expression
+              default: expression
+              type: string
+              length: number
+              description: string
   paths:
     src: string
     state: string
     domain: string
+    logs: string
+  outbox:
+    entities: string[]
+    actions: string[]
+    condition: expression
+    maxAttempts: number
+  migrations: {}
+  crossSource:
+    maxRows: number
+  observability: object
   queue:
     config: object
     consumers:
@@ -128,11 +159,14 @@ infrastructure:
 
 ## Hauptabschnitte {#main-sections}
 
-| Schlüssel      | Beschreibung                                                        |
-|:---------------|:--------------------------------------------------------------------|
-| domain         | Das Geschäftsmodell: Enums und Entitäten.                           |
-| application    | Tasks, die beim Start und Ende des ORM ausgeführt werden, sowie Listener. |
-| infrastructure | Wie und wo die Daten gespeichert werden: Mappings, Quellen, Stages, Views. |
+| Schlüssel      | Beschreibung                                                                                 |
+|:---------------|:---------------------------------------------------------------------------------------------|
+| name           | Ein Name für Menschen (λORM verwendet ihn nicht).                                            |
+| description    | Wofür das Schema gedacht ist (λORM verwendet es nicht).                                      |
+| version        | Die Version des Schemas.                                                                     |
+| domain         | Das Geschäftsmodell: Enums und Entitäten.                                                    |
+| application    | Tasks, die beim Start und Ende des ORM ausgeführt werden, Listener und benannte Abfragen.     |
+| infrastructure | Wie und wo die Daten gespeichert werden: Mappings, Quellen, Stages, Sichten sowie die optionalen Dienste (Outbox, Migrationen, Observability). |
 
 ## Domäne {#domain}
 
@@ -197,8 +231,8 @@ domain:
 
 Eine Entität wird mit ihren Eigenschaften, Beziehungen und Constraints definiert.
 
-| Schlüssel   | Beschreibung                                                                                      | Erforderlich |
-|-------------|---------------------------------------------------------------------------------------------------|:--------:|
+| Schlüssel     | Beschreibung                                                                                      | Erforderlich |
+|---------------|---------------------------------------------------------------------------------------------------|:--------:|
 | name        | Name der Entität. Ein Name mit Punkt (`Orders.details`) definiert eine [Komposit-Entität](SchemaDefinition-Composite.md). | ja |
 | properties  | Eigenschaften der Entität.                                                                        | ja       |
 | abstract    | Die Entität wird nur als Basis für andere Entitäten verwendet (für sie wird keine Tabelle erstellt). |       |
@@ -208,11 +242,12 @@ Eine Entität wird mit ihren Eigenschaften, Beziehungen und Constraints definier
 | primaryKey  | Eigenschaften des Primärschlüssels.                                                               |          |
 | uniqueKey   | Eigenschaften des Unique Keys.                                                                    |          |
 | required    | Erforderliche Eigenschaften (dasselbe wie `required: true` bei jeder von ihnen).                  |          |
-| indexes     | Indizes (`name` und `fields`).                                                                    |          |
+| indexes     | Indizes (siehe [Index](#index)).                                                                  |          |
 | relations   | Beziehungen zu anderen Entitäten.                                                                 |          |
 | constraints | Constraints, die beim Schreiben eines Datensatzes validiert werden.                               |          |
+| observability | `trace`: eine Bedingung, die anstelle der Trace-Regeln entscheidet, welche ihrer Anweisungen als Trace aufgezeichnet werden (siehe [Observability](Observability.md)). |  |
 
-Die Eigenschaften des Primärschlüssels und des Unique Keys sind erforderlich, sofern nicht anders angegeben.
+Die Eigenschaften des Primärschlüssels und des Unique Keys sind erforderlich, sofern nicht anders angegeben; eine `autoIncrement`-Eigenschaft ist nie erforderlich (die Datenbank liefert ihren Wert).
 
 #### Abstract und extends in der Entität {#abstract-and-extends-in-entity}
 
@@ -246,6 +281,7 @@ Eine Entität muss nicht abstrakt sein, um erweitert zu werden. Siehe [Erweitern
 
 Dieses Beispiel definiert die Entität **Users** als View, da ihre Tabelle von einem externen System verwaltet wird.
 Push erstellt keine Tabelle für eine View-Entität, und die Stage-Befehle ändern sie nicht.
+(Gemeint ist eine Tabelle oder View der Datenbank; die [Sichten des Schemas](Views.md), `infrastructure.views`, sind etwas anderes.)
 
 ```yaml
 domain:
@@ -272,9 +308,9 @@ domain:
 |---------------|-------------------------------------------------------------------------------------|:--------:|:----------:|
 | name          | Name der Eigenschaft.                                                               | ja       |            |
 | type          | Typ der Eigenschaft (siehe [Eigenschaftstypen](#property-types)).                   |          | string     |
-| length        | Länge einer String-Eigenschaft.                                                     |          | siehe unten |
+| length        | Länge einer String-Eigenschaft oder die Dimensionen eines `vector`.                 |          | siehe unten |
 | required      | Die Eigenschaft darf nicht null sein.                                               |          | false      |
-| autoIncrement | Der Wert wird von der Datenbank generiert.                                          |          | false      |
+| autoIncrement | Der Wert wird von der Datenbank generiert (oder von der API, bei einer Http-Quelle). |          | false      |
 | enum          | Name des Enums, zu dem der Wert gehören muss.                                       |          |            |
 | view          | Die Eigenschaft wird nicht gespeichert: Ihr Wert stammt aus `readExp`.              |          | false      |
 | default       | Ausdruck, den λORM auswertet, um den Wert beim Einfügen eines Datensatzes zu setzen. |         |            |
@@ -282,28 +318,35 @@ domain:
 | readValue     | Ausdruck, den λORM auf den aus der Quelle gelesenen Wert anwendet.                  |          |            |
 | writeValue    | Ausdruck, den λORM auf den Wert anwendet, bevor er geschrieben wird.                |          |            |
 | key           | Fester Wert, der zum Filtern von Lese- und Aktualisierungsvorgängen verwendet und beim Einfügen gesetzt wird. | |   |
+| pii           | Die Art personenbezogener Daten, die sie enthält (`email`, `phone`, `card`, `id`, `name` oder ein anderes Wort), damit eine Sicht sie maskieren, hashen oder ausschließen kann (siehe [Personenbezogene Daten](Views.md#personal-data-pii)). |  |  |
 
 #### Eigenschaftstypen {#property-types}
 
 | Typ       | Wert in Node             | Von push erstellte Spalte (standardmäßig)                                                  |
 |-----------|--------------------------|--------------------------------------------------------------------------------------------|
-| string    | string                   | `VARCHAR(length)`; ohne `length`: `TEXT` auf PostgreSQL, `VARCHAR(80)` auf anderen Datenbank-Engines |
+| string    | string                   | `VARCHAR(length)`; ohne `length`: `TEXT` auf PostgreSQL, `VARCHAR(80)` auf den anderen Datenbank-Engines (Oracle `VARCHAR2`) |
 | integer   | number                   | `INTEGER` (Oracle `NUMBER(10)`)                                                            |
 | decimal   | number                   | `DECIMAL(10,4)` (Oracle `NUMBER(19,4)`)                                                    |
 | boolean   | boolean                  | `BOOLEAN` (SqlServer `BIT`, Oracle `CHAR(1)`)                                              |
-| dateTime  | Date                     | `TIMESTAMP` (PostgreSQL), `DATETIME` (MySQL, MariaDB, SqlServer), `DATE` (Oracle)          |
+| dateTime  | Date                     | `TIMESTAMP` (PostgreSQL), `DATETIME` (MySQL, MariaDB, SqlServer, SQLite), `DATE` (Oracle)  |
 | date      | Date                     | `DATE` (SqlServer `SMALLDATETIME`)                                                         |
 | time      | Date                     | `TIME` (Oracle `DATE`)                                                                     |
-| json      | Objekt oder Liste        | `JSONB` (PostgreSQL), `JSON` (MySQL, MariaDB), `NVARCHAR(MAX)` (SqlServer), `CLOB` (Oracle), `TEXT` (andere) |
+| json      | Objekt oder Liste        | `JSONB` (PostgreSQL), `JSON` (MySQL, MariaDB, SQLite), `NVARCHAR(MAX)` (SqlServer), `CLOB` (Oracle) |
+| point     | GeoJSON `Point`          | `geography(Point, 4326)` (PostgreSQL mit PostGIS), `POINT SRID 4326` (MySQL), `POINT` (MariaDB), `geography` (SqlServer), `SDO_GEOMETRY` (Oracle mit Spatial), `TEXT` (SQLite, ohne die Geo-Funktionen) |
+| vector    | number[]                 | `vector(length)` (PostgreSQL mit pgvector), `VECTOR(length)` (MariaDB 11.7, SQL Server 2025), `VECTOR(length, FLOAT32)` (Oracle 23ai); nicht auf MySQL, SQLite oder MongoDB |
 
-- **json**: Objekte und Listen werden als solche geschrieben und gelesen (`JSON.stringify` oder `JSON.parse` müssen nicht aufgerufen werden).
+Auf MongoDB wird jeder Wert als Feld des Dokuments gespeichert (ein `point` als GeoJSON).
+
+- **json**: Objekte und Listen werden als solche geschrieben und gelesen (`JSON.stringify` oder `JSON.parse` müssen nicht aufgerufen werden). Eine Abfrage kann einen Pfad darin lesen und schreiben (`p.meta.address.city`); siehe [JSON, Vektoren und Punkte](../queries/JsonVectorsPoints.md).
+- **point**: ein GeoJSON-Punkt, `{ "type": "Point", "coordinates": [longitude, latitude] }`, der als solcher geschrieben und gelesen wird; er wird mit `distance`, `within` und `inside` verwendet.
+- **vector**: eine Liste von Zahlen, deren Dimensionen ihre `length` sind (zum Beispiel die 1536 eines Embeddings); er wird mit `cosineDistance`, `l2Distance` und `innerProduct` verwendet.
 - **dateTime**: Auf PostgreSQL wird der Wert mit Millisekunden und seinem Offset geschrieben, sodass eine Spalte `timestamptz` (siehe `dbType` im [Eigenschafts-Mapping](#property-mapping)) den exakten Zeitpunkt behält.
 - **String ohne Länge**: Auf PostgreSQL ist er unbegrenzt (`TEXT`); auf den anderen Datenbank-Engines ist er `VARCHAR(80)`. Setzen Sie daher `length`, wenn ein Wert länger sein kann.
 - `''`, `0` und `false` sind Werte, niemals NULL (Oracle ist die Ausnahme: Es speichert `''` als NULL).
 
 Siehe auch [Datenbank-Engines](Engines.md) für die Unterschiede zwischen den Datenbank-Engines.
 
-In diesem Beispiel hat `name` keine Länge, `settings` ist ein JSON-Objekt und `createdAt` ein Datum mit Uhrzeit:
+In diesem Beispiel hat `name` keine Länge, `settings` ist ein JSON-Objekt, `createdAt` ein Datum mit Uhrzeit, `location` ein Punkt und `embedding` ein Vektor mit 1536 Dimensionen:
 
 ```yaml
 domain:
@@ -320,6 +363,11 @@ domain:
           type: json                # { "color": "red", "tags": ["a", "b"] } in and out as an object
         - name: createdAt
           type: dateTime
+        - name: location
+          type: point               # { "type": "Point", "coordinates": [-58.38, -34.6] }
+        - name: embedding
+          type: vector
+          length: 1536
 ```
 
 #### Eigenschaft als View und readExp festlegen {#set-property-as-view-and-readexp}
@@ -350,6 +398,7 @@ domain:
 ```
 
 **readExp** kann auch bei einer gespeicherten Eigenschaft gesetzt werden: Der Ausdruck wird beim Lesen angewendet, beim Schreiben ändert sich nichts.
+Da er in die Sprache der Quelle übersetzt wird, kann er nur Funktionen verwenden, die λORM übersetzt (`concat`, `substring`, `upper`, `iif`…).
 
 #### Standardwert einer Eigenschaft {#default-value-in-property}
 
@@ -372,6 +421,8 @@ domain:
           length: 32
           required: true
 ```
+
+Ein `default` kann auch den [Kontext](Context.md) dessen lesen, der die Abfrage ausführt, zum Beispiel `default: context.tenant`.
 
 #### Lese- und Schreibwert einer Eigenschaft {#read-and-write-value-in-property}
 
@@ -458,14 +509,46 @@ infrastructure:
           extends: Locations
 ```
 
+### Index {#index}
+
+| Schlüssel | Beschreibung                                                                                      | Erforderlich |
+|----------|---------------------------------------------------------------------------------------------------|:--------:|
+| name     | Name des Index.                                                                                   | ja       |
+| fields   | Eigenschaften des Index.                                                                          | ja       |
+| type     | Eine Indexart der Datenbank-Engine: `hnsw` oder `ivfflat` für einen Vektor, `spatial` für einen Punkt. |   |
+| distance | Die Distanz eines Vektorindex: `cosine`, `l2` oder `ip`.                                          |          |
+
+Push erstellt jeden Index mit der Vorlage des Dialekts für seinen `type` (und seine `distance`); ein Dialekt ohne diese Vorlage unterstützt ihn nicht. Derzeit gibt es `hnsw` auf PostgreSQL, MariaDB und Oracle, `ivfflat` nur auf PostgreSQL und `spatial` auf PostgreSQL (GIST), MySQL, MariaDB und SQL Server.
+
+```yaml
+domain:
+  entities:
+    - name: Documents
+      primaryKey: ["id"]
+      indexes:
+        - { name: ix_title, fields: [title] }
+        - { name: ix_embedding, fields: [embedding], type: hnsw, distance: cosine }
+      properties:
+        - { name: id, type: integer, autoIncrement: true }
+        - { name: title, length: 200 }
+        - { name: embedding, type: vector, length: 1536 }
+    - name: Stores
+      primaryKey: ["id"]
+      indexes:
+        - { name: ix_location, fields: [location], type: spatial }
+      properties:
+        - { name: id, type: integer, autoIncrement: true }
+        - { name: location, type: point, required: true }
+```
+
 ### Beziehung {#relation}
 
 | Schlüssel | Beschreibung                                                                                        | Erforderlich | Standard  |
 |-----------|-----------------------------------------------------------------------------------------------------|:--------:|:---------:|
 | name      | Name der Beziehung.                                                                                 | ja       |           |
-| from      | Eigenschaft dieser Entität.                                                                         | ja       |           |
+| from      | Eigenschaft dieser Entität oder eine Liste von Eigenschaften für eine Beziehung über mehrere Felder. | ja       |           |
 | entity    | Verknüpfte Entität.                                                                                 | ja       |           |
-| to        | Eigenschaft der verknüpften Entität.                                                                | ja       |           |
+| to        | Eigenschaft der verknüpften Entität oder eine Liste mit ebenso vielen Eigenschaften wie `from`.     | ja       |           |
 | type      | Typ der Beziehung (siehe unten).                                                                    |          | oneToMany |
 | composite | Die verknüpften Datensätze sind Teil dieser Entität (siehe [Komposit-Entität](SchemaDefinition-Composite.md)). |  | false     |
 | weak      | Push erstellt keinen Fremdschlüssel für die Beziehung (zum Beispiel zwischen Entitäten in verschiedenen Quellen). | | false     |
@@ -479,7 +562,20 @@ Der Typ der Beziehung bestimmt, was sie zurückgibt:
 | manyToOne | Viele Datensätze von `entity` verweisen auf diesen Datensatz.        | eine Liste      |
 | oneToOne  | Ein Datensatz dieser Entität steht in Beziehung zu einem Datensatz von `entity`. | ein Objekt |
 
+Beachten Sie, dass die Namen angeben, wie viele Datensätze **dieser** Entität es für jeden Datensatz von `entity` gibt: Eine Bestellung hat eine `oneToMany`-Beziehung zu ihrem Kunden (viele Bestellungen, ein Kunde), und der Kunde eine `manyToOne`-Beziehung zu seinen Bestellungen.
 `manyToOne`-Beziehungen sind immer weak.
+
+#### Beziehung über mehrere Felder {#relation-of-several-fields}
+
+Hat der Schlüssel der verknüpften Entität mehr als ein Feld, sind `from` und `to` Listen gleicher Länge, die der Reihe nach gepaart werden:
+
+```yaml
+relations:
+  - name: area
+    from: [locationId, areaId]
+    entity: Areas
+    to: [locationId, code]
+```
 
 #### Target-Beziehung {#target-relation}
 
@@ -579,6 +675,7 @@ domain:
 | start     | Tasks, die bei der Initialisierung des ORM ausgeführt werden (`orm.init()`). |
 | end       | Tasks, die beim Schließen des ORM ausgeführt werden (`orm.end()`). |
 | listeners | Ausdrücke, die vor oder nach einer Abfrage oder bei deren Fehlschlag ausgeführt werden. |
+| queries   | Benannte Abfragen der Anwendung, deren Typen und Funktionen `lambdaorm build` generiert. |
 
 ### Task {#task}
 
@@ -604,23 +701,45 @@ Jeder Task von `start` und `end` hat:
 
 Wie Listener ausgeführt werden und welche Argumente sie erhalten, erfahren Sie unter [Listener](SchemaExample-Listener.md).
 
+### Benannte Abfrage {#named-query}
+
+| Schlüssel   | Beschreibung                                                     | Erforderlich |
+|-------------|------------------------------------------------------------------|:--------:|
+| name        | Name der Abfrage: ein Bezeichner, eindeutig im Schema.           | ja       |
+| query       | Der Abfrageausdruck; seine Variablen sind seine Parameter.       | ja       |
+| description | Was die Abfrage zurückgibt; geht in den Kommentar ihres Typs ein. |         |
+
+Die Abfragen werden beim Laden des Schemas validiert (eine Abfrage, die nicht kompiliert, ist ein Fehler), und `lambdaorm build` schreibt `queries.ts` neben `model.ts`, mit dem Typ des Ergebnisses jeder Abfrage, dem Typ ihrer Parameter und einer Funktion, die sie ausführt. Siehe [Typisierte Abfragen](../usage/TypedQueries.md).
+
+```yaml
+application:
+  queries:
+    - name: deviceWithType
+      description: a device with its type and category
+      query: 'Devices.filter(p => p.code == code).include(p => p.deviceType.include(t => t.category))'
+```
+
 ## Infrastruktur {#infrastructure}
 
-| Schlüssel | Beschreibung                                                                |
-|----------|-----------------------------------------------------------------------------|
-| mappings | Wie die Entitäten auf die Tabellen oder Collections der Datenbanken abgebildet werden. |
-| sources  | Die Datenbanken und ihre Verbindungen.                                      |
-| stages   | Szenarien, die entscheiden, aus welcher Quelle jede Entität gelesen und in welche sie geschrieben wird. |
-| views    | Views, die die Ergebnisse der Abfragen einschränken oder verändern.         |
-| paths    | Ordner, in die generierte Dateien und der Zustand des ORM geschrieben werden. |
-| queue    | Kafka-Queue, verwendet vom [Data Gateway](../data-gateway/index.md).        |
+| Schlüssel     | Beschreibung                                                                |
+|---------------|-----------------------------------------------------------------------------|
+| mappings      | Wie die Entitäten auf die Tabellen oder Collections der Datenbanken (oder die Routen einer API) abgebildet werden. |
+| sources       | Die Datenbanken (oder REST-APIs) und ihre Verbindungen.                     |
+| stages        | Szenarien, die entscheiden, aus welcher Quelle jede Entität gelesen und in welche sie geschrieben wird, sowie die Daten, mit denen sie beginnen. |
+| views         | Arten, die Domäne zu sehen: nur einige Entitäten und Eigenschaften, maskierte oder berechnete Eigenschaften, gefilterte Zeilen. |
+| paths         | Ordner, in die generierte Dateien, der Zustand des ORM und die Logs geschrieben werden. |
+| outbox        | Die in derselben Transaktion geschriebenen Änderungen der Daten, damit ein Dispatcher sie zustellt. |
+| migrations    | Die Historie der Migrationen in der Datenbank, für `lambdaorm migrate`.     |
+| crossSource   | Die Zeilengrenze einer Abfrage, deren Felder aus mehreren Quellen stammen.  |
+| observability | Logs, Metriken und Traces mit OpenTelemetry (siehe [Observability](Observability.md)). |
+| queue         | Kafka-Queue, verwendet vom [Data Gateway](../data-gateway/index.md).        |
 
 Werden einige davon weggelassen, ergänzt λORM sie:
 
 - Ohne `mappings` wird ein leeres Mapping erstellt (benannt nach der Quelle, wenn es nur eine Quelle gibt).
 - Eine Quelle ohne `mapping` verwendet das erste Mapping.
 - Ohne `stages` wird ein Stage namens `default` mit der ersten Quelle erstellt.
-- Ohne `views` wird eine View namens `default` ohne Einschränkungen erstellt.
+- Die Sicht `default`, die die Domäne ohne Einschränkungen ist, existiert immer.
 
 ### Mapping {#mapping}
 
@@ -638,11 +757,12 @@ Nicht aufgeführte Entitäten und Eigenschaften werden auf eine Tabelle oder Spa
 | Schlüssel  | Beschreibung                                                 | Erforderlich | Standard        |
 |------------|--------------------------------------------------------------|:--------:|:---------------:|
 | name       | Name der Entität.                                            | ja       |                 |
-| mapping    | Name der Tabelle oder Collection in der Datenbank.           |          | der Name der Entität |
+| mapping    | Name der Tabelle oder Collection in der Datenbank; bei einer Http-Quelle ihre Route (`/invoices`). |  | der Name der Entität |
 | abstract   | Das Entitäts-Mapping wird nur als Basis für andere verwendet. |         |                 |
 | extends    | Name des Entitäts-Mappings, von dem dieses erbt.             |          |                 |
 | sequence   | Name der Sequenz, mit der die Werte generiert werden.        |          |                 |
-| filter     | Ausdruck, der die Datensätze der Tabelle filtert.            |          |                 |
+| filter     | Ausdruck, der die Datensätze der Tabelle filtert, für jede Sicht. Er kann den [Kontext](Context.md) lesen. |  |  |
+| http       | Bei einer Http-Quelle, was von der REST-Konvention abweicht (siehe [Eine REST-API als Quelle](HttpSource.md)). |  |  |
 | properties | Eigenschafts-Mappings.                                       |          |                 |
 
 ##### Abstract und extends im Entitäts-Mapping {#abstract-and-extends-in-entity-mapping}
@@ -677,7 +797,7 @@ infrastructure:
 
 ##### Filter im Entitäts-Mapping {#filter-in-entity-mapping}
 
-Der Filter eines Entitäts-Mappings wird auf jede Abfrage der Entität angewendet.
+Der Filter eines Entitäts-Mappings wird jedem Select, Update und Delete der Entität, den Joins über eine Beziehung und den Includes hinzugefügt.
 Dieses Beispiel liest die Benutzer der Tabelle **user_entity**, die zu einer bestimmten **realmId** gehören.
 
 ```yaml
@@ -708,12 +828,14 @@ infrastructure:
 ...
 ```
 
+`${REALM_ID}` wird einmal ersetzt, beim Laden des Schemas. Um danach zu filtern, wer die jeweilige Abfrage ausführt, verwenden Sie stattdessen `context` (`filter: realmId == context.realm`); siehe [Kontext und Zeilenfilter](Context.md).
+
 #### Eigenschafts-Mapping {#property-mapping}
 
 | Schlüssel       | Beschreibung                                                                        | Erforderlich | Standard          |
 |-----------------|-------------------------------------------------------------------------------------|:--------:|:-----------------:|
 | name            | Name der Eigenschaft.                                                               | ja       |                   |
-| mapping         | Name der Spalte in der Datenbank.                                                   |          | der Name der Eigenschaft |
+| mapping         | Name der Spalte in der Datenbank (oder des Felds in der API).                       |          | der Name der Eigenschaft |
 | readMappingExp  | Leseausdruck, der in der Quelle aufgelöst wird.                                     |          |                   |
 | dbType          | Von push (DDL) verwendeter Spaltentyp anstelle des aus dem Eigenschaftstyp abgeleiteten. |      |                   |
 | previousMapping | Vorheriger Name der Spalte: push benennt die Spalte um, anstatt eine neue hinzuzufügen. |       |                   |
@@ -786,14 +908,28 @@ infrastructure:
 
 ### Quelle {#source}
 
-Eine Quelle ist eine Datenbank und ihre Verbindung.
+Eine Quelle ist eine Datenbank (oder eine REST-API) und ihre Verbindung.
 
 | Schlüssel  | Beschreibung                                                             | Erforderlich | Standard          |
 |------------|--------------------------------------------------------------------------|:--------:|:-----------------:|
 | name       | Name der Quelle.                                                         | ja       |                   |
-| dialect    | Dialekt: `MySQL`, `MariaDB`, `PostgreSQL`, `Oracle`, `SqlServer`, `MongoDB` oder `SQLjs`. | ja |       |
+| dialect    | Dialekt: `MySQL`, `MariaDB`, `PostgreSQL`, `Oracle`, `SqlServer`, `MongoDB`, `SQLjs` (SQLite) oder `Http` (eine REST-API). | ja |  |
 | mapping    | Name des von der Quelle verwendeten Mappings.                            |          | das erste Mapping |
-| connection | Verbindung: ein Objekt oder eine Umgebungsvariable, die sie enthält.     | ja       |                   |
+| connection | Verbindung: ein Objekt, ein JSON-Text oder eine Umgebungsvariable, die sie enthält. | ja |                   |
+
+Die Verbindung ist die des Treibers der jeweiligen Datenbank-Engine:
+
+| Dialekt          | Verbindung                                                                                       |
+|------------------|--------------------------------------------------------------------------------------------------|
+| MySQL, MariaDB   | `{ host, port, user, password, database }` (Optionen von [mysql2](https://www.npmjs.com/package/mysql2), etwa `multipleStatements`) |
+| PostgreSQL       | `{ host, port, user, password, database }` (Optionen von [pg](https://www.npmjs.com/package/pg)) |
+| SqlServer        | `{ server, authentication: { type: default, options: { userName, password } }, options: { port, database, encrypt } }` ([tedious](https://www.npmjs.com/package/tedious)) |
+| Oracle           | `{ connectString, user, password }` ([oracledb](https://www.npmjs.com/package/oracledb))          |
+| MongoDB          | `{ url, database }`                                                                              |
+| SQLjs (SQLite)   | Der Pfad der Datei oder `{ file }`; `{}` oder `":memory:"` für eine Datenbank im Speicher       |
+| Http             | `{ url, headers, timeout, auth, forward }` (siehe [Eine REST-API als Quelle](HttpSource.md))     |
+
+SQLite läuft mit [sql.js](https://www.npmjs.com/package/sql.js) innerhalb des Prozesses, ohne Server: Die Datei wird beim Öffnen der ersten Verbindung gelesen (eine fehlende Datei beginnt leer) und beim Beenden des ORM (`orm.end()`) geschrieben.
 
 #### Verbindung einer Quelle festlegen {#set-connection-in-source}
 
@@ -831,15 +967,26 @@ infrastructure:
 ...
 ```
 
+Eine SQLite-Datei:
+
+```yaml
+infrastructure:
+  sources:
+    - name: main
+      dialect: SQLjs
+      connection: data/shop.sqlite
+```
+
 ### Stage {#stage}
 
 Ein Stage ist ein Szenario: Seine Regeln entscheiden, welche Quelle jede Entität verwendet.
 Eine Abfrage wird auf dem in ihren Optionen angegebenen Stage ausgeführt; ohne Angabe auf dem ersten Stage.
 
-| Schlüssel | Beschreibung       | Erforderlich |
-|---------|----------------------|:--------:|
-| name    | Name des Stages.     | ja       |
-| sources | Quellenregeln.       | ja       |
+| Schlüssel | Beschreibung                                                               | Erforderlich |
+|---------|------------------------------------------------------------------------------|:--------:|
+| name    | Name des Stages.                                                             | ja       |
+| sources | Quellenregeln.                                                               | ja       |
+| seed    | Datendateien, mit denen der Stage beginnt, relativ zum Schema, der Reihe nach angewendet (siehe [Seed](SchemaSynchronization-Seed.md)). |  |
 
 #### Quellenregel {#source-rule}
 
@@ -865,6 +1012,7 @@ Im Ausdruck stehen folgende Variablen zur Verfügung:
 | ddl      | Die Anweisung ist DDL                          | boolean                                                                |
 
 Die Regeln werden in der Reihenfolge ihrer Definition ausgewertet, und die erste Quelle, deren Bedingung wahr ist, wird verwendet.
+Die Bedingung kann den [Kontext](Context.md) nicht lesen: Die Route wird beim Kompilieren der Abfrage bestimmt und gecacht.
 
 Im folgenden Beispiel verwendet die Entität **Users** die Quelle **keycloak**, und alle anderen Entitäten verwenden die Quelle **main**.
 
@@ -898,20 +1046,23 @@ infrastructure:
 
 ### View {#view}
 
-Eine View schränkt die Ergebnisse der Abfragen ein oder verändert sie.
-Eine Abfrage verwendet die in der Option `view` angegebene View; Entitäten, die in einer View nicht aufgeführt sind, unterliegen keinen Einschränkungen.
+Eine Sicht ist eine Art, die Domäne zu sehen: nur einige Entitäten und Eigenschaften, maskierte oder berechnete Eigenschaften und gefilterte Zeilen.
+Eine Abfrage verwendet die in der Option `view` angegebene Sicht; ohne diese Option verwendet sie die Sicht `default`, die die Domäne ist und nicht geändert werden kann.
+Entitäten, die eine Sicht nicht aufführt, werden so gesehen, wie sie in der Domäne sind.
+[Sichten](Views.md) erklärt sie ausführlich.
 
-| Schlüssel | Beschreibung       | Erforderlich |
-|----------|----------------------|:--------:|
-| name     | Name der View.       | ja       |
-| entities | Entitäts-Views.      |          |
+| Schlüssel | Beschreibung                                                                | Erforderlich |
+|----------|-----------------------------------------------------------------------------|:--------:|
+| name     | Name der Sicht.                                                             | ja       |
+| pii      | Was die Sicht mit jeder Eigenschaft der Domäne tut, die `pii` hat: `mask`, `hash` oder `exclude`. |  |
+| entities | Entitäts-Views.                                                             |          |
 
-Im folgenden Beispiel maskiert die View **default** `apiKey` und blendet `email` aus, die View **collector** kann nicht auf Benutzer und Gruppen zugreifen, und die View **admin** kann auf alles zugreifen.
+Im folgenden Beispiel maskiert die Sicht **support** `apiKey`, zeigt `created` ohne Uhrzeit und blendet `email` aus, die Sicht **collector** kann nicht auf Benutzer und Gruppen zugreifen, und die Sicht **admin** sieht ohne Entitäten die gesamte Domäne.
 
 ```yaml
 infrastructure:
   views:
-    - name: default
+    - name: support
       entities:
         - name: Devices
           properties:
@@ -932,16 +1083,16 @@ infrastructure:
         - name: GroupUsers
           exclude: true
     - name: admin
-      entities: []
 ```
 
 #### Entitäts-View {#entity-view}
 
-| Schlüssel  | Beschreibung                                     | Erforderlich |
-|------------|--------------------------------------------------|:--------:|
-| name       | Name der Entität.                                | ja       |
-| exclude    | Auf die Entität kann mit dieser View nicht zugegriffen werden. |  |
-| properties | Eigenschafts-Views.                              |          |
+| Schlüssel  | Beschreibung                                                                       | Erforderlich |
+|------------|------------------------------------------------------------------------------------|:--------:|
+| name       | Name der Entität.                                                                  | ja       |
+| exclude    | Die Entität existiert in dieser Sicht nicht: Jede Anweisung auf ihr ist ein `ViewError`. |    |
+| filter     | Die Zeilen der Entität in der Sicht: eine Bedingung auf ihre Eigenschaften und den [Kontext](Context.md), die jeder Anweisung auf ihr hinzugefügt wird. |  |
+| properties | Eigenschafts-Views.                                                                |          |
 
 ##### Exclude in der Entitäts-View {#exclude-in-entity-view}
 
@@ -964,11 +1115,17 @@ infrastructure:
 
 #### Eigenschafts-View {#property-view}
 
-| Schlüssel | Beschreibung                                       | Erforderlich |
-|---------|----------------------------------------------------|:--------:|
-| name    | Name der Eigenschaft.                              | ja       |
-| exclude | Auf die Eigenschaft kann mit dieser View nicht zugegriffen werden. | |
-| readExp | Leseausdruck, der in der Quelle aufgelöst wird.    |          |
+| Schlüssel   | Beschreibung                                                                                | Erforderlich |
+|-------------|---------------------------------------------------------------------------------------------|:--------:|
+| name        | Name einer Eigenschaft der Domäne oder einer neuen Eigenschaft.                             | ja       |
+| exclude     | Die Eigenschaft existiert in dieser Sicht nicht.                                            |          |
+| default     | Mit `exclude`: der Wert, den jeder Insert in der Sicht in die verborgene Eigenschaft schreibt. |       |
+| readExp     | Leseausdruck, der in der Quelle aufgelöst wird: maskiert eine Eigenschaft der Domäne oder berechnet eine neue. |  |
+| type        | Typ einer neuen Eigenschaft (standardmäßig `string`).                                       |          |
+| length      | Länge einer neuen Eigenschaft.                                                              |          |
+| description | Beschreibung einer neuen Eigenschaft, für die Metadaten.                                    |          |
+
+Der Primärschlüssel und die Eigenschaften der Beziehungen, die die Sicht behält, können nicht ausgeschlossen werden.
 
 ##### Exclude in der Eigenschafts-View {#exclude-in-property-view}
 
@@ -977,7 +1134,7 @@ Auf eine Eigenschaft mit **exclude** kann nicht zugegriffen werden, wenn diese V
 ```yaml
 infrastructure:
   views:
-    - name: default
+    - name: support
       entities:
         ...
         - name: Users
@@ -991,13 +1148,13 @@ infrastructure:
 
 ##### Leseausdruck in der Eigenschafts-View {#read-expression-in-property-view}
 
-Mit **readExp** wird in Leseabfragen das Ergebnis des Ausdrucks anstelle des gespeicherten Werts zurückgegeben.
+Mit **readExp** wird in Leseabfragen das Ergebnis des Ausdrucks anstelle des gespeicherten Werts zurückgegeben, und auch Filter und Sortierungen verwenden es.
 In diesem Beispiel wird `created` als Datum ohne Uhrzeit zurückgegeben:
 
 ```yaml
 infrastructure:
   views:
-    - name: default
+    - name: support
       entities:
         ...
         - name: Users
@@ -1009,13 +1166,14 @@ infrastructure:
 
 ### Pfade {#paths}
 
-Ordner, relativ zum Ordner des Schemas, in die generierte Dateien und der Zustand des ORM geschrieben werden.
+Ordner, relativ zum Ordner des Schemas, in die generierte Dateien, der Zustand des ORM und die Logs geschrieben werden.
 
 | Schlüssel | Beschreibung                                                                        | Standard    |
 |--------|-------------------------------------------------------------------------------------|:-----------:|
 | src    | Ordner des Quellcodes.                                                              | `src`       |
 | domain | Ordner innerhalb von `src`, in den `lambdaorm build` das Modell und die Repositories schreibt. | `domain` |
-| state  | Ordner des ORM-Zustands (Modell jedes Stages, von push angewendete DDL-Skripte).    | `orm_state` |
+| state  | Ordner des ORM-Zustands (Modell jedes Stages, von push angewendete DDL-Skripte und ihr Undo). | `orm_state` |
+| logs   | Ordner der in Dateien geschriebenen Logs, etwa der Historie des Schemas.            | `logs`      |
 
 ```yaml
 infrastructure:
@@ -1023,7 +1181,54 @@ infrastructure:
     src: src
     domain: domain
     state: orm_state
+    logs: logs
 ```
+
+### Outbox {#outbox}
+
+Mit `outbox` hinterlässt jeder abgedeckte Schreibvorgang ein Ereignis (Entität, Aktion, Schlüssel, wer und die Transaktion, ohne die geschriebenen Daten) in der Entität `LambdaOrmOutbox`, **in derselben Transaktion** wie die Änderung, sodass ein Dispatcher es zustellen kann, selbst wenn der Prozess anhält, bevor er jemanden benachrichtigt.
+λORM fügt die Entität der Domäne hinzu, und `push` erstellt ihre Tabelle.
+
+| Schlüssel   | Beschreibung                                                                                    | Standard |
+|-------------|-------------------------------------------------------------------------------------------------|:-------:|
+| entities    | Die Entitäten, deren Schreibvorgänge in die Outbox gehen.                                       | alle    |
+| actions     | Die Aktionen: `insert`, `update`, `delete`, `upsert`, `bulkInsert`, `bulkMerge`, `bulkDelete`.  | alle    |
+| condition   | Eine Bedingung auf die Änderung (`entity`, `action`, `keys`, `source`, `actor`…).               |         |
+| maxAttempts | Die Versuche eines Dispatchers, bevor ein Ereignis als `dead` markiert wird.                    | 10      |
+
+```yaml
+infrastructure:
+  outbox:
+    entities: [Orders, Customers]
+    actions: [insert, update, delete]
+    condition: 'action != "delete" || entity == "Orders"'
+    maxAttempts: 10
+```
+
+Die Ereignisse werden mit `orm.outbox` (`pending`, `done`, `failed`, `dispatch`) gelesen und zugestellt; siehe [Änderungen der Daten und Outbox](../usage/DataEvents.md).
+
+### Migrationen {#migrations}
+
+Mit `migrations: {}` fügt λORM der Domäne die Entität `LambdaOrmMigrations` hinzu, und jeder `push` zeichnet darin pro Quelle auf, was er getan hat und wie es rückgängig gemacht wird. Diese Historie verwendet `lambdaorm migrate`, um zu einer Version zurückzukehren. Siehe [Migrationen](SchemaSynchronization-Migrations.md).
+
+```yaml
+infrastructure:
+  migrations: {}
+```
+
+### Quellenübergreifend {#cross-source}
+
+Eine Abfrage, deren `map`, `sort` oder `having` Felder einer Entität in einer anderen Quelle liest, wird teilweise im Speicher aufgelöst. Um im Speicher zu sortieren, zu gruppieren oder zu paginieren, holt sie höchstens `maxRows` Zeilen (standardmäßig 10000) und schlägt mit einem `CrossSourceError` fehl, wenn es mehr sind, statt ein unvollständiges Ergebnis zurückzugeben. `options.maxRows` ändert den Wert für eine Abfrage. Siehe [Quellenübergreifende Abfragen](../queries/CrossSource.md).
+
+```yaml
+infrastructure:
+  crossSource:
+    maxRows: 50000
+```
+
+### Observability {#observability}
+
+`observability` konfiguriert Logs, Metriken und Traces mit OpenTelemetry. Siehe [Observability](Observability.md).
 
 ### Queue {#queue}
 
