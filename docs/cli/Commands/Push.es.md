@@ -4,7 +4,7 @@ Sincroniza las bases de datos de un stage con el modelo. Compara el modelo con l
 [fetch](Fetch.md)), no con el archivo `orm_state`: las tablas nuevas se crean con sus claves, claves foráneas e índices;
 en las tablas existentes, se añaden las columnas que faltan y se modifican las columnas con otro tipo, longitud o
 nulabilidad. **Nunca elimina** lo que solo existe en la base de datos (`fetch` lo informa). `orm_state` se sigue
-escribiendo como registro.
+escribiendo como registro. Cada push escribe `V<versión>__push.sql` y su deshacer, `U<versión>__push.sql` ([Migraciones](../../schema/SchemaSynchronization-Migrations.md)).
 
 ## Opciones {#options}
 
@@ -15,6 +15,8 @@ escribiendo como registro.
 | envfile | `-e` | Lee un archivo de variables de entorno. |
 | output | `-o` | Genera las sentencias pero no las aplica. Sin valor, las imprime por fuente; con una carpeta, escribe un script por cada fuente que cambia, `<stage>.<source>.sql`. |
 | force | `-f` | Si una sentencia falla, continúa con las siguientes. |
+| allow-destructive | | Aplica también los cambios que pueden perder datos (un tipo que se angosta, un texto más corto); sin ella, `push` se detiene y los lista. Ver [Migraciones](../../schema/SchemaSynchronization-Migrations.md). |
+| seed | | Después, inserta los datos con los que empieza el stage ([Seed](Seed.md)). |
 
 !!! note "Nota"
     `push` solo se ejecuta localmente: no tiene la opción `-u`.

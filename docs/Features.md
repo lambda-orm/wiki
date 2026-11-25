@@ -16,6 +16,9 @@ An overview of what λORM offers, with links to the pages that describe each fea
   [update](queries/Update.md) and [delete](queries/Delete.md) clauses.
 - Implicit [joins](queries/Join.md) and [grouping](queries/Grouping.md).
 - Eager loading of relations with [include](queries/Include.md), also across databases.
+- [Queries across sources](queries/CrossSource.md): map, group and sort with fields of several databases.
+- [JSON paths, vectors and points](queries/JsonVectorsPoints.md): `p.meta.address.zip`, `cosineDistance` (RAG),
+  `distance` in meters.
 - [Operators and functions](queries/operatorsAndFunctions/OperatorsAndFunctions.md).
 - [Query metadata](queries/Metadata.md): the parameters, model, constraints and execution plan of a query.
 
@@ -26,6 +29,9 @@ An overview of what λORM offers, with links to the pages that describe each fea
 - [Scripts](usage/Script.md): a whole use case (variables, conditions, loops and several queries) in one transaction,
   also over the Data Gateway.
 - [Usage examples](usage/Usage.md): a single source, several sources, CQRS and the Node.js client.
+- [Changes of the data and outbox](usage/DataEvents.md): `orm.onDataChange` after each commit, and an outbox written
+  in the same transaction.
+- [Typed queries](usage/TypedQueries.md): queries with a name in the schema and the types of their results.
 
 ## Schema
 
@@ -44,6 +50,12 @@ An overview of what λORM offers, with links to the pages that describe each fea
   [incorporate](schema/SchemaSynchronization-Incorporate.md).
 - [Listeners and subscribers](schema/SchemaExample-Listener.md): awaited, and run in the transaction of the sentence
   that triggers them.
+- [Views](schema/Views.md): restrict entities and properties, mask them, add computed ones, personal data (PII).
+- [Context and row filters](schema/Context.md): who runs a query, and the rows a view sees.
+- [Observability](schema/Observability.md): logs, metrics and traces with OpenTelemetry.
+- [A REST API as a source](schema/HttpSource.md): the dialect `Http`.
+- [Migrations](schema/SchemaSynchronization-Migrations.md) (changes that can lose data, undo, `migrate`) and
+  [seed](schema/SchemaSynchronization-Seed.md).
 
 ## Performance
 

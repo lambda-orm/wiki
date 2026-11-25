@@ -19,6 +19,9 @@ añadido; el modelo se regenera cada vez.
 | data-path | | Ruta relativa de la carpeta de datos en el workspace (`--data-path`). |
 | domain-path | | Ruta relativa del dominio dentro de la ruta del código fuente (`--domain-path`). |
 | url | `-u` | URL del esquema en un Data Gateway. |
+| view | | Genera el modelo y los repositorios de una [vista](../../schema/Views.md): solo sus entidades y propiedades; sus repositorios la usan. |
+
+Con `application.queries` en el schema, el modelo también escribe `queries.ts`: el tipo del resultado de cada consulta y un método tipado que la ejecuta ([Consultas tipadas](../../usage/TypedQueries.md)).
 
 ## Ejemplo {#example}
 
