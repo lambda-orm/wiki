@@ -119,7 +119,7 @@ services:
       retries: 30
 
   data-gateway:
-    image: flaviorita/data-gateway:4.0.0
+    image: flaviorita/data-gateway:4.1.0
     depends_on:
       postgres: { condition: service_healthy }
     environment:
@@ -135,7 +135,7 @@ services:
       - "${WS_PORT:-8083}:8083"
 
   ide:
-    image: flaviorita/data-gateway-ide:1.0.0
+    image: flaviorita/data-gateway-ide:1.1.0
     environment:
       DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081,http://data-gateway:8083"
     ports:

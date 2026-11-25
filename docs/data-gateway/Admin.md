@@ -162,9 +162,9 @@ variable that is not of a sentence (`entity`, `action`, `category`, `type`, `rea
 - Where the IDE of each credential was (its tabs and their drafts, what is unfolded) is kept by the gateway in
   `<orm.workspacePath>/.data-gateway/state.sqlite` (`/admin/session`), so a reload or another browser starts there.
 
-## In the next version
+## Since 4.1.0 {#since-4-1-0}
 
-Not in the image 4.0.0: the commands `migrations`, `migrate` and `seed`, and the changes that can lose data in `push`
+Since data-gateway 4.1.0: the commands `migrations`, `migrate` and `seed`, and the changes that can lose data in `push`
 (above); the **history of a schema** (every change made through the administration, with who, before,
 after and the diff, in `logs/changes.jsonl` of the workspace and `GET /admin/workspaces/{route}/history`), the
 **routing of a stage** (where each entity goes, `…/stages/{stage}/routing`), and `build` per language

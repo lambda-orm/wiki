@@ -13,7 +13,7 @@ CLI (`@lambdaorm/cli`) and the Oracle Instant Client. It runs `node index.js` as
 # docker-compose.yml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:4.0.0
+    image: flaviorita/data-gateway:4.1.0
     environment:
       DATA_GATEWAY_HTTP_PORT: "8080"
       DATA_GATEWAY_MCP_PORT: "8081"
@@ -44,10 +44,10 @@ it, and it reaches the `management` port, which is published to nobody else.
 ```yaml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:4.0.0
+    image: flaviorita/data-gateway:4.1.0
     # … as above, with transports.management.port: 9090 in its configuration, and no port 9090 published
   ide:
-    image: flaviorita/data-gateway-ide:1.0.0
+    image: flaviorita/data-gateway-ide:1.1.0
     environment:
       DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081"
     ports: [ "127.0.0.1:8090:8080" ]
@@ -115,7 +115,7 @@ apart by the log collector.
 
 ## OpenTelemetry {#opentelemetry}
 
-**Not in the image 4.0.0: in the next version.** With the section [`observability`](Configuration.md#observability)
+**Since data-gateway 4.1.0.** With the section [`observability`](Configuration.md#observability)
 (or the `OTEL_*` variables):
 
 - **Traces:** a `SERVER` span per HTTP request (named by its route template, `POST /{schema}/execute`), WebSocket
@@ -128,4 +128,4 @@ apart by the log collector.
   `http_server_request_duration_seconds` (`http_request_method`, `http_route`, `http_response_status_code`); the same
   names by OTLP.
 - **The audit** also goes as an OpenTelemetry log record, linked to the trace of its request, and every change of the
-  administration as a `schema.change` event (the [history](Admin.md#in-the-next-version)).
+  administration as a `schema.change` event (the [history](Admin.md#since-4-1-0)).

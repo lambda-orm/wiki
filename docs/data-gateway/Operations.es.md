@@ -13,7 +13,7 @@ La imagen es [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/dat
 # docker-compose.yml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:4.0.0
+    image: flaviorita/data-gateway:4.1.0
     environment:
       DATA_GATEWAY_HTTP_PORT: "8080"
       DATA_GATEWAY_MCP_PORT: "8081"
@@ -44,10 +44,10 @@ El [IDE](../ide/index.md) es otra imagen, `flaviorita/data-gateway-ide`, junto a
 ```yaml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:4.0.0
+    image: flaviorita/data-gateway:4.1.0
     # … as above, with transports.management.port: 9090 in its configuration, and no port 9090 published
   ide:
-    image: flaviorita/data-gateway-ide:1.0.0
+    image: flaviorita/data-gateway-ide:1.1.0
     environment:
       DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081"
     ports: [ "127.0.0.1:8090:8080" ]
@@ -115,7 +115,7 @@ recolector de logs pueda separarlas.
 
 ## OpenTelemetry {#opentelemetry}
 
-**No está en la imagen 4.0.0: llega en la próxima versión.** Con la sección
+**Desde data-gateway 4.1.0.** Con la sección
 [`observability`](Configuration.md#observability) (o las variables `OTEL_*`):
 
 - **Trazas:** un span `SERVER` por petición HTTP (nombrado por la plantilla de su ruta, `POST /{schema}/execute`),
@@ -128,4 +128,4 @@ recolector de logs pueda separarlas.
   `http_server_request_duration_seconds` (`http_request_method`, `http_route`, `http_response_status_code`); los
   mismos nombres por OTLP.
 - **La auditoría** también sale como un log record de OpenTelemetry, enlazado a la traza de su petición, y cada cambio
-  de la administración como un evento `schema.change` (el [historial](Admin.md#in-the-next-version)).
+  de la administración como un evento `schema.change` (el [historial](Admin.md#since-4-1-0)).

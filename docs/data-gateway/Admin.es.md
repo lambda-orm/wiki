@@ -162,9 +162,9 @@ advertencia.
 - Dónde estaba el IDE de cada credencial (sus pestañas y sus borradores, lo desplegado) lo guarda la gateway en
   `<orm.workspacePath>/.data-gateway/state.sqlite` (`/admin/session`), así que un refresco u otro navegador empieza ahí.
 
-## En la próxima versión {#in-the-next-version}
+## Desde 4.1.0 {#since-4-1-0}
 
-No está en la imagen 4.0.0: los comandos `migrations`, `migrate` y `seed`, y los cambios que pueden perder datos en
+Desde data-gateway 4.1.0: los comandos `migrations`, `migrate` y `seed`, y los cambios que pueden perder datos en
 `push` (arriba); el **historial de un esquema** (cada cambio hecho por la administración, con quién, el
 antes, el después y el diff, en `logs/changes.jsonl` del workspace y `GET /admin/workspaces/{route}/history`), el
 **ruteo de un stage** (adónde va cada entidad, `…/stages/{stage}/routing`) y `build` por lenguaje

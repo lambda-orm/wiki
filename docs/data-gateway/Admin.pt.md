@@ -161,9 +161,9 @@ variável que não é de uma sentença (`entity`, `action`, `category`, `type`, 
   `<orm.workspacePath>/.data-gateway/state.sqlite` (`/admin/session`), de modo que um recarregamento ou outro navegador
   começa ali.
 
-## Na próxima versão {#in-the-next-version}
+## Desde a 4.1.0 {#since-4-1-0}
 
-Não está na imagem 4.0.0: os comandos `migrations`, `migrate` e `seed`, e as alterações que podem perder dados em `push`
+Desde o data-gateway 4.1.0: os comandos `migrations`, `migrate` e `seed`, e as alterações que podem perder dados em `push`
 (acima); o **histórico de um esquema** (cada alteração feita pela administração, com quem, antes,
 depois e o diff, em `logs/changes.jsonl` do workspace e em `GET /admin/workspaces/{route}/history`), o **roteamento de
 um stage** (para onde vai cada entidade, `…/stages/{stage}/routing`), e o `build` por linguagem

@@ -14,7 +14,7 @@ angibt (per Konvention `/workspace`). Es hat kein `EXPOSE`: Die Ports stehen nur
 # docker-compose.yml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:4.0.0
+    image: flaviorita/data-gateway:4.1.0
     environment:
       DATA_GATEWAY_HTTP_PORT: "8080"
       DATA_GATEWAY_MCP_PORT: "8081"
@@ -45,10 +45,10 @@ mit ihr, und sie erreicht den `management`-Port, der für niemanden sonst veröf
 ```yaml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:4.0.0
+    image: flaviorita/data-gateway:4.1.0
     # … wie oben, mit transports.management.port: 9090 in seiner Konfiguration und ohne veröffentlichten Port 9090
   ide:
-    image: flaviorita/data-gateway-ide:1.0.0
+    image: flaviorita/data-gateway-ide:1.1.0
     environment:
       DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081"
     ports: [ "127.0.0.1:8090:8080" ]
@@ -117,7 +117,7 @@ damit der Log-Collector es getrennt ablegen kann.
 
 ## OpenTelemetry {#opentelemetry}
 
-**Nicht im Image 4.0.0: in der nächsten Version.** Mit dem Abschnitt [`observability`](Configuration.md#observability)
+**Seit data-gateway 4.1.0.** Mit dem Abschnitt [`observability`](Configuration.md#observability)
 (oder den Variablen `OTEL_*`):
 
 - **Traces:** ein `SERVER`-Span pro HTTP-Anfrage (benannt nach ihrer Routenvorlage, `POST /{schema}/execute`),
@@ -130,4 +130,4 @@ damit der Log-Collector es getrennt ablegen kann.
   `http_server_request_duration_seconds` (`http_request_method`, `http_route`, `http_response_status_code`); dieselben
   Namen per OTLP.
 - **Das Audit** geht auch als OpenTelemetry-Log-Record, verknüpft mit der Trace seiner Anfrage, und jede Änderung der
-  Administration als Ereignis `schema.change` (die [Historie](Admin.md#in-the-next-version)).
+  Administration als Ereignis `schema.change` (die [Historie](Admin.md#since-4-1-0)).

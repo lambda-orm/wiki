@@ -229,7 +229,7 @@ transports:
 
 ## Beobachtbarkeit (OpenTelemetry) {#observability}
 
-**Nicht im Image 4.0.0: in der nächsten Version.** Der Abschnitt `observability` hat die Form von
+**Seit data-gateway 4.1.0.** Der Abschnitt `observability` hat die Form von
 `infrastructure.observability` einer `lambdaORM.yaml` ([Beobachtbarkeit](../schema/Observability.md)), und die
 Standardvariablen `OTEL_*` haben Vorrang. Das Gateway startet das OpenTelemetry-SDK in jedem Worker vor λORM, sodass eine
 Anfrage, ihr Worker und die Sätze von λORM eine einzige Trace bilden.
@@ -306,4 +306,4 @@ Datei verhindert den Start). Was sie liefert, steht in [Betrieb](Operations.md#o
 | `transports.mcpHttp.legacySse` | `true` | zusätzlich zu Streamable HTTP das ältere HTTP+SSE für ältere Clients |
 | `transports.mcpHttp.stateful` | `false` | zustandsloses Streamable HTTP: Jede Replika beantwortet jede Anfrage |
 | `transports.<ws>.asyncapi.enabled` | `true` | `GET /asyncapi` und `/asyncapi.json` von `webSocket` und `mcpWebSocket` |
-| `observability` | — | OpenTelemetry, [oben](#observability); nicht in 4.0.0 |
+| `observability` | — | OpenTelemetry, [oben](#observability); seit 4.1.0 |
