@@ -108,6 +108,17 @@ plugins:
             Script: Skript
             Commands: Befehle
             Version: Version
+            JSON, vectors and points: JSON, Vektoren und Punkte
+            Across sources: Über Quellen hinweg
+            Views: Views
+            Context and row filters: Kontext und Zeilenfilter
+            Observability: Observability
+            REST API source: REST-API als Quelle
+            Migrations: Migrationen
+            Seed: Seed
+            Changes of the data: Datenänderungen
+            Typed queries: Typisierte Abfragen
+            Migrate: Migrate
         - locale: es
           name: Español
           build: true
@@ -170,6 +181,17 @@ plugins:
             Script: Script
             Commands: Comandos
             Version: Versión
+            JSON, vectors and points: JSON, vectores y puntos
+            Across sources: Entre fuentes
+            Views: Vistas
+            Context and row filters: Contexto y filtros de filas
+            Observability: Observabilidad
+            REST API source: API REST como fuente
+            Migrations: Migraciones
+            Seed: Seed
+            Changes of the data: Cambios de los datos
+            Typed queries: Consultas tipadas
+            Migrate: Migrate
         - locale: pt
           name: Português
           build: true
@@ -235,6 +257,17 @@ plugins:
             Script: Script
             Commands: Comandos
             Version: Versão
+            JSON, vectors and points: JSON, vetores e pontos
+            Across sources: Entre fontes
+            Views: Views
+            Context and row filters: Contexto e filtros de linhas
+            Observability: Observabilidade
+            REST API source: API REST como fonte
+            Migrations: Migrações
+            Seed: Seed
+            Changes of the data: Mudanças dos dados
+            Typed queries: Consultas tipadas
+            Migrate: Migrate
 
 markdown_extensions:
   - toc:
@@ -291,6 +324,8 @@ nav:
       - Update: queries/Update.md
       - Delete: queries/Delete.md
       - Metadata: queries/Metadata.md
+      - JSON, vectors and points: queries/JsonVectorsPoints.md
+      - Across sources: queries/CrossSource.md
       - Operators & Functions:
           - queries/operatorsAndFunctions/OperatorsAndFunctions.md
           - Comparison: queries/operatorsAndFunctions/Comparison.md
@@ -309,6 +344,10 @@ nav:
       - Environment Variables: schema/SchemaDefinition-EnvironmentVariables.md
       - Composite: schema/SchemaDefinition-Composite.md
       - Listeners: schema/SchemaExample-Listener.md
+      - Views: schema/Views.md
+      - Context and row filters: schema/Context.md
+      - Observability: schema/Observability.md
+      - REST API source: schema/HttpSource.md
       - Examples:
           - Basic: schema/SchemaExample-Basic.md
           - Extend Entity: schema/SchemaExample-Extend.md
@@ -322,6 +361,8 @@ nav:
           - Fetch: schema/SchemaSynchronization-Fetch.md
           - Introspect: schema/SchemaSynchronization-Introspect.md
           - Incorporate: schema/SchemaSynchronization-Incorporate.md
+          - Migrations: schema/SchemaSynchronization-Migrations.md
+          - Seed: schema/SchemaSynchronization-Seed.md
       - Use: schema/Schema-Use.md
       - Engines: schema/Engines.md
   - Usage:
@@ -329,6 +370,8 @@ nav:
       - Repository: usage/Repository.md
       - Transaction: usage/Transaction.md
       - Script: usage/Script.md
+      - Changes of the data: usage/DataEvents.md
+      - Typed queries: usage/TypedQueries.md
       - Change log: usage/CHANGELOG.md
   - CLI:
       - cli/index.md
@@ -337,6 +380,8 @@ nav:
           - Build: cli/Commands/Build.md
           - Sync: cli/Commands/Sync.md
           - Push: cli/Commands/Push.md
+          - Seed: cli/Commands/Seed.md
+          - Migrate: cli/Commands/Migrate.md
           - Drop: cli/Commands/Drop.md
           - Fetch: cli/Commands/Fetch.md
           - Import: cli/Commands/Import.md

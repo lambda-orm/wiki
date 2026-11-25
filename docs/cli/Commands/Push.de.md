@@ -3,7 +3,7 @@
 Synchronisiert die Datenbanken eines Stages mit dem Modell. Verglichen wird das Modell mit den **Datenbanken** (dem, was
 [fetch](Fetch.md) liest), nicht mit der Datei `orm_state`: Neue Tabellen werden mit Schlüsseln, Fremdschlüsseln und Indizes erstellt;
 in bestehenden Tabellen werden fehlende Spalten hinzugefügt und Spalten mit abweichendem Typ, abweichender Länge oder Nullbarkeit geändert. Der Befehl
-**löscht niemals**, was nur in der Datenbank existiert (`fetch` meldet es). `orm_state` wird weiterhin als Protokoll geschrieben.
+**löscht niemals**, was nur in der Datenbank existiert (`fetch` meldet es). `orm_state` wird weiterhin als Protokoll geschrieben. Jeder Push schreibt `V<Version>__push.sql` und dessen Rückgängigmachung, `U<Version>__push.sql` ([Migrationen](../../schema/SchemaSynchronization-Migrations.md)).
 
 ## Optionen {#options}
 
@@ -14,6 +14,8 @@ in bestehenden Tabellen werden fehlende Spalten hinzugefügt und Spalten mit abw
 | envfile | `-e` | Liest eine Datei mit Umgebungsvariablen. |
 | output | `-o` | Erzeugt die Anweisungen, wendet sie aber nicht an. Ohne Wert werden sie pro Quelle ausgegeben; mit einem Ordner wird für jede Quelle, die sich ändert, ein Skript geschrieben, `<stage>.<source>.sql`. |
 | force | `-f` | Schlägt eine Anweisung fehl, wird mit den nächsten Anweisungen fortgefahren. |
+| allow-destructive | | Wendet auch die Änderungen an, die Daten verlieren können (ein engerer Typ, ein kürzerer Text); ohne diese Option hält `push` an und listet sie auf. Siehe [Migrationen](../../schema/SchemaSynchronization-Migrations.md). |
+| seed | | Fügt danach die Startdaten der Stage ein ([Seed](Seed.md)). |
 
 !!! note "Hinweis"
     `push` läuft nur lokal: Es hat keine Option `-u`.

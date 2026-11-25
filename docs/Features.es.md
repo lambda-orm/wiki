@@ -16,6 +16,9 @@ Una introducción a lo que ofrece λORM, con enlaces a las páginas que describe
   [update](queries/Update.md) y [delete](queries/Delete.md).
 - [Joins](queries/Join.md) y [agrupaciones](queries/Grouping.md) implícitos.
 - Carga anticipada (eager loading) de relaciones con [include](queries/Include.md), también entre bases de datos.
+- [Consultas entre fuentes](queries/CrossSource.md): map, agrupado y orden con campos de varias bases de datos.
+- [Rutas JSON, vectores y puntos](queries/JsonVectorsPoints.md): `p.meta.address.zip`, `cosineDistance` (RAG),
+  `distance` en metros.
 - [Operadores y funciones](queries/operatorsAndFunctions/OperatorsAndFunctions.md).
 - [Metadatos de consultas](queries/Metadata.md): los parámetros, el modelo, las restricciones y el plan de ejecución de una consulta.
 
@@ -26,6 +29,9 @@ Una introducción a lo que ofrece λORM, con enlaces a las páginas que describe
 - [Scripts](usage/Script.md): un caso de uso completo (variables, condiciones, bucles y varias consultas) en una sola transacción,
   también a través del Data Gateway.
 - [Ejemplos de uso](usage/Usage.md): una sola fuente, varias fuentes, CQRS y el cliente de Node.js.
+- [Cambios de los datos y outbox](usage/DataEvents.md): `orm.onDataChange` después de cada commit, y un outbox escrito
+  en la misma transacción.
+- [Consultas tipadas](usage/TypedQueries.md): consultas con nombre en el schema y los tipos de sus resultados.
 
 ## Esquema {#schema}
 
@@ -44,6 +50,12 @@ Una introducción a lo que ofrece λORM, con enlaces a las páginas que describe
   [incorporate](schema/SchemaSynchronization-Incorporate.md).
 - [Listeners y subscribers](schema/SchemaExample-Listener.md): se esperan (await) y se ejecutan en la transacción de la sentencia
   que los dispara.
+- [Vistas](schema/Views.md): restringen entidades y propiedades, las enmascaran, agregan calculadas, datos personales (PII).
+- [Contexto y filtros de filas](schema/Context.md): quién ejecuta una consulta y las filas que ve una vista.
+- [Observabilidad](schema/Observability.md): logs, métricas y trazas con OpenTelemetry.
+- [Una API REST como fuente](schema/HttpSource.md): el dialecto `Http`.
+- [Migraciones](schema/SchemaSynchronization-Migrations.md) (cambios que pueden perder datos, deshacer, `migrate`) y
+  [seed](schema/SchemaSynchronization-Seed.md).
 
 ## Rendimiento {#performance}
 

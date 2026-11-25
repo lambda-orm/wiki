@@ -19,6 +19,9 @@ jedes Mal neu erzeugt.
 | data-path | | Relativer Pfad des Datenordners im Workspace (`--data-path`). |
 | domain-path | | Relativer Pfad der Domäne im Quellcodepfad (`--domain-path`). |
 | url | `-u` | URL des Schemas auf einem Data Gateway. |
+| view | | Erzeugt das Modell und die Repositories einer [View](../../schema/Views.md): nur ihre Entitäten und Eigenschaften; ihre Repositories verwenden sie. |
+
+Mit `application.queries` im Schema schreibt das Modell auch `queries.ts`: den Typ des Ergebnisses jeder Abfrage und eine typisierte Methode, die sie ausführt ([Typisierte Abfragen](../../usage/TypedQueries.md)).
 
 ## Beispiel {#example}
 

@@ -19,6 +19,10 @@ regenerated every time.
 | data-path | | Relative path of the data folder in the workspace (`--data-path`). |
 | domain-path | | Relative path of the domain in the source code path (`--domain-path`). |
 | url | `-u` | URL of the schema on a Data Gateway. |
+| view | | Builds the model and the repositories of a [view](../../schema/Views.md): only its entities and properties; its repositories use it. |
+
+With `application.queries` in the schema, the model also writes `queries.ts`: the type of the result of each query and
+a typed method that runs it ([Typed queries](../../usage/TypedQueries.md)).
 
 ## Example
 
