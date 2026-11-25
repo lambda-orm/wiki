@@ -1,84 +1,118 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="980" height="466" viewBox="0 0 980 466" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
-  <title>One stage, two sources, each with its mapping: Countries on MySQL, TBL_STATES on PostgreSQL</title>
-
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <title>One stage, two sources: Countries on MySQL with the domain names, States on PostgreSQL as TBL_STATES through its mapping</title>
   <style>
     .bg { fill: #ffffff } .t { fill: #111827 } .s { fill: #4b5563 } .m { fill: #6b7280 }
-    .dom { fill: #f8fafc; stroke: #6366f1 } .domt { fill: #3730a3 }
-    .ent { fill: #eef2ff; stroke: #6366f1 } .abs { fill: #f5f3ff; stroke: #8b5cf6; stroke-dasharray: 5 3 }
+    .q { fill: #f1f5f9; stroke: #64748b } .code { fill: #0f172a }
+    .dom { fill: #eef2ff; stroke: #6366f1 } .domt { fill: #3730a3 } .chip { fill: #ffffff; stroke: #a5b4fc }
+    .abs { fill: #ffffff; stroke: #8b5cf6; stroke-dasharray: 5 3 }
+    .inf { fill: #fffbeb; stroke: #d97706 } .inft { fill: #92400e } .ichip { fill: #ffffff; stroke: #fcd34d }
     .stg { fill: #ecfdf5; stroke: #10b981 } .stgt { fill: #065f46 }
-    .src { fill: #fff7ed; stroke: #f97316 } .srct { fill: #9a3412 }
-    .tbl { fill: #ffffff; stroke: #fdba74 } .tblh { fill: #ffedd5 }
-    .ln { stroke: #6b7280 } .hd { fill: #6b7280 } .ext { stroke: #8b5cf6 }
+    .src { fill: #fff7ed; stroke: #f97316 } .srct { fill: #9a3412 } .tbl { fill: #ffffff; stroke: #fdba74 } .key { fill: #c2410c }
+    .ln { stroke: #64748b } .hd { fill: #64748b } .ext { stroke: #8b5cf6 } .exth { fill: #8b5cf6 }
     @media (prefers-color-scheme: dark) {
       .bg { fill: #0f172a } .t { fill: #e5e7eb } .s { fill: #9ca3af } .m { fill: #9ca3af }
-      .dom { fill: #111827; stroke: #818cf8 } .domt { fill: #a5b4fc }
-      .ent { fill: #1e1b4b; stroke: #818cf8 } .abs { fill: #2e1065; stroke: #a78bfa }
+      .q { fill: #1e293b; stroke: #94a3b8 } .code { fill: #e2e8f0 }
+      .dom { fill: #1e1b4b; stroke: #818cf8 } .domt { fill: #a5b4fc } .chip { fill: #0f172a; stroke: #6366f1 }
+      .abs { fill: #0f172a; stroke: #a78bfa }
+      .inf { fill: #422006; stroke: #f59e0b } .inft { fill: #fcd34d } .ichip { fill: #0f172a; stroke: #b45309 }
       .stg { fill: #064e3b; stroke: #34d399 } .stgt { fill: #6ee7b7 }
-      .src { fill: #431407; stroke: #fb923c } .srct { fill: #fdba74 }
-      .tbl { fill: #0f172a; stroke: #c2410c } .tblh { fill: #7c2d12 }
-      .ln { stroke: #9ca3af } .hd { fill: #9ca3af } .ext { stroke: #a78bfa }
+      .src { fill: #431407; stroke: #fb923c } .srct { fill: #fdba74 } .tbl { fill: #0f172a; stroke: #c2410c } .key { fill: #fb923c }
+      .ln { stroke: #94a3b8 } .hd { fill: #94a3b8 } .ext { stroke: #a78bfa } .exth { fill: #a78bfa }
     }
   </style>
-  <rect class="bg" width="980" height="466"/>
-  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="hd" d="M0 0L10 5L0 10z"/></marker><marker id="e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="none" stroke="#8b5cf6"/></marker></defs>
-  <rect class="dom" x="16" y="16" width="200" height="410" rx="12"/>
-  <text class="domt" x="116.0" y="40" text-anchor="middle" font-size="15" font-weight="700">Domain</text>
-  <rect class="abs" x="30" y="52" width="172" height="66" rx="8"/>
-  <text class="t" x="116.0" y="72" text-anchor="middle" font-size="14" font-weight="700">Positions</text>
-  <text class="m" x="194" y="72" text-anchor="end" font-size="10">abstract</text>
-  <text class="s" x="42" y="96" font-size="12">latitude</text>
-  <text class="s" x="42" y="114" font-size="12">longitude</text>
-  <rect class="ent" x="30" y="148" width="172" height="120" rx="8"/>
-  <text class="t" x="116.0" y="168" text-anchor="middle" font-size="14" font-weight="700">Countries</text>
-  <text class="s" x="42" y="192" font-size="12">iso3</text>
-  <text class="s" x="42" y="210" font-size="12">name</text>
-  <text class="s" x="42" y="228" font-size="12">region</text>
-  <text class="s" x="42" y="246" font-size="12">subregion</text>
-  <text class="m" x="42" y="264" font-size="12" font-style="italic">states</text>
-  <rect class="ent" x="30" y="298" width="172" height="102" rx="8"/>
-  <text class="t" x="116.0" y="318" text-anchor="middle" font-size="14" font-weight="700">States</text>
-  <text class="s" x="42" y="342" font-size="12">id</text>
-  <text class="s" x="42" y="360" font-size="12">name</text>
-  <text class="s" x="42" y="378" font-size="12">countryCode</text>
-  <text class="m" x="42" y="396" font-size="12" font-style="italic">country</text>
-  <path class="ext" d="M192 148V122" stroke-width="1.4" stroke-dasharray="4 3" fill="none" marker-end="url(#e)"/>
-  <path class="ext" d="M192 298V122" stroke-width="1.4" stroke-dasharray="4 3" fill="none" marker-end="url(#e)"/>
-  <rect class="stg" x="276" y="176.0" width="298" height="114" rx="12"/>
-  <text class="stgt" x="425.0" y="202.0" text-anchor="middle" font-size="15" font-weight="700">Stage · stage1</text>
-  <text class="t" x="290" y="228.0" font-size="12" font-weight="600">→ dataSource2</text>
-  <text class="s" x="290" y="243.0" font-size="11">entity == &quot;States&quot;</text>
-  <text class="t" x="290" y="262.0" font-size="12" font-weight="600">→ dataSource1</text>
-  <text class="s" x="290" y="277.0" font-size="11">the rest</text>
-  <rect class="src" x="634" y="16" width="330" height="206" rx="12"/>
-  <text class="srct" x="650" y="40" font-size="14" font-weight="700">dataSource1 · MySQL</text>
-  <text class="s" x="650" y="56" font-size="11">mapping: mapping1 (the domain names)</text>
-  <rect class="tbl" x="650" y="64" width="140" height="142" rx="4"/>
-  <rect class="tblh" x="650.5" y="64.5" width="139" height="24" rx="4"/>
-  <text class="t" x="720.0" y="81" text-anchor="middle" font-size="12" font-weight="700">Countries</text>
-  <text class="srct" x="658" y="106" font-size="10" font-weight="700">PK</text>
-  <text class="t" x="684" y="106" font-size="12" font-weight="600">iso3</text>
-  <text class="srct" x="658" y="124" font-size="10" font-weight="700">UK</text>
-  <text class="t" x="684" y="124" font-size="12">name</text>
-  <text class="t" x="684" y="142" font-size="12">region</text>
-  <text class="t" x="684" y="160" font-size="12">subregion</text>
-  <text class="t" x="684" y="178" font-size="12">latitude</text>
-  <text class="t" x="684" y="196" font-size="12">longitude</text>
-  <rect class="src" x="634" y="246" width="330" height="188" rx="12"/>
-  <text class="srct" x="650" y="270" font-size="14" font-weight="700">dataSource2 · PostgreSQL</text>
-  <text class="s" x="650" y="286" font-size="11">mapping: mapping2</text>
-  <rect class="tbl" x="650" y="294" width="160" height="124" rx="4"/>
-  <rect class="tblh" x="650.5" y="294.5" width="159" height="24" rx="4"/>
-  <text class="t" x="730.0" y="311" text-anchor="middle" font-size="12" font-weight="700">TBL_STATES</text>
-  <text class="srct" x="658" y="336" font-size="10" font-weight="700">PK</text>
-  <text class="t" x="684" y="336" font-size="12" font-weight="600">ID</text>
-  <text class="t" x="684" y="354" font-size="12">COUNTRY_CODE</text>
-  <text class="t" x="684" y="372" font-size="12">NAME</text>
-  <text class="t" x="684" y="390" font-size="12">LATITUDE</text>
-  <text class="t" x="684" y="408" font-size="12">LONGITUDE</text>
-  <g class="ln" stroke-width="1.6" fill="none" marker-end="url(#a)">
-    <path d="M216 221.0C246 221.0 246 233.0 274 233.0"/>
-    <path d="M574 224.0C604 224.0 604 340.0 632 340.0"/>
-    <path d="M574 258.0C604 258.0 604 119.0 632 119.0"/>
+  <rect class="bg" width="1000" height="600"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="hd" d="M0 0L10 5L0 10z"/></marker>
+    <marker id="e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="exth" d="M0 0L10 5L0 10z"/></marker>
+  </defs>
+
+  <!-- the query -->
+  <rect class="q" x="16" y="16" width="420" height="54" rx="10"/>
+  <text class="m" x="34" y="38" font-size="11">one query, two databases</text>
+  <text class="code" x="34" y="58" font-size="14" font-family="ui-monospace, Menlo, monospace">States.include(p =&gt; p.country)</text>
+
+  <!-- domain -->
+  <rect class="dom" x="16" y="90" width="420" height="300" rx="12"/>
+  <text class="domt" x="36" y="118" font-size="16" font-weight="700">domain</text>
+  <text class="s" x="36" y="137" font-size="12">the same for both sources</text>
+  <g font-size="12">
+    <rect class="abs" x="36" y="152" width="380" height="50" rx="8"/>
+    <text class="t" x="52" y="172" font-weight="700">Positions</text>
+    <text class="m" x="400" y="172" text-anchor="end" font-size="11">abstract</text>
+    <text class="s" x="52" y="191">latitude · longitude</text>
+    <rect class="chip" x="36" y="230" width="182" height="140" rx="8"/>
+    <text class="t" x="52" y="252" font-weight="700">Countries</text>
+    <text class="s" x="52" y="274">iso3 · key</text>
+    <text class="s" x="52" y="292">name</text>
+    <text class="s" x="52" y="310">region · subregion</text>
+    <text class="m" x="52" y="328" font-style="italic">states → States</text>
+    <text class="m" x="52" y="354" font-size="11">+ latitude · longitude</text>
+    <rect class="chip" x="234" y="230" width="182" height="140" rx="8"/>
+    <text class="t" x="250" y="252" font-weight="700">States</text>
+    <text class="s" x="250" y="274">id · key</text>
+    <text class="s" x="250" y="292">name</text>
+    <text class="s" x="250" y="310">countryCode</text>
+    <text class="m" x="250" y="328" font-style="italic">country → Countries</text>
+    <text class="m" x="250" y="354" font-size="11">+ latitude · longitude</text>
   </g>
-  <text class="m" x="28" y="458" font-size="11">- - ▷ extends</text>
+  <g class="ext" stroke-width="1.4" fill="none" stroke-dasharray="4 3" marker-end="url(#e)">
+    <path d="M127 230V204"/><path d="M325 230V204"/>
+  </g>
+  <text class="m" x="226" y="221" text-anchor="middle" font-size="10">extends</text>
+
+  <!-- mapping -->
+  <rect class="inf" x="16" y="410" width="420" height="174" rx="12"/>
+  <text class="inft" x="36" y="438" font-size="16" font-weight="700">mapping2</text>
+  <text class="s" x="36" y="457" font-size="12">only what differs from the domain is written</text>
+  <g font-size="11" font-family="ui-monospace, Menlo, monospace">
+    <rect class="ichip" x="36" y="470" width="380" height="98" rx="8"/>
+    <text class="t" x="52" y="492" font-size="12" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">States → TBL_STATES</text>
+    <text class="s" x="52" y="514">id → ID</text><text class="s" x="210" y="514">countryCode → COUNTRY_CODE</text>
+    <text class="s" x="52" y="532">name → NAME</text><text class="s" x="210" y="532">latitude → LATITUDE</text>
+    <text class="s" x="210" y="550">longitude → LONGITUDE</text>
+  </g>
+
+  <!-- stage -->
+  <rect class="stg" x="470" y="226" width="200" height="150" rx="12"/>
+  <text class="stgt" x="490" y="254" font-size="16" font-weight="700">stage1</text>
+  <text class="s" x="490" y="273" font-size="12">a rule per source, in order</text>
+  <text class="t" x="490" y="304" font-size="12" font-family="ui-monospace, Menlo, monospace">entity == "States"</text>
+  <text class="s" x="502" y="322" font-size="12">→ dataSource2</text>
+  <text class="t" x="490" y="348" font-size="12" font-family="ui-monospace, Menlo, monospace">the rest</text>
+  <text class="s" x="502" y="366" font-size="12">→ dataSource1</text>
+
+  <!-- sources -->
+  <rect class="src" x="704" y="90" width="280" height="236" rx="12"/>
+  <text class="srct" x="724" y="118" font-size="16" font-weight="700">dataSource1 · MySQL</text>
+  <text class="s" x="724" y="137" font-size="12">mapping1: the domain names</text>
+  <g font-size="12">
+    <rect class="tbl" x="724" y="152" width="240" height="156" rx="8"/>
+    <text class="t" x="740" y="174" font-weight="700">Countries</text>
+    <text class="key" x="740" y="196" font-size="10" font-weight="700">PK</text><text class="t" x="766" y="196" font-weight="600">iso3</text>
+    <text class="key" x="740" y="214" font-size="10" font-weight="700">UK</text><text class="t" x="766" y="214">name</text>
+    <text class="t" x="766" y="232">region</text>
+    <text class="t" x="766" y="250">subregion</text>
+    <text class="t" x="766" y="268">latitude</text>
+    <text class="t" x="766" y="286">longitude</text>
+  </g>
+  <rect class="src" x="704" y="348" width="280" height="236" rx="12"/>
+  <text class="srct" x="724" y="376" font-size="16" font-weight="700">dataSource2 · PostgreSQL</text>
+  <text class="s" x="724" y="395" font-size="12">mapping2</text>
+  <g font-size="12">
+    <rect class="tbl" x="724" y="410" width="240" height="156" rx="8"/>
+    <text class="t" x="740" y="432" font-weight="700">TBL_STATES</text>
+    <text class="key" x="740" y="454" font-size="10" font-weight="700">PK</text><text class="t" x="766" y="454" font-weight="600">ID</text>
+    <text class="t" x="766" y="472">COUNTRY_CODE</text>
+    <text class="t" x="766" y="490">NAME</text>
+    <text class="t" x="766" y="508">LATITUDE</text>
+    <text class="t" x="766" y="526">LONGITUDE</text>
+  </g>
+
+  <g class="ln" stroke-width="1.6" fill="none" marker-end="url(#a)">
+    <path d="M436 300H468"/>
+    <path d="M640 226C640 190 660 208 702 208"/>
+    <path d="M640 376C640 430 660 466 702 466"/>
+    <path d="M436 497C560 497 600 520 702 520" stroke-dasharray="4 3"/>
+  </g>
+  <text class="m" x="560" y="492" text-anchor="middle" font-size="10">names its tables and columns</text>
 </svg>
