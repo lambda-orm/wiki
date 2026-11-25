@@ -1,107 +1,116 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="614" viewBox="0 0 1080 614" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
-  <title>An application queries the domain; λORM sends Countries to a MySQL database and States, through its mapping, to a PostgreSQL database</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="700" viewBox="0 0 1080 700" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <title>An application queries the domain; λORM reads the schema (domain, mapping and stage) and sends Countries to a MySQL database and States to a PostgreSQL database</title>
   <style>
     .bg { fill: #ffffff } .t { fill: #111827 } .s { fill: #4b5563 } .m { fill: #6b7280 }
     .app { fill: #f1f5f9; stroke: #64748b } .code { fill: #0f172a }
+    .sch { fill: #f8fafc; stroke: #94a3b8 } .scht { fill: #334155 }
     .dom { fill: #eef2ff; stroke: #6366f1 } .domt { fill: #3730a3 } .chip { fill: #ffffff; stroke: #a5b4fc } .domi { fill: #6366f1 }
     .abs { fill: #ffffff; stroke: #8b5cf6; stroke-dasharray: 5 3 }
     .inf { fill: #fffbeb; stroke: #d97706 } .inft { fill: #92400e } .ichip { fill: #ffffff; stroke: #fcd34d } .infi { fill: #d97706 }
+    .stgc { fill: #ffffff; stroke: #6ee7b7 } .stgt { fill: #065f46 }
     .orm { fill: #ecfdf5; stroke: #10b981 } .ormt { fill: #065f46 } .ormi { fill: #10b981 }
     .mysql { fill: #e0f2fe; stroke: #0369a1 } .mysqltop { fill: #bae6fd; stroke: #0369a1 } .mysqlt { fill: #075985 }
     .pg { fill: #e0e7ff; stroke: #3730a3 } .pgtop { fill: #c7d2fe; stroke: #3730a3 } .pgt { fill: #312e81 }
     .tbl { fill: #ffffff; stroke: #cbd5e1 } .tblh { fill: #f1f5f9 } .key { fill: #c2410c }
-    .sch { fill: #f8fafc; stroke: #94a3b8 } .scht { fill: #334155 } .file { fill: #334155 }
     .ln { stroke: #64748b } .hd { fill: #64748b } .ext { stroke: #8b5cf6 } .exth { fill: #8b5cf6 }
     @media (prefers-color-scheme: dark) {
       .bg { fill: #0f172a } .t { fill: #e5e7eb } .s { fill: #9ca3af } .m { fill: #9ca3af }
       .app { fill: #1e293b; stroke: #94a3b8 } .code { fill: #e2e8f0 }
+      .sch { fill: #111827; stroke: #64748b } .scht { fill: #cbd5e1 }
       .dom { fill: #1e1b4b; stroke: #818cf8 } .domt { fill: #a5b4fc } .chip { fill: #0f172a; stroke: #6366f1 } .domi { fill: #818cf8 }
       .abs { fill: #0f172a; stroke: #a78bfa }
       .inf { fill: #422006; stroke: #f59e0b } .inft { fill: #fcd34d } .ichip { fill: #0f172a; stroke: #b45309 } .infi { fill: #f59e0b }
+      .stgc { fill: #0f172a; stroke: #059669 } .stgt { fill: #6ee7b7 }
       .orm { fill: #064e3b; stroke: #34d399 } .ormt { fill: #6ee7b7 } .ormi { fill: #34d399 }
       .mysql { fill: #0c4a6e; stroke: #38bdf8 } .mysqltop { fill: #075985; stroke: #38bdf8 } .mysqlt { fill: #e0f2fe }
       .pg { fill: #312e81; stroke: #818cf8 } .pgtop { fill: #3730a3; stroke: #818cf8 } .pgt { fill: #e0e7ff }
       .tbl { fill: #0f172a; stroke: #475569 } .tblh { fill: #1e293b } .key { fill: #fb923c }
-      .sch { fill: #111827; stroke: #64748b } .scht { fill: #cbd5e1 } .file { fill: #cbd5e1 }
       .ln { stroke: #94a3b8 } .hd { fill: #94a3b8 } .ext { stroke: #a78bfa } .exth { fill: #a78bfa }
     }
   </style>
-  <rect class="bg" width="1080" height="614"/>
+  <rect class="bg" width="1080" height="700"/>
   <defs>
     <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="hd" d="M0 0L10 5L0 10z"/></marker>
     <marker id="e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="exth" d="M0 0L10 5L0 10z"/></marker>
   </defs>
 
   <!-- the application -->
-  <rect class="app" x="16" y="16" width="420" height="64" rx="12"/>
+  <rect class="app" x="16" y="16" width="436" height="64" rx="12"/>
   <g class="ln" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <rect x="32" y="30" width="40" height="30" rx="4"/><path d="M32 39H72"/><path d="M45 46l-4 4 4 4M59 46l4 4-4 4"/>
   </g>
   <text class="t" x="86" y="42" font-size="14" font-weight="700">Your application</text>
   <text class="code" x="86" y="64" font-size="13" font-family="ui-monospace, Menlo, monospace">States.include(p =&gt; p.country)</text>
 
-  <!-- the schema: one file, domain and infrastructure -->
-  <rect class="sch" x="8" y="96" width="452" height="506" rx="14" stroke-width="1.6" stroke-dasharray="6 4"/>
-    <path class="scht" d="M24 110h11l6 6v15H24z" opacity="0.15"/>
+  <!-- the schema: one file -->
+  <rect class="sch" x="8" y="96" width="452" height="590" rx="14" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <path class="scht" d="M24 110h11l6 6v15H24z" opacity="0.15"/>
   <path d="M24 110h11l6 6v15H24zM35 110v6h6" fill="none" class="ln" stroke-width="1.5"/>
-  <text class="scht" x="50" y="126" font-size="15" font-weight="700">schema</text><text class="m" x="110" y="126" font-size="12" font-family="ui-monospace, Menlo, monospace">lambdaORM.yaml</text>
-  <g transform="translate(4 44)">
-  <!-- domain -->
-    <rect class="dom" x="16" y="98" width="420" height="250" rx="12"/>
-    <g class="domi"><rect x="32" y="114" width="8" height="8" rx="2"/><rect x="44" y="114" width="8" height="8" rx="2"/><rect x="32" y="126" width="8" height="8" rx="2"/><rect x="44" y="126" width="8" height="8" rx="2"/></g>
-    <text class="domt" x="62" y="131" font-size="16" font-weight="700" font-family="ui-monospace, Menlo, monospace">domain:</text>
-    <text class="s" x="150" y="131" font-size="12">the business model, the same for both databases</text>
-    <g font-size="12">
-      <rect class="abs" x="32" y="146" width="388" height="44" rx="8"/>
-      <text class="t" x="48" y="164" font-weight="700">Positions</text>
-      <text class="m" x="404" y="164" text-anchor="end" font-size="11">abstract</text>
-      <text class="s" x="48" y="181">latitude · longitude</text>
-      <rect class="chip" x="32" y="214" width="186" height="118" rx="8"/>
-      <text class="t" x="48" y="235" font-weight="700">Countries</text>
-      <text class="s" x="48" y="256">iso3 · key</text>
-      <text class="s" x="48" y="273">name · region · subregion</text>
-      <text class="m" x="48" y="291" font-style="italic">states → States</text>
-      <text class="m" x="48" y="318" font-size="11">+ latitude · longitude</text>
-      <rect class="chip" x="234" y="214" width="186" height="118" rx="8"/>
-      <text class="t" x="250" y="235" font-weight="700">States</text>
-      <text class="s" x="250" y="256">id · key</text>
-      <text class="s" x="250" y="273">name · countryCode</text>
-      <text class="m" x="250" y="291" font-style="italic">country → Countries</text>
-      <text class="m" x="250" y="318" font-size="11">+ latitude · longitude</text>
-    </g>
-    <g class="ext" stroke-width="1.4" fill="none" stroke-dasharray="4 3" marker-end="url(#e)"><path d="M125 214V192"/><path d="M327 214V192"/></g>
-    <text class="m" x="226" y="206" text-anchor="middle" font-size="10">extends</text>
-  
-    <!-- mapping -->
-    <rect class="inf" x="16" y="366" width="420" height="178" rx="12"/>
-    <path class="infi" d="M32 382l9-4 9 4 9-4v15l-9 4-9-4-9 4z"/>
-    <text class="inft" x="68" y="395" font-size="16" font-weight="700" font-family="ui-monospace, Menlo, monospace">infrastructure:</text><text class="s" x="230" y="395" font-size="12">mappings · sources · stages</text>
-    <text class="s" x="32" y="418" font-size="12">mapping2: only what differs from the domain is written</text>
-    <g font-size="11" font-family="ui-monospace, Menlo, monospace">
-      <rect class="ichip" x="32" y="430" width="388" height="98" rx="8"/>
-      <text class="t" x="48" y="452" font-size="12" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">States → TBL_STATES</text>
-      <text class="s" x="48" y="474">id → ID</text><text class="s" x="200" y="474">countryCode → COUNTRY_CODE</text>
-      <text class="s" x="48" y="492">name → NAME</text><text class="s" x="200" y="492">latitude → LATITUDE</text>
-      <text class="s" x="200" y="510">longitude → LONGITUDE</text>
-    </g>
-  
-  </g>
-  <g transform="translate(14 0)">
-  <!-- λORM -->
-  <rect class="orm" x="476" y="196" width="196" height="166" rx="14"/>
-  <circle class="ormi" cx="500" cy="221" r="13"/>
-  <text x="500" y="226" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">λ</text>
-  <text class="ormt" x="522" y="219" font-size="15" font-weight="700">λORM · stage1</text>
-  <text class="s" x="522" y="235" font-size="11">routes each sentence</text>
-  <text class="t" x="492" y="268" font-size="12" font-family="ui-monospace, Menlo, monospace">entity == "States"</text>
-  <text class="s" x="504" y="286" font-size="12">→ PostgreSQL</text>
-  <text class="t" x="492" y="314" font-size="12" font-family="ui-monospace, Menlo, monospace">the rest</text>
-  <text class="s" x="504" y="332" font-size="12">→ MySQL</text>
-  <text class="m" x="492" y="352" font-size="10">its rules: the stages of the schema</text>
+  <text class="scht" x="50" y="126" font-size="15" font-weight="700">schema</text>
+  <text class="m" x="112" y="126" font-size="12" font-family="ui-monospace, Menlo, monospace">lambdaORM.yaml</text>
 
+  <!-- domain: -->
+  <rect class="dom" x="20" y="142" width="428" height="248" rx="12"/>
+  <g class="domi"><rect x="36" y="157" width="8" height="8" rx="2"/><rect x="48" y="157" width="8" height="8" rx="2"/><rect x="36" y="169" width="8" height="8" rx="2"/><rect x="48" y="169" width="8" height="8" rx="2"/></g>
+  <text class="domt" x="66" y="174" font-size="16" font-weight="700" font-family="ui-monospace, Menlo, monospace">domain:</text>
+  <text class="s" x="154" y="174" font-size="12">the business model, the same for both databases</text>
+  <g font-size="12">
+    <rect class="abs" x="36" y="190" width="396" height="44" rx="8"/>
+    <text class="t" x="52" y="208" font-weight="700">Positions</text>
+    <text class="m" x="416" y="208" text-anchor="end" font-size="11">abstract</text>
+    <text class="s" x="52" y="225">latitude · longitude</text>
+    <rect class="chip" x="36" y="258" width="190" height="118" rx="8"/>
+    <text class="t" x="52" y="279" font-weight="700">Countries</text>
+    <text class="s" x="52" y="300">iso3 · key</text>
+    <text class="s" x="52" y="317">name · region · subregion</text>
+    <text class="m" x="52" y="335" font-style="italic">states → States</text>
+    <text class="m" x="52" y="362" font-size="11">+ latitude · longitude</text>
+    <rect class="chip" x="242" y="258" width="190" height="118" rx="8"/>
+    <text class="t" x="258" y="279" font-weight="700">States</text>
+    <text class="s" x="258" y="300">id · key</text>
+    <text class="s" x="258" y="317">name · countryCode</text>
+    <text class="m" x="258" y="335" font-style="italic">country → Countries</text>
+    <text class="m" x="258" y="362" font-size="11">+ latitude · longitude</text>
+  </g>
+  <g class="ext" stroke-width="1.4" fill="none" stroke-dasharray="4 3" marker-end="url(#e)"><path d="M131 258V236"/><path d="M337 258V236"/></g>
+  <text class="m" x="234" y="250" text-anchor="middle" font-size="10">extends</text>
+
+  <!-- infrastructure: the mapping and the stage -->
+  <rect class="inf" x="20" y="404" width="428" height="270" rx="12"/>
+  <path class="infi" d="M36 420l9-4 9 4 9-4v15l-9 4-9-4-9 4z"/>
+  <text class="inft" x="72" y="433" font-size="16" font-weight="700" font-family="ui-monospace, Menlo, monospace">infrastructure:</text>
+  <text class="s" x="232" y="433" font-size="12">mappings · sources · stages</text>
+  <g font-size="11" font-family="ui-monospace, Menlo, monospace">
+    <rect class="ichip" x="36" y="448" width="396" height="104" rx="8"/>
+    <text class="inft" x="52" y="469" font-size="12" font-weight="700" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">mapping2</text>
+    <text class="s" x="118" y="469" font-size="11" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">only what differs from the domain</text>
+    <text class="t" x="52" y="491" font-size="12" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">States → TBL_STATES</text>
+    <text class="s" x="52" y="511">id → ID</text><text class="s" x="200" y="511">countryCode → COUNTRY_CODE</text>
+    <text class="s" x="52" y="527">name → NAME</text><text class="s" x="200" y="527">latitude → LATITUDE</text>
+    <text class="s" x="200" y="543">longitude → LONGITUDE</text>
+  </g>
+  <g font-size="12">
+    <rect class="stgc" x="36" y="564" width="396" height="96" rx="8"/>
+    <text class="stgt" x="52" y="585" font-weight="700">stage1</text>
+    <text class="s" x="104" y="585" font-size="11">which source each entity goes to, in order</text>
+    <text class="t" x="52" y="610" font-family="ui-monospace, Menlo, monospace">entity == "States"</text>
+    <text class="s" x="230" y="610">→ dataSource2 · PostgreSQL</text>
+    <text class="t" x="52" y="634" font-family="ui-monospace, Menlo, monospace">the rest</text>
+    <text class="s" x="230" y="634">→ dataSource1 · MySQL</text>
+    <text class="m" x="52" y="652" font-size="10">dataSource1 uses mapping1 (the domain names); dataSource2, mapping2</text>
   </g>
 
-  <!-- MySQL: the classic database cylinder -->
+  <!-- λORM: runs the query with the schema -->
+  <rect class="orm" x="490" y="270" width="196" height="132" rx="14"/>
+  <circle class="ormi" cx="514" cy="296" r="13"/>
+  <text x="514" y="301" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">λ</text>
+  <text class="ormt" x="536" y="301" font-size="16" font-weight="700">λORM</text>
+  <text class="s" x="506" y="332" font-size="12">reads the schema</text>
+  <text class="s" x="506" y="350" font-size="12">sends each sentence by stage1</text>
+  <text class="s" x="506" y="368" font-size="12">writes it with its mapping</text>
+  <text class="s" x="506" y="386" font-size="12">joins the two results</text>
+
+  <!-- MySQL -->
   <g stroke-width="2">
     <path class="mysql" d="M712 62V176A54 14 0 0 0 820 176V62"/>
     <path class="ln" d="M712 100A54 14 0 0 0 820 100M712 138A54 14 0 0 0 820 138" fill="none" stroke-width="1.4" opacity="0.6"/>
@@ -109,7 +118,6 @@
   </g>
   <text class="mysqlt" x="766" y="124" text-anchor="middle" font-size="15" font-weight="700">MySQL</text>
   <text class="s" x="766" y="214" text-anchor="middle" font-size="11">dataSource1</text>
-  <text class="m" x="766" y="229" text-anchor="middle" font-size="10">mapping1: the domain names</text>
   <g font-size="12">
     <rect class="tbl" x="852" y="40" width="210" height="160" rx="8"/>
     <rect class="tblh" x="852.5" y="40.5" width="209" height="28" rx="8"/>
@@ -123,34 +131,32 @@
   </g>
   <path class="ln" d="M820 120H850" stroke-width="1.4" stroke-dasharray="3 3" fill="none"/>
 
-  <!-- PostgreSQL: the classic database cylinder -->
+  <!-- PostgreSQL -->
   <g stroke-width="2">
-    <path class="pg" d="M712 330V444A54 14 0 0 0 820 444V330"/>
-    <path class="ln" d="M712 368A54 14 0 0 0 820 368M712 406A54 14 0 0 0 820 406" fill="none" stroke-width="1.4" opacity="0.6"/>
-    <ellipse class="pgtop" cx="766" cy="330" rx="54" ry="14"/>
+    <path class="pg" d="M712 470V584A54 14 0 0 0 820 584V470"/>
+    <path class="ln" d="M712 508A54 14 0 0 0 820 508M712 546A54 14 0 0 0 820 546" fill="none" stroke-width="1.4" opacity="0.6"/>
+    <ellipse class="pgtop" cx="766" cy="470" rx="54" ry="14"/>
   </g>
-  <text class="pgt" x="766" y="392" text-anchor="middle" font-size="14" font-weight="700">PostgreSQL</text>
-  <text class="s" x="766" y="482" text-anchor="middle" font-size="11">dataSource2</text>
-  <text class="m" x="766" y="497" text-anchor="middle" font-size="10">mapping2</text>
+  <text class="pgt" x="766" y="532" text-anchor="middle" font-size="14" font-weight="700">PostgreSQL</text>
+  <text class="s" x="766" y="622" text-anchor="middle" font-size="11">dataSource2</text>
   <g font-size="12">
-    <rect class="tbl" x="852" y="316" width="210" height="142" rx="8"/>
-    <rect class="tblh" x="852.5" y="316.5" width="209" height="28" rx="8"/>
-    <text class="t" x="868" y="335" font-weight="700">TBL_STATES</text>
-    <text class="key" x="868" y="364" font-size="10" font-weight="700">PK</text><text class="t" x="894" y="364" font-weight="600">ID</text>
-    <text class="t" x="894" y="382">COUNTRY_CODE</text>
-    <text class="t" x="894" y="400">NAME</text>
-    <text class="t" x="894" y="418">LATITUDE</text>
-    <text class="t" x="894" y="436">LONGITUDE</text>
+    <rect class="tbl" x="852" y="456" width="210" height="142" rx="8"/>
+    <rect class="tblh" x="852.5" y="456.5" width="209" height="28" rx="8"/>
+    <text class="t" x="868" y="475" font-weight="700">TBL_STATES</text>
+    <text class="key" x="868" y="504" font-size="10" font-weight="700">PK</text><text class="t" x="894" y="504" font-weight="600">ID</text>
+    <text class="t" x="894" y="522">COUNTRY_CODE</text>
+    <text class="t" x="894" y="540">NAME</text>
+    <text class="t" x="894" y="558">LATITUDE</text>
+    <text class="t" x="894" y="576">LONGITUDE</text>
   </g>
-  <path class="ln" d="M820 388H850" stroke-width="1.4" stroke-dasharray="3 3" fill="none"/>
+  <path class="ln" d="M820 528H850" stroke-width="1.4" stroke-dasharray="3 3" fill="none"/>
 
   <g class="ln" stroke-width="1.6" fill="none" marker-end="url(#a)">
-    <path d="M436 48C540 48 588 110 588 194"/>
-    <path d="M460 280H486"/>
-    <path d="M634 196C634 130 670 120 708 120"/>
-    <path d="M634 362C634 410 670 390 708 390"/>
-    <path d="M440 514C560 514 640 490 708 436" stroke-dasharray="4 3"/>
+    <path d="M452 48C540 48 588 150 588 268"/>
+    <path d="M460 336H488"/>
+    <path d="M640 270C640 160 670 120 708 120"/>
+    <path d="M640 402C640 500 670 528 708 528"/>
   </g>
-  <text class="m" x="494" y="40" font-size="10">the query</text>
-  <text class="m" x="578" y="532" text-anchor="middle" font-size="10">names its tables and columns</text>
+  <text class="m" x="500" y="40" font-size="10">the query</text>
+  <text class="m" x="464" y="328" font-size="10">reads</text>
 </svg>
