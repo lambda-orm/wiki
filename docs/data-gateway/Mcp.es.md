@@ -113,15 +113,17 @@ y los permisos del usuario de la base de datos (la garantía de fondo). Cada esc
 | `GET {basePath}/{schema}/sse` + `POST {basePath}/{schema}/messages?sessionId=<id>` | HTTP+SSE (obsoleto), con `legacySse: true` |
 | `GET {basePath}/status` | el estado del transporte, los esquemas y las sesiones SSE abiertas |
 
-Streamable HTTP no tiene estado por defecto (`stateful: false`): cada `POST` es independiente y cualquier réplica lo responde. La
-credencial va en cada petición.
+Streamable HTTP no tiene estado por defecto (`stateful: false`): cada `POST` es independiente y cualquier réplica lo responde.
+Con `stateful: true` el servidor mantiene una sesión por cliente (hasta `maxConnections`), lo que necesita afinidad de
+sesión con varias réplicas, como HTTP+SSE. La credencial va en cada petición.
 
 ### mcpWebSocket {#mcpwebsocket}
 
-Un upgrade en `{basePath}/{schema}/mcp`, autenticado en el handshake; mensajes JSON-RPC 2.0 con los métodos de MCP
-(`initialize`, `ping`, `tools/list`, `tools/call`, `resources/list`, `resources/read`, …). No es un transporte MCP
-estándar: se ofrece para clientes y gateways que lo soportan por su cuenta. Su documento AsyncAPI está en
-`GET {basePath}/asyncapi`.
+Un upgrade en `{basePath}/{schema}/mcp` con el subprotocolo `mcp`, autenticado en el handshake (un navegador envía la
+credencial en los subprotocolos, como en la [API WebSocket](Transports.md#websocket)); mensajes JSON-RPC 2.0 con los
+métodos de MCP (`initialize`, `ping`, `tools/list`, `tools/call`, `resources/list`, `resources/read`, …). No es un
+transporte MCP estándar: se ofrece para clientes y gateways que lo soportan por su cuenta. Su documento AsyncAPI está en
+`GET {basePath}/asyncapi` (y `/asyncapi.json`).
 
 ```json
 → { "jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": { "name": "orm_execute", "arguments": { "query": "Products.filter(p => p.price > 50).map(p => p.name)" } } }

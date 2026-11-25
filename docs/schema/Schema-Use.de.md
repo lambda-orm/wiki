@@ -114,12 +114,15 @@ Für jede Entität wird eine Repository-Datei generiert, zum Beispiel `repositor
 import { Repository, IOrm } from '@lambdaorm/lib'
 import { Country, QryCountry } from './model'
 export class CountryRepository extends Repository<Country, QryCountry> {
-	constructor (stage?: string, orm?:IOrm) {
-		super('Countries', stage, orm)
+	constructor (stage?: string, orm?:IOrm, view?: string) {
+		super('Countries', stage, orm, view)
 	}
 	// Add your code here
 }
 ```
+
+Mit `--view <name>` generiert `build` das Modell und die Repositories dieser [Sicht](Views.md): nur ihre Entitäten und Eigenschaften sowie Repositories, die sie verwenden.
+Wenn das Schema [benannte Abfragen](SchemaDefinition.md#named-query) (`application.queries`) enthält, schreibt `build` außerdem `queries.ts` mit dem Typ des Ergebnisses jeder Abfrage und einer Funktion, die sie ausführt (siehe [Typisierte Abfragen](../usage/TypedQueries.md)).
 
 ## Schema festlegen {#set-schema}
 

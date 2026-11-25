@@ -11,8 +11,8 @@ omitted. The complete schemas are in the [labs](../labs/index.md).
 
 ### Schema
 
-The domain has five entities: `Categories`, `Customers`, `Products` and `Orders`, where `Orders` is a composite
-entity made of the orders and their details (`Orders.details`).
+The domain has five entities: `Categories`, `Customers`, `Products`, `Orders` and `Orders.details`, where `Orders` is a composite
+entity made of the orders and their details.
 The infrastructure has a single stage with a single source, `Ordering`, a MySQL database that uses the default
 mapping.
 

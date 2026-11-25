@@ -78,6 +78,25 @@ Orders.update({ name: entity.name }).filter(p => p.id === entity.id)
 UPDATE Orders o SET ShipName = ? WHERE o.OrderID = ?
 ```
 
+## Actualizar una ruta de una propiedad json {#update-a-path-of-a-json-property}
+
+Para cambiar un valor dentro de una propiedad `json` sin enviar el json completo, se usa `jsonSet(json, path, value)`. El resto del json se mantiene tal cual.
+
+**Lambda:**
+
+```typescript
+Customers.update(p => ({ meta: jsonSet(p.meta, "address.city", city) })).filter(p => p.id == id)
+```
+
+**SQL resultante:**
+
+```sql
+UPDATE Customers c SET meta = JSON_SET(COALESCE(c.meta, JSON_OBJECT()), '$.address.city', CAST(? AS JSON))
+WHERE c.id = ?
+```
+
+Ver [JSON, vectores y puntos](JsonVectorsPoints.md#write-a-path) para la traducción en cada motor.
+
 ## Actualizar con una entidad relacionada {#update-with-a-related-entity}
 
 Actualiza el nombre de un pedido y, para cada detalle enviado, todas las propiedades del detalle. Cada detalle se filtra por su clave primaria.
@@ -207,7 +226,7 @@ ON CONFLICT (order_id,line) DO UPDATE SET product = EXCLUDED.product, quantity =
 DELETE FROM order_lines WHERE order_id = $1 AND NOT ((order_id = $2 AND line = $3) OR (order_id = $4 AND line = $5))
 ```
 
-Está disponible en PostgreSQL, MySQL, MariaDB, SQL Server y Oracle (estos dos a partir de `@lambdaorm/lib` 3.5.0), que guardan los hijos con [upsert](Insert.md#upsert). En MongoDB los hijos de composición están embebidos en el documento del padre, por lo que se reemplazan allí.
+Está disponible en PostgreSQL, MySQL, MariaDB, SQL Server y Oracle (estos dos a partir de `@lambdaorm/lib` 3.5.0) y SQLite (a partir de 3.15.0), que guardan los hijos con [upsert](Insert.md#upsert). En MongoDB los hijos de composición están embebidos en el documento del padre, por lo que se reemplazan allí.
 
 Para actualizar solo los hijos enviados (sin insertar ni eliminar), se incluye la relación con un update explícito: `Orders.update().include(p => p.lines.update(l => ({ quantity: quantity })))`. Dentro de él, `quantity` es el valor enviado para cada hijo (ver [Actualizar campos de la entidad relacionada](#update-fields-of-the-related-entity)).
 

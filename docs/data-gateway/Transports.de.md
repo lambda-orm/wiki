@@ -1,14 +1,17 @@
 # Transporte {#transports}
 
-Das Gateway hat fünf Transporte. Jeder lauscht auf einem eigenen Port, nur wenn der Port konfiguriert ist
-([Konfiguration](Configuration.md#transports-and-ports)), und jeder erreicht jedes Schema über dessen Route.
+Ein Transport ist ein Zugang zum Gateway: ein Protokoll auf einem eigenen Port. Das Gateway hat fünf, vier für die
+Daten und einen für die IDE; jeder lauscht nur, wenn sein Port konfiguriert ist
+([Konfiguration](Configuration.md#transports-and-ports)), und jeder erreicht jedes Schema über dessen Route. Öffnen Sie
+die, die Ihre Clients brauchen: `http` für Anwendungen, `mcpHttp` für KI-Agenten, `webSocket` für einen Prozess, der eine
+einzige Verbindung und Benachrichtigungen möchte, `management` nur dort, wo die [IDE](../ide/index.md) genutzt wird.
 
 | Transport | Was er ist | Routen des Schemas `iot/v1` | Routen des Gateways |
 | --- | --- | --- | --- |
-| [`http`](Rest.md) | REST API, OpenAPI 3 | `POST /iot/v1/execute`, `GET /iot/v1/entities`, … | `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/transports`, `/doc`, `/api-docs` |
+| [`http`](Rest.md) | REST API, OpenAPI 3 | `POST /iot/v1/execute`, `GET /iot/v1/entities`, … | `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/transports`, `/openapi.json`, `/doc`, `/api-docs` |
 | [`mcpHttp`](Mcp.md) | MCP für KI-Agenten | `POST/GET/DELETE /iot/v1/mcp` (Streamable HTTP); `GET /iot/v1/sse` + `POST /iot/v1/messages?sessionId=` (HTTP+SSE) | `GET /status` |
-| [`mcpWebSocket`](Mcp.md#mcpwebsocket) | MCP über WebSocket | Upgrade unter `/iot/v1/mcp` | `GET /status`, `/asyncapi` |
-| [`webSocket`](WebSocket.md) | JSON-RPC-API mit Benachrichtigungen | Verbindung zu `ws://host:port/iot/v1` | Verbindung zur Wurzel: `general.*` und `gateway.schemas`; `/asyncapi` |
+| [`mcpWebSocket`](Mcp.md#mcpwebsocket) | MCP über WebSocket | Upgrade unter `/iot/v1/mcp` | `GET /status`, `/asyncapi`, `/asyncapi.json` |
+| [`webSocket`](WebSocket.md) | JSON-RPC-API mit Benachrichtigungen | Verbindung zu `ws://host:port/iot/v1` | Verbindung zur Wurzel: `general.*` und `gateway.schemas`; `/asyncapi`, `/asyncapi.json` |
 | [`management`](#management) | die API der [IDE](../ide/index.md) | dieselben wie `http`, für jedes Schema | die von `http` (ohne Swagger) und `/admin/…` |
 
 - `{basePath}` (`transports.<t>.basePath`) steht vor jeder Route: mit `basePath: /data-gateway`
@@ -34,13 +37,22 @@ transports:
     swagger: { enabled: true }   # /doc and /api-docs (Swagger UI, OpenAPI 3)
 ```
 
-- `GET /doc` (und `/api-docs`) stellt Swagger UI mit dem OpenAPI-Dokument bereit. Die Schaltfläche **Authorize** fragt
-  die Zugangsdaten so ab, wie die Schemas konfiguriert sind: einen API-Key in seinem Header, ein Bearer-Token oder
-  Benutzer und Passwort.
-- `/ping`, `/health` und `/metrics` benötigen keine Zugangsdaten (Kubernetes-Probes, Prometheus).
+- `GET /doc` (und `/api-docs`; `/` leitet dorthin weiter) stellt Swagger UI mit dem OpenAPI-Dokument bereit, dessen
+  Server die Routen der Schemas sind. Die Schaltfläche **Authorize** fragt die Zugangsdaten so ab, wie die Schemas
+  konfiguriert sind: einen API-Key in seinem Header, ein Bearer-Token oder Benutzer und Passwort. `GET /openapi.json` ist
+  das Dokument selbst.
+- `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/transports` und die Dokumentation benötigen keine
+  Zugangsdaten (Kubernetes-Probes, Prometheus, ein Client, der sich zurechtfindet).
 - Das Rate Limit (`rateLimit`) gilt nur für diesen Transport.
-- `GET /transports` nennt die Transporte des Gateways (ihren Port, ihren Base-Path und ihr Dokument), und
-  `GET /openapi.json` ist das OpenAPI-Dokument: was ein Client, oder die IDE, braucht, um sie zu finden.
+- `GET /transports` nennt die Transporte des Gateways, damit ein Client (oder die IDE) sie finden kann:
+
+```json
+[
+  { "name": "http", "port": 8080, "basePath": "", "docs": "/openapi.json" },
+  { "name": "webSocket", "port": 8083, "basePath": "", "schemaPath": "/{schema}", "docs": "/asyncapi.json" },
+  { "name": "mcpHttp", "port": 8081, "basePath": "", "schemaPath": "/{schema}/mcp" }
+]
+```
 
 ## mcpHttp {#mcphttp}
 
@@ -76,10 +88,10 @@ transports:
     maxConnections: 100
 ```
 
-Die Verbindung ist ein Upgrade unter `{basePath}/{schema}/mcp`, authentifiziert im Handshake (ohne Zugangsdaten
-antwortet er mit `401` und schließt). Die Nachrichten sind JSON-RPC 2.0 mit den MCP-Methoden (`initialize`, `ping`,
-`tools/list`, `tools/call`, `resources/*`, …). `GET {basePath}/status` und `GET {basePath}/asyncapi` (das
-AsyncAPI-Dokument) sind reines HTTP.
+Die Verbindung ist ein Upgrade unter `{basePath}/{schema}/mcp` mit dem Subprotokoll `mcp`, authentifiziert im
+Handshake (ohne Zugangsdaten antwortet er mit `401` und schließt). Die Nachrichten sind JSON-RPC 2.0 mit den
+MCP-Methoden (`initialize`, `ping`, `tools/list`, `tools/call`, `resources/*`, …). `GET {basePath}/status` und
+`GET {basePath}/asyncapi` (das AsyncAPI-Dokument als YAML; `/asyncapi.json` als JSON) sind reines HTTP.
 
 ## webSocket {#websocket}
 
@@ -94,6 +106,13 @@ transports:
     maxConnections: 100
     asyncapi: { enabled: true }   # GET /asyncapi, /asyncapi.json
 ```
+
+- Das Upgrade wird mit denselben Headern wie REST authentifiziert. **Ein Browser** kann in einem WebSocket keine Header
+  senden: Er bietet die Subprotokolle `lambdaorm` und `lambdaorm.headers.<base64url des JSON der Header>` an (zum
+  Beispiel von `{"X-Api-Key":"…"}`), und das Gateway authentifiziert mit diesen Headern. Die Zugangsdaten reisen in der
+  Anfrage: außerhalb eines lokalen Rechners `wss://` verwenden. Das MCP über WebSocket nimmt sie genauso an.
+- Wird das Schema einer Verbindung entfernt (sein Ordner verschwindet), wird die Verbindung mit dem Code `4404`
+  geschlossen.
 
 ## management {#management}
 
@@ -119,7 +138,8 @@ transports:
   die [Administration](Admin.md) unter `/admin/…`.
 - **Dieselben Zugangsdaten und Berechtigungen** wie die anderen Transporte, aber über eine **Sitzung**: Die
   Zugangsdaten gehen nur in die Anmeldung, und jede andere Anfrage trägt das Token der Sitzung ([unten](#sessions)).
-  Direkt gesendete Zugangsdaten werden mit `401 SessionRequiredError` beantwortet. Kein Swagger und kein Rate Limit.
+  Direkt gesendete Zugangsdaten werden mit `401 SessionRequiredError` beantwortet; `/health`, `/ping`, `/metrics`,
+  `/schemas` und `/transports` brauchen keine. Kein Swagger und kein Rate Limit.
 - **Nur in einem internen Netzwerk:** Er schreibt die Schemas und die Variablen der Verbindungen und führt DDL aus. In
   einem Compose ohne `ports:`; in Kubernetes ein interner `Service` ohne Ingress. Die IDE erreicht ihn, und
   veröffentlicht wird die IDE.
@@ -130,15 +150,27 @@ Seit 4.0.0 arbeitet `management` mit Sitzungen, damit bekannt ist, wer es nutzt,
 
 | Methode | Route | Tut | Berechtigung |
 | --- | --- | --- | --- |
-| `POST` | `/sessions` | die **Anmeldung**: die Zugangsdaten in ihren üblichen Headern → `201 { id, token, credential, permissions, expiresAt, idleTimeoutMs }` | beliebige gültige Zugangsdaten |
+| `POST` | `/sessions` | die **Anmeldung**: die Zugangsdaten in ihren üblichen Headern → `201 { id, token, credential, permissions, createdAt, idleTimeoutMs, expiresAt }` | beliebige gültige Zugangsdaten |
 | `GET` / `DELETE` | `/sessions/current` | die Sitzung des Tokens / die **Abmeldung** | die Sitzung |
 | `GET` | `/sessions` | die Sitzungen derselben Zugangsdaten; mit `?all=true` alle | `all` erfordert `sessionAdmin` |
 | `DELETE` | `/sessions/{id}` | widerruft eine Sitzung | die eigenen Zugangsdaten oder `sessionAdmin` |
 | `DELETE` | `/sessions?credential={name}` | widerruft alle Sitzungen von Zugangsdaten (`&except=current`: die anderen schließen) | die eigenen Zugangsdaten oder `sessionAdmin` |
 
-- Das Token geht in `X-Data-Gateway-Session`. Nur sein Hash wird gespeichert, in
-  `<orm.workspacePath>/.data-gateway/state.sqlite`, geteilt von den Replikas auf diesem Volume (ohne Workspace-Pfad im
-  Speicher).
+```sh
+# die Anmeldung, mit den Zugangsdaten so, wie jeder Transport sie annimmt
+curl -X POST http://data-gateway:9090/sessions -H "X-Api-Key: $MODELER_KEY"
+# {"id":"…","token":"…","credential":"modeler","permissions":["read","schemaRead",…],"createdAt":"…","idleTimeoutMs":1800000,"expiresAt":"…"}
+
+# jede andere Anfrage, mit dem Token
+curl http://data-gateway:9090/admin/workspaces -H "X-Data-Gateway-Session: $TOKEN"
+curl -X DELETE http://data-gateway:9090/sessions/current -H "X-Data-Gateway-Session: $TOKEN"   # die Abmeldung
+```
+
+- Das Token geht in `X-Data-Gateway-Session`. Nur der Hash des Tokens wird gespeichert, in
+  `<orm.workspacePath>/.data-gateway/state.sqlite`, geteilt von den Replikas auf diesem Volume (ohne Workspace-Pfad oder
+  mit `sessions.store: memory` im Speicher der Replika).
+- Der Body der Anmeldung kann angeben, wer der Client ist (`{ "client": { "app", "version", "kind" } }`), was in den
+  Listen angezeigt wird.
 - Eine Sitzung endet nach `idleTimeout` ohne Anfragen oder `maxLifetime` nach der Anmeldung: `401 SessionExpiredError`.
   Eine widerrufene antwortet mit `401 SessionRevokedError` und nennt, wer sie wann widerrufen hat.
 - Eine aufgelistete Sitzung hat ihre Zugangsdaten, die Adresse und den Client (die IDE, ihre Version, Web oder

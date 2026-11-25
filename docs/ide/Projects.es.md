@@ -1,15 +1,17 @@
-# Proyectos {#projects}
+# Workbench {#workbench}
 
-Lo que guardas de un esquema, bajo **proyectos** en el [explorador](Explorer.md): carpetas, consultas y diagramas. Un
-proyecto es una carpeta en la raíz; las carpetas se anidan para organizar lo guardado.
+Lo que guardas de un esquema, bajo **Workbench** en el [explorador](Explorer.md): proyectos, carpetas, consultas y
+diagramas. Un proyecto es una carpeta en la raíz; las carpetas se anidan para organizar lo guardado. Guarda ahí las
+consultas que vuelves a ejecutar, los diagramas que explican el dominio y los
+[diagramas de los stages](Administration.md#the-diagram-of-a-stage), cada uno con un nombre y una descripción.
 
 ## Agregar {#adding}
 
-El **+** de **proyectos** o de una carpeta:
+El **+** de **Workbench** o de una carpeta:
 
 | Elemento | Qué pide |
 | --- | --- |
-| **Nuevo proyecto** / **Nueva carpeta** | un nombre, una descripción y la carpeta en la que va |
+| **Nuevo proyecto** (en **Workbench**) / **Nueva carpeta** (en una carpeta): los dos abren el diálogo **Nueva carpeta** | un nombre, una descripción y la carpeta en la que va |
 | **Nueva consulta** | abre una pestaña de consulta en esa carpeta; su primer **Guardar** pide su nombre |
 | **Nuevo diagrama** | un nombre, una descripción, la carpeta y las entidades ([Diagramas](Diagrams.md#a-new-diagram)) |
 
@@ -26,23 +28,26 @@ asistente.
 - Una consulta guardada cuyo esquema se cambia en su pestaña se guarda como una nueva.
 - Abrir una consulta guardada que ya está abierta lleva a su pestaña.
 
+Un diagrama se guarda con **Guardar** en su barra ([Diagramas](Diagrams.md)); un diagrama de un stage pide la primera
+vez su nombre, descripción y carpeta, y también tiene **Guardar como…**.
+
 ## Editar, mover, eliminar {#editing-moving-deleting}
 
-Cada fila tiene **Editar** (su nombre, descripción y carpeta) y **Eliminar** (pregunta antes; una carpeta se lleva lo
-que contiene). Los elementos se **mueven arrastrándolos** sobre una carpeta, o sobre **proyectos** para llevarlos a la
-raíz, dentro del mismo esquema. Dos elementos del mismo tipo no pueden tener el mismo nombre en una carpeta
-(`Ya hay uno con ese nombre acá`). La descripción se muestra cuando el puntero está sobre el elemento.
+Cada fila tiene ✎ **Editar** (su nombre, descripción y carpeta) y 🗑 **Eliminar** (pregunta antes; una carpeta se lleva
+lo que contiene). Los elementos se **mueven arrastrándolos** sobre una carpeta, o sobre **Workbench** para llevarlos a
+la raíz, dentro del mismo esquema. Dos elementos del mismo tipo no pueden tener el mismo nombre en una carpeta
+(`Ya hay uno con ese nombre acá.`). La descripción se muestra cuando el puntero está sobre el elemento.
 
 ## Dónde se guarda {#where-it-is-saved}
 
 | La credencial tiene | Lo guardado va a | Lo ve |
 | --- | --- | --- |
-| `workbenchWrite` | la carpeta `workbench/` del workspace del esquema, en el gateway: un archivo por elemento (`sales/German orders.query.yaml`) | todo el que usa ese esquema, desde cualquier navegador o la aplicación de escritorio |
+| `workbenchWrite` | la carpeta `workbench/` del workspace del esquema, en el gateway: un archivo por elemento (`sales/German orders.query.yaml`, `model.diagram.yaml`) | todo el que usa ese esquema, desde cualquier navegador o la aplicación de escritorio |
 | sin `workbenchWrite` | **este navegador**, en su almacenamiento, aparte para cada gateway y credencial | solo este navegador en este dispositivo, con esa credencial |
 
 En el workspace, se detecta que dos personas guardan el mismo elemento a la vez: a la segunda se le dice que otra
-persona lo cambió mientras tanto, y el elemento se vuelve a leer. Los archivos de `workbench/` que no se pueden leer se
-listan en el explorador, para corregirlos a mano.
+persona lo cambió mientras tanto, y el elemento se vuelve a leer. Lo que guarda otra persona se ve enseguida. Los
+archivos de `workbench/` que no se pueden leer se listan debajo de la conexión, para corregirlos a mano.
 
 En el navegador:
 

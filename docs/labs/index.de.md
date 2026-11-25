@@ -18,6 +18,12 @@ Das [Engines-Lab](https://github.com/lambda-orm/core/tree/main/packages/lib/src/
 dieselben Abfragen und Skripte auf PostgreSQL, MySQL, MariaDB, SQL Server, Oracle und MongoDB aus. Siehe
 [Datenbank-Engines](../schema/Engines.md).
 
+## Observability-Lab {#observability-lab}
+
+Das [Observability-Lab](https://github.com/lambda-orm/core/tree/main/packages/lib/src/dev/labs/observability) sendet
+die Logs, Metriken und Traces einer Abfrage über PostgreSQL und MySQL an einen OpenTelemetry-Collector. Siehe
+[Observability](../schema/Observability.md).
+
 ## Data Gateway {#data-gateway}
 
 Der Abschnitt [Data Gateway](../data-gateway/index.md) enthält vollständige Beispiele für seine Konfiguration, seine

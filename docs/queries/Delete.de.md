@@ -69,11 +69,11 @@ Orders.delete().include(p => p.details)
 **SQL-Ergebnis:**
 
 ```sql
--- the order
-DELETE o FROM Orders AS o WHERE o.OrderID = ?
-
--- each detail sent
+-- each detail sent, first
 DELETE o1 FROM `Order Details` AS o1 WHERE (o1.OrderID = ? AND o1.ProductID = ?)
+
+-- then the order
+DELETE o FROM Orders AS o WHERE o.OrderID = ?
 ```
 
 ## Codebeispiel {#code-example}

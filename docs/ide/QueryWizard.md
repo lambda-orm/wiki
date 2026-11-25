@@ -31,12 +31,12 @@ The tab needs a schema; the wizard reads its domain from the gateway.
 | Part | Where | What it does |
 | --- | --- | --- |
 | **start from** | top left | the entity the query starts from (the root): every row of the result is one of its rows |
-| **cancel** / **create the query** | top right | close it without changes / write the query (**update the query** on a query it wrote) |
-| **the diagram** | left | the tables of the query, a check on each field; **+** adds related tables, **×** takes one out |
+| **the diagram** | left | the tables of the query, a check on each field and one in the title of each table; **+** adds related tables, **×** takes one out |
 | **the query** | right, at the top | the query as it is written, read only, updated with every change |
 | **filter** | right | the condition the rows of the root must meet |
 | **order** | right | the columns of the result the rows are sorted by |
 | **page** | right | the page and the rows per page |
+| **cancel** / **create the query** | bottom right | close it without changes / write the query (**update the query** on a query it wrote) |
 
 Left empty, the filter, the order and the page are not applied: with nothing chosen, the query is only the name of the
 entity, and reads all its rows with all their fields.
@@ -86,17 +86,22 @@ Delete.
 
 ### 3. The fields: the checks
 
-A click on a field ticks it (the whole row, not only its box). For each table:
+A table comes with **every field ticked**: it reads all its fields, and its include has no `map` (nor the root). A
+click on a field ticks or unticks it (the whole row, not only its box):
 
-- **no field ticked**: every field of that table (its include has no `map`, and the root has no `map`);
-- **some fields ticked**: only those, in the order of the domain, not in the order they were ticked.
+- **unticking a field** leaves the others: the table gets a `map` with the fields still ticked, in the order of the
+  domain, not in the order they were ticked;
+- **the check in the title** of the table unticks all of them but its primary key, to tick then only the fields you
+  want; with some unticked, it ticks them all again;
+- **all of them ticked again** is no `map` again. The last field ticked can't be unticked: a table reads at least one.
 
-Tick `id` and `orderDate` of `Orders`, `name` and `country` of `Customers`, `quantity` and `unitPrice` of the lines,
-and `name` of `Products`. Each table gets its own `map`:
+Untick the title of `Orders` (only `id` stays) and tick `orderDate`; untick the title of `Customers` and tick `name` and
+`country`; untick the title of `Products` and tick `name`. Leave the lines with all their fields. Each table with fields
+unticked gets its own `map`:
 
 ```ts
 Orders
-	.include(p => [p.customer.map(q => ({ name: q.name, country: q.country })), p.details.include(q => q.product.map(r => ({ name: r.name }))).map(q => ({ unitPrice: q.unitPrice, quantity: q.quantity }))])
+	.include(p => [p.customer.map(q => ({ id: q.id, name: q.name, country: q.country })), p.details.include(q => q.product.map(r => ({ id: r.id, name: r.name })))])
 	.map(p => ({ id: p.id, orderDate: p.orderDate }))
 ```
 
@@ -127,8 +132,8 @@ filter is not checked inside the wizard: the query tab marks its errors once it 
 ### 5. The order
 
 **+ add an order** adds a row: a column and **ascending** or **descending**. The columns are those of the result of the
-root: the fields ticked of the entity it starts from, or all its fields when none is ticked. Each column can be used
-once; the first row sorts first. A field unticked takes its order with it.
+root: the fields ticked of the entity it starts from. Each column can be used once; the first row sorts first; × takes
+a row out. A field unticked takes its order with it.
 
 Choose `orderDate`, **descending**: `.sort(p => desc(p.orderDate))`. Two rows give a list:
 `.sort(p => [desc(p.orderDate), p.id])`.
@@ -145,7 +150,7 @@ not applied; without a page, it is the first one. `20` rows per page gives `.pag
 ```ts
 Orders
 	.filter(p => p.customer.country == 'Germany')
-	.include(p => [p.customer.map(q => ({ name: q.name, country: q.country })), p.details.include(q => q.product.map(r => ({ name: r.name }))).map(q => ({ unitPrice: q.unitPrice, quantity: q.quantity }))])
+	.include(p => [p.customer.map(q => ({ id: q.id, name: q.name, country: q.country })), p.details.include(q => q.product.map(r => ({ id: r.id, name: r.name })))])
 	.map(p => ({ id: p.id, orderDate: p.orderDate }))
 	.sort(p => desc(p.orderDate))
 	.page(1, 20)
@@ -160,10 +165,10 @@ Orders
   {
     "id": 823,
     "orderDate": "1998-05-04T22:00:00.000Z",
-    "customer": { "name": "Lehmanns Marktstand", "country": "Germany" },
+    "customer": { "id": "LEHMS", "name": "Lehmanns Marktstand", "country": "Germany" },
     "details": [
-      { "unitPrice": 18, "quantity": 40, "product": { "name": "Chai" } },
-      { "unitPrice": 19, "quantity": 20, "product": { "name": "Chang" } }
+      { "orderId": 823, "productId": 1, "unitPrice": 18, "quantity": 40, "product": { "id": 1, "name": "Chai" } },
+      { "orderId": 823, "productId": 2, "unitPrice": 19, "quantity": 20, "product": { "id": 2, "name": "Chang" } }
     ]
   }
 ]
@@ -184,15 +189,14 @@ it out: copy it before, or finish the query by hand.
 
 ## A query written by hand
 
-Since the IDE 1.0.1, the wizard reads any query of the tab, as far as it can show it (before, it opened on the entity
-the query starts from, with nothing chosen):
+The wizard reads any query of the tab, as far as it can show it:
 
 | The query has | The wizard |
 | --- | --- |
 | `Entity` at its start | starts from that entity |
 | `.filter(x => …)` | takes it as its filter, on `p` whatever the name of its variable |
 | `.include(x => …)` | adds the table of each relation, with the fields of its `map` and its own includes |
-| `.map(x => ({ a: x.a, … }))` | ticks those fields |
+| `.map(x => ({ a: x.a, … }))` | ticks those fields (a map with every field of the table is the same as none) |
 | `.sort(x => …)` with `x.a`, `desc(x.a)`, `asc(x.a)`, `x.a.desc()` | adds those orders (by fields of the result) |
 | `.page(n, size)` | takes the page and the rows per page |
 
@@ -229,7 +233,8 @@ rest, write the query by hand or finish the one it wrote:
 
 The diagram of the wizard is that of [Diagrams](Diagrams.md), with the checks of the fields:
 
-- the wheel zooms, dragging the background moves it, **fit** shows it all, **lay out again** puts the boxes back;
+- the wheel zooms, dragging the background moves it, **fit** shows it all, the outline shows where you are,
+  **lay out again** puts the boxes back;
 - a box or a line is dragged to place it, and the place is kept with the wizard;
 - **relation names** shows the name of each relation on its line;
 - **export** saves the diagram as PDF, PNG or SVG.

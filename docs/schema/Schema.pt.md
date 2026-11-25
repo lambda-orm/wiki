@@ -10,7 +10,15 @@ O esquema contém toda a configuração de que o ORM precisa. Ele separa o model
 
 O esquema pode ser escrito em um arquivo YAML ou JSON (normalmente `lambdaORM.yaml`), ou passado como um objeto quando o ORM é inicializado.
 
+Suas fontes podem ser bancos de dados (MySQL, MariaDB, PostgreSQL, SQL Server, Oracle, MongoDB, SQLite) e APIs REST, combinados no mesmo stage.
+
 Todas as expressões usadas para definir condições e ações são avaliadas pelo mecanismo de expressões [3xpr](https://www.npmjs.com/package/3xpr).
+
+## Num relance {#at-a-glance}
+
+Uma consulta é escrita sobre o **domínio**. As **views** decidem o que cada papel vê dele, e a **infraestrutura** decide onde cada entidade vive: o seu mapping nomeia as tabelas e colunas, e as regras do stage enviam cada sentença à sua fonte.
+
+![O schema: domínio, views e aplicação, infraestrutura e as suas fontes](images/schema-anatomy.svg)
 
 ## Exemplo {#example}
 
@@ -19,7 +27,7 @@ Este exemplo mostra um stage que usa duas fontes: a fonte 1 é MySQL e contém a
 Para a entidade `Countries`, os nomes da tabela e de suas colunas são os mesmos que os nomes da entidade e de suas propriedades, portanto nenhum mapeamento precisa ser escrito.
 Para a entidade `States`, os nomes da tabela e de suas colunas são diferentes, então o mapeamento os define.
 
-![diagrama](images/schema5.svg)
+![Stage stage1: States no PostgreSQL com o seu mapping, o resto no MySQL](images/schema5.svg)
 
 ## Nesta seção {#in-this-section}
 
@@ -27,7 +35,8 @@ Para a entidade `States`, os nomes da tabela e de suas colunas são diferentes, 
 - [Expressões](SchemaDefinition-Expressions.md), [Variáveis de ambiente](SchemaDefinition-EnvironmentVariables.md) e [Entidades compostas](SchemaDefinition-Composite.md).
 - [Uso do esquema](Schema-Use.md): como carregar o esquema e gerar o modelo.
 - Exemplos: [Básico](SchemaExample-Basic.md), [Extend](SchemaExample-Extend.md), [Múltiplos stages](SchemaExample-MultiplesStages.md), [Stage com múltiplas fontes](SchemaExample-StageMultiplesSources.md), [Composto](SchemaExample-Composite.md) e [Listener](SchemaExample-Listener.md).
-- [Sincronização](SchemaSynchronization.md): push, pull, fetch, introspect e incorporate.
-- [Mecanismos de banco de dados](Engines.md): diferenças entre os mecanismos de banco de dados.
+- [Views](Views.md), [Contexto e filtros de linhas](Context.md), [Observabilidade](Observability.md) e [Uma API REST como fonte](HttpSource.md).
+- [Sincronização](SchemaSynchronization.md): push, pull, fetch, introspect, incorporate, [migrações](SchemaSynchronization-Migrations.md) e [seed](SchemaSynchronization-Seed.md).
+- [Mecanismos de banco de dados](Engines.md): diferenças entre os mecanismos de banco de dados (PostgreSQL, MySQL, MariaDB, SQL Server, Oracle, SQLite e MongoDB).
 
 O [Data Gateway](../data-gateway/index.md) publica um esquema pela rede; suas próprias configurações estão em um [arquivo de configuração](../data-gateway/Configuration.md) separado.

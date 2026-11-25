@@ -1,6 +1,6 @@
 # Funciones de ordenación {#sort-functions}
 
-El método `sort` ordena las filas de una consulta (`ORDER BY` en SQL). Su predicado devuelve el campo por el que ordenar, opcionalmente envuelto en `asc` o `desc` para indicar la dirección. Sin `asc` ni `desc`, las filas se ordenan en orden ascendente.
+El método `sort` ordena las filas de una consulta (`ORDER BY` en SQL). Su predicado devuelve el campo por el que ordenar, opcionalmente envuelto en `asc` o `desc` para indicar la dirección. Sin `asc` ni `desc`, las filas se ordenan en orden ascendente. Para ordenar por varios campos o por una expresión, ver [Varios campos y expresiones](#several-fields-and-expressions).
 
 !!! note "Sobre los ejemplos"
     Los ejemplos se ejecutan sobre la entidad `Countries` del esquema de ejemplo de países. Cada uno muestra la consulta, el resultado que devolvió en la base de datos de pruebas y la sentencia SQL que λORM generó para MySQL. Los demás motores de base de datos reciben su propia traducción; para ver la sentencia generada para tu fuente de datos, se usa [`orm.plan`](../Metadata.md).
@@ -122,3 +122,34 @@ ORDER BY c.iso3 desc
 
 !!! warning "Hacer referencia a los campos a través del parámetro de la lambda"
     Hay que escribir `desc(p.iso3)`, no `desc(iso3)`. Un nombre al que no se accede a través del parámetro de la lambda (`p`) se interpreta como un parámetro de la consulta: `sort(p=> desc(iso3))` genera `ORDER BY ? desc`, y las filas no se ordenan por el campo.
+
+## Varios campos y expresiones {#several-fields-and-expressions}
+
+Para ordenar por varios campos, devuélvelos en un arreglo, por orden de prioridad; cada uno puede tener su propia dirección. También se puede ordenar por una expresión (una función o una operación), no solo por un campo. Clientes del ejemplo Northwind ordenados por país y, dentro de cada país, por la longitud del nombre, de mayor a menor:
+
+```typescript
+Customers.map(p => [p.country, p.name]).sort(p => [p.country, desc(length(p.name))])
+```
+
+**SQL generado (MySQL):**
+
+```sql
+SELECT c.Country AS country, c.CompanyName AS name
+FROM Customers c
+ORDER BY c.Country asc, CHAR_LENGTH(c.CompanyName) desc
+```
+
+## Soporte por base de datos {#database-support}
+
+!!! note "MongoDB"
+    MongoDB solo ordena por campos, así que λORM escribe cada expresión del orden como un campo de una etapa `$addFields` antes del `$sort` (a partir de `@lambdaorm/lib` 3.15.0). La consulta anterior queda así:
+
+    ```json
+    [
+      { "$addFields": { "__lambdaOrmSort1": { "$strLenCP": "$CompanyName" } } },
+      { "$sort": { "Country": 1, "__lambdaOrmSort1": -1 } },
+      { "$project": { "_id": 0, "country": "$Country", "name": "$CompanyName" } }
+    ]
+    ```
+
+    Una consulta agrupada ordenada por una expresión falla con `MongoDB doesn't sort a grouped query by an expression`: ordénala por un campo de su `map`.

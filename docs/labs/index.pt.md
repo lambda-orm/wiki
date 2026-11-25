@@ -17,6 +17,12 @@ Os labs são exemplos completos e executáveis do λORM. A maioria deles está n
 O [lab de mecanismos de banco de dados](https://github.com/lambda-orm/core/tree/main/packages/lib/src/dev/labs/engines) executa o mesmo modelo,
 as mesmas consultas e os mesmos scripts em PostgreSQL, MySQL, MariaDB, SQL Server, Oracle e MongoDB. Veja [Mecanismos de banco de dados](../schema/Engines.md).
 
+## Lab de observabilidade {#observability-lab}
+
+O [lab de observabilidade](https://github.com/lambda-orm/core/tree/main/packages/lib/src/dev/labs/observability)
+envia os logs, as métricas e os traces de uma consulta sobre PostgreSQL e MySQL para um coletor OpenTelemetry. Veja
+[Observabilidade](../schema/Observability.md).
+
 ## Data Gateway {#data-gateway}
 
 A seção [Data Gateway](../data-gateway/index.md) traz exemplos completos de sua configuração, de suas APIs REST, MCP e

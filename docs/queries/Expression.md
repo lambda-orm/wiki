@@ -58,7 +58,7 @@ The same query runs on any other engine: on MySQL, for example, the pagination b
 | delete | Deletes records; it always has a filter. | DELETE with WHERE | [Delete](Delete.md) |
 | deleteAll | Deletes all the records of an entity. | DELETE without WHERE | [Delete](Delete.md) |
 
-- There is no method for joins: an INNER JOIN is deduced when the query navigates a relation, as in `p.category.name` (see [Join](Join.md)).
+- There is no method for joins: an INNER JOIN is deduced when the query navigates a relation, as in `p.category.name` (see [Join](Join.md)); when the related entity is in another source, the query is solved across sources (see [Queries across sources](CrossSource.md)).
 - There is no method for GROUP BY: it is deduced when an aggregate function is used (see [Grouping](Grouping.md)).
 
 ## Operators
@@ -79,13 +79,16 @@ The operators are the same as in JavaScript.
 |:--|:--|:--|
 | Numeric | abs, ceil, cos, exp, ln, log, remainder, round, sign, sin, tan, trunc… | [Numeric](operatorsAndFunctions/Numeric.md) |
 | String | chr, lower, lpad, ltrim, replace, rpad, rtrim, substr, trim, upper, concat… | [String](operatorsAndFunctions/String.md) |
-| Datetime | curTime, today, now, time, date, dateTime, year, month, day, weekday, hours… | [Datetime](operatorsAndFunctions/Datetime.md) |
-| Convert | toString, toJson, toNumber | [String](operatorsAndFunctions/String.md) |
+| Datetime | curTime, today, now, time, date, dateTime, year, month, day, weekday, hour… | [Datetime](operatorsAndFunctions/Datetime.md) |
+| Convert | toString, toNumber | [String](operatorsAndFunctions/String.md) |
 | Nullable | nvl, nvl2, isNull, isNotNull | [Nullable](operatorsAndFunctions/Nullable.md) |
 | General | as, distinct | |
 | Sort | asc, desc | [Sort](operatorsAndFunctions/Sort.md) |
-| Condition | between, includes | [Comparison](operatorsAndFunctions/Comparison.md) |
+| Condition | between, in, includes | [Comparison](operatorsAndFunctions/Comparison.md) |
 | Group | avg, count, first, last, max, min, sum | [Group](operatorsAndFunctions/Group.md) |
 | Metadata | user, source | |
+| JSON | jsonHas, jsonSet, jsonIncludes (paths as `p.meta.address.zip`) | [JSON, vectors and points](JsonVectorsPoints.md) |
+| Vector | cosineDistance, l2Distance, innerProduct | [JSON, vectors and points](JsonVectorsPoints.md#vectors) |
+| Geo | point, distance, within, inside | [JSON, vectors and points](JsonVectorsPoints.md#points) |
 
 See [Operators & Functions](operatorsAndFunctions/OperatorsAndFunctions.md) for the full reference.

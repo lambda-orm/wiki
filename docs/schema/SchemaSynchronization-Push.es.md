@@ -1,17 +1,20 @@
 # Push {#push}
 
 Esta página explica push, que actualiza las fuentes (bases de datos) de un stage con el esquema: cómo funciona, el comando de la CLI `lambdaorm push` y el método `orm.stage.push()`.
+Ejecútalo después de cambiar el dominio o los mappings, para que las bases de datos reciban las nuevas tablas y columnas.
 
 ## Cómo funciona push {#how-push-works}
 
 Push lee las bases de datos del stage (como hace [fetch](SchemaSynchronization-Fetch.md)) y genera el DDL que las lleva al modelo:
 
 - Las tablas que no existen se crean con su clave primaria, clave única, claves foráneas e índices.
-- En las tablas existentes, se añaden las columnas que faltan (`ALTER TABLE … ADD`) y se modifican las columnas con otro tipo, longitud o nulabilidad.
+- En las tablas existentes, se añaden las columnas que faltan (`ALTER TABLE … ADD`) y se modifican las columnas con otro tipo, longitud o nulabilidad, con la sintaxis de cada motor (en MySQL y MariaDB la definición completa, así se conserva `AUTO_INCREMENT`; en SQL Server el tipo con su nulabilidad).
 - Una columna declarada con `previousMapping` en el mapping de su propiedad se renombra (`ALTER TABLE … RENAME COLUMN`, en SqlServer `sp_rename`) en lugar de añadirse. Ver [Renombrar una columna](SchemaDefinition.md#rename-a-column-with-previousmapping).
 - **Push nunca elimina** nada que solo exista en la base de datos (tablas, columnas). `fetch` lo informa, para poder eliminarlo a mano si hace falta.
 - Los tipos de columna siguen los tipos de propiedad y el `dbType` del mapping de la propiedad. Ver [Tipos de propiedad](SchemaDefinition.md#property-types).
 - Cada entidad va a la fuente que eligen las reglas del stage; una fuente sin condición solo recibe las entidades que no tomó ninguna otra fuente.
+- **Un cambio que puede perder datos detiene el push**: modificar una columna a un tipo que no es más amplio (`decimal` a `integer`, texto a fecha) o a un texto más corto (`string(50)` a `string(20)`). Push lista esos cambios y falla con un `DestructiveChangeError`; `--allow-destructive` los aplica. Ampliar un tipo o una longitud no es destructivo. Ver [Migraciones](SchemaSynchronization-Migrations.md).
+- En SQLite, la clave única es un índice único, las claves foráneas no se crean y un cambio del tipo o de la nulabilidad de una columna es un error. En MongoDB, que no tiene esquema, push crea las colecciones y sus índices. En una fuente Http push no hace nada. Ver [Motores de base de datos](Engines.md).
 
 Como la comparación se hace contra las bases de datos, push funciona igual en cualquier host o job de CI: no necesita la carpeta `orm_state` de un push anterior.
 La carpeta `orm_state` se sigue escribiendo, como registro de lo que se aplicó.
@@ -33,6 +36,8 @@ lambdaorm push
 | `-e`, `--envfile` | Archivo de variables de entorno que se lee. |
 | `-o`, `--output` | Genera el DDL sin aplicarlo (ver más abajo). |
 | `-f`, `--force` | Cuando una sentencia falla, continúa con las siguientes. |
+| `--allow-destructive` | Aplica también los cambios que pueden perder datos. |
+| `--seed` | Tras el push, inserta los datos con los que empieza el stage (ver [Seed](SchemaSynchronization-Seed.md)). |
 
 Ejemplo del DDL generado sobre una base de datos vacía:
 
@@ -78,11 +83,13 @@ Cuando push aplica los cambios, los registra en la carpeta `orm_state`:
 ├── orm_state
 │   ├── default-model.json
 │   └── main
+│       ├── U231122154351__push.sql
 │       └── V231122154351__push.sql
 ```
 
 - `<stage>-model.json`: el modelo del stage en el último push.
-- `<source>/V<yyMMddHHmmss>__push.sql`: las sentencias ejecutadas en esa fuente.
+- `<source>/V<yyMMddHHmmss>__push.sql`: las sentencias ejecutadas en esa fuente. La versión es la fecha, así que los archivos de dos desarrolladores no chocan en git.
+- `<source>/U<yyMMddHHmmss>__push.sql`: las sentencias que las deshacen (ver [Migraciones](SchemaSynchronization-Migrations.md)).
 
 Laboratorios:
 
@@ -106,7 +113,7 @@ import { Orm } from '@lambdaorm/lib'
 		const sentences = await orm.stage.push({ stage: 'default' }).sentence()
 		// the sentences grouped by source: [{ source: 'accounts', sentences: ['ALTER TABLE accounts ADD phone VARCHAR(32)'] }]
 		const bySource = await orm.stage.push({ stage: 'default' }).sentencesBySource()
-		// apply them
+		// apply them ({ stage: 'default', allowDestructive: true } also applies the changes that can lose data)
 		await orm.stage.push({ stage: 'default' }).execute()
 	} finally {
 		await orm.end()

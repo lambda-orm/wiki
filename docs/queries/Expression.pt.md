@@ -58,7 +58,7 @@ A mesma consulta é executada em qualquer outro mecanismo de banco de dados: no 
 | delete | Exclui registros; sempre tem um filtro. | DELETE com WHERE | [Delete](Delete.md) |
 | deleteAll | Exclui todos os registros de uma entidade. | DELETE sem WHERE | [Delete](Delete.md) |
 
-- Não há método para joins: um INNER JOIN é deduzido quando a consulta navega por uma relação, como em `p.category.name` (veja [Join](Join.md)).
+- Não há método para joins: um INNER JOIN é deduzido quando a consulta navega por uma relação, como em `p.category.name` (veja [Join](Join.md)); quando a entidade relacionada está em outra fonte, a consulta é resolvida entre fontes (veja [Consultas entre fontes](CrossSource.md)).
 - Não há método para GROUP BY: ele é deduzido quando uma função de agregação é usada (veja [Agrupamento](Grouping.md)).
 
 ## Operadores {#operators}
@@ -79,13 +79,16 @@ Os operadores são os mesmos do JavaScript.
 |:--|:--|:--|
 | Numéricas | abs, ceil, cos, exp, ln, log, remainder, round, sign, sin, tan, trunc… | [Numéricas](operatorsAndFunctions/Numeric.md) |
 | String | chr, lower, lpad, ltrim, replace, rpad, rtrim, substr, trim, upper, concat… | [String](operatorsAndFunctions/String.md) |
-| Data e hora | curTime, today, now, time, date, dateTime, year, month, day, weekday, hours… | [Data e hora](operatorsAndFunctions/Datetime.md) |
-| Conversão | toString, toJson, toNumber | [String](operatorsAndFunctions/String.md) |
+| Data e hora | curTime, today, now, time, date, dateTime, year, month, day, weekday, hour… | [Data e hora](operatorsAndFunctions/Datetime.md) |
+| Conversão | toString, toNumber | [String](operatorsAndFunctions/String.md) |
 | Nulos | nvl, nvl2, isNull, isNotNull | [Nulos](operatorsAndFunctions/Nullable.md) |
 | Gerais | as, distinct | |
 | Ordenação | asc, desc | [Ordenação](operatorsAndFunctions/Sort.md) |
-| Condição | between, includes | [Comparação](operatorsAndFunctions/Comparison.md) |
+| Condição | between, in, includes | [Comparação](operatorsAndFunctions/Comparison.md) |
 | Agrupamento | avg, count, first, last, max, min, sum | [Agrupamento](operatorsAndFunctions/Group.md) |
 | Metadados | user, source | |
+| JSON | jsonHas, jsonSet, jsonIncludes (caminhos como `p.meta.address.zip`) | [JSON, vetores e pontos](JsonVectorsPoints.md) |
+| Vetores | cosineDistance, l2Distance, innerProduct | [JSON, vetores e pontos](JsonVectorsPoints.md#vectors) |
+| Geo | point, distance, within, inside | [JSON, vetores e pontos](JsonVectorsPoints.md#points) |
 
 Veja [Operadores e funções](operatorsAndFunctions/OperatorsAndFunctions.md) para a referência completa.

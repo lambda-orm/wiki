@@ -45,6 +45,7 @@ Los argumentos disponibles en `condition`, `before`, `after` y `error`:
 | query       | La expresión de consulta que se ejecutó                                                                         |
 | data        | Los datos que se enviaron al ejecutar la expresión                                                              |
 | options     | Las opciones que se enviaron al ejecutar la expresión                                                           |
+| context     | El [contexto](Context.md) de quien la ejecuta (`options.context`)                                               |
 | result      | Solo está disponible en el evento after y contiene el resultado de la ejecución de la expresión                 |
 | action      | La acción que se ejecutó (select, insert, bulkInsert, update, upsert, merge, bulkMerge, delete, bulkDelete)     |
 | type        | El tipo de sentencia que se ejecutó (dql, dml)                                                                  |

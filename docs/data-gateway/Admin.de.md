@@ -5,6 +5,10 @@ bearbeitet und entfernt**, als YAML oder Element für Element, Gespeichertes (Ab
 Workspaces geteilt, und die **Befehle der [CLI](../cli/index.md)** laufen aus der UI. Alles liegt im Volume des
 Gateways, ein Workspace pro Schema; das Gateway bemerkt Änderungen und stellt sie ohne Neustart bereit.
 
+Aktivieren Sie sie dort, wo Menschen die Schemas modellieren (Entwicklung, eine gemeinsame Modellierungsumgebung). In der
+Produktion, wenn die Schemas fertig im Volume liegen, lassen Sie `management` weg: Die Datentransporte funktionieren
+genauso, und über das Gateway kann nichts die Schemas oder die Struktur der Datenbanken ändern.
+
 ## Aktivieren {#turning-it-on}
 
 ```yaml
@@ -48,7 +52,7 @@ Jeder Ordner unter `orm.workspacePath` mit einer `lambdaORM.yaml` ist ein Schema
   .env               die Variablen seiner Verbindungen
   workbench/         Gespeichertes: Ordner, *.query.yaml, *.script.yaml, *.diagram.yaml
   data/              Exporte
-  src/domain/        der Code von build
+  src/domain/        der Code von build (nach 4.0.0: src/<language>/domain/)
   orm_state/         der Zustand von λORM und das Protokoll jedes Befehls
 ```
 
@@ -105,6 +109,7 @@ nach dem anderen pro Schema), aus dem Bereich **Befehle** der UI:
 
 | Befehl | Vor dem Ausführen zeigt die UI | Berechtigung |
 | --- | --- | --- |
+| `version` | — (die Versionen des Gateways und des Schemas) | `read` |
 | `fetch` | — (vergleicht die Datenbanken mit dem Modell) | `read` |
 | `export` | — (heruntergeladen oder in `data/` gespeichert) | `read` |
 | `push` | die Befehle pro Source | `ddl` |
@@ -116,8 +121,21 @@ nach dem anderen pro Schema), aus dem Bereich **Befehle** der UI:
 | `build` | — (in `src/` geschrieben oder als `.zip` heruntergeladen) | `build` |
 
 Ein Befehl, der die Datenbanken oder das Schema ändert, führt **genau die gezeigte Vorschau** aus, einmal, innerhalb
-von 10 Minuten, und nur solange die `lambdaORM.yaml` die ist, mit der sie erstellt wurde. Jeder Job hinterlässt sein
-Protokoll in `orm_state/jobs/`; `push`, `drop` und `import` werden [auditiert](Security.md#audit).
+von 10 Minuten, und nur solange die `lambdaORM.yaml` die ist, mit der sie erstellt wurde (sonst
+`409 PreviewRequiredError`); ein weiterer Befehl desselben Schemas, während einer läuft, antwortet mit `409 BusyError`.
+Jeder Job hinterlässt sein Protokoll in `orm_state/jobs/`; `push`, `drop` und `import` werden
+[auditiert](Security.md#audit). `admin.commandTimeoutMs` (10 Minuten) begrenzt, wie lange einer dauern darf.
+
+Über die API ist ein Befehl eine Vorschau und dann ein Job:
+
+```sh
+S="X-Data-Gateway-Session: $TOKEN"
+curl -X POST http://data-gateway:9090/admin/workspaces/~/commands/push/preview -H "$S" -H "Content-Type: application/json" -d '{"stage": "default"}'
+# {"previewId":"…","stage":"default","sentences":[…],"expiresAt":"…"}
+curl -X POST http://data-gateway:9090/admin/workspaces/~/commands/push -H "$S" -H "Content-Type: application/json" -d '{"stage": "default", "previewId": "…"}'
+# 202 {"id":"…","command":"push","status":"running",…}
+curl http://data-gateway:9090/admin/workspaces/~/jobs/<id> -H "$S"
+```
 
 ## Gespeichertes {#what-is-saved}
 
@@ -125,6 +143,30 @@ Mit `workbenchWrite` werden Ordner, Abfragen, Skripte und Diagramme des Explorer
 gespeichert, eine Datei pro Element, und alle mit Zugriff auf das Schema sehen sie (sie lassen sich mit git neben dem
 Schema versionieren). Ohne sie bleiben sie wie bisher im Browser. Eine von Hand geschriebene Datei ist ebenfalls ein
 Element; eine, die kein gültiges YAML ist, wird als solche gezeigt und nie überschrieben.
+
+## Stages und ihre Quellen {#stages-and-their-sources}
+
+In einer Stage hat jede Quelle eine `condition`, einen Ausdruck, der entscheidet, welche Sätze zu ihr gehen (die erste
+Quelle, deren Bedingung wahr ist; eine letzte ohne Bedingung nimmt den Rest). Die IDE schreibt sie mit Vorschlägen, und
+das Gateway prüft sie während der Eingabe (`/admin/expressions/check`): Eine Bedingung, die sich nicht parsen lässt, ist
+ein Fehler des Schemas, eine Variable, die nicht zu einem Satz gehört (`entity`, `action`, `category`, `type`, `read`,
+`write`, `dml`, `ddl`), eine Warnung.
+
+## Dateien und wo jeder stand {#files-and-where-each-one-was}
+
+- Die Dateien von `data/` und `src/` können aufgelistet und gelesen werden (`/admin/workspaces/{route}/files`), nie die
+  `.env`, `orm_state/` oder eine versteckte Datei.
+- Wo die IDE jeder Zugangsdaten stand (ihre Tabs und deren Entwürfe, was aufgeklappt ist), speichert das Gateway in
+  `<orm.workspacePath>/.data-gateway/state.sqlite` (`/admin/session`), sodass ein Neuladen oder ein anderer Browser dort
+  beginnt.
+
+## In der nächsten Version {#in-the-next-version}
+
+Nicht im Image 4.0.0: die **Historie eines Schemas** (jede über die Administration gemachte Änderung, mit wem, vorher,
+nachher und dem Diff, in `logs/changes.jsonl` des Workspaces und unter `GET /admin/workspaces/{route}/history`), das
+**Routing einer Stage** (wohin jede Entität geht, `…/stages/{stage}/routing`) und `build` pro Sprache
+(`src/<language>/domain/`), mit nur dem Modell oder nur den Repositories, ein generierter Code als Zip heruntergeladen
+oder entfernt.
 
 ## Über MCP {#over-mcp}
 

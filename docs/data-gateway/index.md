@@ -23,13 +23,17 @@ and every change is audited.
 **What it does:**
 
 - Serves **one or several λORM schemas** per instance, each at a route (`/iot/v1`, `/iot/v2`, `/accounts`).
-- Exposes them by four **transports**, each one only when it has a port: REST (`http`), MCP (`mcpHttp`,
-  `mcpWebSocket`) and a JSON-RPC API over WebSocket (`webSocket`).
+- Exposes them by four data **transports**, each one only when it has a port: REST (`http`), MCP (`mcpHttp`,
+  `mcpWebSocket`) and a JSON-RPC API over WebSocket (`webSocket`); and a fifth, `management`, for the IDE and the
+  administration, kept on an internal network.
 - Every operation of λORM: queries (`execute`, `plan`, `metadata`, `model`, `parameters`, `constraints`), scripts
   (several queries in one transaction), queued executions (Kafka), the schema and its model, and stages (export,
   import).
 - **Authentication** (API key, bearer token, basic) and **permissions** per credential (`read`, `write`, `script`,
   `queue`, `stageImport`), globally, per transport or per schema.
+- **Administration** of the workspaces through `management`: schemas created, edited (as YAML or element by element)
+  and removed, the variables of their connections, and the commands of the CLI (`push`, `pull`, `import`, …) with a
+  preview, under permissions of their own; the schemas reload without restarting the gateway.
 - **Isolation**: each schema runs in its own worker, with its own environment and connections; one that fails doesn't
   affect the others.
 - **Audit** of writes, **metrics** (Prometheus), **health** (Kubernetes probes), limits (rate, concurrency, sizes,
@@ -66,9 +70,9 @@ slow down another; a schema whose database is down answers `503` and is retried,
 | --- | --- |
 | **Schema** | a λORM workspace (a folder with `lambdaORM.yaml`): domain, sources, mappings, stages; served at a route |
 | **Route** | where a schema is reached: `/iot/v1/execute`, `/iot/v1/mcp`, `ws://host/iot/v1`; a single schema can be at the root |
-| **Transport** | a way in, on its own port: `http`, `mcpHttp`, `mcpWebSocket`, `webSocket` |
+| **Transport** | a way in, on its own port: `http`, `mcpHttp`, `mcpWebSocket`, `webSocket`, and `management` (the IDE's) |
 | **Credential** | a key, token or user with a **name** and **permissions**; sent by the client in each request |
-| **Permission** | `read`, `write`, `script`, `queue`, `stageImport`: what the credential can do, on every transport |
+| **Permission** | `read`, `write`, `script`, `queue`, `stageImport`: what the credential can do, on every transport; the administration has its own (`schemaRead`, `ddl`, …), never given by default |
 | **Stage** | a λORM scenario of a schema (which sources hold which entities); chosen with `options.stage` |
 | **Worker** | where a schema runs: a thread or a process of its own |
 
@@ -90,6 +94,7 @@ slow down another; a schema whose database is down answers `503` and is retried,
 - [MCP](Mcp.md): the tools, resources and transports for AI agents.
 - [WebSocket API](WebSocket.md): the JSON-RPC methods and the notifications.
 - [Security](Security.md): authentication, permissions, audit, limits and errors.
+- [Administration](Admin.md): the workspaces edited from the IDE, the commands, the concurrency.
 - [UI](../ide/index.md): the IDE: connections, explorer, entity forms, queries, saved queries and diagrams.
 - [Clients](Clients.md): `@lambdaorm/client`, the CLI and the OpenAPI document.
 - [Operations](Operations.md): Docker, Kubernetes, health, metrics and logs.

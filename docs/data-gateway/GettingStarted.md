@@ -143,6 +143,10 @@ services:
 The keys `reader-demo-key` and `backend-demo-key` are for this example only: in any real use, give `READER_KEY` and
 `BACKEND_KEY` long random values (`openssl rand -hex 24`).
 
+The gateway runs as the user `1000` and writes in `workspace/` (the state of the stage that `push` creates, the
+sessions of the IDE). If your user is another one (`id -u`), add `user: "<uid>:<gid>"` to the `data-gateway` service
+with your ids, or make the folder writable by `1000`.
+
 ## 2. Start it
 
 ```sh
@@ -264,8 +268,10 @@ A script chooses the status of the answer with `throw { status, message }`: a `c
 
 ## 8. The API documentation
 
-`http://localhost:8080/doc/` is the Swagger UI of the REST API. **Authorize** asks for the API key in the
-`X-Api-Key` header; then every method can be tried from the page.
+`http://localhost:8080/doc/` (also `/api-docs`, and `/` redirects there) is the Swagger UI of the REST API: every
+method of the schema with its body and its answers. **Authorize** asks for the API key in the `X-Api-Key` header; then
+every method can be tried from the page with **Try it out**. The document itself, to generate a client, is
+`http://localhost:8080/openapi.json`.
 
 ![Swagger](images/swagger.png)
 

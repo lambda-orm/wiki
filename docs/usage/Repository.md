@@ -18,14 +18,16 @@ import { Repository, IOrm } from '@lambdaorm/lib'
 import { Product, QryProduct } from './model'
 
 export class ProductRepository extends Repository<Product, QryProduct> {
-  constructor (stage?: string, orm?: IOrm) {
-    super('Products', stage, orm)
+  constructor (stage?: string, orm?: IOrm, view?: string) {
+    super('Products', stage, orm, view)
   }
   // Add your code here
 }
 ```
 
-The constructor receives the stage (optional: the default stage when omitted) and, optionally, the `orm` instance.
+The constructor receives the stage (optional: the default stage when omitted) and, optionally, the `orm` instance and
+the [view](../schema/Views.md) its queries use. With `lambdaorm build --view <name>`, the view is the default of the
+generated constructor.
 
 ## Example
 

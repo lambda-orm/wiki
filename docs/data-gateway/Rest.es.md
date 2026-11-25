@@ -1,7 +1,9 @@
 # API REST {#rest-api}
 
 El transporte `http` ([Transportes](Transports.md#http)) expone todas las operaciones de λORM sobre un esquema como REST, con JSON
-de entrada y de salida. El gateway sirve el documento OpenAPI 3 en `/doc` (Swagger UI) y `/api-docs`.
+de entrada y de salida: la vía de entrada para una aplicación en cualquier lenguaje, o para una herramienta que habla
+HTTP. El gateway sirve su documento OpenAPI 3 en `/openapi.json` y Swagger UI, para leer y probar cada método, en `/doc`
+(y `/api-docs`).
 
 ## Rutas {#routes}
 
@@ -13,8 +15,9 @@ Los ejemplos usan un gateway en `http://localhost:8080` con una API key. Los mé
 
 Con `transports.http.basePath: /data-gateway`, todas las rutas quedan bajo ella: `/data-gateway/iot/v1/execute`.
 
-- Todas las peticiones necesitan la credencial, excepto `/ping`, `/health` y `/metrics` (en la raíz y bajo cada esquema),
-  `/schemas`, `/version`, `/transports` y `/doc`. Cómo se envía depende de la [autenticación](Security.md):
+- Todas las peticiones necesitan la credencial, excepto `/ping`, `/health`, `/metrics` y `/version` (en la raíz y bajo
+  cada esquema), `/schemas`, `/transports` y la documentación (`/openapi.json`, `/doc`, `/api-docs`). Cómo se envía
+  depende de la [autenticación](Security.md):
   `X-Api-Key: <key>`, `Authorization: Bearer <token>` o `Authorization: Basic <base64>`.
 - `?format=beautiful` indenta el JSON de la respuesta.
 - `data` (los parámetros de una consulta) y `options` (por ejemplo `{ "stage": "default" }`) son objetos JSON; también se acepta
@@ -29,11 +32,15 @@ Con `transports.http.basePath: /data-gateway`, todas las rutas quedan bajo ella:
 | Método | Ruta | Responde | Credencial |
 | --- | --- | --- | --- |
 | `GET` | `/ping` | `{ "message": "pong", "time" }` | no |
-| `GET` | `/health` | `200` mientras algún esquema esté `ready`, `503` si ninguno lo está | no |
+| `GET` | `/health` | `{ "message", "time", "uptime", "schemas" }`: `OK` cuando todos los esquemas están `ready`, `DEGRADED` si no; siempre `200` mientras el gateway responde | no |
 | `GET` | `/metrics` | las métricas de todos los workers, en texto Prometheus | no |
-| `GET` | `/version` | la versión del gateway | no |
+| `GET` | `/version` | `{ "version" }`, la versión del gateway | no |
 | `GET` | `/schemas` | cada esquema con su estado | no |
-| `GET` | `/whoami` | el nombre y los permisos de la credencial | sí |
+| `GET` | `/transports` | los transportes del gateway: puerto, base path, cómo se llega a un esquema, su documento ([Transportes](Transports.md#http)) | no |
+| `GET` | `/openapi.json` | el documento OpenAPI 3 (con `swagger.enabled`) | no |
+
+Con un único esquema en la raíz, sus propias rutas (abajo) ocupan el lugar de `/ping`, `/health` y `/version`, y
+`/whoami` también está en la raíz.
 
 ```sh
 curl http://localhost:8080/schemas
@@ -46,7 +53,9 @@ curl http://localhost:8080/schemas
 ]
 ```
 
-Los estados son `starting`, `ready`, `error` y `restarting`.
+Los estados son `starting`, `ready`, `error` y `restarting`; `reason` dice por qué un esquema no está `ready`, y
+`pending` por qué no arrancó una versión nueva de su workspace mientras la última sigue sirviendo
+([Administración](Admin.md#workspaces-in-the-volume)).
 
 ## Estado de un esquema {#state-of-a-schema}
 
@@ -55,10 +64,10 @@ Bajo la ruta de cada esquema (`/iot/v1/…`), estos métodos responden solo sobr
 | Método | Ruta | Responde |
 | --- | --- | --- |
 | `GET` | `/{schema}/ping` | `200` si el esquema está `ready`, `503` si no |
-| `GET` | `/{schema}/health` | el estado del esquema; `503` si no está `ready` |
+| `GET` | `/{schema}/health` | `{ "message": "OK", "time", "uptime" }`; `503` si el esquema no está `ready` |
 | `GET` | `/{schema}/metrics` | las métricas de ese esquema |
-| `GET` | `/{schema}/version` | las versiones del gateway y del esquema |
-| `GET` | `/{schema}/whoami` | el nombre y los permisos de la credencial con la autenticación de ese esquema, y si tiene los scripts habilitados |
+| `GET` | `/{schema}/version` | `{ "version" }`, la versión del gateway (la versión del esquema es `GET /{schema}/schema/version`) |
+| `GET` | `/{schema}/whoami` | el nombre y los permisos de la credencial con la autenticación de ese esquema, y si tiene los scripts habilitados (necesita la credencial) |
 
 ```sh
 curl http://localhost:8080/iot/v1/whoami -H "X-Api-Key: $KEY"
@@ -197,7 +206,7 @@ Un script puede elegir el status de la respuesta con `throw { status, message }`
 ### execute-queued {#execute-queued}
 
 `POST /{schema}/execute-queued` ejecuta una consulta en segundo plano y envía su resultado a un topic de Kafka, en bloques.
-Responde de inmediato `{ "queueId": "…" }`; los mensajes llevan las claves `<queueId>-<chunk>`. Cuerpo
+Responde de inmediato el id de la ejecución, como un string JSON (`"…"`); los mensajes llevan las claves `<queueId>-<chunk>`. Cuerpo
 `{ topic, query, data?, chunk?, options? }`. Necesita el permiso `queue` (y `write` si la consulta escribe) y una
 `infrastructure.queue` en el `lambdaORM.yaml` del esquema.
 
@@ -347,18 +356,26 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 
 En el [transporte `management`](Transports.md#management) ([Administración](Admin.md)), bajo `/admin`. Un workspace se nombra por su ruta en un segmento (`iot%2Fv1`; `~` la raíz). Cada lectura devuelve su versión (`ETag`); cada escritura dice cuál cambia (`If-Match`, o el elemento como se leyó): otra versión es un `412` con lo que hay ahora.
 
-| Method | Route | | Permission |
+| Método | Ruta | | Permiso |
 | --- | --- | --- | --- |
-| `GET` | `/admin` | `{ enabled, can }` | — |
-| `GET` / `POST` | `/admin/workspaces` | the workspaces / a new one (`{ path, copyOf? }`) | `schemaRead` / `schemaAdmin` |
-| `DELETE` | `/admin/workspaces/{route}?confirm={route}` | to `.trash` | `schemaAdmin` |
-| `GET` / `PUT` / `PATCH` | `/admin/workspaces/{route}/schema` | the `lambdaORM.yaml`; replaced; one element changed (`{ op, at, value?, to?, expected? }`) | `schemaRead` / `schemaWrite` |
-| `POST` | `/admin/workspaces/{route}/references` | who uses an element | `schemaRead` |
+| `GET` | `/admin` | `{ enabled, can }`: lo que puede hacer esta credencial | — |
+| `GET` / `POST` | `/admin/workspaces` | los workspaces / uno nuevo (`{ path, template?, copyOf?, name?, description? }`) | `schemaRead` / `schemaAdmin` |
+| `DELETE` | `/admin/workspaces/{route}?confirm={route}` | a `.trash` | `schemaAdmin` |
+| `GET` / `PUT` / `PATCH` | `/admin/workspaces/{route}/schema` | el `lambdaORM.yaml`; reemplazado; un elemento cambiado (`{ op, at, value?, to?, expected? }`) | `schemaRead` / `schemaWrite` |
+| `POST` | `/admin/workspaces/{route}/references` | quién usa un elemento | `schemaRead` |
 | `POST` | `/admin/validate` | `{ text }` → `{ valid, issues }` | `schemaRead` |
-| `GET` / `PUT` | `/admin/workspaces/{route}/variables` | the variables of the connections (never their value) / set or removed | `schemaRead` / `schemaAdmin` |
-| `GET` / `PUT` / `POST` | `/admin/workbench`, `/admin/workbench/remove` | what is saved / saved / removed | `read` / `workbenchWrite` |
-| `GET` | `/admin/workspaces/{route}/commands` | the stages and what may be run | `read` |
-| `POST` | `/admin/workspaces/{route}/commands/{command}/preview` | what it will do | the command's |
-| `POST` | `/admin/workspaces/{route}/commands/{command}` | runs it (`{ stage?, previewId?, force?, save? }`) → a job | the command's |
-| `GET` | `/admin/workspaces/{route}/jobs[/{id}]` | the last jobs / one with its result | `read` |
-| `POST` / `GET` | `/admin/workspaces/{route}/build`, `…/build.zip` | the code of the domain in `src/` / as a zip | `build` |
+| `GET` / `PUT` | `/admin/workspaces/{route}/variables` | las variables de las conexiones (nunca su valor) / definidas o quitadas (`{ set?, remove? }`) | `schemaRead` / `schemaAdmin` |
+| `GET` | `/admin/workspaces/{route}/files?dir=`, `…/files/content?path=` | los archivos de `data/` y `src/` / el texto de uno (nunca `.env`, `orm_state/` ni un archivo oculto) | `schemaRead` |
+| `GET` / `POST` | `/admin/expressions`, `/admin/expressions/check` | el lenguaje de las expresiones (3xpr) / una expresión verificada (`{ expression, context? }`), para la condición de un source de un stage | `schemaRead` |
+| `GET` / `PUT` | `/admin/session` | dónde estaba el IDE de esta credencial (sus pestañas, lo desplegado) / guardado | cualquiera |
+| `GET` / `PUT` / `POST` | `/admin/workbench`, `/admin/workbench/remove` | lo guardado / guardar / eliminar | `read` / `workbenchWrite` |
+| `GET` | `/admin/workspaces/{route}/commands` | los stages y lo que se puede ejecutar | `read` |
+| `POST` | `/admin/workspaces/{route}/commands/{command}/preview` | lo que hará | el del comando |
+| `POST` | `/admin/workspaces/{route}/commands/{command}` | lo ejecuta (`{ stage?, previewId?, force?, save? }`) → un job | el del comando |
+| `GET` | `/admin/workspaces/{route}/jobs[/{id}]` | los últimos jobs / uno con su resultado | `read` |
+| `POST` / `GET` | `/admin/workspaces/{route}/build`, `…/build.zip` | el código del dominio en `src/` / como zip | `build` |
+
+Después de 4.0.0 (en la próxima versión de la imagen): `GET /admin/workspaces/{route}/history` (los cambios del
+esquema, con quién y el diff; `schemaRead`), `GET /admin/workspaces/{route}/stages/{stage}/routing` (el source de cada
+entidad de un stage; `schemaRead`), `GET …/files.zip?dir=` (una carpeta de `data/` o `src/` como zip; `schemaRead`) y
+`DELETE …/files?dir=src/…` (quita un código generado; `build`).

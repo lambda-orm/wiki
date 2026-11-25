@@ -4,7 +4,7 @@ Esta página presenta el lenguaje de consultas de λORM: cómo es una consulta, 
 
 Las consultas de λORM se escriben como [expresiones lambda de JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) sobre las entidades del dominio. Se pueden escribir como código TypeScript/JavaScript, navegando por las entidades del modelo, o enviar como un string (por ejemplo desde la [CLI](../cli/index.md) o al [Data Gateway](../data-gateway/index.md)).
 
-λORM traduce cada consulta al lenguaje del motor de base de datos de cada fuente (SQL para MySQL, MariaDB, PostgreSQL, SQL Server, Oracle y SQLite, o consultas de MongoDB).
+λORM traduce cada consulta al lenguaje del motor de base de datos de cada fuente (SQL para MySQL, MariaDB, PostgreSQL, SQL Server, Oracle y SQLite, pipelines de agregación de MongoDB, o peticiones HTTP a una API REST para una [fuente Http](../schema/HttpSource.md)). Una consulta también puede combinar entidades de distintas fuentes: ver [Consultas entre fuentes](CrossSource.md).
 
 ## Tipos de consultas {#query-types}
 
@@ -12,7 +12,7 @@ Las consultas de λORM se escriben como [expresiones lambda de JavaScript](https
 
 Las consultas DQL (Data Query Language) obtienen datos. Pueden ser tan simples como leer todos los registros de una entidad, o pueden filtrar, ordenar, agrupar y paginar los registros, calcular valores a partir de ellos y cargar entidades relacionadas.
 
-**Ver:** [Select](Select.md), [Join](Join.md), [Agrupación](Grouping.md), [Include](Include.md)
+**Ver:** [Select](Select.md), [Join](Join.md), [Agrupación](Grouping.md), [Include](Include.md), [JSON, vectores y puntos](JsonVectorsPoints.md), [Consultas entre fuentes](CrossSource.md)
 
 ### DML {#dml}
 

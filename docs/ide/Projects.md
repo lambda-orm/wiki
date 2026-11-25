@@ -1,15 +1,17 @@
-# Projects
+# Workbench
 
-What you keep of a schema, under **projects** in the [explorer](Explorer.md): folders, queries and diagrams. A project
-is a folder at the top; folders nest to organise what is saved.
+What you keep of a schema, under **Workbench** in the [explorer](Explorer.md): projects, folders, queries and
+diagrams. A project is a folder at the top; folders nest to organise what is saved. Keep there the queries you run
+again, the diagrams that explain the domain and the [diagrams of the stages](Administration.md#the-diagram-of-a-stage),
+each with a name and a description.
 
 ## Adding
 
-The **+** of **projects** or of a folder:
+The **+** of **Workbench** or of a folder:
 
 | Item | What it asks |
 | --- | --- |
-| **New project** / **New folder** | a name, a description and the folder it goes in |
+| **New project** (in **Workbench**) / **New folder** (in a folder): both open the **New folder** dialog | a name, a description and the folder it goes in |
 | **New query** | opens a query tab in that folder; its first **Save** asks for its name |
 | **New diagram** | a name, a description, the folder and the entities ([Diagrams](Diagrams.md#a-new-diagram)) |
 
@@ -25,23 +27,26 @@ the options and, when the [wizard](QueryWizard.md) wrote it, the wizard.
 - A saved query whose schema is changed in its tab is saved as a new one.
 - Opening a saved query that is already open goes to its tab.
 
+A diagram saves with **Save** in its bar ([Diagrams](Diagrams.md)); a diagram of a stage asks the first time for its
+name, description and folder, and has **Save as…** too.
+
 ## Editing, moving, deleting
 
-Each row has **Edit** (its name, description and folder) and **Delete** (asked first; a folder takes what it holds).
-Items are **moved by dragging** them onto a folder, or onto **projects** to take them to the top, within the same
-schema. Two items of the same kind can't have the same name in a folder (`There is already one with that name here`).
-The description shows when the pointer is over the item.
+Each row has ✎ **Edit** (its name, description and folder) and 🗑 **Delete** (asked first; a folder takes what it
+holds). Items are **moved by dragging** them onto a folder, or onto **Workbench** to take them to the top, within the
+same schema. Two items of the same kind can't have the same name in a folder (`There is already one with that name
+here.`). The description shows when the pointer is over the item.
 
 ## Where it is saved {#where-it-is-saved}
 
 | The credential has | What is saved goes to | Seen by |
 | --- | --- | --- |
-| `workbenchWrite` | the `workbench/` folder of the workspace of the schema, in the gateway: one file per item (`sales/German orders.query.yaml`) | everyone who uses that schema, from any browser or the desktop app |
+| `workbenchWrite` | the `workbench/` folder of the workspace of the schema, in the gateway: one file per item (`sales/German orders.query.yaml`, `model.diagram.yaml`) | everyone who uses that schema, from any browser or the desktop app |
 | no `workbenchWrite` | **this browser**, in its storage, apart for each gateway and credential | only this browser on this device, with that credential |
 
 In the workspace, two people saving the same item at once is detected: the second is told that someone else changed it
-meanwhile, and the item is read again. Files of `workbench/` that can't be read are listed in the explorer, to fix them
-by hand.
+meanwhile, and the item is read again. What someone else saves shows at once. Files of `workbench/` that can't be read
+are listed under the connection, to fix them by hand.
 
 In the browser:
 

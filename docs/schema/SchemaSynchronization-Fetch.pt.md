@@ -1,6 +1,7 @@
 # Fetch {#fetch}
 
 Esta página explica o fetch, que mostra as diferenças entre as fontes (bancos de dados) de um stage e o esquema sem aplicar nenhuma alteração: o que ele compara, o comando da CLI `lambdaorm fetch` e o método `orm.stage.fetch()`.
+Use-o antes de um push, para ver o que ele alteraria, ou na CI, para detectar um banco de dados que se afastou do modelo.
 
 ## O que o fetch compara {#what-fetch-compares}
 
@@ -15,6 +16,7 @@ Cada entidade tem suas `differences`, em texto legível. **Quando os bancos de d
 
 Relações (chaves estrangeiras) e índices não são comparados.
 No MongoDB, que não tem esquema, o fetch apenas verifica se cada coleção existe.
+No SQLite ele lê a estrutura de `sqlite_master`; no PostgreSQL ele lê as colunas `geography` e `vector` com seu tipo, de modo que não mostram nenhuma diferença falsa.
 
 Exemplo de resultado, depois de adicionar a propriedade `phone` a `Customers` no modelo:
 

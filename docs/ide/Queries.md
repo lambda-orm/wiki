@@ -1,8 +1,10 @@
 # Queries
 
-Each query is a tab with its own schema, text, data, options and result; switching tabs loses nothing. A tab is opened
-with the **+** of the tabs, with **Query** of an entity, or from a saved query; the [query wizard](QueryWizard.md)
-writes one from a diagram.
+A query tab is where a query of λORM's [language](../queries/Query-Language.md) is written, checked and run against a
+schema of the gateway, with its data and options, and its result seen as a tree, a table, JSON or YAML. Each tab has its
+own schema, text, data, options and result; switching tabs loses nothing. A tab is opened with the **+** of the tabs,
+with **Query** of an [entity](Entities.md), from a saved query, from **query of the diagram** of a
+[diagram](Diagrams.md), or by the [query wizard](QueryWizard.md), which writes one from a diagram.
 
 ![A query and its result](images/ide-query.png)
 
@@ -11,11 +13,11 @@ writes one from a diagram.
 | Control | What it does |
 | --- | --- |
 | **schema** | the schema the query runs on (only those that are ready; `/` is the one at the root) |
-| **query** / **script** | the mode: a query, or a [script](../data-gateway/Rest.md#script), several queries in one transaction (only when the schema has scripts enabled and the gateway offers them). Each mode keeps its own text |
+| **query** / **script** | the mode: a query, or a [script](../data-gateway/Rest.md#script), several queries in one transaction (it runs where the schema has scripts enabled). Each mode keeps its own text |
 | copy | copies the query (or the script) |
 | format | puts each clause of the query on its own line ([below](#format)) |
 | **wizard** | opens the [query wizard](QueryWizard.md) on this query |
-| **Save** (Ctrl+S) / **Save as…** | keeps the query in a [project](Projects.md); **saved** says it has no changes |
+| **Save** (Ctrl+S) / **Save as…** | keeps the query in the [workbench](Projects.md); **saved** says it has no changes |
 
 ## The editor
 
@@ -63,17 +65,17 @@ query, each with a value of its type (`0`, `""`, today…), keeping those alread
 ## Options
 
 The options the query runs with, on one line (`none: the defaults`, or `stage: default · view: sales`), and **edit**,
-which opens them as a form or as JSON:
+which opens them as a **form** or as **JSON**; **done** closes them:
 
 | Option | What it is |
 | --- | --- |
-| **stage** | where it runs: a stage of the schema; empty, its default one |
-| **view** | a view of the schema, which limits what can be read |
+| **stage** | where it runs: a stage of the schema, to choose; empty, its default one |
+| **view** | a view of the schema, to choose, which limits what can be read |
 | **chunk size** | rows per batch of a bulk operation |
-| **try all it can** | go on when a sentence fails |
+| **try all it can** | go on when a sentence fails: (default), yes or no |
 | **timeout (ms)** | of a script: it stops after this time (script mode) |
 | **max iterations** | of a script: its loops, all together (script mode) |
-| **headers** | pairs of name and value that go with the query |
+| **headers** | pairs of name and value that go with the query (**add a header**) |
 
 An empty field is not sent. Options the form doesn't know are kept as they are in the JSON.
 
@@ -95,8 +97,9 @@ per message.
 | **execute queued** | sends it to the queue of **topic**, to run later | `queue` |
 | **execute script** | runs the script (script mode) | `script`, and scripts enabled in the schema |
 
-An action the credential can't use is disabled, and its tooltip says why. **plan**, **metadata**, **model**,
-**parameters** and **constraints** read only the text of the query: they send no data and no options.
+An action the credential can't use is disabled, and its tooltip says why (`"reader" has no queue permission`).
+**plan**, **metadata**, **model**, **parameters** and **constraints** read only the text of the query: they send no
+data and no options.
 
 ## The result {#the-result}
 
@@ -106,9 +109,9 @@ The status, the operation, its time, the rows and the size; then four views:
 | --- | --- |
 | **tree** | the result unfolded two levels, each list and object with its size |
 | **table** | the rows as a table, when the result is a list of rows; an object in a cell, as JSON |
-| **json** / **yaml** | the text, with colours, folding and search |
+| **json** / **yaml** | the text, read only, with colours, folding and search |
 
-- The tree and the table show up to 200 rows (`Showing 200 of N rows: the downloads have all of them`); numbers and
+- The tree and the table show up to 200 rows (`Showing 200 of N rows: the downloads have all of them.`); numbers and
   dates follow the regional format of the [preferences](index.md#the-window) (the value as it came, in its tooltip).
 - **copy** copies what is shown; the table, as tab-separated text, ready to paste in a spreadsheet.
 - **export** downloads the whole result as **JSON**, **YAML** or **TXT (tab-separated)**.

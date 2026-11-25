@@ -1,17 +1,20 @@
 # Push
 
 This page explains push, which updates the sources (databases) of a stage with the schema: how it works, the CLI command `lambdaorm push` and the `orm.stage.push()` method.
+Run it after you change the domain or the mappings, so the databases get the new tables and columns.
 
 ## How push works
 
 Push reads the databases of the stage (as [fetch](SchemaSynchronization-Fetch.md) does) and generates the DDL that takes them to the model:
 
 - Tables that do not exist are created with their primary key, unique key, foreign keys and indexes.
-- In existing tables, missing columns are added (`ALTER TABLE … ADD`) and columns with another type, length or nullability are altered.
+- In existing tables, missing columns are added (`ALTER TABLE … ADD`) and columns with another type, length or nullability are altered, with the syntax of each engine (on MySQL and MariaDB the whole definition, so `AUTO_INCREMENT` is kept; on SQL Server the type with its nullability).
 - A column declared with `previousMapping` in its property mapping is renamed (`ALTER TABLE … RENAME COLUMN`, SqlServer `sp_rename`) instead of being added. See [Rename a column](SchemaDefinition.md#rename-a-column-with-previousmapping).
 - **Push never drops** anything that exists only in the database (tables, columns). `fetch` reports it, so it can be removed by hand if needed.
 - The column types follow the property types and the `dbType` of the property mapping. See [Property types](SchemaDefinition.md#property-types).
 - Each entity goes to the source chosen by the stage rules; a source without condition only gets the entities no other source took.
+- **A change that can lose data stops push**: altering a column to a type that is not wider (`decimal` to `integer`, text to date) or to a shorter text (`string(50)` to `string(20)`). Push lists those changes and fails with a `DestructiveChangeError`; `--allow-destructive` applies them. Making a type or a length wider is not destructive. See [Migrations](SchemaSynchronization-Migrations.md).
+- On SQLite, the unique key is a unique index, foreign keys are not created, and a change of the type or the nullability of a column is an error. On MongoDB, which is schemaless, push creates the collections and their indexes. On an Http source push does nothing. See [Engines](Engines.md).
 
 Since the comparison is made against the databases, push works the same on any host or CI job: it does not need the `orm_state` folder of a previous push.
 The `orm_state` folder is still written, as a record of what was applied.
@@ -33,6 +36,8 @@ lambdaorm push
 | `-e`, `--envfile` | File of environment variables to read. |
 | `-o`, `--output` | Generate the DDL without applying it (see below). |
 | `-f`, `--force` | When a sentence fails, continue with the next ones. |
+| `--allow-destructive` | Apply also the changes that can lose data. |
+| `--seed` | After the push, insert the data the stage starts with (see [Seed](SchemaSynchronization-Seed.md)). |
 
 Example of the generated DDL on an empty database:
 
@@ -78,11 +83,13 @@ When push applies the changes, it records them in the `orm_state` folder:
 ├── orm_state
 │   ├── default-model.json
 │   └── main
+│       ├── U231122154351__push.sql
 │       └── V231122154351__push.sql
 ```
 
 - `<stage>-model.json`: the model of the stage at the last push.
-- `<source>/V<yyMMddHHmmss>__push.sql`: the sentences executed on that source.
+- `<source>/V<yyMMddHHmmss>__push.sql`: the sentences executed on that source. The version is the date, so the files of two developers do not collide in git.
+- `<source>/U<yyMMddHHmmss>__push.sql`: the sentences that undo them (see [Migrations](SchemaSynchronization-Migrations.md)).
 
 Labs:
 
@@ -106,7 +113,7 @@ import { Orm } from '@lambdaorm/lib'
 		const sentences = await orm.stage.push({ stage: 'default' }).sentence()
 		// the sentences grouped by source: [{ source: 'accounts', sentences: ['ALTER TABLE accounts ADD phone VARCHAR(32)'] }]
 		const bySource = await orm.stage.push({ stage: 'default' }).sentencesBySource()
-		// apply them
+		// apply them ({ stage: 'default', allowDestructive: true } also applies the changes that can lose data)
 		await orm.stage.push({ stage: 'default' }).execute()
 	} finally {
 		await orm.end()

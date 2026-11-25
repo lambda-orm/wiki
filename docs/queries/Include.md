@@ -431,6 +431,8 @@ The related entity can be in another source (another database or schema) of the 
 Orders.filter(p => p.id == id).include(p => p.lines.include(l => l.product.include(q => q.category)))
 ```
 
+A `map`, `sort` or `having` can also read fields of a relation in another source without an include (`Orders.map(p => [p.id, p.customer.name])`): λORM includes the relation for you and finishes the query in memory. See [Queries across sources](CrossSource.md).
+
 ### Filter by a field of a relation in another source
 
 A filter can also use a property of a relation whose entity is in another source. The other source is queried first, and the keys found are then used to filter with `in`:
@@ -455,7 +457,7 @@ Each comparison is replaced on its own, so `&&`, `||` and `!` keep their meaning
 
 - It can be combined with other conditions, also with `||`: `OrderLines.filter(p => p.orderId == orderId && (p.product.name == name || p.quantity > 100))`.
 - When the other source has no match, the query returns no rows.
-- Only one level of relation is supported (`p.product.name`, not `p.product.category.name`).
+- In a filter, only one level of relation is supported (`p.product.name`, not `p.product.category.name`); a `map` or a `sort` can read any level (see [Queries across sources](CrossSource.md)).
 - The other side of each comparison must be a value (a literal or a variable). Comparing with a property, as in `p.product.name == p.description`, fails with an error saying that the relation is in another source.
 
 ## Code example

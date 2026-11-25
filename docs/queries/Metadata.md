@@ -164,3 +164,5 @@ One statement for the orders and, as its child, one for the details (`pos` field
   ]
 }
 ```
+
+When a query reads fields of a relation in another source, the plan also has `inMemory`, the steps that run in memory after the statements (`["map", "sort"]`, for example); see [Queries across sources](CrossSource.md#see-the-plan).

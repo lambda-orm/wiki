@@ -12,12 +12,14 @@ Jede Operation ist als Befehl der CLI ([@lambdaorm/cli](https://www.npmjs.com/pa
 | fetch       | vergleicht beide             | nein               | nein                  |
 | introspect  | Datendatei → Schema → Datenbanken | ja            | ja                    |
 | incorporate | Datendatei → Schema → Datenbanken, anschließend Import der Daten | ja | ja |
+| migrate     | Historie → Datenbanken (kehrt zu einer Version zurück) | nein | ja         |
+| seed        | Datendateien des Stages → Datenbanken | nein      | ja                    |
 
 ## Push {#push}
 
 Push aktualisiert die Quellen (Datenbanken) anhand des Schemas, mit dem Befehl `lambdaorm push`.
 
-Push vergleicht das Modell mit den Datenbanken selbst: Es erstellt fehlende Tabellen, fügt Spalten hinzu und ändert sie, benennt die mit `previousMapping` deklarierten Spalten um und löscht niemals etwas, das nur in der Datenbank existiert. `lambdaorm push -o <dir>` schreibt die DDL als ein Skript pro Quelle (`<stage>.<source>.sql`), ohne sie anzuwenden.
+Push vergleicht das Modell mit den Datenbanken selbst: Es erstellt fehlende Tabellen, fügt Spalten hinzu und ändert sie, benennt die mit `previousMapping` deklarierten Spalten um und löscht niemals etwas, was nur in der Datenbank existiert. Eine Änderung, die Daten verlieren kann, stoppt es, sofern nicht `--allow-destructive` angegeben wird. `lambdaorm push -o <dir>` schreibt die DDL als ein Skript pro Quelle (`<stage>.<source>.sql`), ohne sie anzuwenden.
 
 [Weitere Informationen](SchemaSynchronization-Push.md)
 
@@ -44,3 +46,15 @@ Introspect aktualisiert das Schema anhand der Struktur einer JSON-Datendatei und
 Incorporate tut dasselbe wie introspect und importiert anschließend die Daten der Datei in die Quellen (Datenbanken), mit dem Befehl `lambdaorm incorporate`.
 
 [Weitere Informationen](SchemaSynchronization-Incorporate.md)
+
+## Migrationen {#migrations}
+
+Jeder Push schreibt seine DDL und die DDL, die sie rückgängig macht. Mit `infrastructure.migrations` speichert die Datenbank die Historie ihrer Migrationen, und `lambdaorm migrate` listet sie auf oder kehrt zu einer Version zurück.
+
+[Weitere Informationen](SchemaSynchronization-Migrations.md)
+
+## Seed {#seed}
+
+Seed fügt die Daten ein, mit denen ein Stage beginnt (`stages[].seed`), mit dem Befehl `lambdaorm seed` oder `lambdaorm push --seed`. Es fügt nur die Zeilen ein, die noch nicht vorhanden sind, sodass es erneut ausgeführt werden kann.
+
+[Weitere Informationen](SchemaSynchronization-Seed.md)

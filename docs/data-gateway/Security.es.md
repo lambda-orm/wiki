@@ -1,5 +1,10 @@
 # Seguridad {#security}
 
+Quién puede usar el gateway y qué puede hacer cada uno se decide en su configuración, una vez, para todos los
+transportes: una **credencial** (una clave, un token o un usuario) tiene un nombre y una lista de **permisos**; el
+gateway los comprueba antes de que nada llegue a una base de datos, **audita** cada escritura con el nombre de la
+credencial y pone **límites** a lo que puede ocupar una petición. Esta página explica cada parte.
+
 ## Autenticación {#authentication}
 
 El bloque `authentication` tiene tres niveles: global, por transporte (`transports.<t>.authentication`) y por esquema
@@ -26,8 +31,12 @@ authentication:
   `adapter: none`, escrito a propósito.
 - Los secretos se comparan en tiempo constante. El secreto nunca viaja a los workers de los esquemas: solo el nombre y los
   permisos de la credencial.
-- Sin credencial (o con una incorrecta) la respuesta es `401`; los upgrades de WebSocket se rechazan.
-- `/ping`, `/health`, `/metrics`, `/version`, `/schemas`, `/transports` y `/doc` no necesitan credencial.
+- Sin credencial (o con una incorrecta) la respuesta es `401` (`{ "error": "Unauthorized", "message": … }`); los
+  upgrades de WebSocket se rechazan.
+- `/ping`, `/health`, `/metrics`, `/version` (también bajo cada esquema), `/schemas`, `/transports` y la documentación
+  (`/openapi.json`, `/doc`, `/api-docs`) no necesitan credencial.
+- Una credencial sin `permissions` recibe los de los datos (`read`, `write`, `script`, `queue`, `stageImport`), nunca
+  los de la administración.
 - En `management` (el IDE) la credencial va solo en el login, y cada petición lleva el token de una
   [sesión](Transports.md#sessions): las sesiones se listan, terminan por inactividad y se pueden revocar al instante.
 - Ningún transporte responde CORS: un navegador de otro origen no puede llamar al gateway; un backend propio, sí.
@@ -59,9 +68,11 @@ estándar, para que el recolector de logs (Loki, ELK, CloudWatch, …) pueda sep
 | Operación | Se audita |
 | --- | --- |
 | `execute` | cuando alguna sentencia no es un `select` |
-| script | siempre |
-| ejecución encolada | siempre (al encolarse) |
-| importación de stage | siempre |
+| `executeScript` | siempre |
+| `executeQueued` | siempre (al encolarse) |
+| `stageImport` | siempre, también el comando `import` de la [administración](Admin.md#the-commands) |
+| `stagePush`, `stageDrop` | los comandos `push` y `drop` de la administración |
+| `login`, `logout`, `sessionExpired`, `sessionRevoked`, `loginRejected` | las [sesiones](Transports.md#sessions) de `management`, con el id de la sesión (nunca su token), la dirección y quién la revocó |
 
 ```json
 { "type": "audit", "time": "2026-11-17T14:03:22.114Z", "schema": "iot/v1", "transport": "mcpHttp",
@@ -79,10 +90,10 @@ estándar, para que el recolector de logs (Loki, ELK, CloudWatch, …) pueda sep
 | --- | --- | --- |
 | Peticiones por ventana (solo `http`) | `rateLimit.windowMs`, `rateLimit.max` (`0` = desactivado) | `429` |
 | Operaciones simultáneas por esquema | `server.maxConcurrent` | `429` con `Retry-After` (MCP: `isError`; WebSocket: `status: 429`) |
-| Tiempo de una operación | `server.timeout` | error, la operación se abandona |
+| Tiempo de una operación | `server.timeout` | `504 TimeoutError`, la operación se abandona |
 | Tamaño de un cuerpo | `server.requestBodySize` | `413` |
 | Tamaño de una respuesta | `server.maxResponseBytes` | `413`: usar `.page(1, n)` o agregar en la consulta |
-| Scripts | `scripts.maxLength`, `timeoutMs`, `maxIterations` | `413` (longitud) o un error del script |
+| Scripts | `scripts.maxLength`, `timeoutMs`, `maxIterations` | `413 ScriptTooLongError` (longitud) o un error del script |
 | Filas de un resultado para MCP | `mcp.maxRows` | se corta, con una indicación ([MCP](Mcp.md#results-and-errors)) |
 
 ## Errores {#errors}
@@ -103,16 +114,20 @@ Una petición fallida responde un status que un cliente puede mapear y un cuerpo
 | `code` | el código de error de la base de datos cuando lo hay (SQLSTATE de Postgres como `23505`, `ER_DUP_ENTRY` de MySQL) |
 | `message` | el mensaje |
 | `suggestions` | para un nombre de la consulta que no existe, los más cercanos: `[{ "name": "nme", "didYouMean": ["name"] }]` |
+| `details` | en la administración, lo necesario para seguir: los problemas de un esquema inválido, lo que hay ahora tras un conflicto |
 
 | Status | Causa |
 | --- | --- |
 | `400` | una consulta o un modelo inválidos (`ValidationError`, `SchemaError`, `SintaxisError`, `LanguageError`), una violación de not null o de check, datos inválidos (Postgres `22xxx`) |
-| `401` | sin credencial, o con una incorrecta |
+| `401` | sin credencial, o con una incorrecta; en `management`, sin sesión o con una vencida o revocada |
 | `403` | la credencial no tiene el permiso; scripts deshabilitados |
 | `404` | un nombre que el esquema no tiene (una entidad, enum, source, mapping, stage), un esquema no expuesto en ese transporte, una ruta desconocida |
-| `409` | una violación de clave única o foránea (Postgres `23505`, `23503`; MySQL `ER_DUP_ENTRY`, `ER_NO_REFERENCED_ROW_2`, `ER_ROW_IS_REFERENCED_2`) |
+| `409` | una violación de clave única o foránea (Postgres `23505`, `23503`; MySQL `ER_DUP_ENTRY`, `ER_NO_REFERENCED_ROW_2`, `ER_ROW_IS_REFERENCED_2`); en la administración, un workspace ocupado, un comando en curso o sin su vista previa |
+| `412`, `428` | administración: alguien lo cambió desde que se leyó; una escritura sin la versión que cambia |
 | `413` | un cuerpo, una respuesta o un script demasiado grandes |
+| `422` | administración: el esquema no sería válido (`details.issues`, cada uno en su línea) |
 | `429` | límite de tasa, o demasiadas operaciones simultáneas en el esquema |
-| `503` | el esquema no está `ready` (arrancando, en error, reiniciándose); una source que el gateway no alcanza, o cuya variable de conexión no está definida (`ConnectionError`) |
+| `503` | el esquema no está `ready` (`SchemaUnavailableError`: arrancando, en error, reiniciándose); una source que el gateway no alcanza, o cuya variable de conexión no está definida (`ConnectionError`) |
+| `504` | la operación tardó más que `server.timeout` (`TimeoutError`) |
 | *n* | un script ejecutó `throw { status: n, message }` (400–599) |
 | `500` | cualquier otro caso |

@@ -3,7 +3,10 @@
 Esta página muestra cómo usar variables de entorno en el esquema, para mantener las conexiones y los secretos fuera del archivo del esquema.
 
 Cualquier valor del esquema se puede tomar de una variable de entorno, con la notación `$VARIABLE` o `${VARIABLE}`.
-Las variables se reemplazan al cargar el esquema. Con la CLI, la opción `-e` las lee de un archivo (por ejemplo `-e .env`).
+Las variables se reemplazan una sola vez, al cargar el esquema. Con la CLI, la opción `-e` las lee de un archivo (por ejemplo `-e .env`).
+Un valor que, tras el reemplazo, es un texto JSON (como una conexión) se lee como objeto; una conexión con una variable que no está definida se informa como advertencia al cargar el esquema.
+
+Como se reemplazan al cargar, las variables de entorno son las mismas para todas las consultas. Un valor que depende de quién ejecuta cada consulta (usuario, tenant, región) va en el [contexto](Context.md).
 
 ## Ejemplos {#examples}
 

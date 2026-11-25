@@ -1,6 +1,6 @@
 # Sortierfunktionen {#sort-functions}
 
-Die Methode `sort` sortiert die Zeilen einer Abfrage (`ORDER BY` in SQL). Ihr Prädikat gibt das Feld zurück, nach dem sortiert wird, optional umschlossen von `asc` oder `desc`, um die Richtung festzulegen. Ohne `asc` oder `desc` werden die Zeilen aufsteigend sortiert.
+Die Methode `sort` sortiert die Zeilen einer Abfrage (`ORDER BY` in SQL). Ihr Prädikat gibt das Feld zurück, nach dem sortiert wird, optional umschlossen von `asc` oder `desc`, um die Richtung festzulegen. Ohne `asc` oder `desc` werden die Zeilen aufsteigend sortiert. Um nach mehreren Feldern oder nach einem Ausdruck zu sortieren, siehe [Mehrere Felder und Ausdrücke](#several-fields-and-expressions).
 
 !!! note "Zu den Beispielen"
     Die Beispiele laufen gegen die Entität `Countries` des Beispielschemas für Länder. Jedes zeigt die Abfrage, das Ergebnis, das sie auf der Testdatenbank geliefert hat, und die SQL-Anweisung, die λORM für MySQL erzeugt hat. Andere Datenbank-Engines erhalten ihre eigene Übersetzung; um die für Ihre Datenquelle erzeugte Anweisung zu sehen, verwenden Sie [`orm.plan`](../Metadata.md).
@@ -122,3 +122,34 @@ ORDER BY c.iso3 desc
 
 !!! warning "Felder über den Lambda-Parameter referenzieren"
     Schreiben Sie `desc(p.iso3)`, nicht `desc(iso3)`. Ein Name, der nicht über den Lambda-Parameter (`p`) erreicht wird, wird als Abfrageparameter gelesen: `sort(p=> desc(iso3))` erzeugt `ORDER BY ? desc`, und die Zeilen werden nicht nach dem Feld sortiert.
+
+## Mehrere Felder und Ausdrücke {#several-fields-and-expressions}
+
+Um nach mehreren Feldern zu sortieren, gibt man sie in einem Array in der Reihenfolge ihrer Priorität zurück; jedes kann seine eigene Richtung haben. Man kann auch nach einem Ausdruck (einer Funktion oder einer Operation) sortieren, nicht nur nach einem Feld. Kunden des Northwind-Beispiels, sortiert nach Land und innerhalb jedes Landes nach der Länge des Namens, die längsten zuerst:
+
+```typescript
+Customers.map(p => [p.country, p.name]).sort(p => [p.country, desc(length(p.name))])
+```
+
+**Erzeugtes SQL (MySQL):**
+
+```sql
+SELECT c.Country AS country, c.CompanyName AS name
+FROM Customers c
+ORDER BY c.Country asc, CHAR_LENGTH(c.CompanyName) desc
+```
+
+## Datenbankunterstützung {#database-support}
+
+!!! note "MongoDB"
+    MongoDB sortiert nur nach Feldern, daher schreibt λORM jeden Ausdruck der Sortierung als Feld einer `$addFields`-Stufe vor dem `$sort` (ab `@lambdaorm/lib` 3.15.0). Die obige Abfrage wird zu:
+
+    ```json
+    [
+      { "$addFields": { "__lambdaOrmSort1": { "$strLenCP": "$CompanyName" } } },
+      { "$sort": { "Country": 1, "__lambdaOrmSort1": -1 } },
+      { "$project": { "_id": 0, "country": "$Country", "name": "$CompanyName" } }
+    ]
+    ```
+
+    Eine gruppierte Abfrage, die nach einem Ausdruck sortiert wird, schlägt mit `MongoDB doesn't sort a grouped query by an expression` fehl: sortieren Sie sie stattdessen nach einem Feld ihres `map`.

@@ -23,8 +23,20 @@ mantido; o modelo é regenerado todas as vezes.
 
 Com `application.queries` no schema, o modelo também escreve `queries.ts`: o tipo do resultado de cada consulta e um método tipado que a executa ([Consultas tipadas](../../usage/TypedQueries.md)).
 
-## Exemplo {#example}
+Também prepara o projeto: cria `package.json` e `tsconfig.json` se não existirem, e instala `typescript`, a biblioteca
+(`@lambdaorm/lib`, ou `@lambdaorm/client` com `client-node`) e, com `node`, o driver do dialeto de cada fonte
+(`mysql2`, `pg`, `tedious`, …) quando faltam. O caminho do código-fonte é por padrão `src` e o do domínio `domain` (ou
+os de `infrastructure.paths` do esquema, se definidos). `--view` é só para `node`: com o cliente, o Data Gateway escolhe
+a view de quem chama.
+
+## Exemplos {#examples}
 
 ```sh
 lambdaorm build -w lab/countries
+```
+
+Um projeto que usa um Data Gateway (criado com `lambdaorm init -u <url>`):
+
+```sh
+lambdaorm build -w lab/client -l client-node
 ```

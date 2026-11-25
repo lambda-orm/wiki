@@ -4,7 +4,7 @@ This page introduces the λORM query language: what a query looks like, the kind
 
 λORM queries are written as [JavaScript lambda expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) over the entities of the domain. You can write them as TypeScript/JavaScript code, navigating the entities of the model, or send them as a string (for example from the [CLI](../cli/index.md) or to the [Data Gateway](../data-gateway/index.md)).
 
-λORM translates each query into the language of the database engine of each source (SQL for MySQL, MariaDB, PostgreSQL, SQL Server, Oracle and SQLite, or MongoDB queries).
+λORM translates each query into the language of the database engine of each source (SQL for MySQL, MariaDB, PostgreSQL, SQL Server, Oracle and SQLite, MongoDB aggregation pipelines, or HTTP requests to a REST API for an [Http source](../schema/HttpSource.md)). A query can also combine entities of different sources: see [Queries across sources](CrossSource.md).
 
 ## Query types
 
@@ -12,7 +12,7 @@ This page introduces the λORM query language: what a query looks like, the kind
 
 DQL (Data Query Language) queries retrieve data. They can be as simple as reading all the records of an entity, or they can filter, sort, group and paginate the records, compute values from them and load related entities.
 
-**See:** [Select](Select.md), [Join](Join.md), [Grouping](Grouping.md), [Include](Include.md)
+**See:** [Select](Select.md), [Join](Join.md), [Grouping](Grouping.md), [Include](Include.md), [JSON, vectors and points](JsonVectorsPoints.md), [Queries across sources](CrossSource.md)
 
 ### DML
 

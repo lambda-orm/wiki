@@ -33,12 +33,12 @@ La pestaña necesita un esquema; el asistente lee su dominio del gateway.
 | Parte | Dónde | Qué hace |
 | --- | --- | --- |
 | **partir de** | arriba a la izquierda | la entidad de la que parte la consulta (la raíz): cada fila del resultado es una de sus filas |
-| **cancelar** / **crear la consulta** | arriba a la derecha | cerrarlo sin cambios / escribir la consulta (**actualizar la consulta** en una consulta que escribió él) |
-| **el diagrama** | a la izquierda | las tablas de la consulta, una casilla en cada campo; **+** agrega tablas relacionadas, **×** saca una |
+| **el diagrama** | a la izquierda | las tablas de la consulta, una casilla en cada campo y una en el título de cada tabla; **+** agrega tablas relacionadas, **×** saca una |
 | **la consulta** | a la derecha, arriba | la consulta tal como se escribe, solo lectura, actualizada con cada cambio |
 | **filtro** | a la derecha | la condición que deben cumplir las filas de la raíz |
 | **orden** | a la derecha | las columnas del resultado por las que se ordenan las filas |
 | **página** | a la derecha | la página y las filas por página |
+| **cancelar** / **crear la consulta** | abajo a la derecha | cerrarlo sin cambios / escribir la consulta (**actualizar la consulta** en una consulta que escribió él) |
 
 Vacíos, el filtro, el orden y la página no se aplican: sin nada elegido, la consulta es solo el nombre de la entidad, y
 lee todas sus filas con todos sus campos.
@@ -87,17 +87,23 @@ pueden seleccionar varias cajas (Shift o Ctrl y clic, o Shift y arrastrar el fon
 
 ### 3. Los campos: las casillas {#3-the-fields-the-checks}
 
-Un clic en un campo lo marca (toda la fila, no solo su casilla). Para cada tabla:
+Una tabla llega con **todos los campos marcados**: lee todos sus campos, y su include no tiene `map` (ni la raíz). Un
+clic en un campo lo marca o lo desmarca (toda la fila, no solo su casilla):
 
-- **ningún campo marcado**: todos los campos de esa tabla (su include no tiene `map`, y la raíz no tiene `map`);
-- **algunos campos marcados**: solo esos, en el orden del dominio, no en el orden en que se marcaron.
+- **desmarcar un campo** deja los demás: la tabla recibe un `map` con los campos que siguen marcados, en el orden del
+  dominio, no en el orden en que se marcaron;
+- **la casilla del título** de la tabla los desmarca a todos menos su clave primaria, para marcar después solo los
+  campos que quieras; con algunos desmarcados, los vuelve a marcar todos;
+- **todos marcados de nuevo** es otra vez sin `map`. El último campo marcado no se puede desmarcar: una tabla lee al
+  menos uno.
 
-Marca `id` y `orderDate` de `Orders`, `name` y `country` de `Customers`, `quantity` y `unitPrice` de las líneas, y
-`name` de `Products`. Cada tabla recibe su propio `map`:
+Desmarca el título de `Orders` (solo queda `id`) y marca `orderDate`; desmarca el título de `Customers` y marca `name` y
+`country`; desmarca el título de `Products` y marca `name`. Deja las líneas con todos sus campos. Cada tabla con campos
+desmarcados recibe su propio `map`:
 
 ```ts
 Orders
-	.include(p => [p.customer.map(q => ({ name: q.name, country: q.country })), p.details.include(q => q.product.map(r => ({ name: r.name }))).map(q => ({ unitPrice: q.unitPrice, quantity: q.quantity }))])
+	.include(p => [p.customer.map(q => ({ id: q.id, name: q.name, country: q.country })), p.details.include(q => q.product.map(r => ({ id: r.id, name: r.name })))])
 	.map(p => ({ id: p.id, orderDate: p.orderDate }))
 ```
 
@@ -128,8 +134,8 @@ consulta. El filtro no se verifica dentro del asistente: la pestaña de consulta
 ### 5. El orden {#5-the-order}
 
 **+ agregar un orden** agrega una fila: una columna y **ascendente** o **descendente**. Las columnas son las del
-resultado de la raíz: los campos marcados de la entidad de la que parte, o todos sus campos cuando no hay ninguno
-marcado. Cada columna se puede usar una vez; la primera fila ordena primero. Un campo desmarcado se lleva su orden.
+resultado de la raíz: los campos marcados de la entidad de la que parte. Cada columna se puede usar una vez; la
+primera fila ordena primero; × saca una fila. Un campo desmarcado se lleva su orden.
 
 Elige `orderDate`, **descendente**: `.sort(p => desc(p.orderDate))`. Dos filas dan una lista:
 `.sort(p => [desc(p.orderDate), p.id])`.
@@ -146,7 +152,7 @@ se aplica; sin página, es la primera. `20` filas por página da `.page(1, 20)`.
 ```ts
 Orders
 	.filter(p => p.customer.country == 'Germany')
-	.include(p => [p.customer.map(q => ({ name: q.name, country: q.country })), p.details.include(q => q.product.map(r => ({ name: r.name }))).map(q => ({ unitPrice: q.unitPrice, quantity: q.quantity }))])
+	.include(p => [p.customer.map(q => ({ id: q.id, name: q.name, country: q.country })), p.details.include(q => q.product.map(r => ({ id: r.id, name: r.name })))])
 	.map(p => ({ id: p.id, orderDate: p.orderDate }))
 	.sort(p => desc(p.orderDate))
 	.page(1, 20)
@@ -161,10 +167,10 @@ Orders
   {
     "id": 823,
     "orderDate": "1998-05-04T22:00:00.000Z",
-    "customer": { "name": "Lehmanns Marktstand", "country": "Germany" },
+    "customer": { "id": "LEHMS", "name": "Lehmanns Marktstand", "country": "Germany" },
     "details": [
-      { "unitPrice": 18, "quantity": 40, "product": { "name": "Chai" } },
-      { "unitPrice": 19, "quantity": 20, "product": { "name": "Chang" } }
+      { "orderId": 823, "productId": 1, "unitPrice": 18, "quantity": 40, "product": { "id": 1, "name": "Chai" } },
+      { "orderId": 823, "productId": 2, "unitPrice": 19, "quantity": 20, "product": { "id": 2, "name": "Chang" } }
     ]
   }
 ]
@@ -185,15 +191,14 @@ asistente, lee la consulta como está ahora, manteniendo las cajas donde estaban
 
 ## Una consulta escrita a mano {#a-query-written-by-hand}
 
-Desde el IDE 1.0.1, el asistente lee cualquier consulta de la pestaña, hasta donde puede mostrarla (antes, se abría en
-la entidad de la que parte la consulta, sin nada elegido):
+El asistente lee cualquier consulta de la pestaña, hasta donde puede mostrarla:
 
 | La consulta tiene | El asistente |
 | --- | --- |
 | `Entity` al principio | parte de esa entidad |
 | `.filter(x => …)` | lo toma como su filtro, sobre `p` sea cual sea el nombre de su variable |
 | `.include(x => …)` | agrega la tabla de cada relación, con los campos de su `map` y sus propios includes |
-| `.map(x => ({ a: x.a, … }))` | marca esos campos |
+| `.map(x => ({ a: x.a, … }))` | marca esos campos (un map con todos los campos de la tabla es lo mismo que ninguno) |
 | `.sort(x => …)` con `x.a`, `desc(x.a)`, `asc(x.a)`, `x.a.desc()` | agrega esos órdenes (por campos del resultado) |
 | `.page(n, size)` | toma la página y las filas por página |
 
@@ -231,8 +236,8 @@ el resto, escribe la consulta a mano o termina la que escribió:
 
 El diagrama del asistente es el de [Diagramas](Diagrams.md), con las casillas de los campos:
 
-- la rueda hace zoom, arrastrar el fondo lo mueve, **ajustar** lo muestra entero, **acomodar de nuevo** vuelve a
-  acomodar las cajas;
+- la rueda hace zoom, arrastrar el fondo lo mueve, **ajustar** lo muestra entero, el outline muestra dónde estás,
+  **acomodar de nuevo** vuelve a acomodar las cajas;
 - una caja o una línea se arrastra para ubicarla, y el lugar se conserva con el asistente;
 - **nombres de relaciones** muestra el nombre de cada relación en su línea;
 - **exportar** guarda el diagrama como PDF, PNG o SVG.

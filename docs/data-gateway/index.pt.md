@@ -23,13 +23,17 @@ e toda alteração é auditada.
 **O que ele faz:**
 
 - Serve **um ou vários esquemas do λORM** por instância, cada um em uma rota (`/iot/v1`, `/iot/v2`, `/accounts`).
-- Expõe-nos por quatro **transportes**, cada um apenas quando tem uma porta: REST (`http`), MCP (`mcpHttp`,
-  `mcpWebSocket`) e uma API JSON-RPC sobre WebSocket (`webSocket`).
+- Expõe-nos por quatro **transportes** de dados, cada um apenas quando tem uma porta: REST (`http`), MCP (`mcpHttp`,
+  `mcpWebSocket`) e uma API JSON-RPC sobre WebSocket (`webSocket`); e um quinto, `management`, para o IDE e a
+  administração, mantido em uma rede interna.
 - Todas as operações do λORM: consultas (`execute`, `plan`, `metadata`, `model`, `parameters`, `constraints`), scripts
   (várias consultas em uma só transação), execuções enfileiradas (Kafka), o esquema e seu modelo, e stages (exportação,
   importação).
 - **Autenticação** (API key, bearer token, basic) e **permissões** por credencial (`read`, `write`, `script`,
   `queue`, `stageImport`), globalmente, por transporte ou por esquema.
+- **Administração** dos workspaces por meio do `management`: esquemas criados, editados (como YAML ou elemento a
+  elemento) e removidos, as variáveis de suas conexões e os comandos da CLI (`push`, `pull`, `import`, …) com uma
+  pré-visualização, sob permissões próprias; os esquemas são recarregados sem reiniciar o gateway.
 - **Isolamento**: cada esquema é executado em seu próprio worker, com seu próprio ambiente e suas próprias conexões; um que falhe não
   afeta os demais.
 - **Auditoria** das escritas, **métricas** (Prometheus), **saúde** (probes do Kubernetes), limites (taxa, concorrência, tamanhos,
@@ -66,9 +70,9 @@ deixa outro mais lento; um esquema cujo banco de dados está fora do ar responde
 | --- | --- |
 | **Esquema** | um workspace do λORM (uma pasta com `lambdaORM.yaml`): domínio, fontes, mapeamentos, stages; servido em uma rota |
 | **Rota** | onde um esquema é acessado: `/iot/v1/execute`, `/iot/v1/mcp`, `ws://host/iot/v1`; um esquema único pode ficar na raiz |
-| **Transporte** | uma forma de entrada, em sua própria porta: `http`, `mcpHttp`, `mcpWebSocket`, `webSocket` |
+| **Transporte** | uma forma de entrada, em sua própria porta: `http`, `mcpHttp`, `mcpWebSocket`, `webSocket` e `management` (o do IDE) |
 | **Credencial** | uma chave, token ou usuário com um **nome** e **permissões**; enviada pelo cliente em cada requisição |
-| **Permissão** | `read`, `write`, `script`, `queue`, `stageImport`: o que a credencial pode fazer, em todos os transportes |
+| **Permissão** | `read`, `write`, `script`, `queue`, `stageImport`: o que a credencial pode fazer, em todos os transportes; a administração tem as suas (`schemaRead`, `ddl`, …), nunca dadas por padrão |
 | **Stage** | um cenário do λORM de um esquema (quais fontes guardam quais entidades); escolhido com `options.stage` |
 | **Worker** | onde um esquema é executado: uma thread ou um processo próprio |
 
@@ -90,6 +94,7 @@ deixa outro mais lento; um esquema cujo banco de dados está fora do ar responde
 - [MCP](Mcp.md): as ferramentas, os recursos e os transportes para agentes de IA.
 - [API WebSocket](WebSocket.md): os métodos JSON-RPC e as notificações.
 - [Segurança](Security.md): autenticação, permissões, auditoria, limites e erros.
+- [Administração](Admin.md): os workspaces editados a partir do IDE, os comandos, a concorrência.
 - [UI](../ide/index.md): a IDE: conexões, explorador, formulários de entidades, consultas, consultas salvas e diagramas.
 - [Clientes](Clients.md): `@lambdaorm/client`, a CLI e o documento OpenAPI.
 - [Operações](Operations.md): Docker, Kubernetes, saúde, métricas e logs.

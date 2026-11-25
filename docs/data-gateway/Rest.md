@@ -1,7 +1,8 @@
 # REST API
 
 The `http` transport ([Transports](Transports.md#http)) exposes every operation of λORM on a schema as REST, with JSON
-in and out. The OpenAPI 3 document is served by the gateway at `/doc` (Swagger UI) and `/api-docs`.
+in and out: the way in for an application in any language, or for a tool that speaks HTTP. The gateway serves its
+OpenAPI 3 document at `/openapi.json` and Swagger UI, to read and try every method, at `/doc` (and `/api-docs`).
 
 ## Routes
 
@@ -13,8 +14,9 @@ The examples use a gateway at `http://localhost:8080` with an API key. Each sche
 
 With `transports.http.basePath: /data-gateway`, every route is under it: `/data-gateway/iot/v1/execute`.
 
-- Every request needs the credential, except `/ping`, `/health` and `/metrics` (at the root and under each schema),
-  `/schemas`, `/transports`, `/version` and `/doc`. How it is sent depends on the [authentication](Security.md):
+- Every request needs the credential, except `/ping`, `/health`, `/metrics` and `/version` (at the root and under
+  each schema), `/schemas`, `/transports` and the documentation (`/openapi.json`, `/doc`, `/api-docs`). How it is sent
+  depends on the [authentication](Security.md):
   `X-Api-Key: <key>`, `Authorization: Bearer <token>` or `Authorization: Basic <base64>`.
 - `?format=beautiful` indents the JSON of the answer.
 - `data` (the parameters of a query) and `options` (for example `{ "stage": "default" }`) are JSON objects; JSON text
@@ -29,11 +31,15 @@ With `transports.http.basePath: /data-gateway`, every route is under it: `/data-
 | Method | Route | Answers | Credential |
 | --- | --- | --- | --- |
 | `GET` | `/ping` | `{ "message": "pong", "time" }` | no |
-| `GET` | `/health` | `200` while some schema is `ready`, `503` if none | no |
+| `GET` | `/health` | `{ "message", "time", "uptime", "schemas" }`: `OK` when every schema is `ready`, `DEGRADED` if not; always `200` while the gateway answers | no |
 | `GET` | `/metrics` | the metrics of every worker, Prometheus text | no |
-| `GET` | `/version` | the version of the gateway | no |
+| `GET` | `/version` | `{ "version" }`, the version of the gateway | no |
 | `GET` | `/schemas` | each schema with its state | no |
-| `GET` | `/whoami` | the name and permissions of the credential | yes |
+| `GET` | `/transports` | the transports of the gateway: port, base path, how a schema is reached, its document ([Transports](Transports.md#http)) | no |
+| `GET` | `/openapi.json` | the OpenAPI 3 document (with `swagger.enabled`) | no |
+
+With a single schema at the root, its own routes (below) take the place of `/ping`, `/health` and `/version`, and
+`/whoami` is at the root too.
 
 ```sh
 curl http://localhost:8080/schemas
@@ -46,7 +52,9 @@ curl http://localhost:8080/schemas
 ]
 ```
 
-The states are `starting`, `ready`, `error` and `restarting`.
+The states are `starting`, `ready`, `error` and `restarting`; `reason` says why a schema is not `ready`, and `pending`
+why a new version of its workspace didn't start while the last one keeps serving
+([Administration](Admin.md#workspaces-in-the-volume)).
 
 ## State of a schema
 
@@ -55,10 +63,10 @@ Under each schema's route (`/iot/v1/…`), these answer only about that schema:
 | Method | Route | Answers |
 | --- | --- | --- |
 | `GET` | `/{schema}/ping` | `200` if the schema is `ready`, `503` if not |
-| `GET` | `/{schema}/health` | the state of the schema; `503` if it is not `ready` |
+| `GET` | `/{schema}/health` | `{ "message": "OK", "time", "uptime" }`; `503` if the schema is not `ready` |
 | `GET` | `/{schema}/metrics` | the metrics of that schema |
-| `GET` | `/{schema}/version` | the versions of the gateway and the schema |
-| `GET` | `/{schema}/whoami` | the name and permissions of the credential with the authentication of that schema, and whether it has scripts enabled |
+| `GET` | `/{schema}/version` | `{ "version" }`, the version of the gateway (the version of the schema is `GET /{schema}/schema/version`) |
+| `GET` | `/{schema}/whoami` | the name and permissions of the credential with the authentication of that schema, and whether it has scripts enabled (needs the credential) |
 
 ```sh
 curl http://localhost:8080/iot/v1/whoami -H "X-Api-Key: $KEY"
@@ -197,7 +205,7 @@ A script can choose the status of the answer with `throw { status, message }`.
 ### execute-queued
 
 `POST /{schema}/execute-queued` runs a query in the background and sends its result to a Kafka topic, in chunks. It
-answers at once `{ "queueId": "…" }`; the messages carry the keys `<queueId>-<chunk>`. Body
+answers at once the id of the execution, as a JSON string (`"…"`); the messages carry the keys `<queueId>-<chunk>`. Body
 `{ topic, query, data?, chunk?, options? }`. It needs the `queue` permission (and `write` if the query writes) and an
 `infrastructure.queue` in the schema's `lambdaORM.yaml`.
 
@@ -349,16 +357,24 @@ On the [`management` transport](Transports.md#management) ([Administration](Admi
 
 | Method | Route | | Permission |
 | --- | --- | --- | --- |
-| `GET` | `/admin` | `{ enabled, can }` | — |
-| `GET` / `POST` | `/admin/workspaces` | the workspaces / a new one (`{ path, copyOf? }`) | `schemaRead` / `schemaAdmin` |
+| `GET` | `/admin` | `{ enabled, can }`: what this credential can do | — |
+| `GET` / `POST` | `/admin/workspaces` | the workspaces / a new one (`{ path, template?, copyOf?, name?, description? }`) | `schemaRead` / `schemaAdmin` |
 | `DELETE` | `/admin/workspaces/{route}?confirm={route}` | to `.trash` | `schemaAdmin` |
 | `GET` / `PUT` / `PATCH` | `/admin/workspaces/{route}/schema` | the `lambdaORM.yaml`; replaced; one element changed (`{ op, at, value?, to?, expected? }`) | `schemaRead` / `schemaWrite` |
 | `POST` | `/admin/workspaces/{route}/references` | who uses an element | `schemaRead` |
 | `POST` | `/admin/validate` | `{ text }` → `{ valid, issues }` | `schemaRead` |
-| `GET` / `PUT` | `/admin/workspaces/{route}/variables` | the variables of the connections (never their value) / set or removed | `schemaRead` / `schemaAdmin` |
+| `GET` / `PUT` | `/admin/workspaces/{route}/variables` | the variables of the connections (never their value) / set or removed (`{ set?, remove? }`) | `schemaRead` / `schemaAdmin` |
+| `GET` | `/admin/workspaces/{route}/files?dir=`, `…/files/content?path=` | the files of `data/` and `src/` / the text of one (never `.env`, `orm_state/` or a hidden file) | `schemaRead` |
+| `GET` / `POST` | `/admin/expressions`, `/admin/expressions/check` | the language of the expressions (3xpr) / one expression checked (`{ expression, context? }`), for the condition of a source of a stage | `schemaRead` |
+| `GET` / `PUT` | `/admin/session` | where the IDE of this credential was (its tabs, what was unfolded) / saved | any |
 | `GET` / `PUT` / `POST` | `/admin/workbench`, `/admin/workbench/remove` | what is saved / saved / removed | `read` / `workbenchWrite` |
 | `GET` | `/admin/workspaces/{route}/commands` | the stages and what may be run | `read` |
 | `POST` | `/admin/workspaces/{route}/commands/{command}/preview` | what it will do | the command's |
 | `POST` | `/admin/workspaces/{route}/commands/{command}` | runs it (`{ stage?, previewId?, force?, save? }`) → a job | the command's |
 | `GET` | `/admin/workspaces/{route}/jobs[/{id}]` | the last jobs / one with its result | `read` |
 | `POST` / `GET` | `/admin/workspaces/{route}/build`, `…/build.zip` | the code of the domain in `src/` / as a zip | `build` |
+
+After 4.0.0 (in the next version of the image): `GET /admin/workspaces/{route}/history` (the changes of the schema,
+with who and the diff; `schemaRead`), `GET /admin/workspaces/{route}/stages/{stage}/routing` (the source of each entity
+of a stage; `schemaRead`), `GET …/files.zip?dir=` (a folder of `data/` or `src/` as a zip; `schemaRead`) and
+`DELETE …/files?dir=src/…` (removes a generated code; `build`).

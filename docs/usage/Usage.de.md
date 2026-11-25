@@ -11,8 +11,8 @@ weggelassen. Die vollständigen Schemas finden Sie in den [Labs](../labs/index.m
 
 ### Schema {#schema}
 
-Die Domäne hat fünf Entitäten: `Categories`, `Customers`, `Products` und `Orders`, wobei `Orders` eine zusammengesetzte
-Entität aus den Bestellungen und ihren Positionen (`Orders.details`) ist.
+Die Domäne hat fünf Entitäten: `Categories`, `Customers`, `Products`, `Orders` und `Orders.details`, wobei `Orders` eine zusammengesetzte
+Entität aus den Bestellungen und ihren Positionen ist.
 Die Infrastruktur hat einen einzigen Stage mit einer einzigen Quelle, `Ordering`, einer MySQL-Datenbank, die das Standard-Mapping
 verwendet.
 

@@ -1,8 +1,11 @@
 # Consultas {#queries}
 
-Cada consulta es una pestaña con su propio esquema, texto, datos, opciones y resultado; cambiar de pestaña no pierde
-nada. Una pestaña se abre con el **+** de las pestañas, con **Consultar** de una entidad, o desde una consulta guardada;
-el [asistente de consultas](QueryWizard.md) escribe una desde un diagrama.
+Una pestaña de consulta es donde se escribe, se revisa y se ejecuta una consulta del
+[lenguaje](../queries/Query-Language.md) de λORM contra un esquema del gateway, con sus datos y opciones, y se ve su
+resultado como árbol, tabla, JSON o YAML. Cada pestaña tiene su propio esquema, texto, datos, opciones y resultado;
+cambiar de pestaña no pierde nada. Una pestaña se abre con el **+** de las pestañas, con **Consultar** de una
+[entidad](Entities.md), desde una consulta guardada, desde **consulta del diagrama** de un [diagrama](Diagrams.md), o
+con el [asistente de consultas](QueryWizard.md), que escribe una desde un diagrama.
 
 ![Una consulta y su resultado](images/ide-query.png)
 
@@ -11,11 +14,11 @@ el [asistente de consultas](QueryWizard.md) escribe una desde un diagrama.
 | Control | Qué hace |
 | --- | --- |
 | **esquema** | el esquema en el que se ejecuta la consulta (solo los que están listos; `/` es el de la raíz) |
-| **consulta** / **script** | el modo: una consulta, o un [script](../data-gateway/Rest.md#script), varias consultas en una transacción (solo cuando el esquema tiene los scripts habilitados y el gateway los ofrece). Cada modo conserva su propio texto |
+| **consulta** / **script** | el modo: una consulta, o un [script](../data-gateway/Rest.md#script), varias consultas en una transacción (se ejecuta donde el esquema tiene los scripts habilitados). Cada modo conserva su propio texto |
 | copiar | copia la consulta (o el script) |
 | formatear | pone cada cláusula de la consulta en su propia línea ([abajo](#format)) |
 | **asistente** | abre el [asistente de consultas](QueryWizard.md) sobre esta consulta |
-| **Guardar** (Ctrl+S) / **Guardar como…** | guarda la consulta en un [proyecto](Projects.md); **guardado** dice que no tiene cambios |
+| **Guardar** (Ctrl+S) / **Guardar como…** | guarda la consulta en el [workbench](Projects.md); **guardado** dice que no tiene cambios |
 
 ## El editor {#the-editor}
 
@@ -63,17 +66,17 @@ consulta, cada uno con un valor de su tipo (`0`, `""`, hoy…), conservando los 
 ## Opciones {#options}
 
 Las opciones con las que se ejecuta la consulta, en una línea (`ninguna: las de por defecto`, o
-`stage: default · view: sales`), y **editar**, que las abre como formulario o como JSON:
+`stage: default · view: sales`), y **editar**, que las abre como **formulario** o como **JSON**; **listo** las cierra:
 
 | Opción | Qué es |
 | --- | --- |
-| **stage** | dónde se ejecuta: un stage del esquema; vacío, el de por defecto |
-| **view** | una view del esquema, que limita lo que se puede leer |
+| **stage** | dónde se ejecuta: un stage del esquema, a elegir; vacío, el de por defecto |
+| **view** | una view del esquema, a elegir, que limita lo que se puede leer |
 | **tamaño de lote** | filas por lote de una operación masiva |
-| **intentar todo lo posible** | seguir cuando falla una sentencia |
+| **intentar todo lo posible** | seguir cuando falla una sentencia: (por defecto), sí o no |
 | **tiempo máximo (ms)** | de un script: se corta después de este tiempo (modo script) |
 | **iteraciones máximas** | de un script: sus bucles, todos juntos (modo script) |
-| **cabeceras** | pares de nombre y valor que viajan con la consulta |
+| **cabeceras** | pares de nombre y valor que viajan con la consulta (**agregar una cabecera**) |
 
 Un campo vacío no se envía. Las opciones que el formulario no conoce se conservan tal como están en el JSON.
 
@@ -95,8 +98,9 @@ mensaje.
 | **execute queued** | la envía a la cola de **tópico**, para ejecutarla después | `queue` |
 | **execute script** | ejecuta el script (modo script) | `script`, y los scripts habilitados en el esquema |
 
-Una acción que la credencial no puede usar está deshabilitada, y su tooltip dice por qué. **plan**, **metadata**,
-**model**, **parameters** y **constraints** leen solo el texto de la consulta: no envían datos ni opciones.
+Una acción que la credencial no puede usar está deshabilitada, y su tooltip dice por qué
+(`"reader" no tiene el permiso queue`). **plan**, **metadata**, **model**, **parameters** y **constraints** leen solo
+el texto de la consulta: no envían datos ni opciones.
 
 ## El resultado {#the-result}
 
@@ -106,9 +110,9 @@ El estado, la operación, su tiempo, las filas y el tamaño; luego cuatro vistas
 | --- | --- |
 | **tree** | el resultado desplegado dos niveles, cada lista y objeto con su tamaño |
 | **table** | las filas como una tabla, cuando el resultado es una lista de filas; un objeto en una celda, como JSON |
-| **json** / **yaml** | el texto, con colores, plegado y búsqueda |
+| **json** / **yaml** | el texto, solo lectura, con colores, plegado y búsqueda |
 
-- El árbol y la tabla muestran hasta 200 filas (`Se muestran 200 de N filas: las descargas tienen todas`); los números
+- El árbol y la tabla muestran hasta 200 filas (`Se muestran 200 de N filas: las descargas tienen todas.`); los números
   y las fechas siguen el formato regional de las [preferencias](index.md#the-window) (el valor tal como llegó, en su
   tooltip).
 - **copiar** copia lo que se muestra; la tabla, como texto separado por tabulaciones, listo para pegar en una hoja de

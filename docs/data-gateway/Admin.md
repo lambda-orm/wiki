@@ -5,6 +5,10 @@ removed** from them, as YAML or element by element, what is saved (queries, scri
 workspaces, and the **commands of the [CLI](../cli/index.md)** run from the UI. Everything is in the volume of the
 gateway, one workspace per schema; the gateway notices what changes and serves it without restarting.
 
+Turn it on where people model the schemas (development, a shared modelling environment). In production, when the
+schemas come ready in the volume, leave `management` out: the data transports work the same, and nothing can change
+the schemas or the structure of the databases through the gateway.
+
 ## Turning it on
 
 ```yaml
@@ -48,7 +52,7 @@ Every folder under `orm.workspacePath` with a `lambdaORM.yaml` is a schema, and 
   .env               the variables of its connections
   workbench/         what is saved: folders, *.query.yaml, *.script.yaml, *.diagram.yaml
   data/              exports
-  src/domain/        the code of build
+  src/domain/        the code of build (after 4.0.0: src/<language>/domain/)
   orm_state/         the state of λORM and the record of each command
 ```
 
@@ -104,6 +108,7 @@ a time per schema), from the **Commands** panel of the UI:
 
 | Command | Before running it, the UI shows | Permission |
 | --- | --- | --- |
+| `version` | — (the versions of the gateway and the schema) | `read` |
 | `fetch` | — (it compares the databases with the model) | `read` |
 | `export` | — (downloaded, or saved in `data/`) | `read` |
 | `push` | the sentences by source | `ddl` |
@@ -115,8 +120,21 @@ a time per schema), from the **Commands** panel of the UI:
 | `build` | — (written in `src/`, or downloaded as a `.zip`) | `build` |
 
 A command that changes the databases or the schema runs **exactly the preview that was shown**, once, within 10
-minutes, and only while the `lambdaORM.yaml` is the one it was made with. Each job leaves its record in
-`orm_state/jobs/`; `push`, `drop` and `import` are [audited](Security.md#audit).
+minutes, and only while the `lambdaORM.yaml` is the one it was made with (otherwise `409 PreviewRequiredError`); another
+command of the same schema while one runs answers `409 BusyError`. Each job leaves its record in
+`orm_state/jobs/`; `push`, `drop` and `import` are [audited](Security.md#audit). `admin.commandTimeoutMs` (10 minutes)
+limits how long one may take.
+
+Over the API, a command is a preview and then a job:
+
+```sh
+S="X-Data-Gateway-Session: $TOKEN"
+curl -X POST http://data-gateway:9090/admin/workspaces/~/commands/push/preview -H "$S" -H "Content-Type: application/json" -d '{"stage": "default"}'
+# {"previewId":"…","stage":"default","sentences":[…],"expiresAt":"…"}
+curl -X POST http://data-gateway:9090/admin/workspaces/~/commands/push -H "$S" -H "Content-Type: application/json" -d '{"stage": "default", "previewId": "…"}'
+# 202 {"id":"…","command":"push","status":"running",…}
+curl http://data-gateway:9090/admin/workspaces/~/jobs/<id> -H "$S"
+```
 
 ## What is saved
 
@@ -124,6 +142,28 @@ With `workbenchWrite`, the folders, queries, scripts and diagrams of the explore
 workspace, one file per item, and everyone with access to the schema sees them (they can be versioned with git next to
 the schema). Without it, they stay in the browser as before. A file written by hand is an item too; one that is not
 valid YAML is shown as such and never replaced.
+
+## Stages and their sources
+
+In a stage, each source has a `condition`, an expression that decides which sentences go to it (the first source whose
+condition is true; a last one without a condition takes the rest). The IDE writes it with suggestions and the gateway
+checks it while it is typed (`/admin/expressions/check`): a condition that doesn't parse is an error of the schema, a
+variable that is not of a sentence (`entity`, `action`, `category`, `type`, `read`, `write`, `dml`, `ddl`) a warning.
+
+## Files and where each one was
+
+- The files of `data/` and `src/` can be listed and read (`/admin/workspaces/{route}/files`), never the `.env`,
+  `orm_state/` or a hidden file.
+- Where the IDE of each credential was (its tabs and their drafts, what is unfolded) is kept by the gateway in
+  `<orm.workspacePath>/.data-gateway/state.sqlite` (`/admin/session`), so a reload or another browser starts there.
+
+## In the next version
+
+Not in the image 4.0.0: the **history of a schema** (every change made through the administration, with who, before,
+after and the diff, in `logs/changes.jsonl` of the workspace and `GET /admin/workspaces/{route}/history`), the
+**routing of a stage** (where each entity goes, `…/stages/{stage}/routing`), and `build` per language
+(`src/<language>/domain/`), with only the model or only the repositories, a generated code downloaded as a zip or
+removed.
 
 ## Over MCP
 

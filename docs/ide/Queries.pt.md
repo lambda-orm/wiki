@@ -1,8 +1,11 @@
 # Consultas {#queries}
 
-Cada consulta é uma aba com o seu próprio esquema, texto, dados, opções e resultado; trocar de aba não perde nada. Uma
-aba é aberta com o **+** das abas, com **Consultar** de uma entidade, ou a partir de uma consulta salva; o
-[assistente de consultas](QueryWizard.md) escreve uma a partir de um diagrama.
+Uma aba de consulta é onde uma consulta da [linguagem](../queries/Query-Language.md) do λORM é escrita, verificada e
+executada sobre um esquema do gateway, com os seus dados e opções, e o seu resultado visto como árvore, tabela, JSON ou
+YAML. Cada aba tem o seu próprio esquema, texto, dados, opções e resultado; trocar de aba não perde nada. Uma aba é
+aberta com o **+** das abas, com **Consultar** de uma [entidade](Entities.md), a partir de uma consulta salva, a partir
+de **consulta do diagrama** de um [diagrama](Diagrams.md), ou pelo [assistente de consultas](QueryWizard.md), que
+escreve uma a partir de um diagrama.
 
 ![Uma consulta e seu resultado](images/ide-query.png)
 
@@ -11,11 +14,11 @@ aba é aberta com o **+** das abas, com **Consultar** de uma entidade, ou a part
 | Controle | O que faz |
 | --- | --- |
 | **esquema** | o esquema em que a consulta roda (só os que estão prontos; `/` é o da raiz) |
-| **consulta** / **script** | o modo: uma consulta, ou um [script](../data-gateway/Rest.md#script), várias consultas em uma transação (só quando o esquema tem os scripts ativados e o gateway os oferece). Cada modo mantém o seu próprio texto |
+| **consulta** / **script** | o modo: uma consulta, ou um [script](../data-gateway/Rest.md#script), várias consultas em uma transação (roda onde o esquema tem os scripts ativados). Cada modo mantém o seu próprio texto |
 | copiar | copia a consulta (ou o script) |
 | formatar | coloca cada cláusula da consulta em uma linha própria ([abaixo](#format)) |
 | **assistente** | abre o [assistente de consultas](QueryWizard.md) sobre esta consulta |
-| **Salvar** (Ctrl+S) / **Salvar como…** | guarda a consulta em um [projeto](Projects.md); **salvo** diz que ela não tem alterações |
+| **Salvar** (Ctrl+S) / **Salvar como…** | guarda a consulta no [workbench](Projects.md); **salvo** diz que ela não tem alterações |
 
 ## O editor {#the-editor}
 
@@ -63,17 +66,17 @@ cada um com um valor do seu tipo (`0`, `""`, hoje…), mantendo os que já estã
 ## Opções {#options}
 
 As opções com que a consulta roda, em uma linha (`nenhuma: as padrão`, ou `stage: default · view: sales`), e
-**editar**, que as abre como formulário ou como JSON:
+**editar**, que as abre como **formulário** ou como **JSON**; **pronto** as fecha:
 
 | Opção | O que é |
 | --- | --- |
-| **stage** | onde roda: um stage do esquema; vazio, o padrão |
-| **view** | uma view do esquema, que limita o que pode ser lido |
+| **stage** | onde roda: um stage do esquema, a escolher; vazio, o padrão |
+| **view** | uma view do esquema, a escolher, que limita o que pode ser lido |
 | **tamanho do lote** | linhas por lote de uma operação em massa |
-| **tentar tudo o possível** | continuar quando uma sentença falha |
+| **tentar tudo o possível** | continuar quando uma sentença falha: (padrão), sim ou não |
 | **tempo máximo (ms)** | de um script: ele para depois desse tempo (modo script) |
 | **iterações máximas** | de um script: os seus laços, todos juntos (modo script) |
-| **cabeçalhos** | pares de nome e valor que vão com a consulta |
+| **cabeçalhos** | pares de nome e valor que vão com a consulta (**adicionar um cabeçalho**) |
 
 Um campo vazio não é enviado. As opções que o formulário não conhece são mantidas como estão no JSON.
 
@@ -94,8 +97,9 @@ Um campo vazio não é enviado. As opções que o formulário não conhece são 
 | **execute queued** | a envia à fila do **tópico**, para executar depois | `queue` |
 | **execute script** | executa o script (modo script) | `script`, e os scripts ativados no esquema |
 
-Uma ação que a credencial não pode usar fica desativada, e a sua dica diz por quê. **plan**, **metadata**, **model**,
-**parameters** e **constraints** leem apenas o texto da consulta: não enviam dados nem opções.
+Uma ação que a credencial não pode usar fica desativada, e a sua dica diz por quê (`"reader" não tem a permissão
+queue`). **plan**, **metadata**, **model**, **parameters** e **constraints** leem apenas o texto da consulta: não
+enviam dados nem opções.
 
 ## O resultado {#the-result}
 
@@ -105,7 +109,7 @@ O status, a operação, o seu tempo, as linhas e o tamanho; depois, quatro visõ
 | --- | --- |
 | **tree** | o resultado expandido em dois níveis, cada lista e objeto com o seu tamanho |
 | **table** | as linhas como uma tabela, quando o resultado é uma lista de linhas; um objeto em uma célula, como JSON |
-| **json** / **yaml** | o texto, com cores, recolhimento e busca |
+| **json** / **yaml** | o texto, somente leitura, com cores, recolhimento e busca |
 
 - A árvore e a tabela mostram até 200 linhas (`Mostrando 200 de N linhas: os downloads têm todas.`); números e datas
   seguem o formato regional das [preferências](index.md#the-window) (o valor como veio, na sua dica).

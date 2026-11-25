@@ -34,12 +34,12 @@ Der Tab braucht ein Schema; der Assistent liest dessen Domäne vom Gateway.
 | Teil | Wo | Was er tut |
 | --- | --- | --- |
 | **ausgehend von** | oben links | die Entität, von der die Abfrage ausgeht (die Wurzel): jede Zeile des Ergebnisses ist eine ihrer Zeilen |
-| **abbrechen** / **Abfrage erstellen** | oben rechts | ihn ohne Änderungen schließen / die Abfrage schreiben (**Abfrage aktualisieren** bei einer Abfrage, die er geschrieben hat) |
-| **das Diagramm** | links | die Tabellen der Abfrage, ein Häkchen an jedem Feld; **+** fügt verwandte Tabellen hinzu, **×** entfernt eine |
+| **das Diagramm** | links | die Tabellen der Abfrage, ein Häkchen an jedem Feld und eines im Titel jeder Tabelle; **+** fügt verwandte Tabellen hinzu, **×** entfernt eine |
 | **die Abfrage** | rechts, oben | die Abfrage, wie sie geschrieben wird, nur lesen, bei jeder Änderung aktualisiert |
 | **Filter** | rechts | die Bedingung, die die Zeilen der Wurzel erfüllen müssen |
 | **Reihenfolge** | rechts | die Spalten des Ergebnisses, nach denen die Zeilen sortiert werden |
 | **Seite** | rechts | die Seite und die Zeilen pro Seite |
+| **abbrechen** / **Abfrage erstellen** | unten rechts | ihn ohne Änderungen schließen / die Abfrage schreiben (**Abfrage aktualisieren** bei einer Abfrage, die er geschrieben hat) |
 
 Leer gelassen werden Filter, Reihenfolge und Seite nicht angewendet: Ist nichts gewählt, ist die Abfrage nur der Name
 der Entität und liest alle ihre Zeilen mit allen ihren Feldern.
@@ -92,18 +92,23 @@ Klick, oder Umschalt und den Hintergrund ziehen) und mit Entf auf einmal entfern
 
 ### 3. Die Felder: die Häkchen {#3-the-fields-the-checks}
 
-Ein Klick auf ein Feld hakt es an (die ganze Zeile, nicht nur ihr Kästchen). Für jede Tabelle:
+Eine Tabelle kommt mit **allen Feldern angehakt**: Sie liest alle ihre Felder, und ihr include hat kein `map` (die
+Wurzel auch nicht). Ein Klick auf ein Feld hakt es an oder ab (die ganze Zeile, nicht nur ihr Kästchen):
 
-- **kein Feld angehakt**: jedes Feld dieser Tabelle (ihr include hat kein `map`, und die Wurzel hat kein `map`);
-- **einige Felder angehakt**: nur diese, in der Reihenfolge der Domäne, nicht in der Reihenfolge, in der sie angehakt
-  wurden.
+- **ein Feld abhaken** lässt die anderen: Die Tabelle bekommt ein `map` mit den noch angehakten Feldern, in der
+  Reihenfolge der Domäne, nicht in der Reihenfolge, in der sie angehakt wurden;
+- **das Häkchen im Titel** der Tabelle hakt alle ab außer ihrem Primärschlüssel, um dann nur die Felder anzuhaken, die
+  du willst; sind einige abgehakt, hakt es wieder alle an;
+- **alle wieder angehakt** heißt wieder kein `map`. Das letzte angehakte Feld lässt sich nicht abhaken: Eine Tabelle
+  liest mindestens eines.
 
-Hake `id` und `orderDate` von `Orders` an, `name` und `country` von `Customers`, `quantity` und `unitPrice` der
-Positionen und `name` von `Products`. Jede Tabelle bekommt ihr eigenes `map`:
+Entferne das Häkchen im Titel von `Orders` (nur `id` bleibt) und hake `orderDate` an; entferne das Häkchen im Titel von
+`Customers` und hake `name` und `country` an; entferne das Häkchen im Titel von `Products` und hake `name` an. Lass die
+Positionen mit all ihren Feldern. Jede Tabelle mit abgehakten Feldern bekommt ihr eigenes `map`:
 
 ```ts
 Orders
-	.include(p => [p.customer.map(q => ({ name: q.name, country: q.country })), p.details.include(q => q.product.map(r => ({ name: r.name }))).map(q => ({ unitPrice: q.unitPrice, quantity: q.quantity }))])
+	.include(p => [p.customer.map(q => ({ id: q.id, name: q.name, country: q.country })), p.details.include(q => q.product.map(r => ({ id: r.id, name: r.name })))])
 	.map(p => ({ id: p.id, orderDate: p.orderDate }))
 ```
 
@@ -134,9 +139,9 @@ Filter wird im Assistenten nicht geprüft: Der Abfrage-Tab markiert seine Fehler
 ### 5. Die Reihenfolge {#5-the-order}
 
 **+ Reihenfolge hinzufügen** fügt eine Zeile hinzu: eine Spalte und **aufsteigend** oder **absteigend**. Die Spalten
-sind die des Ergebnisses der Wurzel: die angehakten Felder der Entität, von der sie ausgeht, oder alle ihre Felder, wenn
-keines angehakt ist. Jede Spalte kann einmal verwendet werden; die erste Zeile sortiert zuerst. Ein abgehaktes Feld
-nimmt seine Reihenfolge mit.
+sind die des Ergebnisses der Wurzel: die angehakten Felder der Entität, von der sie ausgeht. Jede Spalte kann einmal
+verwendet werden; die erste Zeile sortiert zuerst; × entfernt eine Zeile. Ein abgehaktes Feld nimmt seine Reihenfolge
+mit.
 
 Wähle `orderDate`, **absteigend**: `.sort(p => desc(p.orderDate))`. Zwei Zeilen ergeben eine Liste:
 `.sort(p => [desc(p.orderDate), p.id])`.
@@ -153,7 +158,7 @@ Seite nicht angewendet; ohne Seite ist es die erste. `20` Zeilen pro Seite ergib
 ```ts
 Orders
 	.filter(p => p.customer.country == 'Germany')
-	.include(p => [p.customer.map(q => ({ name: q.name, country: q.country })), p.details.include(q => q.product.map(r => ({ name: r.name }))).map(q => ({ unitPrice: q.unitPrice, quantity: q.quantity }))])
+	.include(p => [p.customer.map(q => ({ id: q.id, name: q.name, country: q.country })), p.details.include(q => q.product.map(r => ({ id: r.id, name: r.name })))])
 	.map(p => ({ id: p.id, orderDate: p.orderDate }))
 	.sort(p => desc(p.orderDate))
 	.page(1, 20)
@@ -168,10 +173,10 @@ Orders
   {
     "id": 823,
     "orderDate": "1998-05-04T22:00:00.000Z",
-    "customer": { "name": "Lehmanns Marktstand", "country": "Germany" },
+    "customer": { "id": "LEHMS", "name": "Lehmanns Marktstand", "country": "Germany" },
     "details": [
-      { "unitPrice": 18, "quantity": 40, "product": { "name": "Chai" } },
-      { "unitPrice": 19, "quantity": 20, "product": { "name": "Chang" } }
+      { "orderId": 823, "productId": 1, "unitPrice": 18, "quantity": 40, "product": { "id": 1, "name": "Chai" } },
+      { "orderId": 823, "productId": 2, "unitPrice": 19, "quantity": 20, "product": { "id": 2, "name": "Chang" } }
     ]
   }
 ]
@@ -194,15 +199,14 @@ Hand fertig.
 
 ## Eine von Hand geschriebene Abfrage {#a-query-written-by-hand}
 
-Seit der IDE 1.0.1 liest der Assistent jede Abfrage des Tabs, soweit er sie zeigen kann (vorher öffnete er sich auf der
-Entität, von der die Abfrage ausgeht, ohne etwas gewählt zu haben):
+Der Assistent liest jede Abfrage des Tabs, soweit er sie zeigen kann:
 
 | Die Abfrage hat | Der Assistent |
 | --- | --- |
 | `Entity` an ihrem Anfang | geht von dieser Entität aus |
 | `.filter(x => …)` | nimmt ihn als seinen Filter, auf `p`, egal wie ihre Variable heißt |
 | `.include(x => …)` | fügt die Tabelle jeder Beziehung hinzu, mit den Feldern ihres `map` und ihren eigenen includes |
-| `.map(x => ({ a: x.a, … }))` | hakt diese Felder an |
+| `.map(x => ({ a: x.a, … }))` | hakt diese Felder an (ein map mit allen Feldern der Tabelle ist dasselbe wie keines) |
 | `.sort(x => …)` mit `x.a`, `desc(x.a)`, `asc(x.a)`, `x.a.desc()` | fügt diese Reihenfolgen hinzu (nach Feldern des Ergebnisses) |
 | `.page(n, size)` | übernimmt die Seite und die Zeilen pro Seite |
 
@@ -242,8 +246,8 @@ und die Seite. Für den Rest schreibe die Abfrage von Hand oder stelle die ferti
 
 Das Diagramm des Assistenten ist das von [Diagramme](Diagrams.md), mit den Häkchen der Felder:
 
-- das Mausrad zoomt, das Ziehen des Hintergrunds verschiebt es, **einpassen** zeigt es ganz, **neu anordnen** setzt die
-  Boxen zurück;
+- das Mausrad zoomt, das Ziehen des Hintergrunds verschiebt es, **einpassen** zeigt es ganz, die Übersicht zeigt, wo du
+  bist, **neu anordnen** setzt die Boxen zurück;
 - eine Box oder eine Linie wird gezogen, um sie zu platzieren, und der Platz wird mit dem Assistenten aufbewahrt;
 - **Beziehungsnamen** zeigt den Namen jeder Beziehung auf ihrer Linie;
 - **exportieren** speichert das Diagramm als PDF, PNG oder SVG.

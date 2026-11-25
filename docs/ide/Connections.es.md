@@ -2,35 +2,41 @@
 
 Una conexión es un gateway con el que trabaja el IDE: la dirección de su puerto `management` y una credencial. El IDE no
 tiene login ni página de inicio: guarda sus conexiones, y la primera vez se abre en una **Nueva conexión**. Puede haber
-varias conexiones abiertas a la vez, cada una con sus esquemas en el explorador y sus pestañas una al lado de otra.
+varias conexiones abiertas a la vez, cada una con sus esquemas en el [explorador](Explorer.md) y sus pestañas una al
+lado de otra.
+
+Agrega una conexión por cada gateway y credencial que uses: uno local, el de un entorno de pruebas, el mismo gateway
+con una credencial que solo lee y otra que administra.
 
 ## Una conexión nueva {#a-new-connection}
 
-El **+** de **Conexiones** en el explorador, o el menú ☰ → **Nueva conexión**:
+El **+** junto a **Conexiones**, arriba del explorador:
 
 | Campo | Qué es |
 | --- | --- |
 | **Nombre** | cómo se muestra la conexión (`local`, `production`…) |
 | **Protocolo** | `REST · http` o `REST · https` |
 | **Dirección del management** | `host:puerto/ruta base` del `management` del gateway, **como lo alcanza el servidor del IDE**: `data-gateway:9090` para un IDE web en el mismo compose, `localhost:9090` para la aplicación de escritorio en la máquina del gateway |
-| **Autenticación** | **API key** (su **Header**, por defecto `X-Api-Key`, y su **Clave**), **Token Bearer**, **Basic (usuario y contraseña)** o **Ninguna** |
+| **Autenticación** | **API key** (su **Header**, por defecto `X-Api-Key`, y su **Clave**), **Token Bearer** (su **Token**), **Basic (usuario y contraseña)** o **Ninguna** |
 | **Recordar la clave en este navegador** | se guarda con la conexión; si no, solo en esa pestaña del navegador, y se vuelve a pedir después de cerrarla |
-| **Otras URLs de sus transportes** | las URLs de su REST, WebSocket y MCP, solo cuando el IDE no los alcanza en los puertos que dice el gateway (un proxy adelante, otra red) |
+| **Otras URLs de sus transportes** (plegado) | la **URL de REST**, la **URL del WebSocket** y la **URL del MCP**, solo cuando el IDE no los alcanza en los puertos que dice el gateway (un proxy adelante, otra red) |
+| **Observabilidad** (plegado) | la **URL de Grafana** y su **Datasource de Tempo (uid)** (`tempo` por defecto): entonces una entidad muestra un enlace a sus trazas ([Entidades](Entities.md)) |
 
 **Mostrar** muestra la clave que se escribió. **Probar** abre una sesión y la cierra enseguida: `Conectado como admin ·
-data-gateway 4.0.0`, o por qué no pudo. **Conectar** agrega la conexión.
+data-gateway 4.0.0`, o por qué no pudo. **Conectar** agrega la conexión y abre su página.
 
 ![Nueva conexión](images/ide-new-connection.png)
 
-La conexión queda en el navegador (en la aplicación de escritorio, en sus datos); sus esquemas, workspaces y proyectos
-están en el gateway. Quitar una conexión la quita solo del IDE: no se borra nada del gateway.
+La conexión queda en el navegador (en la aplicación de escritorio, en sus datos); sus esquemas, workspaces y lo que se
+guarda en ellos están en el gateway.
 
 ## Su fila en el explorador {#its-row-in-the-explorer}
 
 | Elemento | Qué hace |
 | --- | --- |
-| ✎ **Editar la conexión** | abre su página |
-| 🗑 **Quitar** | pregunta, y la quita del IDE |
+| ▸ | pliega y despliega sus esquemas |
+| su nombre y su dirección | abren su página |
+| ⟳ **Actualizar** | vuelve a leer lo que cambió en otro lado: sus esquemas, sus dominios y lo guardado |
 | ⚠ en lugar de su icono | algo para ver: el puntero encima dice qué |
 
 Los problemas que indica, en rojo debajo de su nombre:
@@ -44,30 +50,33 @@ Los problemas que indica, en rojo debajo de su nombre:
 
 ## Su página {#its-page}
 
-✎ abre **Conexión: nombre**, con cuatro pestañas.
+Un clic en su nombre abre **Conexión: nombre**, con cuatro pestañas.
 
 ### Conexión {#connection}
 
 El formulario de arriba, con **Guardar** (guardarlo sin cambios lo vuelve a conectar, después de una revocación) y
-**Quitar**. Debajo, quién es la credencial: su nombre, la URL y su autenticación.
+**Quitar**, que pregunta antes y la quita solo del IDE: no se borra nada del gateway, y se cierran sus pestañas. Debajo
+del formulario, quién es la credencial: su nombre, la URL y su autenticación.
 
 ### Herramientas {#tools}
 
-La API REST, el WebSocket y el MCP del gateway, cada uno en su propia pestaña, con la credencial de la conexión. Un
-transporte que el gateway no expone está deshabilitado. El IDE sabe dónde están por el gateway (`GET /transports` de
-su `management`), o por **Otras URLs de sus transportes**.
+**API REST (Swagger)**, **WebSocket** y **MCP**: los transportes del gateway, cada uno abierto en su propia pestaña
+(`API REST · northwind`…), con la credencial de la conexión. Un transporte que el gateway no expone está deshabilitado
+(`esta data-gateway no lo expone`). El IDE sabe dónde están por el gateway (`GET /transports` de su `management`), o
+por **Otras URLs de sus transportes**.
 
 | Herramienta | Qué tiene |
 | --- | --- |
 | **API REST (Swagger)** | el OpenAPI del gateway, cada método con **Try it out**; la credencial va con cada petición |
-| **WebSocket** | un **Esquema**, **Conectar** / **Desconectar**, sus métodos (de su AsyncAPI: un clic llena el pedido), el **Pedido** (JSON-RPC) con **Enviar** (Ctrl+Enter) y los **Mensajes** enviados y recibidos (los últimos 200) |
-| **MCP** | un **Esquema** y **Conectar**, luego sus **Tools del esquema**: elegida una, sus **Argumentos** (llenos con los obligatorios), **Llamar** (Ctrl+Enter) y su **Resultado** |
+| **WebSocket** | un **Esquema**, **Conectar** / **Desconectar**, sus **Métodos** (de su AsyncAPI: un clic llena el pedido), el **Pedido** (JSON-RPC) con **Enviar** (Ctrl+Enter) y los **Mensajes** enviados y recibidos (los últimos 200) |
+| **MCP** | un **Esquema** y **Conectar**, luego las **Tools del esquema**: elegida una, sus **Argumentos** (llenos con los obligatorios), **Llamar** (Ctrl+Enter) y su **Resultado** |
 
 ![Herramientas](images/ide-connection-tools.png)
 
 ### Roles {#roles}
 
-Lo que puede hacer la credencial: cada permiso, **otorgado** o **no otorgado**, con lo que permite.
+Lo que puede hacer la credencial, en dos grupos, **Datos** y **Administración**, cada uno con cuántos están otorgados
+(`1 / 5`): cada permiso, **otorgado** o **no otorgado**, con lo que permite.
 
 | Permiso | Permite |
 | --- | --- |
@@ -81,7 +90,7 @@ Lo que puede hacer la credencial: cada permiso, **otorgado** o **no otorgado**, 
 | `schemaAdmin` | crear y eliminar esquemas, definir las variables de su `.env` |
 | `workbenchWrite` | guardar consultas, scripts y diagramas en los proyectos de los workspaces |
 | `ddl` | cambiar la estructura de las bases de datos de un stage (push, drop) |
-| `build` | generar el código del dominio en `src/` del workspace |
+| `build` | generar el código del dominio (modelo y repositorios) en `src/` del workspace |
 | `sessionAdmin` | ver todas las sesiones de `management` y revocar las de otras credenciales |
 
 ![Roles](images/ide-connection-roles.png)
@@ -99,11 +108,13 @@ guarda el token en esa pestaña del navegador, y cada petición lo lleva, nunca 
 - Cuando se **revoca**, el IDE dice quién la revocó y no vuelve por sí solo, aunque la clave esté recordada: guardar la
   conexión de nuevo la conecta.
 - El IDE mantiene abierto el WebSocket de eventos del gateway: la sesión se muestra como *conectado* (un ● verde), y un
-  esquema que cambia, o algo que guardó otra persona, se ve enseguida.
+  esquema que cambia, o algo que guardó otra persona, se ve enseguida. Un cambio hecho por otra sesión (otra persona,
+  otro IDE, la CLI a través del gateway) se anuncia debajo de la conexión, `modeler cambió Orders en /`, con
+  **Actualizar**.
 
 **Mis sesiones** lista las sesiones de la misma credencial: esta (**esta**) y las otras (otra pestaña, navegador o
-computadora), cada una con su cliente, su dirección, lo que está mirando, su última actividad y cuándo vence.
-**Cerrar** cierra una; **Cerrar las otras**, todas menos esta.
+computadora), cada una con su cliente, su dirección, lo que está mirando (su esquema y su pestaña activa), su última
+actividad y cuándo vence. **Cerrar** cierra una; **Cerrar las otras**, todas menos esta.
 
 Con `sessionAdmin`, **Sesiones activas** lista todas las sesiones del gateway por credencial: **Revocar** una, o
 **Revocar todas** las de una credencial (pregunta antes; en la tuya, esta sesión queda).

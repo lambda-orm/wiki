@@ -1,10 +1,14 @@
 # Configuração {#configuration}
 
-Tudo é configurado em **um único arquivo YAML**, montado no contêiner, nunca embutido na imagem:
+Tudo o que o gateway faz é decidido por **um único arquivo YAML**, montado no contêiner, nunca embutido na imagem:
+quais esquemas ele serve e em quais rotas, quais transportes abre, quem pode usá-los e com quais limites. Esta página
+explica cada parte e termina com a [referência](#reference) de todas as chaves; o
+[Primeiros passos](GettingStarted.md) tem um arquivo completo e pequeno.
 
 - Caminho: `DATA_GATEWAY_CONFIG_PATH` (padrão `/config/data-gateway.config.yaml`). Ele é **obrigatório**: sem ele o
-  gateway registra o erro e encerra com o código 1. Uma chave ou um valor inválido também impede a inicialização, com a lista de
-  problemas.
+  gateway registra o erro e encerra com o código 1. Um valor inválido (uma porta que não é um número, uma permissão ou
+  ferramenta desconhecida) também impede a inicialização, com a lista de problemas; uma seção ou chave desconhecida gera
+  um aviso e é ignorada.
 - `$VAR` e `${VAR}` são substituídos por variáveis de ambiente em qualquer parte do arquivo, inclusive dentro de um texto
   (`"${HOST}:${PORT}"`). Uma variável não definida conta como **não configurada**: um transporte cujo `port: $VAR` não está
   definido não é exposto; uma credencial cujo segredo não está definido impede a inicialização.
@@ -71,7 +75,9 @@ O mais específico sempre prevalece e **substitui** os demais: esquema → trans
 
 **Regras:**
 
-- Pelo menos um entre `orm.workspacePath` ou um `orm.schemas[]` com `workspace`, e pelo menos um esquema.
+- Pelo menos um entre `orm.workspacePath` ou um `orm.schemas[]` com `workspace`. Com `orm.watch` (o padrão), um volume
+  vazio inicia e espera pelo seu primeiro esquema, e um ajuste de um esquema que ainda não existe gera um aviso e é
+  aplicado quando ele aparece; sem ele, é preciso encontrar pelo menos um esquema.
 - Dois esquemas com a mesma rota, ou uma rota que é prefixo de outra (`iot` e `iot/v1`), são um erro.
 - Cada segmento de uma rota: `[a-zA-Z0-9_.-]`, e nenhum dos nomes reservados: `health`, `ping`, `metrics`, `version`,
   `schemas`, `mcp`, `sse`, `messages`, `status`, `doc`, `api-docs`, `swagger`, `asyncapi`, `ui`, `whoami`, `typings`, `admin`.
@@ -117,6 +123,7 @@ Uma variável usada em `schemas[].env` que não está definida fica indefinida: 
 
 ```yaml
 runtime:
+  transports: shared        # every transport in one edge worker (thread and process: not in this version)
   schemas: thread           # thread | process: one worker per schema (runtime.mode adjusts one schema)
   maxMemoryMb: 512          # JavaScript heap of each worker; above it, only that worker is restarted
   checkConnections: true    # at start each schema opens a connection of each source: a database down → error, retried
@@ -213,8 +220,31 @@ transports:
     port: $DATA_GATEWAY_WS_PORT
   management:                      # a API da IDE; sem a variável, não é exposta (produção)
     port: $DATA_GATEWAY_MANAGEMENT_PORT
+    trustedProxies: [ 10.0.0.0/8 ] # a rede do IDE: seu X-Forwarded-For dá o endereço do navegador
     sessions: { idleTimeout: 30m, maxLifetime: 12h }
 ```
+
+## Observabilidade (OpenTelemetry) {#observability}
+
+**Não está na imagem 4.0.0: virá na próxima versão.** A seção `observability` tem a forma de
+`infrastructure.observability` de um `lambdaORM.yaml` ([Observabilidade](../schema/Observability.md)), e as variáveis
+padrão `OTEL_*` a substituem. O gateway inicia o SDK do OpenTelemetry em cada worker antes do λORM, de modo que uma
+requisição, seu worker e as sentenças do λORM formam um único trace.
+
+```yaml
+observability:
+  serviceName: data-gateway                              # o padrão; OTEL_SERVICE_NAME o substitui
+  exporter: { type: otlp, endpoint: http://alloy:4318 }  # http/protobuf (ou http/json); sem gRPC
+  traces:
+    enabled: true
+    sampler: { ratio: 1, parentBased: true }
+  metrics: { enabled: true }                             # também por OTLP; /metrics as tem de qualquer forma
+  logs:
+    adapters: [ { type: opentelemetry } ]                # a auditoria e o histórico dos esquemas
+```
+
+Os headers do exportador carregam tokens: vão apenas em `OTEL_EXPORTER_OTLP_HEADERS` (`exporter.headers` no arquivo
+impede a inicialização). O que ela oferece está em [Operações](Operations.md#opentelemetry).
 
 ## Referência {#reference}
 
@@ -227,6 +257,7 @@ transports:
 | `admin.enabled` | — | **removida na 4.0.0** (avisada e ignorada): a [administração](Admin.md) fica ligada quando `transports.management` tem uma porta |
 | `admin.allowAnonymous` | `false` | com `authentication: none`, qualquer um administra (só desenvolvimento local) |
 | `admin.commandTimeoutMs` / `maxFileBytes` | `600000` / `2MB` | quanto um comando pode demorar; o maior arquivo gravado |
+| `runtime.transports` | `shared` | todos os transportes em um único edge worker; `thread` e `process` geram um aviso e rodam como `shared` |
 | `runtime.schemas` | `thread` | `thread` / `process` |
 | `runtime.maxMemoryMb` | `512` | por worker |
 | `runtime.checkConnections` | `true` | um banco de dados fora do ar deixa o esquema em `error`, tentado novamente, em vez de falhar na primeira consulta |
@@ -234,7 +265,7 @@ transports:
 | `runtime.heartbeat.intervalMs` / `timeoutMs` | `5000` / `30000` | |
 | `runtime.restart.initialDelayMs` / `maxDelayMs` | `1000` / `300000` | espera crescente entre reinícios |
 | `runtime.env.isolate` / `passthrough` | `true` / `[]` | |
-| `server.timeout` | `120000` | por requisição HTTP, mensagem WebSocket e chamada de ferramenta MCP |
+| `server.timeout` | `120000` | por requisição HTTP, mensagem WebSocket e chamada de ferramenta MCP; acima dele, `504` |
 | `server.maxConcurrent` | `64` | operações simultâneas por esquema; acima disso, `429`; `0` = sem limite |
 | `server.requestBodySize` | `14MB` | |
 | `server.maxResponseBytes` | `256MB` | acima disso, `413`; `0` = sem limite |
@@ -243,6 +274,7 @@ transports:
 | `audit.enabled` | `true` | a auditoria das escritas ([Segurança](Security.md#audit)) |
 | `audit.includeData` | `false` | `true` adiciona os parâmetros (`data`), que podem conter dados pessoais |
 | `authentication` | `{ adapter: none }` | [Segurança](Security.md) |
+| `authentication.header` | `X-Api-Key` | o header de `type: apikey` |
 | `transports.<t>.authentication` | `authentication` | substitui a global para esse transporte |
 | `rateLimit.windowMs` / `rateLimit.max` | `30000` / `30` | apenas `http`; `max: 0` o desativa |
 | `scripts.enabled` | `false` | `POST /script` e sua ferramenta e seu método |
@@ -254,14 +286,15 @@ transports:
 | `transports.<t>.port` | **nenhum** | sem porta, o transporte não é exposto |
 | `transports.<t>.host` | `0.0.0.0` | |
 | `transports.<t>.basePath` | `''` | um prefixo antes da rota do esquema (`/data-gateway`), atrás de um ingress com um caminho |
-| `transports.<t>.maxConnections` | `100` | `webSocket`, `mcpWebSocket` e o SSE de `mcpHttp` |
+| `transports.<t>.maxConnections` | `100` | `webSocket`, `mcpWebSocket`, e os streams SSE e as sessões stateful de `mcpHttp` |
 | `transports.http.swagger.enabled` | `true` | `/doc` e `/api-docs` |
 | `transports.http.ui` | — | **removida na 4.0.0** (avisada e ignorada): a [UI](../ide/index.md) é o data-gateway-ide |
 | `transports.management.port` | **nenhum** | a API da [IDE](../ide/index.md) e a [administração](Admin.md) ([Transportes](Transports.md#management)) |
-| `transports.management.sessions.idleTimeout` / `maxLifetime` | `30m` / `12h` | quando uma [sessão](Transports.md#sessions) termina: sem requisições, e depois do login |
+| `transports.management.sessions.idleTimeout` / `maxLifetime` | `30m` / `12h` | quando uma [sessão](Transports.md#sessions) termina: sem requisições, e depois do login; `30s`, `30m`, `12h`, `7d` ou milissegundos |
 | `transports.management.sessions.maxPerCredential` | `0` | sessões simultâneas por credencial; `0` = sem limite; acima dele, um login fecha a mais antiga |
 | `transports.management.sessions.store` | `auto` | `auto`: `<orm.workspacePath>/.data-gateway/state.sqlite` (compartilhado pelas réplicas); `memory`: apenas esta réplica |
 | `transports.management.trustedProxies` | `[]` | endereços ou redes (CIDR) cujo `X-Forwarded-For` é aceito: a IDE, para que se veja o endereço do navegador |
 | `transports.mcpHttp.legacySse` | `true` | além do Streamable HTTP, o antigo HTTP+SSE para clientes antigos |
 | `transports.mcpHttp.stateful` | `false` | Streamable HTTP sem estado: qualquer réplica responde a qualquer requisição |
 | `transports.<ws>.asyncapi.enabled` | `true` | `GET /asyncapi` e `/asyncapi.json` de `webSocket` e `mcpWebSocket` |
+| `observability` | — | OpenTelemetry, [acima](#observability); não está na 4.0.0 |

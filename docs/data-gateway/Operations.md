@@ -1,9 +1,11 @@
 # Operations
 
+How to run the gateway in production: its image, Kubernetes, its health, its metrics and its logs.
+
 ## Docker
 
 The image is [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway): Node 24, the `lambdaorm`
-CLI and the Oracle Instant Client. It runs `node index.js` as the user 1000, reads the configuration from
+CLI (`@lambdaorm/cli`) and the Oracle Instant Client. It runs `node index.js` as the user 1000, reads the configuration from
 `/config/data-gateway.config.yaml` (`DATA_GATEWAY_CONFIG_PATH`) and the workspaces from where the configuration says
 (`/workspace` by convention). It has no `EXPOSE`: the ports are only in the configuration.
 
@@ -11,7 +13,7 @@ CLI and the Oracle Instant Client. It runs `node index.js` as the user 1000, rea
 # docker-compose.yml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:3.2.0
+    image: flaviorita/data-gateway:4.0.0
     environment:
       DATA_GATEWAY_HTTP_PORT: "8080"
       DATA_GATEWAY_MCP_PORT: "8081"
@@ -28,12 +30,38 @@ services:
       retries: 6
 ```
 
+The workspace is mounted read only: without `management`, the gateway doesn't write in it. With `management` (the
+IDE, the administration) it must be writable by the user 1000 (or the one given in `user:`): it keeps there the
+sessions and the state of the IDE (`.data-gateway/`) and the files it edits.
+
 The versions `3.0.0-rc.*` are prereleases: they don't move `latest`.
+
+### With the IDE
+
+The [IDE](../ide/index.md) is another image, `flaviorita/data-gateway-ide`, next to the gateway: the browser talks to
+it, and it reaches the `management` port, which is published to nobody else.
+
+```yaml
+services:
+  data-gateway:
+    image: flaviorita/data-gateway:4.0.0
+    # … as above, with transports.management.port: 9090 in its configuration, and no port 9090 published
+  ide:
+    image: flaviorita/data-gateway-ide:1.0.0
+    environment:
+      DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081"
+    ports: [ "127.0.0.1:8090:8080" ]
+```
+
+`DATA_GATEWAY_IDE_TARGETS` lists what the IDE may reach (`*`: anything, only for an IDE on your machine).
 
 ## Kubernetes
 
-- **Probes:** `livenessProbe` on `GET /ping` (the gateway is up), `readinessProbe` on `GET /health` (`200` while some
-  schema is `ready`). A probe per schema: `GET /{schema}/health`.
+- **Probes:** `livenessProbe` on `GET /ping` (the gateway answers). `GET /health` answers `200` while the gateway
+  answers, with `DEGRADED` when some schema is not `ready`; to keep a pod out of the service until a schema is ready,
+  the `readinessProbe` goes on `GET /{schema}/health` (`503` while it is not `ready`). With a single schema at the root,
+  `GET /health` is that schema's.
+- **`management`:** an internal `Service` without an ingress, reached only by the IDE; or left out.
 - **Configuration** in a `ConfigMap` mounted at `/config`, secrets as environment variables from a `Secret`
   (`value: $READER_KEY` in the file).
 - **Replicas:** REST, WebSocket and stateless MCP (`stateful: false`) need no session affinity; the older HTTP+SSE of
@@ -47,7 +75,7 @@ The versions `3.0.0-rc.*` are prereleases: they don't move `latest`.
 | Route | Answers |
 | --- | --- |
 | `GET /ping` | `{ "message": "pong", "time" }`: the gateway answers |
-| `GET /health` | `200` while some schema is `ready`, `503` if none |
+| `GET /health` | `200`, `{ "message": "OK" }` when every schema is `ready`, `"DEGRADED"` if not, with the state of each one |
 | `GET /schemas` | each schema with `status` (`starting`, `ready`, `error`, `restarting`), `reason`, `since` and `restarts` |
 | `GET /{schema}/health` | `200` when that schema is `ready`, `503` if not |
 | `GET /status` | in `mcpHttp` and `mcpWebSocket`: the state of the transport |
@@ -66,12 +94,14 @@ each with the label `worker` (`edge`, `schema:iot/v1`):
 | `data_gateway_request_duration_seconds` | `transport`, `schema`, `method` |
 | `data_gateway_forbidden_total` | `credential`, `permission` |
 | `data_gateway_throttled_total` | `schema`, `transport` (answers `429` by `maxConcurrent`) |
-| `data_gateway_connections` | `transport` |
+| `data_gateway_connections` | `transport` (open WebSocket connections, SSE streams, stateful MCP sessions) |
 | `data_gateway_schema_status` | `schema`, `status` |
 | `data_gateway_schema_restarts` | `schema` |
-| `data_gateway_event_loop_lag_seconds` | `worker` |
+| `data_gateway_management_sessions` | `state` (the sessions of `management`, and those with the IDE connected) |
+| `http_request_duration_seconds` | `method`, `route`, `code`, `credential` (the HTTP requests) |
 
-and the usual metrics of Node (memory, CPU, event loop). `metrics.enabled: false` turns them off.
+and the usual metrics of Node with the prefix `node_` (memory, CPU, garbage collection, the lag of the event loop:
+`node_nodejs_eventloop_lag_seconds`). `metrics.enabled: false` turns them off.
 
 ## Logs
 
@@ -82,3 +112,20 @@ and every operation with the name of its credential (never its secret). `logger.
 
 The [audit](Security.md#audit) of writes goes to the standard output as JSON lines with `"type": "audit"`, to be kept
 apart by the log collector.
+
+## OpenTelemetry {#opentelemetry}
+
+**Not in the image 4.0.0: in the next version.** With the section [`observability`](Configuration.md#observability)
+(or the `OTEL_*` variables):
+
+- **Traces:** a `SERVER` span per HTTP request (named by its route template, `POST /{schema}/execute`), WebSocket
+  message and MCP call, child of the caller's `traceparent`; the trace goes on in the worker of the schema and in the
+  spans of λORM (`lambdaorm.execute`, its sentences).
+- **The actor:** the credential (and on `management` the session, the IDE and the address) reaches λORM, for its
+  rules and its events; an `options.actor` sent by a client is replaced.
+- **λORM's metrics in `/metrics`**, with the names of the OpenTelemetry → Prometheus compatibility
+  (`db_client_operation_duration_seconds`, `lambdaorm_query_duration_seconds`, …), and
+  `http_server_request_duration_seconds` (`http_request_method`, `http_route`, `http_response_status_code`); the same
+  names by OTLP.
+- **The audit** also goes as an OpenTelemetry log record, linked to the trace of its request, and every change of the
+  administration as a `schema.change` event (the [history](Admin.md#in-the-next-version)).

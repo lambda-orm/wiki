@@ -30,6 +30,13 @@ import '@lambdaorm/ui/styles.css'
 | `EntityView` | the form of an entity |
 | `ResultViewer` | a result as tree, table, JSON or YAML, with copy and export |
 | `ExpressionInput` | an editor of one expression of 3xpr, checked by the gateway |
+| `SchemaEditor` | the `lambdaORM.yaml` of a schema, checked while it is written ([Administration](Administration.md#the-yaml)) |
+| `SchemaForms` | the forms of the elements of a schema ([Administration](Administration.md#forms)) |
+| `CommandsPanel` | the commands of a schema on its stages, with their previews and jobs |
+| `StageDiagram` | the diagram of a stage ([Administration](Administration.md#the-diagram-of-a-stage)) |
+| `HistoryView` | the history of a schema, or of one of its elements |
 
 What is saved can go to another place than the browser by giving `store` (a `WorkspaceStore`, for example a backend of
-your own).
+your own). Several gateways go in one `Workspace` with `connections` (each one with its name, its `baseUrl`, its
+`headers` or its own `fetch`), as the IDE does; `pages` and `openPage` show pages of your application (an account, the
+preferences) as tabs.

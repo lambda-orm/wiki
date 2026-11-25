@@ -1,15 +1,17 @@
-# Projekte
+# Workbench
 
-Was du von einem Schema aufbewahrst, unter **Projekte** im [Explorer](Explorer.md): Ordner, Abfragen und Diagramme. Ein
-Projekt ist ein Ordner auf oberster Ebene; Ordner lassen sich verschachteln, um das Gespeicherte zu ordnen.
+Was du von einem Schema aufbewahrst, unter **Workbench** im [Explorer](Explorer.md): Projekte, Ordner, Abfragen und
+Diagramme. Ein Projekt ist ein Ordner auf oberster Ebene; Ordner lassen sich verschachteln, um das Gespeicherte zu
+ordnen. Bewahre dort die Abfragen auf, die du wieder ausführst, die Diagramme, die die Domäne erklären, und die
+[Diagramme der Stages](Administration.md#the-diagram-of-a-stage), jedes mit einem Namen und einer Beschreibung.
 
 ## Hinzufügen {#adding}
 
-Das **+** von **Projekte** oder eines Ordners:
+Das **+** von **Workbench** oder eines Ordners:
 
 | Element | Was es abfragt |
 | --- | --- |
-| **Neues Projekt** / **Neuer Ordner** | einen Namen, eine Beschreibung und den Ordner, in den es kommt |
+| **Neues Projekt** (in **Workbench**) / **Neuer Ordner** (in einem Ordner): beide öffnen den Dialog **Neuer Ordner** | einen Namen, eine Beschreibung und den Ordner, in den es kommt |
 | **Neue Abfrage** | öffnet einen Abfrage-Tab in diesem Ordner; ihr erstes **Speichern** fragt nach ihrem Namen |
 | **Neues Diagramm** | einen Namen, eine Beschreibung, den Ordner und die Entitäten ([Diagramme](Diagrams.md#a-new-diagram)) |
 
@@ -26,24 +28,28 @@ Namen. Was gespeichert wird: der Modus, die Abfrage oder das Skript, die Daten, 
 - Eine gespeicherte Abfrage, deren Schema in ihrem Tab geändert wird, wird als neue gespeichert.
 - Eine gespeicherte Abfrage zu öffnen, die schon offen ist, wechselt zu ihrem Tab.
 
+Ein Diagramm wird mit **Speichern** in seiner Leiste gespeichert ([Diagramme](Diagrams.md)); ein Diagramm eines Stage
+fragt beim ersten Mal nach seinem Namen, seiner Beschreibung und seinem Ordner und hat auch **Speichern unter…**.
+
 ## Bearbeiten, verschieben, löschen {#editing-moving-deleting}
 
-Jede Zeile hat **Bearbeiten** (ihr Name, ihre Beschreibung und ihr Ordner) und **Löschen** (vorher gefragt; ein Ordner
-nimmt mit, was er enthält). Elemente werden **durch Ziehen verschoben**: auf einen Ordner, oder auf **Projekte**, um sie
-auf die oberste Ebene zu bringen, innerhalb desselben Schemas. Zwei Elemente derselben Art können in einem Ordner
-nicht denselben Namen haben (`Hier gibt es schon eines mit diesem Namen`). Die Beschreibung erscheint, wenn der
-Mauszeiger über dem Element ist.
+Jede Zeile hat ✎ **Bearbeiten** (ihr Name, ihre Beschreibung und ihr Ordner) und 🗑 **Löschen** (vorher gefragt; ein
+Ordner nimmt mit, was er enthält). Elemente werden **durch Ziehen verschoben**: auf einen Ordner, oder auf
+**Workbench**, um sie auf die oberste Ebene zu bringen, innerhalb desselben Schemas. Zwei Elemente derselben Art können
+in einem Ordner nicht denselben Namen haben (`Hier gibt es schon eines mit diesem Namen.`). Die Beschreibung erscheint,
+wenn der Mauszeiger über dem Element ist.
 
 ## Wo es gespeichert wird {#where-it-is-saved}
 
 | Die Zugangsdaten haben | Das Gespeicherte geht in | Gesehen von |
 | --- | --- | --- |
-| `workbenchWrite` | den Ordner `workbench/` des Workspace des Schemas, im Gateway: eine Datei pro Element (`sales/German orders.query.yaml`) | allen, die dieses Schema nutzen, aus jedem Browser oder der Desktop-App |
+| `workbenchWrite` | den Ordner `workbench/` des Workspace des Schemas, im Gateway: eine Datei pro Element (`sales/German orders.query.yaml`, `model.diagram.yaml`) | allen, die dieses Schema nutzen, aus jedem Browser oder der Desktop-App |
 | kein `workbenchWrite` | **diesen Browser**, in seinen Speicher, getrennt nach Gateway und Zugangsdaten | nur diesem Browser auf diesem Gerät, mit diesen Zugangsdaten |
 
 Im Workspace wird erkannt, wenn zwei Personen dasselbe Element gleichzeitig speichern: Der zweiten wird gesagt, dass
-jemand anderes es inzwischen geändert hat, und das Element wird neu gelesen. Dateien von `workbench/`, die nicht gelesen
-werden können, werden im Explorer aufgelistet, um sie von Hand zu korrigieren.
+jemand anderes es inzwischen geändert hat, und das Element wird neu gelesen. Was jemand anderes speichert, erscheint
+sofort. Dateien von `workbench/`, die nicht gelesen werden können, werden unter der Verbindung aufgelistet, um sie von
+Hand zu korrigieren.
 
 Im Browser:
 

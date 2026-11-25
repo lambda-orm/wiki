@@ -1,10 +1,14 @@
 # Clientes {#clients}
 
+Um Data Gateway é HTTP, WebSocket e MCP comuns: qualquer linguagem pode chamá-lo. Esta página lista os clientes feitos
+para ele: os clientes Node, a CLI, um cliente gerado a partir do seu documento OpenAPI e um agente de IA por MCP.
+
 ## Node: @lambdaorm/data-gateway-client
 
-[`@lambdaorm/data-gateway-client`](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) (0.1.0) é o
-cliente novo: uma API sobre os cinco transportes do gateway, escolhido pelo esquema da string de conexão
-(`http://`, `ws://`, `mcp+http://`, `mcp+sse://`, `mcp+ws://`), e o mesmo código de erro em todos. Passa a suíte
+[`@lambdaorm/data-gateway-client`](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) é o cliente novo:
+uma API sobre todos os transportes de dados do gateway, escolhido pelo esquema da string de conexão (`http://` REST,
+`ws://` WebSocket, `mcp+http://` MCP Streamable HTTP, `mcp+sse://` o MCP HTTP+SSE antigo, `mcp+ws://` MCP sobre
+WebSocket), e o mesmo código de erro em todos. Passa a suíte
 de conformidade do gateway em cada um.
 
 ```sh
@@ -25,7 +29,11 @@ try {
 await gateway.close()
 ```
 
-A credencial vai nas opções (`apiKey`, `token`) ou em `DATA_GATEWAY_API_KEY` / `DATA_GATEWAY_TOKEN`, nunca na URL.
+A credencial vai nas opções (`apiKey`, `token`, ou quaisquer `headers`) ou em `DATA_GATEWAY_API_KEY` /
+`DATA_GATEWAY_TOKEN`, nunca na URL (uma credencial nela é um erro); `DATA_GATEWAY_URL` é a string de conexão quando
+`connect()` não recebe nenhuma, e a URL pode levar `?timeout=<ms>` e `?stage=<stage>`. Os erros têm um `code` que é o
+mesmo em todos os transportes: `invalid`, `unauthorized`, `forbidden`, `not_found`, `unique`, `foreign_key`,
+`timeout`, `unavailable`, `truncated` (MCP, uma lista cortada em `mcp.maxRows`), …
 Seu [README](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) tem toda a API e os códigos.
 `@lambdaorm/client`, abaixo, continua funcionando; a CLI passará para o cliente novo.
 
@@ -77,8 +85,18 @@ lambdaorm script -x "orm.execute(\"Devices.map(p => count(1))\")" -u http://gate
 
 ## Outras linguagens {#other-languages}
 
-O documento OpenAPI 3 da API REST é servido pelo gateway (`/doc`, `/api-docs`): a partir dele é possível gerar um
-cliente para qualquer linguagem com o [OpenAPI Generator](https://openapi-generator.tech).
+O documento OpenAPI 3 da API REST é servido pelo gateway em `/openapi.json` (Swagger UI em `/doc`): a partir dele é
+possível gerar um cliente para qualquer linguagem com o [OpenAPI Generator](https://openapi-generator.tech), ou chamar a
+API com qualquer biblioteca HTTP:
+
+```python
+import requests
+
+rows = requests.post("http://gateway:8080/iot/v1/execute", headers={"X-Api-Key": key}, json={
+    "query": "Devices.filter(p => p.status == status)",
+    "data": {"status": "active"},
+}).json()
+```
 
 ## Agentes de IA {#ai-agents}
 

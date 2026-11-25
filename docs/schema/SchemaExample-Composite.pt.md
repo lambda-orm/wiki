@@ -524,7 +524,7 @@ No MongoDB, os detalhes são armazenados dentro de cada documento da coleção `
 
 ### Pedidos no PostgreSQL {#orders-in-postgresql}
 
-No PostgreSQL, os pedidos são armazenados na tabela `Orders`:
+No PostgreSQL, os pedidos são armazenados na tabela `orders` (o PostgreSQL converte para minúsculas um nome sem aspas; `Order Details` mantém as maiúsculas porque o espaço exige aspas):
 
 ![Pedido composto no PostgreSQL](images/OrderCompositeInPostgres.png)
 

@@ -1,6 +1,7 @@
 # Incorporate {#incorporate}
 
 Diese Seite erklärt incorporate, das das Schema anhand einer JSON-Datendatei aktualisiert, die Änderungen auf die Quellen (Datenbanken) überträgt und die Daten importiert: den CLI-Befehl `lambdaorm incorporate` und die Methode `orm.stage.incorporate()`.
+Verwenden Sie es, um eine Datendatei in einem Schritt in eine Datenbank zu laden, wobei das Modell aus den Daten abgeleitet wird.
 
 Incorporate:
 

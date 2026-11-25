@@ -11,8 +11,8 @@ foram omitidos. Os esquemas completos estão nos [labs](../labs/index.md).
 
 ### Esquema {#schema}
 
-O domínio tem cinco entidades: `Categories`, `Customers`, `Products` e `Orders`, onde `Orders` é uma entidade
-composta formada pelos pedidos e seus detalhes (`Orders.details`).
+O domínio tem cinco entidades: `Categories`, `Customers`, `Products`, `Orders` e `Orders.details`, onde `Orders` é uma entidade
+composta formada pelos pedidos e seus detalhes.
 A infraestrutura tem um único stage com uma única fonte, `Ordering`, um banco de dados MySQL que usa o mapeamento
 padrão.
 

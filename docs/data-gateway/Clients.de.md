@@ -1,10 +1,15 @@
 # Clients {#clients}
 
+Ein Data Gateway ist schlichtes HTTP, WebSocket und MCP: Jede Sprache kann es aufrufen. Diese Seite listet die dafür
+gemachten Clients auf: die Node-Clients, die CLI, einen aus seinem OpenAPI-Dokument generierten Client und einen
+KI-Agenten über MCP.
+
 ## Node: @lambdaorm/data-gateway-client
 
-[`@lambdaorm/data-gateway-client`](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) (0.1.0) ist der
-neue Client: eine API über die fünf Transporte des Gateways, gewählt über das Schema der Verbindungszeichenfolge
-(`http://`, `ws://`, `mcp+http://`, `mcp+sse://`, `mcp+ws://`), und derselbe Fehlercode auf allen. Er besteht die
+[`@lambdaorm/data-gateway-client`](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) ist der neue Client:
+eine API über jeden Datentransport des Gateways, gewählt über das Schema der Verbindungszeichenfolge (`http://` REST,
+`ws://` WebSocket, `mcp+http://` MCP Streamable HTTP, `mcp+sse://` das ältere MCP HTTP+SSE, `mcp+ws://` MCP über
+WebSocket), und derselbe Fehlercode auf allen. Er besteht die
 Konformitätssuite des Gateways auf jedem davon.
 
 ```sh
@@ -25,8 +30,11 @@ try {
 await gateway.close()
 ```
 
-Die Anmeldedaten stehen in den Optionen (`apiKey`, `token`) oder in `DATA_GATEWAY_API_KEY` / `DATA_GATEWAY_TOKEN`,
-nie in der URL. Sein [README](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) enthält die ganze API und
+Die Anmeldedaten stehen in den Optionen (`apiKey`, `token` oder beliebige `headers`) oder in `DATA_GATEWAY_API_KEY` /
+`DATA_GATEWAY_TOKEN`, nie in der URL (Anmeldedaten darin sind ein Fehler); `DATA_GATEWAY_URL` ist die
+Verbindungszeichenfolge, wenn `connect()` keine erhält, und die URL kann `?timeout=<ms>` und `?stage=<stage>` tragen.
+Die Fehler haben einen `code`, der auf jedem Transport gleich ist: `invalid`, `unauthorized`, `forbidden`, `not_found`,
+`unique`, `foreign_key`, `timeout`, `unavailable`, `truncated` (MCP, eine bei `mcp.maxRows` abgeschnittene Liste), … Sein [README](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) enthält die ganze API und
 die Codes. `@lambdaorm/client` weiter unten funktioniert weiter; die CLI wechselt zum neuen Client.
 
 ## Node: @lambdaorm/client {#node-lambdaormclient}
@@ -78,8 +86,18 @@ lambdaorm script -x "orm.execute(\"Devices.map(p => count(1))\")" -u http://gate
 
 ## Andere Sprachen {#other-languages}
 
-Das OpenAPI-3-Dokument der REST API wird vom Gateway bereitgestellt (`/doc`, `/api-docs`): Daraus lässt sich mit
-[OpenAPI Generator](https://openapi-generator.tech) ein Client für jede Sprache generieren.
+Das OpenAPI-3-Dokument der REST API wird vom Gateway unter `/openapi.json` bereitgestellt (Swagger UI unter `/doc`):
+Daraus lässt sich mit [OpenAPI Generator](https://openapi-generator.tech) ein Client für jede Sprache generieren, oder
+die API wird mit einer beliebigen HTTP-Bibliothek aufgerufen:
+
+```python
+import requests
+
+rows = requests.post("http://gateway:8080/iot/v1/execute", headers={"X-Api-Key": key}, json={
+    "query": "Devices.filter(p => p.status == status)",
+    "data": {"status": "active"},
+}).json()
+```
 
 ## KI-Agenten {#ai-agents}
 

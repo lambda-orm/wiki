@@ -27,7 +27,7 @@ Es erfordert Node.js 20 oder höher. Das Docker-Image des Data Gateway
 | [version](Version.md) | Gibt die Version der CLI und die vom Projekt verwendete Version von `@lambdaorm/lib` aus. |
 | [init](Commands/Init.md) | Erzeugt die Struktur eines λORM-Projekts. |
 | [build](Commands/Build.md) | Erzeugt das Modell und die Repositories für die Sprache. |
-| schema | Gibt Informationen über das Schema zurück. |
+| [schema](Commands/Schema.md) | Gibt einen Teil des Schemas zurück: die Domäne, eine Entität, ein Mapping, die Stages, die Views… |
 | [push](Commands/Push.md) | Synchronisiert die Datenbanken mit dem Modell (`-o` schreibt stattdessen die Skripte). |
 | [pull](../schema/SchemaSynchronization-Pull.md) | Aktualisiert das Schema mit der Struktur der Datenbanken eines Stages. |
 | [fetch](Commands/Fetch.md) | Zeigt die Unterschiede zwischen den Datenbanken und dem Modell; endet mit Exit-Code 1, wenn es welche gibt. |
@@ -55,7 +55,7 @@ Den Befehl `sync` gibt es nicht mehr: Er wurde durch [push](Commands/Push.md) er
 | workspace | `-w` | Pfad des Projekts (der Ordner mit `lambdaORM.yaml`). Standard: das aktuelle Verzeichnis. |
 | stage | `-s` | Name des Stages. Standard: der erste Stage des Schemas. |
 | envfile | `-e` | Liest eine Datei mit Umgebungsvariablen (zum Beispiel die Verbindungszeichenfolgen). |
-| output | `-o` | Ausgabeformat des Ergebnisses: `json`, `beautiful`, `light` oder `yaml`. |
+| output | `-o` | Ausgabeformat des Ergebnisses: `json`, `beautiful`, `light` oder `yaml`. Bei `push` und `drop` gibt es die Anweisungen aus (oder schreibt sie), statt sie anzuwenden. |
 | url | `-u` | URL des Schemas auf einem Data Gateway, um den Befehl dort statt lokal auszuführen. |
 
 Jede Befehlsseite listet die Optionen auf, die der jeweilige Befehl akzeptiert.

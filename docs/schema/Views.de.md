@@ -5,6 +5,10 @@ Entitäten, nur einigen Eigenschaften, neuen Eigenschaften, die durch einen Ausd
 die durch eine Maske gelesen werden. Ein Ausdruck mit `options.view` wird gegen **die Domäne seiner Sicht** kompiliert,
 als wäre sie die einzige. Die Datenbank ändert sich nicht.
 
+Verwenden Sie eine Sicht, um jeder Art von Benutzer (Support, Analytics, ein Partner, eine öffentliche API) nur die Daten
+zu geben, die sie sehen soll, ohne ein zweites Modell und ohne Views in der Datenbank. Die Schlüssel von
+`infrastructure.views` stehen in der [Definition](SchemaDefinition.md#view).
+
 ```yaml
 infrastructure:
   views:
@@ -39,8 +43,10 @@ wenn das Schema sie nicht schreibt) und kann keine Entitäten ändern.
 | Eine Eigenschaft der Domäne mit `readExp` | **Maskiert**: wird durch den Ausdruck gelesen, auch in Filtern und Sortierungen („was man sieht, wird gefiltert“); wird mit ihrem echten Wert geschrieben |
 | Eine neue Eigenschaft mit `readExp` (und `type`) | In der Quelle berechnet; nur lesbar |
 
-Der Primärschlüssel und die Schlüssel der Beziehungen, die die Sicht behält, können nicht ausgeschlossen werden. Eine
-Sicht, die etwas nennt, das nicht existiert, ein `readExp`, das nicht kompiliert, oder ein ungültiger `type` ist beim
+Der Primärschlüssel und die Schlüssel der Beziehungen, die die Sicht behält, können nicht ausgeschlossen werden (um eine
+Beziehung zu verbergen, schließen Sie die Entität aus, zu der sie führt). Eine verborgene Eigenschaft, die `required` ist
+und keinen `default` hat, lässt jeden Insert in der Sicht in der Datenbank fehlschlagen: Geben Sie ihr einen `default`.
+Eine Sicht, die etwas nennt, das nicht existiert, ein `readExp`, das nicht kompiliert, oder ein ungültiger `type` ist beim
 Laden des Schemas ein `SchemaError`.
 
 ## Personenbezogene Daten (PII) {#personal-data-pii}
@@ -63,7 +69,15 @@ infrastructure:
     - { name: public, pii: exclude }
 ```
 
-Was die Sicht über eine Eigenschaft sagt, hat Vorrang vor ihrem `pii`; die Schlüssel bleiben.
+| `pii` der Eigenschaft | Maske bei `pii: mask` |
+| --- | --- |
+| `email` | `maskEmail` |
+| `phone`, `card`, `id` | `maskLeft(x, 4)` |
+| `name` | `maskRight(x, 1)` |
+| ein anderer | `mask` |
+
+Was die Sicht über eine Eigenschaft sagt, hat Vorrang vor ihrem `pii`; die Schlüssel bleiben. Die Sicht `default` sieht
+die personenbezogenen Daten so, wie sie sind.
 
 ## Maskierungsfunktionen {#mask-functions}
 
@@ -75,7 +89,7 @@ Speicher liefern:
 | `mask(x)` | Ein Viertel jeder Seite sichtbar (höchstens 3), der Rest `*`; bei weniger als 4 Zeichen alles `*` |
 | `maskLeft(x, n)` / `maskRight(x, n)` | Alles außer den letzten / den ersten `n` |
 | `maskEmail(x)` | Das erste Zeichen des Benutzers und die Domain: `f*****@x.com` |
-| `hash(x, key?)` | SHA-256 hexadezimal; mit einem Schlüssel HMAC-SHA256 (PostgreSQL mit `pgcrypto`). Nicht in MongoDB |
+| `hash(x, key?)` | SHA-256 hexadezimal; mit einem Schlüssel HMAC-SHA256. Ohne Schlüssel wird es auf PostgreSQL, MySQL, MariaDB, SQL Server und Oracle übersetzt; mit Schlüssel nur auf PostgreSQL (`pgcrypto`). Auf MongoDB und SQLite ist es beim Kompilieren der Abfrage ein Fehler |
 
 ## Die gesamte API {#the-whole-api}
 
@@ -84,5 +98,12 @@ Speicher liefern:
 Sicht; ein Repository nimmt eine entgegen (`new CustomersRepository(stage, orm, view)`), und `lambdaorm build --view`
 erzeugt das Modell und die Repositories einer Sicht.
 
-Die Zeilen, die eine Sicht sieht, werden durch ihren [Filter](Context.md) begrenzt. Wer die Sicht wählt, entscheidet,
-was gesehen wird: im Data Gateway das Gateway.
+## Was eine Sicht nicht einschränkt {#what-a-view-does-not-restrict}
+
+- **Wer die Sicht wählt:** in der Bibliothek, wer sie aufruft (er kann `default` anfordern); im Data Gateway das
+  Gateway, anhand der Anmeldeinformation oder der Claims.
+- **Die Aktionen:** Eine Sicht ist nicht schreibgeschützt; `insert`, `update` und `delete` auf ihren Entitäten sind
+  erlaubt. Sie werden durch die Berechtigungen des Gateways oder durch die Anwendung begrenzt.
+- **Die Stage-Befehle** (`push`, `pull`, `import`, `export`, `drop`, `truncate`) arbeiten auf dem gesamten Schema: Sie
+  dienen der Administration, nicht dem, der eine Sicht verwendet.
+- **Die Zeilen:** Eine Sicht sieht alle, sofern ihr [Filter](Context.md) sie nicht mit dem Kontext begrenzt.

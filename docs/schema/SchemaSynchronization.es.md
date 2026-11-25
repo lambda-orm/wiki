@@ -12,12 +12,14 @@ Cada operación está disponible como comando de la CLI ([@lambdaorm/cli](https:
 | fetch       | compara ambos                | no                 | no                    |
 | introspect  | archivo de datos → esquema → bases de datos | sí  | sí                    |
 | incorporate | archivo de datos → esquema → bases de datos, y luego importa los datos | sí | sí |
+| migrate     | historial → bases de datos (vuelve a una versión) | no | sí                  |
+| seed        | archivos de datos del stage → bases de datos | no   | sí                    |
 
 ## Push {#push}
 
 Push actualiza las fuentes (bases de datos) con el esquema, mediante el comando `lambdaorm push`.
 
-Push compara el modelo con las propias bases de datos: crea las tablas que faltan, añade y modifica columnas, renombra las columnas declaradas con `previousMapping` y nunca elimina lo que solo existe en la base de datos. `lambdaorm push -o <dir>` escribe el DDL como un script por fuente (`<stage>.<source>.sql`) sin aplicarlo.
+Push compara el modelo con las propias bases de datos: crea las tablas que faltan, añade y modifica columnas, renombra las columnas declaradas con `previousMapping` y nunca elimina lo que solo existe en la base de datos. Un cambio que puede perder datos lo detiene, salvo que se indique `--allow-destructive`. `lambdaorm push -o <dir>` escribe el DDL como un script por fuente (`<stage>.<source>.sql`) sin aplicarlo.
 
 [Más información](SchemaSynchronization-Push.md)
 
@@ -44,3 +46,15 @@ Introspect actualiza el esquema a partir de la estructura de un archivo de datos
 Incorporate hace lo mismo que introspect y luego importa los datos del archivo en las fuentes (bases de datos), mediante el comando `lambdaorm incorporate`.
 
 [Más información](SchemaSynchronization-Incorporate.md)
+
+## Migraciones {#migrations}
+
+Cada push escribe su DDL y el DDL que lo deshace. Con `infrastructure.migrations`, la base de datos guarda el historial de sus migraciones, y `lambdaorm migrate` las lista o vuelve a una versión.
+
+[Más información](SchemaSynchronization-Migrations.md)
+
+## Seed {#seed}
+
+Seed inserta los datos con los que empieza un stage (`stages[].seed`), mediante el comando `lambdaorm seed` o `lambdaorm push --seed`. Solo inserta las filas que todavía no están, así que se puede volver a ejecutar.
+
+[Más información](SchemaSynchronization-Seed.md)

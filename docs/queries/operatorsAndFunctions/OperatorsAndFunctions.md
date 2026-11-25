@@ -11,10 +11,11 @@ Each page describes the operators and functions of one category, with their sign
 | [Comparison](Comparison.md) | `==`, `!=`, `>`, `<`, `>=`, `<=`, `between`, `in`, `includes` |
 | [Logical](Logical.md) | `!`, `&&`, `||` |
 | [Numeric](Numeric.md) | Arithmetic operators and mathematical functions (`abs`, `round`, `log`, `sin`, ...) |
-| [String](String.md) | Text functions (`concat`, `lower`, `upper`, `replace`, `substring`, ...) |
+| [String](String.md) | Text functions (`concat`, `lower`, `upper`, `replace`, `substring`, `like`, `startsWith`, ...), masks (`mask`, `maskLeft`, `maskRight`, `maskEmail`) and `hash` |
 | [Date and time](Datetime.md) | Current date, conversions, date parts, intervals and date differences |
 | [Nullable](Nullable.md) | `nvl`, `nvl2`, `isNull`, `isNotNull` |
 | [Bitwise](Bitwise.md) | `~`, `&`, `|`, `^`, `<<`, `>>` |
+| [JSON, vectors and points](../JsonVectorsPoints.md) | Paths of a json, `jsonHas`, `jsonSet`; `cosineDistance`, `l2Distance`, `innerProduct`; `point`, `distance`, `within`, `inside` |
 
 ## Aggregation and sorting
 

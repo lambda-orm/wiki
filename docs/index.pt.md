@@ -14,10 +14,10 @@ Orders
   .include(p => [p.customer.map(c => c.name), p.details.include(d => d.product.map(p => p.name))])
 ```
 
-λORM converte essa consulta em SQL para **MySQL, MariaDB, PostgreSQL, SQL Server, Oracle e SQLite**, ou em um pipeline
-de agregação para **MongoDB**, mesmo quando as entidades de uma consulta estão em **bancos de dados diferentes**. E a
-mesma consulta é executada a partir de uma biblioteca Node.js, da linha de comando, de uma API REST ou WebSocket, ou de
-um agente de IA via MCP.
+λORM converte essa consulta em SQL para **MySQL, MariaDB, PostgreSQL, SQL Server, Oracle e SQLite** (sql.js), em um
+pipeline de agregação para **MongoDB** ou em chamadas a uma **API REST**, mesmo quando as entidades de uma consulta
+estão em **fontes diferentes**. E a mesma consulta é executada a partir de uma biblioteca Node.js, da linha de comando,
+de uma API REST ou WebSocket, ou de um agente de IA via MCP.
 
 ## Por que λORM {#why-orm}
 
@@ -237,6 +237,36 @@ transports:
 **Experimente em dez minutos:** [Primeiros passos](data-gateway/GettingStarted.md), de uma pasta vazia até a API REST,
 a IDE, MCP e WebSocket.
 
+## E mais {#and-more}
+
+- **Escritas com seus filhos:** `Orders.insert().include(p => p.details)`, `bulkInsert`, `upsert` e atualizações de
+  relações compostas; `update` e `delete` retornam as linhas afetadas, para o bloqueio otimista. Veja
+  [insert](queries/Insert.md) e [update](queries/Update.md).
+- **[Transações](usage/Transaction.md)** entre fontes e stages, e **[scripts](usage/Script.md)**: um caso de uso
+  inteiro (variáveis, condições, laços e várias consultas) em uma transação e uma única chamada, a partir do Node.js,
+  da CLI ou do gateway.
+- **[Consultas entre fontes](queries/CrossSource.md):** filtrar, projetar, agrupar e ordenar por campos de relações
+  guardadas em outros bancos de dados.
+- **[JSON, vetores e pontos](queries/JsonVectorsPoints.md):** caminhos dentro de propriedades JSON
+  (`p.meta.address.zip`, `jsonSet`), busca por similaridade com `cosineDistance` (RAG), e `distance` e `inside` para
+  geografia.
+- **[Views](schema/Views.md) e [contexto](schema/Context.md):** cada chamador vê apenas suas entidades, propriedades e
+  linhas, com máscaras para os dados pessoais.
+- **[Mudanças dos dados](usage/DataEvents.md):** `orm.onDataChange` após cada commit, e um outbox escrito na mesma
+  transação.
+- **[Consultas tipadas](usage/TypedQueries.md):** consultas com nome no esquema, e os tipos de seus resultados gerados
+  por `lambdaorm build`.
+- **[Sincronização](schema/SchemaSynchronization.md):** `push`, `pull`, `fetch` (as diferenças, para CI),
+  `introspect` e `incorporate`, com [migrações](schema/SchemaSynchronization-Migrations.md) que podem ser desfeitas e
+  [dados iniciais](schema/SchemaSynchronization-Seed.md).
+- **[Repositórios](usage/Repository.md)** e um modelo tipado gerado a partir do esquema
+  ([`lambdaorm build`](cli/Commands/Build.md)).
+- **[Listeners](schema/SchemaExample-Listener.md), restrições, valores padrão e propriedades calculadas**, escritos na
+  mesma linguagem de expressões.
+- **[Observabilidade](schema/Observability.md):** logs, métricas e traces com OpenTelemetry.
+
+Veja todas as [funcionalidades](Features.md).
+
 ## O ecossistema {#the-ecosystem}
 
 | Projeto | Publicado como | O que é |
@@ -247,9 +277,12 @@ a IDE, MCP e WebSocket.
 | [IDE do Data Gateway](ide/index.md) | Docker [`flaviorita/data-gateway-ide`](https://hub.docker.com/r/flaviorita/data-gateway-ide) · [desktop: Linux, Windows, macOS](ide/Download.md) | a IDE dos gateways: conexões, explorador, consultas, diagramas, administração |
 | [Cliente Node.js](data-gateway/Clients.md) | [`@lambdaorm/client`](https://www.npmjs.com/package/@lambdaorm/client) | a interface da biblioteca, executada em um Data Gateway |
 | [Componentes de UI](ide/Embedding.md) | [`@lambdaorm/ui`](https://www.npmjs.com/package/@lambdaorm/ui) | componentes React: o editor de consultas, os resultados, o explorador e os diagramas |
+| [Base](https://www.npmjs.com/package/@lambdaorm/base) | [`@lambdaorm/base`](https://www.npmjs.com/package/@lambdaorm/base) | os contratos compartilhados pela biblioteca, a CLI e o cliente |
 | [3xpr](https://www.npmjs.com/package/3xpr) | [`3xpr`](https://www.npmjs.com/package/3xpr) | o mecanismo de expressões sobre o qual as consultas, os scripts e as regras do esquema são construídos |
 
-O código-fonte está em [github.com/lambda-orm/core](https://github.com/lambda-orm/core).
+O código-fonte da biblioteca, da CLI e do cliente está em
+[github.com/lambda-orm/core](https://github.com/lambda-orm/core); o Data Gateway, sua IDE e `@lambdaorm/ui` estão em
+[github.com/lambda-orm/data-gateway](https://github.com/lambda-orm/data-gateway).
 
 !!! note "Nota"
     Os pacotes sem escopo `lambdaorm`, `lambdaorm-cli` e `lambdaorm-client-node` não são mais mantidos: use os pacotes
@@ -271,19 +304,28 @@ O código-fonte está em [github.com/lambda-orm/core](https://github.com/lambda-
 - **Consultas:** [linguagem de consulta](queries/Query-Language.md) | [select](queries/Select.md) |
   [join](queries/Join.md) | [agrupamento](queries/Grouping.md) | [include](queries/Include.md) |
   [insert](queries/Insert.md) | [bulk insert](queries/BulkInsert.md) | [update](queries/Update.md) |
-  [delete](queries/Delete.md) | [metadados](queries/Metadata.md) |
+  [delete](queries/Delete.md) | [metadados](queries/Metadata.md) | [entre fontes](queries/CrossSource.md) |
+  [JSON, vetores e pontos](queries/JsonVectorsPoints.md) |
   [operadores e funções](queries/operatorsAndFunctions/OperatorsAndFunctions.md)
 - **Esquema:** [esquema](schema/Schema.md) | [definição](schema/SchemaDefinition.md) |
   [expressões](schema/SchemaDefinition-Expressions.md) |
   [variáveis de ambiente](schema/SchemaDefinition-EnvironmentVariables.md) |
   [composição](schema/SchemaDefinition-Composite.md) | [listeners](schema/SchemaExample-Listener.md) |
   [vários stages](schema/SchemaExample-MultiplesStages.md) |
-  [várias fontes](schema/SchemaExample-StageMultiplesSources.md) | [mecanismos](schema/Engines.md)
+  [várias fontes](schema/SchemaExample-StageMultiplesSources.md) | [mecanismos](schema/Engines.md) |
+  [views](schema/Views.md) | [contexto](schema/Context.md) | [API REST como fonte](schema/HttpSource.md) |
+  [observabilidade](schema/Observability.md)
 - **Sincronização:** [visão geral](schema/SchemaSynchronization.md) | [push](schema/SchemaSynchronization-Push.md) |
   [pull](schema/SchemaSynchronization-Pull.md) | [fetch](schema/SchemaSynchronization-Fetch.md) |
-  [introspect](schema/SchemaSynchronization-Introspect.md) | [incorporate](schema/SchemaSynchronization-Incorporate.md)
+  [introspect](schema/SchemaSynchronization-Introspect.md) | [incorporate](schema/SchemaSynchronization-Incorporate.md) |
+  [migrações](schema/SchemaSynchronization-Migrations.md) | [seed](schema/SchemaSynchronization-Seed.md)
 - **Uso:** [uso](usage/Usage.md) | [repositório](usage/Repository.md) | [transações](usage/Transaction.md) |
-  [scripts](usage/Script.md)
+  [scripts](usage/Script.md) | [mudanças dos dados](usage/DataEvents.md) | [consultas tipadas](usage/TypedQueries.md)
+- **CLI:** [comandos](cli/index.md) | [init](cli/Commands/Init.md) | [build](cli/Commands/Build.md) |
+  [push](cli/Commands/Push.md) | [execute](cli/Commands/Execute.md) | [script](cli/Commands/Script.md)
+- **Data Gateway:** [visão geral](data-gateway/index.md) | [primeiros passos](data-gateway/GettingStarted.md) |
+  [REST](data-gateway/Rest.md) | [WebSocket](data-gateway/WebSocket.md) | [MCP](data-gateway/Mcp.md) |
+  [segurança](data-gateway/Security.md) | [clientes](data-gateway/Clients.md) | [IDE](ide/index.md)
 
 ## Comunidade {#community}
 
