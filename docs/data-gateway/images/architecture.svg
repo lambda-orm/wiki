@@ -9,7 +9,7 @@
     .mgmt { fill: #ede9fe; stroke: #7c3aed }
     .ok { fill: #ecfdf5; stroke: #10b981 } .okt { fill: #065f46 }
     .err { fill: #fef2f2; stroke: #ef4444 } .errt { fill: #991b1b }
-    .db { fill: #fff7ed; stroke: #f97316 }
+    .db { fill: #fff7ed; stroke: #f97316 } .dbtop { fill: #ffedd5; stroke: #f97316 } .dbl { stroke: #9a3412 } .svc { fill: #f8fafc; stroke: #94a3b8 }
     .ws { fill: #fefce8; stroke: #ca8a04 }
     .ln { stroke: #6b7280 } .hd { fill: #6b7280 }
     @media (prefers-color-scheme: dark) {
@@ -20,7 +20,7 @@
       .mgmt { fill: #2e1065; stroke: #a78bfa }
       .ok { fill: #064e3b; stroke: #34d399 } .okt { fill: #6ee7b7 }
       .err { fill: #450a0a; stroke: #f87171 } .errt { fill: #fca5a5 }
-      .db { fill: #431407; stroke: #fb923c }
+      .db { fill: #431407; stroke: #fb923c } .dbtop { fill: #7c2d12; stroke: #fb923c } .dbl { stroke: #fdba74 } .svc { fill: #1e293b; stroke: #94a3b8 }
       .ws { fill: #422006; stroke: #facc15 }
       .ln { stroke: #9ca3af } .hd { fill: #9ca3af }
     }
@@ -76,11 +76,23 @@
     <text class="s" x="778" y="354" text-anchor="middle">database down → 503 · retried with a growing wait</text>
   </g>
 
-  <!-- sources -->
+  <!-- sources: the databases as cylinders, the REST API as a service -->
   <g font-size="12">
-    <rect class="db" x="600" y="420" width="110" height="40" rx="8"/><text class="t" x="655" y="445" text-anchor="middle" font-weight="600">PostgreSQL</text>
-    <rect class="db" x="722" y="420" width="110" height="40" rx="8"/><text class="t" x="777" y="445" text-anchor="middle" font-weight="600">MongoDB</text>
-    <rect class="db" x="844" y="420" width="110" height="40" rx="8"/><text class="t" x="899" y="445" text-anchor="middle" font-weight="600">REST API</text>
+    <g stroke-width="1.8">
+      <path class="db" d="M609 428V472A46 9 0 0 0 701 472V428"/>
+      <path class="dbl" d="M609 443A46 9 0 0 0 701 443M609 458A46 9 0 0 0 701 458" fill="none" stroke-width="1.2" opacity="0.6"/>
+      <ellipse class="dbtop" cx="655" cy="428" rx="46" ry="9"/>
+    </g>
+    <text class="t" x="655" y="456" text-anchor="middle" font-weight="700">PostgreSQL</text>
+    <g stroke-width="1.8">
+      <path class="db" d="M731 428V472A46 9 0 0 0 823 472V428"/>
+      <path class="dbl" d="M731 443A46 9 0 0 0 823 443M731 458A46 9 0 0 0 823 458" fill="none" stroke-width="1.2" opacity="0.6"/>
+      <ellipse class="dbtop" cx="777" cy="428" rx="46" ry="9"/>
+    </g>
+    <text class="t" x="777" y="456" text-anchor="middle" font-weight="700">MongoDB</text>
+    <rect class="svc" x="849" y="420" width="100" height="58" rx="8"/>
+    <g class="dbl" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="899" cy="439" r="9"/><path d="M890 439H908M899 430c-4 4-4 14 0 18M899 430c4 4 4 14 0 18"/></g>
+    <text class="t" x="899" y="468" text-anchor="middle" font-weight="600">REST API</text>
   </g>
 
   <g class="ln" stroke-width="1.5" fill="none">
@@ -91,13 +103,13 @@
     <path d="M406 240C490 240 500 268 578 268" marker-end="url(#b)"/>
     <path d="M406 300C490 300 500 338 578 338" marker-end="url(#b)"/>
     <path d="M144 430V388" marker-end="url(#b)"/>
-    <path d="M655 366V418" marker-end="url(#b)"/>
-    <path d="M777 366V418" marker-end="url(#b)"/>
+    <path d="M655 366V416" marker-end="url(#b)"/>
+    <path d="M777 366V416" marker-end="url(#b)"/>
     <path d="M899 366V418" marker-end="url(#b)"/>
   </g>
   <text class="m" x="492" y="190" text-anchor="middle" font-size="11">a direct channel per schema</text>
   <text class="m" x="500" y="116" text-anchor="middle" font-size="11">starts · watches · restarts</text>
-  <text class="m" x="778" y="404" text-anchor="middle" font-size="11">each worker, its own pools</text>
+  <text class="m" x="912" y="402" font-size="11">each worker,</text><text class="m" x="912" y="416" font-size="11">its own pools</text>
   <text class="s" x="290" y="506" font-size="12">A credential with read can query, never write — by any transport.</text>
   <text class="s" x="290" y="526" font-size="12">A heavy query on northwind doesn't stop iot/v2; a fallen worker is restarted alone.</text>
 </svg>

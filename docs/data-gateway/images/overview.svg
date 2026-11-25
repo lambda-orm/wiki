@@ -8,7 +8,7 @@
     .tr { fill: #dbeafe; stroke: #2563eb }
     .core { fill: #ffffff; stroke: #93c5fd }
     .schema { fill: #ecfdf5; stroke: #10b981 }
-    .db { fill: #fff7ed; stroke: #f97316 }
+    .db { fill: #fed7aa; stroke: #c2410c } .dbtop { fill: #ffedd5; stroke: #c2410c } .dbl { stroke: #9a3412 } .svc { fill: #f8fafc; stroke: #94a3b8 } .dbrow { fill: #fff7ed; stroke: #f97316 }
     .ln { stroke: #6b7280 } .hd { fill: #6b7280 }
     @media (prefers-color-scheme: dark) {
       .bg { fill: #0f172a } .t { fill: #e5e7eb } .s { fill: #9ca3af }
@@ -17,7 +17,7 @@
       .tr { fill: #1e3a8a; stroke: #60a5fa }
       .core { fill: #0f172a; stroke: #3b82f6 }
       .schema { fill: #064e3b; stroke: #34d399 }
-      .db { fill: #431407; stroke: #fb923c }
+      .db { fill: #9a3412; stroke: #fdba74 } .dbtop { fill: #c2410c; stroke: #fdba74 } .dbl { stroke: #fdba74 } .svc { fill: #1e293b; stroke: #94a3b8 } .dbrow { fill: #431407; stroke: #fb923c }
       .ln { stroke: #9ca3af } .hd { fill: #9ca3af }
     }
   </style>
@@ -80,20 +80,37 @@
     <text class="s" x="584" y="424" text-anchor="middle" font-size="11">hot reload of the workspace</text>
   </g>
 
-  <!-- what it reaches -->
+  <!-- what it reaches: databases (a cylinder), the APIs and Kafka (services) -->
   <g font-size="13">
-    <rect class="db" x="780" y="52" width="204" height="46" rx="8"/>
-    <text class="t" x="882" y="80" text-anchor="middle" font-weight="600">PostgreSQL · MySQL · MariaDB</text>
-    <rect class="db" x="780" y="122" width="204" height="46" rx="8"/>
-    <text class="t" x="882" y="150" text-anchor="middle" font-weight="600">SQL Server · Oracle</text>
-    <rect class="db" x="780" y="192" width="204" height="46" rx="8"/>
-    <text class="t" x="882" y="220" text-anchor="middle" font-weight="600">MongoDB · SQLite</text>
-    <rect class="db" x="780" y="262" width="204" height="46" rx="8"/>
-    <text class="t" x="882" y="283" text-anchor="middle" font-weight="600">REST APIs</text>
-    <text class="s" x="882" y="299" text-anchor="middle" font-size="11">Http sources · OAuth2</text>
-    <rect class="db" x="780" y="332" width="204" height="46" rx="8"/>
-    <text class="t" x="882" y="353" text-anchor="middle" font-weight="600">Kafka</text>
-    <text class="s" x="882" y="369" text-anchor="middle" font-size="11">queued executions</text>
+    <rect class="dbrow" x="780" y="52" width="204" height="46" rx="8"/>
+    <g stroke-width="1.6">
+      <path class="db" d="M791 64V84A11 4 0 0 0 813 84V64"/>
+      <path class="dbl" d="M791 74A11 4 0 0 0 813 74" fill="none" stroke-width="1.1"/>
+      <ellipse class="dbtop" cx="802" cy="64" rx="11" ry="4"/>
+    </g>
+    <text class="t" x="819" y="80" font-weight="600" font-size="12">PostgreSQL · MySQL · MariaDB</text>
+    <rect class="dbrow" x="780" y="122" width="204" height="46" rx="8"/>
+    <g stroke-width="1.6">
+      <path class="db" d="M791 134V154A11 4 0 0 0 813 154V134"/>
+      <path class="dbl" d="M791 144A11 4 0 0 0 813 144" fill="none" stroke-width="1.1"/>
+      <ellipse class="dbtop" cx="802" cy="134" rx="11" ry="4"/>
+    </g>
+    <text class="t" x="822" y="150" font-weight="600">SQL Server · Oracle</text>
+    <rect class="dbrow" x="780" y="192" width="204" height="46" rx="8"/>
+    <g stroke-width="1.6">
+      <path class="db" d="M791 204V224A11 4 0 0 0 813 224V204"/>
+      <path class="dbl" d="M791 214A11 4 0 0 0 813 214" fill="none" stroke-width="1.1"/>
+      <ellipse class="dbtop" cx="802" cy="204" rx="11" ry="4"/>
+    </g>
+    <text class="t" x="822" y="220" font-weight="600">MongoDB · SQLite</text>
+    <rect class="svc" x="780" y="262" width="204" height="46" rx="8"/>
+    <g class="dbl" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="800" cy="285" r="9"/><path d="M791 285H809M800 276c-4 4-4 14 0 18M800 276c4 4 4 14 0 18"/></g>
+    <text class="t" x="890" y="283" text-anchor="middle" font-weight="600">REST APIs</text>
+    <text class="s" x="890" y="299" text-anchor="middle" font-size="11">Http sources · OAuth2</text>
+    <rect class="svc" x="780" y="332" width="204" height="46" rx="8"/>
+    <g class="dbl" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M792 346h16M792 355h16M792 364h16"/></g>
+    <text class="t" x="890" y="353" text-anchor="middle" font-weight="600">Kafka</text>
+    <text class="s" x="890" y="369" text-anchor="middle" font-size="11">queued executions</text>
   </g>
 
   <g class="ln" stroke-width="1.6" fill="none" marker-end="url(#a)">
