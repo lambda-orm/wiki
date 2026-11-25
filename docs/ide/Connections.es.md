@@ -17,7 +17,7 @@ El **+** junto a **Conexiones**, arriba del explorador:
 | **Nombre** | cómo se muestra la conexión (`local`, `production`…) |
 | **Protocolo** | `REST · http` o `REST · https` |
 | **Dirección del management** | `host:puerto/ruta base` del `management` del gateway, **como lo alcanza el servidor del IDE**: `data-gateway:9090` para un IDE web en el mismo compose, `localhost:9090` para la aplicación de escritorio en la máquina del gateway |
-| **Autenticación** | **API key** (su **Header**, por defecto `X-Api-Key`, y su **Clave**), **Token Bearer** (su **Token**), **Basic (usuario y contraseña)** o **Ninguna** |
+| **Autenticación** | **API key** (su **Header**, por defecto `X-Api-Key`, y su **Clave**), **Token Bearer (JWT)** (su **Token**: una clave del gateway o el [token de un proveedor de identidad](../data-gateway/Security.md#jwt); cuando vence la conexión lo dice y pide uno nuevo), **Basic (usuario y contraseña)** o **Ninguna** |
 | **Recordar la clave en este navegador** | se guarda con la conexión; si no, solo en esa pestaña del navegador, y se vuelve a pedir después de cerrarla |
 | **Otras URLs de sus transportes** (plegado) | la **URL de REST**, la **URL del WebSocket** y la **URL del MCP**, solo cuando el IDE no los alcanza en los puertos que dice el gateway (un proxy adelante, otra red) |
 | **Observabilidad** (plegado) | la **URL de Grafana** y su **Datasource de Tempo (uid)** (`tempo` por defecto): entonces una entidad muestra un enlace a sus trazas ([Entidades](Entities.md)) |

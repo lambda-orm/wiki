@@ -231,6 +231,37 @@ infrastructure:
 Over the [WebSocket API](WebSocket.md), `query.executeQueued` with `notify: true` also tells the connection when the
 execution ends.
 
+### Named queries {#named-queries}
+
+Since data-gateway 4.1.0. The queries of the application declared in the schema with a name
+([`application.queries`](../usage/TypedQueries.md)) are served by their name: a client (or an agent) uses a curated
+query instead of writing its own, and never sees its text.
+
+```yaml
+# lambdaORM.yaml
+application:
+  queries:
+    - name: customersOf
+      description: the customers of a country, by their id
+      query: 'Customers.filter(p => p.country == country).map(p => [p.id, p.city]).sort(p => p.id)'
+```
+
+```sh
+curl http://localhost:8080/queries -H "X-Api-Key: $KEY"
+# [{ "name": "customersOf", "description": "…", "parameters": [{ "name": "country", "type": "string" }],
+#    "model": [{ "name": "id", "type": "string" }, { "name": "city", "type": "string" }], "writes": false }]
+curl -X POST http://localhost:8080/queries/customersOf -H "X-Api-Key: $KEY" -H "Content-Type: application/json" \
+  -d '{ "data": { "country": "Germany" } }'
+```
+
+- In the [view of who calls](Security.md#views): a query that uses what its view excludes is not listed to it, and its
+  rows are those of its view.
+- It runs as `execute`: a query that writes needs `write`, and the [audit](Security.md#audit) says its `name`.
+- Its limits, besides those of the gateway: `orm.schemas[].queries: { customersOf: { maxRows: 100, timeout: 5s } }`
+  in the [configuration](Configuration.md#reference); more rows is `422 TooManyRowsError`, longer is `504`.
+- Over [WebSocket](WebSocket.md#methods), `queries.list` and `queries.execute`; over [MCP](Mcp.md#named-queries), a
+  tool `query_<name>` each.
+
 ## Schema methods
 
 The model of the schema. They need `read`. The connections of the sources are never answered.
@@ -332,6 +363,7 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 | model | `POST /model` | `orm_model` | `query.model` | `read` |
 | parameters | `POST /parameters` | `orm_parameters` | `query.parameters` | `read` |
 | constraints | `POST /constraints` | `orm_constraints` | `query.constraints` | `read` |
+| [named queries](#named-queries) (4.1.0) | `GET /queries`, `POST /queries/{name}` | `query_<name>` | `queries.list`, `queries.execute` | `read` / `write` |
 | schema | `GET /schema` | `schema_get` | `schema.schema` | `read` |
 | schema version | `GET /schema/version` | `schema_version` | `schema.version` | `read` |
 | domain | `GET /domain` | `schema_domain` | `schema.domain` | `read` |

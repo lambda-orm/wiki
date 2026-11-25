@@ -45,6 +45,8 @@ The `params` are the body (or the route parameters) of the equivalent REST metho
 | `gateway.schemas` | — (only at the root) | `GET /schemas` |
 | `query.execute` | `query`, `data?`, `options?` | `POST /execute` |
 | `query.script` | `script`, `data?`, `options?` | `POST /script` |
+| `queries.list` (4.1.0) | — | `GET /queries` |
+| `queries.execute` (4.1.0) | `name`, `data?`, `options?` | `POST /queries/{name}` |
 | `query.executeQueued` | `topic`, `query`, `data?`, `chunk?`, `options?`, `notify?` | `POST /execute-queued` |
 | `query.plan` | `query`, `options?` | `POST /plan` |
 | `query.metadata` | `query`, `options?` | `POST /metadata` |

@@ -275,6 +275,11 @@ impede a inicialização). O que ela oferece está em [Operações](Operations.m
 | `audit.includeData` | `false` | `true` adiciona os parâmetros (`data`), que podem conter dados pessoais |
 | `authentication` | `{ adapter: none }` | [Segurança](Security.md) |
 | `authentication.header` | `X-Api-Key` | o header de `type: apikey` |
+| `authentication.adapter: jwt` | — | (4.1.0) os tokens de um provedor de identidade: `issuer`, `audience`, `jwksUri`, `secret`, `algorithms`, `clockTolerance`, `principal.name`, `principal.permissions.claim` / `roles`, `context` ([Segurança](Security.md#jwt)) |
+| `authentication.methods` | — | (4.1.0) várias autenticações em ordem: `jwt` e `local` ([Segurança](Security.md#jwt)) |
+| `keys[].view`, `roles.<role>.view` | — | (4.1.0) a [view](Security.md#views) das requisições de uma chave ou de um papel |
+| `orm.schemas[].view` | `default` | (4.1.0) a view de quem chama sem uma |
+| `orm.schemas[].queries.<name>` | — | (4.1.0) `maxRows`, `timeout` de uma [consulta nomeada](Rest.md#named-queries) |
 | `transports.<t>.authentication` | `authentication` | substitui a global para esse transporte |
 | `rateLimit.windowMs` / `rateLimit.max` | `30000` / `30` | apenas `http`; `max: 0` o desativa |
 | `scripts.enabled` | `false` | `POST /script` e sua ferramenta e seu método |
@@ -283,6 +288,7 @@ impede a inicialização). O que ela oferece está em [Operações](Operations.m
 | `mcp.tools.include` / `exclude` | `[]` / `[]` | nomes de [ferramentas](Mcp.md#tools) |
 | `mcp.pageSize` | `50` | página de `tools/list` e `resources/list` |
 | `mcp.maxRows` | `500` | linhas de `orm_execute` / `orm_execute_script`; `0` = sem limite |
+| `mcp.freeQueries` | `true` | (4.1.0) `false`: um agente só com as [consultas nomeadas](Mcp.md#named-queries); também por esquema |
 | `transports.<t>.port` | **nenhum** | sem porta, o transporte não é exposto |
 | `transports.<t>.host` | `0.0.0.0` | |
 | `transports.<t>.basePath` | `''` | um prefixo antes da rota do esquema (`/data-gateway`), atrás de um ingress com um caminho |

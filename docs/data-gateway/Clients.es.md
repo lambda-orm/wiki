@@ -30,6 +30,11 @@ try {
 await gateway.close()
 ```
 
+Desde 4.1.0, `token` puede ser una función que lo da (`token: () => idp.accessToken()`), que se pide en cada petición
+de REST y MCP y al abrir un WebSocket: el [JWT](Security.md#jwt) de un proveedor de identidad, renovado. Y
+`gateway.queries()` lista las [consultas con nombre](Rest.md#named-queries) que la credencial puede usar, y
+`gateway.query(name, data)` ejecuta una, en todos los transportes.
+
 La credencial va en las opciones (`apiKey`, `token`, o cualquier `headers`) o en `DATA_GATEWAY_API_KEY` /
 `DATA_GATEWAY_TOKEN`, nunca en la URL (una credencial en ella es un error); `DATA_GATEWAY_URL` es la cadena de conexión
 cuando `connect()` no recibe ninguna, y la URL puede llevar `?timeout=<ms>` y `?stage=<stage>`. Los errores tienen un

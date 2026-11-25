@@ -275,6 +275,11 @@ detiene el arranque). Lo que da está en [Operación](Operations.md#opentelemetr
 | `audit.includeData` | `false` | `true` añade los parámetros (`data`), que pueden contener datos personales |
 | `authentication` | `{ adapter: none }` | [Seguridad](Security.md) |
 | `authentication.header` | `X-Api-Key` | el header de `type: apikey` |
+| `authentication.adapter: jwt` | — | (4.1.0) los tokens de un proveedor de identidad: `issuer`, `audience`, `jwksUri`, `secret`, `algorithms`, `clockTolerance`, `principal.name`, `principal.permissions.claim` / `roles`, `context` ([Seguridad](Security.md#jwt)) |
+| `authentication.methods` | — | (4.1.0) varias autenticaciones en orden: `jwt` y `local` ([Seguridad](Security.md#jwt)) |
+| `keys[].view`, `roles.<role>.view` | — | (4.1.0) la [vista](Security.md#views) de las peticiones de una clave o un rol |
+| `orm.schemas[].view` | `default` | (4.1.0) la vista de quien llama sin una |
+| `orm.schemas[].queries.<name>` | — | (4.1.0) `maxRows`, `timeout` de una [consulta con nombre](Rest.md#named-queries) |
 | `transports.<t>.authentication` | `authentication` | reemplaza la global para ese transporte |
 | `rateLimit.windowMs` / `rateLimit.max` | `30000` / `30` | solo `http`; `max: 0` lo desactiva |
 | `scripts.enabled` | `false` | `POST /script` y su herramienta y su método |
@@ -283,6 +288,7 @@ detiene el arranque). Lo que da está en [Operación](Operations.md#opentelemetr
 | `mcp.tools.include` / `exclude` | `[]` / `[]` | nombres de [herramientas](Mcp.md#tools) |
 | `mcp.pageSize` | `50` | página de `tools/list` y `resources/list` |
 | `mcp.maxRows` | `500` | filas de `orm_execute` / `orm_execute_script`; `0` = sin límite |
+| `mcp.freeQueries` | `true` | (4.1.0) `false`: un agente solo con las [consultas con nombre](Mcp.md#named-queries); también por esquema |
 | `transports.<t>.port` | **ninguno** | sin un puerto, el transporte no se expone |
 | `transports.<t>.host` | `0.0.0.0` | |
 | `transports.<t>.basePath` | `''` | un prefijo antes de la ruta del esquema (`/data-gateway`), detrás de un ingress con una ruta |

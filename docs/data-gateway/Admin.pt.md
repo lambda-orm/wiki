@@ -109,18 +109,23 @@ esquema), pelo painel **Comandos** da UI:
 | `version` | — (as versões da gateway e do esquema) | `read` |
 | `fetch` | — (compara os bancos com o modelo) | `read` |
 | `export` | — (baixado, ou salvo em `data/`) | `read` |
-| `push` | as sentenças por source | `ddl` |
+| `push` | as sentenças por source, e as que podem perder dados (4.1.0: só rodam com `allowDestructive`) | `ddl` |
 | `drop` | as sentenças; o stage é digitado de novo | `ddl` |
 | `import` | as linhas de cada entidade | `stageImport` |
 | `pull` | o diff do `lambdaORM.yaml` | `schemaWrite` |
 | `introspect` | o diff e as linhas dos dados | `schemaWrite` |
 | `incorporate` | o diff e as linhas; depois o esquema recarrega, `push` cria suas tabelas e as linhas são importadas | `schemaWrite`, `ddl`, `stageImport` |
 | `build` | — (gravado em `src/`, ou baixado como `.zip`) | `build` |
+| `migrations` (4.1.0) | — (o [histórico das migrations](../schema/SchemaSynchronization-Migrations.md) do stage) | `read` |
+| `migrate` (4.1.0) | o desfazer de cada migration posterior à `version`, e o que dele pode perder dados | `ddl` |
+| `seed` (4.1.0) | os arquivos do [seed](../schema/SchemaSynchronization-Seed.md) do stage | `stageImport` |
 
 Um comando que altera os bancos ou o esquema executa **exatamente a prévia que foi mostrada**, uma vez, dentro de 10
 minutos, e só enquanto o `lambdaORM.yaml` for o mesmo com que ela foi feita (caso contrário, `409
 PreviewRequiredError`); outro comando do mesmo esquema enquanto um está rodando responde `409 BusyError`. Cada job deixa
-seu registro em `orm_state/jobs/`; `push`, `drop` e `import` são [auditados](Security.md#audit).
+seu registro em `orm_state/jobs/`; `push`, `drop`, `import`, `migrate` e `seed` são [auditados](Security.md#audit). Um
+`push` ou um `migrate` cuja prévia lista alterações que podem perder dados (um tipo mais estreito, um comprimento menor)
+só as executa com `"allowDestructive": true`; sem isso o job falha com `DestructiveChangeError`.
 `admin.commandTimeoutMs` (10 minutos) limita quanto um pode demorar.
 
 Pela API, um comando é uma prévia e depois um job:
@@ -158,7 +163,8 @@ variável que não é de uma sentença (`entity`, `action`, `category`, `type`, 
 
 ## Na próxima versão {#in-the-next-version}
 
-Não está na imagem 4.0.0: o **histórico de um esquema** (cada alteração feita pela administração, com quem, antes,
+Não está na imagem 4.0.0: os comandos `migrations`, `migrate` e `seed`, e as alterações que podem perder dados em `push`
+(acima); o **histórico de um esquema** (cada alteração feita pela administração, com quem, antes,
 depois e o diff, em `logs/changes.jsonl` do workspace e em `GET /admin/workspaces/{route}/history`), o **roteamento de
 um stage** (para onde vai cada entidade, `…/stages/{stage}/routing`), e o `build` por linguagem
 (`src/<language>/domain/`), com apenas o modelo ou apenas os repositórios, e um código gerado baixado como zip ou

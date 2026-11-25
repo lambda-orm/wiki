@@ -35,12 +35,15 @@ können, ist deaktiviert.
 | **export** | die Daten des Stage, zum Herunterladen (`northwind-default.json`, **Herunterladen**) | läuft sofort |
 | **export → data/** | die Daten des Stage, nach `data/` des Workspace | läuft sofort |
 | **import…** | eine Exportdatei in den Stage | fragt nach der Datei, dann zeigt er die Zeilen, die er schreibt |
-| **push…** | wendet das Modell auf die Datenbanken an (legt Tabellen an und ändert sie) | zeigt die Anweisungen, nach Quelle |
+| **push…** | wendet das Modell auf die Datenbanken an (legt Tabellen an und ändert sie) | zeigt die Anweisungen, nach Quelle, und die, die Daten verlieren können (data-gateway 4.1.0) |
 | **pull…** | übernimmt die Datenbanken ins Modell | zeigt, wie sich `lambdaORM.yaml` ändert |
 | **drop…** | löscht die Tabellen des Stage | zeigt die Anweisungen; du gibst den Namen des Stage zur Bestätigung ein |
 | **introspect…** | erstellt eine Entität aus einer Datendatei | fragt nach der Datei und der Entität, dann zeigt er, wie sich `lambdaORM.yaml` ändert |
 | **incorporate…** | erstellt eine Entität aus einer Datendatei und importiert ihre Zeilen | fragt nach der Datei und der Entität, dann zeigt er die Änderung und die Zeilen |
 | **build…** | erzeugt den Code der Domäne ([unten](#source-code)) | die Sprache und was erzeugt wird |
+| **migrations** | die Historie der Migrations des Stage (data-gateway 4.1.0): Version, Quelle, angewendet oder rückgängig gemacht, wann und von wem; **hierher zurück** bei einer angewendeten Version führt **migrate** aus | läuft sofort |
+| **migrate…** | kehrt zu einer Version zurück: das Rückgängigmachen jeder späteren Migration | zeigt die Anweisungen des Rückgängigmachens, nach Migration |
+| **seed…** | fügt die Zeilen der Seed-Dateien des Stage ein, die noch nicht vorhanden sind (data-gateway 4.1.0) | zeigt seine Dateien |
 | **version** | die λORM-Versionen im Gateway | läuft sofort |
 
 Um einen Befehl auszuführen, der vorher zeigt, was er tun wird:
@@ -49,7 +52,8 @@ Um einen Befehl auszuführen, der vorher zeigt, was er tun wird:
 2. Klicke auf den Befehl (und wähle bei import, introspect und incorporate die Datei und **Ansehen, was er tut**).
 3. Lies die Vorschau: die Anweisungen nach Quelle, die Änderung der `lambdaORM.yaml` (`+3 −0 Zeilen`) oder die Zeilen
    jeder Entität. Push und drop haben **weitermachen, wenn ein Befehl fehlschlägt (tryAllCan)**; drop fragt nach dem
-   Namen des Stage.
+   Namen des Stage. Wenn push oder migrate etwas ändern würde, das Daten verlieren kann, listet die Vorschau es auf und
+   führt es erst aus, wenn **auch die Änderungen anwenden, die Daten verlieren können** angehakt ist.
 4. **push ausführen** (rot) führt genau das aus; **Abbrechen** nicht.
 
 Jeder Befehl läuft als Job: Sein Zustand (**läuft**, **fertig**, **fehlgeschlagen**) und sein Ergebnis erscheinen

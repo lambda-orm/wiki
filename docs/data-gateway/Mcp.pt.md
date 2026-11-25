@@ -27,6 +27,7 @@ credencial permitir**. As descrições e os esquemas de entrada são gerados qua
 | `orm_model` | `query` | `POST /model` | `read` | somente leitura |
 | `orm_parameters` | `query` | `POST /parameters` | `read` | somente leitura |
 | `orm_constraints` | `query` | `POST /constraints` | `read` | somente leitura |
+| `query_<name>` (4.1.0) | os parâmetros da consulta | `POST /queries/{name}` | `read` (ou `write` se ela grava) | somente leitura, ou destrutiva |
 | `schema_get` | — | `GET /schema` | `read` | somente leitura |
 | `schema_version` | — | `GET /schema/version` | `read` | somente leitura |
 | `schema_domain` | — | `GET /domain` | `read` | somente leitura |
@@ -56,7 +57,30 @@ As tools `admin_*` existem só quando o transporte `management` está exposto ([
 - As mesmas regras do REST: `orm_execute_script` falha se os scripts estiverem desabilitados; `orm_execute_queued`, se o esquema não tiver
   fila.
 - `mcp.tools.include` / `exclude` (global ou por esquema) restringem ainda mais a lista, por exemplo
-  `exclude: [ orm_execute_script, stage_import ]`.
+  `exclude: [ orm_execute_script, stage_import ]` (ou `query_<name>`).
+- Com uma [view](Security.md#views) (4.1.0), as descrições e os resources levam o domínio **dessa view**: um agente
+  não é informado do que não pode ver.
+
+### Consultas nomeadas e ferramentas curadas {#named-queries}
+
+Desde o data-gateway 4.1.0. Cada [consulta nomeada](Rest.md#named-queries) do esquema é uma ferramenta `query_<name>`:
+sua descrição, seus parâmetros como argumentos tipados e o que ela retorna. Um agente chama uma consulta curada em vez
+de escrever uma:
+
+```yaml
+mcp:
+  freeQueries: false      # sem orm_execute, orm_execute_script, orm_execute_queued nem orm_plan
+orm:
+  schemas:
+    - path: shop
+      mcp: { freeQueries: false }                         # ou por esquema
+      queries:
+        customersOf: { maxRows: 100, timeout: 5s }        # os limites de uma consulta
+```
+
+Com `freeQueries: false` um agente tem apenas as consultas nomeadas e as ferramentas do esquema (`schema_*`): o que ele
+pode executar é o que o esquema declara. As ferramentas são listadas na view de quem chama, e uma consulta que grava
+apenas para uma credencial com `write`.
 
 ### Esquemas grandes {#large-schemas}
 

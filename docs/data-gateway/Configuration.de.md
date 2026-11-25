@@ -278,6 +278,11 @@ Datei verhindert den Start). Was sie liefert, steht in [Betrieb](Operations.md#o
 | `audit.includeData` | `false` | `true` fügt die Parameter (`data`) hinzu, die personenbezogene Daten enthalten können |
 | `authentication` | `{ adapter: none }` | [Sicherheit](Security.md) |
 | `authentication.header` | `X-Api-Key` | der Header von `type: apikey` |
+| `authentication.adapter: jwt` | — | (4.1.0) die Tokens eines Identitätsanbieters: `issuer`, `audience`, `jwksUri`, `secret`, `algorithms`, `clockTolerance`, `principal.name`, `principal.permissions.claim` / `roles`, `context` ([Sicherheit](Security.md#jwt)) |
+| `authentication.methods` | — | (4.1.0) mehrere Authentifizierungen der Reihe nach: `jwt` und `local` ([Sicherheit](Security.md#jwt)) |
+| `keys[].view`, `roles.<role>.view` | — | (4.1.0) die [View](Security.md#views) der Anfragen eines Schlüssels oder einer Rolle |
+| `orm.schemas[].view` | `default` | (4.1.0) die View eines Aufrufers ohne eigene |
+| `orm.schemas[].queries.<name>` | — | (4.1.0) `maxRows`, `timeout` einer [benannten Abfrage](Rest.md#named-queries) |
 | `transports.<t>.authentication` | `authentication` | ersetzt die globale für diesen Transport |
 | `rateLimit.windowMs` / `rateLimit.max` | `30000` / `30` | nur `http`; `max: 0` deaktiviert es |
 | `scripts.enabled` | `false` | `POST /script` sowie das zugehörige Tool und die Methode |
@@ -286,6 +291,7 @@ Datei verhindert den Start). Was sie liefert, steht in [Betrieb](Operations.md#o
 | `mcp.tools.include` / `exclude` | `[]` / `[]` | Namen von [Tools](Mcp.md#tools) |
 | `mcp.pageSize` | `50` | Seitengröße von `tools/list` und `resources/list` |
 | `mcp.maxRows` | `500` | Zeilen von `orm_execute` / `orm_execute_script`; `0` = kein Limit |
+| `mcp.freeQueries` | `true` | (4.1.0) `false`: ein Agent nur mit den [benannten Abfragen](Mcp.md#named-queries); auch pro Schema |
 | `transports.<t>.port` | **keiner** | ohne Port wird der Transport nicht bereitgestellt |
 | `transports.<t>.host` | `0.0.0.0` | |
 | `transports.<t>.basePath` | `''` | ein Präfix vor der Route des Schemas (`/data-gateway`), hinter einem Ingress mit Pfad |

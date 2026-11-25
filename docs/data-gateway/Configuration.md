@@ -274,6 +274,11 @@ file stops the start). What it gives is in [Operations](Operations.md#openteleme
 | `audit.includeData` | `false` | `true` adds the parameters (`data`), which can have personal data |
 | `authentication` | `{ adapter: none }` | [Security](Security.md) |
 | `authentication.header` | `X-Api-Key` | the header of `type: apikey` |
+| `authentication.adapter: jwt` | — | (4.1.0) the tokens of an identity provider: `issuer`, `audience`, `jwksUri`, `secret`, `algorithms`, `clockTolerance`, `principal.name`, `principal.permissions.claim` / `roles`, `context` ([Security](Security.md#jwt)) |
+| `authentication.methods` | — | (4.1.0) several authentications in order: `jwt` and `local` ([Security](Security.md#jwt)) |
+| `keys[].view`, `roles.<role>.view` | — | (4.1.0) the [view](Security.md#views) of the requests of a key or a role |
+| `orm.schemas[].view` | `default` | (4.1.0) the view of a caller without one |
+| `orm.schemas[].queries.<name>` | — | (4.1.0) `maxRows`, `timeout` of a [named query](Rest.md#named-queries) |
 | `transports.<t>.authentication` | `authentication` | replaces the global one for that transport |
 | `rateLimit.windowMs` / `rateLimit.max` | `30000` / `30` | `http` only; `max: 0` turns it off |
 | `scripts.enabled` | `false` | `POST /script` and its tool and method |
@@ -282,6 +287,7 @@ file stops the start). What it gives is in [Operations](Operations.md#openteleme
 | `mcp.tools.include` / `exclude` | `[]` / `[]` | names of [tools](Mcp.md#tools) |
 | `mcp.pageSize` | `50` | page of `tools/list` and `resources/list` |
 | `mcp.maxRows` | `500` | rows of `orm_execute` / `orm_execute_script`; `0` = no limit |
+| `mcp.freeQueries` | `true` | (4.1.0) `false`: an agent only with the [named queries](Mcp.md#named-queries); also per schema |
 | `transports.<t>.port` | **none** | without a port, the transport is not exposed |
 | `transports.<t>.host` | `0.0.0.0` | |
 | `transports.<t>.basePath` | `''` | a prefix before the schema's route (`/data-gateway`), behind an ingress with a path |

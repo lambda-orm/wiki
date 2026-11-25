@@ -2,7 +2,27 @@
 
 The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway).
 
-### 4.0.0 (unreleased)
+### 4.1.0 (unreleased)
+
+Security: who calls is the user of an identity provider, sees its view of the domain, and an agent can be left with
+curated queries.
+
+- **[JWT / OIDC](Security.md#jwt):** `authentication.adapter: jwt` (the tokens of an issuer, its roles mapped to
+  permissions, its claims to the context of λORM) and `authentication.methods` (tokens for the users, keys for the
+  services). A refused token says why (`401` with `WWW-Authenticate`); a session or a connection doesn't outlive it.
+- **[The view of each caller](Security.md#views):** the gateway chooses the view of λORM by the key, the role of the
+  token or the schema; queries, metadata, the domain, the typings and MCP are in it. A `view` or a `context` sent by a
+  client is dropped.
+- **[Named queries](Rest.md#named-queries):** the queries of `application.queries` by their name (`GET /queries`,
+  `POST /queries/{name}`, `queries.*` by WebSocket, the MCP tools `query_<name>`), with their limits; `mcp.freeQueries:
+  false` leaves an agent only with them.
+- **λORM 3.15:** its errors have their status (`ContextError` 400, `ViewError` 403, `CrossSourceError` 422,
+  `DestructiveChangeError` 409); the [administration](Admin.md#the-commands) has `migrations`, `migrate`, `seed`, and a
+  `push` that can lose data runs only when allowed.
+- The image installs the exact versions of λORM it was tested with; it needs Node 22.12 or later (it runs 24).
+- `GET /transports` gives `/{schema}/mcp` for `mcpWebSocket`; the Northwind data keeps its letters.
+
+### 4.0.0 (2026-11-23)
 
 The UI becomes the [data-gateway-ide](../ide/index.md), an image of its own, and the gateway gains a port for it.
 

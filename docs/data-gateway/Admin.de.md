@@ -112,19 +112,24 @@ nach dem anderen pro Schema), aus dem Bereich **Befehle** der UI:
 | `version` | — (die Versionen des Gateways und des Schemas) | `read` |
 | `fetch` | — (vergleicht die Datenbanken mit dem Modell) | `read` |
 | `export` | — (heruntergeladen oder in `data/` gespeichert) | `read` |
-| `push` | die Befehle pro Source | `ddl` |
+| `push` | die Befehle pro Source und die, die Daten verlieren können (4.1.0: sie laufen nur mit `allowDestructive`) | `ddl` |
 | `drop` | die Befehle; der Stage wird erneut eingegeben | `ddl` |
 | `import` | die Zeilen jeder Entität | `stageImport` |
 | `pull` | das Diff der `lambdaORM.yaml` | `schemaWrite` |
 | `introspect` | das Diff und die Zeilen der Daten | `schemaWrite` |
 | `incorporate` | das Diff und die Zeilen; danach lädt das Schema neu, `push` legt seine Tabellen an und die Zeilen werden importiert | `schemaWrite`, `ddl`, `stageImport` |
 | `build` | — (in `src/` geschrieben oder als `.zip` heruntergeladen) | `build` |
+| `migrations` (4.1.0) | — (die [Historie der Migrations](../schema/SchemaSynchronization-Migrations.md) der Stage) | `read` |
+| `migrate` (4.1.0) | das Rückgängigmachen jeder Migration nach der `version` und was davon Daten verlieren kann | `ddl` |
+| `seed` (4.1.0) | die Dateien des [Seeds](../schema/SchemaSynchronization-Seed.md) der Stage | `stageImport` |
 
 Ein Befehl, der die Datenbanken oder das Schema ändert, führt **genau die gezeigte Vorschau** aus, einmal, innerhalb
 von 10 Minuten, und nur solange die `lambdaORM.yaml` die ist, mit der sie erstellt wurde (sonst
 `409 PreviewRequiredError`); ein weiterer Befehl desselben Schemas, während einer läuft, antwortet mit `409 BusyError`.
-Jeder Job hinterlässt sein Protokoll in `orm_state/jobs/`; `push`, `drop` und `import` werden
-[auditiert](Security.md#audit). `admin.commandTimeoutMs` (10 Minuten) begrenzt, wie lange einer dauern darf.
+Jeder Job hinterlässt sein Protokoll in `orm_state/jobs/`; `push`, `drop`, `import`, `migrate` und `seed` werden
+[auditiert](Security.md#audit). Ein `push` oder ein `migrate`, dessen Vorschau Änderungen auflistet, die Daten verlieren
+können (ein engerer Typ, eine kürzere Länge), führt sie nur mit `"allowDestructive": true` aus; ohne dies schlägt der
+Job mit `DestructiveChangeError` fehl. `admin.commandTimeoutMs` (10 Minuten) begrenzt, wie lange einer dauern darf.
 
 Über die API ist ein Befehl eine Vorschau und dann ein Job:
 
@@ -162,7 +167,8 @@ ein Fehler des Schemas, eine Variable, die nicht zu einem Satz gehört (`entity`
 
 ## In der nächsten Version {#in-the-next-version}
 
-Nicht im Image 4.0.0: die **Historie eines Schemas** (jede über die Administration gemachte Änderung, mit wem, vorher,
+Nicht im Image 4.0.0: die Befehle `migrations`, `migrate` und `seed` sowie die Änderungen, die Daten verlieren können,
+in `push` (oben); die **Historie eines Schemas** (jede über die Administration gemachte Änderung, mit wem, vorher,
 nachher und dem Diff, in `logs/changes.jsonl` des Workspaces und unter `GET /admin/workspaces/{route}/history`), das
 **Routing einer Stage** (wohin jede Entität geht, `…/stages/{stage}/routing`) und `build` pro Sprache
 (`src/<language>/domain/`), mit nur dem Modell oder nur den Repositories, ein generierter Code als Zip heruntergeladen

@@ -35,12 +35,15 @@ desativado.
 | **export** | os dados do stage, para baixar (`northwind-default.json`, **Baixar**) | executa na hora |
 | **export → data/** | os dados do stage, para `data/` do workspace | executa na hora |
 | **import…** | um arquivo exportado no stage | pede o arquivo, depois mostra as linhas que vai gravar |
-| **push…** | aplica o modelo aos bancos de dados (cria e altera tabelas) | mostra as sentenças, por source |
+| **push…** | aplica o modelo aos bancos de dados (cria e altera tabelas) | mostra as sentenças, por source, e as que podem perder dados (data-gateway 4.1.0) |
 | **pull…** | traz os bancos de dados para o modelo | mostra como o `lambdaORM.yaml` vai mudar |
 | **drop…** | remove as tabelas do stage | mostra as sentenças; você digita o nome do stage para confirmar |
 | **introspect…** | cria uma entidade a partir de um arquivo de dados | pede o arquivo e a entidade, depois mostra como o `lambdaORM.yaml` vai mudar |
 | **incorporate…** | cria uma entidade a partir de um arquivo de dados e importa as suas linhas | pede o arquivo e a entidade, depois mostra a alteração e as linhas |
 | **build…** | gera o código do domínio ([abaixo](#source-code)) | a linguagem e o que gera |
+| **migrations** | o histórico das migrations do stage (data-gateway 4.1.0): versão, source, aplicada ou desfeita, quando e quem; **voltar aqui** em uma versão aplicada executa **migrate** | executa na hora |
+| **migrate…** | volta a uma versão: o desfazer de cada migration posterior | mostra as sentenças do desfazer, por migration |
+| **seed…** | insere as linhas dos arquivos de seed do stage que ainda não estão lá (data-gateway 4.1.0) | mostra os seus arquivos |
 | **version** | as versões do λORM no gateway | executa na hora |
 
 Para executar um comando que mostra antes o que vai fazer:
@@ -48,7 +51,9 @@ Para executar um comando que mostra antes o que vai fazer:
 1. Escolha o **Stage**.
 2. Clique no comando (e, para import, introspect e incorporate, escolha o arquivo e **Ver o que vai fazer**).
 3. Leia a prévia: as sentenças por source, a alteração do `lambdaORM.yaml` (`+3 −0 linhas`) ou as linhas de cada
-   entidade. Push e drop têm **continuar se uma sentença falhar (tryAllCan)**; drop pede o nome do stage.
+   entidade. Push e drop têm **continuar se uma sentença falhar (tryAllCan)**; drop pede o nome do stage. Quando
+   push ou migrate alteraria algo que pode perder dados, a prévia o lista e só executa depois de marcar **aplicar também
+   as alterações que podem perder dados**.
 4. **Executar push** (vermelho) executa exatamente isso; **Cancelar** não.
 
 Cada comando roda como um job: o seu estado (**em andamento**, **concluído**, **falhou**) e o seu resultado aparecem

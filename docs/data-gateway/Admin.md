@@ -111,18 +111,23 @@ a time per schema), from the **Commands** panel of the UI:
 | `version` | — (the versions of the gateway and the schema) | `read` |
 | `fetch` | — (it compares the databases with the model) | `read` |
 | `export` | — (downloaded, or saved in `data/`) | `read` |
-| `push` | the sentences by source | `ddl` |
+| `push` | the sentences by source, and those that can lose data (4.1.0: they run only with `allowDestructive`) | `ddl` |
 | `drop` | the sentences; the stage is typed again | `ddl` |
 | `import` | the rows of each entity | `stageImport` |
 | `pull` | the diff of the `lambdaORM.yaml` | `schemaWrite` |
 | `introspect` | the diff and the rows of the data | `schemaWrite` |
 | `incorporate` | the diff and the rows; then the schema reloads, `push` creates its tables and the rows are imported | `schemaWrite`, `ddl`, `stageImport` |
 | `build` | — (written in `src/`, or downloaded as a `.zip`) | `build` |
+| `migrations` (4.1.0) | — (the [history of the migrations](../schema/SchemaSynchronization-Migrations.md) of the stage) | `read` |
+| `migrate` (4.1.0) | the undo of each migration after the `version`, and what of it can lose data | `ddl` |
+| `seed` (4.1.0) | the files of the [seed](../schema/SchemaSynchronization-Seed.md) of the stage | `stageImport` |
 
 A command that changes the databases or the schema runs **exactly the preview that was shown**, once, within 10
 minutes, and only while the `lambdaORM.yaml` is the one it was made with (otherwise `409 PreviewRequiredError`); another
 command of the same schema while one runs answers `409 BusyError`. Each job leaves its record in
-`orm_state/jobs/`; `push`, `drop` and `import` are [audited](Security.md#audit). `admin.commandTimeoutMs` (10 minutes)
+`orm_state/jobs/`; `push`, `drop`, `import`, `migrate` and `seed` are [audited](Security.md#audit). A `push` or a
+`migrate` whose preview lists changes that can lose data (a narrower type, a shorter length) runs them only with
+`"allowDestructive": true`; without it the job fails with `DestructiveChangeError`. `admin.commandTimeoutMs` (10 minutes)
 limits how long one may take.
 
 Over the API, a command is a preview and then a job:
@@ -159,7 +164,8 @@ variable that is not of a sentence (`entity`, `action`, `category`, `type`, `rea
 
 ## In the next version
 
-Not in the image 4.0.0: the **history of a schema** (every change made through the administration, with who, before,
+Not in the image 4.0.0: the commands `migrations`, `migrate` and `seed`, and the changes that can lose data in `push`
+(above); the **history of a schema** (every change made through the administration, with who, before,
 after and the diff, in `logs/changes.jsonl` of the workspace and `GET /admin/workspaces/{route}/history`), the
 **routing of a stage** (where each entity goes, `…/stages/{stage}/routing`), and `build` per language
 (`src/<language>/domain/`), with only the model or only the repositories, a generated code downloaded as a zip or
