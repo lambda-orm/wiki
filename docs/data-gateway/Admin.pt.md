@@ -170,6 +170,12 @@ um stage** (para onde vai cada entidade, `…/stages/{stage}/routing`), e o `bui
 (`src/<language>/domain/`), com apenas o modelo ou apenas os repositórios, e um código gerado baixado como zip ou
 removido.
 
+## Desde a 4.2.0 {#since-4-2-0}
+
+Os eventos do [outbox](Changes.md#retries-and-dead-events) de um schema: `GET /admin/workspaces/{route}/outbox?status=dead`
+lista os que falharam vezes demais, com o seu erro (`schemaRead`), e `POST …/outbox/{id}/retry` devolve um para
+pendente (`schemaRead` e `ddl`).
+
 ## Por MCP {#over-mcp}
 
 O servidor MCP de cada esquema adiciona `admin_schema_get`, `admin_schema_validate` e `admin_stage_fetch` para

@@ -14,7 +14,7 @@ angibt (per Konvention `/workspace`). Es hat kein `EXPOSE`: Die Ports stehen nur
 # docker-compose.yml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:4.1.0
+    image: flaviorita/data-gateway:4.2.0
     environment:
       DATA_GATEWAY_HTTP_PORT: "8080"
       DATA_GATEWAY_MCP_PORT: "8081"
@@ -45,10 +45,10 @@ mit ihr, und sie erreicht den `management`-Port, der für niemanden sonst veröf
 ```yaml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:4.1.0
+    image: flaviorita/data-gateway:4.2.0
     # … wie oben, mit transports.management.port: 9090 in seiner Konfiguration und ohne veröffentlichten Port 9090
   ide:
-    image: flaviorita/data-gateway-ide:1.1.0
+    image: flaviorita/data-gateway-ide:1.2.0
     environment:
       DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081"
     ports: [ "127.0.0.1:8090:8080" ]
@@ -66,7 +66,9 @@ services:
 - **Konfiguration** in einer `ConfigMap`, die unter `/config` eingebunden wird, Secrets als Umgebungsvariablen aus einem
   `Secret` (`value: $READER_KEY` in der Datei).
 - **Replikas:** REST, WebSocket und zustandsloses MCP (`stateful: false`) benötigen keine Session-Affinität; das ältere
-  HTTP+SSE von MCP schon.
+  HTTP+SSE von MCP schon. Seit 4.2.0 sehen der [Cache](Configuration.md#cache) und die
+  [Abonnements](Changes.md#subscriptions) einer Replika die Schreibvorgänge, die über sie laufen, und nur eine Replika
+  soll die [Outbox](Changes.md#one-replica-dispatches) zustellen.
 - **Hinter einem Ingress mit Pfad:** `transports.<t>.basePath: /data-gateway`.
 - **Herunterfahren:** `SIGTERM` nimmt keine Verbindungen mehr an, wartet auf laufende Operationen (bis zu
   `server.timeout`), schließt die Warteschlangen und die Pools und beendet sich. Setzen Sie
@@ -100,6 +102,9 @@ mit dem Label `worker` (`edge`, `schema:iot/v1`):
 | `data_gateway_schema_status` | `schema`, `status` |
 | `data_gateway_schema_restarts` | `schema` |
 | `data_gateway_management_sessions` | `state` (die Sitzungen von `management` und die mit verbundener IDE) |
+| `data_gateway_cache_requests` | `schema`, `result` (`hit`, `miss`: der [Cache](Configuration.md#cache), 4.2.0) |
+| `data_gateway_cache_invalidations` / `data_gateway_cache_entries` | `schema` |
+| `data_gateway_outbox_events` | `schema`, `result` (`delivered`, `failed`: die [Outbox](Changes.md#the-outbox), 4.2.0) |
 | `http_request_duration_seconds` | `method`, `route`, `code`, `credential` (die HTTP-Anfragen) |
 
 sowie die üblichen Metriken von Node mit dem Präfix `node_` (Speicher, CPU, Garbage Collection, die Verzögerung des

@@ -69,6 +69,7 @@ Lo que un esquema puede ajustar:
 | `scripts` | `enabled` y los límites de los scripts | `scripts` |
 | `mcp.maxRows`, `mcp.tools` | límite de filas y herramientas de su servidor MCP | `mcp` |
 | `server.timeout`, `server.maxConcurrent`, `server.maxResponseBytes` | timeout, operaciones simultáneas y tamaño de respuesta | `server` |
+| `cache`, `outbox` (4.2.0) | el [caché](#cache) de sus lecturas; a dónde va su [outbox](Changes.md#the-outbox) | `cache`, `outbox` |
 | `runtime.mode`, `runtime.maxMemoryMb`, `runtime.checkConnections` | `thread` / `process`, memoria de su worker, si sus conexiones se comprueban al arrancar | `runtime` |
 
 Siempre gana el más específico, que **reemplaza** a los demás: esquema → transporte → global.
@@ -246,6 +247,34 @@ observability:
 Las cabeceras del exportador llevan tokens: van solo en `OTEL_EXPORTER_OTLP_HEADERS` (`exporter.headers` en el archivo
 detiene el arranque). Lo que da está en [Operación](Operations.md#opentelemetry).
 
+## El caché de las lecturas {#cache}
+
+**Desde data-gateway 4.2.0.** Una lectura repetida mientras no cambió nada de lo que lee no vuelve a la base. Está
+apagado hasta `cache.enabled: true` (global o por schema): un cliente puede ver un resultado de hasta `ttl` de
+antigüedad cuando otra aplicación escribe en la base.
+
+```yaml
+cache:                      # también orm.schemas[].cache
+  enabled: true
+  ttl: 60s                  # cuánto vive un resultado
+  maxEntries: 10000         # en memoria; los menos usados se van primero
+  maxRowBytes: 1MB          # un resultado más grande no se guarda
+  entities:
+    Prices: { ttl: 5s }               # otro ttl para lo que la lee
+    AuditLogs: { enabled: false }     # lo que la lee nunca se guarda
+```
+
+- **Qué se guarda:** el resultado de un `execute` que solo lee y de una [consulta con nombre](Rest.md#named-queries)
+  que solo lee; nunca una escritura, un script ni un `execute-queued`.
+- **De quién:** un resultado es de su consulta, sus `data`, su stage, y **la vista y el contexto de quien preguntó**: dos
+  identidades con otra vista u otro tenant nunca comparten uno.
+- **Hasta cuándo:** una escritura que pasa por λORM borra al instante todos los resultados que leen su entidad (también
+  por un `include` o una relación); lo que escribe otra aplicación se ve después de `ttl`, como mucho.
+- Con varias réplicas, cada una tiene su caché y ve sus propias escrituras (compartido con Redis, más adelante); usa un
+  `ttl` corto ahí.
+- `/metrics` tiene `data_gateway_cache_requests{result="hit|miss"}`, `data_gateway_cache_invalidations` y
+  `data_gateway_cache_entries`; REST responde [`ETag` y `304`](Rest.md#execute).
+
 ## Referencia {#reference}
 
 | Clave | Por defecto | Notas |
@@ -280,6 +309,12 @@ detiene el arranque). Lo que da está en [Operación](Operations.md#opentelemetr
 | `keys[].view`, `roles.<role>.view` | — | (4.1.0) la [vista](Security.md#views) de las peticiones de una clave o un rol |
 | `orm.schemas[].view` | `default` | (4.1.0) la vista de quien llama sin una |
 | `orm.schemas[].queries.<name>` | — | (4.1.0) `maxRows`, `timeout` de una [consulta con nombre](Rest.md#named-queries) |
+| `cache.enabled` | `false` | (4.2.0) el [caché de las lecturas](#cache); también por schema |
+| `cache.ttl` / `maxEntries` / `maxRowBytes` | `60s` / `10000` / `1MB` | (4.2.0) |
+| `cache.entities.<entity>` | — | (4.2.0) `{ ttl }` o `{ enabled: false }` para lo que la lee |
+| `outbox.destinations[]` | `[]` | (4.2.0) a dónde va el [outbox](Changes.md#the-outbox): `type: webhook` (`url`, `secret`, `timeout`, `entities`) o `type: kafka` (`topic`, `entities`); también por schema |
+| `outbox.interval` / `batch` | `1s` / `100` | (4.2.0) cada cuánto busca eventos pendientes; cuántos por vuelta |
+| `outbox.dispatch` | `true` | (4.2.0) esta réplica despacha; `false` (o `DATA_GATEWAY_OUTBOX_DISPATCH=false`) en todas las réplicas menos una |
 | `transports.<t>.authentication` | `authentication` | reemplaza la global para ese transporte |
 | `rateLimit.windowMs` / `rateLimit.max` | `30000` / `30` | solo `http`; `max: 0` lo desactiva |
 | `scripts.enabled` | `false` | `POST /script` y su herramienta y su método |

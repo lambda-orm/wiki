@@ -2,7 +2,7 @@
 
 O transporte `webSocket` oferece as operações da API REST sobre **uma única conexão JSON-RPC 2.0 persistente**, além de
 **notificações** que o REST não pode oferecer: o fim de uma execução enfileirada, as mudanças de estado do esquema e
-do seu workspace. Use-o para um processo que envia muitas consultas, ou que quer saber quando algo muda.
+do seu workspace, e (4.2.0) as [mudanças dos dados](Changes.md#subscriptions) que assinou. Use-o para um processo que envia muitas consultas, ou que quer saber quando algo muda.
 
 ```yaml
 transports:
@@ -67,6 +67,9 @@ Os `params` são o corpo (ou os parâmetros de rota) do método REST equivalente
 | `stage.exists` | `stage` | `GET /stages/{stage}/exists` |
 | `stage.export` | `stage` | `GET /stages/{stage}/export` |
 | `stage.import` | `stage`, `data` | `POST /stages/{stage}/import` |
+| `subscribe.entity` (4.2.0) | `entity` | `GET /subscribe?entity=` ([Mudanças dos dados](Changes.md#subscriptions)) |
+| `subscribe.query` (4.2.0) | `query` ou `name`, `data?` | `GET /subscribe?query=` / `?name=` |
+| `unsubscribe` (4.2.0) | `subscription` | — |
 
 As [permissões](Security.md#permissions) são as mesmas do REST.
 
@@ -79,6 +82,9 @@ Mensagens do servidor sem `id`:
 | `queue.completed` | uma execução enfileirada com `query.executeQueued` e `notify: true` nesta conexão terminou | `queueId`, `ok: true`, `rows` (enviadas ao tópico) |
 | `queue.failed` | essa execução falhou | `queueId`, `ok: false`, `error` |
 | `schema.statusChanged` | o esquema da conexão passou para `error` / `restarting`, ou voltou para `ready` | `path`, `status`, `reason`, `pending` |
+| `data.changed` (4.2.0) | uma escrita de uma entidade de um `subscribe.entity` | `subscription`, `entity`, `action`, `keys?`, `count?` |
+| `query.changed` (4.2.0) | o resultado de um `subscribe.query` mudou | `subscription`, `result` |
+| `subscription.failed` (4.2.0) | a consulta de uma assinatura não pode mais rodar | `subscription`, `error`, `message` |
 | `workspace.changed` | algo mudou no workspace do esquema (uma conexão à raiz: em qualquer um): `added`, `removed`, `schema`, `env` ou `files` | `path`, `kind`, `files`, `at` |
 
 ```json

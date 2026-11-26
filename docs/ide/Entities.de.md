@@ -68,9 +68,26 @@ Anweisung mit ihrer Meldung ab. Jede mit ihrer **Meldung**, ihrer **Bedingung** 
 
 ## Daten {#data}
 
-Ihre Zeilen, 50 pro Seite, **◀ Zurück** und **Weiter ▶**: nur lesen (hier wird keine Zeile geändert). Sie werden wie
-die Tabelle eines [Ergebnisses](Queries.md#the-result) angezeigt: Sie können kopiert und exportiert werden
-(`Orders-page-1.json`). Eine abstrakte Entität hat keine Daten.
+Ihre Zeilen, 50 pro Seite, **◀ Zurück** und **Weiter ▶**. Eine abstrakte Entität hat keine Daten.
+
+- **Sortieren** nach einer Spalte: ein Klick auf ihre Überschrift (aufsteigend ▲, absteigend ▼, keine). **Filtern**
+  mit einer Bedingung auf `p` (`p.price > 18`) und **Anwenden** (oder Enter).
+- **Exportieren** der Seite (**CSV**, **JSON**, **XLSX**) oder von allem (**CSV ∀**, **JSON ∀**, **XLSX ∀**): alle
+  Seiten, mit ihrer Sortierung und ihrem Filter, bis zu 100 000 Zeilen, mit den bisher gelesenen Zeilen und
+  **Abbrechen**. Die `.xlsx` ist eine echte Excel-Datei (`Orders.xlsx`, `Orders-page-1.csv`).
+
+Mit einer Berechtigung, die `write` hat, und einer Entität mit Primärschlüssel ist die Tabelle auch ein
+**Backoffice** (seit IDE 1.2.0):
+
+- **Eine Zelle ändern:** Doppelklick, der neue Wert, Enter (Escape verlässt sie). Sie ändert sich nur, solange die
+  Zelle noch hat, was gelesen wurde: Hat sie inzwischen jemand geändert, wird nichts geändert, und die Tabelle sagt es
+  und zeigt sie jetzt. Der Schlüssel, Berechnetes (`view`, `readExp`) und `autoIncrement` werden nicht bearbeitet; ein
+  Wert, der nicht zu seinem Typ passt (`x` in einer Zahl), wird nicht gesendet.
+- **+ Zeile hinzufügen:** ein Formular mit den Eigenschaften der Entität (die erforderlichen mit `*` markiert).
+- **✕** am Ende einer Zeile löscht sie, nachdem ihr Schlüssel gezeigt und nachgefragt wurde.
+
+Alles läuft über das Gateway mit der Berechtigung der Connection: ihre Berechtigungen, ihre
+[View](../data-gateway/Security.md#views) und das Audit. Ohne `write` ist die Tabelle nur lesbar.
 
 ![Daten](images/ide-entity-data.png)
 

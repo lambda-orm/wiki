@@ -68,9 +68,26 @@ sentença com a sua mensagem. Cada uma com a sua **Mensagem**, a sua **Condiçã
 
 ## Dados {#data}
 
-Suas linhas, 50 por página, **◀ Anterior** e **Próxima ▶**: somente leitura (nenhuma linha é alterada aqui). Elas
-aparecem como a tabela de um [resultado](Queries.md#the-result): podem ser copiadas e exportadas
-(`Orders-page-1.json`). Uma entidade abstrata não tem dados.
+Suas linhas, 50 por página, **◀ Anterior** e **Próxima ▶**. Uma entidade abstrata não tem dados.
+
+- **Ordenar** por uma coluna: um clique no seu cabeçalho (crescente ▲, decrescente ▼, nenhum). **Filtrar** com uma
+  condição sobre `p` (`p.price > 18`) e **Aplicar** (ou Enter).
+- **Exportar** a página (**CSV**, **JSON**, **XLSX**) ou tudo (**CSV ∀**, **JSON ∀**, **XLSX ∀**): todas as páginas,
+  com a sua ordem e o seu filtro, até 100 000 linhas, com as linhas lidas até o momento e **Cancelar**. O `.xlsx` é um
+  arquivo do Excel de verdade (`Orders.xlsx`, `Orders-page-1.csv`).
+
+Com uma credencial que tem `write` e uma entidade com chave primária, a tabela é também um **backoffice** (desde o
+IDE 1.2.0):
+
+- **Alterar uma célula:** duplo clique, o novo valor, Enter (Escape a deixa). Ela muda só enquanto a célula ainda tem
+  o que foi lido: se alguém a alterou nesse meio-tempo, nada é alterado e a tabela avisa e a mostra agora. A chave, o
+  calculado (`view`, `readExp`) e o `autoIncrement` não são editados; um valor que não é do seu tipo (`x` num número)
+  não é enviado.
+- **+ Adicionar uma linha:** um formulário com as propriedades da entidade (as obrigatórias marcadas com `*`).
+- **✕** no fim de uma linha a exclui, depois de mostrar a sua chave e perguntar.
+
+Tudo passa pelo gateway com a credencial da connection: as suas permissões, a sua
+[view](../data-gateway/Security.md#views) e a auditoria. Sem `write`, a tabela é somente leitura.
 
 ![Dados](images/ide-entity-data.png)
 

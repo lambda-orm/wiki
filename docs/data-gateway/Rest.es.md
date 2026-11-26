@@ -106,6 +106,9 @@ curl -X POST "http://localhost:8080/execute?format=beautiful" -H "X-Api-Key: $KE
 
 - Un select responde las filas; `update` y `delete` responden el número de filas afectadas (`0` cuando ninguna coincidió);
   `insert` responde los datos insertados.
+- **Desde 4.2.0**, la respuesta de una lectura tiene un `ETag` (y `Cache-Control: private, no-cache`); una petición
+  con el mismo `If-None-Match` se responde `304` sin cuerpo. También `POST /queries/{name}`. Con el
+  [caché](Configuration.md#cache), una lectura repetida no llega a la base.
 - Con solo el permiso `read`, una consulta que escribe (`insert`, `update`, `delete`, `upsert`, `merge`, `bulk*`) se
   rechaza con `403` antes de llegar a la base de datos.
 
@@ -366,6 +369,7 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 | parameters | `POST /parameters` | `orm_parameters` | `query.parameters` | `read` |
 | constraints | `POST /constraints` | `orm_constraints` | `query.constraints` | `read` |
 | [consultas con nombre](#named-queries) (4.1.0) | `GET /queries`, `POST /queries/{name}` | `query_<name>` | `queries.list`, `queries.execute` | `read` / `write` |
+| [suscribirse](Changes.md#subscriptions) (4.2.0) | `GET /subscribe` (SSE) | — | `subscribe.entity`, `subscribe.query`, `unsubscribe` | `read` |
 | esquema | `GET /schema` | `schema_get` | `schema.schema` | `read` |
 | versión del esquema | `GET /schema/version` | `schema_version` | `schema.version` | `read` |
 | dominio | `GET /domain` | `schema_domain` | `schema.domain` | `read` |
