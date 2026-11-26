@@ -20,7 +20,5 @@
   <link rel="apple-touch-icon" href="{{ 'img/apple-touch-icon.png'|url }}" />
 {%- endblock %}
 
-{#- the name of the site with its icon, instead of the house of the theme -#}
-{%- block site_name %}
-  <a href="{{ nav.homepage.url|url }}" class="site-name"><img src="{{ 'img/favicon.svg'|url }}" alt="" class="site-icon" width="28" height="28" /> {{ config.site_name }}</a>
-{%- endblock %}
+{#- no heading above the search: the name of the site and its house are left out (the favicon stays) -#}
+{%- block site_name %}{%- endblock %}
