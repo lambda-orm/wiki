@@ -70,8 +70,8 @@ Las opciones con las que se ejecuta la consulta, en una línea (`ninguna: las de
 
 | Opción | Qué es |
 | --- | --- |
-| **stage** | dónde se ejecuta: un stage del esquema, a elegir; vacío, el de por defecto |
-| **view** | una view del esquema, a elegir, que limita lo que se puede leer |
+| **stage** | dónde se ejecuta: un stage del esquema, a elegir (con data-gateway 4.4, los que permiten los roles de la credencial); vacío, el de por defecto |
+| **view** | con data-gateway 4.4, cuando los roles de la credencial dan más de una: cuál de ellas; vacío, la de sus roles |
 | **tamaño de lote** | filas por lote de una operación masiva |
 | **intentar todo lo posible** | seguir cuando falla una sentencia: (por defecto), sí o no |
 | **tiempo máximo (ms)** | de un script: se corta después de este tiempo (modo script) |

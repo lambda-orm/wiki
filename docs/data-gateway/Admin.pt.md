@@ -183,6 +183,17 @@ as lista, cada uma com quem pediu, sua consulta ou script, seus dados e as sente
 …/approvals/{id}/approve` a roda como quem pediu, `…/reject { reason }` a descarta. As duas precisam de `approve`, e
 nunca por quem pediu.
 
+## Desde a 4.4.0 {#since-4-4-0}
+
+Os [papéis](Security.md#roles), com a permissão `roles`: `GET /admin/roles` lista os da configuração (somente leitura)
+e os guardados no [estado do gateway](Configuration.md#state); `PUT /admin/roles/{nome}` `{ schema?, config: {
+permissions, views, stages, maxRows, approval, scope }, reason? }` adiciona um papel ou estende um da configuração (em
+todos os esquemas, ou em um); `DELETE /admin/roles/{nome}?schema=` remove um do estado; `GET /admin/roles/changes` diz
+quem mudou o quê, quando, antes e depois.
+
+- Ninguém dá uma permissão que não tem, e um papel `locked` na configuração não é estendido.
+- Uma mudança vale na hora na réplica que a guarda, e nas outras dentro de `state.refresh`.
+
 ## Por MCP {#over-mcp}
 
 O servidor MCP de cada esquema adiciona `admin_schema_get`, `admin_schema_validate` e `admin_stage_fetch` para

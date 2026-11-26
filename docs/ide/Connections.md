@@ -98,8 +98,16 @@ What the credential may do, in two groups, **Data** and **Administration**, each
 | `ddl` | change the structure of the databases of a stage (push, drop) |
 | `build` | generate the code of the domain (model and repositories) in `src/` of the workspace |
 | `sessionAdmin` | see every session of `management` and revoke those of other credentials |
+| `approve` | approve or reject the writes that wait for a person |
+| `destructive` | with `ddl`, a push or a migration that loses data (data-gateway 4.4) |
+| `roles` | see and change the roles kept in the state of the gateway (data-gateway 4.4) |
 
 ![Roles](images/ide-connection-roles.png)
+
+**Roles of the gateway** (with `roles`, data-gateway 4.4, IDE 1.4.0): below, the [roles](../data-gateway/Security.md#roles)
+of the gateway, those of its configuration (read only) and those of its state. **+ Add a role**; **Extend** one of the
+configuration with more permissions, views or stages, in every schema or in one; **Edit** or **Remove** one of the
+state, with a reason. **Its changes** says who changed what and when.
 
 The permissions are given to each credential in the configuration of the gateway
 ([Security](../data-gateway/Security.md)).

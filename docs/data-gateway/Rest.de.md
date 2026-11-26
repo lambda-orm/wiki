@@ -69,15 +69,19 @@ Unter der Route jedes Schemas (`/iot/v1/…`) antworten diese nur zu diesem Sche
 | `GET` | `/{schema}/health` | `{ "message": "OK", "time", "uptime" }`; `503`, wenn das Schema nicht `ready` ist |
 | `GET` | `/{schema}/metrics` | die Metriken dieses Schemas |
 | `GET` | `/{schema}/version` | `{ "version" }`, die Version des Gateways (die Version des Schemas ist `GET /{schema}/schema/version`) |
-| `GET` | `/{schema}/whoami` | der Name und die Berechtigungen der Zugangsdaten mit der Authentifizierung dieses Schemas und ob Skripte aktiviert sind (benötigt die Zugangsdaten) |
+| `GET` | `/{schema}/whoami` | der Name und die Berechtigungen der Zugangsdaten mit der Authentifizierung dieses Schemas und ob Skripte aktiviert sind (benötigt die Zugangsdaten); seit 4.4.0 ihre Rollen, ihre View und Stage und alle Views und Stages, die sie wählen dürfen |
 
 ```sh
 curl http://localhost:8080/iot/v1/whoami -H "X-Api-Key: $KEY"
 ```
 
 ```json
-{ "name": "reader", "permissions": ["read"], "schema": "iot/v1", "scripts": true }
+{ "name": "reader", "permissions": ["read"], "roles": ["reader"], "view": "default", "stage": "default",
+  "views": ["default", "support"], "stages": ["default"], "schema": "iot/v1", "scripts": true }
 ```
+
+Seit 4.4.0 wählen `options.view` und `options.stage` einer Anfrage unter ihnen ([Rollen](Security.md#roles)): eine
+andere ist `403`.
 
 Das Secret der Zugangsdaten wird nie zurückgegeben.
 

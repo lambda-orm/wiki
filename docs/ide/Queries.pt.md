@@ -70,8 +70,8 @@ As opções com que a consulta roda, em uma linha (`nenhuma: as padrão`, ou `st
 
 | Opção | O que é |
 | --- | --- |
-| **stage** | onde roda: um stage do esquema, a escolher; vazio, o padrão |
-| **view** | uma view do esquema, a escolher, que limita o que pode ser lido |
+| **stage** | onde roda: um stage do esquema, a escolher (com data-gateway 4.4, os que os papéis da credencial permitem); vazio, o padrão |
+| **view** | com data-gateway 4.4, quando os papéis da credencial dão mais de uma: qual delas; vazio, a dos seus papéis |
 | **tamanho do lote** | linhas por lote de uma operação em massa |
 | **tentar tudo o possível** | continuar quando uma sentença falha: (padrão), sim ou não |
 | **tempo máximo (ms)** | de um script: ele para depois desse tempo (modo script) |

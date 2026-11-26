@@ -117,10 +117,72 @@ orm:
   dice a un agente y `/whoami` (`view`).
 - **Una `view` o un `context` que un cliente envía en `options` se descarta**, en todos los transportes: un cliente no
   puede saltarse lo que su vista oculta ni leer las filas de otro tenant.
-- **Nunca se adivina:** un token cuyos roles dan dos vistas es `403`; una vista que el esquema no tiene se advierte
-  cuando el esquema carga y sus peticiones son `403`. Una entidad que la vista excluye es `403 ViewError`.
+- **Elegida entre las de sus roles** (desde 4.4.0, [abajo](#roles)): el cliente puede pedir una de ellas en
+  `options.view`; otra es `403`. Antes de 4.4.0 el cliente nunca elegía, y un token cuyos roles daban dos vistas era
+  `403`. Una vista que el esquema no tiene se advierte al cargar el esquema y sus pedidos son `403`. Una entidad que la
+  vista excluye es `403 ViewError`.
 - Los comandos de stage (`import`, `export`, `push`…) ven todo el esquema: una credencial con una vista y `stageImport`
   o `ddl` se advierte cuando se lee la configuración.
+
+## Roles: dónde trabajan y qué pueden hacer {#roles}
+
+**Desde data-gateway 4.4.0.** Un rol dice **dónde** puede trabajar, las vistas y los stages de λORM que puede usar, y
+**qué** puede hacer ahí, sus permisos y sus límites. Los tokens nombran sus roles por su claim; las claves, por `roles`:
+
+```yaml
+authorization:
+  roles:
+    support:
+      views: [support]                 # la primera, la de quien no elige; sin ellas, la del esquema
+      permissions: [read]
+    analyst:
+      views: [analytics, support]
+      stages: [default, reporting]     # sin ellos, el del esquema
+      permissions: [read]
+      maxRows: 5000                    # options.maxRows: el cliente puede pedir menos, nunca más
+    backend:
+      permissions: [read, write]
+    operator:
+      stages: [default, staging]
+      permissions: [read, ddl, destructive]
+    admin:
+      permissions: [read, schemaRead, roles]
+      locked: true                     # no se extiende desde la administración
+  # stages: open                       # se puede elegir un stage que ningún rol nombra, como antes de 4.4.0 (por una versión)
+authentication:
+  methods:
+    - adapter: jwt
+      issuer: https://auth.example.com/realms/shop
+      principal:
+        permissions: { claim: realm_access.roles }    # los nombres del claim son los de authorization.roles
+    - adapter: local
+      type: apikey
+      keys:
+        - { name: billing, value: $BILLING_KEY, roles: [backend] }
+orm:
+  schemas:
+    - path: shop
+      view: public                     # la vista del esquema
+      stage: default                   # el stage del esquema
+      roles:                           # en este esquema, lo que suman los roles
+        support: { views: [support, public] }
+```
+
+- **El cliente elige solo entre ellos:** `options.view` y `options.stage` de cualquier pedido, por cualquier transporte;
+  uno que sus roles no permiten es `403`. Sin elegir, el primero de sus roles; si sus roles no coinciden, el del esquema
+  cuando lo permiten, si no `403` pidiendo que elija. Un agente por MCP no elige: los de sus roles por defecto.
+- **Los permisos de los roles que permiten lo elegido,** no la suma de todos: con `support` (lee, en la vista
+  `support`) y `backend` (escribe, en la vista del esquema), un pedido en `support` solo lee. Los comandos de un stage
+  (`push`, `migrate`, `seed`, `export`, `import`…) solo en los stages de su rol; los permisos de la administración, sea
+  cual sea lo elegido. `scope: any` en un rol mantiene sus permisos sea cual sea lo elegido.
+- **`options.maxRows`** solo menor que el del rol; **`allowDestructive`** ya no es una opción del cliente: un push o una
+  migración que pierde datos necesita el permiso `destructive` además de `ddl`.
+- **`GET /whoami`** dice la vista y el stage de quien llama sin elegir, todos los que puede elegir y sus roles.
+- **Los roles de un esquema** (`orm.schemas[].roles`) y los [guardados en el estado de la gateway](Admin.md#since-4-4-0)
+  extienden los de `authorization.roles`: más vistas, stages o permisos, nunca menos. Un rol del estado que el YAML no
+  tiene es uno nuevo.
+- Lo de antes sigue valiendo: `roles` dentro de un método `jwt` y `view` (una) en un rol o una clave se leen como
+  roles; una clave con sus propios `permissions` y `view` es un rol propio.
 
 ## Permisos {#permissions}
 
@@ -133,6 +195,8 @@ orm:
 | `stageImport` | importar un stage |
 | `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | la [administración](Admin.md#turning-it-on): nunca se dan por defecto |
 | `approve` | (4.3.0) aprobar o rechazar las [escrituras que esperan](#approvals), nunca las propias: nunca se da por defecto |
+| `destructive` | (4.4.0) con `ddl`, un push o una migración que pierde datos (`allowDestructive`): nunca se da por defecto |
+| `roles` | (4.4.0) ver y cambiar los [roles del estado de la gateway](Admin.md#since-4-4-0): nunca se da por defecto |
 | `sessionAdmin` | listar todas las [sesiones](Transports.md#sessions) de `management` y revocar las de otras credenciales (sin él, una credencial ve y cierra solo las suyas): nunca se da por defecto |
 
 - La autorización ocurre en el worker del esquema, antes de ejecutar nada, igual para REST, MCP y WebSocket.
@@ -140,7 +204,8 @@ orm:
   sentencia que no sea un `select`, también dentro de un `include`.
 - Sin el permiso: `403` en REST, `status: 403` en WebSocket, `isError: true` en MCP, con el mensaje
   `the credential "reader" does not have the "write" permission`.
-- `GET /whoami` responde el nombre y los permisos de la credencial (y su vista, 4.1.0), nunca su secreto.
+- `GET /whoami` responde el nombre y los permisos de la credencial (su vista, 4.1.0; su stage, lo que puede elegir y
+  sus roles, 4.4.0), nunca su secreto.
 
 ## Escrituras que esperan a una persona {#approvals}
 

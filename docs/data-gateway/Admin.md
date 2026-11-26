@@ -184,6 +184,17 @@ lists them, each with who asked, its query or script, its data and the sentences
 …/approvals/{id}/approve` runs it as who asked, `…/reject { reason }` drops it. Both need `approve`, and never by who
 asked.
 
+## Since 4.4.0 {#since-4-4-0}
+
+The [roles](Security.md#roles), with the permission `roles`: `GET /admin/roles` lists those of the configuration (read
+only) and those kept in the [state of the gateway](Configuration.md#state); `PUT /admin/roles/{name}` `{ schema?,
+config: { permissions, views, stages, maxRows, approval, scope }, reason? }` adds a role or extends one of the
+configuration (in every schema, or in one); `DELETE /admin/roles/{name}?schema=` removes one of the state;
+`GET /admin/roles/changes` says who changed what, when, before and after.
+
+- Nobody gives a permission it doesn't have, and a role `locked` in the configuration is not extended.
+- A change applies at once in the replica that saves it, and in the others within `state.refresh`.
+
 ## Over MCP
 
 The MCP server of each schema adds `admin_schema_get`, `admin_schema_validate` and `admin_stage_fetch` for credentials

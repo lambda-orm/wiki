@@ -187,6 +187,17 @@ listet sie, jeden mit dem Anfragenden, seiner Abfrage oder seinem Skript, seinen
 ausführen würde; `POST …/approvals/{id}/approve` führt ihn als der Anfragende aus, `…/reject { reason }` verwirft ihn.
 Beide brauchen `approve`, und nie durch den Anfragenden.
 
+## Seit 4.4.0 {#since-4-4-0}
+
+Die [Rollen](Security.md#roles), mit der Berechtigung `roles`: `GET /admin/roles` listet die der Konfiguration (nur
+lesen) und die im [Zustand des Gateways](Configuration.md#state) gespeicherten; `PUT /admin/roles/{name}` `{ schema?,
+config: { permissions, views, stages, maxRows, approval, scope }, reason? }` fügt eine Rolle hinzu oder erweitert eine
+der Konfiguration (in allen Schemas oder in einem); `DELETE /admin/roles/{name}?schema=` entfernt eine des Zustands;
+`GET /admin/roles/changes` sagt, wer was wann geändert hat, vorher und nachher.
+
+- Niemand vergibt eine Berechtigung, die er nicht hat, und eine in der Konfiguration `locked` Rolle wird nicht erweitert.
+- Eine Änderung gilt sofort in der Replika, die sie speichert, und in den anderen innerhalb von `state.refresh`.
+
 ## Über MCP {#over-mcp}
 
 Der MCP-Server jedes Schemas ergänzt `admin_schema_get`, `admin_schema_validate` und `admin_stage_fetch` für

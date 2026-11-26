@@ -99,8 +99,16 @@ Lo que puede hacer la credencial, en dos grupos, **Datos** y **Administración**
 | `ddl` | cambiar la estructura de las bases de datos de un stage (push, drop) |
 | `build` | generar el código del dominio (modelo y repositorios) en `src/` del workspace |
 | `sessionAdmin` | ver todas las sesiones de `management` y revocar las de otras credenciales |
+| `approve` | aprobar o rechazar las escrituras que esperan a una persona |
+| `destructive` | con `ddl`, un push o una migración que pierde datos (data-gateway 4.4) |
+| `roles` | ver y cambiar los roles guardados en el estado de la gateway (data-gateway 4.4) |
 
 ![Roles](images/ide-connection-roles.png)
+
+**Roles de la gateway** (con `roles`, data-gateway 4.4, IDE 1.4.0): debajo, los [roles](../data-gateway/Security.md#roles)
+de la gateway, los de su configuración (solo lectura) y los de su estado. **+ Agregar un rol**; **Extender** uno de la
+configuración con más permisos, vistas o stages, en todos los esquemas o en uno; **Editar** o **Quitar** uno del estado,
+con un motivo. **Sus cambios** dice quién cambió qué y cuándo.
 
 Los permisos se dan a cada credencial en la configuración del gateway
 ([Seguridad](../data-gateway/Security.md)).
