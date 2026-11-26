@@ -68,6 +68,7 @@ What a schema can adjust:
 | `scripts` | `enabled` and the limits of scripts | `scripts` |
 | `mcp.maxRows`, `mcp.tools` | row limit and tools of its MCP server | `mcp` |
 | `server.timeout`, `server.maxConcurrent`, `server.maxResponseBytes` | timeout, simultaneous operations and response size | `server` |
+| `cache`, `outbox` (4.2.0) | the [cache](#cache) of its reads; where its [outbox](Changes.md#the-outbox) goes | `cache`, `outbox` |
 | `runtime.mode`, `runtime.maxMemoryMb`, `runtime.checkConnections` | `thread` / `process`, memory of its worker, whether its connections are checked at start | `runtime` |
 
 The most specific always wins and **replaces** the others: schema → transport → global.
@@ -245,6 +246,34 @@ observability:
 The headers of the exporter carry tokens: they go only in `OTEL_EXPORTER_OTLP_HEADERS` (`exporter.headers` in the
 file stops the start). What it gives is in [Operations](Operations.md#opentelemetry).
 
+## The cache of the reads {#cache}
+
+**Since data-gateway 4.2.0.** A read repeated while nothing it reads changed doesn't go back to the database. It is off
+until `cache.enabled: true` (globally or per schema): a client may see a result up to `ttl` old when another
+application writes in the database.
+
+```yaml
+cache:                      # also orm.schemas[].cache
+  enabled: true
+  ttl: 60s                  # how long a result lives
+  maxEntries: 10000         # in memory; the least used go first
+  maxRowBytes: 1MB          # a larger result is not kept
+  entities:
+    Prices: { ttl: 5s }               # another ttl for what reads it
+    AuditLogs: { enabled: false }     # what reads it is never kept
+```
+
+- **What is kept:** the result of an `execute` that only reads and of a [named query](Rest.md#named-queries) that only
+  reads; never a write, a script or an `execute-queued`.
+- **Whose:** a result belongs to its query, its `data`, its stage, and **the view and the context of who asked**: two
+  identities with another view or another tenant never share one.
+- **Until when:** a write that goes through λORM drops at once every result that reads its entity (also through an
+  `include` or a relation); what another application writes is seen after `ttl`, at most.
+- With several replicas each one has its own cache and sees its own writes (shared with Redis, later); use a short
+  `ttl` there.
+- `/metrics` has `data_gateway_cache_requests{result="hit|miss"}`, `data_gateway_cache_invalidations` and
+  `data_gateway_cache_entries`; REST answers [`ETag` and `304`](Rest.md#execute).
+
 ## Reference
 
 | Key | Default | Notes |
@@ -279,6 +308,12 @@ file stops the start). What it gives is in [Operations](Operations.md#openteleme
 | `keys[].view`, `roles.<role>.view` | — | (4.1.0) the [view](Security.md#views) of the requests of a key or a role |
 | `orm.schemas[].view` | `default` | (4.1.0) the view of a caller without one |
 | `orm.schemas[].queries.<name>` | — | (4.1.0) `maxRows`, `timeout` of a [named query](Rest.md#named-queries) |
+| `cache.enabled` | `false` | (4.2.0) the [cache of the reads](#cache); also per schema |
+| `cache.ttl` / `maxEntries` / `maxRowBytes` | `60s` / `10000` / `1MB` | (4.2.0) |
+| `cache.entities.<entity>` | — | (4.2.0) `{ ttl }` or `{ enabled: false }` for what reads it |
+| `outbox.destinations[]` | `[]` | (4.2.0) where the [outbox](Changes.md#the-outbox) goes: `type: webhook` (`url`, `secret`, `timeout`, `entities`) or `type: kafka` (`topic`, `entities`); also per schema |
+| `outbox.interval` / `batch` | `1s` / `100` | (4.2.0) how often it looks for pending events; how many per round |
+| `outbox.dispatch` | `true` | (4.2.0) this replica dispatches; `false` (or `DATA_GATEWAY_OUTBOX_DISPATCH=false`) in all replicas but one |
 | `transports.<t>.authentication` | `authentication` | replaces the global one for that transport |
 | `rateLimit.windowMs` / `rateLimit.max` | `30000` / `30` | `http` only; `max: 0` turns it off |
 | `scripts.enabled` | `false` | `POST /script` and its tool and method |

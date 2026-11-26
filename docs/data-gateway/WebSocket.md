@@ -2,7 +2,7 @@
 
 The `webSocket` transport offers the operations of the REST API over **one persistent JSON-RPC 2.0 connection**, plus
 **notifications** that REST cannot give: the end of a queued execution, the changes of state of the schema and of its
-workspace. Use it for a process that sends many queries, or that wants to know when something changes.
+workspace, and (4.2.0) the [changes of the data](Changes.md#subscriptions) it subscribed to. Use it for a process that sends many queries, or that wants to know when something changes.
 
 ```yaml
 transports:
@@ -67,6 +67,9 @@ The `params` are the body (or the route parameters) of the equivalent REST metho
 | `stage.exists` | `stage` | `GET /stages/{stage}/exists` |
 | `stage.export` | `stage` | `GET /stages/{stage}/export` |
 | `stage.import` | `stage`, `data` | `POST /stages/{stage}/import` |
+| `subscribe.entity` (4.2.0) | `entity` | `GET /subscribe?entity=` ([Data changes](Changes.md#subscriptions)) |
+| `subscribe.query` (4.2.0) | `query` or `name`, `data?` | `GET /subscribe?query=` / `?name=` |
+| `unsubscribe` (4.2.0) | `subscription` | — |
 
 The [permissions](Security.md#permissions) are the same as in REST.
 
@@ -79,6 +82,9 @@ Messages from the server without an `id`:
 | `queue.completed` | an execution queued with `query.executeQueued` and `notify: true` on this connection ended | `queueId`, `ok: true`, `rows` (sent to the topic) |
 | `queue.failed` | that execution failed | `queueId`, `ok: false`, `error` |
 | `schema.statusChanged` | the schema of the connection went to `error` / `restarting`, or back to `ready` | `path`, `status`, `reason`, `pending` |
+| `data.changed` (4.2.0) | a write of an entity of a `subscribe.entity` | `subscription`, `entity`, `action`, `keys?`, `count?` |
+| `query.changed` (4.2.0) | the result of a `subscribe.query` changed | `subscription`, `result` |
+| `subscription.failed` (4.2.0) | the query of a subscription can't run any more | `subscription`, `error`, `message` |
 | `workspace.changed` | something changed in the workspace of the schema (a connection to the root: in any): `added`, `removed`, `schema`, `env` or `files` | `path`, `kind`, `files`, `at` |
 
 ```json

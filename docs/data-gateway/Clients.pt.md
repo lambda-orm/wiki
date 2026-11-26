@@ -32,7 +32,9 @@ await gateway.close()
 Desde a 4.1.0, `token` pode ser uma função que o fornece (`token: () => idp.accessToken()`), chamada em cada requisição
 REST e MCP e ao abrir um WebSocket: o [JWT](Security.md#jwt) de um provedor de identidade, renovado. E
 `gateway.queries()` lista as [consultas nomeadas](Rest.md#named-queries) que a credencial pode usar, e
-`gateway.query(name, data)` executa uma, em todos os transportes.
+`gateway.query(name, data)` executa uma, em todos os transportes. Desde a 4.2.0, com uma conexão `ws://`,
+`gateway.subscribe({ entity } | { query, data } | { name, data }, listener)` fica sabendo das
+[mudanças dos dados](Changes.md#from-node).
 
 A credencial vai nas opções (`apiKey`, `token`, ou quaisquer `headers`) ou em `DATA_GATEWAY_API_KEY` /
 `DATA_GATEWAY_TOKEN`, nunca na URL (uma credencial nela é um erro); `DATA_GATEWAY_URL` é a string de conexão quando

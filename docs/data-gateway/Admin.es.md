@@ -171,6 +171,12 @@ antes, el después y el diff, en `logs/changes.jsonl` del workspace y `GET /admi
 (`src/<language>/domain/`), con solo el modelo o solo los repositorios, y un código generado descargado como zip o
 eliminado.
 
+## Desde 4.2.0 {#since-4-2-0}
+
+Los eventos del [outbox](Changes.md#retries-and-dead-events) de un schema: `GET /admin/workspaces/{route}/outbox?status=dead`
+lista los que fallaron demasiadas veces, con su error (`schemaRead`), y `POST …/outbox/{id}/retry` devuelve uno a
+pendiente (`schemaRead` y `ddl`).
+
 ## Por MCP {#over-mcp}
 
 El servidor MCP de cada esquema suma `admin_schema_get`, `admin_schema_validate` y `admin_stage_fetch` para

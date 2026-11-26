@@ -33,7 +33,9 @@ await gateway.close()
 Seit 4.1.0 kann `token` eine Funktion sein, die ihn liefert (`token: () => idp.accessToken()`), abgefragt bei jeder
 Anfrage über REST und MCP und beim Öffnen eines WebSocket: das [JWT](Security.md#jwt) eines Identitätsanbieters,
 erneuert. Und `gateway.queries()` listet die [benannten Abfragen](Rest.md#named-queries), die die Anmeldedaten nutzen
-dürfen, `gateway.query(name, data)` führt eine aus, auf jedem Transport.
+dürfen, `gateway.query(name, data)` führt eine aus, auf jedem Transport. Seit 4.2.0 erfährt über eine `ws://`-Verbindung
+`gateway.subscribe({ entity } | { query, data } | { name, data }, listener)` von den
+[Datenänderungen](Changes.md#from-node).
 
 Die Anmeldedaten stehen in den Optionen (`apiKey`, `token` oder beliebige `headers`) oder in `DATA_GATEWAY_API_KEY` /
 `DATA_GATEWAY_TOKEN`, nie in der URL (Anmeldedaten darin sind ein Fehler); `DATA_GATEWAY_URL` ist die

@@ -2,7 +2,7 @@
 
 El transporte `webSocket` ofrece las operaciones de la API REST sobre **una única conexión persistente JSON-RPC 2.0**, más
 **notificaciones** que REST no puede dar: el fin de una ejecución encolada, los cambios de estado del esquema y de su
-workspace. Úsalo para un proceso que envía muchas consultas, o que quiere saber cuándo cambia algo.
+workspace, y (4.2.0) los [cambios de los datos](Changes.md#subscriptions) a los que se suscribió. Úsalo para un proceso que envía muchas consultas, o que quiere saber cuándo cambia algo.
 
 ```yaml
 transports:
@@ -67,6 +67,9 @@ Los `params` son el cuerpo (o los parámetros de ruta) del método REST equivale
 | `stage.exists` | `stage` | `GET /stages/{stage}/exists` |
 | `stage.export` | `stage` | `GET /stages/{stage}/export` |
 | `stage.import` | `stage`, `data` | `POST /stages/{stage}/import` |
+| `subscribe.entity` (4.2.0) | `entity` | `GET /subscribe?entity=` ([Cambios de los datos](Changes.md#subscriptions)) |
+| `subscribe.query` (4.2.0) | `query` o `name`, `data?` | `GET /subscribe?query=` / `?name=` |
+| `unsubscribe` (4.2.0) | `subscription` | — |
 
 Los [permisos](Security.md#permissions) son los mismos que en REST.
 
@@ -79,6 +82,9 @@ Mensajes del servidor sin `id`:
 | `queue.completed` | terminó una ejecución encolada con `query.executeQueued` y `notify: true` en esta conexión | `queueId`, `ok: true`, `rows` (enviadas al topic) |
 | `queue.failed` | esa ejecución falló | `queueId`, `ok: false`, `error` |
 | `schema.statusChanged` | el esquema de la conexión pasó a `error` / `restarting`, o volvió a `ready` | `path`, `status`, `reason`, `pending` |
+| `data.changed` (4.2.0) | una escritura de una entidad de un `subscribe.entity` | `subscription`, `entity`, `action`, `keys?`, `count?` |
+| `query.changed` (4.2.0) | cambió el resultado de un `subscribe.query` | `subscription`, `result` |
+| `subscription.failed` (4.2.0) | la consulta de una suscripción ya no puede correr | `subscription`, `error`, `message` |
 | `workspace.changed` | cambió algo en el workspace del esquema (una conexión a la raíz: en cualquiera): `added`, `removed`, `schema`, `env` o `files` | `path`, `kind`, `files`, `at` |
 
 ```json

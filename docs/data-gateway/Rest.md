@@ -105,6 +105,9 @@ curl -X POST "http://localhost:8080/execute?format=beautiful" -H "X-Api-Key: $KE
 
 - A select answers the rows; `update` and `delete` answer the number of affected rows (`0` when nothing matched);
   `insert` answers the inserted data.
+- **Since 4.2.0**, the answer of a read has an `ETag` (and `Cache-Control: private, no-cache`); a request with the
+  same `If-None-Match` is answered `304` without a body. Also `POST /queries/{name}`. With the
+  [cache](Configuration.md#cache), a repeated read doesn't reach the database.
 - With only the `read` permission, a query that writes (`insert`, `update`, `delete`, `upsert`, `merge`, `bulk*`) is
   refused with `403` before reaching the database.
 
@@ -364,6 +367,7 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 | parameters | `POST /parameters` | `orm_parameters` | `query.parameters` | `read` |
 | constraints | `POST /constraints` | `orm_constraints` | `query.constraints` | `read` |
 | [named queries](#named-queries) (4.1.0) | `GET /queries`, `POST /queries/{name}` | `query_<name>` | `queries.list`, `queries.execute` | `read` / `write` |
+| [subscribe](Changes.md#subscriptions) (4.2.0) | `GET /subscribe` (SSE) | — | `subscribe.entity`, `subscribe.query`, `unsubscribe` | `read` |
 | schema | `GET /schema` | `schema_get` | `schema.schema` | `read` |
 | schema version | `GET /schema/version` | `schema_version` | `schema.version` | `read` |
 | domain | `GET /domain` | `schema_domain` | `schema.domain` | `read` |

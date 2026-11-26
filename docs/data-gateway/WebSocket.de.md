@@ -2,7 +2,7 @@
 
 Der Transport `webSocket` bietet die Operationen der REST API über **eine einzige dauerhafte JSON-RPC-2.0-Verbindung**,
 dazu **Benachrichtigungen**, die REST nicht bieten kann: das Ende einer Ausführung in der Warteschlange und die
-Änderungen des Zustands des Schemas und seines Workspaces. Verwenden Sie ihn für einen Prozess, der viele Abfragen
+Änderungen des Zustands des Schemas und seines Workspaces, und (4.2.0) die [Datenänderungen](Changes.md#subscriptions), die er abonniert hat. Verwenden Sie ihn für einen Prozess, der viele Abfragen
 sendet oder wissen möchte, wann sich etwas ändert.
 
 ```yaml
@@ -68,6 +68,9 @@ Die `params` entsprechen dem Body (oder den Routenparametern) der entsprechenden
 | `stage.exists` | `stage` | `GET /stages/{stage}/exists` |
 | `stage.export` | `stage` | `GET /stages/{stage}/export` |
 | `stage.import` | `stage`, `data` | `POST /stages/{stage}/import` |
+| `subscribe.entity` (4.2.0) | `entity` | `GET /subscribe?entity=` ([Datenänderungen](Changes.md#subscriptions)) |
+| `subscribe.query` (4.2.0) | `query` oder `name`, `data?` | `GET /subscribe?query=` / `?name=` |
+| `unsubscribe` (4.2.0) | `subscription` | — |
 
 Die [Berechtigungen](Security.md#permissions) sind dieselben wie bei REST.
 
@@ -80,6 +83,9 @@ Nachrichten des Servers ohne `id`:
 | `queue.completed` | eine mit `query.executeQueued` und `notify: true` auf dieser Verbindung eingereihte Ausführung ist beendet | `queueId`, `ok: true`, `rows` (an das Topic gesendet) |
 | `queue.failed` | diese Ausführung ist fehlgeschlagen | `queueId`, `ok: false`, `error` |
 | `schema.statusChanged` | das Schema der Verbindung ist in den Zustand `error` / `restarting` oder zurück zu `ready` gewechselt | `path`, `status`, `reason`, `pending` |
+| `data.changed` (4.2.0) | ein Schreibvorgang einer Entität eines `subscribe.entity` | `subscription`, `entity`, `action`, `keys?`, `count?` |
+| `query.changed` (4.2.0) | das Ergebnis eines `subscribe.query` hat sich geändert | `subscription`, `result` |
+| `subscription.failed` (4.2.0) | die Abfrage eines Abonnements kann nicht mehr laufen | `subscription`, `error`, `message` |
 | `workspace.changed` | im Workspace des Schemas hat sich etwas geändert (eine Verbindung zur Wurzel: in jedem): `added`, `removed`, `schema`, `env` oder `files` | `path`, `kind`, `files`, `at` |
 
 ```json

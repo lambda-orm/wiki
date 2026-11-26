@@ -71,6 +71,7 @@ orm:
 | `scripts` | `enabled` und die Limits für Skripte | `scripts` |
 | `mcp.maxRows`, `mcp.tools` | Zeilenlimit und Tools seines MCP-Servers | `mcp` |
 | `server.timeout`, `server.maxConcurrent`, `server.maxResponseBytes` | Timeout, gleichzeitige Operationen und Antwortgröße | `server` |
+| `cache`, `outbox` (4.2.0) | der [Cache](#cache) seiner Lesevorgänge; wohin seine [Outbox](Changes.md#the-outbox) geht | `cache`, `outbox` |
 | `runtime.mode`, `runtime.maxMemoryMb`, `runtime.checkConnections` | `thread` / `process`, Speicher seines Workers, ob seine Verbindungen beim Start geprüft werden | `runtime` |
 
 Die spezifischste Angabe gewinnt immer und **ersetzt** die anderen: Schema → Transport → global.
@@ -249,6 +250,35 @@ observability:
 Die Header des Exporters enthalten Tokens: Sie gehören nur in `OTEL_EXPORTER_OTLP_HEADERS` (`exporter.headers` in der
 Datei verhindert den Start). Was sie liefert, steht in [Betrieb](Operations.md#opentelemetry).
 
+## Der Cache der Lesevorgänge {#cache}
+
+**Seit data-gateway 4.2.0.** Ein Lesevorgang, der wiederholt wird, solange sich nichts geändert hat, was er liest, geht
+nicht zurück zur Datenbank. Er ist aus, bis `cache.enabled: true` (global oder pro Schema): Ein Client kann ein
+Ergebnis sehen, das bis zu `ttl` alt ist, wenn eine andere Anwendung in die Datenbank schreibt.
+
+```yaml
+cache:                      # auch orm.schemas[].cache
+  enabled: true
+  ttl: 60s                  # wie lange ein Ergebnis lebt
+  maxEntries: 10000         # im Speicher; die am wenigsten genutzten gehen zuerst
+  maxRowBytes: 1MB          # ein größeres Ergebnis wird nicht behalten
+  entities:
+    Prices: { ttl: 5s }               # ein anderes ttl für das, was sie liest
+    AuditLogs: { enabled: false }     # was sie liest, wird nie behalten
+```
+
+- **Was behalten wird:** das Ergebnis eines `execute`, das nur liest, und einer
+  [benannten Abfrage](Rest.md#named-queries), die nur liest; nie ein Schreibvorgang, ein Skript oder ein
+  `execute-queued`.
+- **Wessen:** Ein Ergebnis gehört zu seiner Abfrage, seinen `data`, seiner Stage und **der View und dem Kontext dessen,
+  der gefragt hat**: Zwei Identitäten mit einer anderen View oder einem anderen Mandanten teilen nie eines.
+- **Bis wann:** Ein Schreibvorgang über λORM entfernt sofort alle Ergebnisse, die seine Entität lesen (auch über ein
+  `include` oder eine Relation); was eine andere Anwendung schreibt, wird höchstens nach `ttl` gesehen.
+- Bei mehreren Replikas hat jede ihren eigenen Cache und sieht ihre eigenen Schreibvorgänge (geteilt mit Redis,
+  später); verwenden Sie dort ein kurzes `ttl`.
+- `/metrics` hat `data_gateway_cache_requests{result="hit|miss"}`, `data_gateway_cache_invalidations` und
+  `data_gateway_cache_entries`; REST antwortet mit [`ETag` und `304`](Rest.md#execute).
+
 ## Referenz {#reference}
 
 | Schlüssel | Standard | Hinweise |
@@ -283,6 +313,12 @@ Datei verhindert den Start). Was sie liefert, steht in [Betrieb](Operations.md#o
 | `keys[].view`, `roles.<role>.view` | — | (4.1.0) die [View](Security.md#views) der Anfragen eines Schlüssels oder einer Rolle |
 | `orm.schemas[].view` | `default` | (4.1.0) die View eines Aufrufers ohne eigene |
 | `orm.schemas[].queries.<name>` | — | (4.1.0) `maxRows`, `timeout` einer [benannten Abfrage](Rest.md#named-queries) |
+| `cache.enabled` | `false` | (4.2.0) der [Cache der Lesevorgänge](#cache); auch pro Schema |
+| `cache.ttl` / `maxEntries` / `maxRowBytes` | `60s` / `10000` / `1MB` | (4.2.0) |
+| `cache.entities.<entity>` | — | (4.2.0) `{ ttl }` oder `{ enabled: false }` für das, was sie liest |
+| `outbox.destinations[]` | `[]` | (4.2.0) wohin die [Outbox](Changes.md#the-outbox) geht: `type: webhook` (`url`, `secret`, `timeout`, `entities`) oder `type: kafka` (`topic`, `entities`); auch pro Schema |
+| `outbox.interval` / `batch` | `1s` / `100` | (4.2.0) wie oft nach ausstehenden Ereignissen gesucht wird; wie viele pro Runde |
+| `outbox.dispatch` | `true` | (4.2.0) diese Replika stellt zu; `false` (oder `DATA_GATEWAY_OUTBOX_DISPATCH=false`) in allen Replikas außer einer |
 | `transports.<t>.authentication` | `authentication` | ersetzt die globale für diesen Transport |
 | `rateLimit.windowMs` / `rateLimit.max` | `30000` / `30` | nur `http`; `max: 0` deaktiviert es |
 | `scripts.enabled` | `false` | `POST /script` sowie das zugehörige Tool und die Methode |

@@ -68,9 +68,26 @@ rechaza la sentencia con su mensaje. Cada una con su **Mensaje**, su **Condició
 
 ## Datos {#data}
 
-Sus filas, 50 por página, **◀ Anterior** y **Siguiente ▶**: solo lectura (aquí no se modifica ninguna fila). Se
-muestran como la tabla de un [resultado](Queries.md#the-result): se pueden copiar y exportar (`Orders-page-1.json`).
-Una entidad abstracta no tiene datos.
+Sus filas, 50 por página, **◀ Anterior** y **Siguiente ▶**. Una entidad abstracta no tiene datos.
+
+- **Ordenar** por una columna: un clic en su encabezado (ascendente ▲, descendente ▼, ninguno). **Filtrar** con una
+  condición sobre `p` (`p.price > 18`) y **Aplicar** (o Enter).
+- **Exportar** la página (**CSV**, **JSON**, **XLSX**) o todo (**CSV ∀**, **JSON ∀**, **XLSX ∀**): todas las páginas,
+  con su orden y su filtro, hasta 100 000 filas, con las filas leídas hasta el momento y **Cancelar**. El `.xlsx` es un
+  archivo de Excel de verdad (`Orders.xlsx`, `Orders-page-1.csv`).
+
+Con una credencial que tiene `write` y una entidad con clave primaria, la tabla es además un **backoffice** (desde el
+IDE 1.2.0):
+
+- **Cambiar una celda:** doble clic, el valor nuevo, Enter (Escape la deja). Cambia solo mientras la celda todavía
+  tiene lo que se leyó: si alguien la cambió mientras tanto, no se cambia nada y la tabla lo dice y la muestra ahora.
+  La clave, lo calculado (`view`, `readExp`) y lo `autoIncrement` no se editan; un valor que no es de su tipo (`x` en
+  un número) no se manda.
+- **+ Agregar una fila:** un formulario con las propiedades de la entidad (las requeridas marcadas con `*`).
+- **✕** al final de una fila la borra, después de mostrar su clave y preguntar.
+
+Todo pasa por la gateway con la credencial de la connection: sus permisos, su
+[vista](../data-gateway/Security.md#views) y la auditoría. Sin `write`, la tabla es de solo lectura.
 
 ![Datos](images/ide-entity-data.png)
 

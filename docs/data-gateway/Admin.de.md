@@ -174,6 +174,12 @@ nachher und dem Diff, in `logs/changes.jsonl` des Workspaces und unter `GET /adm
 (`src/<language>/domain/`), mit nur dem Modell oder nur den Repositories, ein generierter Code als Zip heruntergeladen
 oder entfernt.
 
+## Seit 4.2.0 {#since-4-2-0}
+
+Die Ereignisse der [Outbox](Changes.md#retries-and-dead-events) eines Schemas: `GET /admin/workspaces/{route}/outbox?status=dead`
+listet die, die zu oft fehlgeschlagen sind, mit ihrem Fehler (`schemaRead`), und `POST …/outbox/{id}/retry` setzt
+eines wieder auf ausstehend (`schemaRead` und `ddl`).
+
 ## Über MCP {#over-mcp}
 
 Der MCP-Server jedes Schemas ergänzt `admin_schema_get`, `admin_schema_validate` und `admin_stage_fetch` für

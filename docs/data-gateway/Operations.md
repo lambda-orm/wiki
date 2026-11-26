@@ -13,7 +13,7 @@ CLI (`@lambdaorm/cli`) and the Oracle Instant Client. It runs `node index.js` as
 # docker-compose.yml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:4.1.0
+    image: flaviorita/data-gateway:4.2.0
     environment:
       DATA_GATEWAY_HTTP_PORT: "8080"
       DATA_GATEWAY_MCP_PORT: "8081"
@@ -44,10 +44,10 @@ it, and it reaches the `management` port, which is published to nobody else.
 ```yaml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:4.1.0
+    image: flaviorita/data-gateway:4.2.0
     # … as above, with transports.management.port: 9090 in its configuration, and no port 9090 published
   ide:
-    image: flaviorita/data-gateway-ide:1.1.0
+    image: flaviorita/data-gateway-ide:1.2.0
     environment:
       DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081"
     ports: [ "127.0.0.1:8090:8080" ]
@@ -65,7 +65,9 @@ services:
 - **Configuration** in a `ConfigMap` mounted at `/config`, secrets as environment variables from a `Secret`
   (`value: $READER_KEY` in the file).
 - **Replicas:** REST, WebSocket and stateless MCP (`stateful: false`) need no session affinity; the older HTTP+SSE of
-  MCP does.
+  MCP does. Since 4.2.0, the [cache](Configuration.md#cache) and the [subscriptions](Changes.md#subscriptions) of a
+  replica see the writes made through it, and only one replica should dispatch the
+  [outbox](Changes.md#one-replica-dispatches).
 - **Behind an ingress with a path:** `transports.<t>.basePath: /data-gateway`.
 - **Shutdown:** `SIGTERM` stops accepting connections, waits for the operations in progress (up to `server.timeout`),
   closes the queues and the pools, and exits. Give `terminationGracePeriodSeconds` at least that time.
@@ -98,6 +100,9 @@ each with the label `worker` (`edge`, `schema:iot/v1`):
 | `data_gateway_schema_status` | `schema`, `status` |
 | `data_gateway_schema_restarts` | `schema` |
 | `data_gateway_management_sessions` | `state` (the sessions of `management`, and those with the IDE connected) |
+| `data_gateway_cache_requests` | `schema`, `result` (`hit`, `miss`: the [cache](Configuration.md#cache), 4.2.0) |
+| `data_gateway_cache_invalidations` / `data_gateway_cache_entries` | `schema` |
+| `data_gateway_outbox_events` | `schema`, `result` (`delivered`, `failed`: the [outbox](Changes.md#the-outbox), 4.2.0) |
 | `http_request_duration_seconds` | `method`, `route`, `code`, `credential` (the HTTP requests) |
 
 and the usual metrics of Node with the prefix `node_` (memory, CPU, garbage collection, the lag of the event loop:
