@@ -16,7 +16,7 @@ theme:
 
 extra_css:
   # a new name when they change: a browser never mixes a cached old one with the new pages
-  - assets/wiki-v5.css
+  - assets/wiki-v6.css
 extra_javascript:
   - assets/wiki-v3.js
   # the downloads of the IDE (docs/ide/Download.md): GitHub releases ide-v*, read by the browser

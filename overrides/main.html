@@ -12,3 +12,15 @@
     </div>
   {%- endif %}
 {%- endblock %}
+
+{#- the icon of λORM (the one of the data-gateway-ide, lambda-orm/data-gateway scripts/icons/make-icons.py): the λ in a
+    tab (img/favicon.ico, which the theme links, and its SVG), λORM on the home screen of a phone -#}
+{%- block extrahead %}
+  <link rel="icon" href="{{ 'img/favicon.svg'|url }}" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="{{ 'img/apple-touch-icon.png'|url }}" />
+{%- endblock %}
+
+{#- the name of the site with its icon, instead of the house of the theme -#}
+{%- block site_name %}
+  <a href="{{ nav.homepage.url|url }}" class="site-name"><img src="{{ 'img/favicon.svg'|url }}" alt="" class="site-icon" width="28" height="28" /> {{ config.site_name }}</a>
+{%- endblock %}
