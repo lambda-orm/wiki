@@ -274,10 +274,63 @@ cache:                      # auch orm.schemas[].cache
   der gefragt hat**: Zwei Identitäten mit einer anderen View oder einem anderen Mandanten teilen nie eines.
 - **Bis wann:** Ein Schreibvorgang über λORM entfernt sofort alle Ergebnisse, die seine Entität lesen (auch über ein
   `include` oder eine Relation); was eine andere Anwendung schreibt, wird höchstens nach `ttl` gesehen.
-- Bei mehreren Replikas hat jede ihren eigenen Cache und sieht ihre eigenen Schreibvorgänge (geteilt mit Redis,
-  später); verwenden Sie dort ein kurzes `ttl`.
+- Bei mehreren Replikas hat jede ihren eigenen Cache; seit 4.3.0 entfernt mit [`cluster.valkey`](#cluster) ein
+  Schreibvorgang über eine beliebige Replika die Ergebnisse aller; ohne ihn sieht jede ihre eigenen: dort ein kurzes `ttl`.
 - `/metrics` hat `data_gateway_cache_requests{result="hit|miss"}`, `data_gateway_cache_invalidations` und
   `data_gateway_cache_entries`; REST antwortet mit [`ETag` und `304`](Rest.md#execute).
+
+## Replikas gemeinsam (Valkey) {#cluster}
+
+**Seit data-gateway 4.3.0.** Mit einem geteilten Valkey (oder Redis: dasselbe Protokoll) meldet jede Replika den
+anderen die Schreibvorgänge, die über sie laufen: Der [Cache](#cache) aller entfernt, was sie ändern, die
+[Abonnements](Changes.md#subscriptions) aller erfahren davon, und die [Outbox](Changes.md#the-outbox) stellt eine
+einzige Replika zu, die einen Lease hält (eine andere übernimmt, wenn sie geht).
+
+```yaml
+cluster:
+  valkey:
+    url: $VALKEY_URL           # valkey://[user:password@]host:6379[/db], valkeys:// (TLS); redis://, rediss://
+    prefix: data-gateway
+```
+
+Nur Entität, Aktion, Schlüssel und Zeilenzahl reisen, nie die Daten. Fällt der Valkey aus, macht jede Replika mit ihren
+eigenen Schreibvorgängen weiter (im Log und in `data_gateway_cluster_connected` gemeldet), und niemand stellt die Outbox
+zu, bis er zurück ist.
+
+## Dateien von Eigenschaften {#files}
+
+**Seit data-gateway 4.3.0.** Eine Eigenschaft kann den Schlüssel einer Datei in einem Speicher halten (S3 — AWS oder
+ein anderes mit seinem `endpoint` — oder Azure Blob): Das Gateway signiert kurzlebige URLs zum Hochladen und Lesen, und
+die Bytes gehen direkt zwischen Client und Speicher, nie über das Gateway. Global oder pro Schema:
+
+```yaml
+files:
+  storages:
+    images:
+      type: s3
+      bucket: shop-images
+      region: eu-west-1
+      # endpoint: https://minio.example.com
+      accessKeyId: $S3_KEY
+      secretAccessKey: $S3_SECRET
+      prefix: products/
+      maxBytes: 10MB
+      types: [ image/png, image/jpeg ]
+      expires: 5m
+    invoices:
+      type: azureBlob
+      account: shopfiles
+      container: invoices
+      accountKey: $AZURE_KEY
+  properties:
+    Products.photo: images
+    Orders.invoice: invoices
+```
+
+Die Routen stehen in der [REST API](Rest.md#files). Eine URL zum Lesen wird nur für einen Schlüssel signiert, den eine
+Zeile der [View](Security.md#views) des Aufrufers hält. S3 signiert Typ und Größe eines Uploads; Azure kann das nicht,
+daher prüft das Gateway sie beim Signieren. Der Speicher muss den Origin der IDE erlauben (CORS), damit die
+[IDE](../ide/Entities.md#data) hochlädt und liest.
 
 ## Referenz {#reference}
 
@@ -313,6 +366,11 @@ cache:                      # auch orm.schemas[].cache
 | `keys[].view`, `roles.<role>.view` | — | (4.1.0) die [View](Security.md#views) der Anfragen eines Schlüssels oder einer Rolle |
 | `orm.schemas[].view` | `default` | (4.1.0) die View eines Aufrufers ohne eigene |
 | `orm.schemas[].queries.<name>` | — | (4.1.0) `maxRows`, `timeout` einer [benannten Abfrage](Rest.md#named-queries) |
+| `cluster.valkey.url` / `prefix` | — / `data-gateway` | (4.3.0) der Valkey der [Replikas](#cluster) |
+| `files.storages.<name>` | — | (4.3.0) `type: s3` (`bucket`, `region`, `endpoint`, `accessKeyId`, `secretAccessKey`) oder `type: azureBlob` (`account`, `container`, `accountKey`, `endpoint`); `prefix`, `maxBytes` (10MB), `types`, `expires` (5m) — [Dateien](#files) |
+| `files.properties.<Entität.Eigenschaft>` | — | (4.3.0) der Speicher ihrer Dateien |
+| `mcp.approval` / `mcp.approvalExpires` | `none` / `1h` | (4.3.0) `writes`: jeder Schreibvorgang über MCP [wartet auf eine Person](Security.md#approvals); auch pro Schema |
+| `keys[].approval`, `roles.<rolle>.approval` | — | (4.3.0) `writes`: die Schreibvorgänge dieser Anmeldedaten oder Rolle warten, auf jedem Transport |
 | `cache.enabled` | `false` | (4.2.0) der [Cache der Lesevorgänge](#cache); auch pro Schema |
 | `cache.ttl` / `maxEntries` / `maxRowBytes` | `60s` / `10000` / `1MB` | (4.2.0) |
 | `cache.entities.<entity>` | — | (4.2.0) `{ ttl }` oder `{ enabled: false }` für das, was sie liest |

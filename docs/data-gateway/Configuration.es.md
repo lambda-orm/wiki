@@ -270,10 +270,62 @@ cache:                      # también orm.schemas[].cache
   identidades con otra vista u otro tenant nunca comparten uno.
 - **Hasta cuándo:** una escritura que pasa por λORM borra al instante todos los resultados que leen su entidad (también
   por un `include` o una relación); lo que escribe otra aplicación se ve después de `ttl`, como mucho.
-- Con varias réplicas, cada una tiene su caché y ve sus propias escrituras (compartido con Redis, más adelante); usa un
-  `ttl` corto ahí.
+- Con varias réplicas, cada una tiene su caché; desde 4.3.0, con [`cluster.valkey`](#cluster) una escritura en
+  cualquier réplica borra los resultados de todas; sin él, cada una ve sus escrituras: usa un `ttl` corto ahí.
 - `/metrics` tiene `data_gateway_cache_requests{result="hit|miss"}`, `data_gateway_cache_invalidations` y
   `data_gateway_cache_entries`; REST responde [`ETag` y `304`](Rest.md#execute).
+
+## Réplicas juntas (Valkey) {#cluster}
+
+**Desde data-gateway 4.3.0.** Con un Valkey (o un Redis: el mismo protocolo) compartido, cada réplica avisa a las otras
+de las escrituras hechas a través de ella: el [caché](#cache) de todas borra lo que cambian, las
+[suscripciones](Changes.md#subscriptions) de todas se enteran, y el [outbox](Changes.md#the-outbox) lo despacha una
+sola réplica, la que tiene un lease (otra lo toma si se va).
+
+```yaml
+cluster:
+  valkey:
+    url: $VALKEY_URL           # valkey://[user:password@]host:6379[/db], valkeys:// (TLS); redis://, rediss://
+    prefix: data-gateway
+```
+
+Solo viajan la entidad, la acción, las claves y cuántas filas, nunca los datos. Si el Valkey se cae, cada réplica sigue
+con sus escrituras (dicho en el log y en `data_gateway_cluster_connected`) y nadie despacha el outbox hasta que vuelve.
+
+## Archivos de propiedades {#files}
+
+**Desde data-gateway 4.3.0.** Una propiedad puede guardar la clave de un archivo en un almacenamiento (S3 — AWS u otro
+con su `endpoint` — o Azure Blob): la gateway firma URLs de vida corta para subirlo y para leerlo, y los bytes van
+directo entre el cliente y el almacenamiento, nunca por la gateway. Global o por schema:
+
+```yaml
+files:
+  storages:
+    images:
+      type: s3
+      bucket: shop-images
+      region: eu-west-1
+      # endpoint: https://minio.example.com
+      accessKeyId: $S3_KEY
+      secretAccessKey: $S3_SECRET
+      prefix: products/
+      maxBytes: 10MB
+      types: [ image/png, image/jpeg ]
+      expires: 5m
+    invoices:
+      type: azureBlob
+      account: shopfiles
+      container: invoices
+      accountKey: $AZURE_KEY
+  properties:
+    Products.photo: images
+    Orders.invoice: invoices
+```
+
+Las rutas están en la [API REST](Rest.md#files). Una URL para leer se firma solo para una clave que guarda una fila de
+la [vista](Security.md#views) de quien pide. S3 firma el tipo y el tamaño de una subida; Azure no puede, así que la
+gateway los controla al firmar. El almacenamiento debe permitir el origen del IDE (CORS) para que el
+[IDE](../ide/Entities.md#data) suba y lea.
 
 ## Referencia {#reference}
 
@@ -309,6 +361,11 @@ cache:                      # también orm.schemas[].cache
 | `keys[].view`, `roles.<role>.view` | — | (4.1.0) la [vista](Security.md#views) de las peticiones de una clave o un rol |
 | `orm.schemas[].view` | `default` | (4.1.0) la vista de quien llama sin una |
 | `orm.schemas[].queries.<name>` | — | (4.1.0) `maxRows`, `timeout` de una [consulta con nombre](Rest.md#named-queries) |
+| `cluster.valkey.url` / `prefix` | — / `data-gateway` | (4.3.0) el Valkey de las [réplicas](#cluster) |
+| `files.storages.<nombre>` | — | (4.3.0) `type: s3` (`bucket`, `region`, `endpoint`, `accessKeyId`, `secretAccessKey`) o `type: azureBlob` (`account`, `container`, `accountKey`, `endpoint`); `prefix`, `maxBytes` (10MB), `types`, `expires` (5m) — [archivos](#files) |
+| `files.properties.<Entidad.propiedad>` | — | (4.3.0) el almacenamiento de sus archivos |
+| `mcp.approval` / `mcp.approvalExpires` | `none` / `1h` | (4.3.0) `writes`: toda escritura por MCP [espera a una persona](Security.md#approvals); también por schema |
+| `keys[].approval`, `roles.<rol>.approval` | — | (4.3.0) `writes`: las escrituras de esa credencial o rol esperan, en todo transporte |
 | `cache.enabled` | `false` | (4.2.0) el [caché de las lecturas](#cache); también por schema |
 | `cache.ttl` / `maxEntries` / `maxRowBytes` | `60s` / `10000` / `1MB` | (4.2.0) |
 | `cache.entities.<entity>` | — | (4.2.0) `{ ttl }` o `{ enabled: false }` para lo que la lee |

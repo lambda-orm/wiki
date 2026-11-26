@@ -48,7 +48,8 @@ authentication:
 
 ## Tokens eines Identitätsanbieters (JWT / OIDC) {#jwt}
 
-Seit data-gateway 4.1.0. Die Benutzer bringen das Token mit, das ihnen ihr Identitätsanbieter ausstellt (Keycloak,
+Seit data-gateway 4.1.0 (seit 4.3.0 gegen Keycloak getestet: seine Rollen, eine View nach einem Claim und die
+Rotation seines Schlüssels, auf den fünf Transporten). Die Benutzer bringen das Token mit, das ihnen ihr Identitätsanbieter ausstellt (Keycloak,
 Auth0, Entra ID, Cognito, Google…), und das Gateway prüft es, ohne den Anbieter bei jeder Anfrage aufzurufen:
 
 ```yaml
@@ -136,6 +137,7 @@ orm:
 | `queue` | `execute-queued` (und `write`, wenn die Abfrage schreibt) |
 | `stageImport` | das Importieren eines Stages |
 | `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | die [Administration](Admin.md#turning-it-on): nie standardmäßig vergeben |
+| `approve` | (4.3.0) die [wartenden Schreibvorgänge](#approvals) genehmigen oder ablehnen, nie die eigenen: nie standardmäßig vergeben |
 | `sessionAdmin` | jede [Sitzung](Transports.md#sessions) von `management` auflisten und die anderer Zugangsdaten widerrufen (ohne sie sehen und schließen Zugangsdaten nur ihre eigenen): nie standardmäßig vergeben |
 
 - Die Autorisierung erfolgt im Worker des Schemas, bevor irgendetwas ausgeführt wird, gleich für REST, MCP und WebSocket.
@@ -144,6 +146,31 @@ orm:
 - Ohne die Berechtigung: `403` in REST, `status: 403` in WebSocket, `isError: true` in MCP, mit der Meldung
   `the credential "reader" does not have the "write" permission`.
 - `GET /whoami` liefert den Namen und die Berechtigungen der Zugangsdaten (und ihre View, 4.1.0), nie deren Secret.
+
+## Schreibvorgänge, die auf eine Person warten {#approvals}
+
+**Seit data-gateway 4.3.0.** Ein Agent kann Änderungen vorschlagen, ohne sie allein auszuführen: Sein Schreibvorgang
+wartet, bis eine Person ihn genehmigt.
+
+```yaml
+mcp:
+  approval: writes
+  approvalExpires: 1h
+authentication:
+  keys:
+    - { name: agent, value: $AGENT_KEY, permissions: [ read, write ], approval: writes }
+    - { name: ops,   value: $OPS_KEY,   permissions: [ read, approve ] }
+```
+
+- Der Schreibvorgang antwortet sofort `{ "approval": "…", "status": "pending", "expiresAt" }` (REST: `202`); noch hat
+  sich nichts geändert. Ein Skript wartet immer (es kann schreiben); ein Schreibvorgang in der Warteschlange kann nicht
+  warten (`403`).
+- Wer ihn angefragt hat, sieht seinen Zustand mit dem MCP-Werkzeug `approval_status`, `GET /{schema}/approvals/{id}`
+  oder `approvals.status`: `pending`, `done` (mit Ergebnis), `failed`, `rejected` (mit Grund) oder `expired`.
+- Wer `approve` hat, listet sie mit den Anweisungen, die jeder ausführen würde, und genehmigt oder lehnt sie ab, in der
+  [Administration](Admin.md#since-4-3-0) oder der [IDE](../ide/Connections.md#approvals); **nie den eigenen**.
+  Genehmigt läuft er einmal als der Anfragende (seine View, sein Kontext) und wird mit `approvedBy` auditiert.
+- Sie liegen im SQLite des Volumes (`.data-gateway/state.sqlite`), geteilt von den Replikas, die es einbinden.
 
 ## Audit {#audit}
 

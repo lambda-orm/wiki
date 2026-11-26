@@ -47,6 +47,8 @@ Os `params` são o corpo (ou os parâmetros de rota) do método REST equivalente
 | `query.script` | `script`, `data?`, `options?` | `POST /script` |
 | `queries.list` (4.1.0) | — | `GET /queries` |
 | `queries.execute` (4.1.0) | `name`, `data?`, `options?` | `POST /queries/{name}` |
+| `approvals.status` (4.3.0) | `id` | `GET /approvals/{id}` ([escritas que aguardam](Security.md#approvals)) |
+| `files.list` / `files.upload` / `files.url` (4.3.0) | — / `entity`, `property`, `name`, `type`, `size` / `entity`, `property`, `key` | `GET /files…` ([arquivos](Rest.md#files)) |
 | `query.executeQueued` | `topic`, `query`, `data?`, `chunk?`, `options?`, `notify?` | `POST /execute-queued` |
 | `query.plan` | `query`, `options?` | `POST /plan` |
 | `query.metadata` | `query`, `options?` | `POST /metadata` |

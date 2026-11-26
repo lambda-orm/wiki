@@ -123,6 +123,10 @@ die Beschreibung die Namen der Entitäten und verweist auf zwei Tools, damit das
 
 ## Was ein Agent tun kann {#what-an-agent-can-do}
 
+Seit 4.3.0 können die Schreibvorgänge eines Agenten [auf eine Person warten](Security.md#approvals)
+(`mcp.approval: writes`): Das Werkzeug antwortet sofort, dass der Schreibvorgang aussteht, und `approval_status` sagt
+später, ob er genehmigt wurde, und sein Ergebnis.
+
 Es gibt keinen Nur-Lese-Modus des Transports: Was ein Agent tun kann, bestimmen **die Berechtigungen seiner
 Zugangsdaten**. Ein Agent, der nur abfragt, erhält Zugangsdaten mit `[ read ]`: Er kann Selects ausführen, aber über
 keinen Transport schreiben, Skripte ausführen, Warteschlangen nutzen oder importieren. Außerdem: `schemas[].transports`,

@@ -82,8 +82,8 @@ await orders.unsubscribe()
 - **Un cambio que no puede ver no le llega:** cuando su vista filtra las filas de la entidad (un tenant, un país), un
   `data.changed` lleva solo las claves que su vista ve, y no se manda ninguno si no ve ninguna. A un usuario de la vista
   de Alemania se le avisa de una escritura de `ALFKI`, no de una de `BLONP`.
-- Con varias réplicas, cada una avisa de las escrituras hechas a través de ella (entre réplicas, con Redis, más
-  adelante).
+- Con varias réplicas, cada una avisa de las escrituras hechas a través de ella; desde 4.3.0, con
+  [`cluster.valkey`](Configuration.md#cluster), de las escrituras de todas.
 
 ## El outbox {#the-outbox}
 
@@ -168,6 +168,8 @@ defecto) o `done`. `/metrics` tiene `data_gateway_outbox_events{result="delivere
 
 ### Una réplica despacha {#one-replica-dispatches}
 
+Desde 4.3.0, con [`cluster.valkey`](Configuration.md#cluster), despacha la réplica que tiene un lease en el Valkey
+(renovado cada 5 s); si se va, otra lo toma en 15 s como mucho. Sin él:
 λORM no bloquea los eventos: dos réplicas despachando entregarían algunos dos veces. Solo una debe hacerlo:
 `outbox.dispatch: false` (o `DATA_GATEWAY_OUTBOX_DISPATCH=false`) en las otras. Con una réplica, el valor por defecto
 (`true`) es el correcto.

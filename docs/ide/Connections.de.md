@@ -17,10 +17,17 @@ Das **+** neben **Verbindungen**, oben im Explorer:
 | **Name** | wie die Verbindung angezeigt wird (`local`, `production`…) |
 | **Protokoll** | `REST · http` oder `REST · https` |
 | **Management-Adresse** | `host:port/base path` des `management` des Gateways, **so wie der Server der IDE es erreicht**: `data-gateway:9090` für eine Web-IDE im selben Compose, `localhost:9090` für die Desktop-App auf dem Rechner des Gateways |
-| **Authentifizierung** | **API-Schlüssel** (sein **Header**, standardmäßig `X-Api-Key`, und sein **Schlüssel**), **Bearer-Token (JWT)** (sein **Token**: ein Schlüssel des Gateways oder das [Token eines Identitätsanbieters](../data-gateway/Security.md#jwt); wenn es abläuft, sagt die Verbindung es und fragt nach einem neuen), **Basic (Benutzer und Passwort)** oder **Keine** |
+| **Authentifizierung** | **API-Schlüssel** (sein **Header**, standardmäßig `X-Api-Key`, und sein **Schlüssel**), **Bearer-Token (JWT)** (sein **Token**: ein Schlüssel des Gateways oder das [Token eines Identitätsanbieters](../data-gateway/Security.md#jwt); wenn es abläuft, sagt die Verbindung es und fragt nach einem neuen), **Basic (Benutzer und Passwort)**, **OpenID Connect (Anmeldung)** (IDE 1.3.0: sein **Aussteller**, **Client-ID** und **Scopes**; siehe unten) oder **Keine** |
 | **Schlüssel in diesem Browser merken** | mit der Verbindung aufbewahrt; sonst nur in diesem Tab des Browsers, und nach dem Schließen erneut abgefragt |
 | **Andere URLs seiner Transporte** (eingeklappt) | die **REST-URL**, **WebSocket-URL** und **MCP-URL**, nur wenn die IDE sie nicht an den Ports erreicht, die das Gateway nennt (ein Proxy davor, ein anderes Netzwerk) |
 | **Beobachtbarkeit** (eingeklappt) | die **Grafana-URL** und ihre **Tempo-Datenquelle (uid)** (standardmäßig `tempo`): Eine Entität zeigt dann einen Link zu ihren Traces ([Entitäten](Entities.md)) |
+
+**OpenID Connect (Anmeldung)**: Die Seite der Connection hat **Anmelden**, das die Anmeldung des Identitätsanbieters
+öffnet (im Browser ein eigenes Fenster; in der Desktop-App der Browser des Systems, der zur App zurückkehrt); das Token
+bleibt in diesem Tab und wird vor Ablauf erneuert; **Abmelden** beendet auch die Sitzung des Anbieters. Der Anbieter
+braucht einen öffentlichen Client mit PKCE, dessen Redirect-URIs die IDE annehmen (`…/oidc-callback.html` der IDE und
+`http://127.0.0.1:*` für die Desktop-App); der Server der IDE erreicht ihn, daher gehört sein Origin in
+`DATA_GATEWAY_IDE_TARGETS` ([Bereitstellung](Deploying.md)).
 
 **Anzeigen** zeigt den eingegebenen Schlüssel. **Testen** öffnet eine Sitzung und schließt sie sofort wieder: `Verbunden
 als admin · data-gateway 4.0.0`, oder warum es nicht ging. **Verbinden** fügt die Verbindung hinzu und öffnet ihre
@@ -99,6 +106,15 @@ Was die Zugangsdaten dürfen, in zwei Gruppen, **Daten** und **Verwaltung**, jed
 
 Die Berechtigungen werden jeden Zugangsdaten in der Konfiguration des Gateways gegeben
 ([Sicherheit](../data-gateway/Security.md)).
+
+### Wartende Schreibvorgänge {#approvals}
+
+Seit IDE 1.3.0, mit Anmeldedaten, die `approve` haben: die
+[Schreibvorgänge von Agenten, die auf eine Person warten](../data-gateway/Security.md#approvals), in allen Schemas
+des Gateways, jeder mit dem Anfragenden und wann, seiner Abfrage (oder seinem Skript), **Was ausgeführt würde** (seine
+Anweisungen) und **Ihre Daten**. **Genehmigen** führt ihn als der Anfragende aus; **Ablehnen** fragt nach einem Grund
+(optional). Wer einen Schreibvorgang angefragt hat, kann ihn nicht genehmigen. Die Liste wird alle 15 Sekunden neu
+gelesen.
 
 ### Sitzungen {#sessions}
 

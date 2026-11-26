@@ -89,6 +89,15 @@ Mit einer Berechtigung, die `write` hat, und einer Entität mit Primärschlüsse
 Alles läuft über das Gateway mit der Berechtigung der Connection: ihre Berechtigungen, ihre
 [View](../data-gateway/Security.md#views) und das Audit. Ohne `write` ist die Tabelle nur lesbar.
 
+Seit IDE 1.3.0:
+
+- **Punkte** (`point`) werden als Längengrad, Breitengrad mit **↗** zu einer Karte gezeigt und in zwei Feldern
+  bearbeitet; **Vektoren** (`vector`) zeigen ihre ersten Zahlen und wie viele (`[0.12, -0.03, 0.5, …] (1536)`) und
+  werden im Formular der Zeile als JSON geschrieben, gegen ihre Dimensionen geprüft.
+- Eine Eigenschaft, die [Dateien](../data-gateway/Configuration.md#files) hält (data-gateway 4.3.0), zeigt ihre Datei:
+  ein Klick öffnet sie (eine kurzlebige URL); mit `write` lädt **⤒** eine andere direkt in den Speicher hoch, und **✕**
+  entfernt sie aus der Zeile.
+
 ![Daten](images/ide-entity-data.png)
 
 ## Diagramm {#diagram}

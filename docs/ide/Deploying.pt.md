@@ -48,6 +48,7 @@ host da sua rede. Liste o `management` de cada gateway, e o seu REST, WebSocket 
 | Variável | Padrão | O que é |
 | --- | --- | --- |
 | `DATA_GATEWAY_IDE_TARGETS` | nenhum | as origens que ela pode alcançar: `http://data-gateway:9090,http://data-gateway:8080` |
+| `DATA_GATEWAY_IDE_CONNECT_SRC` | nenhuma | (1.3.0) outras origens que a página alcança sozinha: os armazenamentos dos [arquivos](../data-gateway/Configuration.md#files), que recebem e dão os bytes direto |
 | `PORT` | `8080` | a porta da IDE no seu contêiner |
 | `HOST` | `0.0.0.0` | o endereço em que ela escuta |
 

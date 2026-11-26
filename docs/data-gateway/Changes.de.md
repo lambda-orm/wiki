@@ -87,7 +87,8 @@ await orders.unsubscribe()
   Mandant, ein Land), trägt ein `data.changed` nur die Schlüssel, die seine View sieht, und es wird keines gesendet,
   wenn er keinen davon sieht. Ein Benutzer der View für Deutschland erfährt von einem Schreibvorgang von `ALFKI`, nicht
   von einem von `BLONP`.
-- Bei mehreren Replikas meldet jede die Schreibvorgänge, die über sie laufen (replikaübergreifend, mit Redis, später).
+- Bei mehreren Replikas meldet jede die Schreibvorgänge, die über sie laufen; seit 4.3.0 mit
+  [`cluster.valkey`](Configuration.md#cluster) die aller Replikas.
 
 ## Die Outbox {#the-outbox}
 
@@ -174,6 +175,8 @@ Standard) oder `done`. `/metrics` hat `data_gateway_outbox_events{result="delive
 
 ### Eine Replika stellt zu {#one-replica-dispatches}
 
+Seit 4.3.0 stellt mit [`cluster.valkey`](Configuration.md#cluster) die Replika zu, die einen Lease im Valkey hält
+(alle 5 s erneuert); geht sie, übernimmt eine andere in höchstens 15 s. Ohne ihn:
 λORM sperrt die Ereignisse nicht: Zwei zustellende Replikas würden manche doppelt zustellen. Nur eine soll es tun:
 `outbox.dispatch: false` (oder `DATA_GATEWAY_OUTBOX_DISPATCH=false`) in den anderen. Mit einer Replika ist der
 Standard (`true`) richtig.

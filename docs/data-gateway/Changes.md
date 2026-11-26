@@ -82,7 +82,8 @@ await orders.unsubscribe()
 - **A change it can't see doesn't reach it:** when its view filters the rows of the entity (a tenant, a country), a
   `data.changed` carries only the keys its view sees, and none is sent if it sees none of them. A user of the view of
   Germany is told of a write of `ALFKI`, not of one of `BLONP`.
-- With several replicas, each one tells of the writes made through it (between replicas, with Redis, comes later).
+- With several replicas, each one tells of the writes made through it; since 4.3.0, with
+  [`cluster.valkey`](Configuration.md#cluster), of the writes of every replica.
 
 ## The outbox {#the-outbox}
 
@@ -167,6 +168,8 @@ or `done`. `/metrics` has `data_gateway_outbox_events{result="delivered|failed"}
 
 ### One replica dispatches
 
+Since 4.3.0, with [`cluster.valkey`](Configuration.md#cluster), the replica that holds a lease in the Valkey
+dispatches (renewed every 5 s); when it goes, another takes it in 15 s at most. Without it:
 λORM doesn't lock the events: two replicas dispatching would deliver some twice. Only one should:
 `outbox.dispatch: false` (or `DATA_GATEWAY_OUTBOX_DISPATCH=false`) in the others. With one replica, the default
 (`true`) is right.

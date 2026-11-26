@@ -121,6 +121,10 @@ description gives the names of the entities and points to two tools, so the mode
 
 ## What an agent can do
 
+Since 4.3.0, an agent's writes can [wait for a person](Security.md#approvals) (`mcp.approval: writes`): the tool
+answers at once that the write is pending, and `approval_status` tells, later, whether it was approved and its result.
+
+
 There is no read-only mode of the transport: what an agent can do is decided by **its credential's permissions**. An
 agent that only queries gets a credential with `[ read ]`: it can run selects but not write, run scripts, queue or
 import, by any transport. Besides: `schemas[].transports` to keep a schema out of MCP, `mcp.tools.exclude`, the hints,

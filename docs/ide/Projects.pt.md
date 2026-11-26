@@ -14,6 +14,16 @@ O **+** do **Workbench** ou de uma pasta:
 | **Novo projeto** (no **Workbench**) / **Nova pasta** (em uma pasta): os dois abrem o diálogo **Nova pasta** | um nome, uma descrição e a pasta em que vai |
 | **Nova consulta** | abre uma aba de consulta nessa pasta; o seu primeiro **Salvar** pede o seu nome |
 | **Novo diagrama** | um nome, uma descrição, a pasta e as entidades ([Diagramas](Diagrams.md#a-new-diagram)) |
+| **Novo painel** (IDE 1.3.0) | nada: abre na hora um painel chamado **Novo painel** (renomeado pelo explorador) |
+
+## Painéis {#panels}
+
+Desde a IDE 1.3.0. Um **painel** é uma grade de cartões, cada um uma consulta e como seu resultado é mostrado: um
+**número** (seu primeiro valor), uma **tabela**, **barras** ou **linhas** (uma coluna de rótulos e as dos valores:
+nenhuma, todas as numéricas) ou uma **pizza**. **+ Cartão** adiciona um e abre seu formulário (**Título**,
+**Consulta**, **Dados**, **Mostrado como**, suas colunas e **Larga**, duas colunas da grade); **✎** o abre de novo.
+**Atualizar** roda todos, **Atualizar sozinho** a cada 30 s a 15 min; **Salvar** guarda o painel no workbench
+(`<nome>.panel.yaml`). Os cartões rodam com a credencial da connection: sua view e suas permissões.
 
 ## Salvar uma consulta {#saving-a-query}
 

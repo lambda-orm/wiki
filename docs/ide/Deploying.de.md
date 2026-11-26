@@ -48,6 +48,7 @@ Host seines Netzwerks erreichen. Liste das `management` jedes Gateways auf, und 
 | Variable | Standard | Was sie ist |
 | --- | --- | --- |
 | `DATA_GATEWAY_IDE_TARGETS` | keiner | die Origins, die sie erreichen darf: `http://data-gateway:9090,http://data-gateway:8080` |
+| `DATA_GATEWAY_IDE_CONNECT_SRC` | keine | (1.3.0) weitere Origins, die die Seite selbst erreicht: die Speicher der [Dateien](../data-gateway/Configuration.md#files), die die Bytes direkt annehmen und liefern |
 | `PORT` | `8080` | der Port der IDE in ihrem Container |
 | `HOST` | `0.0.0.0` | die Adresse, auf der sie lauscht |
 

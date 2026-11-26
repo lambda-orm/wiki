@@ -16,10 +16,17 @@ The **+** next to **Connections**, at the top of the explorer:
 | **Name** | how the connection is shown (`local`, `production`…) |
 | **Protocol** | `REST · http` or `REST · https` |
 | **Management address** | `host:port/base path` of the `management` of the gateway, **as the server of the IDE reaches it**: `data-gateway:9090` for a web IDE in the same compose, `localhost:9090` for the desktop app on the machine of the gateway |
-| **Authentication** | **API key** (its **Header**, default `X-Api-Key`, and its **Key**), **Bearer token (JWT)** (its **Token**: a key of the gateway or the [token of an identity provider](../data-gateway/Security.md#jwt); when it expires the connection says so and asks for a new one), **Basic (user and password)** or **None** |
+| **Authentication** | **API key** (its **Header**, default `X-Api-Key`, and its **Key**), **Bearer token (JWT)** (its **Token**: a key of the gateway or the [token of an identity provider](../data-gateway/Security.md#jwt); when it expires the connection says so and asks for a new one), **Basic (user and password)**, **OpenID Connect (sign in)** (IDE 1.3.0: its **Issuer**, **Client ID** and **Scopes**; see below) or **None** |
 | **Remember the key in this browser** | kept with the connection; otherwise only in that tab of the browser, and asked again after closing it |
 | **Other URLs of its transports** (folded) | the **REST URL**, **WebSocket URL** and **MCP URL**, only when the IDE doesn't reach them at the ports the gateway tells (a proxy in front, another network) |
 | **Observability** (folded) | the **Grafana URL** and its **Tempo datasource (uid)** (`tempo` by default): an entity then shows a link to its traces ([Entities](Entities.md)) |
+
+**OpenID Connect (sign in)**: the page of the connection has **Sign in**, which opens the login of the identity
+provider (in the browser, a window of its own; in the desktop app, the browser of the system, back to the app); the
+token stays in that tab and is renewed before it ends; **Sign out** ends the session of the provider too. The provider
+needs a public client with PKCE whose redirect URIs take the IDE (`…/oidc-callback.html` of the IDE, and
+`http://127.0.0.1:*` for the desktop app); the server of the IDE reaches it, so its origin goes in
+`DATA_GATEWAY_IDE_TARGETS` ([Deploying](Deploying.md)).
 
 **Show** shows the key that was typed. **Test** opens a session and closes it at once: `Connected as admin ·
 data-gateway 4.0.0`, or why it couldn't. **Connect** adds the connection and opens its page.
@@ -96,6 +103,14 @@ What the credential may do, in two groups, **Data** and **Administration**, each
 
 The permissions are given to each credential in the configuration of the gateway
 ([Security](../data-gateway/Security.md)).
+
+### Writes that wait {#approvals}
+
+Since IDE 1.3.0, with a credential that has `approve`: the
+[writes of agents that wait for a person](../data-gateway/Security.md#approvals) in every schema of the gateway, each
+with who asked and when, its query (or script), **What it would run** (its sentences) and **Its data**. **Approve** runs
+it as who asked; **Reject** asks for a reason (optional). A write can't be approved by who asked for it. The list is
+read again every 15 seconds.
 
 ### Sessions {#sessions}
 

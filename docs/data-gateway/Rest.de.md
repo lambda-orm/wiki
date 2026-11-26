@@ -111,6 +111,8 @@ curl -X POST "http://localhost:8080/execute?format=beautiful" -H "X-Api-Key: $KE
 - **Seit 4.2.0** hat die Antwort eines Lesevorgangs ein `ETag` (und `Cache-Control: private, no-cache`); eine Anfrage
   mit demselben `If-None-Match` wird mit `304` ohne Body beantwortet. Auch `POST /queries/{name}`. Mit dem
   [Cache](Configuration.md#cache) erreicht ein wiederholter Lesevorgang die Datenbank nicht.
+- **Seit 4.3.0** antwortet ein Schreibvorgang, der [auf eine Person wartet](Security.md#approvals), mit `202` und
+  seiner Genehmigung; `GET /{schema}/approvals/{id}` sagt seinen Zustand.
 - Mit nur der Berechtigung `read` wird eine schreibende Abfrage (`insert`, `update`, `delete`, `upsert`, `merge`,
   `bulk*`) mit `403` abgelehnt, bevor sie die Datenbank erreicht.
 
@@ -269,6 +271,25 @@ curl -X POST http://localhost:8080/queries/customersOf -H "X-Api-Key: $KEY" -H "
 - Über [WebSocket](WebSocket.md#methods) `queries.list` und `queries.execute`; über [MCP](Mcp.md#named-queries) je ein
   Tool `query_<name>`.
 
+### Dateien {#files}
+
+Seit data-gateway 4.3.0. Die Eigenschaften, die [Dateien](Configuration.md#files) halten: für den Speicher signierte
+URLs, nie die Bytes.
+
+```sh
+curl http://localhost:8080/files -H "X-Api-Key: $KEY"
+curl -X POST http://localhost:8080/files/Products/photo/upload -H "X-Api-Key: $KEY" -H "Content-Type: application/json" \
+  -d '{ "name": "chai.png", "type": "image/png", "size": 48213 }'
+# { "key": "products/Products/photo/0b1e….png", "url": "https://…", "method": "PUT", "headers": { … }, "expiresAt": "…" }
+curl -X PUT "<url>" -H "Content-Type: image/png" --data-binary @chai.png
+curl "http://localhost:8080/files/Products/photo/url?key=products/Products/photo/0b1e….png" -H "X-Api-Key: $KEY"
+```
+
+- Hochladen braucht `write` und bleibt innerhalb von `types` und `maxBytes` des Speichers; den Schlüssel bildet das
+  Gateway (niemand überschreibt die Datei eines anderen). Danach kommt der Schlüssel mit einem `update` in die Zeile.
+- Eine URL zum Lesen wird nur für einen Schlüssel signiert, den eine Zeile der [View](Security.md#views) des Aufrufers
+  hält; eine Eigenschaft, die seine View ausschließt, ist `403`.
+
 ## Schema-Methoden {#schema-methods}
 
 Das Modell des Schemas. Sie benötigen `read`. Die Verbindungen der Quellen werden nie zurückgegeben.
@@ -372,6 +393,8 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 | constraints | `POST /constraints` | `orm_constraints` | `query.constraints` | `read` |
 | [benannte Abfragen](#named-queries) (4.1.0) | `GET /queries`, `POST /queries/{name}` | `query_<name>` | `queries.list`, `queries.execute` | `read` / `write` |
 | [abonnieren](Changes.md#subscriptions) (4.2.0) | `GET /subscribe` (SSE) | — | `subscribe.entity`, `subscribe.query`, `unsubscribe` | `read` |
+| [eine Genehmigung](Security.md#approvals) (4.3.0) | `GET /approvals/{id}` | `approval_status` | `approvals.status` | `read` / `write` |
+| [Dateien](#files) (4.3.0) | `GET /files`, `POST /files/{Entity}/{property}/upload`, `GET /files/{Entity}/{property}/url` | — | `files.list`, `files.upload`, `files.url` | `read` / `write` |
 | Schema | `GET /schema` | `schema_get` | `schema.schema` | `read` |
 | Schema-Version | `GET /schema/version` | `schema_version` | `schema.version` | `read` |
 | Domäne | `GET /domain` | `schema_domain` | `schema.domain` | `read` |
