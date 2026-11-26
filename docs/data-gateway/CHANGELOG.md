@@ -2,6 +2,33 @@
 
 The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway).
 
+### 4.4.0
+
+Who may do what, and where: roles with their views and stages, and the state of the gateway in a database.
+
+- **[Roles](Security.md#roles):** `authorization.roles` says, for each role, the views and the stages of λORM it may
+  use and its permissions there; the client chooses `options.view` and `options.stage` only among them, and a request
+  gets the permissions of the roles that allow what it chose. `orm.schemas[].roles` extends them in a schema; the
+  [administration](Admin.md#since-4-4-0) adds or extends them at run time (`/admin/roles`, permission `roles`), each
+  change recorded.
+- **[The state of the gateway](Configuration.md#state):** `state.source` keeps the sessions, the writes that wait and
+  the roles in a SQLite (one instance) or in PostgreSQL, MySQL, MariaDB, SQL Server or Oracle (several replicas).
+- **Breaking:** a stage the roles don't name can't be chosen (`authorization.stages: open` keeps the old behavior for
+  this version); a push or a migration that loses data needs the permission `destructive`; several replicas with the
+  state in SQLite are an error.
+
+### 4.3.0 (2026-11-26)
+
+The replicas together, files of properties, writes that wait for a person and a real identity provider.
+
+- **[Replicas together](Configuration.md#cluster):** with `cluster.valkey`, the cache and the subscriptions of every
+  replica hear the writes of all of them, and one replica dispatches the outbox.
+- **[Files of properties](Configuration.md#files):** `files.storages` (S3, Azure Blob) and `files.properties`: the
+  gateway signs short-lived URLs to upload and read; the bytes never go through it.
+- **[Writes that wait for a person](Security.md#approvals):** `mcp.approval: writes`, or `approval: writes` on a key or
+  a role, and the permission `approve`.
+- **Keycloak** tested on the five transports, and the IDE signs in with OpenID Connect (PKCE).
+
 ### 4.2.0 (2026-11-26)
 
 The changes of the data: reads that don't go back to the database, clients and other systems that learn that something

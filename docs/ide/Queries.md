@@ -69,8 +69,8 @@ which opens them as a **form** or as **JSON**; **done** closes them:
 
 | Option | What it is |
 | --- | --- |
-| **stage** | where it runs: a stage of the schema, to choose; empty, its default one |
-| **view** | a view of the schema, to choose, which limits what can be read |
+| **stage** | where it runs: a stage of the schema, to choose (with data-gateway 4.4, those the roles of the credential allow); empty, its default one |
+| **view** | with data-gateway 4.4, when the roles of the credential give more than one: which of them; empty, the one of its roles |
 | **chunk size** | rows per batch of a bulk operation |
 | **try all it can** | go on when a sentence fails: (default), yes or no |
 | **timeout (ms)** | of a script: it stops after this time (script mode) |

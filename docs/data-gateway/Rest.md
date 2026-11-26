@@ -66,15 +66,19 @@ Under each schema's route (`/iot/v1/…`), these answer only about that schema:
 | `GET` | `/{schema}/health` | `{ "message": "OK", "time", "uptime" }`; `503` if the schema is not `ready` |
 | `GET` | `/{schema}/metrics` | the metrics of that schema |
 | `GET` | `/{schema}/version` | `{ "version" }`, the version of the gateway (the version of the schema is `GET /{schema}/schema/version`) |
-| `GET` | `/{schema}/whoami` | the name and permissions of the credential with the authentication of that schema, and whether it has scripts enabled (needs the credential) |
+| `GET` | `/{schema}/whoami` | the name and permissions of the credential with the authentication of that schema, and whether it has scripts enabled; since 4.4.0 its roles, its view and stage, and every view and stage it may choose (needs the credential) |
 
 ```sh
 curl http://localhost:8080/iot/v1/whoami -H "X-Api-Key: $KEY"
 ```
 
 ```json
-{ "name": "reader", "permissions": ["read"], "schema": "iot/v1", "scripts": true }
+{ "name": "reader", "permissions": ["read"], "roles": ["reader"], "view": "default", "stage": "default",
+  "views": ["default", "support"], "stages": ["default"], "schema": "iot/v1", "scripts": true }
 ```
+
+Since 4.4.0, `options.view` and `options.stage` of a request choose among them ([roles](Security.md#roles)): another is
+`403`.
 
 The secret of the credential is never answered.
 

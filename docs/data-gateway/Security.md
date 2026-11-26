@@ -117,10 +117,73 @@ orm:
   tells an agent and `/whoami` (`view`).
 - **A `view` or a `context` sent by a client in `options` is dropped**, by every transport: a client can't skip what
   its view hides nor read the rows of another tenant.
-- **Never guessed:** a token whose roles give two views is `403`; a view the schema doesn't have is warned about when
-  the schema loads and its requests are `403`. An entity the view excludes is `403 ViewError`.
+- **Chosen among those of its roles** (since 4.4.0, [below](#roles)): the client may ask for one of them in
+  `options.view`; another is `403`. Before 4.4.0 the client never chose, and a token whose roles gave two views was
+  `403`. A view the schema doesn't have is warned about when the schema loads and its requests are `403`. An entity
+  the view excludes is `403 ViewError`.
 - The commands of stage (`import`, `export`, `push`…) see the whole schema: a credential with a view and `stageImport`
   or `ddl` is warned about when the configuration is read.
+
+## Roles: where they work and what they may do {#roles}
+
+**Since data-gateway 4.4.0.** A role says **where** it may work, the views and the stages of λORM it may use, and
+**what** it may do there, its permissions and their limits. The tokens name their roles by their claim, the keys by
+`roles`:
+
+```yaml
+authorization:
+  roles:
+    support:
+      views: [support]                 # the first, the one of who doesn't choose; none, the one of the schema
+      permissions: [read]
+    analyst:
+      views: [analytics, support]
+      stages: [default, reporting]     # none, the one of the schema
+      permissions: [read]
+      maxRows: 5000                    # options.maxRows: the client may ask for fewer, never more
+    backend:
+      permissions: [read, write]
+    operator:
+      stages: [default, staging]
+      permissions: [read, ddl, destructive]
+    admin:
+      permissions: [read, schemaRead, roles]
+      locked: true                     # not extended from the administration
+  # stages: open                       # a stage no role names may be chosen, as before 4.4.0 (for one version)
+authentication:
+  methods:
+    - adapter: jwt
+      issuer: https://auth.example.com/realms/shop
+      principal:
+        permissions: { claim: realm_access.roles }    # the names of the claim are those of authorization.roles
+    - adapter: local
+      type: apikey
+      keys:
+        - { name: billing, value: $BILLING_KEY, roles: [backend] }
+orm:
+  schemas:
+    - path: shop
+      view: public                     # the view of the schema
+      stage: default                   # the stage of the schema
+      roles:                           # in this schema, what the roles add
+        support: { views: [support, public] }
+```
+
+- **The client chooses only among them:** `options.view` and `options.stage` of any request, by every transport; one
+  its roles don't allow is `403`. Without choosing, the first of its roles; if its roles disagree, the one of the
+  schema when they allow it, else `403` asking to choose. An agent by MCP doesn't choose: the defaults of its roles.
+- **The permissions of the roles that allow what was chosen,** not the sum of all of them: with `support` (reads, in
+  the view `support`) and `backend` (writes, in the view of the schema), a request in `support` only reads. The
+  commands of a stage (`push`, `migrate`, `seed`, `export`, `import`…) only in the stages of their role; the permissions
+  of the administration, whatever was chosen. `scope: any` in a role keeps its permissions whatever was chosen.
+- **`options.maxRows`** only lower than the role's; **`allowDestructive`** is no longer an option of the client: a push
+  or a migration that loses data needs the permission `destructive` besides `ddl`.
+- **`GET /whoami`** says the view and the stage of who calls without choosing, every one it may choose and its roles.
+- **The roles of a schema** (`orm.schemas[].roles`) and those [kept in the state of the gateway](Admin.md#since-4-4-0)
+  extend the ones of `authorization.roles`: more views, stages or permissions, never less. A role of the state the YAML
+  doesn't have is a new one.
+- What was there before still works: `roles` inside a method `jwt` and `view` (one) in a role or a key are read as
+  roles; a key with its own `permissions` and `view` is a role of its own.
 
 ## Permissions
 
@@ -133,6 +196,8 @@ orm:
 | `stageImport` | importing a stage |
 | `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | the [administration](Admin.md#turning-it-on): never given by default |
 | `approve` | (4.3.0) approve or reject the [writes that wait](#approvals), never its own: never given by default |
+| `destructive` | (4.4.0) with `ddl`, a push or a migration that loses data (`allowDestructive`): never given by default |
+| `roles` | (4.4.0) see and change the [roles of the state of the gateway](Admin.md#since-4-4-0): never given by default |
 | `sessionAdmin` | list every [session](Transports.md#sessions) of `management` and revoke those of other credentials (without it, a credential sees and closes only its own): never given by default |
 
 - Authorization happens in the schema's worker, before running anything, the same for REST, MCP and WebSocket.
@@ -140,7 +205,8 @@ orm:
   sentence that is not a `select`, also inside an `include`, is refused.
 - Without the permission: `403` in REST, `status: 403` in WebSocket, `isError: true` in MCP, with the message
   `the credential "reader" does not have the "write" permission`.
-- `GET /whoami` answers the name and permissions of the credential (and its view, 4.1.0), never its secret.
+- `GET /whoami` answers the name and permissions of the credential (its view, 4.1.0; its stage, what it may choose and
+  its roles, 4.4.0), never its secret.
 
 ## Writes that wait for a person {#approvals}
 
