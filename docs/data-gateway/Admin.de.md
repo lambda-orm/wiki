@@ -180,6 +180,13 @@ Die Ereignisse der [Outbox](Changes.md#retries-and-dead-events) eines Schemas: `
 listet die, die zu oft fehlgeschlagen sind, mit ihrem Fehler (`schemaRead`), und `POST …/outbox/{id}/retry` setzt
 eines wieder auf ausstehend (`schemaRead` und `ddl`).
 
+## Seit 4.3.0 {#since-4-3-0}
+
+Die [Schreibvorgänge, die auf eine Person warten](Security.md#approvals): `GET /admin/workspaces/{route}/approvals?status=pending`
+listet sie, jeden mit dem Anfragenden, seiner Abfrage oder seinem Skript, seinen Daten und den Anweisungen, die er
+ausführen würde; `POST …/approvals/{id}/approve` führt ihn als der Anfragende aus, `…/reject { reason }` verwirft ihn.
+Beide brauchen `approve`, und nie durch den Anfragenden.
+
 ## Über MCP {#over-mcp}
 
 Der MCP-Server jedes Schemas ergänzt `admin_schema_get`, `admin_schema_validate` und `admin_stage_fetch` für

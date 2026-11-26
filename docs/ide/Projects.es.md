@@ -14,6 +14,16 @@ El **+** de **Workbench** o de una carpeta:
 | **Nuevo proyecto** (en **Workbench**) / **Nueva carpeta** (en una carpeta): los dos abren el diálogo **Nueva carpeta** | un nombre, una descripción y la carpeta en la que va |
 | **Nueva consulta** | abre una pestaña de consulta en esa carpeta; su primer **Guardar** pide su nombre |
 | **Nuevo diagrama** | un nombre, una descripción, la carpeta y las entidades ([Diagramas](Diagrams.md#a-new-diagram)) |
+| **Nuevo panel** (IDE 1.3.0) | nada: se abre al instante un panel llamado **Nuevo panel** (se renombra desde el explorador) |
+
+## Paneles {#panels}
+
+Desde el IDE 1.3.0. Un **panel** es una grilla de tarjetas, cada una una consulta y cómo se muestra su resultado: un
+**número** (su primer valor), una **tabla**, **barras** o **líneas** (una columna de etiquetas y las de los valores:
+ninguna, todas las numéricas) o una **torta**. **+ Tarjeta** agrega una y abre su formulario (**Título**, **Consulta**,
+**Datos**, **Se muestra como**, sus columnas y **Ancha**, dos columnas de la grilla); **✎** la vuelve a abrir.
+**Actualizar** las corre todas, **Actualizar solo** cada 30 s a 15 min; **Guardar** guarda el panel en el workbench
+(`<nombre>.panel.yaml`). Las tarjetas corren con la credencial de la connection: su vista y sus permisos.
 
 ## Guardar una consulta {#saving-a-query}
 

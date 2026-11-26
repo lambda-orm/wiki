@@ -270,10 +270,62 @@ cache:                      # também orm.schemas[].cache
   perguntou**: duas identidades com outra view ou outro tenant nunca compartilham um.
 - **Até quando:** uma escrita que passa pelo λORM apaga na hora todos os resultados que leem a sua entidade (também por
   um `include` ou uma relação); o que outra aplicação escreve é visto depois de `ttl`, no máximo.
-- Com várias réplicas, cada uma tem o seu cache e vê as próprias escritas (compartilhado com Redis, mais adiante); use
-  um `ttl` curto nesse caso.
+- Com várias réplicas, cada uma tem o seu cache; desde a 4.3.0, com [`cluster.valkey`](#cluster) uma escrita em
+  qualquer réplica apaga os resultados de todas; sem ele, cada uma vê as próprias escritas: use um `ttl` curto.
 - O `/metrics` tem `data_gateway_cache_requests{result="hit|miss"}`, `data_gateway_cache_invalidations` e
   `data_gateway_cache_entries`; o REST responde [`ETag` e `304`](Rest.md#execute).
+
+## Réplicas juntas (Valkey) {#cluster}
+
+**Desde o data-gateway 4.3.0.** Com um Valkey (ou um Redis: o mesmo protocolo) compartilhado, cada réplica avisa as
+outras das escritas feitas por ela: o [cache](#cache) de todas apaga o que elas mudam, as
+[assinaturas](Changes.md#subscriptions) de todas ficam sabendo, e o [outbox](Changes.md#the-outbox) é despachado por
+uma réplica só, a que tem um lease (outra o toma se ela sair).
+
+```yaml
+cluster:
+  valkey:
+    url: $VALKEY_URL           # valkey://[user:password@]host:6379[/db], valkeys:// (TLS); redis://, rediss://
+    prefix: data-gateway
+```
+
+Só viajam a entidade, a ação, as chaves e quantas linhas, nunca os dados. Se o Valkey cair, cada réplica segue com as
+próprias escritas (dito no log e em `data_gateway_cluster_connected`) e ninguém despacha o outbox até ele voltar.
+
+## Arquivos de propriedades {#files}
+
+**Desde o data-gateway 4.3.0.** Uma propriedade pode guardar a chave de um arquivo num armazenamento (S3 — AWS ou outro
+com seu `endpoint` — ou Azure Blob): o gateway assina URLs de vida curta para enviá-lo e lê-lo, e os bytes vão direto
+entre o cliente e o armazenamento, nunca pelo gateway. Global ou por schema:
+
+```yaml
+files:
+  storages:
+    images:
+      type: s3
+      bucket: shop-images
+      region: eu-west-1
+      # endpoint: https://minio.example.com
+      accessKeyId: $S3_KEY
+      secretAccessKey: $S3_SECRET
+      prefix: products/
+      maxBytes: 10MB
+      types: [ image/png, image/jpeg ]
+      expires: 5m
+    invoices:
+      type: azureBlob
+      account: shopfiles
+      container: invoices
+      accountKey: $AZURE_KEY
+  properties:
+    Products.photo: images
+    Orders.invoice: invoices
+```
+
+As rotas estão na [API REST](Rest.md#files). Uma URL de leitura só é assinada para uma chave que uma linha da
+[view](Security.md#views) de quem pede guarda. O S3 assina o tipo e o tamanho de um envio; o Azure não pode, então o
+gateway os confere ao assinar. O armazenamento deve permitir a origem da IDE (CORS) para que a
+[IDE](../ide/Entities.md#data) envie e leia.
 
 ## Referência {#reference}
 
@@ -309,6 +361,11 @@ cache:                      # também orm.schemas[].cache
 | `keys[].view`, `roles.<role>.view` | — | (4.1.0) a [view](Security.md#views) das requisições de uma chave ou de um papel |
 | `orm.schemas[].view` | `default` | (4.1.0) a view de quem chama sem uma |
 | `orm.schemas[].queries.<name>` | — | (4.1.0) `maxRows`, `timeout` de uma [consulta nomeada](Rest.md#named-queries) |
+| `cluster.valkey.url` / `prefix` | — / `data-gateway` | (4.3.0) o Valkey das [réplicas](#cluster) |
+| `files.storages.<nome>` | — | (4.3.0) `type: s3` (`bucket`, `region`, `endpoint`, `accessKeyId`, `secretAccessKey`) ou `type: azureBlob` (`account`, `container`, `accountKey`, `endpoint`); `prefix`, `maxBytes` (10MB), `types`, `expires` (5m) — [arquivos](#files) |
+| `files.properties.<Entidade.propriedade>` | — | (4.3.0) o armazenamento dos seus arquivos |
+| `mcp.approval` / `mcp.approvalExpires` | `none` / `1h` | (4.3.0) `writes`: toda escrita por MCP [aguarda uma pessoa](Security.md#approvals); também por schema |
+| `keys[].approval`, `roles.<papel>.approval` | — | (4.3.0) `writes`: as escritas dessa credencial ou papel aguardam, em todo transporte |
 | `cache.enabled` | `false` | (4.2.0) o [cache das leituras](#cache); também por schema |
 | `cache.ttl` / `maxEntries` / `maxRowBytes` | `60s` / `10000` / `1MB` | (4.2.0) |
 | `cache.entities.<entity>` | — | (4.2.0) `{ ttl }` ou `{ enabled: false }` para o que a lê |

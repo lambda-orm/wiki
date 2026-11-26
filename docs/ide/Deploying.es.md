@@ -48,6 +48,7 @@ cualquier host de su red. Lista el `management` de cada gateway, y su REST, WebS
 | Variable | Por defecto | Qué es |
 | --- | --- | --- |
 | `DATA_GATEWAY_IDE_TARGETS` | ninguno | los orígenes a los que puede llegar: `http://data-gateway:9090,http://data-gateway:8080` |
+| `DATA_GATEWAY_IDE_CONNECT_SRC` | ninguna | (1.3.0) otros orígenes a los que la página llega sola: los almacenamientos de los [archivos](../data-gateway/Configuration.md#files), que reciben y dan los bytes directo |
 | `PORT` | `8080` | el puerto del IDE en su contenedor |
 | `HOST` | `0.0.0.0` | la dirección en la que escucha |
 

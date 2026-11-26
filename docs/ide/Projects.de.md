@@ -14,6 +14,17 @@ Das **+** von **Workbench** oder eines Ordners:
 | **Neues Projekt** (in **Workbench**) / **Neuer Ordner** (in einem Ordner): beide öffnen den Dialog **Neuer Ordner** | einen Namen, eine Beschreibung und den Ordner, in den es kommt |
 | **Neue Abfrage** | öffnet einen Abfrage-Tab in diesem Ordner; ihr erstes **Speichern** fragt nach ihrem Namen |
 | **Neues Diagramm** | einen Namen, eine Beschreibung, den Ordner und die Entitäten ([Diagramme](Diagrams.md#a-new-diagram)) |
+| **Neues Panel** (IDE 1.3.0) | nichts: ein Panel namens **Neues Panel** öffnet sich sofort (im Explorer umbenannt) |
+
+## Panels {#panels}
+
+Seit IDE 1.3.0. Ein **Panel** ist ein Raster von Karten, jede eine Abfrage und wie ihr Ergebnis gezeigt wird: eine
+**Zahl** (ihr erster Wert), eine **Tabelle**, **Balken** oder **Linien** (eine Spalte mit Beschriftungen und die der
+Werte: keine, alle numerischen) oder ein **Kreis**. **+ Karte** fügt eine hinzu und öffnet ihr Formular (**Titel**,
+**Abfrage**, **Daten**, **Angezeigt als**, ihre Spalten und **Breit**, zwei Spalten des Rasters); **✎** öffnet sie
+wieder. **Aktualisieren** führt alle aus, **Automatisch aktualisieren** alle 30 s bis 15 min; **Speichern** legt das
+Panel im Workbench ab (`<name>.panel.yaml`). Die Karten laufen mit den Anmeldedaten der Connection: ihre View und ihre
+Berechtigungen.
 
 ## Eine Abfrage speichern {#saving-a-query}
 

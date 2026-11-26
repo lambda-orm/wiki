@@ -68,7 +68,9 @@ services:
 - **Replikas:** REST, WebSocket und zustandsloses MCP (`stateful: false`) benötigen keine Session-Affinität; das ältere
   HTTP+SSE von MCP schon. Seit 4.2.0 sehen der [Cache](Configuration.md#cache) und die
   [Abonnements](Changes.md#subscriptions) einer Replika die Schreibvorgänge, die über sie laufen, und nur eine Replika
-  soll die [Outbox](Changes.md#one-replica-dispatches) zustellen.
+  soll die [Outbox](Changes.md#one-replica-dispatches) zustellen; seit 4.3.0 sieht mit
+  [`cluster.valkey`](Configuration.md#cluster) jede Replika die Schreibvorgänge der anderen, und die Outbox hat einen
+  Lease (kein Flag).
 - **Hinter einem Ingress mit Pfad:** `transports.<t>.basePath: /data-gateway`.
 - **Herunterfahren:** `SIGTERM` nimmt keine Verbindungen mehr an, wartet auf laufende Operationen (bis zu
   `server.timeout`), schließt die Warteschlangen und die Pools und beendet sich. Setzen Sie
@@ -105,6 +107,8 @@ mit dem Label `worker` (`edge`, `schema:iot/v1`):
 | `data_gateway_cache_requests` | `schema`, `result` (`hit`, `miss`: der [Cache](Configuration.md#cache), 4.2.0) |
 | `data_gateway_cache_invalidations` / `data_gateway_cache_entries` | `schema` |
 | `data_gateway_outbox_events` | `schema`, `result` (`delivered`, `failed`: die [Outbox](Changes.md#the-outbox), 4.2.0) |
+| `data_gateway_cluster_connected` | `schema` (1: erreicht den [Valkey](Configuration.md#cluster) der Replikas, 4.3.0) |
+| `data_gateway_outbox_leader` | `schema` (1: diese Replika stellt die Outbox zu, 4.3.0) |
 | `http_request_duration_seconds` | `method`, `route`, `code`, `credential` (die HTTP-Anfragen) |
 
 sowie die üblichen Metriken von Node mit dem Präfix `node_` (Speicher, CPU, Garbage Collection, die Verzögerung des

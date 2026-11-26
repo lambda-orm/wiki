@@ -45,7 +45,8 @@ authentication:
 
 ## Tokens de um provedor de identidade (JWT / OIDC) {#jwt}
 
-Desde o data-gateway 4.1.0. Os usuários trazem o token que seu provedor de identidade lhes dá (Keycloak, Auth0, Entra
+Desde o data-gateway 4.1.0 (testado contra o Keycloak desde a 4.3.0: seus papéis, uma view por um claim e a rotação
+da sua chave, nos cinco transportes). Os usuários trazem o token que seu provedor de identidade lhes dá (Keycloak, Auth0, Entra
 ID, Cognito, Google…) e o gateway o verifica sem chamar o provedor a cada requisição:
 
 ```yaml
@@ -131,6 +132,7 @@ orm:
 | `queue` | `execute-queued` (e `write` se a consulta grava) |
 | `stageImport` | importar um stage |
 | `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | a [administração](Admin.md#turning-it-on): nunca dadas por padrão |
+| `approve` | (4.3.0) aprovar ou recusar as [escritas que aguardam](#approvals), nunca as próprias: nunca é dada por padrão |
 | `sessionAdmin` | listar todas as [sessões](Transports.md#sessions) de `management` e revogar as de outras credenciais (sem ela, uma credencial vê e fecha apenas as suas): nunca dada por padrão |
 
 - A autorização acontece no worker do esquema, antes de executar qualquer coisa, igual para REST, MCP e WebSocket.
@@ -139,6 +141,30 @@ orm:
 - Sem a permissão: `403` no REST, `status: 403` no WebSocket, `isError: true` no MCP, com a mensagem
   `the credential "reader" does not have the "write" permission`.
 - `GET /whoami` responde o nome e as permissões da credencial (e sua view, 4.1.0), nunca seu segredo.
+
+## Escritas que aguardam uma pessoa {#approvals}
+
+**Desde o data-gateway 4.3.0.** Um agente pode propor mudanças sem fazê-las sozinho: sua escrita aguarda até uma pessoa
+aprová-la.
+
+```yaml
+mcp:
+  approval: writes
+  approvalExpires: 1h
+authentication:
+  keys:
+    - { name: agent, value: $AGENT_KEY, permissions: [ read, write ], approval: writes }
+    - { name: ops,   value: $OPS_KEY,   permissions: [ read, approve ] }
+```
+
+- A escrita responde na hora `{ "approval": "…", "status": "pending", "expiresAt" }` (REST: `202`); nada mudou ainda.
+  Um script sempre aguarda (pode escrever); uma escrita enfileirada não pode aguardar (`403`).
+- Quem pediu vê o estado com a ferramenta MCP `approval_status`, `GET /{schema}/approvals/{id}` ou
+  `approvals.status`: `pending`, `done` (com o resultado), `failed`, `rejected` (com o motivo) ou `expired`.
+- Quem tem `approve` as lista com as sentenças que cada uma rodaria e as aprova ou recusa, na
+  [administração](Admin.md#since-4-3-0) ou na [IDE](../ide/Connections.md#approvals); **nunca a própria**. Aprovada,
+  roda uma vez como quem pediu (sua view, seu contexto) e fica auditada com `approvedBy`.
+- Ficam no SQLite do volume (`.data-gateway/state.sqlite`), compartilhado pelas réplicas que o montam.
 
 ## Auditoria {#audit}
 

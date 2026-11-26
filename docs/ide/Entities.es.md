@@ -89,6 +89,15 @@ IDE 1.2.0):
 Todo pasa por la gateway con la credencial de la connection: sus permisos, su
 [vista](../data-gateway/Security.md#views) y la auditoría. Sin `write`, la tabla es de solo lectura.
 
+Desde el IDE 1.3.0:
+
+- Los **puntos** (`point`) se muestran como longitud, latitud con **↗** a un mapa, y se editan en dos campos; los
+  **vectores** (`vector`) muestran sus primeros números y cuántos (`[0.12, -0.03, 0.5, …] (1536)`), y se escriben como
+  JSON en el formulario de la fila, controlados contra sus dimensiones.
+- Una propiedad que guarda [archivos](../data-gateway/Configuration.md#files) (data-gateway 4.3.0) muestra su archivo:
+  un clic lo abre (una URL de vida corta); con `write`, **⤒** sube otro, directo al almacenamiento, y **✕** lo quita de
+  la fila.
+
 ![Datos](images/ide-entity-data.png)
 
 ## Diagrama {#diagram}

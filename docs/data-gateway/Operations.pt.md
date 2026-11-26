@@ -67,7 +67,8 @@ services:
 - **Réplicas:** REST, WebSocket e MCP sem estado (`stateful: false`) não precisam de afinidade de sessão; o antigo HTTP+SSE do
   MCP precisa. Desde a 4.2.0, o [cache](Configuration.md#cache) e as [assinaturas](Changes.md#subscriptions) de uma
   réplica veem as escritas feitas por ela, e só uma réplica deve despachar o
-  [outbox](Changes.md#one-replica-dispatches).
+  [outbox](Changes.md#one-replica-dispatches); desde a 4.3.0, com [`cluster.valkey`](Configuration.md#cluster), cada
+  réplica vê as escritas das outras e o outbox tem um lease (sem flag).
 - **Atrás de um ingress com um caminho:** `transports.<t>.basePath: /data-gateway`.
 - **Encerramento:** `SIGTERM` deixa de aceitar conexões, aguarda as operações em andamento (até `server.timeout`),
   fecha as filas e os pools, e encerra. Defina `terminationGracePeriodSeconds` com pelo menos esse tempo.
@@ -103,6 +104,8 @@ cada uma com o rótulo `worker` (`edge`, `schema:iot/v1`):
 | `data_gateway_cache_requests` | `schema`, `result` (`hit`, `miss`: o [cache](Configuration.md#cache), 4.2.0) |
 | `data_gateway_cache_invalidations` / `data_gateway_cache_entries` | `schema` |
 | `data_gateway_outbox_events` | `schema`, `result` (`delivered`, `failed`: o [outbox](Changes.md#the-outbox), 4.2.0) |
+| `data_gateway_cluster_connected` | `schema` (1: alcança o [Valkey](Configuration.md#cluster) das réplicas, 4.3.0) |
+| `data_gateway_outbox_leader` | `schema` (1: esta réplica despacha o outbox, 4.3.0) |
 | `http_request_duration_seconds` | `method`, `route`, `code`, `credential` (as requisições HTTP) |
 
 e as métricas habituais do Node com o prefixo `node_` (memória, CPU, coleta de lixo, o atraso do event loop:

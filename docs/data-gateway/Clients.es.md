@@ -35,7 +35,8 @@ de REST y MCP y al abrir un WebSocket: el [JWT](Security.md#jwt) de un proveedor
 `gateway.queries()` lista las [consultas con nombre](Rest.md#named-queries) que la credencial puede usar, y
 `gateway.query(name, data)` ejecuta una, en todos los transportes. Desde 4.2.0, con una conexión `ws://`,
 `gateway.subscribe({ entity } | { query, data } | { name, data }, listener)` se entera de los
-[cambios de los datos](Changes.md#from-node).
+[cambios de los datos](Changes.md#from-node). Desde 4.3.0, `isApprovalPending(result)` dice si una escritura
+[espera a una persona](Security.md#approvals) y `gateway.approval(id)` dice su estado, en todo transporte.
 
 La credencial va en las opciones (`apiKey`, `token`, o cualquier `headers`) o en `DATA_GATEWAY_API_KEY` /
 `DATA_GATEWAY_TOKEN`, nunca en la URL (una credencial en ella es un error); `DATA_GATEWAY_URL` es la cadena de conexión

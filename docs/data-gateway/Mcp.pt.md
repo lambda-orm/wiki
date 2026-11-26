@@ -121,6 +121,10 @@ descrição dá os nomes das entidades e aponta para duas ferramentas, para que 
 
 ## O que um agente pode fazer {#what-an-agent-can-do}
 
+Desde a 4.3.0, as escritas de um agente podem [aguardar uma pessoa](Security.md#approvals) (`mcp.approval: writes`):
+a ferramenta responde na hora que a escrita está pendente, e `approval_status` diz depois se foi aprovada e o
+resultado.
+
 Não existe um modo somente leitura do transporte: o que um agente pode fazer é decidido pelas **permissões de sua credencial**. Um
 agente que apenas consulta recebe uma credencial com `[ read ]`: pode executar selects, mas não gravar, executar scripts, enfileirar nem
 importar, por nenhum transporte. Além disso: `schemas[].transports` para deixar um esquema fora do MCP, `mcp.tools.exclude`, as dicas

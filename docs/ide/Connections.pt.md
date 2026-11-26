@@ -17,10 +17,16 @@ O **+** ao lado de **Conexões**, no topo do explorador:
 | **Nome** | como a conexão é mostrada (`local`, `production`…) |
 | **Protocolo** | `REST · http` ou `REST · https` |
 | **Endereço do management** | `host:porta/caminho base` do `management` do gateway, **como o servidor da IDE o alcança**: `data-gateway:9090` para uma IDE web no mesmo compose, `localhost:9090` para o aplicativo de desktop na máquina do gateway |
-| **Autenticação** | **API key** (seu **Header**, por padrão `X-Api-Key`, e sua **Chave**), **Token Bearer (JWT)** (seu **Token**: uma chave do gateway ou o [token de um provedor de identidade](../data-gateway/Security.md#jwt); quando expira, a conexão avisa e pede um novo), **Basic (usuário e senha)** ou **Nenhuma** |
+| **Autenticação** | **API key** (seu **Header**, por padrão `X-Api-Key`, e sua **Chave**), **Token Bearer (JWT)** (seu **Token**: uma chave do gateway ou o [token de um provedor de identidade](../data-gateway/Security.md#jwt); quando expira, a conexão avisa e pede um novo), **Basic (usuário e senha)**, **OpenID Connect (entrar)** (IDE 1.3.0: seu **Emissor**, **Client ID** e **Scopes**; veja abaixo) ou **Nenhuma** |
 | **Lembrar a chave neste navegador** | guardada com a conexão; caso contrário, só naquela aba do navegador, e pedida de novo depois de fechá-la |
 | **Outras URLs dos seus transportes** (recolhido) | a **URL do REST**, a **URL do WebSocket** e a **URL do MCP**, só quando a IDE não os alcança nas portas que o gateway informa (um proxy na frente, outra rede) |
 | **Observabilidade** (recolhido) | a **URL do Grafana** e o seu **Datasource do Tempo (uid)** (`tempo` por padrão): uma entidade então mostra um link para os seus rastreamentos ([Entidades](Entities.md)) |
+
+**OpenID Connect (entrar)**: a página da connection tem **Entrar**, que abre o login do provedor de identidade (no
+navegador, uma janela própria; no app desktop, o navegador do sistema, que volta ao app); o token fica nessa aba e é
+renovado antes de vencer; **Sair** encerra também a sessão do provedor. O provedor precisa de um cliente público com
+PKCE cujas redirect URIs aceitem a IDE (`…/oidc-callback.html` da IDE, e `http://127.0.0.1:*` para o app desktop); o
+servidor da IDE o alcança, então sua origem vai em `DATA_GATEWAY_IDE_TARGETS` ([Implantação](Deploying.md)).
 
 **Mostrar** mostra a chave digitada. **Testar** abre uma sessão e a fecha em seguida: `Conectado como admin ·
 data-gateway 4.0.0`, ou por que não conseguiu. **Conectar** adiciona a conexão e abre a sua página.
@@ -97,6 +103,14 @@ O que a credencial pode fazer, em dois grupos, **Dados** e **Administração**, 
 
 As permissões são dadas a cada credencial na configuração do gateway
 ([Segurança](../data-gateway/Security.md)).
+
+### Escritas que aguardam {#approvals}
+
+Desde a IDE 1.3.0, com uma credencial que tem `approve`: as
+[escritas de agentes que aguardam uma pessoa](../data-gateway/Security.md#approvals) em todos os schemas do gateway,
+cada uma com quem pediu e quando, sua consulta (ou script), **O que rodaria** (suas sentenças) e **Seus dados**.
+**Aprovar** a roda como quem pediu; **Recusar** pede um motivo (opcional). Quem pediu uma escrita não pode aprová-la. A
+lista é relida a cada 15 segundos.
 
 ### Sessões {#sessions}
 
