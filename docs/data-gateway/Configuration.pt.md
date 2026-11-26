@@ -292,6 +292,33 @@ cluster:
 Só viajam a entidade, a ação, as chaves e quantas linhas, nunca os dados. Se o Valkey cair, cada réplica segue com as
 próprias escritas (dito no log e em `data_gateway_cluster_connected`) e ninguém despacha o outbox até ele voltar.
 
+## O estado do gateway {#state}
+
+**Desde data-gateway 4.4.0.** O que o gateway guarda de si mesmo (as sessões do `management`, o estado da UI de cada
+credencial, as [escritas que aguardam](Security.md#approvals), os [papéis](Security.md#roles) mudados pela
+administração) vive em um só lugar:
+
+```yaml
+state:
+  source:
+    dialect: SQLite                       # uma instância: um arquivo
+    connection: /data/.data-gateway/state.sqlite
+  # várias réplicas: um banco de dados
+  # source:
+  #   dialect: PostgreSQL                 # também MySQL, MariaDB, SqlServer, Oracle
+  #   connection: $DATA_GATEWAY_STATE_URL # postgres://usuario:senha@host:5432/gateway
+  refresh: 30s                            # a cada quanto uma réplica olha se os papéis mudaram
+  required: false                         # true: sem seu banco o gateway não inicia
+```
+
+- **Sem `state`,** um SQLite do volume (`<orm.workspacePath>/.data-gateway/state.sqlite`), como antes da 4.4.0; sem
+  `orm.workspacePath`, memória.
+- **Um banco de dados** é usado através do λORM: suas tabelas (`dg_sessions`, `dg_approvals`, `dg_roles`…) são criadas
+  quando o gateway inicia, e uma versão nova adiciona o que precisa (nunca apaga).
+- **Várias réplicas** (`cluster.valkey`) com o estado em SQLite são um erro: perderiam dados.
+- **Sem seu banco ao iniciar,** o gateway inicia só com os papéis da configuração (nunca uma permissão a mais) e tenta
+  de novo; com `required: true`, não inicia.
+
 ## Arquivos de propriedades {#files}
 
 **Desde o data-gateway 4.3.0.** Uma propriedade pode guardar a chave de um arquivo num armazenamento (S3 — AWS ou outro
@@ -364,6 +391,11 @@ gateway os confere ao assinar. O armazenamento deve permitir a origem da IDE (CO
 | `cluster.valkey.url` / `prefix` | — / `data-gateway` | (4.3.0) o Valkey das [réplicas](#cluster) |
 | `files.storages.<nome>` | — | (4.3.0) `type: s3` (`bucket`, `region`, `endpoint`, `accessKeyId`, `secretAccessKey`) ou `type: azureBlob` (`account`, `container`, `accountKey`, `endpoint`); `prefix`, `maxBytes` (10MB), `types`, `expires` (5m) — [arquivos](#files) |
 | `files.properties.<Entidade.propriedade>` | — | (4.3.0) o armazenamento dos seus arquivos |
+| `authorization.roles.<nome>` | — | (4.4.0) `permissions`, `views`, `stages`, `maxRows`, `approval`, `scope: any`, `locked` — [papéis](Security.md#roles) |
+| `authorization.stages` | `restricted` | (4.4.0) `open`: pode-se escolher um stage que nenhum papel nomeia, como antes da 4.4.0 |
+| `orm.schemas[].roles` / `stage` | — | (4.4.0) o que os papéis somam no esquema; o stage de quem não escolhe |
+| `state.source` | o SQLite do volume | (4.4.0) `dialect` (`SQLite`, `PostgreSQL`, `MySQL`, `MariaDB`, `SqlServer`, `Oracle`) e `connection` — [o estado](#state) |
+| `state.refresh` / `required` | `30s` / `false` | (4.4.0) a cada quanto os papéis são lidos de novo; se o gateway inicia sem seu banco |
 | `mcp.approval` / `mcp.approvalExpires` | `none` / `1h` | (4.3.0) `writes`: toda escrita por MCP [aguarda uma pessoa](Security.md#approvals); também por schema |
 | `keys[].approval`, `roles.<papel>.approval` | — | (4.3.0) `writes`: as escritas dessa credencial ou papel aguardam, em todo transporte |
 | `cache.enabled` | `false` | (4.2.0) o [cache das leituras](#cache); também por schema |

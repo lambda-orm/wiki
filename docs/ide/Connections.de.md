@@ -101,8 +101,16 @@ Was die Zugangsdaten dürfen, in zwei Gruppen, **Daten** und **Verwaltung**, jed
 | `ddl` | die Struktur der Datenbanken eines Stage ändern (push, drop) |
 | `build` | den Code der Domäne (Modell und Repositories) in `src/` des Workspace erzeugen |
 | `sessionAdmin` | alle Sitzungen von `management` sehen und die anderer Zugangsdaten widerrufen |
+| `approve` | die Schreibvorgänge, die auf eine Person warten, genehmigen oder ablehnen |
+| `destructive` | mit `ddl` ein Push oder eine Migration, die Daten verliert (data-gateway 4.4) |
+| `roles` | die im Zustand des Gateways gespeicherten Rollen sehen und ändern (data-gateway 4.4) |
 
 ![Rollen](images/ide-connection-roles.png)
+
+**Rollen des Gateways** (mit `roles`, data-gateway 4.4, IDE 1.4.0): darunter die [Rollen](../data-gateway/Security.md#roles)
+des Gateways, die seiner Konfiguration (nur lesen) und die seines Zustands. **+ Rolle hinzufügen**; eine der
+Konfiguration **Erweitern** mit mehr Berechtigungen, Views oder Stages, in allen Schemas oder in einem; eine des
+Zustands **Bearbeiten** oder **Entfernen**, mit einem Grund. **Ihre Änderungen** sagt, wer was wann geändert hat.
 
 Die Berechtigungen werden jeden Zugangsdaten in der Konfiguration des Gateways gegeben
 ([Sicherheit](../data-gateway/Security.md)).

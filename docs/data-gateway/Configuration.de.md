@@ -297,6 +297,33 @@ Nur Entität, Aktion, Schlüssel und Zeilenzahl reisen, nie die Daten. Fällt de
 eigenen Schreibvorgängen weiter (im Log und in `data_gateway_cluster_connected` gemeldet), und niemand stellt die Outbox
 zu, bis er zurück ist.
 
+## Der Zustand des Gateways {#state}
+
+**Seit data-gateway 4.4.0.** Was das Gateway von sich selbst speichert (die Sitzungen von `management`, den Zustand der
+UI jeder Zugangsdaten, die [wartenden Schreibvorgänge](Security.md#approvals), die über die Administration geänderten
+[Rollen](Security.md#roles)), liegt an einem Ort:
+
+```yaml
+state:
+  source:
+    dialect: SQLite                       # eine Instanz: eine Datei
+    connection: /data/.data-gateway/state.sqlite
+  # mehrere Replikas: eine Datenbank
+  # source:
+  #   dialect: PostgreSQL                 # auch MySQL, MariaDB, SqlServer, Oracle
+  #   connection: $DATA_GATEWAY_STATE_URL # postgres://benutzer:passwort@host:5432/gateway
+  refresh: 30s                            # wie oft eine Replika prüft, ob sich die Rollen geändert haben
+  required: false                         # true: ohne seine Datenbank startet das Gateway nicht
+```
+
+- **Ohne `state`** ein SQLite des Volumes (`<orm.workspacePath>/.data-gateway/state.sqlite`), wie vor 4.4.0; ohne
+  `orm.workspacePath` der Speicher.
+- **Eine Datenbank** wird über λORM genutzt: Ihre Tabellen (`dg_sessions`, `dg_approvals`, `dg_roles`…) werden beim
+  Start des Gateways angelegt, und eine neue Version fügt hinzu, was sie braucht (sie löscht nie).
+- **Mehrere Replikas** (`cluster.valkey`) mit dem Zustand in SQLite sind ein Fehler: Sie würden Daten verlieren.
+- **Ohne seine Datenbank beim Start** startet das Gateway nur mit den Rollen der Konfiguration (nie eine Berechtigung
+  mehr) und versucht es erneut; mit `required: true` startet es nicht.
+
 ## Dateien von Eigenschaften {#files}
 
 **Seit data-gateway 4.3.0.** Eine Eigenschaft kann den Schlüssel einer Datei in einem Speicher halten (S3 — AWS oder
@@ -369,6 +396,11 @@ daher prüft das Gateway sie beim Signieren. Der Speicher muss den Origin der ID
 | `cluster.valkey.url` / `prefix` | — / `data-gateway` | (4.3.0) der Valkey der [Replikas](#cluster) |
 | `files.storages.<name>` | — | (4.3.0) `type: s3` (`bucket`, `region`, `endpoint`, `accessKeyId`, `secretAccessKey`) oder `type: azureBlob` (`account`, `container`, `accountKey`, `endpoint`); `prefix`, `maxBytes` (10MB), `types`, `expires` (5m) — [Dateien](#files) |
 | `files.properties.<Entität.Eigenschaft>` | — | (4.3.0) der Speicher ihrer Dateien |
+| `authorization.roles.<name>` | — | (4.4.0) `permissions`, `views`, `stages`, `maxRows`, `approval`, `scope: any`, `locked` — [Rollen](Security.md#roles) |
+| `authorization.stages` | `restricted` | (4.4.0) `open`: eine Stage, die keine Rolle nennt, darf gewählt werden, wie vor 4.4.0 |
+| `orm.schemas[].roles` / `stage` | — | (4.4.0) was die Rollen im Schema hinzufügen; die Stage dessen, der nicht wählt |
+| `state.source` | das SQLite des Volumes | (4.4.0) `dialect` (`SQLite`, `PostgreSQL`, `MySQL`, `MariaDB`, `SqlServer`, `Oracle`) und `connection` — [der Zustand](#state) |
+| `state.refresh` / `required` | `30s` / `false` | (4.4.0) wie oft die Rollen neu gelesen werden; ob das Gateway ohne seine Datenbank startet |
 | `mcp.approval` / `mcp.approvalExpires` | `none` / `1h` | (4.3.0) `writes`: jeder Schreibvorgang über MCP [wartet auf eine Person](Security.md#approvals); auch pro Schema |
 | `keys[].approval`, `roles.<rolle>.approval` | — | (4.3.0) `writes`: die Schreibvorgänge dieser Anmeldedaten oder Rolle warten, auf jedem Transport |
 | `cache.enabled` | `false` | (4.2.0) der [Cache der Lesevorgänge](#cache); auch pro Schema |

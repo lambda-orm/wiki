@@ -67,15 +67,19 @@ Sob a rota de cada esquema (`/iot/v1/…`), estes respondem apenas sobre aquele 
 | `GET` | `/{schema}/health` | `{ "message": "OK", "time", "uptime" }`; `503` se o esquema não está `ready` |
 | `GET` | `/{schema}/metrics` | as métricas desse esquema |
 | `GET` | `/{schema}/version` | `{ "version" }`, a versão do gateway (a versão do esquema é `GET /{schema}/schema/version`) |
-| `GET` | `/{schema}/whoami` | o nome e as permissões da credencial com a autenticação desse esquema, e se ele tem scripts habilitados (precisa da credencial) |
+| `GET` | `/{schema}/whoami` | o nome e as permissões da credencial com a autenticação desse esquema, e se ele tem scripts habilitados (precisa da credencial); desde a 4.4.0 seus papéis, sua view e seu stage, e todas as views e stages que pode escolher |
 
 ```sh
 curl http://localhost:8080/iot/v1/whoami -H "X-Api-Key: $KEY"
 ```
 
 ```json
-{ "name": "reader", "permissions": ["read"], "schema": "iot/v1", "scripts": true }
+{ "name": "reader", "permissions": ["read"], "roles": ["reader"], "view": "default", "stage": "default",
+  "views": ["default", "support"], "stages": ["default"], "schema": "iot/v1", "scripts": true }
 ```
+
+Desde a 4.4.0, `options.view` e `options.stage` de um pedido escolhem entre eles ([papéis](Security.md#roles)): outro é
+`403`.
 
 O segredo da credencial nunca é retornado.
 

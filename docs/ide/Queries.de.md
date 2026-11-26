@@ -71,8 +71,8 @@ sales`), und **bearbeiten**, das sie als **Formular** oder als **JSON** öffnet;
 
 | Option | Was sie ist |
 | --- | --- |
-| **Stage** | wo sie läuft: ein Stage des Schemas, zur Auswahl; leer, sein Standard-Stage |
-| **View** | eine View des Schemas, zur Auswahl, die begrenzt, was gelesen werden kann |
+| **Stage** | wo sie läuft: ein Stage des Schemas, zur Auswahl (mit data-gateway 4.4 die, die die Rollen der Zugangsdaten erlauben); leer, sein Standard-Stage |
+| **View** | mit data-gateway 4.4, wenn die Rollen der Zugangsdaten mehr als eine ergeben: welche davon; leer, die ihrer Rollen |
 | **Blockgröße** | Zeilen pro Block einer Massenoperation |
 | **so viel wie möglich versuchen** | weitermachen, wenn eine Anweisung fehlschlägt: (Standard), ja oder nein |
 | **Zeitlimit (ms)** | eines Skripts: es stoppt nach dieser Zeit (Skriptmodus) |
