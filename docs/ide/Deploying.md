@@ -47,6 +47,7 @@ locally). Without it, the IDE reaches none and says so: an open proxy would reac
 | Variable | Default | What it is |
 | --- | --- | --- |
 | `DATA_GATEWAY_IDE_TARGETS` | none | the origins it may reach: `http://data-gateway:9090,http://data-gateway:8080` |
+| `DATA_GATEWAY_IDE_CONNECT_SRC` | none | (1.3.0) other origins the page may reach itself: the storages of the [files](../data-gateway/Configuration.md#files), which take and give the bytes straight |
 | `PORT` | `8080` | the port of the IDE in its container |
 | `HOST` | `0.0.0.0` | the address it listens on |
 

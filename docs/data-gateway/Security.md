@@ -45,7 +45,8 @@ authentication:
 
 ## Tokens of an identity provider (JWT / OIDC) {#jwt}
 
-Since data-gateway 4.1.0. The users bring the token their identity provider gives them (Keycloak, Auth0, Entra ID,
+Since data-gateway 4.1.0 (tested against Keycloak since 4.3.0: its roles, a view by a claim and the rotation of its
+key, on the five transports). The users bring the token their identity provider gives them (Keycloak, Auth0, Entra ID,
 Cognito, Google…) and the gateway checks it without calling the provider on every request:
 
 ```yaml
@@ -131,6 +132,7 @@ orm:
 | `queue` | `execute-queued` (and `write` if the query writes) |
 | `stageImport` | importing a stage |
 | `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | the [administration](Admin.md#turning-it-on): never given by default |
+| `approve` | (4.3.0) approve or reject the [writes that wait](#approvals), never its own: never given by default |
 | `sessionAdmin` | list every [session](Transports.md#sessions) of `management` and revoke those of other credentials (without it, a credential sees and closes only its own): never given by default |
 
 - Authorization happens in the schema's worker, before running anything, the same for REST, MCP and WebSocket.
@@ -139,6 +141,30 @@ orm:
 - Without the permission: `403` in REST, `status: 403` in WebSocket, `isError: true` in MCP, with the message
   `the credential "reader" does not have the "write" permission`.
 - `GET /whoami` answers the name and permissions of the credential (and its view, 4.1.0), never its secret.
+
+## Writes that wait for a person {#approvals}
+
+**Since data-gateway 4.3.0.** An agent can propose changes without making them alone: its write waits until a person
+approves it.
+
+```yaml
+mcp:
+  approval: writes           # every write by MCP waits (also per schema)
+  approvalExpires: 1h        # one nobody decides expires
+authentication:
+  keys:
+    - { name: agent, value: $AGENT_KEY, permissions: [ read, write ], approval: writes }   # on every transport
+    - { name: ops,   value: $OPS_KEY,   permissions: [ read, approve ] }
+```
+
+- The write answers at once `{ "approval": "…", "status": "pending", "expiresAt" }` (REST: `202`); nothing changed yet.
+  A script always waits (it may write); a queued write can't wait (`403`).
+- Who asked sees its state with the MCP tool `approval_status`, `GET /{schema}/approvals/{id}` or `approvals.status`:
+  `pending`, `done` (with its result), `failed`, `rejected` (with the reason) or `expired`.
+- Who has `approve` lists them with the sentences each would run and approves or rejects them, in the
+  [administration](Admin.md#since-4-3-0) or the [IDE](../ide/Connections.md#approvals); **never its own**. Approved,
+  it runs once as who asked (its view, its context) and is audited with `approvedBy`.
+- They live in the SQLite of the volume (`.data-gateway/state.sqlite`), shared by the replicas that mount it.
 
 ## Audit
 

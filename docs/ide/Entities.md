@@ -88,6 +88,15 @@ With a credential that has `write` and an entity with a primary key, the table i
 Everything goes through the gateway with the credential of the connection: its permissions, its
 [view](../data-gateway/Security.md#views) and the audit. Without `write`, the table is read only.
 
+Since IDE 1.3.0:
+
+- **Points** (`point`) show as longitude, latitude with **↗** to a map, and are edited in two fields; **vectors**
+  (`vector`) show their first numbers and how many (`[0.12, -0.03, 0.5, …] (1536)`), and are written as JSON in the form
+  of a row, checked against their dimensions.
+- A property that keeps [files](../data-gateway/Configuration.md#files) (data-gateway 4.3.0) shows its file: a click
+  opens it (a URL of short life); with `write`, **⤒** uploads another, straight to the storage, and **✕** removes it
+  from the row.
+
 ![Data](images/ide-entity-data.png)
 
 ## Diagram {#diagram}

@@ -269,10 +269,63 @@ cache:                      # also orm.schemas[].cache
   identities with another view or another tenant never share one.
 - **Until when:** a write that goes through λORM drops at once every result that reads its entity (also through an
   `include` or a relation); what another application writes is seen after `ttl`, at most.
-- With several replicas each one has its own cache and sees its own writes (shared with Redis, later); use a short
-  `ttl` there.
+- With several replicas each one has its own cache; since 4.3.0, with [`cluster.valkey`](#cluster) a write through
+  any replica drops the results of every replica; without it, each sees its own writes: use a short `ttl` there.
 - `/metrics` has `data_gateway_cache_requests{result="hit|miss"}`, `data_gateway_cache_invalidations` and
   `data_gateway_cache_entries`; REST answers [`ETag` and `304`](Rest.md#execute).
+
+## Replicas together (Valkey) {#cluster}
+
+**Since data-gateway 4.3.0.** With a Valkey (or a Redis: the same protocol) shared by the replicas, each one tells the
+others of the writes made through it: the [cache](#cache) of every replica drops what they change, the
+[subscriptions](Changes.md#subscriptions) of every replica hear them, and the [outbox](Changes.md#the-outbox) is
+dispatched by one replica, which holds a lease (another takes it when it goes).
+
+```yaml
+cluster:
+  valkey:
+    url: $VALKEY_URL           # valkey://[user:password@]host:6379[/db], valkeys:// (TLS); redis:// and rediss:// too
+    prefix: data-gateway       # its channels and keys start with it
+```
+
+Only the entity, the action, the keys and how many rows travel, never the data. If the Valkey falls, each replica goes
+on with its own writes (said in the log and in `data_gateway_cluster_connected`) and nobody dispatches the outbox until
+it is back.
+
+## Files of properties {#files}
+
+**Since data-gateway 4.3.0.** A property can keep the key of a file in a storage (S3 — AWS, or another with its
+`endpoint` — or Azure Blob): the gateway signs URLs of short life to upload it and to read it, and the bytes go
+straight between the client and the storage, never through the gateway. Globally or per schema:
+
+```yaml
+files:
+  storages:
+    images:
+      type: s3
+      bucket: shop-images
+      region: eu-west-1
+      # endpoint: https://minio.example.com       # another S3: the bucket in the path
+      accessKeyId: $S3_KEY
+      secretAccessKey: $S3_SECRET
+      prefix: products/                         # the keys it makes go under it
+      maxBytes: 10MB
+      types: [ image/png, image/jpeg ]
+      expires: 5m                               # the life of a URL
+    invoices:
+      type: azureBlob
+      account: shopfiles
+      container: invoices
+      accountKey: $AZURE_KEY
+  properties:
+    Products.photo: images
+    Orders.invoice: invoices
+```
+
+The routes are in the [REST API](Rest.md#files). A URL to read is signed only for a key that a row of the
+[view](Security.md#views) of the caller keeps. S3 signs the type and the size of an upload; Azure can't, so the gateway
+checks them when it signs. The storage must allow the origin of the IDE (CORS) for the [IDE](../ide/Entities.md#data)
+to upload and read.
 
 ## Reference
 
@@ -308,6 +361,11 @@ cache:                      # also orm.schemas[].cache
 | `keys[].view`, `roles.<role>.view` | — | (4.1.0) the [view](Security.md#views) of the requests of a key or a role |
 | `orm.schemas[].view` | `default` | (4.1.0) the view of a caller without one |
 | `orm.schemas[].queries.<name>` | — | (4.1.0) `maxRows`, `timeout` of a [named query](Rest.md#named-queries) |
+| `cluster.valkey.url` / `prefix` | — / `data-gateway` | (4.3.0) the Valkey of the [replicas](#cluster) |
+| `files.storages.<name>` | — | (4.3.0) `type: s3` (`bucket`, `region`, `endpoint`, `accessKeyId`, `secretAccessKey`) or `type: azureBlob` (`account`, `container`, `accountKey`, `endpoint`); `prefix`, `maxBytes` (10MB), `types`, `expires` (5m) — [files](#files) |
+| `files.properties.<Entity.property>` | — | (4.3.0) the storage of its files |
+| `mcp.approval` / `mcp.approvalExpires` | `none` / `1h` | (4.3.0) `writes`: every write by MCP [waits for a person](Security.md#approvals); also per schema |
+| `keys[].approval`, `roles.<role>.approval` | — | (4.3.0) `writes`: the writes of that credential or role wait, on every transport |
 | `cache.enabled` | `false` | (4.2.0) the [cache of the reads](#cache); also per schema |
 | `cache.ttl` / `maxEntries` / `maxRowBytes` | `60s` / `10000` / `1MB` | (4.2.0) |
 | `cache.entities.<entity>` | — | (4.2.0) `{ ttl }` or `{ enabled: false }` for what reads it |

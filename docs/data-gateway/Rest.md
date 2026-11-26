@@ -108,6 +108,8 @@ curl -X POST "http://localhost:8080/execute?format=beautiful" -H "X-Api-Key: $KE
 - **Since 4.2.0**, the answer of a read has an `ETag` (and `Cache-Control: private, no-cache`); a request with the
   same `If-None-Match` is answered `304` without a body. Also `POST /queries/{name}`. With the
   [cache](Configuration.md#cache), a repeated read doesn't reach the database.
+- **Since 4.3.0**, a write that [waits for a person](Security.md#approvals) answers `202` with its approval;
+  `GET /{schema}/approvals/{id}` tells its state.
 - With only the `read` permission, a query that writes (`insert`, `update`, `delete`, `upsert`, `merge`, `bulk*`) is
   refused with `403` before reaching the database.
 
@@ -265,6 +267,28 @@ curl -X POST http://localhost:8080/queries/customersOf -H "X-Api-Key: $KEY" -H "
 - Over [WebSocket](WebSocket.md#methods), `queries.list` and `queries.execute`; over [MCP](Mcp.md#named-queries), a
   tool `query_<name>` each.
 
+### Files {#files}
+
+Since data-gateway 4.3.0. The properties that keep [files](Configuration.md#files): URLs signed for the storage, never
+the bytes.
+
+```sh
+curl http://localhost:8080/files -H "X-Api-Key: $KEY"
+# [{ "entity": "Products", "property": "photo", "storage": "images", "maxBytes": 10485760, "types": ["image/png"] }]
+curl -X POST http://localhost:8080/files/Products/photo/upload -H "X-Api-Key: $KEY" -H "Content-Type: application/json" \
+  -d '{ "name": "chai.png", "type": "image/png", "size": 48213 }'
+# { "key": "products/Products/photo/0b1e….png", "url": "https://…", "method": "PUT", "headers": { … }, "expiresAt": "…" }
+curl -X PUT "<url>" -H "Content-Type: image/png" --data-binary @chai.png      # straight to the storage
+# then the key in the row: Products.update(p => ({ photo: key })).filter(p => p.id == 1)
+curl "http://localhost:8080/files/Products/photo/url?key=products/Products/photo/0b1e….png" -H "X-Api-Key: $KEY"
+# { "url": "https://…", "expiresAt": "…" }
+```
+
+- Upload needs `write` and stays within the `types` and `maxBytes` of the storage; the key is made by the gateway (nobody
+  overwrites the file of another).
+- A URL to read is signed only for a key that a row of the [view](Security.md#views) of the caller keeps; a property its
+  view excludes is `403`.
+
 ## Schema methods
 
 The model of the schema. They need `read`. The connections of the sources are never answered.
@@ -368,6 +392,8 @@ curl -X POST http://localhost:8080/stages/default/import -H "X-Api-Key: $BACKEND
 | constraints | `POST /constraints` | `orm_constraints` | `query.constraints` | `read` |
 | [named queries](#named-queries) (4.1.0) | `GET /queries`, `POST /queries/{name}` | `query_<name>` | `queries.list`, `queries.execute` | `read` / `write` |
 | [subscribe](Changes.md#subscriptions) (4.2.0) | `GET /subscribe` (SSE) | — | `subscribe.entity`, `subscribe.query`, `unsubscribe` | `read` |
+| [an approval](Security.md#approvals) (4.3.0) | `GET /approvals/{id}` | `approval_status` | `approvals.status` | `read` / `write` |
+| [files](#files) (4.3.0) | `GET /files`, `POST /files/{Entity}/{property}/upload`, `GET /files/{Entity}/{property}/url` | — | `files.list`, `files.upload`, `files.url` | `read` / `write` |
 | schema | `GET /schema` | `schema_get` | `schema.schema` | `read` |
 | schema version | `GET /schema/version` | `schema_version` | `schema.version` | `read` |
 | domain | `GET /domain` | `schema_domain` | `schema.domain` | `read` |

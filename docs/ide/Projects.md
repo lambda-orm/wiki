@@ -14,6 +14,16 @@ The **+** of **Workbench** or of a folder:
 | **New project** (in **Workbench**) / **New folder** (in a folder): both open the **New folder** dialog | a name, a description and the folder it goes in |
 | **New query** | opens a query tab in that folder; its first **Save** asks for its name |
 | **New diagram** | a name, a description, the folder and the entities ([Diagrams](Diagrams.md#a-new-diagram)) |
+| **New panel** (IDE 1.3.0) | nothing: a panel named **New panel** opens at once (renamed from the explorer) |
+
+## Panels {#panels}
+
+Since IDE 1.3.0. A **panel** is a grid of cards, each a query and how its result is shown: a **number** (its first
+value), a **table**, **bars** or **lines** (a column of labels and the columns of the values: none, every numeric one)
+or a **pie**. **+ Card** adds one and opens its form (**Title**, **Query**, **Data**, **Shown as**, its columns and
+**Wide**, two columns of the grid); **✎** opens it again. **Refresh** runs them all, **Auto-refresh** every 30 s to
+15 min; **Save** keeps the panel in the workbench (`<name>.panel.yaml`). The cards run with the credential of the
+connection: its view and its permissions.
 
 ## Saving a query
 

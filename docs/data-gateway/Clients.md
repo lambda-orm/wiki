@@ -32,7 +32,8 @@ Since 4.1.0, `token` can be a function that gives it (`token: () => idp.accessTo
 REST and MCP and on opening a WebSocket: the [JWT](Security.md#jwt) of an identity provider, refreshed. And
 `gateway.queries()` lists the [named queries](Rest.md#named-queries) the credential can use, `gateway.query(name, data)`
 runs one, on every transport. Since 4.2.0, over a `ws://` connection, `gateway.subscribe({ entity } | { query, data } |
-{ name, data }, listener)` is told of the [changes of the data](Changes.md#from-node).
+{ name, data }, listener)` is told of the [changes of the data](Changes.md#from-node). Since 4.3.0, `isApprovalPending(result)` says whether a
+write [waits for a person](Security.md#approvals) and `gateway.approval(id)` tells its state, on every transport.
 
 The credential goes in the options (`apiKey`, `token`, or any `headers`) or in `DATA_GATEWAY_API_KEY` /
 `DATA_GATEWAY_TOKEN`, never in the URL (a credential in it is an error); `DATA_GATEWAY_URL` is the connection string
