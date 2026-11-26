@@ -171,6 +171,12 @@ after and the diff, in `logs/changes.jsonl` of the workspace and `GET /admin/wor
 (`src/<language>/domain/`), with only the model or only the repositories, a generated code downloaded as a zip or
 removed.
 
+## Since 4.2.0 {#since-4-2-0}
+
+The events of the [outbox](Changes.md#retries-and-dead-events) of a schema: `GET /admin/workspaces/{route}/outbox?status=dead`
+lists those that failed too often, with their error (`schemaRead`), and `POST …/outbox/{id}/retry` sends one back to
+pending (`schemaRead` and `ddl`).
+
 ## Over MCP
 
 The MCP server of each schema adds `admin_schema_get`, `admin_schema_validate` and `admin_stage_fetch` for credentials

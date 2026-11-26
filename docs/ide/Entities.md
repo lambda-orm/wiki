@@ -67,9 +67,26 @@ sentence with its message. Each one with its **Message**, its **Condition** in t
 
 ## Data
 
-Its rows, 50 per page, **◀ Previous** and **Next ▶**: read only (no row is changed here). They are shown as the table
-of a [result](Queries.md#the-result): they can be copied and exported (`Orders-page-1.json`). An abstract entity has no
-data.
+Its rows, 50 per page, **◀ Previous** and **Next ▶**. An abstract entity has no data.
+
+- **Sort** by a column: a click on its header (ascending ▲, descending ▼, none). **Filter** with a condition on `p`
+  (`p.price > 18`) and **Apply** (or Enter).
+- **Export** the page (**CSV**, **JSON**, **XLSX**) or everything (**CSV ∀**, **JSON ∀**, **XLSX ∀**): every page, with
+  its sort and its filter, up to 100 000 rows, with the rows read so far and **Cancel**. The `.xlsx` is a real Excel
+  file (`Orders.xlsx`, `Orders-page-1.csv`).
+
+With a credential that has `write` and an entity with a primary key, the table is also a **backoffice** (since IDE
+1.2.0):
+
+- **Change a cell:** a double click, the new value, Enter (Escape leaves it). It changes only while the cell still has
+  what was read: if someone changed it meanwhile, nothing is changed and the table says so and shows it now. The key,
+  what is calculated (`view`, `readExp`) and what is `autoIncrement` are not edited; a value that is not of its type
+  (`x` in a number) is not sent.
+- **+ Add a row:** a form with the properties of the entity (the required ones marked `*`).
+- **✕** at the end of a row deletes it, after showing its key and asking.
+
+Everything goes through the gateway with the credential of the connection: its permissions, its
+[view](../data-gateway/Security.md#views) and the audit. Without `write`, the table is read only.
 
 ![Data](images/ide-entity-data.png)
 

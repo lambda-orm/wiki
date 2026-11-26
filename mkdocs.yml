@@ -58,6 +58,7 @@ plugins:
             Getting started: Erste Schritte
             Configuration: Konfiguration
             Transports: Transporte
+            Data changes: Datenänderungen
             Security: Sicherheit
             Clients: Clients
             Operations: Betrieb
@@ -131,6 +132,7 @@ plugins:
             Getting started: Primeros pasos
             Configuration: Configuración
             Transports: Transportes
+            Data changes: Cambios de los datos
             Security: Seguridad
             Clients: Clientes
             Operations: Operación
@@ -207,6 +209,7 @@ plugins:
             Getting started: Primeiros passos
             Configuration: Configuração
             Transports: Transportes
+            Data changes: Mudanças dos dados
             Security: Segurança
             Clients: Clientes
             Operations: Operação
@@ -293,6 +296,7 @@ nav:
       - REST API: data-gateway/Rest.md
       - MCP: data-gateway/Mcp.md
       - WebSocket API: data-gateway/WebSocket.md
+      - Data changes: data-gateway/Changes.md
       - Security: data-gateway/Security.md
       - Administration: data-gateway/Admin.md
       - Clients: data-gateway/Clients.md

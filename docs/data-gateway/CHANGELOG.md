@@ -2,6 +2,23 @@
 
 The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway).
 
+### 4.2.0 (2026-11-26)
+
+The changes of the data: reads that don't go back to the database, clients and other systems that learn that something
+changed, and the IDE as a backoffice.
+
+- **[The cache of the reads](Configuration.md#cache):** `cache.enabled` (off by default) keeps the results of the reads
+  in memory, per view and context of who asks, dropped by every write of what they read and after their `ttl`; REST
+  answers `ETag` and `304`.
+- **[Subscriptions](Changes.md#subscriptions):** over WebSocket (`subscribe.entity`, `subscribe.query`) and SSE (`GET
+  /subscribe`): the writes of an entity, or the new result of a query; with the view of who subscribes, so a change it
+  can't see doesn't reach it. `gateway.subscribe` in the Node client.
+- **[The outbox](Changes.md#the-outbox):** the events λORM writes with each change go to signed webhooks and Kafka,
+  retried; the dead ones are listed and retried in the [administration](Admin.md#since-4-2-0).
+- **The IDE 1.2.0:** the [Data](../ide/Entities.md#data) of an entity is sorted, filtered, edited with `write` and
+  exported as CSV, JSON or Excel.
+- `view`, `queries` (and now `cache`, `outbox`) of a schema are no longer warned about as unknown keys.
+
 ### 4.1.0 (2026-11-25)
 
 Security: who calls is the user of an identity provider, sees its view of the domain, and an agent can be left with
