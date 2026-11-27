@@ -2,6 +2,34 @@
 
 The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.com/r/flaviorita/data-gateway).
 
+### 5.0.0
+
+**Breaking:** what a credential may do is said only by its roles. One way, not two.
+
+- **[Only roles](Security.md#roles):** a key, a token or a user names its `roles` of `authorization.roles`
+  (**required**); a method `jwt` says only the claim of the roles. A credential with its own `permissions`, `view` or
+  `approval`, the `roles` of a method `jwt` or `orm.schemas[].roles` stop the gateway, saying where each one goes.
+  [From 4.x](Security.md#from-4x): each set of permissions of a key becomes a role, and the key names it.
+- **A role is of the gateway and says its `schemas`** (none, every schema), and by schema the views and stages it uses
+  there and the defaults of who doesn't choose (`schemas: { shop: { views, view, stages, stage } }`). From the
+  [administration](Admin.md#roles) too; `GET /admin/scopes` tells the views and stages of each schema.
+- **[The context of a key](Security.md#context):** a key, a token or a user may say its `context`
+  (`{ username: ana@acme.com }`), the context of λORM of its requests as a token gives it from its claims: it fills a
+  `default: context.username` or a `writeValue` of the schema, and the client can't replace it.
+- **The administration of the gateway:** `GET /admin/me` (who I am and what my roles give me here), `GET /admin/access`
+  (who may come in, never a secret), [`/admin/observability`](Admin.md#observability) (permission `observability`:
+  what is sent, the exporter and where it is seen, saved and applied at once in every replica) and
+  [`/admin/state`, `/admin/persist/*`](Admin.md#persist) (permission `persist`: another database or another mapping for
+  the state, copied there with λORM).
+- **[`observability.explore`](Configuration.md#observability):** where the traces, the metrics and the logs are seen
+  (Grafana and its Tempo, Prometheus and Loki), of the installation and not of each IDE; `GET /observability` of
+  `management` tells it.
+- **Clients:** [Node](Clients.md#node) (`@lambdaorm/data-gateway-client-node`) and [Go](Clients.md#go)
+  (`github.com/lambda-orm/data-gateway-client-go`), the same API over the five transports, step by step.
+- With `@lambdaorm/base` 3.11.1 and `@lambdaorm/lib` 3.15.0. With it, the [IDE](../ide/index.md) 1.5.0: the
+  [administration](../ide/Connections.md#administration) in the tree of each connection and the
+  [abstract entities](../ide/Entities.md#abstract).
+
 ### 4.4.0
 
 Who may do what, and where: roles with their views and stages, and the state of the gateway in a database.
@@ -9,7 +37,7 @@ Who may do what, and where: roles with their views and stages, and the state of 
 - **[Roles](Security.md#roles):** `authorization.roles` says, for each role, the views and the stages of λORM it may
   use and its permissions there; the client chooses `options.view` and `options.stage` only among them, and a request
   gets the permissions of the roles that allow what it chose. `orm.schemas[].roles` extends them in a schema; the
-  [administration](Admin.md#since-4-4-0) adds or extends them at run time (`/admin/roles`, permission `roles`), each
+  [administration](Admin.md#roles) adds or extends them at run time (`/admin/roles`, permission `roles`), each
   change recorded.
 - **[The state of the gateway](Configuration.md#state):** `state.source` keeps the sessions, the writes that wait and
   the roles in a SQLite (one instance) or in PostgreSQL, MySQL, MariaDB, SQL Server or Oracle (several replicas).

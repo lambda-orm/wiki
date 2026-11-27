@@ -224,12 +224,16 @@ veröffentlicht ein oder mehrere Schemas über REST, WebSocket und MCP, mit eine
 schreiben:
 
 ```yaml
+authorization:
+  roles:
+    agent:   { permissions: [ read ] }
+    backend: { permissions: [ read, write, script ] }
 authentication:
   adapter: local
   type: apikey
   keys:
-    - { name: agent,   value: $AGENT_KEY,   permissions: [ read ] }
-    - { name: backend, value: $BACKEND_KEY, permissions: [ read, write, script ] }
+    - { name: agent,   value: $AGENT_KEY,   roles: [ agent ] }
+    - { name: backend, value: $BACKEND_KEY, roles: [ backend ] }
 transports:
   http:       { port: 8080 }    # REST, OpenAPI
   mcpHttp:    { port: 8081 }    # KI-Agenten

@@ -14,21 +14,26 @@ genauso, und über das Gateway kann nichts die Schemas oder die Struktur der Dat
 ```yaml
 transports:
   management:
-    port: 9090               # ohne Port keine Administration (und keine IDE)
+    port: 9090               # without a port, no administration (and no IDE)
 admin:
-  commandTimeoutMs: 600000   # wie lange ein Befehl dauern darf
-  maxFileBytes: 2MB          # die größte Datei, die geschrieben werden kann
+  commandTimeoutMs: 600000   # how long a command may take
+  maxFileBytes: 2MB          # the largest file that can be written
+authorization:
+  roles:
+    modeler: { permissions: [ read, schemaRead, schemaWrite, schemaAdmin, workbenchWrite, ddl, build ] }
+    analyst: { permissions: [ read, workbenchWrite ] }
+    admin:   { permissions: [ read, roles, observability, persist, sessionAdmin ] }
 authentication:
   adapter: local
   type: apikey
   keys:
-    - { name: modeler, value: $MODELER_KEY, permissions: [ read, schemaRead, schemaWrite, schemaAdmin, workbenchWrite, ddl, build ] }
-    - { name: analyst, value: $ANALYST_KEY, permissions: [ read, workbenchWrite ] }
+    - { name: modeler, value: $MODELER_KEY, roles: [ modeler ] }
+    - { name: analyst, value: $ANALYST_KEY, roles: [ analyst ] }
+    - { name: ops,     value: $OPS_KEY,     roles: [ admin ] }
 ```
 
 Die Administration antwortet unter `/admin` des [`management`-Transports](Transports.md#management), mit dessen
-Authentifizierung; `http` hat sie nicht. Ihre Berechtigungen werden **nie standardmäßig vergeben**: Anmeldedaten ohne
-Berechtigungsliste haben nur die der Daten.
+Authentifizierung; `http` hat sie nicht. Ihre Berechtigungen werden **nie standardmäßig vergeben**: Zugangsdaten haben sie nur, wenn eine ihrer [Rollen](Security.md#roles) sie gibt.
 
 | Berechtigung | Erlaubt |
 | --- | --- |
@@ -39,6 +44,9 @@ Berechtigungsliste haben nur die der Daten.
 | `ddl` | die Struktur der Datenbanken eines Stage ändern (`push`, `drop`) |
 | `build` | den Code der Domäne in `src/` des Workspace erzeugen |
 | `sessionAdmin` | jede [Sitzung](Transports.md#sessions) von `management` sehen (wer verbunden ist) und sie widerrufen |
+| `roles` | die [Rollen](#roles) des Zustands, und wer hereinkommt (`/admin/access`, `/admin/scopes`) |
+| `observability` | (5.0.0) die [Observability](#observability) des Gateways |
+| `persist` | (5.0.0) [wo der Zustand liegt](#persist) |
 
 Mit `authentication: none` administriert niemand, außer mit `admin.allowAnonymous: true` (nur lokale Entwicklung).
 
@@ -187,16 +195,64 @@ listet sie, jeden mit dem Anfragenden, seiner Abfrage oder seinem Skript, seinen
 ausführen würde; `POST …/approvals/{id}/approve` führt ihn als der Anfragende aus, `…/reject { reason }` verwirft ihn.
 Beide brauchen `approve`, und nie durch den Anfragenden.
 
-## Seit 4.4.0 {#since-4-4-0}
+## Die Rollen {#roles}
 
-Die [Rollen](Security.md#roles), mit der Berechtigung `roles`: `GET /admin/roles` listet die der Konfiguration (nur
-lesen) und die im [Zustand des Gateways](Configuration.md#state) gespeicherten; `PUT /admin/roles/{name}` `{ schema?,
-config: { permissions, views, stages, maxRows, approval, scope }, reason? }` fügt eine Rolle hinzu oder erweitert eine
-der Konfiguration (in allen Schemas oder in einem); `DELETE /admin/roles/{name}?schema=` entfernt eine des Zustands;
-`GET /admin/roles/changes` sagt, wer was wann geändert hat, vorher und nachher.
+**Seit data-gateway 4.4.0** (<span id="since-4-4-0"></span>eine Rolle des Gateways mit ihren `schemas` seit 5.0.0). Die
+[Rollen](Security.md#roles), mit der Berechtigung `roles`: `GET /admin/roles` listet die der Konfiguration (nur lesbar)
+und die im [Zustand des Gateways](Configuration.md#state) gespeicherten; `PUT /admin/roles/{name}` `{ config: {
+permissions, schemas, views, stages, maxRows, approval, scope }, reason? }` legt eine Rolle an oder erweitert eine der
+Konfiguration; `DELETE /admin/roles/{name}` entfernt eine des Zustands; `GET /admin/roles/changes` sagt, wer was wann
+geändert hat, vorher und nachher.
 
-- Niemand vergibt eine Berechtigung, die er nicht hat, und eine in der Konfiguration `locked` Rolle wird nicht erweitert.
+- Niemand vergibt eine Berechtigung, die er nicht hat, niemand nimmt sich `roles`, wenn er der letzte ist, und eine in
+  der Konfiguration `locked` Rolle wird nicht erweitert.
+- **Eine Rolle nennt ihre Schemas** (5.0.0): ein `PUT` mit `schema` ist `400`. Eine Rolle, die 4.4 für ein Schema
+  gespeichert hat, gilt nicht mehr: sie wird als ignoriert gelistet, um sie zu entfernen
+  (`DELETE /admin/roles/{name}?schema=`) und mit ihren `schemas` neu anzulegen. `GET /admin/scopes` nennt die Views und
+  Stages jedes bedienten Schemas, um sie zu wählen.
 - Eine Änderung gilt sofort in der Replika, die sie speichert, und in den anderen innerhalb von `state.refresh`.
+
+## Wer hereinkommt {#access}
+
+**Seit data-gateway 5.0.0.**
+
+- **`GET /admin/me`** (beliebige Zugangsdaten, über sich selbst): ihr Name, ihr Kontext und jede ihrer Rollen, wie sie
+  hier gilt, mit Berechtigungen, Schemas, Views und Stages (die erste jeweils die dessen, der nicht wählt). Die Seite
+  einer Verbindung der [IDE](../ide/Connections.md) zeigt es.
+- **`GET /admin/access`** (Berechtigung `roles`): wer hereinkommt, wie die Konfiguration es sagt: die Authentifizierungen
+  jeder Ebene (global, Transport, Schema), jeder Schlüssel, jedes Token und jeder Benutzer mit Namen, Rollen und Kontext,
+  Aussteller und Claims einer Methode `jwt`, und alle vorhandenen Berechtigungen. **Nie ein Geheimnis.**
+
+## Die Observability {#observability}
+
+**Seit data-gateway 5.0.0,** mit der Berechtigung `observability`: `GET /admin/observability` gibt die geltende
+[Observability](Configuration.md#observability) und woher sie kommt; `PUT /admin/observability` `{ config, reason }`
+ersetzt ganze Abschnitte (`exporter`, `traces`, `metrics`, `logs`, `explore`), geprüft wie das YAML (der Exporter trägt
+nie Header: sie gehören in `OTEL_EXPORTER_OTLP_HEADERS`); `DELETE` kehrt zum YAML zurück.
+
+- Sie wird im Zustand des Gateways gespeichert, über dem YAML, mit wer sie geändert hat und warum.
+- **Sofort angewendet:** der Edge startet neu, und die Worker der Schemas, deren SDK sich ändert, werden blue-green neu
+  geladen (laufende Anfragen enden im alten), in jeder Replika.
+
+## Wo der Zustand liegt {#persist}
+
+**Seit data-gateway 5.0.0.** `GET /admin/state` (Berechtigung `roles` oder `persist`) sagt, wo das Gateway seinen
+[Zustand](Configuration.md#state) hält (das SQLite des Volumes, eine Datenbank über λORM, Speicher), wie er gelesen wird,
+wie oft die Replikas ihn neu lesen, ob er jetzt lesbar ist, und das `lambdaORM.yaml` seines Systemschemas; die
+Verbindung ohne Geheimnisse. Mit der Berechtigung `persist` wird er geändert:
+
+- `PUT /admin/persist/connection` `{ dialect, connection, reason }`: eine andere Datenbank (`SQLite`, `PostgreSQL`,
+  `MySQL`, `MariaDB`, `SqlServer`, `Oracle`; die Verbindung darf Variablen nennen, `$STATE_DB`).
+- `PUT /admin/persist/schema` `{ text, reason }`: das bearbeitete `lambdaORM.yaml` des Zustands, von dem sich nur das
+  Mapping ändert (die Tabelle jeder Entität und ihre Spalten).
+- `DELETE /admin/persist`: zurück zu `state` des YAML.
+- Es wird in `.data-gateway/persist.yaml` des Volumes gespeichert (braucht `orm.workspacePath`), das beim Start
+  `state.source` und `state.mapping` des YAML ersetzt.
+- **Der Zustand wird mit λORM kopiert:** `push` der Tabellen am neuen Ort, `export` des aktuellen und `import` in den
+  neuen. Eine neue Datenbank, die schon einen Zustand hat, wird abgelehnt (`409`); ein SQLite, das einen hatte, wird
+  beiseitegelegt (`.bak-<Zeit>`); scheitert die Kopie, ändert sich nichts. Danach startet das Gateway seinen Edge neu
+  und lädt die Schemas mit der neuen Quelle; die Sitzungen bleiben (sie wurden kopiert), und die alten Tabellen werden
+  nicht gelöscht.
 
 ## Über MCP {#over-mcp}
 

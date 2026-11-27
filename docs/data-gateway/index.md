@@ -15,8 +15,8 @@ databases of different engines). The Data Gateway publishes that schema so that:
 - an **AI agent** explores the domain and queries it through MCP, knowing the entities and the language;
 - a **person** explores the schemas, reads each entity as a form, tries queries and draws diagrams in its IDE;
 
-and so that **who can do what** is decided in one place, the same for all of them: each credential has permissions,
-and every change is audited.
+and so that **who can do what** is decided in one place, the same for all of them: each credential has roles, and its roles the
+permissions, and every change is audited.
 
 ## Scope
 
@@ -46,8 +46,8 @@ and every change is audited.
 - It doesn't define the domain nor migrate the databases: that is the [schema](../schema/SchemaDefinition.md) and the
   [CLI](../cli/index.md) (`push`, `pull`, …).
 - It doesn't accept SQL: only λORM queries, translated for each source.
-- No users nor roles of its own beyond the credentials of its configuration (no login against an identity provider
-  yet).
+- It keeps no users of its own: who comes in is a key of its configuration or a token of your identity provider
+  ([JWT / OIDC](Security.md#jwt)), and what each one may do, its [roles](Security.md#roles).
 - Without the `workbenchWrite` permission, the IDE keeps what is saved in each browser.
 
 ## Description
@@ -79,7 +79,7 @@ slow down another; a schema whose database is down answers `503` and is retried,
 ### A request, step by step
 
 1. A client sends `POST /iot/v1/execute` with `X-Api-Key: …` and `{ "query": "Orders.filter(…)", "data": {…} }`.
-2. The `http` transport finds the credential (`agent`, permissions `[read]`) and the schema `iot/v1`.
+2. The `http` transport finds the credential (`agent`, whose role gives `[read]`) and the schema `iot/v1`.
 3. The schema's worker analyses the query: it only selects, so `read` is enough.
 4. λORM translates it for each source of the stage, runs it and joins the results.
 5. The answer goes back as JSON. Had it written data, the credential would have needed `write`, and the operation

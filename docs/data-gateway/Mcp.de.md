@@ -127,8 +127,8 @@ Seit 4.3.0 können die Schreibvorgänge eines Agenten [auf eine Person warten](S
 (`mcp.approval: writes`): Das Werkzeug antwortet sofort, dass der Schreibvorgang aussteht, und `approval_status` sagt
 später, ob er genehmigt wurde, und sein Ergebnis.
 
-Es gibt keinen Nur-Lese-Modus des Transports: Was ein Agent tun kann, bestimmen **die Berechtigungen seiner
-Zugangsdaten**. Ein Agent, der nur abfragt, erhält Zugangsdaten mit `[ read ]`: Er kann Selects ausführen, aber über
+Es gibt keinen Nur-Lese-Modus des Transports: Was ein Agent tun kann, bestimmen **die Rollen seiner
+Zugangsdaten**. Ein Agent, der nur abfragt, erhält Zugangsdaten, deren Rolle `[ read ]` hat: Er kann Selects ausführen, aber über
 keinen Transport schreiben, Skripte ausführen, Warteschlangen nutzen oder importieren. Außerdem: `schemas[].transports`,
 um ein Schema aus MCP herauszuhalten, `mcp.tools.exclude`, die Hinweise und die Berechtigungen des Datenbankbenutzers
 (die darunterliegende Garantie). Jeder Schreibvorgang eines Agenten wird mit dem Namen seiner Zugangsdaten und

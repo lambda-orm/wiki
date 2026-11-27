@@ -17,7 +17,7 @@ oder mehrere Datenbanken unterschiedlicher Datenbank-Engines). Das Data Gateway 
   Diagramme zeichnet;
 
 und sodass **wer was tun darf** an einer einzigen Stelle festgelegt wird, für alle gleich: Alle Zugangsdaten haben
-Berechtigungen, und jede Änderung wird protokolliert.
+Rollen, ihre Rollen die Berechtigungen, und jede Änderung wird protokolliert.
 
 ## Umfang {#scope}
 
@@ -48,8 +48,8 @@ Berechtigungen, und jede Änderung wird protokolliert.
 - Es definiert weder die Domäne noch migriert es die Datenbanken: Das übernehmen das [Schema](../schema/SchemaDefinition.md)
   und die [CLI](../cli/index.md) (`push`, `pull`, …).
 - Es akzeptiert kein SQL: nur λORM-Abfragen, die für jede Quelle übersetzt werden.
-- Keine eigenen Benutzer oder Rollen über die Zugangsdaten seiner Konfiguration hinaus (noch keine Anmeldung bei einem
-  Identity Provider).
+- Es speichert keine eigenen Benutzer: wer hereinkommt, ist ein Schlüssel seiner Konfiguration oder ein Token deines
+  Identitätsanbieters ([JWT / OIDC](Security.md#jwt)), und was jeder darf, sagen seine [Rollen](Security.md#roles).
 - Ohne die Berechtigung `workbenchWrite` speichert die IDE das Gespeicherte in jedem Browser.
 
 ## Beschreibung {#description}
@@ -82,7 +82,7 @@ und wird erneut versucht, während die anderen weiterarbeiten.
 ### Eine Anfrage Schritt für Schritt {#a-request-step-by-step}
 
 1. Ein Client sendet `POST /iot/v1/execute` mit `X-Api-Key: …` und `{ "query": "Orders.filter(…)", "data": {…} }`.
-2. Der Transport `http` findet die Zugangsdaten (`agent`, Berechtigungen `[read]`) und das Schema `iot/v1`.
+2. Der Transport `http` findet die Zugangsdaten (`agent`, dessen Rolle `[read]` gibt) und das Schema `iot/v1`.
 3. Der Worker des Schemas analysiert die Abfrage: Sie liest nur, also genügt `read`.
 4. λORM übersetzt sie für jede Quelle des Stages, führt sie aus und führt die Ergebnisse zusammen.
 5. Die Antwort wird als JSON zurückgegeben. Hätte sie Daten geschrieben, hätten die Zugangsdaten `write` benötigt, und

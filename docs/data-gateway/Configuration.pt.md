@@ -64,7 +64,7 @@ O que um esquema pode ajustar:
 | Chave de um esquema | Efeito | Se não for configurada |
 | --- | --- | --- |
 | `transports` | os transportes que o expõem; nos demais suas rotas não existem (`404`) | todos os transportes expostos |
-| `authentication` | substitui a autenticação (e suas permissões) para este esquema, em todos os seus transportes | a do transporte, senão a global |
+| `authentication` | substitui a autenticação (e suas credenciais) para este esquema, em todos os seus transportes | a do transporte, senão a global |
 | `env` | variáveis que seu worker recebe (abaixo) | seu `.env` e as variáveis base |
 | `scripts` | `enabled` e os limites dos scripts | `scripts` |
 | `mcp.maxRows`, `mcp.tools` | limite de linhas e ferramentas de seu servidor MCP | `mcp` |
@@ -176,7 +176,7 @@ orm:
         adapter: local
         type: apikey
         keys:
-          - { name: accounts-backend, value: $ACCOUNTS_KEY, permissions: [ read, write ] }
+          - { name: accounts-backend, value: $ACCOUNTS_KEY, roles: [ backend ] }
 
 runtime:
   schemas: thread
@@ -192,13 +192,18 @@ logger: { adapter: console, level: info }
 metrics: { enabled: true }
 audit: { enabled: true, includeData: false }
 
+authorization:                     # what each role may do, and where (since 5.0.0 the only way)
+  roles:
+    agent:   { permissions: [ read ], schemas: [ iot/v1, iot/v2 ] }
+    backend: { permissions: [ read, write, script, queue, stageImport ] }
+
 authentication:                    # for every schema and transport that doesn't set its own
   adapter: local
   type: apikey
   header: X-Api-Key
   keys:
-    - { name: agent,   value: $AGENT_KEY,   permissions: [ read ] }
-    - { name: backend, value: $BACKEND_KEY, permissions: [ read, write, script, queue, stageImport ] }
+    - { name: agent,   value: $AGENT_KEY,   roles: [ agent ] }
+    - { name: backend, value: $BACKEND_KEY, roles: [ backend ], context: { username: backend } }
 
 rateLimit: { windowMs: 30000, max: 0 }   # http only; max: 0 = no rate limit
 
@@ -219,9 +224,9 @@ transports:
     port: $DATA_GATEWAY_MCP_WS_PORT
   webSocket:
     port: $DATA_GATEWAY_WS_PORT
-  management:                      # a API da IDE; sem a variável, não é exposta (produção)
+  management:                      # the API of the IDE; without the variable, not exposed (production)
     port: $DATA_GATEWAY_MANAGEMENT_PORT
-    trustedProxies: [ 10.0.0.0/8 ] # a rede do IDE: seu X-Forwarded-For dá o endereço do navegador
+    trustedProxies: [ 10.0.0.0/8 ] # the network of the IDE: its X-Forwarded-For gives the browser's address
     sessions: { idleTimeout: 30m, maxLifetime: 12h }
 ```
 
@@ -246,6 +251,23 @@ observability:
 
 Os headers do exportador carregam tokens: vão apenas em `OTEL_EXPORTER_OTLP_HEADERS` (`exporter.headers` no arquivo
 impede a inicialização). O que ela oferece está em [Operações](Operations.md#opentelemetry).
+
+**Onde é visto** (`explore`, desde a 5.0.0): o Grafana da instalação, para que o IDE abra ali os traces de uma
+entidade, suas métricas e seus logs. `management` o diz em `GET /observability` (sem credencial); não chega ao SDK do
+λORM.
+
+```yaml
+observability:
+  explore:
+    grafana: https://grafana.example.com   # the URL of Grafana
+    tempo: tempo                           # the uids of its datasources (these by default)
+    prometheus: prometheus
+    loki: loki
+    orgId: 1
+```
+
+Desde a 5.0.0 a observabilidade também pode ser mudada a partir da [administração](Admin.md#observability) (permissão
+`observability`): o que é salvo ali fica no estado, sobre esta seção, e é aplicado na hora.
 
 ## O cache das leituras {#cache}
 
@@ -318,6 +340,10 @@ state:
 - **Várias réplicas** (`cluster.valkey`) com o estado em SQLite são um erro: perderiam dados.
 - **Sem seu banco ao iniciar,** o gateway inicia só com os papéis da configuração (nunca uma permissão a mais) e tenta
   de novo; com `required: true`, não inicia.
+- **`state.mapping`** (5.0.0) diz as tabelas e colunas do esquema de sistema num banco, por entidade
+  (`{ Roles: { table: gw_roles, columns: { name: role_name } } }`); sem ele, `dg_` e seus nomes.
+- **A partir da administração** (5.0.0, permissão `persist`): [outro banco ou outro mapping](Admin.md#persist), com o
+  estado copiado ali; guardado em `.data-gateway/persist.yaml`, sobre `state.source` e `state.mapping`.
 
 ## Arquivos de propriedades {#files}
 
@@ -383,9 +409,10 @@ gateway os confere ao assinar. O armazenamento deve permitir a origem da IDE (CO
 | `audit.includeData` | `false` | `true` adiciona os parâmetros (`data`), que podem conter dados pessoais |
 | `authentication` | `{ adapter: none }` | [Segurança](Security.md) |
 | `authentication.header` | `X-Api-Key` | o header de `type: apikey` |
-| `authentication.adapter: jwt` | — | (4.1.0) os tokens de um provedor de identidade: `issuer`, `audience`, `jwksUri`, `secret`, `algorithms`, `clockTolerance`, `principal.name`, `principal.permissions.claim` / `roles`, `context` ([Segurança](Security.md#jwt)) |
+| `authentication.adapter: jwt` | — | (4.1.0) os tokens de um provedor de identidade: `issuer`, `audience`, `jwksUri`, `secret`, `algorithms`, `clockTolerance`, `principal.name`, `principal.permissions.claim`, `context` ([Segurança](Security.md#jwt)); desde a 5.0.0 seus papéis são os de `authorization.roles` |
+| `keys[]`, `tokens[]`, `users[]` | — | `name`, o segredo (`value` / `password`), `roles` (obrigatório desde a 5.0.0) e `context` (5.0.0: variável → um texto, um número ou um booleano, [o contexto de uma chave](Security.md#context)) |
 | `authentication.methods` | — | (4.1.0) várias autenticações em ordem: `jwt` e `local` ([Segurança](Security.md#jwt)) |
-| `keys[].view`, `roles.<role>.view` | — | (4.1.0) a [view](Security.md#views) das requisições de uma chave ou de um papel |
+| `authorization.roles.<nome>` | — | (4.4.0) `permissions`, `schemas` (5.0.0: uma lista de caminhos, ou `{ <caminho>: { views, view, stages, stage } }`), `views`, `stages`, `maxRows`, `approval`, `scope: any`, `locked` — [papéis](Security.md#roles) |
 | `orm.schemas[].view` | `default` | (4.1.0) a view de quem chama sem uma |
 | `orm.schemas[].queries.<name>` | — | (4.1.0) `maxRows`, `timeout` de uma [consulta nomeada](Rest.md#named-queries) |
 | `cluster.valkey.url` / `prefix` | — / `data-gateway` | (4.3.0) o Valkey das [réplicas](#cluster) |
@@ -393,11 +420,13 @@ gateway os confere ao assinar. O armazenamento deve permitir a origem da IDE (CO
 | `files.properties.<Entidade.propriedade>` | — | (4.3.0) o armazenamento dos seus arquivos |
 | `authorization.roles.<nome>` | — | (4.4.0) `permissions`, `views`, `stages`, `maxRows`, `approval`, `scope: any`, `locked` — [papéis](Security.md#roles) |
 | `authorization.stages` | `restricted` | (4.4.0) `open`: pode-se escolher um stage que nenhum papel nomeia, como antes da 4.4.0 |
-| `orm.schemas[].roles` / `stage` | — | (4.4.0) o que os papéis somam no esquema; o stage de quem não escolhe |
+| `orm.schemas[].stage` | — | (4.4.0) o stage de quem não escolhe (`orm.schemas[].roles` não existe mais desde a 5.0.0: o papel diz seus `schemas`) |
 | `state.source` | o SQLite do volume | (4.4.0) `dialect` (`SQLite`, `PostgreSQL`, `MySQL`, `MariaDB`, `SqlServer`, `Oracle`) e `connection` — [o estado](#state) |
 | `state.refresh` / `required` | `30s` / `false` | (4.4.0) a cada quanto os papéis são lidos de novo; se o gateway inicia sem seu banco |
+| `state.mapping.<Entity>` | `dg_…` | (5.0.0) `table`, `columns`: as tabelas do esquema de sistema num banco |
+| `observability.explore` | — | (5.0.0) `grafana`, `tempo`, `prometheus`, `loki`, `orgId`: [onde é visto](#observability) |
 | `mcp.approval` / `mcp.approvalExpires` | `none` / `1h` | (4.3.0) `writes`: toda escrita por MCP [aguarda uma pessoa](Security.md#approvals); também por schema |
-| `keys[].approval`, `roles.<papel>.approval` | — | (4.3.0) `writes`: as escritas dessa credencial ou papel aguardam, em todo transporte |
+| `authorization.roles.<papel>.approval` | — | (4.3.0) `writes`: as escritas desse papel aguardam, em todo transporte (desde a 5.0.0 só num papel) |
 | `cache.enabled` | `false` | (4.2.0) o [cache das leituras](#cache); também por schema |
 | `cache.ttl` / `maxEntries` / `maxRowBytes` | `60s` / `10000` / `1MB` | (4.2.0) |
 | `cache.entities.<entity>` | — | (4.2.0) `{ ttl }` ou `{ enabled: false }` para o que a lê |

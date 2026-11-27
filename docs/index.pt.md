@@ -220,12 +220,16 @@ O [Data Gateway](data-gateway/index.md) (Docker [`flaviorita/data-gateway`](http
 publica um ou vários esquemas via REST, WebSocket e MCP, com uma UI web, sem escrever um backend:
 
 ```yaml
+authorization:
+  roles:
+    agent:   { permissions: [ read ] }
+    backend: { permissions: [ read, write, script ] }
 authentication:
   adapter: local
   type: apikey
   keys:
-    - { name: agent,   value: $AGENT_KEY,   permissions: [ read ] }
-    - { name: backend, value: $BACKEND_KEY, permissions: [ read, write, script ] }
+    - { name: agent,   value: $AGENT_KEY,   roles: [ agent ] }
+    - { name: backend, value: $BACKEND_KEY, roles: [ backend ] }
 transports:
   http:       { port: 8080 }    # REST, OpenAPI
   mcpHttp:    { port: 8081 }    # agentes de IA

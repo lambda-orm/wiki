@@ -218,12 +218,16 @@ The [Data Gateway](data-gateway/index.md) (Docker [`flaviorita/data-gateway`](ht
 publishes one or several schemas over REST, WebSocket and MCP, with a web UI, with no backend to write:
 
 ```yaml
+authorization:
+  roles:
+    agent:   { permissions: [ read ] }
+    backend: { permissions: [ read, write, script ] }
 authentication:
   adapter: local
   type: apikey
   keys:
-    - { name: agent,   value: $AGENT_KEY,   permissions: [ read ] }
-    - { name: backend, value: $BACKEND_KEY, permissions: [ read, write, script ] }
+    - { name: agent,   value: $AGENT_KEY,   roles: [ agent ] }
+    - { name: backend, value: $BACKEND_KEY, roles: [ backend ] }
 transports:
   http:       { port: 8080 }    # REST, OpenAPI
   mcpHttp:    { port: 8081 }    # AI agents

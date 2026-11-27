@@ -15,8 +15,8 @@ bases de datos de distintos motores). El Data Gateway publica ese esquema para q
 - un **agente de IA** explore el dominio y lo consulte a través de MCP, conociendo las entidades y el lenguaje;
 - una **persona** explore los esquemas, lea cada entidad como un formulario, pruebe consultas y dibuje diagramas en su IDE;
 
-y para que **quién puede hacer qué** se decida en un único lugar, igual para todos ellos: cada credencial tiene permisos,
-y cada cambio se audita.
+y para que **quién puede hacer qué** se decida en un único lugar, igual para todos ellos: cada credencial tiene roles, y sus roles los
+permisos, y cada cambio se audita.
 
 ## Alcance {#scope}
 
@@ -46,8 +46,8 @@ y cada cambio se audita.
 - No define el dominio ni migra las bases de datos: de eso se encargan el [esquema](../schema/SchemaDefinition.md) y la
   [CLI](../cli/index.md) (`push`, `pull`, …).
 - No acepta SQL: solo consultas de λORM, traducidas para cada fuente.
-- No tiene usuarios ni roles propios más allá de las credenciales de su configuración (todavía no hay login contra un proveedor
-  de identidad).
+- No guarda usuarios propios: quien entra es una clave de su configuración o un token de tu proveedor de identidad
+  ([JWT / OIDC](Security.md#jwt)), y lo que cada uno puede hacer, sus [roles](Security.md#roles).
 - Sin el permiso `workbenchWrite`, el IDE guarda lo que se guarda en cada navegador.
 
 ## Descripción {#description}
@@ -79,7 +79,7 @@ ralentiza a otro; un esquema cuya base de datos está caída responde `503` y se
 ### Una petición, paso a paso {#a-request-step-by-step}
 
 1. Un cliente envía `POST /iot/v1/execute` con `X-Api-Key: …` y `{ "query": "Orders.filter(…)", "data": {…} }`.
-2. El transporte `http` encuentra la credencial (`agent`, permisos `[read]`) y el esquema `iot/v1`.
+2. El transporte `http` encuentra la credencial (`agent`, cuyo rol da `[read]`) y el esquema `iot/v1`.
 3. El worker del esquema analiza la consulta: solo selecciona, así que basta con `read`.
 4. λORM la traduce para cada fuente del stage, la ejecuta y une los resultados.
 5. La respuesta vuelve como JSON. Si hubiera escrito datos, la credencial habría necesitado `write`, y la operación

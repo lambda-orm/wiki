@@ -3,6 +3,23 @@
 Um Data Gateway é HTTP, WebSocket e MCP comuns: qualquer linguagem pode chamá-lo. Esta página lista os clientes feitos
 para ele: os clientes Node e Go, a CLI, um cliente gerado a partir do seu documento OpenAPI e um agente de IA por MCP.
 
+## Passo a passo {#step-by-step}
+
+Os dois clientes, Node e Go, são usados do mesmo jeito: uma **string de conexão** diz onde está o gateway e por qual
+transporte, uma **credencial** diz quem chama, e cada operação responde o que o gateway responde ou um erro com um
+`code` que é o mesmo em todos os transportes. Estes passos usam o gateway de [Primeiros passos](GettingStarted.md)
+(Northwind, seus passos 1 a 3: `docker compose up -d` e os dados importados):
+
+| Transporte | String de conexão | |
+| --- | --- | --- |
+| REST | `http://localhost:8080/` | a escolha padrão |
+| WebSocket | `ws://localhost:8083/` | uma conexão para todas as operações; assinaturas e notificações |
+| MCP | `mcp+http://localhost:8081/` | quando só a porta do MCP está aberta |
+
+O caminho depois da porta é a **rota do esquema**: `/` ali, porque esse exemplo serve um só esquema na raiz; num gateway
+com vários, `http://gateway:8080/iot/v1`. As credenciais são suas chaves `reader-demo-key` (lê) e `backend-demo-key`
+(também grava).
+
 ## Node: @lambdaorm/data-gateway-client-node {#node}
 
 [`@lambdaorm/data-gateway-client-node`](https://www.npmjs.com/package/@lambdaorm/data-gateway-client-node) é o
@@ -11,25 +28,34 @@ cliente Node: uma API sobre todos os transportes de dados do gateway, escolhido 
 MCP sobre WebSocket), e o mesmo código de erro em todos. Passa a suíte de conformidade do gateway em cada um. Precisa
 do Node 22 ou posterior.
 
-### Em um projeto {#node-in-a-project}
-
-Cria-se o projeto e adiciona-se o cliente (TypeScript e `tsx` só para escrevê-lo em TypeScript):
+### 1. Criar o projeto {#node-in-a-project}
 
 ```sh
 mkdir shop && cd shop
 npm init -y
-npm install @lambdaorm/data-gateway-client-node
-npm install -D typescript tsx @types/node
+npm pkg set type=module
 ```
 
-A string de conexão e a credencial ficam fora do código, no ambiente:
+### 2. Instalar o cliente
 
 ```sh
-export DATA_GATEWAY_URL=http://gateway:8080/northwind
-export DATA_GATEWAY_API_KEY=…
+npm install @lambdaorm/data-gateway-client-node
+npm install -D typescript tsx @types/node        # só para escrevê-lo em TypeScript
 ```
 
-Uma conexão para toda a aplicação, aberta na primeira vez que for necessária, em `src/gateway.ts`:
+### 3. Dizer onde está o gateway
+
+A string de conexão e a credencial ficam fora do código, no ambiente (ou num `.env` que a aplicação lê); o cliente as
+pega dali:
+
+```sh
+export DATA_GATEWAY_URL=http://localhost:8080/
+export DATA_GATEWAY_API_KEY=reader-demo-key
+```
+
+### 4. Uma conexão para a aplicação
+
+`src/gateway.ts`: a conexão é aberta na primeira vez que for necessária e compartilhada por toda a aplicação:
 
 ```ts
 import { connect, DataGatewayClient } from '@lambdaorm/data-gateway-client-node'
@@ -45,11 +71,14 @@ export const closeGateway = async (): Promise<void> => {
 }
 ```
 
-As consultas, com o tipo do seu resultado, em `src/products.ts`:
+### 5. As consultas
+
+`src/products.ts`: uma consulta é o texto de uma expressão do λORM, com suas variáveis à parte; `execute<T>` dá seu
+resultado com um tipo:
 
 ```ts
 import { GatewayError } from '@lambdaorm/data-gateway-client-node'
-import { gateway } from './gateway'
+import { gateway } from './gateway.js'
 
 export interface Product { name: string, price: number }
 
@@ -70,25 +99,66 @@ export const addCategory = async (name: string): Promise<boolean> => {
 }
 ```
 
-E `src/index.ts`, que fecha a conexão ao terminar:
+### 6. Executar
+
+`src/index.ts`, que diz o código de um erro e fecha a conexão ao terminar:
 
 ```ts
-import { closeGateway } from './gateway'
-import { expensiveProducts } from './products'
+import { GatewayError } from '@lambdaorm/data-gateway-client-node'
+import { closeGateway } from './gateway.js'
+import { addCategory, expensiveProducts } from './products.js'
 
-const main = async () => {
+try {
 	console.log(await expensiveProducts(50))
+	console.log(await addCategory('Beverages'))
+} catch (error) {
+	if (!(error instanceof GatewayError)) throw error
+	console.error(`${error.code}: ${error.message}`)
+} finally {
+	await closeGateway()
 }
-
-main().finally(closeGateway)
 ```
 
 ```sh
 npx tsx src/index.ts
 ```
 
-Um servidor mantém a conexão aberta enquanto roda e a fecha ao parar (`process.on('SIGTERM', …)`). Em JavaScript o
-pacote é importado da mesma forma, com `import` ou com `require`.
+```text
+[
+  { name: 'Côte de Blaye', price: 263.5 },
+  { name: 'Thüringer Rostbratwurst', price: 123.79 },
+  { name: 'Mishi Kobe Niku', price: 97 }
+]
+forbidden: the credential "reader" does not have the "write" permission
+```
+
+A leitura funciona; a escrita é recusada **antes de chegar ao banco de dados**, com o código `forbidden`:
+`reader-demo-key` só lê.
+
+### 7. Gravar, e os erros
+
+Com a chave que grava, de novo:
+
+```sh
+DATA_GATEWAY_API_KEY=backend-demo-key npx tsx src/index.ts
+```
+
+Agora `addCategory('Beverages')` responde `false` (a última linha): a categoria existe, o banco a recusa e o cliente dá
+o código `unique`, seja qual for o banco (Postgres `23505`, MySQL `ER_DUP_ENTRY`…). Decide-se por `error.code`;
+`errorName`, `status`, `dbCode` e `suggestions` (os nomes mais próximos, para um nome que não existe) dizem mais.
+
+### 8. Outro transporte
+
+Só muda a string de conexão; o código e os resultados são os mesmos:
+
+```sh
+DATA_GATEWAY_URL=ws://localhost:8083/ npx tsx src/index.ts          # WebSocket
+DATA_GATEWAY_URL=mcp+http://localhost:8081/ npx tsx src/index.ts    # MCP
+```
+
+Um servidor mantém a conexão aberta enquanto roda e a fecha ao parar (`process.on('SIGTERM', …)`). Os imports dos
+arquivos do projeto dizem `.js` (`./gateway.js`), como o TypeScript pede num módulo ES; em CommonJS o pacote é
+importado com `require`, a mesma API.
 
 ### O que mais faz {#node-more}
 
@@ -115,15 +185,31 @@ Seu [README](https://www.npmjs.com/package/@lambdaorm/data-gateway-client-node) 
 operações e os mesmos códigos de erro, e passa a mesma suíte de conformidade. Precisa do Go 1.22 ou posterior; sua
 única dependência é [`github.com/coder/websocket`](https://github.com/coder/websocket).
 
-### Em um projeto {#go-in-a-project}
+### 1. Criar o módulo {#go-in-a-project}
 
 ```sh
 mkdir shop && cd shop
 go mod init example.com/shop
+```
+
+### 2. Adicionar o cliente
+
+```sh
 go get github.com/lambda-orm/data-gateway-client-go
 ```
 
-Com os mesmos `DATA_GATEWAY_URL` e `DATA_GATEWAY_API_KEY` no ambiente, `main.go`:
+### 3. Dizer onde está o gateway
+
+As mesmas variáveis que em Node:
+
+```sh
+export DATA_GATEWAY_URL=http://localhost:8080/
+export DATA_GATEWAY_API_KEY=reader-demo-key
+```
+
+### 4. Conectar, consultar, tratar os erros
+
+`main.go`:
 
 ```go
 package main
@@ -157,25 +243,68 @@ func main() {
 	products, err := gateway.ExecuteInto[[]Product](ctx, gw,
 		"Products.filter(p => p.price > minPrice).map(p => ({ name: p.name, price: p.price })).sort(p => desc(p.price)).page(1, 3)",
 		map[string]any{"minPrice": 50}, nil)
-	var e *gateway.Error
-	if errors.As(err, &e) {
-		log.Fatalf("%s (%s): %s", e.Code, e.Name, e.Message)
+	if err != nil {
+		log.Fatal(err)
 	}
 	for _, p := range products {
 		fmt.Printf("%s %.2f\n", p.Name, p.Price)
 	}
+
+	_, err = gw.Execute(ctx, "Categories.insert()", map[string]any{"name": "Beverages"}, nil)
+	var e *gateway.Error
+	switch {
+	case err == nil:
+		fmt.Println("added")
+	case gateway.IsCode(err, gateway.CodeUnique):
+		fmt.Println("it already exists")
+	case errors.As(err, &e):
+		fmt.Printf("%s: %s\n", e.Code, e.Message)
+	default:
+		log.Fatal(err)
+	}
 }
 ```
+
+### 5. Executar
 
 ```sh
 go run .
 ```
 
-`ExecuteInto[T]` decodifica o resultado em um tipo (um struct por suas tags `json`, um slice deles); `Execute` o dá
-como `any`. Toda operação recebe um `context.Context`, que pode encerrá-la antes do timeout da conexão.
+```text
+Côte de Blaye 263.50
+Thüringer Rostbratwurst 123.79
+Mishi Kobe Niku 97.00
+forbidden: the credential "reader" does not have the "write" permission
+```
 
-Em um servidor, um `*gateway.Client` atende toda a aplicação (pode ser usado de forma concorrente), e cada requisição
-passa seu próprio contexto:
+e com a chave que grava, o banco recusa a categoria repetida, com o mesmo código em todos os bancos:
+
+```sh
+DATA_GATEWAY_API_KEY=backend-demo-key go run .
+```
+
+```text
+Côte de Blaye 263.50
+Thüringer Rostbratwurst 123.79
+Mishi Kobe Niku 97.00
+it already exists
+```
+
+`ExecuteInto[T]` decodifica o resultado num tipo (um struct pelas suas tags `json`, um slice deles); `Execute` o dá como
+`any`. Toda operação recebe um `context.Context`, que pode encerrá-la antes do timeout da conexão.
+
+### 6. Outro transporte
+
+```sh
+DATA_GATEWAY_URL=ws://localhost:8083/ go run .          # WebSocket
+DATA_GATEWAY_URL=mcp+http://localhost:8081/ go run .    # MCP
+```
+
+### 7. Num servidor
+
+Um `*gateway.Client` atende toda a aplicação (pode ser usado de forma concorrente), e cada requisição passa seu próprio
+contexto:
 
 ```go
 func products(gw *gateway.Client) http.HandlerFunc {

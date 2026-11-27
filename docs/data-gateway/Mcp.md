@@ -125,8 +125,8 @@ Since 4.3.0, an agent's writes can [wait for a person](Security.md#approvals) (`
 answers at once that the write is pending, and `approval_status` tells, later, whether it was approved and its result.
 
 
-There is no read-only mode of the transport: what an agent can do is decided by **its credential's permissions**. An
-agent that only queries gets a credential with `[ read ]`: it can run selects but not write, run scripts, queue or
+There is no read-only mode of the transport: what an agent can do is decided by **the roles of its credential**. An
+agent that only queries gets a credential whose role has `[ read ]`: it can run selects but not write, run scripts, queue or
 import, by any transport. Besides: `schemas[].transports` to keep a schema out of MCP, `mcp.tools.exclude`, the hints,
 and the permissions of the database user (the guarantee underneath). Every write an agent makes is
 [audited](Security.md#audit) with the name of its credential and `"transport": "mcpHttp"`.
