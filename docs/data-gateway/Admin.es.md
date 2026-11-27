@@ -14,20 +14,26 @@ puede cambiar los esquemas ni la estructura de las bases a través de la gateway
 ```yaml
 transports:
   management:
-    port: 9090               # sin un puerto, no hay administración (ni IDE)
+    port: 9090               # without a port, no administration (and no IDE)
 admin:
-  commandTimeoutMs: 600000   # cuánto puede tardar un comando
-  maxFileBytes: 2MB          # el archivo más grande que se puede escribir
+  commandTimeoutMs: 600000   # how long a command may take
+  maxFileBytes: 2MB          # the largest file that can be written
+authorization:
+  roles:
+    modeler: { permissions: [ read, schemaRead, schemaWrite, schemaAdmin, workbenchWrite, ddl, build ] }
+    analyst: { permissions: [ read, workbenchWrite ] }
+    admin:   { permissions: [ read, roles, observability, persist, sessionAdmin ] }
 authentication:
   adapter: local
   type: apikey
   keys:
-    - { name: modeler, value: $MODELER_KEY, permissions: [ read, schemaRead, schemaWrite, schemaAdmin, workbenchWrite, ddl, build ] }
-    - { name: analyst, value: $ANALYST_KEY, permissions: [ read, workbenchWrite ] }
+    - { name: modeler, value: $MODELER_KEY, roles: [ modeler ] }
+    - { name: analyst, value: $ANALYST_KEY, roles: [ analyst ] }
+    - { name: ops,     value: $OPS_KEY,     roles: [ admin ] }
 ```
 
 La administración responde en `/admin` del [transporte `management`](Transports.md#management), con su
-autenticación; `http` no la tiene. Sus permisos **nunca se dan por defecto**: una credencial sin lista de permisos tiene solo los de los datos.
+autenticación; `http` no la tiene. Sus permisos **nunca se dan por defecto**: una credencial los tiene solo cuando uno de sus [roles](Security.md#roles) los da.
 
 | Permiso | Permite |
 | --- | --- |
@@ -38,6 +44,9 @@ autenticación; `http` no la tiene. Sus permisos **nunca se dan por defecto**: u
 | `ddl` | cambiar la estructura de las bases de un stage (`push`, `drop`) |
 | `build` | generar el código del dominio en `src/` del workspace |
 | `sessionAdmin` | ver todas las [sesiones](Transports.md#sessions) de `management` (quién está conectado) y revocarlas |
+| `roles` | los [roles](#roles) del estado, y quién puede entrar (`/admin/access`, `/admin/scopes`) |
+| `observability` | (5.0.0) la [observabilidad](#observability) del gateway |
+| `persist` | (5.0.0) [dónde se guarda el estado](#persist) |
 
 Con `authentication: none` nadie administra, salvo con `admin.allowAnonymous: true` (solo desarrollo local).
 
@@ -184,16 +193,62 @@ las lista, cada una con quién la pidió, su consulta o script, sus datos y las 
 …/approvals/{id}/approve` la corre como quien la pidió, `…/reject { reason }` la descarta. Las dos necesitan `approve`,
 y nunca por quien la pidió.
 
-## Desde 4.4.0 {#since-4-4-0}
+## Los roles {#roles}
 
-Los [roles](Security.md#roles), con el permiso `roles`: `GET /admin/roles` lista los de la configuración (solo lectura)
-y los guardados en el [estado de la gateway](Configuration.md#state); `PUT /admin/roles/{nombre}` `{ schema?, config:
-{ permissions, views, stages, maxRows, approval, scope }, reason? }` agrega un rol o extiende uno de la configuración (en
-todos los esquemas, o en uno); `DELETE /admin/roles/{nombre}?schema=` quita uno del estado; `GET /admin/roles/changes`
-dice quién cambió qué, cuándo, antes y después.
+**Desde data-gateway 4.4.0** (<span id="since-4-4-0"></span>un rol del gateway con sus `schemas` desde 5.0.0). Los
+[roles](Security.md#roles), con el permiso `roles`: `GET /admin/roles` lista los de la configuración (de solo lectura) y
+los guardados en el [estado del gateway](Configuration.md#state); `PUT /admin/roles/{name}` `{ config: { permissions,
+schemas, views, stages, maxRows, approval, scope }, reason? }` agrega un rol o extiende uno de la configuración;
+`DELETE /admin/roles/{name}` quita uno del estado; `GET /admin/roles/changes` dice quién cambió qué, cuándo, antes y
+después.
 
-- Nadie da un permiso que no tiene, y un rol `locked` en la configuración no se extiende.
+- Nadie da un permiso que no tiene, nadie se quita `roles` si es el último, y un rol `locked` en la configuración no se
+  extiende.
+- **Un rol dice sus esquemas** (5.0.0): un `PUT` con `schema` es `400`. Un rol que la 4.4 guardó para un esquema ya no
+  vale: se lista como ignorado, para quitarlo (`DELETE /admin/roles/{name}?schema=`) y agregarlo de nuevo con sus
+  `schemas`. `GET /admin/scopes` dice las vistas y stages de cada esquema servido, para elegirlos.
 - Un cambio vale enseguida en la réplica que lo guarda, y en las otras dentro de `state.refresh`.
+
+## Quién entra {#access}
+
+**Desde data-gateway 5.0.0.**
+
+- **`GET /admin/me`** (cualquier credencial, sobre sí misma): su nombre, su contexto y cada uno de sus roles como vale
+  aquí, con sus permisos, esquemas, vistas y stages (la primera de cada uno, la de quien no elige). La página de una
+  conexión del [IDE](../ide/Connections.md) lo muestra.
+- **`GET /admin/access`** (permiso `roles`): quién puede entrar, como lo dice la configuración: las autenticaciones de
+  cada nivel (global, transporte, esquema), cada clave, token o usuario con su nombre, sus roles y su contexto, el emisor
+  y los claims de un método `jwt`, y todos los permisos que hay. **Nunca un secreto.**
+
+## La observabilidad {#observability}
+
+**Desde data-gateway 5.0.0,** con el permiso `observability`: `GET /admin/observability` da la
+[observabilidad](Configuration.md#observability) vigente y de dónde viene; `PUT /admin/observability` `{ config,
+reason }` reemplaza secciones enteras (`exporter`, `traces`, `metrics`, `logs`, `explore`), revisadas como el YAML (el
+exporter nunca lleva headers: van en `OTEL_EXPORTER_OTLP_HEADERS`); `DELETE` vuelve al YAML.
+
+- Se guarda en el estado del gateway, sobre el YAML, con quién la cambió y por qué.
+- **Se aplica enseguida:** el edge se reinicia y los workers de los esquemas cuyo SDK cambia se recargan blue-green (las
+  peticiones en curso terminan en el viejo), en todas las réplicas.
+
+## Dónde se guarda el estado {#persist}
+
+**Desde data-gateway 5.0.0.** `GET /admin/state` (permiso `roles` o `persist`) dice dónde guarda el gateway su
+[estado](Configuration.md#state) (el SQLite del volumen, una base por λORM, memoria), cómo se lee, cada cuánto lo releen
+las réplicas, si se puede leer ahora, y el `lambdaORM.yaml` de su esquema de sistema; la conexión sin sus secretos. Con
+el permiso `persist` se cambia:
+
+- `PUT /admin/persist/connection` `{ dialect, connection, reason }`: otra base (`SQLite`, `PostgreSQL`, `MySQL`,
+  `MariaDB`, `SqlServer`, `Oracle`; la conexión puede nombrar variables, `$STATE_DB`).
+- `PUT /admin/persist/schema` `{ text, reason }`: el `lambdaORM.yaml` del estado editado, del que solo cambia el mapping
+  (la tabla de cada entidad y sus columnas).
+- `DELETE /admin/persist`: volver a `state` del YAML.
+- Se guarda en `.data-gateway/persist.yaml` del volumen (necesita `orm.workspacePath`), que reemplaza `state.source` y
+  `state.mapping` del YAML al arrancar.
+- **El estado se copia con λORM:** `push` de las tablas en el lugar nuevo, `export` del actual e `import` en el nuevo.
+  Una base nueva que ya tiene estado se rechaza (`409`); un SQLite que tenía uno se guarda aparte (`.bak-<hora>`); si la
+  copia falla, nada cambia. Después el gateway reinicia su edge y recarga los esquemas con la fuente nueva; las sesiones
+  siguen (se copiaron) y las tablas viejas no se borran.
 
 ## Por MCP {#over-mcp}
 

@@ -2,7 +2,8 @@
 
 A connection is a gateway the IDE works with: the address of its `management` port and a credential. The IDE has no
 login and no home page: it keeps its connections, and the first time it opens on a **New connection**. Several
-connections can be open at once, each with its schemas in the [explorer](Explorer.md) and its tabs side by side.
+connections can be open at once, each one a tree of the [explorer](Explorer.md): its **Administration** (what its
+credential may administer of the gateway) and its **Schemas**, with their tabs side by side.
 
 Add one connection per gateway and credential you use: a local one, the one of a test environment, the same gateway
 with a credential that only reads and another one that administers.
@@ -19,7 +20,6 @@ The **+** next to **Connections**, at the top of the explorer:
 | **Authentication** | **API key** (its **Header**, default `X-Api-Key`, and its **Key**), **Bearer token (JWT)** (its **Token**: a key of the gateway or the [token of an identity provider](../data-gateway/Security.md#jwt); when it expires the connection says so and asks for a new one), **Basic (user and password)**, **OpenID Connect (sign in)** (IDE 1.3.0: its **Issuer**, **Client ID** and **Scopes**; see below) or **None** |
 | **Remember the key in this browser** | kept with the connection; otherwise only in that tab of the browser, and asked again after closing it |
 | **Other URLs of its transports** (folded) | the **REST URL**, **WebSocket URL** and **MCP URL**, only when the IDE doesn't reach them at the ports the gateway tells (a proxy in front, another network) |
-| **Observability** (folded) | the **Grafana URL** and its **Tempo datasource (uid)** (`tempo` by default): an entity then shows a link to its traces ([Entities](Entities.md)) |
 
 **OpenID Connect (sign in)**: the page of the connection has **Sign in**, which opens the login of the identity
 provider (in the browser, a window of its own; in the desktop app, the browser of the system, back to the app); the
@@ -56,13 +56,70 @@ The problems it tells, in red under its name:
 
 ## Its page
 
-A click on its name opens **Connection: name**, with four tabs.
+A click on its name opens **Connection: name** (since IDE 1.5.0, only the connection; its tools, roles, sessions and
+writes that wait are in its [Administration](#administration)):
 
-### Connection
+- **The form** above, with **Save** (saving it unchanged connects it again, after a revocation) and **Remove**, which
+  asks first and removes it from the IDE only: nothing is removed from the gateway, and its tabs close.
+- **Who I am here** (data-gateway 5.0, `GET /admin/me`): the user of the credential, its context and each of its roles
+  as it applies, with its permissions, its schemas and, in each one, its views and stages (the one used when nothing is
+  chosen, marked). In each schema the permissions are those of the roles that allow the view and the stage chosen. A
+  role the gateway doesn't have says *unknown: it gives nothing*. With a gateway before 5.0, its name and permissions.
 
-The form above, with **Save** (saving it unchanged connects it again, after a revocation) and **Remove**, which asks
-first and removes it from the IDE only: nothing is removed from the gateway, and its tabs close. Under the form, who
-the credential is: its name, the URL and its authentication.
+## Its administration {#administration}
+
+**Since IDE 1.5.0, with data-gateway 5.0.** In the explorer, each connection has the node **Administration** above its
+**Schemas**, with what its credential may administer; what needs a permission it doesn't have doesn't show:
+
+```text
+northwind  http://data-gateway:9090
+├─ Administration
+│  ├─ Roles                    (roles)        each role a node: Edit, Remove
+│  ├─ Access                   (roles)
+│  ├─ Persist                  (roles or persist)
+│  │  ├─ Config                its lambdaORM.yaml, in Monaco
+│  │  └─ Connection            (persist)
+│  ├─ Sessions
+│  ├─ Writes that wait         (approve)
+│  ├─ Tools                    REST API · WebSocket · MCP
+│  └─ Observability            (observability)   Metrics · Logs · Traces
+└─ Schemas
+   └─ /
+```
+
+### Roles {#roles}
+
+**Permissions by role:** a role by row and a permission by column (the configuration and the state together), with its
+schemas. **+ Add a role** opens a new one. Each role is a node of its own: all it gives, its permissions and, by schema,
+its views and stages with the defaults marked, where it comes from (*its configuration*, or who changed it and when),
+with **Edit** and **Remove**.
+
+**Edit** has a box per permission (those its configuration gives, checked and fixed: what is saved extends a role of
+the configuration, never takes from it), its **Schemas** (none: every schema) and, for each schema chosen, its views
+and stages to check with its **Default view** and **Default stage**, **Most rows**, *Its writes wait for a person to
+approve them* and **Why (optional)**. A role *locked* in the configuration can't be extended; a role that 4.4 kept for
+one schema is marked *of one schema (4.4): it doesn't apply; remove it*. **Its changes** says who changed what and when.
+See [roles](../data-gateway/Security.md#roles).
+
+### Access {#access}
+
+**Access: keys and tokens:** who may come in, as the configuration says it (`GET /admin/access`): by **Where**
+(*everywhere*, a transport, a schema) each **Method** and **Credential** with its roles and its **Context**; a method
+`jwt` says its issuer and the claim of its roles. Never a secret.
+
+### Persist {#persist}
+
+Where the gateway keeps its administration (the sessions, the roles, its observability, the writes that wait and the
+changes of each): its database or file, who reads and writes it, who says it (*state.source of the configuration*,
+*by default: the SQLite of the volume*, *the administration*), how often the replicas read it again, whether it is
+required and whether it can be read now.
+
+- **Config:** the `lambdaORM.yaml` of the administration, in Monaco: the entities, the mapping and the source of the
+  state as λORM uses them. With `persist` its mapping can be edited (the table of each entity and its columns):
+  **Save the mapping** copies the state to the new tables and the gateway restarts.
+- **Connection** (with `persist`): **Now**, the database of the moment, and **Another database**: **Copy the state and
+  move** copies it there with λORM and the gateway restarts with it (open connections reconnect); **Back to the
+  configuration** undoes it. See [where the state is kept](../data-gateway/Admin.md#persist).
 
 ### Tools {#tools}
 
@@ -79,38 +136,16 @@ the credential is: its name, the URL and its authentication.
 
 ![Tools](images/ide-connection-tools.png)
 
-### Roles {#roles}
+### Observability {#observability}
 
-What the credential may do, in two groups, **Data** and **Administration**, each with how many are granted
-(`1 / 5`): each permission, **granted** or **not granted**, with what it allows.
-
-| Permission | Allows |
-| --- | --- |
-| `read` | queries that only select, the schema, plans, metadata and exports of a stage |
-| `write` | queries that insert, update, delete, upsert or merge rows |
-| `script` | run scripts |
-| `queue` | send queries to the queue, to run later |
-| `stageImport` | import data into a stage |
-| `schemaRead` | read the `lambdaORM.yaml` of each workspace (without secrets) and validate it |
-| `schemaWrite` | change the `lambdaORM.yaml`: entities, sources, stages…, from the forms or the YAML |
-| `schemaAdmin` | create and remove schemas, set the variables of their `.env` |
-| `workbenchWrite` | save queries, scripts and diagrams in the projects of the workspaces |
-| `ddl` | change the structure of the databases of a stage (push, drop) |
-| `build` | generate the code of the domain (model and repositories) in `src/` of the workspace |
-| `sessionAdmin` | see every session of `management` and revoke those of other credentials |
-| `approve` | approve or reject the writes that wait for a person |
-| `destructive` | with `ddl`, a push or a migration that loses data (data-gateway 4.4) |
-| `roles` | see and change the roles kept in the state of the gateway (data-gateway 4.4) |
-
-![Roles](images/ide-connection-roles.png)
-
-**Roles of the gateway** (with `roles`, data-gateway 4.4, IDE 1.4.0): below, the [roles](../data-gateway/Security.md#roles)
-of the gateway, those of its configuration (read only) and those of its state. **+ Add a role**; **Extend** one of the
-configuration with more permissions, views or stages, in every schema or in one; **Edit** or **Remove** one of the
-state, with a reason. **Its changes** says who changed what and when.
-
-The permissions are given to each credential in the configuration of the gateway
-([Security](../data-gateway/Security.md)).
+With `observability`: what the gateway sends and where, in three nodes, **Metrics** (*Send by OTLP*, *Every (ms)*,
+*lambdaorm.entity in the metrics*; `/metrics` for Prometheus is served always), **Logs** (*To the console*, its
+**Level**, by OTLP) and **Traces** (*Sampled (0–1)*, *Follow the decision of the caller*, *Text of the queries in the
+spans*); **Where it goes: the OTLP exporter** (its **Endpoint**; its headers only in `OTEL_EXPORTER_OTLP_HEADERS`) and
+**Where it is seen** (**Grafana URL**, the datasources of **Tempo**, **Prometheus** and **Loki**, the **Organization of
+Grafana**), with **Open in Grafana**. **Save and apply** keeps it over the configuration and applies it at once (the
+edge restarts and the schemas whose telemetry changes reload); **Back to the configuration** undoes it. The link of an
+entity to its traces ([Entities](Entities.md)) comes from here, not from each IDE.
 
 ### Writes that wait {#approvals}
 

@@ -44,6 +44,13 @@ A barra termina com quantas entidades e relações ele mostra (`entidades: 6 · 
 A aba **Diagrama** de uma [entidade](Entities.md#diagram) a desenha com as suas vizinhas, somente leitura: **entidade**
 o centraliza em outra, e a profundidade vai até **2 níveis** ou o **modelo inteiro**.
 
+Suas **opções** (IDE 1.5.0) escolhem o que é desenhado: os nomes das relações, suas entidades relacionadas e as
+entidades que estende (marcadas no início).
+
+**Uma entidade abstrata** (IDE 1.5.0) é desenhada à parte em todo diagrama: uma borda tracejada, um cabeçalho da sua
+própria cor, seu nome em itálico com «abstract»; as entidades que a estendem chegam a ela com uma linha tracejada. Assim
+fica também no SVG e no PNG exportados, no tema claro e no escuro.
+
 ## O diagrama de um stage {#the-diagram-of-a-stage}
 
 Cada stage de um esquema tem um diagrama de para onde os seus sources levam cada entidade: o gateway, os seus sources

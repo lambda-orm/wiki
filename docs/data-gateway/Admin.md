@@ -18,17 +18,24 @@ transports:
 admin:
   commandTimeoutMs: 600000   # how long a command may take
   maxFileBytes: 2MB          # the largest file that can be written
+authorization:
+  roles:
+    modeler: { permissions: [ read, schemaRead, schemaWrite, schemaAdmin, workbenchWrite, ddl, build ] }
+    analyst: { permissions: [ read, workbenchWrite ] }
+    admin:   { permissions: [ read, roles, observability, persist, sessionAdmin ] }
 authentication:
   adapter: local
   type: apikey
   keys:
-    - { name: modeler, value: $MODELER_KEY, permissions: [ read, schemaRead, schemaWrite, schemaAdmin, workbenchWrite, ddl, build ] }
-    - { name: analyst, value: $ANALYST_KEY, permissions: [ read, workbenchWrite ] }
+    - { name: modeler, value: $MODELER_KEY, roles: [ modeler ] }
+    - { name: analyst, value: $ANALYST_KEY, roles: [ analyst ] }
+    - { name: ops,     value: $OPS_KEY,     roles: [ admin ] }
 ```
 
 The administration answers at `/admin` of the [`management` transport](Transports.md#management), with its
 authentication; `http` doesn't have it. Its
-permissions are **never given by default**: a credential without a list of permissions gets those of the data only.
+permissions are **never given by default**: a credential has them only when one of its [roles](Security.md#roles) gives
+them.
 
 | Permission | Allows |
 | --- | --- |
@@ -39,6 +46,9 @@ permissions are **never given by default**: a credential without a list of permi
 | `ddl` | change the structure of the databases of a stage (`push`, `drop`) |
 | `build` | generate the code of the domain in `src/` of the workspace |
 | `sessionAdmin` | see every [session](Transports.md#sessions) of `management` (who is connected) and revoke them |
+| `roles` | the [roles](#roles) of the state, and who may come in (`/admin/access`, `/admin/scopes`) |
+| `observability` | (5.0.0) the [observability](#observability) of the gateway |
+| `persist` | (5.0.0) [where the state is kept](#persist) |
 
 With `authentication: none`, nobody administers unless `admin.allowAnonymous: true` (local development only).
 
@@ -184,16 +194,62 @@ lists them, each with who asked, its query or script, its data and the sentences
 …/approvals/{id}/approve` runs it as who asked, `…/reject { reason }` drops it. Both need `approve`, and never by who
 asked.
 
-## Since 4.4.0 {#since-4-4-0}
+## The roles {#roles}
 
-The [roles](Security.md#roles), with the permission `roles`: `GET /admin/roles` lists those of the configuration (read
-only) and those kept in the [state of the gateway](Configuration.md#state); `PUT /admin/roles/{name}` `{ schema?,
-config: { permissions, views, stages, maxRows, approval, scope }, reason? }` adds a role or extends one of the
-configuration (in every schema, or in one); `DELETE /admin/roles/{name}?schema=` removes one of the state;
-`GET /admin/roles/changes` says who changed what, when, before and after.
+**Since data-gateway 4.4.0** (<span id="since-4-4-0"></span>a role of the gateway with its `schemas` since 5.0.0). The
+[roles](Security.md#roles), with the permission `roles`: `GET /admin/roles` lists those of the configuration (read
+only) and those kept in the [state of the gateway](Configuration.md#state); `PUT /admin/roles/{name}` `{ config: {
+permissions, schemas, views, stages, maxRows, approval, scope }, reason? }` adds a role or extends one of the
+configuration; `DELETE /admin/roles/{name}` removes one of the state; `GET /admin/roles/changes` says who changed what,
+when, before and after.
 
-- Nobody gives a permission it doesn't have, and a role `locked` in the configuration is not extended.
+- Nobody gives a permission it doesn't have, nobody removes its own `roles` if it is the last one, and a role `locked`
+  in the configuration is not extended.
+- **A role says its schemas** (5.0.0): a `PUT` with `schema` is `400`. A role that 4.4 kept for one schema doesn't apply
+  any more: it is listed as ignored, to remove it (`DELETE /admin/roles/{name}?schema=`) and add it again with its
+  `schemas`. `GET /admin/scopes` tells the views and stages of every schema served, to choose them.
 - A change applies at once in the replica that saves it, and in the others within `state.refresh`.
+
+## Who comes in {#access}
+
+**Since data-gateway 5.0.0.**
+
+- **`GET /admin/me`** (any credential, about itself): its name, its context and each of its roles as it applies here,
+  with its permissions, schemas, views and stages (the first of each, the one of who doesn't choose). The page of a
+  connection of the [IDE](../ide/Connections.md) shows it.
+- **`GET /admin/access`** (permission `roles`): who may come in, as the configuration says it: the authentications of
+  every level (global, transport, schema), each key, token or user with its name, its roles and its context, the issuer
+  and the claims of a method `jwt`, and every permission there is. **Never a secret.**
+
+## The observability {#observability}
+
+**Since data-gateway 5.0.0,** with the permission `observability`: `GET /admin/observability` gives the
+[observability](Configuration.md#observability) in force and where it comes from; `PUT /admin/observability` `{
+config, reason }` replaces sections of it whole (`exporter`, `traces`, `metrics`, `logs`, `explore`), checked as the
+YAML (the exporter never carries headers: they go in `OTEL_EXPORTER_OTLP_HEADERS`); `DELETE` goes back to the YAML.
+
+- It is kept in the state of the gateway, over the YAML, with who changed it and why.
+- **Applied at once:** the edge restarts and the schema workers whose SDK changes are reloaded blue-green (the requests
+  in flight end in the old one), in every replica.
+
+## Where the state is kept {#persist}
+
+**Since data-gateway 5.0.0.** `GET /admin/state` (permission `roles` or `persist`) tells where the gateway keeps its
+[state](Configuration.md#state) (the SQLite of the volume, a database through λORM, memory), how it is read, how often
+the replicas read it again, whether it can be read now, and the `lambdaORM.yaml` of its system schema; the connection
+without its secrets. With the permission `persist` it is changed:
+
+- `PUT /admin/persist/connection` `{ dialect, connection, reason }`: another database (`SQLite`, `PostgreSQL`, `MySQL`,
+  `MariaDB`, `SqlServer`, `Oracle`; the connection may name variables, `$STATE_DB`).
+- `PUT /admin/persist/schema` `{ text, reason }`: the `lambdaORM.yaml` of the state edited, of which only the mapping
+  changes (the table of each entity and its columns).
+- `DELETE /admin/persist`: back to `state` of the YAML.
+- It is kept in `.data-gateway/persist.yaml` of the volume (it needs `orm.workspacePath`), which replaces
+  `state.source` and `state.mapping` of the YAML on starting.
+- **The state is copied with λORM:** `push` of the tables in the new place, `export` of the current one and `import` in
+  the new. A new database that already has a state is refused (`409`); a SQLite that had one is kept aside
+  (`.bak-<time>`); if the copy fails, nothing changes. Then the gateway restarts its edge and reloads the schemas with
+  the new source; the sessions go on (they were copied), and the old tables are not removed.
 
 ## Over MCP
 

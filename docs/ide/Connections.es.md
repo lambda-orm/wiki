@@ -2,8 +2,8 @@
 
 Una conexión es un gateway con el que trabaja el IDE: la dirección de su puerto `management` y una credencial. El IDE no
 tiene login ni página de inicio: guarda sus conexiones, y la primera vez se abre en una **Nueva conexión**. Puede haber
-varias conexiones abiertas a la vez, cada una con sus esquemas en el [explorador](Explorer.md) y sus pestañas una al
-lado de otra.
+varias conexiones abiertas a la vez, cada una un árbol del [explorador](Explorer.md): su **Administración** (lo que su credencial puede administrar
+del gateway) y sus **Esquemas**, con sus pestañas una al lado de la otra.
 
 Agrega una conexión por cada gateway y credencial que uses: uno local, el de un entorno de pruebas, el mismo gateway
 con una credencial que solo lee y otra que administra.
@@ -20,7 +20,6 @@ El **+** junto a **Conexiones**, arriba del explorador:
 | **Autenticación** | **API key** (su **Header**, por defecto `X-Api-Key`, y su **Clave**), **Token Bearer (JWT)** (su **Token**: una clave del gateway o el [token de un proveedor de identidad](../data-gateway/Security.md#jwt); cuando vence la conexión lo dice y pide uno nuevo), **Basic (usuario y contraseña)**, **OpenID Connect (iniciar sesión)** (IDE 1.3.0: su **Emisor**, **Client ID** y **Scopes**; ver abajo) o **Ninguna** |
 | **Recordar la clave en este navegador** | se guarda con la conexión; si no, solo en esa pestaña del navegador, y se vuelve a pedir después de cerrarla |
 | **Otras URLs de sus transportes** (plegado) | la **URL de REST**, la **URL del WebSocket** y la **URL del MCP**, solo cuando el IDE no los alcanza en los puertos que dice el gateway (un proxy adelante, otra red) |
-| **Observabilidad** (plegado) | la **URL de Grafana** y su **Datasource de Tempo (uid)** (`tempo` por defecto): entonces una entidad muestra un enlace a sus trazas ([Entidades](Entities.md)) |
 
 **OpenID Connect (iniciar sesión)**: la página de la connection tiene **Iniciar sesión**, que abre el login del
 proveedor de identidad (en el navegador, una ventana propia; en la app de escritorio, el navegador del sistema, que
@@ -57,13 +56,70 @@ Los problemas que indica, en rojo debajo de su nombre:
 
 ## Su página {#its-page}
 
-Un clic en su nombre abre **Conexión: nombre**, con cuatro pestañas.
+Un clic en su nombre abre **Conexión: nombre** (desde IDE 1.5.0, solo la conexión; sus herramientas, roles, sesiones y
+escrituras que esperan están en su [Administración](#administration)):
 
-### Conexión {#connection}
+- **El formulario** arriba, con **Guardar** (guardarla sin cambios la conecta de nuevo, después de una revocación) y
+  **Quitar**, que pregunta antes y la quita solo del IDE: no se quita nada del gateway, y sus pestañas se cierran.
+- **Quién soy acá** (data-gateway 5.0, `GET /admin/me`): el usuario de la credencial, su contexto y cada uno de sus roles
+  como vale, con sus permisos, sus esquemas y, en cada uno, sus vistas y stages (marcado el que se usa cuando no se elige
+  nada). En cada esquema los permisos son los de los roles que permiten la vista y el stage elegidos. Un rol que el
+  gateway no tiene dice *desconocido: no da nada*. Con un gateway anterior a 5.0, su nombre y sus permisos.
 
-El formulario de arriba, con **Guardar** (guardarlo sin cambios lo vuelve a conectar, después de una revocación) y
-**Quitar**, que pregunta antes y la quita solo del IDE: no se borra nada del gateway, y se cierran sus pestañas. Debajo
-del formulario, quién es la credencial: su nombre, la URL y su autenticación.
+## Su administración {#administration}
+
+**Desde IDE 1.5.0, con data-gateway 5.0.** En el explorador, cada conexión tiene el nodo **Administración** sobre sus
+**Esquemas**, con lo que su credencial puede administrar; lo que necesita un permiso que no tiene no se muestra:
+
+```text
+northwind  http://data-gateway:9090
+├─ Administración
+│  ├─ Roles                    (roles)        cada rol un nodo: Editar, Quitar
+│  ├─ Acceso                   (roles)
+│  ├─ Persistencia             (roles o persist)
+│  │  ├─ Config                su lambdaORM.yaml, en Monaco
+│  │  └─ Conexión              (persist)
+│  ├─ Sesiones
+│  ├─ Escrituras que esperan   (approve)
+│  ├─ Herramientas             API REST · WebSocket · MCP
+│  └─ Observabilidad           (observability)   Métricas · Logs · Trazas
+└─ Esquemas
+   └─ /
+```
+
+### Roles {#roles}
+
+**Permisos por rol:** un rol por fila y un permiso por columna (la configuración y el estado juntos), con sus esquemas.
+**+ Agregar un rol** abre uno nuevo. Cada rol es un nodo propio: todo lo que da, sus permisos y, por esquema, sus vistas
+y stages con los de por defecto marcados, de dónde viene (*su configuración*, o quién lo cambió y cuándo), con
+**Editar** y **Quitar**.
+
+**Editar** tiene una casilla por permiso (los que da su configuración, marcados y fijos: lo que se guarda extiende un rol
+de la configuración, nunca le quita), sus **Esquemas** (ninguno: todos los esquemas) y, para cada esquema elegido, sus
+vistas y stages para marcar con su **Vista por defecto** y su **Stage por defecto**, **Máximo de filas**, *Sus escrituras
+esperan que una persona las apruebe* y **Por qué (opcional)**. Un rol *bloqueado* en la configuración no se puede
+extender; un rol que la 4.4 guardó para un esquema se marca *de un esquema (4.4): no se aplica; quitalo*. **Sus
+cambios** dice quién cambió qué y cuándo. Ver [roles](../data-gateway/Security.md#roles).
+
+### Acceso {#access}
+
+**Acceso: keys y tokens:** quién puede entrar, como lo dice la configuración (`GET /admin/access`): por **Dónde** (*en
+todo*, un transporte, un esquema) cada **Método** y **Credencial** con sus roles y su **Contexto**; un método `jwt` dice
+su emisor y el claim de sus roles. Nunca un secreto.
+
+### Persistencia {#persist}
+
+Dónde guarda el gateway su administración (las sesiones, los roles, su observabilidad, las escrituras que esperan y los
+cambios de cada uno): su base o archivo, quién lo lee y escribe, quién lo dice (*state.source de la configuración*, *por
+defecto: el SQLite del volumen*, *la administración*), cada cuánto lo releen las réplicas, si es obligatorio y si se
+puede leer ahora.
+
+- **Config:** el `lambdaORM.yaml` de la administración, en Monaco: las entidades, el mapping y la fuente del estado como
+  los usa λORM. Con `persist` se puede editar su mapping (la tabla de cada entidad y sus columnas): **Guardar el
+  mapping** copia el estado a las tablas nuevas y el gateway se reinicia.
+- **Conexión** (con `persist`): **Ahora**, la base del momento, y **Otra base**: **Copiar el estado y mover** lo copia
+  ahí con λORM y el gateway se reinicia con ella (las conexiones abiertas se reconectan); **Volver a la configuración**
+  lo deshace. Ver [dónde se guarda el estado](../data-gateway/Admin.md#persist).
 
 ### Herramientas {#tools}
 
@@ -80,38 +136,16 @@ por **Otras URLs de sus transportes**.
 
 ![Herramientas](images/ide-connection-tools.png)
 
-### Roles {#roles}
+### Observabilidad {#observability}
 
-Lo que puede hacer la credencial, en dos grupos, **Datos** y **Administración**, cada uno con cuántos están otorgados
-(`1 / 5`): cada permiso, **otorgado** o **no otorgado**, con lo que permite.
-
-| Permiso | Permite |
-| --- | --- |
-| `read` | consultas que solo seleccionan, el esquema, planes, metadatos y exportar un stage |
-| `write` | consultas que insertan, actualizan, borran, hacen upsert o merge de filas |
-| `script` | ejecutar scripts |
-| `queue` | enviar consultas a la cola, para ejecutarlas después |
-| `stageImport` | importar datos en un stage |
-| `schemaRead` | leer el `lambdaORM.yaml` de cada workspace (sin secretos) y validarlo |
-| `schemaWrite` | cambiar el `lambdaORM.yaml`: entidades, sources, stages…, desde los formularios o el YAML |
-| `schemaAdmin` | crear y eliminar esquemas, definir las variables de su `.env` |
-| `workbenchWrite` | guardar consultas, scripts y diagramas en los proyectos de los workspaces |
-| `ddl` | cambiar la estructura de las bases de datos de un stage (push, drop) |
-| `build` | generar el código del dominio (modelo y repositorios) en `src/` del workspace |
-| `sessionAdmin` | ver todas las sesiones de `management` y revocar las de otras credenciales |
-| `approve` | aprobar o rechazar las escrituras que esperan a una persona |
-| `destructive` | con `ddl`, un push o una migración que pierde datos (data-gateway 4.4) |
-| `roles` | ver y cambiar los roles guardados en el estado de la gateway (data-gateway 4.4) |
-
-![Roles](images/ide-connection-roles.png)
-
-**Roles de la gateway** (con `roles`, data-gateway 4.4, IDE 1.4.0): debajo, los [roles](../data-gateway/Security.md#roles)
-de la gateway, los de su configuración (solo lectura) y los de su estado. **+ Agregar un rol**; **Extender** uno de la
-configuración con más permisos, vistas o stages, en todos los esquemas o en uno; **Editar** o **Quitar** uno del estado,
-con un motivo. **Sus cambios** dice quién cambió qué y cuándo.
-
-Los permisos se dan a cada credencial en la configuración del gateway
-([Seguridad](../data-gateway/Security.md)).
+Con `observability`: lo que envía el gateway y a dónde, en tres nodos, **Métricas** (*Enviar por OTLP*, *Cada (ms)*,
+*lambdaorm.entity en las métricas*; `/metrics` para Prometheus se sirve siempre), **Logs** (*A la consola*, su
+**Nivel**, por OTLP) y **Trazas** (*Muestreo (0–1)*, *Seguir la decisión de quien llama*, *Texto de las consultas en
+los spans*); **A dónde va: el exportador OTLP** (su **Endpoint**; sus headers solo en `OTEL_EXPORTER_OTLP_HEADERS`) y
+**Dónde se ve** (**URL de Grafana**, los datasources de **Tempo**, **Prometheus** y **Loki**, la **Organización de
+Grafana**), con **Abrir en Grafana**. **Guardar y aplicar** lo guarda sobre la configuración y lo aplica enseguida (el
+edge se reinicia y los esquemas cuya telemetría cambia se recargan); **Volver a la configuración** lo deshace. El
+enlace de una entidad a sus trazas ([Entidades](Entities.md)) viene de aquí, no de cada IDE.
 
 ### Escrituras que esperan {#approvals}
 

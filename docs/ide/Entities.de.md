@@ -10,14 +10,30 @@ das ist. Ihre Schaltflächen:
 
 | Schaltfläche | Tut | Braucht |
 | --- | --- | --- |
-| **Traces anzeigen** | öffnet die Traces dieser Entität in Grafana (Tempo, gefiltert nach `lambdaorm.entity`) | die **Beobachtbarkeit** der [Verbindung](Connections.md#a-new-connection) |
+| **Traces anzeigen** | öffnet die Traces dieser Entität in Grafana (Tempo, gefiltert nach `lambdaorm.entity`) | `observability.explore` des Gateways ([Observability](Connections.md#observability); vor IDE 1.5.0 der Verbindung) |
 | **Entfernen** | sagt, was die Entität verwendet, und entfernt sie nach Bestätigung aus dem Schema | `schemaWrite` |
 | **Bearbeiten** | öffnet ihr [Formular](Administration.md#forms), schon im Bearbeitungsmodus: **Abbrechen** oder **Speichern** kehren zu dieser Ansicht zurück | `schemaWrite` |
 | **Abfragen** | öffnet einen Abfrage-Tab mit `Entity.page(1, 10)` (nicht bei einer abstrakten Entität) | |
 
 Unter der Kopfzeile ihre Tabs: **Eigenschaften (n)**, **Beziehungen (n)**, **Schlüssel und Indizes**,
-**Einschränkungen (n)**, **Daten**, **Diagramm** und **Verlauf**.
+**Einschränkungen (n)**, **Daten**, **Diagramm** und **Verlauf** (eine abstrakte Entität: **Erweitert von (n)** statt **Daten**, **Diagramm** und **Abfrage**).
 Die Anzahl bei **Relationen** zählt auch die Relationen anderer Entitäten mit, die auf diese zeigen (**Referenziert von**), daher kann sie höher sein als im Explorer.
+
+## Abstrakte Entitäten und was eine Entität erbt {#abstract}
+
+**Seit IDE 1.5.0** (aus der `lambdaORM.yaml` gelesen, mit `schemaRead`). Eine abstrakte Entität (`abstract: true`) ist
+die Basis, die andere Entitäten erweitern (`extends: Audited`): ihre Eigenschaften und Beziehungen erreichen sie.
+
+- **Im Explorer** steht sie unter **Abstrakte**, und ihre Ansicht ist die einer Entität, mit **Bearbeiten** und
+  **Entfernen**, plus dem Tab **Erweitert von (n)**: jede Entität, die sie erweitert, auch über eine andere abstrakte
+  (`Areas → LocatedCatalog → Located`), mit der Basis, die jede erweitert; ein Klick öffnet ihre Ansicht.
+- **Eine erweiternde Entität** sagt `erweitert <base>` in ihrer Kopfzeile (die ganze Kette in ihrem Titel; ein Klick
+  öffnet die Basis), und ihre **Eigenschaften** und **Beziehungen** haben die Spalte **Geerbt** mit der Herkunft jeder.
+- **In ihrem Formular** stehen die geerbten Eigenschaften und Beziehungen getrennt, nach der Basis, die sie deklariert,
+  nur lesbar, mit einem Link zu dieser Basis (in einem eigenen Tab geöffnet, das Bearbeitete bleibt); eine eigene, die
+  eine geerbte neu definiert, sagt es.
+- **In den Diagrammen** wird eine abstrakte Entität abgesetzt gezeichnet: ein gestrichelter Rand, eine Kopfzeile in
+  eigener Farbe und ihr Name kursiv mit «abstract»; eine Vererbung ist eine gestrichelte Linie ([Diagramme](Diagrams.md)).
 
 ## Eigenschaften {#properties}
 
@@ -103,7 +119,9 @@ Seit IDE 1.3.0:
 ## Diagramm {#diagram}
 
 Die Entität und ihre Nachbarn, nur lesen. Das Feld **Entität** zentriert das Diagramm auf eine andere, und die Tiefe
-geht von **Nachbarn** zu **2 Ebenen** oder **ganzes Modell**. Ein Klick auf eine Box zentriert sie; ein Doppelklick
+geht von **Nachbarn** zu **2 Ebenen** oder **ganzes Modell**. Ihre **Optionen** (IDE 1.5.0), mehrere zugleich: die **Namen der Beziehungen**, ihre **verbundenen Entitäten**
+(ohne sie nur die Entität) und die **Entitäten, die sie erweitert** (die abstrakten Basen ihrer Kette, nie die anderen
+Entitäten derselben Basis); anfangs sind nur die Entitäten angekreuzt, die sie erweitert. Ein Klick auf eine Box zentriert sie; ein Doppelklick
 öffnet ihre Ansicht. Der Rest des Diagramms (Zoom, anzeigen, Übersicht, exportieren) ist wie in
 [Diagramme](Diagrams.md).
 

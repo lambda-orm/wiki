@@ -9,11 +9,13 @@ einem Tab auf der rechten Seite.
 ```text
 λORM Data Gateway ▾   Verbindungen 1        ⟳ · + Neue Verbindung
 northwind  http://data-gateway:9090         ⟳ Aktualisieren
-Schemas                                     Neues Schema · Exportieren · Importieren
+├─ Administration                           Rollen · Zugang · Persistenz · Sitzungen · Wartende Schreibvorgänge · Werkzeuge · Observability
+└─ Schemas                                     Neues Schema · Exportieren · Importieren
 └─ /                                        sein Tab: Befehle, Informationen, Verlauf   ⟳
    ├─ Metadaten
    │  ├─ config                             die lambdaORM.yaml                  (schemaRead)
    │  ├─ domain                             Doppelklick: die Domäne als YAML, schreibgeschützt
+   │  │  ├─ Abstrakte  +                    die abstrakten Entitäten, die die anderen erweitern   (schemaRead)
    │  │  ├─ Entitäten  +                    Filter · jede Entität: Eigenschaften (n), Beziehungen (n)
    │  │  └─ Enums  +
    │  ├─ application                        ihre Start-Tasks und Listener       (schemaRead)
@@ -31,17 +33,21 @@ Schemas                                     Neues Schema · Exportieren · Impor
 
 ![Der Explorer](images/ide-explorer.png)
 
-Was eine Berechtigung braucht, erscheint ohne sie nicht: Nur mit `read` hat ein Schema seine **Metadaten → domain** und
+Seit IDE 1.5.0 ist jede Verbindung ein Baum: ihre **Administration** (data-gateway 5.0) und ihre **Schemas**. Die
+**Abstrakten** einer Domäne (IDE 1.5.0, aus der `lambdaORM.yaml` gelesen, also mit `schemaRead`) kommen zuerst, nach
+Namen; ihr **+** öffnet eine neue Entität, die abstrakt beginnt. Was eine Berechtigung braucht, erscheint ohne sie nicht: Nur mit `read` hat ein Schema seine **Metadaten → domain** und
 seine **Workbench**. Das **+** von **Entitäten**, **Enums**, **Mappings**, **Quellen** und **Stages** (mit
 `schemaWrite`) öffnet das Formular eines neuen Elements ([Verwaltung](Administration.md#forms)).
 
 | Zeile | Ein Klick | Ihre Schaltflächen |
 | --- | --- | --- |
 | eine Verbindung | ihr Name öffnet ihre Seite ([Verbindungen](Connections.md)) | ⟳ aktualisieren |
+| **Administration** | klappt auf, was ihre Zugangsdaten vom Gateway verwalten dürfen ([Verbindungen](Connections.md#administration)) | |
 | ein Schema | klappt es auf und öffnet seinen Tab ([Verwaltung](Administration.md#the-schema-tab)) | ⟳ es aktualisieren |
 | **config** | öffnet die `lambdaORM.yaml` ([Verwaltung](Administration.md#the-yaml)) | |
 | **domain** | klappt sie auf; ein Doppelklick öffnet die Domäne als YAML (nur die Domäne: nie die Quellen, die Verbindungen oder den Rest der Konfiguration) | |
 | eine Entität | klappt sie auf und öffnet ihre [Ansicht](Entities.md) | |
+| eine abstrakte Entität (**Abstrakte**) | klappt sie auf (ihre Eigenschaften und Beziehungen) und öffnet ihre Ansicht, wie die einer Entität ([Entitäten](Entities.md#abstract)) | |
 | eine Eigenschaft einer Entität | nichts: ihr Name, fett für den Primärschlüssel, und ihr Typ | |
 | eine Beziehung einer Entität | öffnet die Entität, die sie erreicht (`customer → Customers · N — 1`) | ↗ sie öffnen |
 | ein Enum, ein Mapping, eine Source, ein Stage | öffnet sein Formular ([Verwaltung](Administration.md#forms)) | ein Stage: ◇ sein [Diagramm](Administration.md#the-diagram-of-a-stage) |

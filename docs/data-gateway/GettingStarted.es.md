@@ -75,13 +75,17 @@ orm:
   schemas:
     - path: ""                         # that schema: it receives only the variables given here
       env: { NORTHWIND_DB: $NORTHWIND_DB }
+authorization:
+  roles:                               # what each role may do (its permissions)
+    reader:  { permissions: [ read ] }
+    backend: { permissions: [ read, write, script, queue, stageImport ] }
 authentication:
   adapter: local
   type: apikey
   header: X-Api-Key
-  keys:
-    - { name: reader,  value: $READER_KEY,  permissions: [ read ] }
-    - { name: backend, value: $BACKEND_KEY, permissions: [ read, write, script, queue, stageImport ] }
+  keys:                                # each key names its roles
+    - { name: reader,  value: $READER_KEY,  roles: [ reader ] }
+    - { name: backend, value: $BACKEND_KEY, roles: [ backend ] }
 scripts:
   enabled: true
 transports:
@@ -95,7 +99,9 @@ transports:
     port: 9090
 ```
 
-- **Dos credenciales:** `reader` solo puede leer; `backend` además puede escribir, ejecutar scripts, encolar e importar.
+- **Dos roles y dos claves:** el rol `reader` solo puede leer; `backend` además puede escribir, ejecutar scripts,
+  encolar e importar. Cada clave nombra sus roles: lo que puede hacer una clave es siempre lo que le dan sus
+  [roles](Security.md#roles).
 - **Cuatro transportes:** REST en el 8080, MCP en el 8081, WebSocket en el 8083, y `management` en el 9090: la API
   del IDE, a la que solo llega el IDE (no se publica).
 - **Las variables del esquema:** cada esquema recibe solo sus propias variables, por seguridad; `env` le da la
@@ -117,7 +123,7 @@ services:
       retries: 30
 
   data-gateway:
-    image: flaviorita/data-gateway:4.1.0
+    image: flaviorita/data-gateway:5.0.0
     depends_on:
       postgres: { condition: service_healthy }
     environment:
@@ -133,7 +139,7 @@ services:
       - "${WS_PORT:-8083}:8083"
 
   ide:
-    image: flaviorita/data-gateway-ide:1.1.0
+    image: flaviorita/data-gateway-ide:1.5.0
     environment:
       DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080,http://data-gateway:8081,http://data-gateway:8083"
     ports:
@@ -285,8 +291,8 @@ Se abre `http://localhost:8090`: el IDE se abre en una **Nueva conexión**. Se c
 - **Dirección:** `data-gateway:9090`, el `management` del gateway tal como lo alcanza el IDE en el compose;
 - **Autenticación:** API key, el header `X-Api-Key` y la clave `reader-demo-key` (**Mostrar** muestra lo que se escribió).
 
-**Probar** dice quién es la clave; **Conectar** agrega la conexión. Su página muestra los permisos de la clave, y desde
-ahí se pueden probar su API REST, su WebSocket y su MCP, cada uno en su propia pestaña.
+**Probar** dice quién es la clave; **Conectar** agrega la conexión. Su página muestra quién es la clave ahí: sus roles
+con sus permisos. Su API REST, su WebSocket y su MCP se prueban desde **Administración › Herramientas** en el explorador.
 
 A la izquierda, el **explorador**: la conexión, su esquema, el dominio, sus entidades con sus propiedades y relaciones. Se elige el
 esquema `/`, se escribe una consulta (el editor completa las entidades y propiedades mientras se escribe), sus datos, y se pulsa **execute**
@@ -339,27 +345,40 @@ northwind en sus descripciones, y responde con una consulta como:
 
 Con `reader`, el agente no puede modificar nada, se le pida lo que se le pida. Véase [MCP](Mcp.md).
 
-## 11. WebSocket {#11-websocket}
+## 11. Desde tu código: Node y Go {#11-websocket}
 
-Una sola conexión para todas las operaciones, con notificaciones. Con `@lambdaorm/client`:
+Los [clientes](Clients.md) del gateway dan la misma API por REST, WebSocket y MCP: el esquema de la URL elige el
+transporte. En Node:
 
 ```ts
-import { orm } from '@lambdaorm/client'
+import { connect } from '@lambdaorm/data-gateway-client-node'
 
-await orm.init('ws://localhost:8083/', { headers: { 'X-Api-Key': 'reader-demo-key' } })
-const customers = await orm.execute('Customers.filter(p => p.country == country).map(p => p.name)', { country: 'Argentina' })
+const gateway = await connect('ws://localhost:8083/', { apiKey: 'reader-demo-key' })
+const customers = await gateway.execute('Customers.filter(p => p.country == country).map(p => p.name)', { country: 'Argentina' })
 // [ { name: 'Cactus Comidas para llevar' }, { name: 'Océano Atlántico Ltda.' }, { name: 'Rancho grande' } ]
-await orm.end()
+await gateway.close()
 ```
 
-o directamente los mensajes JSON-RPC:
+y en Go, la misma consulta:
+
+```go
+gw, err := gateway.Connect(ctx, "ws://localhost:8083/", gateway.WithAPIKey("reader-demo-key"))
+if err != nil {
+	log.Fatal(err)
+}
+defer gw.Close()
+customers, err := gw.Execute(ctx, "Customers.filter(p => p.country == country).map(p => p.name)", map[string]any{"country": "Argentina"}, nil)
+```
+
+Por WebSocket son mensajes JSON-RPC:
 
 ```json
 → { "jsonrpc": "2.0", "id": 1, "method": "query.execute", "params": { "query": "Customers.filter(p => p.country == country).map(p => p.name)", "data": { "country": "Argentina" } } }
 ← { "jsonrpc": "2.0", "id": 1, "result": [ { "name": "Cactus Comidas para llevar" }, { "name": "Océano Atlántico Ltda." }, { "name": "Rancho grande" } ] }
 ```
 
-Véase [API WebSocket](WebSocket.md).
+Los clientes, paso a paso en un proyecto propio: [Clientes](Clients.md#step-by-step). Los mensajes:
+[API WebSocket](WebSocket.md).
 
 ## 12. Detenerlo {#12-stop-it}
 

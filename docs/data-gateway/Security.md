@@ -1,9 +1,16 @@
 # Security
 
 Who can use the gateway and what each one can do is decided in its configuration, once, for every transport: a
-**credential** (a key, a token or a user) has a name and a list of **permissions**; the gateway checks them before
-anything reaches a database, **audits** every write with the name of the credential, and puts **limits** on what a
-request can take. This page explains each part.
+**credential** (a key, a token or a user) has a name and the **roles** it has, and a role says what it may do and
+where: its **permissions**, its schemas, views and stages. The gateway checks them before anything reaches a database,
+**audits** every write with the name of the credential, and puts **limits** on what a request can take. This page
+explains each part.
+
+!!! warning "data-gateway 5.0.0: only roles"
+    Since 5.0.0 what a credential may do is said **only by its roles** (`authorization.roles`). A key, a token or a
+    user names its `roles` (required) and may say its `context`; with its own `permissions`, `view` or `approval`, or a
+    method `jwt` with its own `roles`, or `orm.schemas[].roles`, the gateway doesn't start, and the error says where
+    each one goes. To move a configuration of 4.x: [below](#from-4x).
 
 ## Authentication
 
@@ -14,19 +21,23 @@ by the edge worker before anything reaches the schema.
 | `adapter` | One credential (every permission) | Several credentials with permissions | The client sends |
 | --- | --- | --- | --- |
 | `none` (default) | — | — | nothing: an anonymous credential with every permission |
-| `local`, `type: bearer` | `token` | `tokens: [{ name, value, permissions }]` | `Authorization: Bearer <token>` |
-| `local`, `type: apikey` | `value` (and `header`, default `X-Api-Key`) | `keys: [{ name, value, permissions }]` | `<header>: <key>` |
-| `local`, `type: basic` | `username`, `password` | `users: [{ username, password, permissions }]` | `Authorization: Basic <base64(user:password)>` |
-| `jwt` (4.1.0) | — | the users of an identity provider, their roles mapped to permissions ([below](#jwt)) | `Authorization: Bearer <JWT>` |
+| `local`, `type: bearer` | `token` and its `roles` | `tokens: [{ name, value, roles, context }]` | `Authorization: Bearer <token>` |
+| `local`, `type: apikey` | `value` and its `roles` (and `header`, default `X-Api-Key`) | `keys: [{ name, value, roles, context }]` | `<header>: <key>` |
+| `local`, `type: basic` | `username`, `password` and its `roles` | `users: [{ username, password, roles, context }]` | `Authorization: Basic <base64(user:password)>` |
+| `jwt` (4.1.0) | — | the users of an identity provider, with the roles of a claim of their token ([below](#jwt)) | `Authorization: Bearer <JWT>` |
 | `methods` (4.1.0) | — | several of the above, in order: tokens for the users, keys for the services ([below](#jwt)) | what each one takes |
 
 ```yaml
+authorization:
+  roles:
+    reader:  { permissions: [ read ] }
+    backend: { permissions: [ read, write, script, queue, stageImport ] }
 authentication:
   adapter: local
   type: bearer
   tokens:
-    - { name: reports, value: $REPORTS_TOKEN, permissions: [ read ] }
-    - { name: backend, value: $BACKEND_TOKEN, permissions: [ read, write, script, queue, stageImport ] }
+    - { name: reports, value: $REPORTS_TOKEN, roles: [ reader ] }
+    - { name: backend, value: $BACKEND_TOKEN, roles: [ backend ] }
 ```
 
 - A `local` credential without its secret (or whose `$VAR` is not defined) stops the start. Open access is only
@@ -37,8 +48,9 @@ authentication:
   WebSocket upgrades are refused.
 - `/ping`, `/health`, `/metrics`, `/version` (also under each schema), `/schemas`, `/transports` and the
   documentation (`/openapi.json`, `/doc`, `/api-docs`) need no credential.
-- A credential without `permissions` gets those of the data (`read`, `write`, `script`, `queue`, `stageImport`), never
-  those of the administration.
+- A local credential without `roles` (an empty list, or none) stops the start; a role it names that
+  `authorization.roles` doesn't have is warned about (it may come from the [state of the gateway](Admin.md#roles)).
+- `adapter: none` is the only credential with every permission: the anonymous one.
 - On `management` (the IDE) the credential goes only in the login, and every request carries the token of a
   [session](Transports.md#sessions): sessions are listed, end on inactivity and can be revoked at once.
 - No transport answers CORS: a browser of another origin can't call the gateway, a backend of its own does.
@@ -62,24 +74,25 @@ authentication:
         name: preferred_username                            # the claim of the name (default sub)
         permissions:
           claim: realm_access.roles                         # a list, or a text separated by spaces (as scope)
-          roles:
-            reader: [ read ]
-            support: { permissions: [ read ], view: support }  # a role with its view (below)
-            admin: [ read, write, script ]
       context:                                              # claim → variable of the context of λORM
         tenant: tenant_id
         region: address.region
     - adapter: local                                        # the services keep their keys
       type: apikey
       keys:
-        - { name: billing, value: $BILLING_KEY, permissions: [ read, write ] }
+        - { name: billing, value: $BILLING_KEY, roles: [ admin ] }
+authorization:
+  roles:                                                    # the names of the claim are these roles
+    reader:  { permissions: [ read ] }
+    support: { permissions: [ read ], views: [ support ] }  # a role with its view (below)
+    admin:   { permissions: [ read, write, script ] }
 ```
 
 - **The signature** is checked with the public keys of the issuer (its JWKS, cached; a token signed with a new key reads
   them again), then the issuer, the audience and the times. `secret: $JWT_SECRET` (HS256) instead of the keys is for
   development and tests.
-- **Who it is:** its name (`principal.name`), the permissions of its roles (a role must list them: a role not listed
-  gives nothing) and its **context**: what the [row filters of the views](#views), the defaults and the conditions of
+- **Who it is:** its name (`principal.name`), its roles (the names of the claim that `authorization.roles` has: one it
+  doesn't have gives nothing) and its **context**: what the [row filters of the views](#views), the defaults and the conditions of
   the schema read (`context.tenant`). A claim can be a path (`address.region`) or a name with dots or a URL, as Auth0
   names them (`https://example.com/roles`).
 - **`methods`:** the first that recognizes the credential decides. A JWT that fails is refused as a token, a wrong key
@@ -99,12 +112,14 @@ its properties (masked, hidden or calculated) and its rows (a filter with the co
 of each request**, never the client:
 
 ```yaml
+authorization:
+  roles:
+    billing: { permissions: [ read ], views: [ billing ] }     # the view of a role, for a key or a token
 authentication:
   adapter: local
   type: apikey
   keys:
-    - { name: billing, value: $BILLING_KEY, permissions: [ read ], view: billing }   # the view of a key
-# or the view of a role of a token: roles: { support: { permissions: [ read ], view: support } }
+    - { name: billing, value: $BILLING_KEY, roles: [ billing ] }
 orm:
   schemas:
     - path: shop
@@ -115,8 +130,8 @@ orm:
   filtered with the context of the token), their `metadata`, `model`, `parameters` and `constraints`, the domain
   (`/schema`, `/domain`, `/entities`, `/typings`, the search), the entities of the mappings, the views listed, what MCP
   tells an agent and `/whoami` (`view`).
-- **A `view` or a `context` sent by a client in `options` is dropped**, by every transport: a client can't skip what
-  its view hides nor read the rows of another tenant.
+- **A `context` sent by a client in `options` is dropped**, by every transport: a client can't read the rows of another
+  tenant; the context comes from the token (its claims) or from the [key](#context).
 - **Chosen among those of its roles** (since 4.4.0, [below](#roles)): the client may ask for one of them in
   `options.view`; another is `403`. Before 4.4.0 the client never chose, and a token whose roles gave two views was
   `403`. A view the schema doesn't have is warned about when the schema loads and its requests are `403`. An entity
@@ -126,15 +141,18 @@ orm:
 
 ## Roles: where they work and what they may do {#roles}
 
-**Since data-gateway 4.4.0.** A role says **where** it may work, the views and the stages of λORM it may use, and
-**what** it may do there, its permissions and their limits. The tokens name their roles by their claim, the keys by
-`roles`:
+**Since data-gateway 4.4.0; since 5.0.0 the only way.** A role is of the gateway: it says **where** it may work, its
+schemas and in each one the views and the stages of λORM it may use, and **what** it may do there, its permissions and
+their limits. The tokens name their roles by their claim, the keys, tokens and users by `roles`:
 
 ```yaml
 authorization:
   roles:
     support:
-      views: [support]                 # the first, the one of who doesn't choose; none, the one of the schema
+      schemas:                         # where it applies (their paths); none, every schema
+        shop: { views: [support, public], view: public, stages: [default, reporting], stage: default }
+        sales: {}                      # the views and stages below (or those of the schema)
+      views: [support]                 # in its schemas, unless one says its own; the first, the one of who doesn't choose
       permissions: [read]
     analyst:
       views: [analytics, support]
@@ -142,7 +160,10 @@ authorization:
       permissions: [read]
       maxRows: 5000                    # options.maxRows: the client may ask for fewer, never more
     backend:
+      permissions: [read, write]       # no views: the one of the schema
+    agent:
       permissions: [read, write]
+      approval: writes                 # its writes wait for a person (below)
     operator:
       stages: [default, staging]
       permissions: [read, ddl, destructive]
@@ -165,10 +186,12 @@ orm:
     - path: shop
       view: public                     # the view of the schema
       stage: default                   # the stage of the schema
-      roles:                           # in this schema, what the roles add
-        support: { views: [support, public] }
 ```
 
+- **A role of the gateway (5.0.0):** in a schema its `schemas` don't name it gives nothing. By schema it may say the views
+  and stages it uses there and the defaults of who doesn't choose (`view`, `stage`, which must be among its `views` and
+  `stages`); they replace those of the role in that schema. A role that needs other permissions or views in another
+  schema is another role. `GET /admin/scopes` (permission `roles`) tells the views and stages of each schema served.
 - **The client chooses only among them:** `options.view` and `options.stage` of any request, by every transport; one
   its roles don't allow is `403`. Without choosing, the first of its roles; if its roles disagree, the one of the
   schema when they allow it, else `403` asking to choose. An agent by MCP doesn't choose: the defaults of its roles.
@@ -178,12 +201,40 @@ orm:
   of the administration, whatever was chosen. `scope: any` in a role keeps its permissions whatever was chosen.
 - **`options.maxRows`** only lower than the role's; **`allowDestructive`** is no longer an option of the client: a push
   or a migration that loses data needs the permission `destructive` besides `ddl`.
-- **`GET /whoami`** says the view and the stage of who calls without choosing, every one it may choose and its roles.
-- **The roles of a schema** (`orm.schemas[].roles`) and those [kept in the state of the gateway](Admin.md#since-4-4-0)
-  extend the ones of `authorization.roles`: more views, stages or permissions, never less. A role of the state the YAML
-  doesn't have is a new one.
-- What was there before still works: `roles` inside a method `jwt` and `view` (one) in a role or a key are read as
-  roles; a key with its own `permissions` and `view` is a role of its own.
+- **`GET /whoami`** says the view and the stage of who calls without choosing, every one it may choose and its roles;
+  **`GET /admin/me`** (5.0.0, of `management`, any credential about itself) its name, its context and each of its roles
+  as it applies: permissions, schemas, views and stages.
+- **The roles [kept in the state of the gateway](Admin.md#roles)** extend those of `authorization.roles`: more
+  schemas, views, stages or permissions, never less. A role of the state the YAML doesn't have is a new one.
+
+### The context of a key {#context}
+
+**Since data-gateway 5.0.0.** A key, a token or a user of a `local` method may say its `context`: the context of λORM
+of its requests, as a [token](#jwt) gives it from its claims. It is what the row filters of the views, the defaults and
+the `writeValue` of the schema read:
+
+```yaml
+authentication:
+  adapter: local
+  type: apikey
+  keys:
+    - { name: ana, value: $ANA_KEY, roles: [editor], context: { username: ana@acme.com, region: south } }
+```
+
+- Each variable is a text, a number or a boolean: who the key is, never a secret. Without it, the key has no context.
+- A schema with `default: context.username` (an abstract `Audited` with `createdBy`, say) fills it with the user of
+  the key; a client can't replace it (its `options.context` is dropped). It reaches a session opened with the key too.
+
+### From 4.x {#from-4x}
+
+| 4.x | 5.0.0 |
+| --- | --- |
+| a key with `permissions: [read, write]` | a role `authorization.roles.backend: { permissions: [read, write] }` and the key with `roles: [backend]` |
+| a key with `view: billing` | `views: [billing]` in its role |
+| a key with `approval: writes` | `approval: writes` in its role |
+| `roles` inside a method `jwt` | the same roles in `authorization.roles`; the method keeps only `principal.permissions.claim` |
+| `orm.schemas[].roles` | in `authorization.roles`, with `schemas: [<path>]` (or `schemas: { <path>: { views, stages } }`) |
+| a role kept for a schema from the administration | listed as ignored: removed (`DELETE /admin/roles/{name}?schema=`) and added again with its `schemas` |
 
 ## Permissions
 
@@ -197,7 +248,9 @@ orm:
 | `schemaRead`, `schemaWrite`, `schemaAdmin`, `workbenchWrite`, `ddl`, `build` | the [administration](Admin.md#turning-it-on): never given by default |
 | `approve` | (4.3.0) approve or reject the [writes that wait](#approvals), never its own: never given by default |
 | `destructive` | (4.4.0) with `ddl`, a push or a migration that loses data (`allowDestructive`): never given by default |
-| `roles` | (4.4.0) see and change the [roles of the state of the gateway](Admin.md#since-4-4-0): never given by default |
+| `roles` | (4.4.0) see and change the [roles of the state of the gateway](Admin.md#roles), and see who may come in (`/admin/access`, 5.0.0): never given by default |
+| `observability` | (5.0.0) see and change the [observability](Admin.md#observability) from the administration: never given by default |
+| `persist` | (5.0.0) see and change [where the state is kept](Admin.md#persist): never given by default |
 | `sessionAdmin` | list every [session](Transports.md#sessions) of `management` and revoke those of other credentials (without it, a credential sees and closes only its own): never given by default |
 
 - Authorization happens in the schema's worker, before running anything, the same for REST, MCP and WebSocket.
@@ -207,6 +260,8 @@ orm:
   `the credential "reader" does not have the "write" permission`.
 - `GET /whoami` answers the name and permissions of the credential (its view, 4.1.0; its stage, what it may choose and
   its roles, 4.4.0), never its secret.
+- No credential gets a permission by itself: they are the ones of its roles (or every one, for the anonymous of
+  `adapter: none`).
 
 ## Writes that wait for a person {#approvals}
 
@@ -217,10 +272,16 @@ approves it.
 mcp:
   approval: writes           # every write by MCP waits (also per schema)
   approvalExpires: 1h        # one nobody decides expires
+authorization:
+  roles:
+    agent: { permissions: [ read, write ], approval: writes }   # on every transport
+    ops:   { permissions: [ read, approve ] }
 authentication:
+  adapter: local
+  type: apikey
   keys:
-    - { name: agent, value: $AGENT_KEY, permissions: [ read, write ], approval: writes }   # on every transport
-    - { name: ops,   value: $OPS_KEY,   permissions: [ read, approve ] }
+    - { name: agent, value: $AGENT_KEY, roles: [ agent ] }
+    - { name: ops,   value: $OPS_KEY,   roles: [ ops ] }
 ```
 
 - The write answers at once `{ "approval": "…", "status": "pending", "expiresAt" }` (REST: `202`); nothing changed yet.
@@ -230,7 +291,8 @@ authentication:
 - Who has `approve` lists them with the sentences each would run and approves or rejects them, in the
   [administration](Admin.md#since-4-3-0) or the [IDE](../ide/Connections.md#approvals); **never its own**. Approved,
   it runs once as who asked (its view, its context) and is audited with `approvedBy`.
-- They live in the SQLite of the volume (`.data-gateway/state.sqlite`), shared by the replicas that mount it.
+- They live in the [state of the gateway](Admin.md#persist) (the SQLite of the volume, or a database), shared by its
+  replicas.
 
 ## Audit
 

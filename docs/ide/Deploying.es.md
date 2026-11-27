@@ -18,10 +18,10 @@ transports:
 # docker-compose.yml
 services:
   data-gateway:
-    image: flaviorita/data-gateway:4.2.0
+    image: flaviorita/data-gateway:5.0.0
     # 9090 no se publica: solo el IDE llega a él, en la red del compose
   ide:
-    image: flaviorita/data-gateway-ide:1.2.0
+    image: flaviorita/data-gateway-ide:1.5.0
     environment:
       DATA_GATEWAY_IDE_TARGETS: "http://data-gateway:9090,http://data-gateway:8080"
     ports:

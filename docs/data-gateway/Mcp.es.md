@@ -125,8 +125,8 @@ Desde 4.3.0, las escrituras de un agente pueden [esperar a una persona](Security
 la herramienta responde al instante que la escritura está pendiente, y `approval_status` dice después si se aprobó y
 su resultado.
 
-No hay un modo de solo lectura del transporte: lo que un agente puede hacer lo deciden **los permisos de su credencial**. Un
-agente que solo consulta recibe una credencial con `[ read ]`: puede ejecutar selects pero no escribir, ejecutar scripts, encolar ni
+No hay un modo de solo lectura del transporte: lo que un agente puede hacer lo deciden **los roles de su credencial**. Un
+agente que solo consulta recibe una credencial cuyo rol tiene `[ read ]`: puede ejecutar selects pero no escribir, ejecutar scripts, encolar ni
 importar, por ningún transporte. Además: `schemas[].transports` para dejar un esquema fuera de MCP, `mcp.tools.exclude`, las indicaciones
 y los permisos del usuario de la base de datos (la garantía de fondo). Cada escritura que hace un agente queda
 [auditada](Security.md#audit) con el nombre de su credencial y `"transport": "mcpHttp"`.

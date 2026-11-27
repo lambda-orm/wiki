@@ -42,7 +42,12 @@ The bar ends with how many entities and relations it shows (`entities: 6 · rela
 ## The diagram of an entity
 
 The **Diagram** tab of an [entity](Entities.md#diagram) draws it with its neighbours, read only: **entity** centres it
-on another one, and the depth goes to **2 levels** or the **whole model**.
+on another one, and the depth goes to **2 levels** or the **whole model**. Its **options** (IDE 1.5.0) choose what is
+drawn: the names of the relations, its related entities and the entities it extends (checked at first).
+
+**An abstract entity** (IDE 1.5.0) is drawn apart in every diagram: a dashed border, a header of its own colour, its
+name in italics with «abstract»; the entities that extend it reach it with a dashed line. So it is in the SVG and PNG
+exported, in the light and the dark theme.
 
 ## The diagram of a stage
 

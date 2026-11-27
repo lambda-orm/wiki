@@ -45,6 +45,13 @@ recarga.
 La pestaña **Diagrama** de una [entidad](Entities.md#diagram) la dibuja con sus vecinas, solo lectura: **entidad** lo
 centra en otra, y la profundidad va a **2 niveles** o **todo el modelo**.
 
+Sus **opciones** (IDE 1.5.0) eligen qué se dibuja: los nombres de las relaciones, sus entidades relacionadas y las
+entidades que extiende (marcadas al principio).
+
+**Una entidad abstracta** (IDE 1.5.0) se dibuja aparte en todo diagrama: un borde punteado, una cabecera de su propio
+color, su nombre en cursiva con «abstract»; las entidades que la extienden llegan a ella con una línea punteada. Así
+queda también en el SVG y el PNG exportados, en el tema claro y el oscuro.
+
 ## El diagrama de un stage {#the-diagram-of-a-stage}
 
 Cada stage de un esquema tiene un diagrama de a dónde llevan sus sources cada entidad: el gateway, sus sources en orden y

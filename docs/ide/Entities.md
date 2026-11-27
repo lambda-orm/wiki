@@ -9,14 +9,30 @@ Its buttons:
 
 | Button | Does | Needs |
 | --- | --- | --- |
-| **View traces** | opens the traces of this entity in Grafana (Tempo, filtered by `lambdaorm.entity`) | the **Observability** of the [connection](Connections.md#a-new-connection) |
+| **View traces** | opens the traces of this entity in Grafana (Tempo, filtered by `lambdaorm.entity`) | `observability.explore` of the gateway ([Observability](Connections.md#observability); before IDE 1.5.0, of the connection) |
 | **Remove** | says what uses the entity and, confirmed, removes it from the schema | `schemaWrite` |
 | **Edit** | opens its [form](Administration.md#forms), already in edit: **Cancel** or **Save** come back to this view | `schemaWrite` |
 | **Query** | opens a query tab with `Entity.page(1, 10)` (not on an abstract entity) | |
 
 Under the header, its tabs: **Properties (n)**, **Relations (n)**, **Keys and indexes**, **Constraints (n)**, **Data**,
-**Diagram** and **History**. The count of **Relations** includes the relations of other entities that point to this one
+**Diagram** and **History** (an abstract entity: **Extended by (n)** in place of **Data**, **Diagram** and **Query**). The count of **Relations** includes the relations of other entities that point to this one
 (**Referenced by**), so it can be higher than the one in the explorer.
+
+## Abstract entities and what an entity inherits {#abstract}
+
+**Since IDE 1.5.0** (read from the `lambdaORM.yaml`, with `schemaRead`). An abstract entity (`abstract: true`) is the
+base other entities extend (`extends: Audited`): its properties and relations reach them.
+
+- **In the explorer** it is in **Abstracts**, and its view is the one of an entity, with **Edit** and **Remove**, plus
+  the tab **Extended by (n)**: every entity that extends it, also through another abstract one (`Areas → LocatedCatalog
+  → Located`), with the base each one extends; a click opens its view.
+- **An entity that extends** says `extends <base>` in its header (the whole chain in its title; a click opens the
+  base), and its **Properties** and **Relations** have the column **Inherited** with where each one comes from.
+- **In its form**, the inherited properties and relations are apart, by the base that declares them, read only, with a
+  link to that base (opened in a tab of its own, keeping what is being edited); an own one that redefines an inherited
+  one says so.
+- **In the diagrams** an abstract entity is drawn apart: a dashed border, a header of its own colour and its name in
+  italics with «abstract»; an inheritance is a dashed line ([Diagrams](Diagrams.md)).
 
 ## Properties
 
@@ -102,7 +118,10 @@ Since IDE 1.3.0:
 ## Diagram {#diagram}
 
 The entity and its neighbours, read only. The **entity** box centres the diagram on another one, and the depth goes
-from **neighbours** to **2 levels** or the **whole model**. A click on a box centres it; a double click opens its view.
+from **neighbours** to **2 levels** or the **whole model**. Its **options** (IDE 1.5.0), several at once: the **names
+of the relations**, its **related entities** (without them, only the entity) and the **entities it extends** (the
+abstract bases up its chain, never the other entities of the same base); at first only the entities it extends are
+checked. A click on a box centres it; a double click opens its view.
 The rest of the diagram (zoom, show, outline, export) is as in [Diagrams](Diagrams.md).
 
 ![Diagram](images/ide-entity-diagram.png)

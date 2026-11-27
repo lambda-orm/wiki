@@ -15,8 +15,8 @@ bancos de dados de mecanismos diferentes). O Data Gateway publica esse esquema p
 - um **agente de IA** explore o domínio e o consulte por MCP, conhecendo as entidades e a linguagem;
 - uma **pessoa** explore os esquemas, leia cada entidade como um formulário, experimente consultas e desenhe diagramas em sua IDE;
 
-e para que **quem pode fazer o quê** seja decidido em um só lugar, igual para todos eles: cada credencial tem permissões,
-e toda alteração é auditada.
+e para que **quem pode fazer o quê** seja decidido em um só lugar, igual para todos eles: cada credencial tem papéis, e seus papéis as
+permissões, e toda alteração é auditada.
 
 ## Escopo {#scope}
 
@@ -46,8 +46,8 @@ e toda alteração é auditada.
 - Não define o domínio nem migra os bancos de dados: isso é papel do [esquema](../schema/SchemaDefinition.md) e da
   [CLI](../cli/index.md) (`push`, `pull`, …).
 - Não aceita SQL: apenas consultas do λORM, traduzidas para cada fonte.
-- Não tem usuários nem papéis próprios além das credenciais de sua configuração (ainda sem login em um provedor de
-  identidade).
+- Não guarda usuários próprios: quem entra é uma chave da sua configuração ou um token do seu provedor de identidade
+  ([JWT / OIDC](Security.md#jwt)), e o que cada um pode fazer, seus [papéis](Security.md#roles).
 - Sem a permissão `workbenchWrite`, a IDE guarda o que é salvo em cada navegador.
 
 ## Descrição {#description}
@@ -79,7 +79,7 @@ deixa outro mais lento; um esquema cujo banco de dados está fora do ar responde
 ### Uma requisição, passo a passo {#a-request-step-by-step}
 
 1. Um cliente envia `POST /iot/v1/execute` com `X-Api-Key: …` e `{ "query": "Orders.filter(…)", "data": {…} }`.
-2. O transporte `http` encontra a credencial (`agent`, permissões `[read]`) e o esquema `iot/v1`.
+2. O transporte `http` encontra a credencial (`agent`, cujo papel dá `[read]`) e o esquema `iot/v1`.
 3. O worker do esquema analisa a consulta: ela apenas faz seleções, então `read` é suficiente.
 4. O λORM a traduz para cada fonte do stage, executa-a e une os resultados.
 5. A resposta volta como JSON. Se tivesse gravado dados, a credencial precisaria de `write`, e a operação

@@ -2,8 +2,8 @@
 
 Eine Verbindung ist ein Gateway, mit dem die IDE arbeitet: die Adresse seines Ports `management` und Zugangsdaten. Die
 IDE hat weder Login noch Startseite: Sie behält ihre Verbindungen und öffnet sich beim ersten Mal mit einer **Neuen
-Verbindung**. Mehrere Verbindungen können gleichzeitig offen sein, jede mit ihren Schemas im [Explorer](Explorer.md)
-und ihren Tabs nebeneinander.
+Verbindung**. Mehrere Verbindungen können gleichzeitig offen sein, jede ein Baum des [Explorers](Explorer.md): ihre **Administration** (was ihre Zugangsdaten vom Gateway
+verwalten dürfen) und ihre **Schemas**, mit ihren Tabs nebeneinander.
 
 Lege eine Verbindung pro Gateway und Zugangsdaten an, die du nutzt: eine lokale, die einer Testumgebung, dasselbe
 Gateway mit Zugangsdaten, die nur lesen, und mit anderen, die verwalten.
@@ -20,7 +20,6 @@ Das **+** neben **Verbindungen**, oben im Explorer:
 | **Authentifizierung** | **API-Schlüssel** (sein **Header**, standardmäßig `X-Api-Key`, und sein **Schlüssel**), **Bearer-Token (JWT)** (sein **Token**: ein Schlüssel des Gateways oder das [Token eines Identitätsanbieters](../data-gateway/Security.md#jwt); wenn es abläuft, sagt die Verbindung es und fragt nach einem neuen), **Basic (Benutzer und Passwort)**, **OpenID Connect (Anmeldung)** (IDE 1.3.0: sein **Aussteller**, **Client-ID** und **Scopes**; siehe unten) oder **Keine** |
 | **Schlüssel in diesem Browser merken** | mit der Verbindung aufbewahrt; sonst nur in diesem Tab des Browsers, und nach dem Schließen erneut abgefragt |
 | **Andere URLs seiner Transporte** (eingeklappt) | die **REST-URL**, **WebSocket-URL** und **MCP-URL**, nur wenn die IDE sie nicht an den Ports erreicht, die das Gateway nennt (ein Proxy davor, ein anderes Netzwerk) |
-| **Beobachtbarkeit** (eingeklappt) | die **Grafana-URL** und ihre **Tempo-Datenquelle (uid)** (standardmäßig `tempo`): Eine Entität zeigt dann einen Link zu ihren Traces ([Entitäten](Entities.md)) |
 
 **OpenID Connect (Anmeldung)**: Die Seite der Connection hat **Anmelden**, das die Anmeldung des Identitätsanbieters
 öffnet (im Browser ein eigenes Fenster; in der Desktop-App der Browser des Systems, der zur App zurückkehrt); das Token
@@ -59,13 +58,73 @@ Die Probleme, die sie meldet, in Rot unter ihrem Namen:
 
 ## Ihre Seite {#its-page}
 
-Ein Klick auf ihren Namen öffnet **Verbindung: Name**, mit vier Tabs.
+Ein Klick auf ihren Namen öffnet **Verbindung: Name** (seit IDE 1.5.0 nur die Verbindung; ihre Werkzeuge, Rollen,
+Sitzungen und wartenden Schreibvorgänge sind in ihrer [Administration](#administration)):
 
-### Verbindung {#connection}
+- **Das Formular** oben, mit **Speichern** (unverändert gespeichert verbindet es erneut, nach einem Widerruf) und
+  **Entfernen**, das vorher fragt und sie nur aus der IDE entfernt: im Gateway wird nichts entfernt, und ihre Tabs
+  schließen sich.
+- **Wer ich hier bin** (data-gateway 5.0, `GET /admin/me`): der Benutzer der Zugangsdaten, sein Kontext und jede seiner
+  Rollen, wie sie gilt, mit Berechtigungen, Schemas und in jedem seinen Views und Stages (markiert, was ohne Wahl
+  benutzt wird). In jedem Schema sind die Berechtigungen die der Rollen, die die gewählte View und den gewählten Stage
+  erlauben. Eine Rolle, die das Gateway nicht hat, sagt *unbekannt: gibt nichts*. Mit einem Gateway vor 5.0 sein Name
+  und seine Berechtigungen.
 
-Das Formular oben, mit **Speichern** (sie unverändert zu speichern verbindet sie erneut, nach einem Widerruf) und
-**Entfernen**, das vorher fragt und sie nur aus der IDE entfernt: Im Gateway wird nichts entfernt, und ihre Tabs
-schließen sich. Unter dem Formular, wer die Zugangsdaten sind: ihr Name, die URL und ihre Authentifizierung.
+## Ihre Administration {#administration}
+
+**Seit IDE 1.5.0, mit data-gateway 5.0.** Im Explorer hat jede Verbindung den Knoten **Administration** über ihren
+**Schemas**, mit dem, was ihre Zugangsdaten verwalten dürfen; was eine fehlende Berechtigung braucht, wird nicht gezeigt:
+
+```text
+northwind  http://data-gateway:9090
+├─ Administration
+│  ├─ Rollen                   (roles)        jede Rolle ein Knoten: Bearbeiten, Entfernen
+│  ├─ Zugang                   (roles)
+│  ├─ Persistenz               (roles oder persist)
+│  │  ├─ Config                sein lambdaORM.yaml, in Monaco
+│  │  └─ Verbindung            (persist)
+│  ├─ Sitzungen
+│  ├─ Wartende Schreibvorgänge (approve)
+│  ├─ Werkzeuge                REST API · WebSocket · MCP
+│  └─ Observability            (observability)   Metriken · Logs · Traces
+└─ Schemas
+   └─ /
+```
+
+### Rollen {#roles}
+
+**Berechtigungen nach Rolle:** eine Rolle pro Zeile und eine Berechtigung pro Spalte (Konfiguration und Zustand
+zusammen), mit ihren Schemas. **+ Rolle hinzufügen** öffnet eine neue. Jede Rolle ist ein eigener Knoten: alles, was sie
+gibt, ihre Berechtigungen und pro Schema ihre Views und Stages mit den markierten Standards, woher sie kommt (*seine
+Konfiguration*, oder wer sie wann geändert hat), mit **Bearbeiten** und **Entfernen**.
+
+**Bearbeiten** hat ein Kästchen pro Berechtigung (die von der Konfiguration gegebenen, markiert und fest: Gespeichertes
+erweitert eine Rolle der Konfiguration, nimmt ihr nie etwas), ihre **Schemas** (keine: alle Schemas) und für jedes
+gewählte Schema seine Views und Stages zum Ankreuzen mit **Standard-View** und **Standard-Stage**, **Höchstens Zeilen**,
+*Ihre Schreibvorgänge warten auf die Freigabe einer Person* und **Warum (optional)**. Eine in der Konfiguration
+*gesperrte* Rolle lässt sich nicht erweitern; eine Rolle, die 4.4 für ein Schema gespeichert hat, ist markiert *eines
+Schemas (4.4): gilt nicht; entferne sie*. **Ihre Änderungen** sagt, wer was wann geändert hat. Siehe
+[Rollen](../data-gateway/Security.md#roles).
+
+### Zugang {#access}
+
+**Zugang: Schlüssel und Tokens:** wer hereinkommt, wie die Konfiguration es sagt (`GET /admin/access`): nach **Wo**
+(*überall*, ein Transport, ein Schema) jede **Methode** und **Anmeldedaten** mit ihren Rollen und ihrem **Kontext**;
+eine Methode `jwt` nennt ihren Aussteller und den Claim ihrer Rollen. Nie ein Geheimnis.
+
+### Persistenz {#persist}
+
+Wo das Gateway seine Administration hält (die Sitzungen, die Rollen, seine Observability, die wartenden
+Schreibvorgänge und die Änderungen von allem): seine Datenbank oder Datei, wer sie liest und schreibt, wer es sagt
+(*state.source der Konfiguration*, *standardmäßig: das SQLite des Volumes*, *die Administration*), wie oft die Replikas
+sie neu lesen, ob sie Pflicht ist und ob sie jetzt lesbar ist.
+
+- **Config:** das `lambdaORM.yaml` der Administration, in Monaco: Entitäten, Mapping und Quelle des Zustands, wie λORM
+  sie benutzt. Mit `persist` lässt sich sein Mapping bearbeiten (die Tabelle jeder Entität und ihre Spalten):
+  **Mapping speichern** kopiert den Zustand in die neuen Tabellen, und das Gateway startet neu.
+- **Verbindung** (mit `persist`): **Jetzt**, die aktuelle Datenbank, und **Eine andere Datenbank**: **Zustand kopieren
+  und umziehen** kopiert ihn mit λORM dorthin, und das Gateway startet damit neu (offene Verbindungen verbinden sich
+  neu); **Zurück zur Konfiguration** macht es rückgängig. Siehe [wo der Zustand liegt](../data-gateway/Admin.md#persist).
 
 ### Werkzeuge {#tools}
 
@@ -82,38 +141,17 @@ seines `management`), oder aus **Andere URLs seiner Transporte**.
 
 ![Werkzeuge](images/ide-connection-tools.png)
 
-### Rollen {#roles}
+### Observability {#observability}
 
-Was die Zugangsdaten dürfen, in zwei Gruppen, **Daten** und **Verwaltung**, jede mit der Anzahl der erteilten
-(`1 / 5`): jede Berechtigung, **erteilt** oder **nicht erteilt**, mit dem, was sie erlaubt.
-
-| Berechtigung | Erlaubt |
-| --- | --- |
-| `read` | Abfragen, die nur auswählen, das Schema, Pläne, Metadaten und Exporte eines Stage |
-| `write` | Abfragen, die Zeilen einfügen, ändern, löschen, upserten oder mergen |
-| `script` | Skripte ausführen |
-| `queue` | Abfragen in die Warteschlange stellen, um sie später auszuführen |
-| `stageImport` | Daten in einen Stage importieren |
-| `schemaRead` | die `lambdaORM.yaml` jedes Workspace lesen (ohne Geheimnisse) und prüfen |
-| `schemaWrite` | die `lambdaORM.yaml` ändern: Entitäten, Sources, Stages…, über die Formulare oder das YAML |
-| `schemaAdmin` | Schemas anlegen und entfernen, die Variablen ihrer `.env` setzen |
-| `workbenchWrite` | Abfragen, Skripte und Diagramme in den Projekten der Workspaces speichern |
-| `ddl` | die Struktur der Datenbanken eines Stage ändern (push, drop) |
-| `build` | den Code der Domäne (Modell und Repositories) in `src/` des Workspace erzeugen |
-| `sessionAdmin` | alle Sitzungen von `management` sehen und die anderer Zugangsdaten widerrufen |
-| `approve` | die Schreibvorgänge, die auf eine Person warten, genehmigen oder ablehnen |
-| `destructive` | mit `ddl` ein Push oder eine Migration, die Daten verliert (data-gateway 4.4) |
-| `roles` | die im Zustand des Gateways gespeicherten Rollen sehen und ändern (data-gateway 4.4) |
-
-![Rollen](images/ide-connection-roles.png)
-
-**Rollen des Gateways** (mit `roles`, data-gateway 4.4, IDE 1.4.0): darunter die [Rollen](../data-gateway/Security.md#roles)
-des Gateways, die seiner Konfiguration (nur lesen) und die seines Zustands. **+ Rolle hinzufügen**; eine der
-Konfiguration **Erweitern** mit mehr Berechtigungen, Views oder Stages, in allen Schemas oder in einem; eine des
-Zustands **Bearbeiten** oder **Entfernen**, mit einem Grund. **Ihre Änderungen** sagt, wer was wann geändert hat.
-
-Die Berechtigungen werden jeden Zugangsdaten in der Konfiguration des Gateways gegeben
-([Sicherheit](../data-gateway/Security.md)).
+Mit `observability`: was das Gateway sendet und wohin, in drei Knoten, **Metriken** (*Per OTLP senden*, *Alle (ms)*,
+*lambdaorm.entity in den Metriken*; `/metrics` für Prometheus wird immer bereitgestellt), **Logs** (*Auf die Konsole*,
+ihre **Stufe**, per OTLP) und **Traces** (*Sampling (0–1)*, *Der Entscheidung des Aufrufers folgen*, *Text der Abfragen
+in den Spans*); **Wohin es geht: der OTLP-Exporter** (sein **Endpoint**; seine Header nur in
+`OTEL_EXPORTER_OTLP_HEADERS`) und **Wo man es sieht** (**Grafana-URL**, die Datasources von **Tempo**, **Prometheus**
+und **Loki**, die **Organisation in Grafana**), mit **In Grafana öffnen**. **Speichern und anwenden** speichert es über
+der Konfiguration und wendet es sofort an (der Edge startet neu, und die Schemas, deren Telemetrie sich ändert, laden
+neu); **Zurück zur Konfiguration** macht es rückgängig. Der Link einer Entität zu ihren Traces ([Entitäten](Entities.md))
+kommt von hier, nicht aus jeder IDE.
 
 ### Wartende Schreibvorgänge {#approvals}
 
