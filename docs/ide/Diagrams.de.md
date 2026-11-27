@@ -45,6 +45,13 @@ Neuladen in seinem Tab.
 Der Tab **Diagramm** einer [Entität](Entities.md#diagram) zeichnet sie mit ihren Nachbarn, nur lesen: **Entität**
 zentriert es auf eine andere, und die Tiefe geht zu **2 Ebenen** oder **ganzes Modell**.
 
+Ihre **Optionen** (IDE 1.5.0) wählen, was gezeichnet wird: die Namen der Beziehungen, ihre verbundenen Entitäten und
+die Entitäten, die sie erweitert (anfangs angekreuzt).
+
+**Eine abstrakte Entität** (IDE 1.5.0) wird in jedem Diagramm abgesetzt gezeichnet: ein gestrichelter Rand, eine
+Kopfzeile in eigener Farbe, ihr Name kursiv mit «abstract»; die Entitäten, die sie erweitern, erreichen sie mit einer
+gestrichelten Linie. So auch im exportierten SVG und PNG, im hellen und im dunklen Design.
+
 ## Das Diagramm eines Stage {#the-diagram-of-a-stage}
 
 Jeder Stage eines Schemas hat ein Diagramm davon, wohin seine Sources jede Entität bringen: das Gateway, seine Sources

@@ -10,14 +10,30 @@ Sus botones:
 
 | Botón | Hace | Necesita |
 | --- | --- | --- |
-| **Ver trazas** | abre las trazas de esta entidad en Grafana (Tempo, filtradas por `lambdaorm.entity`) | la **Observabilidad** de la [conexión](Connections.md#a-new-connection) |
+| **Ver trazas** | abre las trazas de esta entidad en Grafana (Tempo, filtradas por `lambdaorm.entity`) | `observability.explore` del gateway ([Observabilidad](Connections.md#observability); antes de IDE 1.5.0, de la conexión) |
 | **Eliminar** | dice qué usa la entidad y, confirmado, la elimina del esquema | `schemaWrite` |
 | **Editar** | abre su [formulario](Administration.md#forms), ya en edición: **Cancelar** o **Guardar** vuelven a esta vista | `schemaWrite` |
 | **Consultar** | abre una pestaña de consulta con `Entity.page(1, 10)` (no en una entidad abstracta) | |
 
 Debajo de la cabecera, sus pestañas: **Propiedades (n)**, **Relaciones (n)**, **Claves e índices**,
-**Restricciones (n)**, **Datos**, **Diagrama** e **Historial**.
+**Restricciones (n)**, **Datos**, **Diagrama** e **Historial** (una entidad abstracta: **Extendida por (n)** en lugar de **Datos**, **Diagrama** y **Consulta**).
 El número de **Relaciones** incluye las relaciones de otras entidades que apuntan a esta (**Referenciada por**), así que puede ser mayor que el del explorador.
+
+## Entidades abstractas y lo que hereda una entidad {#abstract}
+
+**Desde IDE 1.5.0** (leído del `lambdaORM.yaml`, con `schemaRead`). Una entidad abstracta (`abstract: true`) es la base
+que otras entidades extienden (`extends: Audited`): sus propiedades y relaciones llegan a ellas.
+
+- **En el explorador** está en **Abstractas**, y su vista es la de una entidad, con **Editar** y **Quitar**, más la
+  pestaña **Extendida por (n)**: cada entidad que la extiende, también a través de otra abstracta (`Areas →
+  LocatedCatalog → Located`), con la base que extiende cada una; un clic abre su vista.
+- **Una entidad que extiende** dice `extiende <base>` en su cabecera (toda la cadena en su título; un clic abre la
+  base), y sus **Propiedades** y **Relaciones** tienen la columna **Heredado** con de dónde viene cada una.
+- **En su formulario**, las propiedades y relaciones heredadas están aparte, por la base que las declara, de solo
+  lectura, con un enlace a esa base (abierta en una pestaña propia, conservando lo que se está editando); una propia que
+  redefine una heredada lo dice.
+- **En los diagramas** una entidad abstracta se dibuja aparte: un borde punteado, una cabecera de su propio color y su
+  nombre en cursiva con «abstract»; una herencia es una línea punteada ([Diagramas](Diagrams.md)).
 
 ## Propiedades {#properties}
 
@@ -103,7 +119,9 @@ Desde el IDE 1.3.0:
 ## Diagrama {#diagram}
 
 La entidad y sus vecinas, solo lectura. La caja **entidad** centra el diagrama en otra, y la profundidad va de
-**vecinas** a **2 niveles** o **todo el modelo**. Un clic en una caja la centra; un doble clic abre su vista. El resto
+**vecinas** a **2 niveles** o **todo el modelo**. Sus **opciones** (IDE 1.5.0), varias a la vez: los **nombres de las relaciones**, sus **entidades relacionadas**
+(sin ellas, solo la entidad) y las **entidades que extiende** (las bases abstractas de su cadena, nunca las otras
+entidades de la misma base); al principio solo están marcadas las entidades que extiende. Un clic en una caja la centra; un doble clic abre su vista. El resto
 del diagrama (zoom, mostrar, outline, exportar) es como en [Diagramas](Diagrams.md).
 
 ![Diagrama](images/ide-entity-diagram.png)

@@ -9,11 +9,13 @@ right.
 ```text
 λORM Data Gateway ▾   Connections 1         ⟳ · + New connection
 northwind  http://data-gateway:9090         ⟳ Refresh
-Schemas                                     New schema · Export · Import
+├─ Administration                           Roles · Access · Persist · Sessions · Writes that wait · Tools · Observability
+└─ Schemas                                  New schema · Export · Import
 └─ /                                        its tab: commands, about, history   ⟳
    ├─ Metadata
    │  ├─ config                             the lambdaORM.yaml                  (schemaRead)
    │  ├─ domain                             double click: the domain as YAML, read only
+   │  │  ├─ Abstracts  +                    the abstract entities the others extend   (schemaRead)
    │  │  ├─ Entities  +                     filter · each entity: Properties (n), Relations (n)
    │  │  └─ Enums  +
    │  ├─ application                        its start tasks and listeners       (schemaRead)
@@ -31,17 +33,21 @@ Schemas                                     New schema · Export · Import
 
 ![The explorer](images/ide-explorer.png)
 
-What needs a permission doesn't show without it: with only `read`, a schema has its **Metadata → domain** and its
+Since IDE 1.5.0 each connection is one tree: its **Administration** (data-gateway 5.0) and its **Schemas**. The
+**Abstracts** of a domain (IDE 1.5.0, read from the `lambdaORM.yaml`, so with `schemaRead`) come first, by name; their
+**+** opens a new entity that starts abstract. What needs a permission doesn't show without it: with only `read`, a schema has its **Metadata → domain** and its
 **Workbench**. The **+** of **Entities**, **Enums**, **Mappings**, **Sources** and **Stages** (with `schemaWrite`)
 opens the form of a new one ([Administration](Administration.md#forms)).
 
 | Row | A click | Its buttons |
 | --- | --- | --- |
 | a connection | its name opens its page ([Connections](Connections.md)) | ⟳ refresh |
+| **Administration** | unfolds what its credential may administer of the gateway ([Connections](Connections.md#administration)) | |
 | a schema | unfolds it and opens its tab ([Administration](Administration.md#the-schema-tab)) | ⟳ refresh it |
 | **config** | opens the `lambdaORM.yaml` ([Administration](Administration.md#the-yaml)) | |
 | **domain** | unfolds it; a double click opens the domain as YAML (only the domain: never the sources, the connections or the rest of the configuration) | |
 | an entity | unfolds it and opens its [view](Entities.md) | |
+| an abstract entity (**Abstracts**) | unfolds it (its properties and relations) and opens its view, as an entity's ([Entities](Entities.md#abstract)) | |
 | a property of an entity | nothing: its name, in bold for the primary key, and its type | |
 | a relation of an entity | opens the entity it reaches (`customer → Customers · N — 1`) | ↗ open it |
 | an enum, a mapping, a source, a stage | opens its form ([Administration](Administration.md#forms)) | a stage: ◇ its [diagram](Administration.md#the-diagram-of-a-stage) |

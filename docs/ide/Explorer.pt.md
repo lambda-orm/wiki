@@ -9,11 +9,13 @@ direita.
 ```text
 λORM Data Gateway ▾   Conexões 1            ⟳ · + Nova conexão
 northwind  http://data-gateway:9090         ⟳ Atualizar
-Esquemas                                    Novo esquema · Exportar · Importar
+├─ Administração                           Papéis · Acesso · Persistência · Sessões · Escritas que aguardam · Ferramentas · Observabilidade
+└─ Esquemas                                    Novo esquema · Exportar · Importar
 └─ /                                        sua aba: comandos, informações, histórico   ⟳
    ├─ Metadados
    │  ├─ config                             o lambdaORM.yaml                    (schemaRead)
    │  ├─ domain                             duplo clique: o domínio como YAML, somente leitura
+   │  │  ├─ Abstratas  +                    as entidades abstratas que as outras estendem   (schemaRead)
    │  │  ├─ Entidades  +                    filtro · cada entidade: Propriedades (n), Relações (n)
    │  │  └─ Enums  +
    │  ├─ application                        suas tarefas de início e listeners  (schemaRead)
@@ -31,17 +33,21 @@ Esquemas                                    Novo esquema · Exportar · Importar
 
 ![O explorador](images/ide-explorer.png)
 
-O que precisa de uma permissão não aparece sem ela: só com `read`, um esquema tem os seus **Metadados → domain** e o
+Desde a IDE 1.5.0 cada conexão é uma árvore: sua **Administração** (data-gateway 5.0) e seus **Esquemas**. As
+**Abstratas** de um domínio (IDE 1.5.0, lidas do `lambdaORM.yaml`, portanto com `schemaRead`) vêm primeiro, por nome;
+seu **+** abre uma entidade nova que começa abstrata. O que precisa de uma permissão não aparece sem ela: só com `read`, um esquema tem os seus **Metadados → domain** e o
 seu **Workbench**. O **+** de **Entidades**, **Enums**, **Mappings**, **Sources** e **Stages** (com `schemaWrite`)
 abre o formulário de um novo ([Administração](Administration.md#forms)).
 
 | Linha | Um clique | Seus botões |
 | --- | --- | --- |
 | uma conexão | o seu nome abre a sua página ([Conexões](Connections.md)) | ⟳ atualizar |
+| **Administração** | expande o que sua credencial pode administrar do gateway ([Conexões](Connections.md#administration)) | |
 | um esquema | o expande e abre a sua aba ([Administração](Administration.md#the-schema-tab)) | ⟳ atualizá-lo |
 | **config** | abre o `lambdaORM.yaml` ([Administração](Administration.md#the-yaml)) | |
 | **domain** | o expande; um duplo clique abre o domínio como YAML (só o domínio: nunca as sources, as conexões ou o resto da configuração) | |
 | uma entidade | a expande e abre a sua [vista](Entities.md) | |
+| uma entidade abstrata (**Abstratas**) | a expande (suas propriedades e relações) e abre sua vista, como a de uma entidade ([Entidades](Entities.md#abstract)) | |
 | uma propriedade de uma entidade | nada: o seu nome, em negrito para a chave primária, e o seu tipo | |
 | uma relação de uma entidade | abre a entidade que ela alcança (`customer → Customers · N — 1`) | ↗ abri-la |
 | um enum, um mapping, uma source, um stage | abre o seu formulário ([Administração](Administration.md#forms)) | um stage: ◇ o seu [diagrama](Administration.md#the-diagram-of-a-stage) |
