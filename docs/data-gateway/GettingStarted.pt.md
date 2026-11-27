@@ -377,7 +377,7 @@ Por WebSocket são mensagens JSON-RPC:
 ← { "jsonrpc": "2.0", "id": 1, "result": [ { "name": "Cactus Comidas para llevar" }, { "name": "Océano Atlántico Ltda." }, { "name": "Rancho grande" } ] }
 ```
 
-Os clientes, passo a passo num projeto seu: [Clientes](Clients.md#step-by-step). As mensagens:
+Os clientes, passo a passo num projeto seu: [Node](ClientNode.md) e [Go](ClientGo.md). As mensagens:
 [API WebSocket](WebSocket.md).
 
 ## 12. Pare {#12-stop-it}
