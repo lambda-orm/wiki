@@ -299,7 +299,10 @@ nav:
       - Data changes: data-gateway/Changes.md
       - Security: data-gateway/Security.md
       - Administration: data-gateway/Admin.md
-      - Clients: data-gateway/Clients.md
+      - Clients:
+          - Overview: data-gateway/Clients.md
+          - Node: data-gateway/ClientNode.md
+          - Go: data-gateway/ClientGo.md
       - Operations: data-gateway/Operations.md
       - Change log: data-gateway/CHANGELOG.md
   - Data Gateway IDE:

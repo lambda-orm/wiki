@@ -24,7 +24,7 @@ The versions of the Docker image [`flaviorita/data-gateway`](https://hub.docker.
 - **[`observability.explore`](Configuration.md#observability):** where the traces, the metrics and the logs are seen
   (Grafana and its Tempo, Prometheus and Loki), of the installation and not of each IDE; `GET /observability` of
   `management` tells it.
-- **Clients:** [Node](Clients.md#node) (`@lambdaorm/data-gateway-client-node`) and [Go](Clients.md#go)
+- **Clients:** [Node](ClientNode.md) (`@lambdaorm/data-gateway-client-node`) and [Go](ClientGo.md)
   (`github.com/lambda-orm/data-gateway-client-go`), the same API over the five transports, step by step.
 - With `@lambdaorm/base` 3.11.1 and `@lambdaorm/lib` 3.15.0. With it, the [IDE](../ide/index.md) 1.5.0: the
   [administration](../ide/Connections.md#administration) in the tree of each connection and the

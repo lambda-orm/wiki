@@ -384,7 +384,7 @@ customers, err := gw.Execute(ctx, "Customers.filter(p => p.country == country).m
 ← { "jsonrpc": "2.0", "id": 1, "result": [ { "name": "Cactus Comidas para llevar" }, { "name": "Océano Atlántico Ltda." }, { "name": "Rancho grande" } ] }
 ```
 
-Die Clients Schritt für Schritt in einem eigenen Projekt: [Clients](Clients.md#step-by-step). Die Nachrichten:
+Die Clients Schritt für Schritt in einem eigenen Projekt: [Node](ClientNode.md) und [Go](ClientGo.md). Die Nachrichten:
 [WebSocket API](WebSocket.md).
 
 ## 12. Beenden {#12-stop-it}
