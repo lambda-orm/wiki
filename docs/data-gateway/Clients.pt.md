@@ -1,33 +1,96 @@
 # Clientes {#clients}
 
 Um Data Gateway é HTTP, WebSocket e MCP comuns: qualquer linguagem pode chamá-lo. Esta página lista os clientes feitos
-para ele: os clientes Node, a CLI, um cliente gerado a partir do seu documento OpenAPI e um agente de IA por MCP.
+para ele: os clientes Node e Go, a CLI, um cliente gerado a partir do seu documento OpenAPI e um agente de IA por MCP.
 
-## Node: @lambdaorm/data-gateway-client
+## Node: @lambdaorm/data-gateway-client-node {#node}
 
-[`@lambdaorm/data-gateway-client`](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) é o cliente novo:
-uma API sobre todos os transportes de dados do gateway, escolhido pelo esquema da string de conexão (`http://` REST,
-`ws://` WebSocket, `mcp+http://` MCP Streamable HTTP, `mcp+sse://` o MCP HTTP+SSE antigo, `mcp+ws://` MCP sobre
-WebSocket), e o mesmo código de erro em todos. Passa a suíte
-de conformidade do gateway em cada um.
+[`@lambdaorm/data-gateway-client-node`](https://www.npmjs.com/package/@lambdaorm/data-gateway-client-node) é o
+cliente Node: uma API sobre todos os transportes de dados do gateway, escolhido pelo esquema da string de conexão
+(`http://` REST, `ws://` WebSocket, `mcp+http://` MCP Streamable HTTP, `mcp+sse://` o MCP HTTP+SSE antigo, `mcp+ws://`
+MCP sobre WebSocket), e o mesmo código de erro em todos. Passa a suíte de conformidade do gateway em cada um. Precisa
+do Node 22 ou posterior.
+
+### Em um projeto {#node-in-a-project}
+
+Cria-se o projeto e adiciona-se o cliente (TypeScript e `tsx` só para escrevê-lo em TypeScript):
 
 ```sh
-npm install @lambdaorm/data-gateway-client
+mkdir shop && cd shop
+npm init -y
+npm install @lambdaorm/data-gateway-client-node
+npm install -D typescript tsx @types/node
 ```
+
+A string de conexão e a credencial ficam fora do código, no ambiente:
+
+```sh
+export DATA_GATEWAY_URL=http://gateway:8080/northwind
+export DATA_GATEWAY_API_KEY=…
+```
+
+Uma conexão para toda a aplicação, aberta na primeira vez que for necessária, em `src/gateway.ts`:
 
 ```ts
-import { connect, GatewayError } from '@lambdaorm/data-gateway-client'
+import { connect, DataGatewayClient } from '@lambdaorm/data-gateway-client-node'
 
-const gateway = await connect('http://gateway:8080/iot/v1', { apiKey: process.env.IOT_KEY })
-const devices = await gateway.execute('Devices.filter(p => p.status == status)', { status: 'active' })
-const found = await gateway.schema.search('Devices.area')     // um esquema grande, por parte de um nome
-try {
-	await gateway.execute('Devic.map(p => p.id)')
-} catch (error) {
-	if (error instanceof GatewayError && error.code === 'invalid') console.log(error.suggestions) // [{ name: 'Devic', didYouMean: ['Devices'] }]
+let client: Promise<DataGatewayClient> | undefined
+
+/** a conexão da aplicação (DATA_GATEWAY_URL, DATA_GATEWAY_API_KEY): aberta uma vez e compartilhada */
+export const gateway = (): Promise<DataGatewayClient> =>
+	(client ??= connect().catch(error => { client = undefined; throw error }))
+
+export const closeGateway = async (): Promise<void> => {
+	if (client) await (await client).close()
 }
-await gateway.close()
 ```
+
+As consultas, com o tipo do seu resultado, em `src/products.ts`:
+
+```ts
+import { GatewayError } from '@lambdaorm/data-gateway-client-node'
+import { gateway } from './gateway'
+
+export interface Product { name: string, price: number }
+
+export const expensiveProducts = async (minPrice: number): Promise<Product[]> =>
+	(await gateway()).execute<Product[]>(
+		'Products.filter(p => p.price > minPrice).map(p => ({ name: p.name, price: p.price })).sort(p => desc(p.price)).page(1, 3)',
+		{ minPrice })
+
+/** false quando a categoria já existe */
+export const addCategory = async (name: string): Promise<boolean> => {
+	try {
+		await (await gateway()).execute('Categories.insert()', { name })
+		return true
+	} catch (error) {
+		if (error instanceof GatewayError && error.code === 'unique') return false
+		throw error
+	}
+}
+```
+
+E `src/index.ts`, que fecha a conexão ao terminar:
+
+```ts
+import { closeGateway } from './gateway'
+import { expensiveProducts } from './products'
+
+const main = async () => {
+	console.log(await expensiveProducts(50))
+}
+
+main().finally(closeGateway)
+```
+
+```sh
+npx tsx src/index.ts
+```
+
+Um servidor mantém a conexão aberta enquanto roda e a fecha ao parar (`process.on('SIGTERM', …)`). Em JavaScript o
+pacote é importado da mesma forma, com `import` ou com `require`.
+
+### O que mais faz {#node-more}
 
 Desde a 4.1.0, `token` pode ser uma função que o fornece (`token: () => idp.accessToken()`), chamada em cada requisição
 REST e MCP e ao abrir um WebSocket: o [JWT](Security.md#jwt) de um provedor de identidade, renovado. E
@@ -42,8 +105,125 @@ A credencial vai nas opções (`apiKey`, `token`, ou quaisquer `headers`) ou em 
 `connect()` não recebe nenhuma, e a URL pode levar `?timeout=<ms>` e `?stage=<stage>`. Os erros têm um `code` que é o
 mesmo em todos os transportes: `invalid`, `unauthorized`, `forbidden`, `not_found`, `unique`, `foreign_key`,
 `timeout`, `unavailable`, `truncated` (MCP, uma lista cortada em `mcp.maxRows`), …
-Seu [README](https://www.npmjs.com/package/@lambdaorm/data-gateway-client) tem toda a API e os códigos.
+Seu [README](https://www.npmjs.com/package/@lambdaorm/data-gateway-client-node) tem toda a API e os códigos.
 `@lambdaorm/client`, abaixo, continua funcionando; a CLI passará para o cliente novo.
+
+## Go: github.com/lambda-orm/data-gateway-client-go {#go}
+
+[`github.com/lambda-orm/data-gateway-client-go`](https://pkg.go.dev/github.com/lambda-orm/data-gateway-client-go)
+(pacote `gateway`) é o mesmo cliente em Go: as mesmas strings de conexão, os mesmos cinco transportes, as mesmas
+operações e os mesmos códigos de erro, e passa a mesma suíte de conformidade. Precisa do Go 1.22 ou posterior; sua
+única dependência é [`github.com/coder/websocket`](https://github.com/coder/websocket).
+
+### Em um projeto {#go-in-a-project}
+
+```sh
+mkdir shop && cd shop
+go mod init example.com/shop
+go get github.com/lambda-orm/data-gateway-client-go
+```
+
+Com os mesmos `DATA_GATEWAY_URL` e `DATA_GATEWAY_API_KEY` no ambiente, `main.go`:
+
+```go
+package main
+
+import (
+	"context"
+	"errors"
+	"fmt"
+	"log"
+	"time"
+
+	gateway "github.com/lambda-orm/data-gateway-client-go"
+)
+
+type Product struct {
+	Name  string  `json:"name"`
+	Price float64 `json:"price"`
+}
+
+func main() {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	// "" usa DATA_GATEWAY_URL; a chave, DATA_GATEWAY_API_KEY (ou gateway.WithAPIKey)
+	gw, err := gateway.Connect(ctx, "")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer gw.Close()
+
+	products, err := gateway.ExecuteInto[[]Product](ctx, gw,
+		"Products.filter(p => p.price > minPrice).map(p => ({ name: p.name, price: p.price })).sort(p => desc(p.price)).page(1, 3)",
+		map[string]any{"minPrice": 50}, nil)
+	var e *gateway.Error
+	if errors.As(err, &e) {
+		log.Fatalf("%s (%s): %s", e.Code, e.Name, e.Message)
+	}
+	for _, p := range products {
+		fmt.Printf("%s %.2f\n", p.Name, p.Price)
+	}
+}
+```
+
+```sh
+go run .
+```
+
+`ExecuteInto[T]` decodifica o resultado em um tipo (um struct por suas tags `json`, um slice deles); `Execute` o dá
+como `any`. Toda operação recebe um `context.Context`, que pode encerrá-la antes do timeout da conexão.
+
+Em um servidor, um `*gateway.Client` atende toda a aplicação (pode ser usado de forma concorrente), e cada requisição
+passa seu próprio contexto:
+
+```go
+func products(gw *gateway.Client) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		rows, err := gateway.ExecuteInto[[]Product](r.Context(), gw, "Products.map(p => ({ name: p.name, price: p.price })).page(1, 20)", nil, nil)
+		switch {
+		case gateway.IsCode(err, gateway.CodeForbidden):
+			http.Error(w, "forbidden", http.StatusForbidden)
+		case err != nil:
+			http.Error(w, err.Error(), http.StatusBadGateway)
+		default:
+			_ = json.NewEncoder(w).Encode(rows)
+		}
+	}
+}
+```
+
+### O que mais faz {#go-more}
+
+As opções de `Connect`: `WithAPIKey`, `WithAPIKeyHeader`, `WithToken`, `WithTokenFunc` (o token de um provedor de
+identidade, pedido em cada requisição), `WithHeader`, `WithTimeout` (30 s por padrão), `WithStage` e
+`WithTruncatedRows` (MCP: as linhas cortadas em `mcp.maxRows` em vez do erro `truncated`). O resto da API é o do Node
+com os nomes do Go: `ExecuteScript`, `ExecuteQueued`, `Plan`, `Metadata`, `Queries`, `Query`, `Approval`, `Whoami`,
+`gw.Schema.Search`, `gw.Stage.Export`, `gw.General.Health`, … Com uma conexão `ws://`, `Subscribe` fica sabendo das
+[mudanças dos dados](Changes.md) e `On` recebe as [notificações](WebSocket.md#notifications):
+
+```go
+sub, err := gw.Subscribe(ctx, gateway.SubscribeTarget{Entity: "Orders"}, func(e gateway.Event) {
+	log.Println(e.Type, e.Params["action"]) // na goroutine que lê o socket: não bloqueá-la
+})
+if err != nil {
+	log.Fatal(err)
+}
+defer sub.Unsubscribe(ctx)
+```
+
+## Node e Go, lado a lado {#side-by-side}
+
+| | Node | Go |
+| --- | --- | --- |
+| Conectar | `const gw = await connect(url, { apiKey })` | `gw, err := gateway.Connect(ctx, url, gateway.WithAPIKey(key))` |
+| Uma consulta | `await gw.execute<Product[]>(query, data)` | `gateway.ExecuteInto[[]Product](ctx, gw, query, data, nil)` |
+| Um script | `await gw.executeScript(script, data)` | `gw.ExecuteScript(ctx, script, data, nil)` |
+| Uma consulta nomeada | `await gw.query(name, data)` | `gw.Query(ctx, name, data, nil)` |
+| O esquema | `await gw.schema.search(text)` | `gw.Schema.Search(ctx, text)` |
+| Um erro | `error instanceof GatewayError && error.code === 'unique'` | `gateway.IsCode(err, gateway.CodeUnique)` |
+| Mudanças dos dados (`ws://`) | `await gw.subscribe({ entity }, listener)` | `gw.Subscribe(ctx, gateway.SubscribeTarget{Entity: …}, listener)` |
+| Fechar | `await gw.close()` | `gw.Close()` |
 
 ## Node: @lambdaorm/client {#node-lambdaormclient}
 
